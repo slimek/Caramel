@@ -1,8 +1,4 @@
-//
-// Caramel C++ Library
-//
-// Setup - System Determination
-//
+// Caramel C++ Library - Libary Setup - System Determination
 
 #ifndef __CARAMEL_SETUP_SYSTEM_H
 #define __CARAMEL_SETUP_SYSTEM_H

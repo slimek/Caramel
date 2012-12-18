@@ -28,6 +28,7 @@
     <ClInclude Include="..\include\Caramel\String\Sprintf.h" />
     <ClInclude Include="..\include\Caramel\String\String.h" />
     <ClInclude Include="..\include\Caramel\String\StringConvertible.h" />
+    <ClInclude Include="..\include\Caramel\Value\SharedArray.h" />
     <ClInclude Include="Caramel\CaramelPch.h" />
   </ItemGroup>
   <ItemGroup>

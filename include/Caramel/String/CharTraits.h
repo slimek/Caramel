@@ -1,8 +1,4 @@
-//
-// Caramel C++ Library
-//
-// String Facility - Char Traits Header
-//
+// Caramel C++ Library - String Facility - Char Traits Header
 
 #ifndef __CARAMEL_STRING_CHAR_TRAITS_H
 #define __CARAMEL_STRING_CHAR_TRAITS_H

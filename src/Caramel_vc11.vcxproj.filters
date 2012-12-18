@@ -21,6 +21,9 @@
     <Filter Include="2. Sources\Precompiled Headers">
       <UniqueIdentifier>{8b2e3277-36cd-42fa-8732-83043d356706}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\Value">
+      <UniqueIdentifier>{8a8b007f-7ad8-4545-951a-f22db1335bb1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -52,6 +55,9 @@
     </ClInclude>
     <ClInclude Include="Caramel\CaramelPch.h">
       <Filter>2. Sources\Precompiled Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Value\SharedArray.h">
+      <Filter>1. Public Packages\Value</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

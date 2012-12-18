@@ -1,8 +1,4 @@
-//
-// Caramel C++ Library
-//
-// String Facility - String Convertible Header
-//
+// Caramel C++ Library - String Facility - String Convertible Header
 
 #ifndef __CARAMEL_STRING_STRING_CONVERTIBLE_H
 #define __CARAMEL_STRING_STRING_CONVERTIBLE_H

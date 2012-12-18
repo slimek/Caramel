@@ -1,8 +1,4 @@
-//
-// Caramel C++ Library
-//
-// Starting Header
-//
+// Caramel C++ Library - Starting Header
 
 #ifndef __CARAMEL_CARAMEL_H
 #define __CARAMEL_CARAMEL_H

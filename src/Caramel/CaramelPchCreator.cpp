@@ -1,7 +1,3 @@
-//
-// Caramel C++ Library
-//
-// Precompiled Header
-//
+// Caramel C++ Library - Precompiled Header Creator
 
 #include <Caramel/CaramelPch.h>

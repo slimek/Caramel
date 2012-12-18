@@ -1,8 +1,4 @@
-//
-// Caramel C++ Library
-//
-// Setup - Compiler Determination
-//
+// Caramel C++ Library - Libary Setup - Compiler Determination
 
 #ifndef __CARAMEL_SETUP_COMPILER_H
 #define __CARAMEL_SETUP_COMPILER_H

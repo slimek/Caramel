@@ -1,10 +1,4 @@
-//
-// Caramel C++ Library
-//
-// String Facility - String Header
-//
-//   Based on std::string, encoding is not specified.
-//
+// Caramel C++ Library - String Facility - String Header
 
 #ifndef __CARAMEL_STRING_STRING_H
 #define __CARAMEL_STRING_STRING_H
@@ -26,7 +20,8 @@ namespace Caramel
 ///////////////////////////////////////////////////////////////////////////////
 //
 // String
-// - A lightweight wrapper of std::string
+// - A lightweight wrapper of std::string, encoding unspecified.
+//   For a encoding specified string, see CodedString.
 //
 
 class String : public BasicString< std::string, CharTraits< Char > >

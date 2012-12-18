@@ -1,8 +1,4 @@
-//
-// Caramel C++ Library
-//
-// Metaprogramming Amenity - Utility Header
-//
+// Caramel C++ Library - Metaprogramming Amenity - Utility Header
 
 #ifndef __CARAMEL_META_UTILITY_H
 #define __CARAMEL_META_UTILITY_H

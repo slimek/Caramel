@@ -1,8 +1,4 @@
-//
-// Caramel C++ Library
-//
-// String Facility - Sprintf Header
-//
+// Caramel C++ Library - String Facility - Sprintf Header
 
 #ifndef __CARAMEL_STRING_SPRINTF_H
 #define __CARAMEL_STRING_SPRINTF_H

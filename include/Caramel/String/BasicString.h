@@ -1,8 +1,4 @@
-//
-// Caramel C++ Library
-//
-// String Facility - Basic String Header
-//
+// Caramel C++ Library - String Facility - Basic String Header
 
 #ifndef __CARAMEL_STRING_BASIC_STRING_H
 #define __CARAMEL_STRING_BASIC_STRING_H
