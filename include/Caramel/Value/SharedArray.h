@@ -10,6 +10,8 @@
 #endif
 
 #include <boost/shared_array.hpp>
+#include <Caramel/Error/Assert.h>
+#include <Caramel/Trace/Trace.h>
 
 
 namespace Caramel
@@ -44,10 +46,10 @@ public:
 
     typedef const ValueType* ConstIterator;
 
-    ConstIterator Begin() const;
-    ConstIterator End()   const;
+    ConstIterator Begin() const { return &m_array[0]; }
+    ConstIterator End()   const { return &m_array[ m_size ]; }
 
-
+    
 protected:
 
     typedef boost::shared_array< T > ArrayType;
@@ -82,8 +84,8 @@ public:
 
     typedef ValueType* Iterator;
 
-    Iterator Begin() const;
-    Iterator End()   const;
+    Iterator Begin() const { return &m_array[0]; }
+    Iterator End()   const { return &m_array[ m_size ]; }
 
 
     /// Modifiers ///
@@ -92,9 +94,49 @@ public:
 };
 
 
+///////////////////////////////////////////////////////////////////////////////
 //
 // Implementation
 //
+
+//
+// Constructors
+//
+
+template< typename T >
+ConstSharedArray< T >::ConstSharedArray()
+    : m_array( new T[1] )  // dummy content
+    , m_size( 0 )
+{
+}
+
+
+template< typename T >
+ConstSharedArray< T >::ConstSharedArray( Uint size )
+    : m_size( size )
+{
+    if ( 0 == size )
+    {
+        CARAMEL_TRACE_FAIL_HERE( "Size can't be 0" );
+        CARAMEL_INVALID_ARGUMENT();
+    }
+
+    m_array.reset( new T[size] );
+}
+
+
+template< typename T >
+SharedArray< T >::SharedArray()
+    : ConstSharedArray< T >()
+{
+}
+
+
+template< typename T >
+SharedArray< T >::SharedArray ( Uint size )
+    : ConstSharedArray< T >( size )
+{
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////

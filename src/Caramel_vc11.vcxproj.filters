@@ -24,6 +24,21 @@
     <Filter Include="1. Public Packages\Value">
       <UniqueIdentifier>{8a8b007f-7ad8-4545-951a-f22db1335bb1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\Error">
+      <UniqueIdentifier>{be99fd4f-31a7-46eb-9e45-b9ce451933ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Trace">
+      <UniqueIdentifier>{e2e7a6dc-fee1-435e-8d25-202b90861e6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Thread">
+      <UniqueIdentifier>{ca13aaa6-4019-457e-8881-5526f7e89171}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Object">
+      <UniqueIdentifier>{00a1ce5e-5e58-42f0-9a44-837c5b74db8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\Trace">
+      <UniqueIdentifier>{5f4c063a-eac1-49f5-9b71-53c6b56b3414}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -59,10 +74,31 @@
     <ClInclude Include="..\include\Caramel\Value\SharedArray.h">
       <Filter>1. Public Packages\Value</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Error\Assert.h">
+      <Filter>1. Public Packages\Error</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Error\Exception.h">
+      <Filter>1. Public Packages\Error</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Trace\Trace.h">
+      <Filter>1. Public Packages\Trace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Thread\Mutex.h">
+      <Filter>1. Public Packages\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Object\Singleton.h">
+      <Filter>1. Public Packages\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Caramel\Trace\TraceManager.h">
+      <Filter>2. Sources\Trace</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\CaramelPchCreator.cpp">
       <Filter>2. Sources\Precompiled Headers</Filter>
+    </ClCompile>
+    <ClCompile Include="Caramel\Trace.cpp">
+      <Filter>2. Sources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

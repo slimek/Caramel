@@ -20,7 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h" />
+    <ClInclude Include="..\include\Caramel\Error\Assert.h" />
+    <ClInclude Include="..\include\Caramel\Error\Exception.h" />
     <ClInclude Include="..\include\Caramel\Meta\Utility.h" />
+    <ClInclude Include="..\include\Caramel\Object\Singleton.h" />
     <ClInclude Include="..\include\Caramel\Setup\Compiler.h" />
     <ClInclude Include="..\include\Caramel\Setup\System.h" />
     <ClInclude Include="..\include\Caramel\String\BasicString.h" />
@@ -28,11 +31,15 @@
     <ClInclude Include="..\include\Caramel\String\Sprintf.h" />
     <ClInclude Include="..\include\Caramel\String\String.h" />
     <ClInclude Include="..\include\Caramel\String\StringConvertible.h" />
+    <ClInclude Include="..\include\Caramel\Thread\Mutex.h" />
+    <ClInclude Include="..\include\Caramel\Trace\Trace.h" />
     <ClInclude Include="..\include\Caramel\Value\SharedArray.h" />
     <ClInclude Include="Caramel\CaramelPch.h" />
+    <ClInclude Include="Caramel\Trace\TraceManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\CaramelPchCreator.cpp" />
+    <ClCompile Include="Caramel\Trace.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{ED63D1E4-3DE9-4273-A22A-8B558E1BD6C0}</ProjectGuid>
@@ -110,7 +117,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\include;..\..\Boost</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -124,7 +131,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\include;..\..\Boost</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -140,7 +147,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\include;..\..\Boost</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -158,7 +165,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\include;..\..\Boost</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
