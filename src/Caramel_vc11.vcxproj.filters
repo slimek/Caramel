@@ -39,6 +39,9 @@
     <Filter Include="2. Sources\Trace">
       <UniqueIdentifier>{5f4c063a-eac1-49f5-9b71-53c6b56b3414}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\Object\Detail headers">
+      <UniqueIdentifier>{d28a9a7e-028d-4862-ab2a-16e04456458e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -92,12 +95,18 @@
     <ClInclude Include="Caramel\Trace\TraceManager.h">
       <Filter>2. Sources\Trace</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Object\Detail\LifetimeTracker.h">
+      <Filter>1. Public Packages\Object\Detail headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\CaramelPchCreator.cpp">
       <Filter>2. Sources\Precompiled Headers</Filter>
     </ClCompile>
     <ClCompile Include="Caramel\Trace.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Caramel\Object.cpp">
       <Filter>2. Sources</Filter>
     </ClCompile>
   </ItemGroup>

@@ -23,6 +23,7 @@
     <ClInclude Include="..\include\Caramel\Error\Assert.h" />
     <ClInclude Include="..\include\Caramel\Error\Exception.h" />
     <ClInclude Include="..\include\Caramel\Meta\Utility.h" />
+    <ClInclude Include="..\include\Caramel\Object\Detail\LifetimeTracker.h" />
     <ClInclude Include="..\include\Caramel\Object\Singleton.h" />
     <ClInclude Include="..\include\Caramel\Setup\Compiler.h" />
     <ClInclude Include="..\include\Caramel\Setup\System.h" />
@@ -39,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\CaramelPchCreator.cpp" />
+    <ClCompile Include="Caramel\Object.cpp" />
     <ClCompile Include="Caramel\Trace.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
