@@ -49,6 +49,14 @@ public:
     ConstIterator Begin() const { return &m_array[0]; }
     ConstIterator End()   const { return &m_array[ m_size ]; }
 
+
+    /// STL Compatible ///
+
+    typedef const ValueType* const_iterator;
+
+    const_iterator begin() const { return this->Begin(); }
+    const_iterator end()   const { return this->End(); }
+
     
 protected:
 
@@ -84,8 +92,16 @@ public:
 
     typedef ValueType* Iterator;
 
-    Iterator Begin() const { return &m_array[0]; }
-    Iterator End()   const { return &m_array[ m_size ]; }
+    Iterator Begin() { return &m_array[0]; }
+    Iterator End()   { return &m_array[ m_size ]; }
+
+
+    /// STL Compatible ///
+
+    typedef ValueType* iterator;
+
+    iterator begin() { return this->Begin(); }
+    iterator end()   { return this->End(); }
 
 
     /// Modifiers ///
