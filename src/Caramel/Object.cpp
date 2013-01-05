@@ -25,11 +25,7 @@ namespace Caramel
 namespace Detail
 {
 
-#if defined( CARAMEL_COMPILER_IS_MSVC )
-void __cdecl AtExit()
-#else
-void AtExit()
-#endif
+void CARAMEL_CDECL AtExit()
 {
     LifetimeTracker* tracker = LifetimeTrackerSortedList::PopFront();
     delete tracker;

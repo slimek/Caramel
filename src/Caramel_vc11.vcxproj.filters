@@ -42,6 +42,12 @@
     <Filter Include="1. Public Packages\Object\Detail headers">
       <UniqueIdentifier>{d28a9a7e-028d-4862-ab2a-16e04456458e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\String\Inline headers">
+      <UniqueIdentifier>{5e2af97b-94fe-40ea-b155-7171182bd52b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\String\Detail headers">
+      <UniqueIdentifier>{371c93a3-2c32-4227-8257-2142070f310b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -54,9 +60,6 @@
       <Filter>1. Public Packages\Setup</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\String\Sprintf.h">
-      <Filter>1. Public Packages\String</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Caramel\String\String.h">
       <Filter>1. Public Packages\String</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\String\BasicString.h">
@@ -98,6 +101,18 @@
     <ClInclude Include="..\include\Caramel\Object\Detail\LifetimeTracker.h">
       <Filter>1. Public Packages\Object\Detail headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\String\AnsiString.h">
+      <Filter>1. Public Packages\String</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\String\Detail\SprintfParameter.h">
+      <Filter>1. Public Packages\String\Detail headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Meta\IfThenElse.h">
+      <Filter>1. Public Packages\Meta</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Meta\Select.h">
+      <Filter>1. Public Packages\Meta</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\CaramelPchCreator.cpp">
@@ -107,6 +122,9 @@
       <Filter>2. Sources</Filter>
     </ClCompile>
     <ClCompile Include="Caramel\Object.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Caramel\String.cpp">
       <Filter>2. Sources</Filter>
     </ClCompile>
   </ItemGroup>

@@ -22,15 +22,18 @@
     <ClInclude Include="..\include\Caramel\Caramel.h" />
     <ClInclude Include="..\include\Caramel\Error\Assert.h" />
     <ClInclude Include="..\include\Caramel\Error\Exception.h" />
+    <ClInclude Include="..\include\Caramel\Meta\IfThenElse.h" />
+    <ClInclude Include="..\include\Caramel\Meta\Select.h" />
     <ClInclude Include="..\include\Caramel\Meta\Utility.h" />
     <ClInclude Include="..\include\Caramel\Object\Detail\LifetimeTracker.h" />
     <ClInclude Include="..\include\Caramel\Object\Singleton.h" />
     <ClInclude Include="..\include\Caramel\Setup\Compiler.h" />
     <ClInclude Include="..\include\Caramel\Setup\System.h" />
+    <ClInclude Include="..\include\Caramel\String\AnsiString.h" />
     <ClInclude Include="..\include\Caramel\String\BasicString.h" />
     <ClInclude Include="..\include\Caramel\String\CharTraits.h" />
+    <ClInclude Include="..\include\Caramel\String\Detail\SprintfParameter.h" />
     <ClInclude Include="..\include\Caramel\String\Sprintf.h" />
-    <ClInclude Include="..\include\Caramel\String\String.h" />
     <ClInclude Include="..\include\Caramel\String\StringConvertible.h" />
     <ClInclude Include="..\include\Caramel\Thread\Mutex.h" />
     <ClInclude Include="..\include\Caramel\Trace\Trace.h" />
@@ -41,6 +44,7 @@
   <ItemGroup>
     <ClCompile Include="Caramel\CaramelPchCreator.cpp" />
     <ClCompile Include="Caramel\Object.cpp" />
+    <ClCompile Include="Caramel\String.cpp" />
     <ClCompile Include="Caramel\Trace.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

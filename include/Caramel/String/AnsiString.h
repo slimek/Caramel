@@ -1,7 +1,7 @@
-// Caramel C++ Library - String Facility - String Header
+// Caramel C++ Library - String Facility - Ansi String Header
 
-#ifndef __CARAMEL_STRING_STRING_H
-#define __CARAMEL_STRING_STRING_H
+#ifndef __CARAMEL_STRING_ANSI_STRING_H
+#define __CARAMEL_STRING_ANSI_STRING_H
 
 #include <Caramel/Caramel.h>
 
@@ -19,13 +19,13 @@ namespace Caramel
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// String
+// Ansi String
 // - A lightweight wrapper of std::string, encoding unspecified.
 //   For a encoding specified string, see CodedString.
 //
 
-class String : public BasicString< std::string, CharTraits< Char > >
-             , public StringConvertible< String >
+class AnsiString : public BasicString< std::string, CharTraits< Char > >
+                 , public StringConvertible< AnsiString >
 {
     typedef BasicString< std::string, CharTraits< Char > > Inherited;
 
@@ -33,17 +33,17 @@ public:
 
     /// Constructors ///
 
-    String() {}
+    AnsiString() {}
 
-    String( const std::string& s )
+    AnsiString( const std::string& s )
         : Inherited( s )
     {}
 
-    String( const String& s )
+    AnsiString( const AnsiString& s )
         : Inherited( s )
     {}
 
-    String( const Char* sz )
+    AnsiString( const Char* sz )
         : Inherited( std::string( sz ))
     {}
 
@@ -60,4 +60,4 @@ public:
 
 } // namespace Caramel
 
-#endif // __CARAMEL_STRING_STRING_H
+#endif // __CARAMEL_STRING_ANSI_STRING_H

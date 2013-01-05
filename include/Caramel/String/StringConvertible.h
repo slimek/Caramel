@@ -10,6 +10,9 @@
 #endif
 
 #include <iosfwd>
+#include <boost/type_traits/is_base_of.hpp>
+#include <boost/type_traits/is_class.hpp>
+#include <Caramel/Meta/Select.h>
 #include <Caramel/Meta/Utility.h>
 
 
@@ -59,6 +62,22 @@ protected:
             "The Derived::ToString() doesn't return std::string" );
     }
 };
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// String Convertible Detection
+//
+
+template< typename T >
+struct IsStringConvertibleT
+    : SelectT
+    <
+        boost::is_class< T >::value,
+        BoolType< boost::is_base_of< StringConvertible< T >, T >::value >,
+        FalseType
+    >::Type
+{};
 
 
 ///////////////////////////////////////////////////////////////////////////////

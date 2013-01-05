@@ -35,6 +35,20 @@ template< typename T > T MakeT();
 
 
 ///////////////////////////////////////////////////////////////////////////////
+//
+// Boolean Types
+//
+
+struct TrueType  { static const Bool VALUE = true; };
+struct FalseType { static const Bool VALUE = false; };
+
+template< Bool expr > struct BoolType;
+
+template<> struct BoolType< true >  : public TrueType {};
+template<> struct BoolType< false > : public FalseType {};
+
+
+///////////////////////////////////////////////////////////////////////////////
 
 } // namespace Caramel
 
