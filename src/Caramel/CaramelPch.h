@@ -18,6 +18,7 @@
 
 // Caramel Headers
 #include <Caramel/Caramel.h>
+#include <Caramel/Error/Exception.h>
 
 
 #endif // __CARAMEL_CARAMEL_PCH_H

@@ -113,6 +113,15 @@
     <ClInclude Include="..\include\Caramel\Meta\Select.h">
       <Filter>1. Public Packages\Meta</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\String\CodedString.h">
+      <Filter>1. Public Packages\String</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\String\Utf8String.h">
+      <Filter>1. Public Packages\String</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\String\TextEncoding.h">
+      <Filter>1. Public Packages\String</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\CaramelPchCreator.cpp">

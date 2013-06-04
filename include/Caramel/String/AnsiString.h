@@ -33,19 +33,12 @@ public:
 
     /// Constructors ///
 
-    AnsiString() {}
+    AnsiString();
+    AnsiString( const std::string& s );
+    AnsiString( const AnsiString& s );
 
-    AnsiString( const std::string& s )
-        : Inherited( s )
-    {}
-
-    AnsiString( const AnsiString& s )
-        : Inherited( s )
-    {}
-
-    AnsiString( const Char* sz )
-        : Inherited( std::string( sz ))
-    {}
+    template< Uint n >
+    AnsiString( const Char(& sz)[n] );
 
 
     /// Conversions ///
@@ -54,6 +47,31 @@ public:
     std::string ToString() const { return *this; }
 
 };
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Implementations
+//
+
+AnsiString::AnsiString()
+{}
+
+
+AnsiString::AnsiString( const std::string& s )
+    : Inherited( s )
+{}
+
+
+AnsiString::AnsiString( const AnsiString& s )
+    : Inherited( s )
+{}
+
+
+template< Uint n >
+AnsiString::AnsiString( const Char(& sz)[n] )
+    : Inherited( std::string( sz, sz + n ))
+{}
 
 
 ///////////////////////////////////////////////////////////////////////////////

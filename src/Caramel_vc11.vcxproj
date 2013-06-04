@@ -32,9 +32,12 @@
     <ClInclude Include="..\include\Caramel\String\AnsiString.h" />
     <ClInclude Include="..\include\Caramel\String\BasicString.h" />
     <ClInclude Include="..\include\Caramel\String\CharTraits.h" />
+    <ClInclude Include="..\include\Caramel\String\CodedString.h" />
     <ClInclude Include="..\include\Caramel\String\Detail\SprintfParameter.h" />
     <ClInclude Include="..\include\Caramel\String\Sprintf.h" />
     <ClInclude Include="..\include\Caramel\String\StringConvertible.h" />
+    <ClInclude Include="..\include\Caramel\String\TextEncoding.h" />
+    <ClInclude Include="..\include\Caramel\String\Utf8String.h" />
     <ClInclude Include="..\include\Caramel\Thread\Mutex.h" />
     <ClInclude Include="..\include\Caramel\Trace\Trace.h" />
     <ClInclude Include="..\include\Caramel\Value\SharedArray.h" />
