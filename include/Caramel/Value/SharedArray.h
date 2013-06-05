@@ -9,9 +9,9 @@
 #pragma once
 #endif
 
-#include <boost/shared_array.hpp>
 #include <Caramel/Error/Assert.h>
 #include <Caramel/Trace/Trace.h>
+#include <boost/shared_array.hpp>
 
 
 namespace Caramel

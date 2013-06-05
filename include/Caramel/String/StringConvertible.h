@@ -9,11 +9,11 @@
 #pragma once
 #endif
 
-#include <iosfwd>
-#include <boost/type_traits/is_base_of.hpp>
-#include <boost/type_traits/is_class.hpp>
 #include <Caramel/Meta/Select.h>
 #include <Caramel/Meta/Utility.h>
+#include <boost/type_traits/is_base_of.hpp>
+#include <boost/type_traits/is_class.hpp>
+#include <iosfwd>
 
 
 namespace Caramel

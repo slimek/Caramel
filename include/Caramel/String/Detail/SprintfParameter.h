@@ -9,10 +9,10 @@
 #pragma once
 #endif
 
-#include <boost/type_traits/is_enum.hpp>
-#include <boost/type_traits/is_fundamental.hpp>
 #include <Caramel/Meta/IfThenElse.h>
 #include <Caramel/String/StringConvertible.h>
+#include <boost/type_traits/is_enum.hpp>
+#include <boost/type_traits/is_fundamental.hpp>
 
 
 namespace Caramel

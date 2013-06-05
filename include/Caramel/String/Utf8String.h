@@ -25,11 +25,9 @@ namespace Caramel
 //   This is the default string type of all Caramel I/O components.
 //
 
-class Utf8String : public CodedStringN< TEXT_ENCODING_UTF8 >
+class Utf8String : public CodedString
                  , public StringConvertible< Utf8String >
 {
-    typedef CodedStringN< TEXT_ENCODING_UTF8 > Inherited;
-
 public:
     
     Utf8String();

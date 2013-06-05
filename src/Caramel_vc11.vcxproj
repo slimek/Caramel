@@ -42,6 +42,7 @@
     <ClInclude Include="..\include\Caramel\Trace\Trace.h" />
     <ClInclude Include="..\include\Caramel\Value\SharedArray.h" />
     <ClInclude Include="Caramel\CaramelPch.h" />
+    <ClInclude Include="Caramel\String\Utf8StringImpl.h" />
     <ClInclude Include="Caramel\Trace\TraceManager.h" />
   </ItemGroup>
   <ItemGroup>

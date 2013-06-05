@@ -9,9 +9,9 @@
 #pragma once
 #endif
 
-#include <mutex>
-#include <boost/noncopyable.hpp>
 #include <Caramel/Object/Detail/LifetimeTracker.h>
+#include <boost/noncopyable.hpp>
+#include <mutex>
 
 
 namespace Caramel
