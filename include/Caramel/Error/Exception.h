@@ -55,9 +55,14 @@ private:
 // Throw Exception Macros
 //
 
-#define CARAMEL_THROW( what )
+#define CARAMEL_THROW( what ) \
+    throw Exception( __LINE__, __FILE__, __FUNCTION__, what )
 
-#define CARAMEL_INVALID_ARGUMENT()
+#define CARAMEL_INVALID_ARGUMENT() \
+    CARAMEL_THROW( "Invalid Argument" )
+
+#define CARAMEL_NOT_IMPLEMENTED() \
+    CARAMEL_THROW( "Not Implemented" )
 
 
 ///////////////////////////////////////////////////////////////////////////////

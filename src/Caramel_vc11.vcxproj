@@ -42,11 +42,11 @@
     <ClInclude Include="..\include\Caramel\Trace\Trace.h" />
     <ClInclude Include="..\include\Caramel\Value\SharedArray.h" />
     <ClInclude Include="Caramel\CaramelPch.h" />
-    <ClInclude Include="Caramel\String\Utf8StringImpl.h" />
     <ClInclude Include="Caramel\Trace\TraceManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\CaramelPchCreator.cpp" />
+    <ClCompile Include="Caramel\Error.cpp" />
     <ClCompile Include="Caramel\Object.cpp" />
     <ClCompile Include="Caramel\String.cpp" />
     <ClCompile Include="Caramel\Trace.cpp" />

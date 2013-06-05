@@ -48,9 +48,6 @@
     <Filter Include="1. Public Packages\String\Detail headers">
       <UniqueIdentifier>{371c93a3-2c32-4227-8257-2142070f310b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2. Sources\String">
-      <UniqueIdentifier>{0133765d-d627-43cf-9a2b-796a482c468e}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -125,9 +122,6 @@
     <ClInclude Include="..\include\Caramel\String\TextEncoding.h">
       <Filter>1. Public Packages\String</Filter>
     </ClInclude>
-    <ClInclude Include="Caramel\String\Utf8StringImpl.h">
-      <Filter>2. Sources\String</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\CaramelPchCreator.cpp">
@@ -140,6 +134,9 @@
       <Filter>2. Sources</Filter>
     </ClCompile>
     <ClCompile Include="Caramel\String.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Caramel\Error.cpp">
       <Filter>2. Sources</Filter>
     </ClCompile>
   </ItemGroup>
