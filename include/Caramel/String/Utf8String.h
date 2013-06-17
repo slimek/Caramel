@@ -9,8 +9,10 @@
 #pragma once
 #endif
 
-#include <Caramel/String/CodedString.h>
+#include <Caramel/String/BasicString.h>
+#include <Caramel/String/CharTraits.h>
 #include <Caramel/String/StringConvertible.h>
+#include <Caramel/String/TextEncoding.h>
 
 
 namespace Caramel
@@ -25,9 +27,11 @@ namespace Caramel
 //   This is the default string type of all Caramel I/O components.
 //
 
-class Utf8String : public CodedString
+class Utf8String : public BasicString< std::string, CharTraits< Char > >
                  , public StringConvertible< Utf8String >
 {
+    typedef BasicString< std::string, CharTraits< Char > > Inherited;
+
 public:
     
     Utf8String();
@@ -39,8 +43,6 @@ public:
     // Construct from another coding
     // - Throws if 'text' can't be converted to UTF-8 by the specified encoding.
     //
-
-    explicit Utf8String( const CodedString& text );
 
     Utf8String( const std::string& text, TextEncoding encoding );
 
@@ -74,7 +76,6 @@ public:
 //
 
 inline Utf8String::Utf8String()
-    : CodedString( TEXT_ENCODING_UTF8 )
 {}
 
 

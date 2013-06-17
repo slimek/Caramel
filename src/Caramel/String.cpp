@@ -27,7 +27,7 @@ namespace Caramel
 //
 
 Utf8String::Utf8String( const std::string& u8Text )
-    : CodedString( TEXT_ENCODING_UTF8 )
+    : Inherited( u8Text )
 {
     if ( !this->TryParse( u8Text ))
     {

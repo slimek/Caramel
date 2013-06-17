@@ -21,7 +21,7 @@ namespace Caramel
 //
 // Ansi String
 // - A lightweight wrapper of std::string, encoding unspecified.
-//   For a encoding specified string, see CodedString.
+//   For UTF-8 encoded text, use Utf8String.
 //
 
 class AnsiString : public BasicString< std::string, CharTraits< Char > >
