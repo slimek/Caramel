@@ -51,6 +51,9 @@
     <Filter Include="1. Public Packages\Json">
       <UniqueIdentifier>{f960189a-4e5f-4f2f-8c66-0b8b7ede4ef4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\Lexical">
+      <UniqueIdentifier>{7500b9b7-34a6-45c1-88a9-9c008305f73d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -128,6 +131,12 @@
     <ClInclude Include="..\include\Caramel\Json\JsonValue.h">
       <Filter>1. Public Packages\Json</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Lexical\Integer.h">
+      <Filter>1. Public Packages\Lexical</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Lexical\IntegerList.h">
+      <Filter>1. Public Packages\Lexical</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\CaramelPchCreator.cpp">
@@ -143,6 +152,9 @@
       <Filter>2. Sources</Filter>
     </ClCompile>
     <ClCompile Include="Caramel\Error.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Caramel\Lexical.cpp">
       <Filter>2. Sources</Filter>
     </ClCompile>
   </ItemGroup>
