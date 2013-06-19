@@ -9,8 +9,7 @@
 #pragma once
 #endif
 
-#include <boost/static_assert.hpp>
-#include <boost/type_traits/is_integral.hpp>
+#include <type_traits>
 
 
 namespace Caramel
@@ -29,7 +28,7 @@ namespace Lexical
 template< typename ValueType >
 class Integer
 {
-    BOOST_STATIC_ASSERT( boost::is_integral< ValueType >::value );
+    static_assert( std::is_integral< ValueType >::value, "ValueType must be integral" );
 
 public:
     Integer();

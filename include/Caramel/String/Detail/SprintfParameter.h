@@ -11,8 +11,7 @@
 
 #include <Caramel/Meta/IfThenElse.h>
 #include <Caramel/String/StringConvertible.h>
-#include <boost/type_traits/is_enum.hpp>
-#include <boost/type_traits/is_fundamental.hpp>
+#include <type_traits>
 
 
 namespace Caramel
@@ -63,10 +62,10 @@ struct SprintfParameterSelect
 {
     typedef typename IfThenElse3T
     <
-        boost::is_fundamental< T >::value,  SprintfParameter_IdentityCopy< T >,
-        boost::is_enum< T >::value,         SprintfParameter_IdentityCopy< T >,
-        IsStringConvertibleT< T >::VALUE,   SprintfParameter_StringConvertible< T >,
-                                            EmptyType
+        std::is_fundamental< T >::value,  SprintfParameter_IdentityCopy< T >,
+        std::is_enum< T >::value,         SprintfParameter_IdentityCopy< T >,
+        IsStringConvertibleT< T >::VALUE, SprintfParameter_StringConvertible< T >,
+                                          EmptyType
     >::Type ParameterType;
 };
 

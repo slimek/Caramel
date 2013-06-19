@@ -11,9 +11,8 @@
 
 #include <Caramel/Meta/Select.h>
 #include <Caramel/Meta/Utility.h>
-#include <boost/type_traits/is_base_of.hpp>
-#include <boost/type_traits/is_class.hpp>
 #include <iosfwd>
+#include <type_traits>
 
 
 namespace Caramel
@@ -73,8 +72,8 @@ template< typename T >
 struct IsStringConvertibleT
     : SelectT
     <
-        boost::is_class< T >::value,
-        BoolType< boost::is_base_of< StringConvertible< T >, T >::value >,
+        std::is_class< T >::value,
+        BoolType< std::is_base_of< StringConvertible< T >, T >::value >,
         FalseType
     >::Type
 {};
