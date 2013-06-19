@@ -64,8 +64,12 @@ public:
 
     std::string ToString() const { return *this; }
 
+    // Cooperates with C-style functions
+    const Char* ToCstr() const { return this->c_str(); }
+
     // NOTE: No implicit conversion to std::string.
     //       Always use Utf8String as possible.
+
 
 };
 
