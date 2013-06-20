@@ -57,6 +57,9 @@
     <Filter Include="1. Public Packages\Chrono">
       <UniqueIdentifier>{b9527995-68be-4694-bb0c-1b22f6babd52}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\Io">
+      <UniqueIdentifier>{814c1f5a-cf73-4231-86af-31e1b9c2fbf6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -139,6 +142,9 @@
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Chrono\SteadyClock.h">
       <Filter>1. Public Packages\Chrono</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Io\FileInfo.h">
+      <Filter>1. Public Packages\Io</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
