@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h" />
+    <ClInclude Include="..\include\Caramel\Chrono\SteadyClock.h" />
     <ClInclude Include="..\include\Caramel\Error\Assert.h" />
     <ClInclude Include="..\include\Caramel\Error\Exception.h" />
     <ClInclude Include="..\include\Caramel\Json\JsonValue.h" />
