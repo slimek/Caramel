@@ -21,7 +21,7 @@ namespace Caramel
 // - Immutable
 //
 
-class Path
+class Path : public boost::filesystem::path
 {
 
 public:
@@ -35,13 +35,9 @@ public:
     //   In other OS it is slash '/'
     //
 
-    std::string Stem()      const { return m_path.stem().string(); }
-    std::string Extension() const { return m_path.extension().string(); }
+    std::string Stem()      const { return this->stem().string(); }
+    std::string Extension() const { return this->extension().string(); }
 
-
-private:
-
-    boost::filesystem::path m_path;
 };
 
 
@@ -50,7 +46,7 @@ private:
 //
 
 inline Path::Path( const std::string& path )
-    : m_path( path )
+    : boost::filesystem::path( path )
 {
 }
 

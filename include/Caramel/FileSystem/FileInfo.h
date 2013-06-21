@@ -9,6 +9,7 @@
 #pragma once
 #endif
 
+#include <Caramel/FileSystem/Path.h>
 #include <boost/filesystem.hpp>
 
 
@@ -26,6 +27,7 @@ class FileInfo
 public:
 
     explicit FileInfo( const std::string& fileName );
+    explicit FileInfo( const Path& path );
 
     Bool Exists() const;
 
@@ -44,6 +46,13 @@ private:
 inline FileInfo::FileInfo( const std::string& fileName )
     : m_fileName( fileName )
     , m_status( boost::filesystem::status( fileName ))
+{
+}
+
+
+inline FileInfo::FileInfo( const Path& path )
+    : m_fileName( path.string() )
+    , m_status( boost::filesystem::status( path ))
 {
 }
 
