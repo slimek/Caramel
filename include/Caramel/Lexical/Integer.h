@@ -56,12 +56,13 @@ private:
 };
 
 
+///////////////////////////////////////////////////////////////////////////////
 //
 // Implementations
 //
 
 template< typename ValueType >
-Integer< ValueType >::Integer()
+inline Integer< ValueType >::Integer()
     : m_value( 0 )
     , m_outOfRange( false )
 {
@@ -69,7 +70,7 @@ Integer< ValueType >::Integer()
 
 
 template< typename ValueType >
-Integer< ValueType >::Integer( ValueType defaultValue )
+inline Integer< ValueType >::Integer( ValueType defaultValue )
     : m_value( defaultValue )
     , m_outOfRange( false )
 {

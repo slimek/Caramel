@@ -42,20 +42,11 @@ inline const std::string& Sprintf( const std::string& format )
 }
 
 
-/// Functions with 1 Argument ///
+//
+// Sprintf Functions Variadic Templates
+//
 
-template< typename T0 >
-inline std::string Sprintf( const Char* format, const T0& a0 )
-{
-    return Detail::SprintfImpl( format, Detail::SprintfParameter< T0 >()( a0 ));
-}
-
-
-template< typename T0 >
-inline std::string Sprintf( const std::string& format, const T0& a0 )
-{
-    return Detail::SprintfImpl( format.c_str(), Detail::SprintfParameter< T0 >()( a0 ));
-}
+#include <Caramel/String/Inline/Sprintf_Sprintf.h>
 
 
 ///////////////////////////////////////////////////////////////////////////////

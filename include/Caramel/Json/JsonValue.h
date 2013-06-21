@@ -67,11 +67,12 @@ private:
 };
 
 
+///////////////////////////////////////////////////////////////////////////////
 //
 // Implementation
 //
 
-JsonValue::JsonValue()
+inline JsonValue::JsonValue()
     : m_value( new rapidjson::Value( rapidjson::kObjectType ))
 {
 }

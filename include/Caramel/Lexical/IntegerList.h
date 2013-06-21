@@ -51,12 +51,13 @@ private:
 };
 
 
+///////////////////////////////////////////////////////////////////////////////
 //
 // Implementations
 //
 
 template< typename ValueType >
-Bool IntegerList< ValueType >::TryParse( const std::string& input, const std::string& separators )
+inline Bool IntegerList< ValueType >::TryParse( const std::string& input, const std::string& separators )
 {
     std::deque< std::string > tokens;
     boost::split( tokens, input, boost::is_any_of( separators ));

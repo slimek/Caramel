@@ -52,33 +52,34 @@ private:
 };
 
 
+///////////////////////////////////////////////////////////////////////////////
 //
 // Implementation
 //
 
 template< typename ValueType, typename Ratio >
-SteadyClock< ValueType, Ratio >::SteadyClock()
+inline SteadyClock< ValueType, Ratio >::SteadyClock()
 {
     this->Reset();
 }
 
 
 template< typename ValueType, typename Ratio >
-void SteadyClock< ValueType, Ratio >::Reset()
+inline void SteadyClock< ValueType, Ratio >::Reset()
 {
     m_clockStart = m_intervalStart = ClockType::now();
 }
 
 
 template< typename ValueType, typename Ratio >
-ValueType SteadyClock< ValueType, Ratio >::GetTotalElapsed() const
+inline ValueType SteadyClock< ValueType, Ratio >::GetTotalElapsed() const
 {
     return Duration( ClockType::now() - m_clockStart ).count();
 }
 
 
 template< typename ValueType, typename Ratio >
-ValueType SteadyClock< ValueType, Ratio >::Delta()
+inline ValueType SteadyClock< ValueType, Ratio >::Delta()
 {
     const TimePoint now = ClockType::now();
     const Duration delta = now - m_intervalStart;
