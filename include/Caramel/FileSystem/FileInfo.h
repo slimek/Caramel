@@ -1,7 +1,7 @@
-// Caramel C++ Library - I/O Amenity - File Info Header
+// Caramel C++ Library - File System Amenity - File Info Header
 
-#ifndef __CARAMEL_IO_FILE_INFO_H
-#define __CARAMEL_IO_FILE_INFO_H
+#ifndef __CARAMEL_FILE_SYSTEM_FILE_INFO_H
+#define __CARAMEL_FILE_SYSTEM_FILE_INFO_H
 
 #include <Caramel/Caramel.h>
 
@@ -18,6 +18,7 @@ namespace Caramel
 ///////////////////////////////////////////////////////////////////////////////
 //
 // File Info
+// - Immutable
 //
 
 class FileInfo
@@ -58,4 +59,4 @@ inline Bool FileInfo::Exists() const
 
 } // namespace Caramel
 
-#endif // __CARAMEL_IO_FILE_INFO_H
+#endif // __CARAMEL_FILE_SYSTEM_FILE_INFO_H

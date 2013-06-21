@@ -1,7 +1,7 @@
-// Caramel C++ Library - I/O Amenity - Path Header
+// Caramel C++ Library - File System Amenity - Path Header
 
-#ifndef __CARAMEL_IO_PATH_H
-#define __CARAMEL_IO_PATH_H
+#ifndef __CARAMEL_FILE_SYSTEM_PATH_H
+#define __CARAMEL_FILE_SYSTEM_PATH_H
 
 #include <Caramel/Caramel.h>
 
@@ -59,4 +59,4 @@ inline Path::Path( const std::string& path )
 
 } // namespace Caramel
 
-#endif // __CARAMEL_IO_PATH_H
+#endif // __CARAMEL_FILE_SYSTEM_PATH_H
