@@ -24,6 +24,7 @@
     <ClInclude Include="..\include\Caramel\Error\Assert.h" />
     <ClInclude Include="..\include\Caramel\Error\Exception.h" />
     <ClInclude Include="..\include\Caramel\Io\FileInfo.h" />
+    <ClInclude Include="..\include\Caramel\Io\Path.h" />
     <ClInclude Include="..\include\Caramel\Json\JsonValue.h" />
     <ClInclude Include="..\include\Caramel\Lexical\Integer.h" />
     <ClInclude Include="..\include\Caramel\Lexical\IntegerList.h" />

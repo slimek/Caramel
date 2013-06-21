@@ -146,6 +146,9 @@
     <ClInclude Include="..\include\Caramel\Io\FileInfo.h">
       <Filter>1. Public Packages\Io</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Io\Path.h">
+      <Filter>1. Public Packages\Io</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\CaramelPchCreator.cpp">
