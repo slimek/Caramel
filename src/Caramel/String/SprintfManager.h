@@ -38,8 +38,6 @@ public:
     SprintfBuffer();
     ~SprintfBuffer();
 
-    void Clear();
-
     Char* GetPointer() { return m_buffer; }
 
 

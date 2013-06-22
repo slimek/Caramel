@@ -39,7 +39,6 @@ std::string SprintfImpl( const Char* format, ... )
     ScopeGuard guard( [ buffer ] { SprintfManager::Instance()->FreeBuffer( buffer ); } );
 
     Char* p = buffer->GetPointer();
-    p[0] = 0;  // Set this buffer as an empty string. Do not clear all buffer to keep performance.
 
     va_list args;
     va_start( args, format );
@@ -89,19 +88,14 @@ SprintfBuffer::SprintfBuffer()
     m_tailGuard = reinterpret_cast< Uint32* >( m_buffer + SIZE );
     *m_tailGuard = TAIL_GUARD;
 
-    this->Clear();
+    // Clear the buffer
+    std::fill( m_buffer, m_buffer + SIZE, 0 );
 }
 
 
 SprintfBuffer::~SprintfBuffer()
 {
     delete[] m_chunk;
-}
-
-
-void SprintfBuffer::Clear()
-{
-    std::fill( m_buffer, m_buffer + SIZE, 0 );
 }
 
 
