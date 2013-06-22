@@ -2,9 +2,12 @@
 
 #include <Caramel/CaramelPch.h>
 
+#include <Caramel/Functional/ScopeGuard.h>
 #include <Caramel/String/Sprintf.h>
 #include <Caramel/String/SprintfManager.h>
 #include <Caramel/String/Utf8String.h>
+#include <cstdarg>
+#include <cstdio>
 
 
 namespace Caramel
@@ -32,9 +35,25 @@ namespace Detail
 
 std::string SprintfImpl( const Char* format, ... )
 {
-    //SprintfBuffer* buffer = SprintfManager::Instance()->AllocateBuffer();
+    SprintfBuffer* buffer = SprintfManager::Instance()->AllocateBuffer();
+    ScopeGuard guard( [ buffer ] { SprintfManager::Instance()->FreeBuffer( buffer ); } );
 
-    CARAMEL_NOT_IMPLEMENTED();  
+    Char* p = buffer->GetPointer();
+    p[0] = 0;  // Set this buffer as an empty string. Do not clear all buffer to keep performance.
+
+    va_list args;
+    va_start( args, format );
+
+    const Int count = vsnprintf( p, SprintfBuffer::SIZE, format, args );
+
+    va_end( args );
+
+    if ( 0 > count )
+    {
+        // TODO: use Trace function for error reporting.
+    }
+    
+    return std::string( p );
 }
 
 } // namespace Detail
@@ -93,6 +112,12 @@ void SprintfBuffer::Clear()
 // - CAUTION: Sprintf utility is the foundation of Exception and Trace macros.
 //            Don't use these macros in Sprintf code.
 //
+
+SprintfManager::SprintfManager()
+    : m_buffers( 1 )   // <= Number of free-list nodes.
+{                      //    Nodes may be allocated dynamically when necessary,
+}                      //    Give only 1 node for the first call is OK.
+
 
 SprintfManager::~SprintfManager()
 {
