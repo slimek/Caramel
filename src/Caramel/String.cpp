@@ -3,6 +3,7 @@
 #include <Caramel/CaramelPch.h>
 
 #include <Caramel/String/Sprintf.h>
+#include <Caramel/String/SprintfManager.h>
 #include <Caramel/String/Utf8String.h>
 
 
@@ -13,13 +14,112 @@ namespace Caramel
 // Contents
 //
 // 1. Sprintf
-// 2. Utf8String
+// 2. SprintfBuffer
+// 3. SprintfManager
+// 4. Utf8String
 //
 
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Sprintf
 //
+// - CAUTION: Sprintf utility is the foundation of Exception and Trace macros.
+//            Don't use these macros in Sprintf code.
+//
+
+namespace Detail
+{
+
+std::string SprintfImpl( const Char* format, ... )
+{
+    //SprintfBuffer* buffer = SprintfManager::Instance()->AllocateBuffer();
+
+    CARAMEL_NOT_IMPLEMENTED();  
+}
+
+} // namespace Detail
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Sprintf Buffer
+//
+// - CAUTION: Sprintf utility is the foundation of Exception and Trace macros.
+//            Don't use these macros in Sprintf code.
+//
+
+SprintfBuffer::SprintfBuffer()
+{
+    m_chunk = new Char[ CHUNK_SIZE ];
+    
+    // Align buffer acoording to the cache lines
+    void* p = m_chunk;
+    std::size_t space = 0;
+    std::align( BUFFER_ALIGN, SIZE, p, space );  
+    m_buffer = reinterpret_cast< Char* >( p );
+
+    CARAMEL_ASSERT( m_buffer + SIZE + sizeof( Uint32 ) <= m_chunk + CHUNK_SIZE );
+
+    // Padding before head
+    std::fill( m_chunk, m_buffer, PAD_CHAR );
+
+    // Padding after tail
+    std::fill( m_buffer + SIZE, m_chunk + CHUNK_SIZE, PAD_CHAR );
+
+    // Put the tail guard
+    m_tailGuard = reinterpret_cast< Uint32* >( m_buffer + SIZE );
+    *m_tailGuard = TAIL_GUARD;
+
+    this->Clear();
+}
+
+
+SprintfBuffer::~SprintfBuffer()
+{
+    delete[] m_chunk;
+}
+
+
+void SprintfBuffer::Clear()
+{
+    std::fill( m_buffer, m_buffer + SIZE, 0 );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Sprintf Manager
+//
+// - CAUTION: Sprintf utility is the foundation of Exception and Trace macros.
+//            Don't use these macros in Sprintf code.
+//
+
+SprintfManager::~SprintfManager()
+{
+    SprintfBuffer* buffer = nullptr;
+    while ( m_buffers.pop( buffer ))
+    {
+        delete buffer;
+    }
+}
+
+
+SprintfBuffer* SprintfManager::AllocateBuffer()
+{
+    SprintfBuffer* buffer = nullptr;
+    if ( ! m_buffers.pop( buffer ))
+    {
+        buffer = new SprintfBuffer;
+    }
+    return buffer;
+}
+
+
+void SprintfManager::FreeBuffer( SprintfBuffer* buffer )
+{
+    CARAMEL_VERIFY( m_buffers.push( buffer ));
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //

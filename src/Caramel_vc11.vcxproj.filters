@@ -60,6 +60,12 @@
     <Filter Include="1. Public Packages\FileSystem">
       <UniqueIdentifier>{c9f622dd-a423-4a8d-b682-bb4368bc6a29}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Sources\Object">
+      <UniqueIdentifier>{503032af-d7e5-4de1-8850-7beec02279d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\String">
+      <UniqueIdentifier>{7380edb2-21b9-4d93-93ca-49098af90550}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -148,6 +154,15 @@
     </ClInclude>
     <ClInclude Include="..\include\Caramel\FileSystem\Path.h">
       <Filter>1. Public Packages\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\String\Inline\Sprintf_Sprintf.h">
+      <Filter>1. Public Packages\String\Inline headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Caramel\Object\FacilityLongevity.h">
+      <Filter>2. Sources\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Caramel\String\SprintfManager.h">
+      <Filter>2. Sources\String</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

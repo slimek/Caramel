@@ -14,10 +14,12 @@
 // ANSI C++ Headers
 #include <algorithm>
 #include <list>
+#include <memory>
 #include <mutex>
 
 // Caramel Headers
 #include <Caramel/Caramel.h>
+#include <Caramel/Error/Assert.h>
 #include <Caramel/Error/Exception.h>
 
 

@@ -23,6 +23,7 @@ namespace Caramel
 // - The higher longevity, the later it is destroyed.
 //   If two singletons have the same longevity, the order of their destruction
 //   is undetermined.
+// - Longevity greater than 0x7FFFFFFF is reserved for Caramel internal usage.
 // - Credit to "Loki" library.
 //
 
