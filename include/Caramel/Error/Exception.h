@@ -9,6 +9,7 @@
 #pragma once
 #endif
 
+#include <Caramel/String/Sprintf.h>
 #include <exception>
 
 
@@ -58,11 +59,20 @@ private:
 #define CARAMEL_THROW( what ) \
     throw Exception( __LINE__, __FILE__, __FUNCTION__, what )
 
+
+//
+// Specific Exceptions
+// - The below macros have only 1 argument and don't use Sprintf().
+//
+
+#define CARAMEL_THROW1( msg ) \
+    throw Exception( __LINE__, __FILE__, __FUNCTION__, msg )
+
 #define CARAMEL_INVALID_ARGUMENT() \
-    CARAMEL_THROW( "Invalid Argument" )
+    CARAMEL_THROW1( "Invalid Argument" )
 
 #define CARAMEL_NOT_IMPLEMENTED() \
-    CARAMEL_THROW( "Not Implemented" )
+    CARAMEL_THROW1( "Not Implemented" )
 
 
 ///////////////////////////////////////////////////////////////////////////////

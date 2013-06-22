@@ -19,12 +19,16 @@
 
 #if defined( NDEBUG )
 
-#define CARAMEL_ASSERT( expr ) ((void)0)
+#define CARAMEL_ASSERT( expr ) ( (void)0 )
+
+#define CARAMEL_VERIFY( expr ) ( expr )
 
 #else  // NDEBUG
 
 #define CARAMEL_ASSERT( expr ) \
     if ( !( expr )) { CARAMEL_THROW( "Assertion failed : \"" #expr "\"" );  }
+
+#define CARAMEL_VERIFY( expr ) CARAMEL_ASSERT( expr )
 
 #endif // NDEBUG 
 
