@@ -68,34 +68,31 @@ std::string SprintfImpl( const Char* format, ... )
 
 SprintfBuffer::SprintfBuffer()
 {
-    m_chunk = new Char[ CHUNK_SIZE ];
-    
     // Align buffer acoording to the cache lines
-    void* p = m_chunk;
-    std::size_t space = 0;
-    std::align( BUFFER_ALIGN, SIZE, p, space );  
-    m_buffer = reinterpret_cast< Char* >( p );
+    Void* p = &m_chunk[0];
+    std::size_t space = CHUNK_SIZE;
+    m_buffer = reinterpret_cast< Char* >( std::align( BUFFER_ALIGN, SIZE, p, space ));
 
-    CARAMEL_ASSERT( m_buffer + SIZE + sizeof( Uint32 ) <= m_chunk + CHUNK_SIZE );
+    CARAMEL_ASSERT( m_buffer + SIZE + sizeof( Uint32 ) <= &m_chunk[0] + CHUNK_SIZE );
 
     // Padding before head
-    std::fill( m_chunk, m_buffer, PAD_CHAR );
+    std::fill( &m_chunk[0], m_buffer, PAD_CHAR );
 
     // Padding after tail
-    std::fill( m_buffer + SIZE, m_chunk + CHUNK_SIZE, PAD_CHAR );
+    std::fill( m_buffer + SIZE, &m_chunk[ CHUNK_SIZE ], PAD_CHAR );
 
     // Put the tail guard
-    m_tailGuard = reinterpret_cast< Uint32* >( m_buffer + SIZE );
-    *m_tailGuard = TAIL_GUARD;
+    Uint32* tailGuard = reinterpret_cast< Uint32* >( m_buffer + SIZE );
+    *tailGuard = TAIL_GUARD;
 
     // Clear the buffer
     std::fill( m_buffer, m_buffer + SIZE, 0 );
 }
 
 
-SprintfBuffer::~SprintfBuffer()
+Bool SprintfBuffer::CheckGuard() const
 {
-    delete[] m_chunk;
+    return *reinterpret_cast< Uint32* >( m_buffer + SIZE ) == TAIL_GUARD;
 }
 
 
@@ -130,6 +127,8 @@ SprintfBuffer* SprintfManager::AllocateBuffer()
     {
         buffer = new SprintfBuffer;
     }
+
+    CARAMEL_ASSERT( buffer->CheckGuard() );
     return buffer;
 }
 

@@ -25,28 +25,28 @@ namespace Caramel
 
 class SprintfBuffer
 {
-    static const Uint8  PAD_CHAR   = 0xD3;
-    static const Uint32 TAIL_GUARD = 0xD3DED700;
-
-    static const Uint CHUNK_SIZE   = 4048;  // <= 4096 - 48 , a little less than 4 KB page.
-    static const Uint BUFFER_ALIGN = 64;    // Common CPU cache line length.
-
 public:
 
     static const Uint SIZE = 3968;   // 64 x 62 bytes, available buffer size
-
+                                     // A little less than 4 KB page.
     SprintfBuffer();
-    ~SprintfBuffer();
 
     Char* GetPointer() { return m_buffer; }
+
+    Bool CheckGuard() const;
 
 
 private:
 
-    Char* m_chunk;
-    Char* m_buffer;
+    static const Uint8  PAD_CHAR   = 0xD3;
+    static const Uint32 TAIL_GUARD = 0xD3DED700;
 
-    Uint32* m_tailGuard;
+    static const Uint BUFFER_ALIGN = 64;    // Common CPU cache line length.
+
+    static const Uint CHUNK_SIZE   = SIZE + BUFFER_ALIGN + 4;  // 4 : size of the tail guard
+
+    Char* m_buffer;
+    Char  m_chunk[ CHUNK_SIZE ];
 };
 
 
