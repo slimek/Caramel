@@ -11,6 +11,7 @@
 #endif
 
 // mandatory ANSI C++ 11 headers
+#include <cstdint>
 #include <cstdlib>
 #include <memory>
 #include <string>
@@ -39,20 +40,15 @@ typedef unsigned int    Uint;
 
 /// Integers with Bits Specified ///
 
-#if defined( CARAMEL_COMPILER_IS_MSVC )
+typedef std::int8_t     Int8;
+typedef std::int16_t    Int16;
+typedef std::int32_t    Int32;
+typedef std::int64_t    Int64;
 
-typedef __int8  Int8;
-typedef __int16 Int16;
-typedef __int32 Int32;
-typedef __int64 Int64;
-
-typedef unsigned __int8  Uint8;
-typedef unsigned __int16 Uint16;
-typedef unsigned __int32 Uint32;
-typedef unsigned __int64 Uint64;
-
-
-#endif
+typedef std::uint8_t    Uint8;
+typedef std::uint16_t   Uint16;
+typedef std::uint32_t   Uint32;
+typedef std::uint64_t   Uint64;
 
 
 /// Floating Points ///

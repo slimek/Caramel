@@ -73,20 +73,20 @@ SprintfBuffer::SprintfBuffer()
     std::size_t space = CHUNK_SIZE;
     m_buffer = reinterpret_cast< Char* >( std::align( BUFFER_ALIGN, SIZE, p, space ));
 
-    CARAMEL_ASSERT( m_buffer + SIZE + sizeof( Uint32 ) <= &m_chunk[0] + CHUNK_SIZE );
+    CARAMEL_ASSERT( m_buffer + SIZE + sizeof( Uint32 ) <= &m_chunk[ CHUNK_SIZE ] );
 
     // Padding before head
     std::fill( &m_chunk[0], m_buffer, PAD_CHAR );
 
-    // Padding after tail
-    std::fill( m_buffer + SIZE, &m_chunk[ CHUNK_SIZE ], PAD_CHAR );
+    // Clear the buffer
+    std::fill( m_buffer, m_buffer + SIZE, 0 );
 
     // Put the tail guard
     Uint32* tailGuard = reinterpret_cast< Uint32* >( m_buffer + SIZE );
     *tailGuard = TAIL_GUARD;
 
-    // Clear the buffer
-    std::fill( m_buffer, m_buffer + SIZE, 0 );
+    // Padding after tail
+    std::fill( m_buffer + SIZE + sizeof( Uint32 ), &m_chunk[ CHUNK_SIZE ], PAD_CHAR );
 }
 
 
