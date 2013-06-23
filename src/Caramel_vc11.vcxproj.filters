@@ -167,7 +167,7 @@
     <ClInclude Include="Caramel\String\SprintfManager.h">
       <Filter>2. Sources\String</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\Functional\ScopeGuard.h">
+    <ClInclude Include="..\include\Caramel\Functional\ScopeExit.h">
       <Filter>1. Public Packages\Functional</Filter>
     </ClInclude>
   </ItemGroup>

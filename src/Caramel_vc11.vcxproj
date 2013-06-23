@@ -25,7 +25,7 @@
     <ClInclude Include="..\include\Caramel\Error\Exception.h" />
     <ClInclude Include="..\include\Caramel\FileSystem\FileInfo.h" />
     <ClInclude Include="..\include\Caramel\FileSystem\Path.h" />
-    <ClInclude Include="..\include\Caramel\Functional\ScopeGuard.h" />
+    <ClInclude Include="..\include\Caramel\Functional\ScopeExit.h" />
     <ClInclude Include="..\include\Caramel\Json\JsonValue.h" />
     <ClInclude Include="..\include\Caramel\Lexical\Integer.h" />
     <ClInclude Include="..\include\Caramel\Lexical\IntegerList.h" />

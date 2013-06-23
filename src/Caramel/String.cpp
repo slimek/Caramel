@@ -2,7 +2,7 @@
 
 #include <Caramel/CaramelPch.h>
 
-#include <Caramel/Functional/ScopeGuard.h>
+#include <Caramel/Functional/ScopeExit.h>
 #include <Caramel/String/Sprintf.h>
 #include <Caramel/String/SprintfManager.h>
 #include <Caramel/String/Utf8String.h>
@@ -36,7 +36,7 @@ namespace Detail
 std::string SprintfImpl( const Char* format, ... )
 {
     SprintfBuffer* buffer = SprintfManager::Instance()->AllocateBuffer();
-    ScopeGuard guard( [ buffer ] { SprintfManager::Instance()->FreeBuffer( buffer ); } );
+    auto guard = ScopeExit( [ buffer ] { SprintfManager::Instance()->FreeBuffer( buffer ); } );
 
     Char* p = buffer->GetPointer();
 
