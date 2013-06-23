@@ -56,8 +56,8 @@ private:
 // Throw Exception Macros
 //
 
-#define CARAMEL_THROW( what ) \
-    throw Exception( __LINE__, __FILE__, __FUNCTION__, what )
+#define CARAMEL_THROW( ... ) \
+    throw Exception( __LINE__, __FILE__, __FUNCTION__, Sprintf( __VA_ARGS__ ))
 
 
 //

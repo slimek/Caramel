@@ -26,7 +26,7 @@
 #else  // NDEBUG
 
 #define CARAMEL_ASSERT( expr ) \
-    if ( !( expr )) { CARAMEL_THROW( "Assertion failed : \"" #expr "\"" );  }
+    if ( !( expr )) { CARAMEL_THROW1( "Assertion failed : \"" #expr "\"" );  }
 
 #define CARAMEL_VERIFY( expr ) CARAMEL_ASSERT( expr )
 
