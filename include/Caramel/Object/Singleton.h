@@ -13,6 +13,10 @@
 #include <boost/noncopyable.hpp>
 #include <mutex>
 
+#if defined( CARAMEL_COMPILER_IS_GCC )
+#include <thread>  // for std::call_once()
+#endif
+
 
 namespace Caramel
 {

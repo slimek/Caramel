@@ -38,8 +38,8 @@
 
 #if defined( __GNUC__ ) && !defined( __clang__ )
 
-#if ( 4 > __GNUC__ ) || (( 4 == __GNUC__ ) && 6 > __GNUC_MINOR__ )
-#error "Caramel doesn't support GNU C++ before 4.6"
+#if ( 4 > __GNUC__ ) || (( 4 == __GNUC__ ) && 7 > __GNUC_MINOR__ )
+#error "Caramel doesn't support GNU C++ before 4.7"
 #endif
 
 #define CARAMEL_COMPILER_IS_GCC
@@ -66,7 +66,7 @@
 #if defined( __clang__ )
 
 #if ( 3 > __clang_major__ ) || (( 3 == __clang_major__ ) && ( 1 > __clang_minor__ ))
-#error "Caramel doesn't support Clang before 3.1
+#error "Caramel doesn't support Clang before 3.1"
 #endif
 
 #define CARAMEL_COMPILER_IS_CLANG
