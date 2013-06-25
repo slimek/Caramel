@@ -3,8 +3,8 @@
 #ifndef __CARAMEL_CARAMEL_PCH_H
 #define __CARAMEL_CARAMEL_PCH_H
 
-#include <Caramel/Setup/System.h>
 #include <Caramel/Setup/Compiler.h>
+#include <Caramel/Setup/System.h>
 
 #if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
 #pragma once

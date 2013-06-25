@@ -4,6 +4,10 @@
 #define __CARAMEL_SETUP_SYSTEM_H
 
 
+#if !defined( CARAMEL_COMPILER_NAME )
+#error "Compiler must be detected first"
+#endif
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // System - Windows
@@ -36,10 +40,25 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 //
+// System - iOS
+//
+
+#if ( defined( CARAMEL_COMPILER_IS_GCC ) || defined( CARAMEL_COMPILER_IS_CLANG )) \
+ && ( defined( TARGET_OS_IPHONE ) || defined( TARGET_IPHONE_SIMULATOR ))
+
+#define CARAMEL_SYSTEM_IS_IOS
+
+#define CARAMEL_SYSTEM_NAME "iOS"
+
+
+#endif // iOS
+
+///////////////////////////////////////////////////////////////////////////////
+//
 // System - Android
 //
 
-#if defined( ANDROID ) || defined( __ANDROID )
+#if defined( ANDROID ) || defined( __ANDROID__ )
 
 #define CARAMEL_SYSTEM_IS_ANDROID
 
