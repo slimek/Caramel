@@ -41,6 +41,15 @@ struct SelectT< false, T0, T1 >
 };
 
 
+/// Recursive ///
+
+template< Bool cond1, typename T0, typename T1, typename T2 >
+struct SelectT< false, T0, SelectT< cond1, T1, T2 > >
+{
+    typedef typename SelectT< cond1, T1, T2 >::Type Type;
+};
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // namespace Caramel
