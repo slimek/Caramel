@@ -46,7 +46,7 @@ public:
 
     Utf8String( const std::string& text, TextEncoding encoding );
 
-    
+
     //
     // Conversions
     //
@@ -55,7 +55,6 @@ public:
     // Returns whether the input string is UTF-8 encoded.
     // NOTES: An ASCII string would also satisfy the UTF-8 rule. 
     //
-
     Bool TryParse( const std::string& u8Text );
 
     // convert from binary data
@@ -71,16 +70,30 @@ public:
     //       Always use Utf8String as possible.
 
 
+#if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+
+    //
+    // Windows Specific
+    // - In Windows, many APIs use wide string, in UTF-16 LE encoding.
+    //   Here provides some wstring conversions to cooperate with Windows APIs.
+    //
+    //   In other OS, like Linux or Mac, you should never use wstring...
+    //   
+
+    //
+    // Construct from a wstring
+    // - Suppose the wText is UTF-16 LE encoded.
+    //   Throws is conversion failed.
+    //
+    explicit Utf8String( const std::wstring& wText );
+
+    // Convert to UTF-16 LE wstring
+    std::wstring ToWstring() const;
+
+
+#endif // CARAMEL_SYSTEM_IS_WINDOWS
+    
 };
-
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Implementation
-//
-
-inline Utf8String::Utf8String()
-{}
 
 
 ///////////////////////////////////////////////////////////////////////////////

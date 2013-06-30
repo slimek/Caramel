@@ -6,6 +6,7 @@
 #include <Caramel/String/Sprintf.h>
 #include <Caramel/String/SprintfManager.h>
 #include <Caramel/String/Utf8String.h>
+#include <codecvt>
 #include <cstdarg>
 #include <cstdio>
 
@@ -144,8 +145,12 @@ void SprintfManager::FreeBuffer( SprintfBuffer* buffer )
 // UTF-8 String
 //
 
+Utf8String::Utf8String()
+{
+}
+
+
 Utf8String::Utf8String( const std::string& u8Text )
-    : Inherited( u8Text )
 {
     if ( !this->TryParse( u8Text ))
     {
@@ -217,6 +222,28 @@ Bool Utf8String::TryParse( const Byte* data, Uint length )
 {
     CARAMEL_NOT_IMPLEMENTED();
 }
+
+
+#if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+
+//
+// Conversion between UTF-8 and UTF-16 LE, Windows specific
+//
+
+Utf8String::Utf8String( const std::wstring& wText )
+{
+    std::wstring_convert< std::codecvt_utf8_utf16< Wchar > > converter;
+    this->assign( converter.to_bytes( wText ));
+}
+
+
+std::wstring Utf8String::ToWstring() const
+{
+    std::wstring_convert< std::codecvt_utf8_utf16< Wchar > > converter;
+    return converter.from_bytes( static_cast< const std::string& >( *this ));
+}
+
+#endif // CARAMEL_SYSTEM_IS_WINDOWS
 
 
 ///////////////////////////////////////////////////////////////////////////////
