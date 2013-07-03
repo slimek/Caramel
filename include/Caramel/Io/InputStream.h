@@ -29,8 +29,25 @@ struct InputStream
     // Move read position from current, forwards or backwards.
     virtual void Seek( Int offset ) = 0;
 
-    // returns true if this stream has read over the end.
+    // Returns the current read position.
+    virtual Uint Tell() const = 0;
+
+    // Returns true if this stream has read over the end.
     virtual Bool IsEof() const = 0;
+
+
+    //
+    // Combination Functions
+    // - Returns how many bytes actually peeked.
+    //
+
+    virtual Uint Peek( Void* buffer, Uint size )
+    {
+        const Uint count = this->Read( buffer, size );
+        this->Seek( - static_cast< Int >( count ));
+        return count;
+    }
+
 };
 
 

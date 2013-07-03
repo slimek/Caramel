@@ -9,6 +9,8 @@
 #pragma once
 #endif
 
+#include <Caramel/String/Utf8String.h>
+
 
 namespace Caramel
 {
@@ -22,6 +24,13 @@ namespace Caramel
 struct TextReader
 {
     virtual ~TextReader() {}
+
+    //
+    // Read Line
+    // - Returns false if EOF.
+    //
+    virtual Bool ReadLine( Utf8String& line ) = 0;
+
 };
 
 

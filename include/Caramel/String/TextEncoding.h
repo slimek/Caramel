@@ -22,8 +22,38 @@ namespace Caramel
 
 enum TextEncoding
 {
-    TEXT_ENCODING_BIG5 = 950,
-    TEXT_ENCODING_UTF8 = 65001,
+    TEXT_ENCODING_BIG5      = 950,
+    TEXT_ENCODING_UTF8      = 65001,
+
+    TEXT_ENCODING_UTF16_LE  = 1200,
+
+
+    #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+
+    // In Windows, call ::GetACP() to get the current code page.
+    TEXT_ENCODING_DEFAULT = 0,
+
+    #else
+
+    // In other systems, the default encoding is UTF-8.
+    TEXT_ENCODING_DEFAULT = TEXT_ENCODING_UTF8,
+
+    #endif
+
+};
+
+
+/////////////////////////////////////////////////////////////////////////////////
+//
+// Byte Order Mark (BOM)
+// - Placed at the beginning of a Unicode text file.
+//   Values are in little endian.
+//
+
+enum ByteOrderMark
+{
+    UNICODE_BOM_UTF16_LE = 0xFEEF,
+    UNICODE_BOM_UTF8     = 0xBFBBEF,
 };
 
 

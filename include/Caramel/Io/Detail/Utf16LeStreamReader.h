@@ -1,7 +1,7 @@
-// Caramel C++ Library - I/O Amenity - Detail - MBCS Stream Reader Header
+// Caramel C++ Library - I/O Amenity - Detail - UTF-16 LE Stream Reader Header
 
-#ifndef __CARAMEL_IO_DETAIL_MBCS_STREAM_READER_H
-#define __CARAMEL_IO_DETAIL_MBCS_STREAM_READER_H
+#ifndef __CARAMEL_IO_DETAIL_UTF16_LE_STREAM_READER_H
+#define __CARAMEL_IO_DETAIL_UTF16_LE_STREAM_READER_H
 
 #include <Caramel/Caramel.h>
 
@@ -21,15 +21,14 @@ namespace Detail
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// MBCS (Multi-Byte Character Set) Stream Reader
-// - Only in Windows System
+// UTF-16 LE Stream Reader
 //
 
-class MbcsStreamReader : public TextReader
+class Utf16LeStreamReader : public TextReader
 {
 public:
 
-    MbcsStreamReader( InputStream& stream, TextEncoding encoding );
+    explicit Utf16LeStreamReader( InputStream& stream );
 
 
     //
@@ -46,13 +45,12 @@ public:
 // Implementation
 //
 
-inline MbcsStreamReader::MbcsStreamReader( InputStream& stream, TextEncoding encoding )
+inline Utf16LeStreamReader::Utf16LeStreamReader( InputStream& stream )
 {
-    CARAMEL_NOT_IMPLEMENTED();
 }
 
 
-inline Bool MbcsStreamReader::ReadLine( Utf8String& line )
+inline Bool Utf16LeStreamReader::ReadLine( Utf8String& line )
 {
     CARAMEL_NOT_IMPLEMENTED();
 }
@@ -64,4 +62,4 @@ inline Bool MbcsStreamReader::ReadLine( Utf8String& line )
 
 } // namespace Caramel
 
-#endif // __CARAMEL_IO_DETAIL_MBCS_STREAM_READER_H
+#endif // __CARAMEL_IO_DETAIL_UTF16_LE_STREAM_READER_H

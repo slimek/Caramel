@@ -28,6 +28,7 @@
     <ClInclude Include="..\include\Caramel\Functional\ScopeExit.h" />
     <ClInclude Include="..\include\Caramel\Io\Detail\FileStream.h" />
     <ClInclude Include="..\include\Caramel\Io\Detail\MbcsStreamReader.h" />
+    <ClInclude Include="..\include\Caramel\Io\Detail\Utf16LeStreamReader.h" />
     <ClInclude Include="..\include\Caramel\Io\Detail\Utf8StreamReader.h" />
     <ClInclude Include="..\include\Caramel\Io\InputFileStream.h" />
     <ClInclude Include="..\include\Caramel\Io\InputStream.h" />

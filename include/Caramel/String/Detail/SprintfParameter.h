@@ -96,7 +96,7 @@ public:
 
 
 template<>
-class SprintfParameter< const Char* >
+class SprintfParameter< Char* >
 {
 public:
     const Char* operator()( const Char* sz ) const { return sz; }

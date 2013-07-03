@@ -197,6 +197,9 @@
     <ClInclude Include="..\include\Caramel\Io\Detail\FileStream.h">
       <Filter>1. Public Packages\Io\Detail headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Io\Detail\Utf16LeStreamReader.h">
+      <Filter>1. Public Packages\Io\Detail headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\CaramelPchCreator.cpp">
