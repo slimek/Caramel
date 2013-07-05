@@ -56,6 +56,7 @@
     <ClInclude Include="..\include\Caramel\Thread\Mutex.h" />
     <ClInclude Include="..\include\Caramel\Trace\Trace.h" />
     <ClInclude Include="..\include\Caramel\Value\SharedArray.h" />
+    <ClInclude Include="..\include\Caramel\Windows\WideString.h" />
     <ClInclude Include="Caramel\CaramelPch.h" />
     <ClInclude Include="Caramel\Object\FacilityLongevity.h" />
     <ClInclude Include="Caramel\String\SprintfManager.h" />
@@ -68,6 +69,7 @@
     <ClCompile Include="Caramel\Object.cpp" />
     <ClCompile Include="Caramel\String.cpp" />
     <ClCompile Include="Caramel\Trace.cpp" />
+    <ClCompile Include="Caramel\Windows.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{ED63D1E4-3DE9-4273-A22A-8B558E1BD6C0}</ProjectGuid>

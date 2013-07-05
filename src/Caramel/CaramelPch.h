@@ -16,6 +16,7 @@
 #include <list>
 #include <memory>
 #include <mutex>
+#include <vector>
 
 // Caramel Headers
 #include <Caramel/Caramel.h>

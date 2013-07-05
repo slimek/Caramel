@@ -75,6 +75,9 @@
     <Filter Include="1. Public Packages\Io\Detail headers">
       <UniqueIdentifier>{412964a5-7b4e-4b07-8d00-f5da58ed48dc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\Windows">
+      <UniqueIdentifier>{c8fd4531-ad69-4323-b08a-aa82f670d38b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -200,6 +203,9 @@
     <ClInclude Include="..\include\Caramel\Io\Detail\Utf16LeStreamReader.h">
       <Filter>1. Public Packages\Io\Detail headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Windows\WideString.h">
+      <Filter>1. Public Packages\Windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\CaramelPchCreator.cpp">
@@ -218,6 +224,9 @@
       <Filter>2. Sources</Filter>
     </ClCompile>
     <ClCompile Include="Caramel\Lexical.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Caramel\Windows.cpp">
       <Filter>2. Sources</Filter>
     </ClCompile>
   </ItemGroup>

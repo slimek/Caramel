@@ -57,7 +57,10 @@ public:
     //
     Bool TryParse( const std::string& u8Text );
 
-    // convert from binary data
+    // convert from other encoding
+    Bool TryParse( const std::string& text, TextEncoding encoding );
+
+    // convert from binary data, which should be a UTF-8 text.
     Bool TryParse( const Byte* data, Uint length );
 
 

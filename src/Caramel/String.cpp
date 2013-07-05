@@ -6,6 +6,7 @@
 #include <Caramel/String/Sprintf.h>
 #include <Caramel/String/SprintfManager.h>
 #include <Caramel/String/Utf8String.h>
+#include <Caramel/Windows/WideString.h>
 #include <codecvt>
 #include <cstdarg>
 #include <cstdio>
@@ -225,6 +226,24 @@ Bool Utf8String::TryParse( const Byte* data, Uint length )
 
 
 #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+
+//
+// Conversion between UTF-8 and other Multi-bytes encoding.
+//
+
+Bool Utf8String::TryParse( const std::string& text, TextEncoding encoding )
+{
+    Windows::WideString wbuffer;
+
+    if ( ! wbuffer.TryParse( text, encoding ))
+    {
+        return false;
+    }
+
+    this->assign( wbuffer.ToNarrow( TEXT_ENCODING_UTF8 ));
+    return true;
+}
+
 
 //
 // Conversion between UTF-8 and UTF-16 LE, Windows specific

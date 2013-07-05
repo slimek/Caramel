@@ -30,8 +30,10 @@ enum TextEncoding
 
     #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
 
-    // In Windows, call ::GetACP() to get the current code page.
-    TEXT_ENCODING_DEFAULT = 0,
+    // In Windows, call ::GetACP() to get the current active code page.
+    TEXT_ENCODING_WINDOWS_ACP = 0,
+
+    TEXT_ENCODING_DEFAULT = TEXT_ENCODING_WINDOWS_ACP,
 
     #else
 
