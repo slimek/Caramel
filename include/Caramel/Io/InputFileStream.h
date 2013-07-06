@@ -22,7 +22,7 @@ namespace Caramel
 // Input File Stream
 //
 
-class InputFileStream : public Detail::FileStream
+class InputFileStream : public FileStream
                       , public InputStream
 {
 public:

@@ -1,7 +1,7 @@
-// Caramel C++ Library - I/O Facility - Detail - MBCS Stream Reader Header
+// Caramel C++ Library - I/O Facility - MBCS Stream Reader Header
 
-#ifndef __CARAMEL_IO_DETAIL_MBCS_STREAM_READER_H
-#define __CARAMEL_IO_DETAIL_MBCS_STREAM_READER_H
+#ifndef __CARAMEL_IO_MBCS_STREAM_READER_H
+#define __CARAMEL_IO_MBCS_STREAM_READER_H
 
 #include <Caramel/Caramel.h>
 
@@ -15,9 +15,6 @@
 
 
 namespace Caramel
-{
-
-namespace Detail
 {
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -39,70 +36,28 @@ public:
     Bool ReadLine( Utf8String& line );
 
 
-private:
+protected:
+
+    //
+    // Read Char Line
+    // - Read a line of chars, no matter of its encoding.
+    //
+    std::string ReadCharLine();
+
 
     InputStream& m_stream;
-    TextEncoding m_encoding;
-
-    std::ostringstream m_builder;  // Build the input string
     Bool m_ended;
+
+
+private:
+
+    TextEncoding m_encoding;
+    std::ostringstream m_builder;  // Build the input string
 };
 
 
 ///////////////////////////////////////////////////////////////////////////////
-//
-// Implementation
-//
-
-inline MbcsStreamReader::MbcsStreamReader( InputStream& stream, TextEncoding encoding )
-    : m_stream( stream )
-    , m_encoding( encoding )
-    , m_ended( stream.IsEof() )
-{
-}
-
-
-inline Bool MbcsStreamReader::ReadLine( Utf8String& line )
-{
-    if ( m_ended ) { return false; }
-
-    m_builder.str( "" );
-
-    while ( true )
-    {
-        Char c = 0;
-        const Uint count = m_stream.Read( &c, 1 );
-        if ( 1 != count )
-        {
-            if ( m_stream.IsEof() )
-            {
-                m_ended = true;
-                break;
-            }
-
-            CARAMEL_THROW( "Read stream failed" );
-        }
-
-        if ( '\r' == c ) { continue; }
-        if ( '\n' == c ) { break; }
-
-        m_builder << c;
-    }
-
-    const Bool encoded = line.TryParse( m_builder.str(), m_encoding );
-    if ( ! encoded )
-    {
-        CARAMEL_THROW( "Convert from encoding %u failed", m_encoding );
-    }
-
-    return true;
-}
-
-
-///////////////////////////////////////////////////////////////////////////////
-
-} // namespace Detail
 
 } // namespace Caramel
 
-#endif // __CARAMEL_IO_DETAIL_MBCS_STREAM_READER_H
+#endif // __CARAMEL_IO_MBCS_STREAM_READER_H

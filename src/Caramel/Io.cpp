@@ -2,6 +2,7 @@
 
 #include <Caramel/CaramelPch.h>
 
+#include <Caramel/Io/FileStream.h>
 #include <Caramel/Io/InputFileStream.h>
 #include <Caramel/Io/MbcsStreamReader.h>
 #include <Caramel/Io/TextStreamReader.h>
@@ -16,9 +17,81 @@ namespace Caramel
 //
 // Contents
 //
-// 1. InputFileStream
-// 2. TextStreamReader
+// < Streams >
+//   FileStream
+//   InputFileStream
 //
+// < Readers >
+//   TextStreamReader
+//   MbcsStreamReader
+//   Utf8StreamReader
+//
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Implementation
+//
+
+FileStream::FileStream( const std::string& openMode )
+    : m_file( nullptr )
+    , m_openMode( openMode )
+{
+}
+
+
+FileStream::~FileStream()
+{
+    this->Close();
+}
+
+
+void FileStream::Open( const Utf8String& fileName )
+{
+    if ( ! this->TryOpen( fileName ))
+    {
+        CARAMEL_THROW( "Open file failed: %s", fileName );
+    }
+}
+
+
+
+Bool FileStream::TryOpen( const Utf8String& fileName )
+{
+    #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+    {
+        m_file = _wfopen( fileName.ToWstring().c_str(), m_openMode.ToWstring().c_str()  );
+    }
+    #else
+    {
+        m_file = fopen( fileName.ToCstr(), m_openMode.ToCstr() );
+    }
+    #endif
+
+    if ( m_file )
+    {
+        m_fileName = fileName;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+
+void FileStream::Close()
+{
+    if ( ! m_file ) { return; }
+
+    const Int result = fclose( m_file );
+    m_file = nullptr;
+
+    if ( 0 != result )
+    {
+        // TODO: Trace Warning.
+    }
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -140,15 +213,15 @@ void TextStreamReader::BuildReader( TextEncoding encoding )
     switch ( encoding )
     {
     case TEXT_ENCODING_UTF8:
-        m_reader.reset( new Detail::Utf8StreamReader( m_stream ));
+        m_reader.reset( new Utf8StreamReader( m_stream ));
         return;
 
     case TEXT_ENCODING_UTF16_LE:
-        m_reader.reset( new Detail::Utf16LeStreamReader( m_stream ));
+        m_reader.reset( new Utf16LeStreamReader( m_stream ));
         return;
 
     default:
-        m_reader.reset( new Detail::MbcsStreamReader( m_stream, encoding ));
+        m_reader.reset( new MbcsStreamReader( m_stream, encoding ));
     }
 }
 
@@ -156,6 +229,122 @@ void TextStreamReader::BuildReader( TextEncoding encoding )
 Bool TextStreamReader::ReadLine( Utf8String& line )
 {
     return m_reader->ReadLine( line );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// MBCS Stream Reader
+//
+
+MbcsStreamReader::MbcsStreamReader( InputStream& stream, TextEncoding encoding )
+    : m_stream( stream )
+    , m_encoding( encoding )
+    , m_ended( stream.IsEof() )
+{
+}
+
+
+Bool MbcsStreamReader::ReadLine( Utf8String& line )
+{
+    if ( m_ended ) { return false; }
+
+    const std::string chars = this->ReadCharLine();
+
+    const Bool encoded = line.TryParse( chars, m_encoding );
+    if ( ! encoded )
+    {
+        CARAMEL_THROW( "Convert from encoding %u failed", m_encoding );
+    }
+
+    return true;
+}
+
+
+std::string MbcsStreamReader::ReadCharLine()
+{
+    m_builder.str( "" );
+
+    while ( true )
+    {
+        Char c = 0;
+        const Uint count = m_stream.Read( &c, 1 );
+        if ( 1 != count )
+        {
+            if ( m_stream.IsEof() )
+            {
+                m_ended = true;
+                break;
+            }
+
+            CARAMEL_THROW( "Read stream failed" );
+        }
+
+        if ( '\r' == c ) { continue; }
+        if ( '\n' == c ) { break; }
+
+        m_builder << c;
+    }
+
+    return m_builder.str();
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// UTF-8 Stream Reader
+//
+
+Utf8StreamReader::Utf8StreamReader( InputStream& stream )
+    : MbcsStreamReader( stream, TEXT_ENCODING_UTF8 )
+{
+    this->TrySkipBom();
+}
+
+
+Bool Utf8StreamReader::ReadLine( Utf8String& line )
+{
+    if ( m_ended ) { return false; }
+
+    const std::string chars = this->ReadCharLine();
+
+    const Bool encoded = line.TryParse( chars );
+    if ( ! encoded )
+    {
+        CARAMEL_THROW( "Encoding is not UTF-8" );
+    }
+
+    return true;
+}
+
+
+void Utf8StreamReader::TrySkipBom()
+{
+    Uint32 bom = 0;
+    const Uint count = m_stream.Read( &bom, 3 );
+    if ( 3 == count && UNICODE_BOM_UTF8 == bom )
+    {
+        return;  // the BOM is skipped
+    }
+
+    // No BOM, move the read position back
+    m_stream.Seek( - static_cast< Int >( count ));
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// UTF-16 LE Stream Reader
+//
+
+Utf16LeStreamReader::Utf16LeStreamReader( InputStream& stream )
+{
+}
+
+
+Bool Utf16LeStreamReader::ReadLine( Utf8String& line )
+{
+    CARAMEL_NOT_IMPLEMENTED();
 }
 
 
