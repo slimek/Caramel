@@ -53,6 +53,12 @@ public:
     //
     Bool ReadLine( Utf8String& line );
 
+    //
+    // Read All
+    // - Read until the end of stream in a single string.
+    //
+    Utf8String ReadAll();
+
 
 private:
 

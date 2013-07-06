@@ -249,6 +249,30 @@ Bool TextStreamReader::ReadLine( Utf8String& line )
 }
 
 
+Utf8String TextStreamReader::ReadAll()
+{
+    std::ostringstream builder;
+    Utf8String line;
+    Bool firstLine = true;
+
+    while ( this->ReadLine( line ))
+    {
+        if ( firstLine )
+        {
+            firstLine = false;
+        }
+        else
+        {
+            builder << '\n';
+        }
+
+        builder << line;
+    }
+
+    return Utf8String( builder.str() );
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // MBCS Stream Reader

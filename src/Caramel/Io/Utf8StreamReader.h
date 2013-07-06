@@ -27,7 +27,7 @@ public:
     explicit Utf8StreamReader( InputStream& stream );
 
     //
-    // Implements TextReader
+    // Implements TextReader ( Overwrites MbcsStreamReader )
     //
 
     Bool ReadLine( Utf8String& line );
