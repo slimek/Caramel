@@ -11,6 +11,7 @@
 
 #include <Caramel/Io/InputStream.h>
 #include <Caramel/Io/TextReader.h>
+#include <sstream>
 
 
 namespace Caramel
@@ -34,6 +35,21 @@ public:
 
     Bool ReadLine( Utf8String& line );
 
+
+private:
+
+    void TrySkipBom();
+
+
+    InputStream& m_stream;
+    Bool m_ended;
+
+    std::ostringstream m_builder;
+
+    // UTF-16 LE characters
+
+    std::string m_newline;  // LF U+000A
+    std::string m_return;   // CR U+000D
 };
 
 

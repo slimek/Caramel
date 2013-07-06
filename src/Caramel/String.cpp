@@ -225,29 +225,37 @@ Bool Utf8String::TryParse( const Byte* data, Uint length )
 }
 
 
-#if defined( CARAMEL_SYSTEM_IS_WINDOWS )
-
 //
 // Conversion between UTF-8 and other Multi-bytes encoding.
 //
 
 Bool Utf8String::TryParse( const std::string& text, TextEncoding encoding )
 {
-    Windows::WideString wbuffer;
-
-    if ( ! wbuffer.TryParse( text, encoding ))
+    #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
     {
-        return false;
-    }
+        Windows::WideString wbuffer;
 
-    this->assign( wbuffer.ToNarrow( TEXT_ENCODING_UTF8 ));
-    return true;
+        if ( ! wbuffer.TryParse( text, encoding ))
+        {
+            return false;
+        }
+
+        this->assign( wbuffer.ToNarrow( TEXT_ENCODING_UTF8 ));
+        return true;
+    }
+    #else
+    {
+        CARAMEL_NOT_IMPLEMENTED();   
+    }
+    #endif
 }
 
 
 //
 // Conversion between UTF-8 and UTF-16 LE, Windows specific
 //
+
+#if defined( CARAMEL_SYSTEM_IS_WINDOWS )
 
 Utf8String::Utf8String( const std::wstring& wText )
 {

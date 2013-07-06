@@ -45,20 +45,6 @@ enum TextEncoding
 };
 
 
-/////////////////////////////////////////////////////////////////////////////////
-//
-// Byte Order Mark (BOM)
-// - Placed at the beginning of a Unicode text file.
-//   Values are in little endian.
-//
-
-enum ByteOrderMark
-{
-    UNICODE_BOM_UTF16_LE = 0xFEEF,
-    UNICODE_BOM_UTF8     = 0xBFBBEF,
-};
-
-
 ///////////////////////////////////////////////////////////////////////////////
 
 } // namespace Caramel

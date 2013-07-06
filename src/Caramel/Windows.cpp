@@ -28,11 +28,16 @@ namespace Windows
 
 Bool WideString::TryParse( const std::string& input, TextEncoding encoding )
 {
-    CARAMEL_ASSERT( TEXT_ENCODING_UTF16_LE != encoding );
-
     if ( input.empty() )
     {
         this->assign( std::wstring() );
+        return true;
+    }
+
+    if ( TEXT_ENCODING_UTF16_LE == encoding )
+    {
+        const Wchar* winput = reinterpret_cast< const Wchar* >( input.c_str() );
+        this->assign( winput, winput + input.length() / 2  );
         return true;
     }
 

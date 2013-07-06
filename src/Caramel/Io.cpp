@@ -17,6 +17,9 @@ namespace Caramel
 //
 // Contents
 //
+// < Constants >
+//   ByteOrderMark
+//
 // < Streams >
 //   FileStream
 //   InputFileStream
@@ -27,9 +30,23 @@ namespace Caramel
 //   Utf8StreamReader
 //
 
+/////////////////////////////////////////////////////////////////////////////////
+//
+// Byte Order Mark (BOM)
+// - Placed at the beginning of a Unicode text file.
+//   Values are in little endian.
+//
+
+struct ByteOrderMark
+{
+    static std::string UTF16_LE() { return std::string( "\xFF\xFE" ); }
+    static std::string UTF8()     { return std::string( "\xEF\xBB\xBF" ); }
+};
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Implementation
+// File Stream
 //
 
 FileStream::FileStream( const std::string& openMode )
@@ -181,10 +198,10 @@ TextEncoding TextStreamReader::DetectEncoding()
     // Check 1 : UTF-16 LE
 
     {
-        Uint16 bom = 0;
-        const Uint count = m_stream.Peek( &bom, 2 );
+        Char bom[3] = { 0 };
+        const Uint count = m_stream.Peek( bom, 2 );
 
-        if ( 2 == count && UNICODE_BOM_UTF16_LE == bom )
+        if ( 2 == count && ByteOrderMark::UTF16_LE() == bom )
         {
             return TEXT_ENCODING_UTF16_LE;
         }
@@ -193,10 +210,10 @@ TextEncoding TextStreamReader::DetectEncoding()
     // Check 2 : UTF-8
 
     {
-        Uint32 bom = 0;
-        const Uint count = m_stream.Peek( &bom, 3 );
+        Char bom[4] = { 0 };
+        const Uint count = m_stream.Peek( bom, 3 );
 
-        if ( 3 == count && UNICODE_BOM_UTF8 == bom )
+        if ( 3 == count && ByteOrderMark::UTF8() == bom )
         {
             return TEXT_ENCODING_UTF8;
         }
@@ -320,9 +337,9 @@ Bool Utf8StreamReader::ReadLine( Utf8String& line )
 
 void Utf8StreamReader::TrySkipBom()
 {
-    Uint32 bom = 0;
-    const Uint count = m_stream.Read( &bom, 3 );
-    if ( 3 == count && UNICODE_BOM_UTF8 == bom )
+    Char bom[4] = { 0 };
+    const Uint count = m_stream.Read( bom, 3 );
+    if ( 3 == count && ByteOrderMark::UTF8() == bom )
     {
         return;  // the BOM is skipped
     }
@@ -338,13 +355,66 @@ void Utf8StreamReader::TrySkipBom()
 //
 
 Utf16LeStreamReader::Utf16LeStreamReader( InputStream& stream )
+    : m_stream( stream )
+    , m_ended( stream.IsEof() )
+
+    // These two character are little endian
+    , m_newline( "\x0A\x00" )  // U+000A
+    , m_return ( "\x0D\x00" )  // U+000D
 {
+
+    this->TrySkipBom();
 }
 
 
 Bool Utf16LeStreamReader::ReadLine( Utf8String& line )
 {
-    CARAMEL_NOT_IMPLEMENTED();
+    if ( m_ended ) { return false; }
+
+    m_builder.str( "" );
+
+    while ( true )
+    {
+        Char c16[3] = { 0 };
+        const Uint count = m_stream.Read( &c16, 2 );
+        if ( 2 != count )
+        {
+            if ( m_stream.IsEof() )
+            {
+                m_ended = true;
+                break;
+            }
+
+            CARAMEL_THROW( "Read stream failed" );
+        }
+
+        if ( m_return  == c16 ) { continue; }
+        if ( m_newline == c16 ) { break; }
+
+        m_builder << c16[0] << c16[1];
+    }
+
+    const Bool encoded = line.TryParse( m_builder.str(), TEXT_ENCODING_UTF16_LE );
+    if ( ! encoded )
+    {
+        CARAMEL_THROW( "Convert UTF-16 LE to UTF-8 failed" );
+    }
+
+    return true;
+}
+
+
+void Utf16LeStreamReader::TrySkipBom()
+{
+    Char bom[3] = { 0 };
+    const Uint count = m_stream.Read( bom, 2 );
+    if ( 2 == count && ByteOrderMark::UTF16_LE() == bom )
+    {
+        return;  // the BOM is skipped.
+    }
+
+    // No BOM, move the read position back
+    m_stream.Seek( - static_cast< Int >( count ));
 }
 
 

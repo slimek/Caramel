@@ -1,22 +1,5 @@
 // Caramel C++ Library - I/O Facility - Text Stream Reader Header
 
-//
-// USAGE:
-//
-// TextStreamReader can detect the text encoding of a stream.
-// 
-// On Windows, it supports 3 encodings:
-// - File starts with a UTF-8 BOM     => UTF-8
-//   File starts with a UTF-16 LE BOM => UTF-16 LE
-//   Otherwise uses Windows ACP
-//
-// On other operating system, it treats stream as UTF-8 in default,
-// no matter whether the stream has a UTF-8 BOM or not.
-//
-// NOTES:
-// - On Windows, you may specify the encoding code page explicitly.
-//
-
 #ifndef __CARAMEL_IO_TEXT_STREAM_READER_H
 #define __CARAMEL_IO_TEXT_STREAM_READER_H
 
@@ -38,6 +21,21 @@ namespace Caramel
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Text Stream Reader
+//
+// USAGE:
+//
+// TextStreamReader can detect the text encoding of a stream.
+// 
+// On Windows, it supports 3 encodings:
+// - File starts with a UTF-8 BOM     => UTF-8
+//   File starts with a UTF-16 LE BOM => UTF-16 LE
+//   Otherwise uses Windows ACP
+//
+// On other operating system, it treats stream as UTF-8 in default,
+// no matter whether the stream has a UTF-8 BOM or not.
+//
+// NOTES:
+// - On Windows, you may specify the encoding code page explicitly.
 //
 
 class TextStreamReader : public TextReader
