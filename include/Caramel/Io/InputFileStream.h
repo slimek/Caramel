@@ -9,7 +9,7 @@
 #pragma once
 #endif
 
-#include <Caramel/Io/Detail/FileStream.h>
+#include <Caramel/Io/FileStream.h>
 #include <Caramel/Io/InputStream.h>
 #include <Caramel/String/Utf8String.h>
 

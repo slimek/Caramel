@@ -72,11 +72,11 @@
     <Filter Include="1. Public Packages\Io">
       <UniqueIdentifier>{2cf66935-4cd4-44d6-b7c1-8964bf374360}</UniqueIdentifier>
     </Filter>
-    <Filter Include="1. Public Packages\Io\Detail headers">
-      <UniqueIdentifier>{412964a5-7b4e-4b07-8d00-f5da58ed48dc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="1. Public Packages\Windows">
       <UniqueIdentifier>{c8fd4531-ad69-4323-b08a-aa82f670d38b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\Io">
+      <UniqueIdentifier>{6ad8dcd3-139d-409d-87e6-ef1c97fab225}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -188,23 +188,23 @@
     <ClInclude Include="..\include\Caramel\Io\TextReader.h">
       <Filter>1. Public Packages\Io</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\Io\Detail\Utf8StreamReader.h">
-      <Filter>1. Public Packages\Io\Detail headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Caramel\Io\Detail\MbcsStreamReader.h">
-      <Filter>1. Public Packages\Io\Detail headers</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Caramel\Io\InputFileStream.h">
       <Filter>1. Public Packages\Io</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\Io\Detail\FileStream.h">
-      <Filter>1. Public Packages\Io\Detail headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Caramel\Io\Detail\Utf16LeStreamReader.h">
-      <Filter>1. Public Packages\Io\Detail headers</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Caramel\Windows\WideString.h">
       <Filter>1. Public Packages\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Io\FileStream.h">
+      <Filter>1. Public Packages\Io</Filter>
+    </ClInclude>
+    <ClInclude Include="Caramel\Io\MbcsStreamReader.h">
+      <Filter>2. Sources\Io</Filter>
+    </ClInclude>
+    <ClInclude Include="Caramel\Io\Utf8StreamReader.h">
+      <Filter>2. Sources\Io</Filter>
+    </ClInclude>
+    <ClInclude Include="Caramel\Io\Utf16LeStreamReader.h">
+      <Filter>2. Sources\Io</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -229,7 +229,7 @@
     <ClCompile Include="Caramel\Windows.cpp">
       <Filter>2. Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Io.cpp">
+    <ClCompile Include="Caramel\Io.cpp">
       <Filter>2. Sources</Filter>
     </ClCompile>
   </ItemGroup>

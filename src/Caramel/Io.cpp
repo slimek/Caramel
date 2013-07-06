@@ -2,11 +2,11 @@
 
 #include <Caramel/CaramelPch.h>
 
-#include <Caramel/Io/Detail/MbcsStreamReader.h>
-#include <Caramel/Io/Detail/Utf16LeStreamReader.h>
-#include <Caramel/Io/Detail/Utf8StreamReader.h>
 #include <Caramel/Io/InputFileStream.h>
+#include <Caramel/Io/MbcsStreamReader.h>
 #include <Caramel/Io/TextStreamReader.h>
+#include <Caramel/Io/Utf16LeStreamReader.h>
+#include <Caramel/Io/Utf8StreamReader.h>
 #include <cerrno>
 
 

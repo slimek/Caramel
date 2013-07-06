@@ -26,10 +26,7 @@
     <ClInclude Include="..\include\Caramel\FileSystem\FileInfo.h" />
     <ClInclude Include="..\include\Caramel\FileSystem\Path.h" />
     <ClInclude Include="..\include\Caramel\Functional\ScopeExit.h" />
-    <ClInclude Include="..\include\Caramel\Io\Detail\FileStream.h" />
-    <ClInclude Include="..\include\Caramel\Io\Detail\MbcsStreamReader.h" />
-    <ClInclude Include="..\include\Caramel\Io\Detail\Utf16LeStreamReader.h" />
-    <ClInclude Include="..\include\Caramel\Io\Detail\Utf8StreamReader.h" />
+    <ClInclude Include="..\include\Caramel\Io\FileStream.h" />
     <ClInclude Include="..\include\Caramel\Io\InputFileStream.h" />
     <ClInclude Include="..\include\Caramel\Io\InputStream.h" />
     <ClInclude Include="..\include\Caramel\Io\TextReader.h" />
@@ -58,6 +55,9 @@
     <ClInclude Include="..\include\Caramel\Value\SharedArray.h" />
     <ClInclude Include="..\include\Caramel\Windows\WideString.h" />
     <ClInclude Include="Caramel\CaramelPch.h" />
+    <ClInclude Include="Caramel\Io\MbcsStreamReader.h" />
+    <ClInclude Include="Caramel\Io\Utf16LeStreamReader.h" />
+    <ClInclude Include="Caramel\Io\Utf8StreamReader.h" />
     <ClInclude Include="Caramel\Object\FacilityLongevity.h" />
     <ClInclude Include="Caramel\String\SprintfManager.h" />
     <ClInclude Include="Caramel\Trace\TraceManager.h" />
@@ -65,12 +65,12 @@
   <ItemGroup>
     <ClCompile Include="Caramel\CaramelPchCreator.cpp" />
     <ClCompile Include="Caramel\Error.cpp" />
+    <ClCompile Include="Caramel\Io.cpp" />
     <ClCompile Include="Caramel\Lexical.cpp" />
     <ClCompile Include="Caramel\Object.cpp" />
     <ClCompile Include="Caramel\String.cpp" />
     <ClCompile Include="Caramel\Trace.cpp" />
     <ClCompile Include="Caramel\Windows.cpp" />
-    <ClCompile Include="Io.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{ED63D1E4-3DE9-4273-A22A-8B558E1BD6C0}</ProjectGuid>
