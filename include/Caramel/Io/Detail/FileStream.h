@@ -1,4 +1,4 @@
-// Caramel C++ Library - I/O Amenity - Detail - File Stream Header
+// Caramel C++ Library - I/O Facility - Detail - File Stream Header
 
 #ifndef __CARAMEL_IO_DETAIL_FILE_STREAM_H
 #define __CARAMEL_IO_DETAIL_FILE_STREAM_H

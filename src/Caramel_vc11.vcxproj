@@ -70,6 +70,7 @@
     <ClCompile Include="Caramel\String.cpp" />
     <ClCompile Include="Caramel\Trace.cpp" />
     <ClCompile Include="Caramel\Windows.cpp" />
+    <ClCompile Include="Io.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{ED63D1E4-3DE9-4273-A22A-8B558E1BD6C0}</ProjectGuid>

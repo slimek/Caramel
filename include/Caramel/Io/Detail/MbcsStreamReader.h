@@ -1,4 +1,4 @@
-// Caramel C++ Library - I/O Amenity - Detail - MBCS Stream Reader Header
+// Caramel C++ Library - I/O Facility - Detail - MBCS Stream Reader Header
 
 #ifndef __CARAMEL_IO_DETAIL_MBCS_STREAM_READER_H
 #define __CARAMEL_IO_DETAIL_MBCS_STREAM_READER_H
@@ -23,7 +23,6 @@ namespace Detail
 ///////////////////////////////////////////////////////////////////////////////
 //
 // MBCS (Multi-Byte Character Set) Stream Reader
-// - Only in Windows System
 //
 
 class MbcsStreamReader : public TextReader

@@ -1,4 +1,4 @@
-// Caramel C++ Library - I/O Amenity - Input Stream Header
+// Caramel C++ Library - I/O Facility - Input Stream Header
 
 #ifndef __CARAMEL_IO_INPUT_STREAM_H
 #define __CARAMEL_IO_INPUT_STREAM_H
@@ -38,17 +38,29 @@ struct InputStream
 
     //
     // Combination Functions
-    // - Returns how many bytes actually peeked.
     //
 
-    virtual Uint Peek( Void* buffer, Uint size )
-    {
-        const Uint count = this->Read( buffer, size );
-        this->Seek( - static_cast< Int >( count ));
-        return count;
-    }
+    //
+    // Peek
+    // - See a few data at the stream, but don't move the read position.
+    //   Returns how many bytes actually peeked.
+    //
+    virtual Uint Peek( Void* buffer, Uint size );
 
 };
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Implementation
+//
+
+inline Uint InputStream::Peek( Void* buffer, Uint size )
+{
+    const Uint count = this->Read( buffer, size );
+    this->Seek( - static_cast< Int >( count ));
+    return count;
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////

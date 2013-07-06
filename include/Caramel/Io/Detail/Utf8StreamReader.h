@@ -1,4 +1,4 @@
-// Caramel C++ Library - I/O Amenity - Detail - UTF-8 Stream Reader Header
+// Caramel C++ Library - I/O Facility - Detail - UTF-8 Stream Reader Header
 
 #ifndef __CARAMEL_IO_DETAIL_UTF8_STREAM_READER_H
 #define __CARAMEL_IO_DETAIL_UTF8_STREAM_READER_H

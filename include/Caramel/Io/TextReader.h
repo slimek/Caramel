@@ -1,4 +1,4 @@
-// Caramel C++ Library - I/O Amenity - Text Reader Header
+// Caramel C++ Library - I/O Facility - Text Reader Header
 
 #ifndef __CARAMEL_IO_TEXT_READER_H
 #define __CARAMEL_IO_TEXT_READER_H
