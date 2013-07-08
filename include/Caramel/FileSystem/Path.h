@@ -9,6 +9,7 @@
 #pragma once
 #endif
 
+#include <Caramel/String/Utf8String.h>
 #include <boost/filesystem.hpp>
 
 
@@ -25,18 +26,30 @@ class Path : public boost::filesystem::path
 {
 
 public:
-    explicit Path( const std::string& path );
+
+    explicit Path( const Utf8String& u8path );
 
     
     //
     // Native format properties
-    // - Major different is the directory separators.
-    //   In Windows it is back-slash '\'
-    //   In other OS it is slash '/'
+    //
+    //   Different |  directory       |  string_type
+    //             |  separators      |
+    //  ---------------------------------------------
+    //   Windows   |  back-slash '\'  |  wstring
+    //   Other OS  |  slash '/'       |  string
     //
 
-    std::string Stem()      const { return this->stem().string(); }
-    std::string Extension() const { return this->extension().string(); }
+    Utf8String Stem()      const { return Utf8String( this->stem().native() ); }
+    Utf8String Extension() const { return Utf8String( this->extension().native() ); }
+
+
+    //
+    // Conversion
+    // - Path always can be converted to UTF-8 string.
+    //
+
+    operator Utf8String() const { return Utf8String( this->native() ); }
 
 };
 
@@ -46,10 +59,27 @@ public:
 // Implementations
 //
 
-inline Path::Path( const std::string& path )
+#if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+
+//
+// For Windows, path's value_type is wchar_t.
+// If you don't give codecvt, it would think the input string as ACP (active code page).
+//
+inline Path::Path( const Utf8String& path )
+    : boost::filesystem::path( path.ToWstring() )
+{
+}
+
+
+#else
+
+inline Path::Path( const Utf8String& path )
     : boost::filesystem::path( path )
 {
 }
+
+
+#endif  // CARAMEL_SYSTEM_IS_WINDOWS
 
 
 ///////////////////////////////////////////////////////////////////////////////

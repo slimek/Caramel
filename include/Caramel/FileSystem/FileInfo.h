@@ -10,6 +10,7 @@
 #endif
 
 #include <Caramel/FileSystem/Path.h>
+#include <Caramel/String/Utf8String.h>
 #include <boost/filesystem.hpp>
 
 
@@ -26,7 +27,7 @@ class FileInfo
 {
 public:
 
-    explicit FileInfo( const std::string& fileName );
+    explicit FileInfo( const Utf8String& fileName );
     explicit FileInfo( const Path& path );
 
     Bool Exists() const;
@@ -34,7 +35,10 @@ public:
 
 private:
 
-    std::string m_fileName;
+    // NOTES: m_status depends on m_path,
+    //        therefore m_path must be in front of m_status.
+
+    Path m_path;
     boost::filesystem::file_status m_status;
 };
 
@@ -44,15 +48,15 @@ private:
 // Implementations
 //
 
-inline FileInfo::FileInfo( const std::string& fileName )
-    : m_fileName( fileName )
-    , m_status( boost::filesystem::status( fileName ))
+inline FileInfo::FileInfo( const Utf8String& fileName )
+    : m_path( fileName )
+    , m_status( boost::filesystem::status( m_path ))
 {
 }
 
 
 inline FileInfo::FileInfo( const Path& path )
-    : m_fileName( path.string() )
+    : m_path( path )
     , m_status( boost::filesystem::status( path ))
 {
 }
