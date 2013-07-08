@@ -25,6 +25,8 @@
     <ClInclude Include="..\include\Caramel\Error\Exception.h" />
     <ClInclude Include="..\include\Caramel\FileSystem\FileInfo.h" />
     <ClInclude Include="..\include\Caramel\FileSystem\Path.h" />
+    <ClInclude Include="..\include\Caramel\FileView\IniFileView.h" />
+    <ClInclude Include="..\include\Caramel\FileView\IniSection.h" />
     <ClInclude Include="..\include\Caramel\Functional\ScopeExit.h" />
     <ClInclude Include="..\include\Caramel\Io\FileStream.h" />
     <ClInclude Include="..\include\Caramel\Io\InputFileStream.h" />

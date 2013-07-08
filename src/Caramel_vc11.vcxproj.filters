@@ -78,6 +78,9 @@
     <Filter Include="2. Sources\Io">
       <UniqueIdentifier>{6ad8dcd3-139d-409d-87e6-ef1c97fab225}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\FileView">
+      <UniqueIdentifier>{592e6b2b-56ba-4cda-917f-aa007e7a59d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -205,6 +208,12 @@
     </ClInclude>
     <ClInclude Include="Caramel\Io\Utf16LeStreamReader.h">
       <Filter>2. Sources\Io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\FileView\IniFileView.h">
+      <Filter>1. Public Packages\FileView</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\FileView\IniSection.h">
+      <Filter>1. Public Packages\FileView</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
