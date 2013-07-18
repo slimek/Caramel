@@ -20,24 +20,32 @@ namespace Caramel
 //
 // Path
 // - Immutable
+//   Used as function parameters in other FileSystem classes,
+//   Therefore it provides both std::string and const Char* constructors.
+//
+//   Different |  directory       |  value_type  |  string_type
+//             |  separators      |              |
+//  ------------------------------------------------------------
+//   Windows   |  back-slash '\'  |  wchar_t     |  wstring
+//   Other OS  |  slash '/'       |  char        |  string
 //
 
 class Path : public boost::filesystem::path
 {
-
 public:
 
-    explicit Path( const Utf8String& u8path );
+    Path( const Utf8String& u8path );
 
+    //
+    // Construct from native encoding
+    //
+
+    Path( const std::string& path );
+    Path( const Char* path );
     
+
     //
-    // Native format properties
-    //
-    //   Different |  directory       |  string_type
-    //             |  separators      |
-    //  ---------------------------------------------
-    //   Windows   |  back-slash '\'  |  wstring
-    //   Other OS  |  slash '/'       |  string
+    // Properties
     //
 
     Utf8String Stem()      const { return Utf8String( this->stem().native() ); }
@@ -50,6 +58,18 @@ public:
     //
 
     operator Utf8String() const { return Utf8String( this->native() ); }
+
+
+#if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+
+    //
+    // Construct from wide string
+    //
+
+    Path( const std::wstring& wpath );
+    Path( const Wchar* wpath );
+
+#endif // CARAMEL_SYSTEM_IS_WINDOWS
 
 };
 
@@ -71,6 +91,17 @@ inline Path::Path( const Utf8String& path )
 }
 
 
+inline Path::Path( const std::wstring& wpath )
+    : boost::filesystem::path( wpath )
+{
+}
+
+
+inline Path::Path( const Wchar* wpath )
+    : boost::filesystem::path( wpath )
+{
+}
+
 #else
 
 inline Path::Path( const Utf8String& path )
@@ -78,8 +109,25 @@ inline Path::Path( const Utf8String& path )
 {
 }
 
-
 #endif  // CARAMEL_SYSTEM_IS_WINDOWS
+
+
+//
+// Construct from native encoding.
+// - In Windows, it is ACP (acitve code page).
+//   In other OS, it is UTF-8.
+//
+
+inline Path::Path( const std::string& path )
+    : boost::filesystem::path( path )
+{
+}
+
+
+inline Path::Path( const Char* path )
+    : boost::filesystem::path( path )
+{
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////

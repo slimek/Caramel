@@ -48,6 +48,14 @@ public:
 
 
     //
+    // Construct from std::string, suppose it is native encoding.
+    // - In Windows, it is ACP (acitve code page).
+    //   In other OS, it is UTF-8.
+
+    static Utf8String FromNative( const std::string& nativeText );
+
+
+    //
     // Conversions
     //
     

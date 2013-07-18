@@ -6,7 +6,11 @@
 #include <Caramel/String/Sprintf.h>
 #include <Caramel/String/SprintfManager.h>
 #include <Caramel/String/Utf8String.h>
+
+#if defined( CARAMEL_SYSTEM_IS_WINDOWS )
 #include <Caramel/Windows/WideString.h>
+#endif
+
 #include <codecvt>
 #include <cstdarg>
 #include <cstdio>
@@ -158,6 +162,22 @@ Utf8String::Utf8String( const std::string& u8Text )
         CARAMEL_THROW( "Input text is not UTF-8 encoded" );
     }
 }
+
+
+Utf8String Utf8String::FromNative( const std::string& nativeText )
+{
+    #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+    {
+        Windows::WideString wideText( nativeText, TEXT_ENCODING_WINDOWS_ACP );
+        return Utf8String( wideText );
+    }
+    #else
+    {
+        return Utf8String( nativeText );
+    }
+    #endif
+}
+
 
 
 //

@@ -113,7 +113,7 @@ template< Uint n >
 class SprintfParameter< const Char[n] >
 {
 public:
-    const Char* operator()( const Char sz[n] ) const { return sz; }
+    const Char* operator()( const Char(& sz)[n] ) const { return sz; }
 };
 
 
@@ -121,7 +121,7 @@ template< Uint n >
 class SprintfParameter< Char[n] >
 {
 public:
-    const Char* operator()( const Char sz[n] ) const { return sz; }
+    const Char* operator()( const Char(& sz)[n] ) const { return sz; }
 };
 
 

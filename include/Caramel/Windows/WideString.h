@@ -33,6 +33,9 @@ class WideString : public BasicString< std::wstring, CharTraits< Wchar > >
 {
 public:
 
+    WideString();
+    WideString( const std::string& input, TextEncoding encoding );
+
     Bool TryParse( const std::string& input, TextEncoding encoding );
 
     std::string ToNarrow( TextEncoding encoding ) const;

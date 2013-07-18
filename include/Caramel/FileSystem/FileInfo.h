@@ -27,7 +27,6 @@ class FileInfo
 {
 public:
 
-    explicit FileInfo( const Utf8String& fileName );
     explicit FileInfo( const Path& path );
 
     Bool Exists() const;
@@ -47,13 +46,6 @@ private:
 //
 // Implementations
 //
-
-inline FileInfo::FileInfo( const Utf8String& fileName )
-    : m_path( fileName )
-    , m_status( boost::filesystem::status( m_path ))
-{
-}
-
 
 inline FileInfo::FileInfo( const Path& path )
     : m_path( path )

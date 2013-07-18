@@ -26,6 +26,20 @@ namespace Windows
 // Wide String
 //
 
+WideString::WideString()
+{
+}
+
+
+WideString::WideString( const std::string& input, TextEncoding encoding )
+{
+    if ( ! this->TryParse( input, encoding ))
+    {
+        CARAMEL_THROW( "Convert to UTF-16 failed, input: %s, encoding: %u", input, encoding );
+    }
+}
+
+
 Bool WideString::TryParse( const std::string& input, TextEncoding encoding )
 {
     if ( input.empty() )
