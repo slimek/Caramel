@@ -164,22 +164,6 @@ Utf8String::Utf8String( const std::string& u8Text )
 }
 
 
-Utf8String Utf8String::FromNative( const std::string& nativeText )
-{
-    #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
-    {
-        Windows::WideString wideText( nativeText, TEXT_ENCODING_WINDOWS_ACP );
-        return Utf8String( wideText );
-    }
-    #else
-    {
-        return Utf8String( nativeText );
-    }
-    #endif
-}
-
-
-
 //
 // Validation
 //

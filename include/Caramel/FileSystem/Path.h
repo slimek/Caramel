@@ -34,10 +34,13 @@ class Path : public boost::filesystem::path
 {
 public:
 
+    Path();
+    Path( const boost::filesystem::path& path );
+
     Path( const Utf8String& u8path );
 
     //
-    // Construct from native encoding
+    // Construct from OS default encoding
     //
 
     Path( const std::string& path );
@@ -48,8 +51,8 @@ public:
     // Properties
     //
 
-    Utf8String Stem()      const { return Utf8String( this->stem().native() ); }
-    Utf8String Extension() const { return Utf8String( this->extension().native() ); }
+    Path Stem()      const { return Path( this->stem() ); }
+    Path Extension() const { return Path( this->extension() ); }
 
 
     //
@@ -78,6 +81,35 @@ public:
 //
 // Implementations
 //
+
+inline Path::Path()
+{
+}
+
+
+inline Path::Path( const boost::filesystem::path& path )
+    : boost::filesystem::path( path )
+{
+}
+
+
+//
+// Construct from OS default encoding.
+// - In Windows, it is ACP (acitve code page).
+//   In other OS, it is UTF-8.
+//
+
+inline Path::Path( const std::string& path )
+    : boost::filesystem::path( path )
+{
+}
+
+
+inline Path::Path( const Char* path )
+    : boost::filesystem::path( path )
+{
+}
+
 
 #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
 
@@ -110,24 +142,6 @@ inline Path::Path( const Utf8String& path )
 }
 
 #endif  // CARAMEL_SYSTEM_IS_WINDOWS
-
-
-//
-// Construct from native encoding.
-// - In Windows, it is ACP (acitve code page).
-//   In other OS, it is UTF-8.
-//
-
-inline Path::Path( const std::string& path )
-    : boost::filesystem::path( path )
-{
-}
-
-
-inline Path::Path( const Char* path )
-    : boost::filesystem::path( path )
-{
-}
 
 
 ///////////////////////////////////////////////////////////////////////////////
