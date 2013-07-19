@@ -9,6 +9,7 @@
 #pragma once
 #endif
 
+#include <Caramel/String/StringConvertible.h>
 #include <Caramel/String/Utf8String.h>
 #include <boost/filesystem.hpp>
 
@@ -31,6 +32,7 @@ namespace Caramel
 //
 
 class Path : public boost::filesystem::path
+           , public StringConvertible< Path >
 {
 public:
 
@@ -79,7 +81,10 @@ public:
     // - Path always can be converted to UTF-8 string.
     //
 
-    operator Utf8String() const { return Utf8String( this->native() ); }
+    operator   Utf8String()   const { return Utf8String( this->native() ); }
+    Utf8String ToUtf8String() const { return Utf8String( this->native() ); }
+
+    std::string ToString()    const { return this->ToUtf8String().ToString(); }
 
 
     //
@@ -98,6 +103,14 @@ public:
 
     Path( const std::wstring& wpath );
     Path( const Wchar* wpath );
+
+
+    //
+    // Conversion to wide string
+    //
+
+    std::wstring ToWstring() const;
+
 
 #endif // CARAMEL_SYSTEM_IS_WINDOWS
 
@@ -138,37 +151,14 @@ inline Path::Path( const Char* path )
 }
 
 
-#if defined( CARAMEL_SYSTEM_IS_WINDOWS )
-
-//
-// For Windows, path's value_type is wchar_t.
-// If you don't give codecvt, it would think the input string as ACP (active code page).
-//
 inline Path::Path( const Utf8String& path )
+    #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
     : boost::filesystem::path( path.ToWstring() )
-{
-}
-
-
-inline Path::Path( const std::wstring& wpath )
-    : boost::filesystem::path( wpath )
-{
-}
-
-
-inline Path::Path( const Wchar* wpath )
-    : boost::filesystem::path( wpath )
-{
-}
-
-#else
-
-inline Path::Path( const Utf8String& path )
+    #else
     : boost::filesystem::path( path )
+    #endif
 {
 }
-
-#endif  // CARAMEL_SYSTEM_IS_WINDOWS
 
 
 //
@@ -186,6 +176,37 @@ inline Path Path::AppendExtension( const std::string& extension ) const
     return Path( '.' == extension[0] ? u8Path + u8Ext
                                      : u8Path + u8Dot + u8Ext );
 }
+
+
+#if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+
+//
+// Constructors from wide string
+//
+
+inline Path::Path( const std::wstring& wpath )
+    : boost::filesystem::path( wpath )
+{
+}
+
+
+inline Path::Path( const Wchar* wpath )
+    : boost::filesystem::path( wpath )
+{
+}
+
+
+//
+// Conversion to wide string
+//
+
+inline std::wstring Path::ToWstring() const
+{
+    return this->wstring();
+}
+
+
+#endif  // CARAMEL_SYSTEM_IS_WINDOWS
 
 
 ///////////////////////////////////////////////////////////////////////////////

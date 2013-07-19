@@ -3,6 +3,7 @@
 #include <Caramel/CaramelPch.h>
 
 #include <Caramel/FileView/IniFileViewImpl.h>
+#include <Caramel/Io/InputFileStream.h>
 
 
 namespace Caramel
@@ -25,10 +26,10 @@ IniFileView::IniFileView()
 }
 
 
-IniFileView::IniFileView( const Path& path )
+IniFileView::IniFileView( const Utf8String& fileName )
     : m_impl( new IniFileViewImpl )
 {
-    this->LoadFromFile( path );
+    this->LoadFromFile( fileName );
 }
 
 
@@ -37,12 +38,15 @@ IniFileView::~IniFileView()
 }
 
 
-void IniFileView::LoadFromFile( const Path& inputPath )
+void IniFileView::LoadFromFile( const Utf8String& fileName )
 {
+    const Path inputPath( fileName );
+
     const Path fullPath = inputPath.HasExtension()
                         ? inputPath
-                        : inputPath.AppendExtension( ".ini" );
+                        : inputPath.AppendExtension( "ini" );
 
+    InputFileStream file( fullPath );
 }
 
 
