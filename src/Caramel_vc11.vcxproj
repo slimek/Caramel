@@ -57,6 +57,7 @@
     <ClInclude Include="..\include\Caramel\Value\SharedArray.h" />
     <ClInclude Include="..\include\Caramel\Windows\WideString.h" />
     <ClInclude Include="Caramel\CaramelPch.h" />
+    <ClInclude Include="Caramel\FileView\IniFileViewImpl.h" />
     <ClInclude Include="Caramel\Io\MbcsStreamReader.h" />
     <ClInclude Include="Caramel\Io\Utf16LeStreamReader.h" />
     <ClInclude Include="Caramel\Io\Utf8StreamReader.h" />
@@ -67,6 +68,7 @@
   <ItemGroup>
     <ClCompile Include="Caramel\CaramelPchCreator.cpp" />
     <ClCompile Include="Caramel\Error.cpp" />
+    <ClCompile Include="Caramel\FileView.cpp" />
     <ClCompile Include="Caramel\Io.cpp" />
     <ClCompile Include="Caramel\Lexical.cpp" />
     <ClCompile Include="Caramel\Object.cpp" />

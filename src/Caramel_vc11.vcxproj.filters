@@ -81,6 +81,9 @@
     <Filter Include="1. Public Packages\FileView">
       <UniqueIdentifier>{592e6b2b-56ba-4cda-917f-aa007e7a59d8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Sources\FileView">
+      <UniqueIdentifier>{0447b952-dbca-4566-8b56-ba1801162fa4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -215,6 +218,9 @@
     <ClInclude Include="..\include\Caramel\FileView\IniSection.h">
       <Filter>1. Public Packages\FileView</Filter>
     </ClInclude>
+    <ClInclude Include="Caramel\FileView\IniFileViewImpl.h">
+      <Filter>2. Sources\FileView</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\CaramelPchCreator.cpp">
@@ -239,6 +245,9 @@
       <Filter>2. Sources</Filter>
     </ClCompile>
     <ClCompile Include="Caramel\Io.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Caramel\FileView.cpp">
       <Filter>2. Sources</Filter>
     </ClCompile>
   </ItemGroup>
