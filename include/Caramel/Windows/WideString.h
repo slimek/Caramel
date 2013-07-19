@@ -29,8 +29,10 @@ namespace Windows
 // - A UTF-16 LE string based on std::wstring.
 //
 
-class WideString : public BasicString< std::wstring, CharTraits< Wchar > >
+class WideString : public BasicString< WideString, std::wstring, CharTraits< Wchar > >
 {
+    
+
 public:
 
     WideString();

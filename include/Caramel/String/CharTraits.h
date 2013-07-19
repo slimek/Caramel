@@ -28,14 +28,18 @@ struct CharTraits;
 
 template<>
 struct CharTraits< Char > : public std::char_traits< Char >
-{};
+{
+    static const Char DOT_CHAR = '.';
+};
 
 
 /// Wide Char Specialization ///
 
 template<>
 struct CharTraits< Wchar > : public std::char_traits< Wchar >
-{};
+{
+    static const Wchar DOT_CHAR = '.';
+};
 
 
 ///////////////////////////////////////////////////////////////////////////////

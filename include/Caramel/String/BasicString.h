@@ -18,7 +18,7 @@ namespace Caramel
 // Basic String
 //
 
-template< typename StringType, typename TraitsType >
+template< typename Derived, typename StringType, typename TraitsType >
 class BasicString : public StringType
 {
 protected:
