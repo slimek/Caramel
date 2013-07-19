@@ -48,11 +48,30 @@ public:
     
 
     //
-    // Properties
+    // Splits
     //
 
     Path Stem()      const { return Path( this->stem() ); }
     Path Extension() const { return Path( this->extension() ); }
+
+
+    //
+    // Predicates
+    //
+
+    Bool HasExtension() const { return this->has_extension(); }
+
+
+    //
+    // Compositions
+    // - Don't change this object, return the result as a copy.
+    //
+
+    //
+    // Append Extension
+    // - Whether or not the extension has a prefix '.', the result is append with just one '.'
+    //
+    Path AppendExtension( const std::string& extension ) const;
 
 
     //
@@ -61,6 +80,14 @@ public:
     //
 
     operator Utf8String() const { return Utf8String( this->native() ); }
+
+
+    //
+    // Member Types
+    //
+
+    typedef boost::filesystem::path::value_type ValueType;
+    typedef CharTraits< ValueType > TraitsType;
 
 
 #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
@@ -142,6 +169,23 @@ inline Path::Path( const Utf8String& path )
 }
 
 #endif  // CARAMEL_SYSTEM_IS_WINDOWS
+
+
+//
+// Compositions
+//
+
+inline Path Path::AppendExtension( const std::string& extension ) const
+{
+    if ( extension.empty() ) { return *this; }
+
+    const Utf8String u8Path( *this );
+    const Utf8String u8Dot( '.' );
+    const Utf8String u8Ext( extension );
+
+    return Path( '.' == extension[0] ? u8Path + u8Ext
+                                     : u8Path + u8Dot + u8Ext );
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////
