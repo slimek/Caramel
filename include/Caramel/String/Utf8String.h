@@ -13,6 +13,7 @@
 #include <Caramel/String/CharTraits.h>
 #include <Caramel/String/StringConvertible.h>
 #include <Caramel/String/TextEncoding.h>
+#include <boost/operators.hpp>
 
 
 namespace Caramel
@@ -27,14 +28,16 @@ namespace Caramel
 //   This is the default string type of all Caramel I/O components.
 //
 
-class Utf8String : public BasicString< std::string, CharTraits< Char > >
-                 , public StringConvertible< Utf8String >
+class Utf8String : public StringConvertible< Utf8String >
+                 , public boost::addable< Utf8String >
 {
-    typedef BasicString< std::string, CharTraits< Char > > Inherited;
+    typedef BasicString< Utf8String, std::string, CharTraits< Char > > Inherited;
 
 public:
     
     Utf8String();
+
+    explicit Utf8String( Char c );
 
     // Throws if 'text' is not UTF-8 encoded.
     explicit Utf8String( const std::string& u8Text );
@@ -45,6 +48,13 @@ public:
     //
 
     Utf8String( const std::string& text, TextEncoding encoding );
+
+
+    //
+    // Operators
+    //
+
+    Utf8String& operator+=( const Utf8String& rhs );
 
 
     //
@@ -64,10 +74,10 @@ public:
     Bool TryParse( const Byte* data, Uint length );
 
 
-    std::string ToString() const { return *this; }
+    std::string ToString() const { return m_string; }
 
     // Cooperates with C-style functions
-    const Char* ToCstr() const { return this->c_str(); }
+    const Char* ToCstr() const { return m_string.c_str(); }
 
     // NOTE: No implicit conversion to std::string.
     //       Always use Utf8String as possible.
@@ -95,6 +105,11 @@ public:
 
 
 #endif // CARAMEL_SYSTEM_IS_WINDOWS
+
+
+private:
+
+    std::string m_string;
     
 };
 

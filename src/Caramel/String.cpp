@@ -155,6 +155,17 @@ Utf8String::Utf8String()
 }
 
 
+Utf8String::Utf8String( Char c )
+{
+    if ( 0x7f < static_cast< Uint8 >( c ))
+    {
+        CARAMEL_THROW( "Input c is not valid UTF-8 character" );
+    }
+
+    m_string.assign( 1, c );
+}
+
+
 Utf8String::Utf8String( const std::string& u8Text )
 {
     if ( !this->TryParse( u8Text ))
@@ -218,7 +229,7 @@ Bool Utf8String::TryParse( const std::string& u8Text )
         }
     }
 
-    this->assign( u8Text );
+    m_string.assign( u8Text );
     return true;
 }
 
@@ -244,7 +255,7 @@ Bool Utf8String::TryParse( const std::string& text, TextEncoding encoding )
             return false;
         }
 
-        this->assign( wbuffer.ToNarrow( TEXT_ENCODING_UTF8 ));
+        m_string.assign( wbuffer.ToNarrow( TEXT_ENCODING_UTF8 ));
         return true;
     }
     #else
@@ -264,17 +275,28 @@ Bool Utf8String::TryParse( const std::string& text, TextEncoding encoding )
 Utf8String::Utf8String( const std::wstring& wText )
 {
     std::wstring_convert< std::codecvt_utf8_utf16< Wchar > > converter;
-    this->assign( converter.to_bytes( wText ));
+    m_string.assign( converter.to_bytes( wText ));
 }
 
 
 std::wstring Utf8String::ToWstring() const
 {
     std::wstring_convert< std::codecvt_utf8_utf16< Wchar > > converter;
-    return converter.from_bytes( static_cast< const std::string& >( *this ));
+    return converter.from_bytes( static_cast< const std::string& >( m_string ));
 }
 
 #endif // CARAMEL_SYSTEM_IS_WINDOWS
+
+
+//
+// Operators
+//
+
+Utf8String& Utf8String::operator+=( const Utf8String& rhs )
+{
+    m_string += rhs.m_string;
+    return *this;
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////
