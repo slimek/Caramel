@@ -24,10 +24,10 @@ namespace Caramel
 //   For UTF-8 encoded text, use Utf8String.
 //
 
-class AnsiString : public BasicString< std::string, CharTraits< Char > >
+class AnsiString : public BasicString< AnsiString, std::string, CharTraits< Char > >
                  , public StringConvertible< AnsiString >
 {
-    typedef BasicString< std::string, CharTraits< Char > > Inherited;
+    typedef BasicString< AnsiString, std::string, CharTraits< Char > > Inherited;
 
 public:
 
@@ -43,8 +43,8 @@ public:
 
     /// Conversions ///
 
-    operator std::string() const { return *this; }
-    std::string ToString() const { return *this; }
+    operator std::string() const { return m_string; }
+    std::string ToString() const { return m_string; }
 
 };
 

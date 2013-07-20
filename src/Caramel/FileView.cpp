@@ -4,6 +4,7 @@
 
 #include <Caramel/FileView/IniFileViewImpl.h>
 #include <Caramel/Io/InputFileStream.h>
+#include <Caramel/Io/TextStreamReader.h>
 
 
 namespace Caramel
@@ -47,6 +48,25 @@ void IniFileView::LoadFromFile( const Utf8String& fileName )
                         : inputPath.AppendExtension( "ini" );
 
     InputFileStream file( fullPath );
+    TextStreamReader reader( file );
+
+    m_impl->LoadFromText( reader );
+}
+
+
+void IniFileView::LoadFromText( TextReader& reader )
+{
+    m_impl->LoadFromText( reader );
+}
+
+
+//
+// Implementation
+//
+
+void IniFileViewImpl::LoadFromText( TextReader& reader )
+{
+    
 }
 
 

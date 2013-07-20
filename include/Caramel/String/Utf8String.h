@@ -28,7 +28,8 @@ namespace Caramel
 //   This is the default string type of all Caramel I/O components.
 //
 
-class Utf8String : public StringConvertible< Utf8String >
+class Utf8String : public BasicString< Utf8String, std::string, CharTraits< Char > >
+                 , public StringConvertible< Utf8String >
                  , public boost::addable< Utf8String >
 {
     typedef BasicString< Utf8String, std::string, CharTraits< Char > > Inherited;
@@ -106,11 +107,6 @@ public:
 
 #endif // CARAMEL_SYSTEM_IS_WINDOWS
 
-
-private:
-
-    std::string m_string;
-    
 };
 
 

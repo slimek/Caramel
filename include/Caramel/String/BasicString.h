@@ -18,19 +18,47 @@ namespace Caramel
 // Basic String
 //
 
-template< typename Derived, typename StringType, typename TraitsType >
-class BasicString : public StringType
+template< typename Derived, typename String, typename Traits >
+class BasicString
 {
+public:
+
+    typedef String StringType;
+    typedef Traits TraitsType;
+
+
+    /// Properties ///
+
+    Bool IsEmpty() const { return m_string.empty(); }
+
+
 protected:
 
-    /// Constructors ///
+    BasicString();
+    BasicString( const String& s );
 
-    BasicString() {}
 
-    BasicString( const StringType& s )
-        : StringType( s )
-    {}
+    /// Data Members ///
+
+    String m_string;
 };
+
+
+//
+// Implementation
+//
+
+template< typename Derived, typename String, typename Traits >
+inline BasicString< Derived, String, Traits >::BasicString()
+{
+}
+
+
+template< typename Derived, typename String, typename Traits >
+inline BasicString< Derived, String, Traits >::BasicString( const String& s )
+    : m_string( s )
+{
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////
