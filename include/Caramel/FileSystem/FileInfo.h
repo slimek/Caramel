@@ -32,7 +32,7 @@ public:
     Bool Exists() const;
 
 
-private:
+protected:
 
     // NOTES: m_status depends on m_path,
     //        therefore m_path must be in front of m_status.

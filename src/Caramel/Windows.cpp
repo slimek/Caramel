@@ -5,6 +5,7 @@
 
 #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
 
+#include <Caramel/Windows/FileInfo.h>
 #include <Caramel/Windows/WideString.h>
 #include <windows.h>
 
@@ -18,8 +19,35 @@ namespace Windows
 //
 // Contents
 //
-// 1. WideString
+//   FileInfo
+//   WideString
 //
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// File Info
+//
+
+FileInfo::FileInfo( const Path& path )
+    : Caramel::FileInfo( path )
+{
+}
+
+
+Path FileInfo::GetExactPath() const
+{
+    SHFILEINFO fileInfo = { 0 };
+    const DWORD_PTR ok = ::SHGetFileInfoW(
+        m_path.ToWstring().c_str(), 0, &fileInfo, sizeof( fileInfo ), SHGFI_DISPLAYNAME );
+
+    if ( ! ok )
+    {
+        CARAMEL_THROW( "SHGetFileInfo() failed, error code: %u", ::GetLastError() );
+    }
+
+    return Path( fileInfo.szDisplayName );
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //

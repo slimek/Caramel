@@ -221,6 +221,12 @@
     <ClInclude Include="Caramel\FileView\IniFileViewImpl.h">
       <Filter>2. Sources\FileView</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\String\CainLess.h">
+      <Filter>1. Public Packages\String</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Windows\FileInfo.h">
+      <Filter>1. Public Packages\Windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\CaramelPchCreator.cpp">
