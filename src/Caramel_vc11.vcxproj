@@ -19,7 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\Caramel\Async\FlowState.h" />
     <ClInclude Include="..\include\Caramel\Caramel.h" />
+    <ClInclude Include="..\include\Caramel\Chrono\Detail\SteadyClockCore.h" />
     <ClInclude Include="..\include\Caramel\Chrono\SteadyClock.h" />
     <ClInclude Include="..\include\Caramel\Error\Assert.h" />
     <ClInclude Include="..\include\Caramel\Error\Exception.h" />
@@ -59,6 +61,7 @@
     <ClInclude Include="..\include\Caramel\Windows\FileInfo.h" />
     <ClInclude Include="..\include\Caramel\Windows\WideString.h" />
     <ClInclude Include="Caramel\CaramelPch.h" />
+    <ClInclude Include="Caramel\Chrono\ChronoManager.h" />
     <ClInclude Include="Caramel\FileView\IniFileViewImpl.h" />
     <ClInclude Include="Caramel\Io\MbcsStreamReader.h" />
     <ClInclude Include="Caramel\Io\Utf16LeStreamReader.h" />
@@ -69,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\CaramelPchCreator.cpp" />
+    <ClCompile Include="Caramel\Chrono.cpp" />
     <ClCompile Include="Caramel\Error.cpp" />
     <ClCompile Include="Caramel\FileView.cpp" />
     <ClCompile Include="Caramel\Io.cpp" />

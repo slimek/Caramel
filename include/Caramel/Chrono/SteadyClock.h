@@ -1,4 +1,4 @@
-// Caramel C++ Library - Chrono Amenity - Steady Clock Header
+// Caramel C++ Library - Chrono Facility - Steady Clock Header
 
 #ifndef __CARAMEL_CHRONO_STEADY_CLOCK_H
 #define __CARAMEL_CHRONO_STEADY_CLOCK_H
@@ -9,6 +9,7 @@
 #pragma once
 #endif
 
+#include <Caramel/Chrono/Detail/SteadyClockCore.h>
 #include <chrono>
 
 
@@ -29,15 +30,17 @@ class SteadyClock
 
     typedef std::chrono::duration< ValueType, Ratio > Duration;
 
-
 public:
 
     SteadyClock();
 
     void Reset();
 
+    //
+    // Total Elapsed
+    // - The duration from the clock is created/reseted until now.
+    //
     ValueType GetTotalElapsed() const;
-
     
     //
     // Delta
@@ -45,6 +48,12 @@ public:
     //
     ValueType Delta();
     
+    //
+    // Now
+    // - A convenient wrapper for the std::steady_clock.
+    //
+    static ValueType Now();
+
 
 private:
     TimePoint m_clockStart;
@@ -74,7 +83,7 @@ inline void SteadyClock< ValueType, Ratio >::Reset()
 template< typename ValueType, typename Ratio >
 inline ValueType SteadyClock< ValueType, Ratio >::GetTotalElapsed() const
 {
-    return Duration( ClockType::now() - m_clockStart ).count();
+    return std::chrono::duration_cast< Duration >( ClockType::now() - m_clockStart ).count();
 }
 
 
@@ -82,9 +91,17 @@ template< typename ValueType, typename Ratio >
 inline ValueType SteadyClock< ValueType, Ratio >::Delta()
 {
     const TimePoint now = ClockType::now();
-    const Duration delta = now - m_intervalStart;
+    const Duration delta = std::chrono::duration_cast< Duration >( now - m_intervalStart );
     m_intervalStart = now;
     return delta.count();
+}
+
+
+template< typename ValueType, typename Ratio >
+inline ValueType SteadyClock< ValueType, Ratio >::Now()
+{
+    return std::chrono::duration_cast< Duration >(
+        ClockType::now() - Detail::SteadyClockCore::Epoch() ).count();
 }
 
 
