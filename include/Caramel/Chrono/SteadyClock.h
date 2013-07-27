@@ -21,6 +21,12 @@ namespace Caramel
 // Steady Clock
 // - Default time unit is 1 second, i.e. ratio< 1 >.
 //
+//   USAGE:
+//     Here are some common typedefs:
+//
+//     typedef SteadyClock< Float >              SecondClock;
+//     typedef SteadyClock< Uint32, std::milli > TickClock;    // milliseconds
+//
 
 template< typename ValueType, typename Ratio = std::ratio< 1 > >
 class SteadyClock
