@@ -9,7 +9,6 @@
 #pragma once
 #endif
 
-#include <Caramel/Meta/Select.h>
 #include <Caramel/Meta/Utility.h>
 #include <iosfwd>
 #include <type_traits>
@@ -21,7 +20,7 @@ namespace Caramel
 ///////////////////////////////////////////////////////////////////////////////
 //
 // String Convertible
-// - Provides an interface to std::string from a custom type.
+// - Provides an adapter from a custom to std::string.
 //
 
 template< typename Derived >
@@ -47,8 +46,7 @@ public:
 
 private:
 
-    SizerN< 1 > CheckToString( ... );
-    SizerN< 1 > CheckToString( const Char* );
+    template< typename T > SizerN< 1 > CheckToString( T );
     SizerN< 2 > CheckToString( const std::string& );
 
 protected:
@@ -70,12 +68,7 @@ protected:
 
 template< typename T >
 struct IsStringConvertibleT
-    : SelectT
-    <
-        std::is_class< T >::value,
-        BoolType< std::is_base_of< StringConvertible< T >, T >::value >,
-        FalseType
-    >::Type
+    : BoolType< std::is_base_of< StringConvertible< T >, T >::value >
 {};
 
 

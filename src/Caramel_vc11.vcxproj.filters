@@ -93,6 +93,9 @@
     <Filter Include="2. Sources\Chrono">
       <UniqueIdentifier>{e8979ed2-8d93-4e13-b503-2a7ee248426c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\Numeric">
+      <UniqueIdentifier>{ab6a21d9-c585-4cc2-865b-a38a3f5d4f63}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -244,6 +247,9 @@
     </ClInclude>
     <ClInclude Include="Caramel\Chrono\ChronoManager.h">
       <Filter>2. Sources\Chrono</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Numeric\NumberConvertible.h">
+      <Filter>1. Public Packages\Numeric</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

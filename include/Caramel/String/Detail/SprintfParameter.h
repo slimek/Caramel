@@ -10,6 +10,7 @@
 #endif
 
 #include <Caramel/Meta/IfThenElse.h>
+#include <Caramel/Numeric/NumberConvertible.h>
 #include <Caramel/String/StringConvertible.h>
 #include <type_traits>
 
@@ -52,6 +53,21 @@ private:
 };
 
 
+/// Number Convertible ///
+
+template< typename T >
+class SprintfParameter_NumberConvertible
+{
+public:
+    typedef typename T::NumberType NumberType;
+    
+    NumberType operator()( const T& x )
+    {
+        return x.ToNumber();
+    }
+};
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Sprintf Parameter Select
@@ -60,11 +76,12 @@ private:
 template< typename T >
 struct SprintfParameterSelect
 {
-    typedef typename IfThenElse3T
+    typedef typename IfThenElse4T
     <
         std::is_fundamental< T >::value,  SprintfParameter_IdentityCopy< T >,
         std::is_enum< T >::value,         SprintfParameter_IdentityCopy< T >,
         IsStringConvertibleT< T >::VALUE, SprintfParameter_StringConvertible< T >,
+        IsNumberConvertibleT< T >::VALUE, SprintfParameter_NumberConvertible< T >,
                                           EmptyType
     >::Type ParameterType;
 };
