@@ -34,7 +34,7 @@ class SteadyClock
     typedef std::chrono::steady_clock ClockType;
     typedef ClockType::time_point TimePoint;
 
-    typedef std::chrono::duration< ValueType, Ratio > Duration;
+    typedef std::chrono::duration< ValueType, Ratio > DurationType;
 
 public:
 
@@ -43,27 +43,28 @@ public:
     void Reset();
 
     //
-    // Total Elapsed
+    // Duration
     // - The duration from the clock is created/reseted until now.
     //
-    ValueType GetTotalElapsed() const;
+    ValueType Duration() const;
     
     //
-    // Delta
-    // - Call Delta() successively to get differences of time.
+    // Slice
+    // - Get a slice of time :
+    //   Return the Duration() and Reset() this clock.
     //
-    ValueType Delta();
+    ValueType Slice();
     
     //
     // Now
-    // - A convenient wrapper for the std::steady_clock.
+    // - A convenient wrapper for the std::steady_clock::now.
+    //   Returns a monotolic time.
     //
     static ValueType Now();
 
 
 private:
-    TimePoint m_clockStart;
-    TimePoint m_intervalStart;
+    TimePoint m_markTime;
 };
 
 
@@ -82,23 +83,22 @@ inline SteadyClock< ValueType, Ratio >::SteadyClock()
 template< typename ValueType, typename Ratio >
 inline void SteadyClock< ValueType, Ratio >::Reset()
 {
-    m_clockStart = m_intervalStart = ClockType::now();
+    m_markTime = ClockType::now();
 }
 
 
 template< typename ValueType, typename Ratio >
-inline ValueType SteadyClock< ValueType, Ratio >::GetTotalElapsed() const
+inline ValueType SteadyClock< ValueType, Ratio >::Duration() const
 {
-    return std::chrono::duration_cast< Duration >( ClockType::now() - m_clockStart ).count();
+    return std::chrono::duration_cast< DurationType >( ClockType::now() - m_markTime ).count();
 }
 
 
 template< typename ValueType, typename Ratio >
-inline ValueType SteadyClock< ValueType, Ratio >::Delta()
+inline ValueType SteadyClock< ValueType, Ratio >::Slice()
 {
-    const TimePoint now = ClockType::now();
-    const Duration delta = std::chrono::duration_cast< Duration >( now - m_intervalStart );
-    m_intervalStart = now;
+    const Duration delta = this->Duration();
+    this->Reset();
     return delta.count();
 }
 
@@ -106,7 +106,7 @@ inline ValueType SteadyClock< ValueType, Ratio >::Delta()
 template< typename ValueType, typename Ratio >
 inline ValueType SteadyClock< ValueType, Ratio >::Now()
 {
-    return std::chrono::duration_cast< Duration >(
+    return std::chrono::duration_cast< DurationType >(
         ClockType::now() - Detail::SteadyClockCore::Epoch() ).count();
 }
 

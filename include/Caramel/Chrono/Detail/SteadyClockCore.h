@@ -35,8 +35,8 @@ public:
     //
     // Epoch
     // - In one run of program, it returns always the same time.
-    //   You may treat it as "the start time of this run",
-    //   but in fact is the time when Epoch() is first called.
+    //   You may treat it as "the start time of this program run",
+    //   but in fact it is the time when Epoch() was first called.
     //
     static TimePoint Epoch();
 };
