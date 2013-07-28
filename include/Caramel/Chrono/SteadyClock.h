@@ -97,8 +97,12 @@ inline ValueType SteadyClock< ValueType, Ratio >::Duration() const
 template< typename ValueType, typename Ratio >
 inline ValueType SteadyClock< ValueType, Ratio >::Slice()
 {
-    const Duration delta = this->Duration();
-    this->Reset();
+    // This function is equivalent to Duration() then Reset(),
+    // but you must use the same now in both functions.
+
+    const TimePoint now = ClockType::now();
+    const DurationType delta = std::chrono::duration_cast< DurationType >( now - m_markTime );
+    m_markTime = now;
     return delta.count();
 }
 
