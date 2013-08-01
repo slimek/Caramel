@@ -36,16 +36,44 @@ FileInfo::FileInfo( const Path& path )
 
 Path FileInfo::GetExactPath() const
 {
-    SHFILEINFO fileInfo = { 0 };
-    const DWORD_PTR ok = ::SHGetFileInfoW(
-        m_path.ToWstring().c_str(), 0, &fileInfo, sizeof( fileInfo ), SHGFI_DISPLAYNAME );
+    /// Step 1 : Convert original path to short path.
 
-    if ( ! ok )
+    const DWORD shortSize = ::GetShortPathNameW( m_path.ToWstring().c_str(), NULL, 0 );
+    if ( 0 == shortSize )
     {
-        CARAMEL_THROW( "SHGetFileInfo() failed, error code: %u", ::GetLastError() );
+        CARAMEL_THROW( "GetShortPathName() get buffer size failed" );
     }
 
-    return Path( fileInfo.szDisplayName );
+    std::vector< Wchar > shortBuffer( shortSize + 1, 0 );
+
+    const DWORD shortConverted = ::GetShortPathNameW( m_path.ToWstring().c_str(), &shortBuffer[0], shortBuffer.size() );
+    if ( ! shortConverted )
+    {
+        CARAMEL_THROW( "GetShortPathName() convert failed" );
+    }
+
+    const std::wstring shortPath( &shortBuffer[0] );
+
+
+    /// Step 2 : Convert short path to long path.
+
+    const DWORD longSize = ::GetLongPathNameW( shortPath.c_str(), NULL, 0 );
+    if ( 0 == longSize )
+    {
+        CARAMEL_THROW( "GetLongPathName() get buffer size failed" );
+    }
+
+    std::vector< Wchar > longBuffer( longSize + 1, 0 );
+
+    const DWORD longConverted = ::GetLongPathNameW( shortPath.c_str(), &longBuffer[0], longBuffer.size() );
+    if ( ! longConverted )
+    {
+        CARAMEL_THROW( "GetLongPathName() convert failed" );
+    }
+
+    const std::wstring longPath( &longBuffer[0] );
+
+    return Path( longPath );
 }
 
 
