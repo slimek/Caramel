@@ -42,6 +42,9 @@ public:
 
     void Reset();
 
+
+    typedef ValueType ValueType;
+
     //
     // Duration
     // - The duration from the clock is created/reseted until now.

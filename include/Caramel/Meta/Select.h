@@ -16,6 +16,7 @@ namespace Caramel
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Select Type
+// - Similar with std::conditional, but can be used recursively.
 //
 
 /// Primary Template ///
