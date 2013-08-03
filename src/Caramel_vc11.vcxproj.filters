@@ -96,6 +96,9 @@
     <Filter Include="1. Public Packages\Numeric">
       <UniqueIdentifier>{ab6a21d9-c585-4cc2-865b-a38a3f5d4f63}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Sources\FileSystem">
+      <UniqueIdentifier>{aa3087b5-7401-44cb-8a5b-a2e6eaf69ffa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -254,6 +257,12 @@
     <ClInclude Include="..\include\Caramel\Numeric\NumberTraits.h">
       <Filter>1. Public Packages\Numeric</Filter>
     </ClInclude>
+    <ClInclude Include="Caramel\FileSystem\FileInfoImpl.h">
+      <Filter>2. Sources\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Caramel\FileSystem\PathImpl.h">
+      <Filter>2. Sources\FileSystem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\CaramelPchCreator.cpp">
@@ -284,6 +293,9 @@
       <Filter>2. Sources</Filter>
     </ClCompile>
     <ClCompile Include="Caramel\Chrono.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Caramel\FileSystem.cpp">
       <Filter>2. Sources</Filter>
     </ClCompile>
   </ItemGroup>

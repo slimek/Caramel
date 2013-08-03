@@ -64,6 +64,8 @@
     <ClInclude Include="..\include\Caramel\Windows\WideString.h" />
     <ClInclude Include="Caramel\CaramelPch.h" />
     <ClInclude Include="Caramel\Chrono\ChronoManager.h" />
+    <ClInclude Include="Caramel\FileSystem\FileInfoImpl.h" />
+    <ClInclude Include="Caramel\FileSystem\PathImpl.h" />
     <ClInclude Include="Caramel\FileView\IniFileViewImpl.h" />
     <ClInclude Include="Caramel\Io\MbcsStreamReader.h" />
     <ClInclude Include="Caramel\Io\Utf16LeStreamReader.h" />
@@ -76,6 +78,7 @@
     <ClCompile Include="Caramel\CaramelPchCreator.cpp" />
     <ClCompile Include="Caramel\Chrono.cpp" />
     <ClCompile Include="Caramel\Error.cpp" />
+    <ClCompile Include="Caramel\FileSystem.cpp" />
     <ClCompile Include="Caramel\FileView.cpp" />
     <ClCompile Include="Caramel\Io.cpp" />
     <ClCompile Include="Caramel\Lexical.cpp" />
@@ -159,7 +162,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;CARAMEL_SOURCE;_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.;..\include;..\..\Boost</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -189,7 +192,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;CARAMEL_SOURCE;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.;..\include;..\..\Boost</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>

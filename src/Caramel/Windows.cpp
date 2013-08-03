@@ -36,9 +36,11 @@ FileInfo::FileInfo( const Path& path )
 
 Path FileInfo::GetExactPath() const
 {
+    const std::wstring wpath = this->GetPath().ToWstring();
+
     /// Step 1 : Convert original path to short path.
 
-    const DWORD shortSize = ::GetShortPathNameW( m_path.ToWstring().c_str(), NULL, 0 );
+    const DWORD shortSize = ::GetShortPathNameW( wpath.c_str(), NULL, 0 );
     if ( 0 == shortSize )
     {
         CARAMEL_THROW( "GetShortPathName() get buffer size failed" );
@@ -46,7 +48,7 @@ Path FileInfo::GetExactPath() const
 
     std::vector< Wchar > shortBuffer( shortSize + 1, 0 );
 
-    const DWORD shortConverted = ::GetShortPathNameW( m_path.ToWstring().c_str(), &shortBuffer[0], shortBuffer.size() );
+    const DWORD shortConverted = ::GetShortPathNameW( wpath.c_str(), &shortBuffer[0], shortBuffer.size() );
     if ( ! shortConverted )
     {
         CARAMEL_THROW( "GetShortPathName() convert failed" );

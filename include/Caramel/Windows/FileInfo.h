@@ -33,6 +33,7 @@ public:
     
     explicit FileInfo( const Path& path );
 
+    
     //
     // Get Exact Path
     // - Win32 API treats paths as case insensitive, but NTFS is not.
