@@ -251,6 +251,9 @@
     <ClInclude Include="..\include\Caramel\Numeric\NumberConvertible.h">
       <Filter>1. Public Packages\Numeric</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Numeric\NumberTraits.h">
+      <Filter>1. Public Packages\Numeric</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\CaramelPchCreator.cpp">
