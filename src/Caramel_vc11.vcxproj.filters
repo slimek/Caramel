@@ -263,6 +263,9 @@
     <ClInclude Include="Caramel\FileSystem\PathImpl.h">
       <Filter>2. Sources\FileSystem</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Async\TimedBool.h">
+      <Filter>1. Public Packages\Async</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\CaramelPchCreator.cpp">

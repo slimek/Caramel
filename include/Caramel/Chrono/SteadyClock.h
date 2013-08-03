@@ -11,6 +11,7 @@
 
 #include <Caramel/Chrono/Detail/SteadyClockCore.h>
 #include <chrono>
+#include <limits>
 
 
 namespace Caramel
@@ -28,13 +29,13 @@ namespace Caramel
 //     typedef SteadyClock< Uint32, std::milli > TickClock;    // milliseconds
 //
 
-template< typename ValueType, typename Ratio = std::ratio< 1 > >
+template< typename UnitType, typename Ratio = std::ratio< 1 > >
 class SteadyClock
 {
     typedef std::chrono::steady_clock ClockType;
     typedef ClockType::time_point TimePoint;
 
-    typedef std::chrono::duration< ValueType, Ratio > DurationType;
+    typedef std::chrono::duration< UnitType, Ratio > DurationType;
 
 public:
 
@@ -43,27 +44,33 @@ public:
     void Reset();
 
 
-    typedef ValueType ValueType;
+    typedef UnitType UnitType;
 
     //
     // Duration
     // - The duration from the clock is created/reseted until now.
     //
-    ValueType Duration() const;
+    UnitType Duration() const;
     
     //
     // Slice
     // - Get a slice of time :
     //   Return the Duration() and Reset() this clock.
     //
-    ValueType Slice();
+    UnitType Slice();
     
     //
     // Now
     // - A convenient wrapper for the std::steady_clock::now.
     //   Returns a monotolic time.
     //
-    static ValueType Now();
+    static UnitType Now();
+
+    //
+    // Max Value
+    // - Depends on the unit type.
+    //
+    static UnitType MaxValue();
 
 
 private:
@@ -76,29 +83,29 @@ private:
 // Implementation
 //
 
-template< typename ValueType, typename Ratio >
-inline SteadyClock< ValueType, Ratio >::SteadyClock()
+template< typename UnitType, typename Ratio >
+inline SteadyClock< UnitType, Ratio >::SteadyClock()
 {
     this->Reset();
 }
 
 
-template< typename ValueType, typename Ratio >
-inline void SteadyClock< ValueType, Ratio >::Reset()
+template< typename UnitType, typename Ratio >
+inline void SteadyClock< UnitType, Ratio >::Reset()
 {
     m_markTime = ClockType::now();
 }
 
 
-template< typename ValueType, typename Ratio >
-inline ValueType SteadyClock< ValueType, Ratio >::Duration() const
+template< typename UnitType, typename Ratio >
+inline UnitType SteadyClock< UnitType, Ratio >::Duration() const
 {
     return std::chrono::duration_cast< DurationType >( ClockType::now() - m_markTime ).count();
 }
 
 
-template< typename ValueType, typename Ratio >
-inline ValueType SteadyClock< ValueType, Ratio >::Slice()
+template< typename UnitType, typename Ratio >
+inline UnitType SteadyClock< UnitType, Ratio >::Slice()
 {
     // This function is equivalent to Duration() then Reset(),
     // but you must use the same now in both functions.
@@ -110,11 +117,18 @@ inline ValueType SteadyClock< ValueType, Ratio >::Slice()
 }
 
 
-template< typename ValueType, typename Ratio >
-inline ValueType SteadyClock< ValueType, Ratio >::Now()
+template< typename UnitType, typename Ratio >
+inline UnitType SteadyClock< UnitType, Ratio >::Now()
 {
     return std::chrono::duration_cast< DurationType >(
         ClockType::now() - Detail::SteadyClockCore::Epoch() ).count();
+}
+
+
+template< typename UnitType, typename Ratio >
+inline UnitType SteadyClock< UnitType, Ratio >::MaxValue()
+{
+    return std::numeric_limits< UnitType >::max();
 }
 
 

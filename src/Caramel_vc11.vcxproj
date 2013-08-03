@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Async\FlowState.h" />
+    <ClInclude Include="..\include\Caramel\Async\TimedBool.h" />
     <ClInclude Include="..\include\Caramel\Caramel.h" />
     <ClInclude Include="..\include\Caramel\Chrono\Detail\SteadyClockCore.h" />
     <ClInclude Include="..\include\Caramel\Chrono\SteadyClock.h" />
