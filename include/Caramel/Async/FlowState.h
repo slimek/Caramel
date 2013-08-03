@@ -12,6 +12,7 @@
 #include <Caramel/Chrono/SteadyClock.h>
 #include <Caramel/Numeric/NumberConvertible.h>
 #include <Caramel/Numeric/NumberTraits.h>
+#include <boost/operators.hpp>
 
 
 namespace Caramel
@@ -20,14 +21,26 @@ namespace Caramel
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Flow State
-// - Build a simple state machine, better than switch-case solution.
+// - Build a simple state machine, better than bare switch-case solution.
 //   NOT thread-safe.
+//
+// USAGE:
+//   Usually we call its Update() in a timer or main loop function, with switch-case:
+//
+//   switch ( m_state.Update() )
+//   {
+//   case STATE_INITIAL:
+//       ...
+//       m_state = STATE_RUNNING;
+//       break;
 //
 
 template< typename StateType, typename ClockType = SteadyClock< Float > >
 class FlowState
     : public NumberConvertible< FlowState< StateType, ClockType >
                               , typename NumberTraits< StateType >::NumberType >
+    , public boost::totally_ordered< FlowState< StateType, ClockType >
+                                   , StateType >
 {
 public:
     
@@ -41,22 +54,50 @@ public:
 
 
     //
-    // Properties
+    // Update
+    // - Move m_nextState to m_currentState, and change properties.
     //
+    StateType Update();
 
-    Bool IsEntering() const { return m_entering; }
 
+    //
+    // Current State
+    // - REMARKS: Don't provide cast to StateType or Int implicityly,
+    //            otherwise people may misuse it in switch statement.
+    //        
 
-    /// Current States ///
-
-    StateType CurrentState() const { return m_currentState; }
+    StateType Current() const { return m_currentState; }
 
     NumberType ToNumber() const { return static_cast< NumberType >( m_currentState ); }
 
 
-    /// Elapsed Type ///
+    //
+    // Is Entering
+    // - In the last Update() the state is transitted.,
+    //   NOTES: Even if the prev and next states are the same,
+    //          It still counts as a transit, therefore it entering a "new" state.
+    //
+    Bool IsEntering() const { return m_entering; }
 
-    typedef typename ClockType::ValueType TimeValueType;
+
+    //
+    // Elapsed
+    // - The duration since the last transit.
+    //
+
+    typedef typename ClockType::UnitType TimeUnit;
+
+    TimeUnit Elapsed() const { return ClockType::Now() - m_transitTime; }
+
+
+    //
+    // Operators
+    // - Three operators are required by boost::totally_ordered< T, U >.
+    //
+
+    Bool operator==( StateType state ) const { return m_currentState == state; }
+    Bool operator< ( StateType state ) const { return m_currentState < state; }
+    Bool operator> ( StateType state ) const { return m_currentState > state; }
 
 
 private:
@@ -65,12 +106,10 @@ private:
     // Data Members
     //
 
-    StateType m_initialState;
-
     StateType m_currentState;
     StateType m_nextState;
 
-    TimeValueType m_transitTime;
+    TimeUnit m_transitTime;
 
     Bool m_toTransit;
     Bool m_entering;
@@ -84,8 +123,7 @@ private:
 
 template< typename StateType, typename ClockType >
 inline FlowState< StateType, ClockType >::FlowState( StateType initialState )
-    : m_initialState( initialState )
-    , m_currentState( initialState )
+    : m_currentState( initialState )
     , m_nextState( initialState )
     , m_transitTime( ClockType::Now() )
     , m_toTransit( true )  // have the m_entering to become true in the first Update().
@@ -99,6 +137,25 @@ inline void FlowState< StateType, ClockType >::operator=( StateType newState )
 {
     m_nextState = newState;
     m_toTransit = true;
+}
+
+
+template< typename StateType, typename ClockType >
+inline StateType FlowState< StateType, ClockType >::Update()
+{
+    if ( m_toTransit )
+    {
+        m_currentState = m_nextState;
+        m_transitTime = ClockType::Now();
+        m_toTransit = false;
+        m_entering = true;
+    }
+    else
+    {
+        m_entering = false;
+    }
+
+    return m_currentState;
 }
 
 
