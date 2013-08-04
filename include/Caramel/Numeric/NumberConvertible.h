@@ -26,16 +26,16 @@ namespace Caramel
 
 struct NumberConvertibleTag {};
 
-template< typename Derived, typename NumberType >
+template< typename Derived, typename NumberT >
 class NumberConvertible : public NumberConvertibleTag
 {
     static_assert(
-        std::is_arithmetic< NumberType >::value,
+        std::is_arithmetic< NumberT >::value,
         "Must represents as an integral or floating-point type" );
 
 public:
 
-    typedef NumberType NumberType;
+    typedef NumberT NumberType;
 
     /// Stream Operators ///
 

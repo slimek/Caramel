@@ -35,15 +35,17 @@ namespace Caramel
 //       break;
 //
 
-template< typename StateType, typename ClockType = SteadyClock< Float > >
+template< typename StateT, typename ClockType = SteadyClock< Float > >
 class FlowState
-    : public NumberConvertible< FlowState< StateType, ClockType >
-                              , typename NumberTraits< StateType >::NumberType >
-    , public boost::totally_ordered< FlowState< StateType, ClockType >
-                                   , StateType >
+    : public NumberConvertible< FlowState< StateT, ClockType >
+                              , typename NumberTraits< StateT >::NumberType >
+    , public boost::totally_ordered< FlowState< StateT, ClockType >
+                                   , StateT >
 {
 public:
     
+    typedef StateT StateType;
+
     explicit FlowState( StateType initialState );
 
 
@@ -67,6 +69,8 @@ public:
     //        
 
     StateType Current() const { return m_currentState; }
+
+    typedef typename NumberTraits< StateT >::NumberType NumberType;
 
     NumberType ToNumber() const { return static_cast< NumberType >( m_currentState ); }
 
@@ -92,7 +96,7 @@ public:
 
     //
     // Operators
-    // - Three operators are required by boost::totally_ordered< T, U >.
+    // - Three operators are required for boost::totally_ordered< T, U >.
     //
 
     Bool operator==( StateType state ) const { return m_currentState == state; }
@@ -121,8 +125,8 @@ private:
 // Implementation
 //
 
-template< typename StateType, typename ClockType >
-inline FlowState< StateType, ClockType >::FlowState( StateType initialState )
+template< typename StateT, typename ClockType >
+inline FlowState< StateT, ClockType >::FlowState( StateType initialState )
     : m_currentState( initialState )
     , m_nextState( initialState )
     , m_transitTime( ClockType::Now() )
@@ -132,16 +136,16 @@ inline FlowState< StateType, ClockType >::FlowState( StateType initialState )
 }
 
 
-template< typename StateType, typename ClockType >
-inline void FlowState< StateType, ClockType >::operator=( StateType newState )
+template< typename StateT, typename ClockType >
+inline void FlowState< StateT, ClockType >::operator=( StateType newState )
 {
     m_nextState = newState;
     m_toTransit = true;
 }
 
 
-template< typename StateType, typename ClockType >
-inline StateType FlowState< StateType, ClockType >::Update()
+template< typename StateT, typename ClockType >
+inline StateT FlowState< StateT, ClockType >::Update()
 {
     if ( m_toTransit )
     {

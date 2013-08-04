@@ -25,7 +25,7 @@ namespace Detail
 //
 
 template< typename T >
-struct NumberTraits_Fundamental
+struct NumberTraits_Arithmetic
 {
     typedef T NumberType;
 };
@@ -48,9 +48,9 @@ struct NumberTraitsSelect
 {
     typedef typename IfThenElse2T
     <
-        std::is_fundamental< T >::value, NumberTraits_Fundamental< T >,
-        std::is_enum< T >::value,        NumberTraits_Enum< T >,
-                                         EmptyType
+        std::is_arithmetic< T >::value, NumberTraits_Arithmetic< T >,
+        std::is_enum< T >::value,       NumberTraits_Enum< T >,
+                                        EmptyType
     >::Type TraitsType;
 };
 
