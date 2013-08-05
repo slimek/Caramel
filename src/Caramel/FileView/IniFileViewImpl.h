@@ -10,10 +10,15 @@
 #endif
 
 #include <Caramel/FileView/IniFileView.h>
+#include <Caramel/String/CainLess.h>
+#include <map>
 
 
 namespace Caramel
 {
+
+class IniSectionImpl;
+typedef std::shared_ptr< IniSectionImpl > IniSectionPtr;
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -22,6 +27,41 @@ namespace Caramel
 
 class IniFileViewImpl
 {
+    friend class IniFileView;
+
+public:
+
+    IniFileViewImpl();
+
+    void LoadFromText( TextReader& reader );
+
+
+    /// Section Management ///
+
+    void AddSection( const std::string& sectionName, const Utf8String& rawLine );
+
+    IniSectionPtr FindSection( const std::string& sectionName ) const;
+
+
+private:
+
+    /// Manipulators ///
+
+    void Clear();
+
+
+    /// Data Members ///
+
+    TextEncoding m_textEncoding;
+
+    IniSectionPtr m_currSection;
+
+    typedef std::map< std::string, IniSectionPtr, CainLess > SectionMap;
+    SectionMap m_sectionMap;
+
+    typedef std::vector< IniSectionPtr > SectionSeq;
+    SectionSeq m_sectionSeq;  // Keep the order of sections in the INI file.
+
 };
 
 

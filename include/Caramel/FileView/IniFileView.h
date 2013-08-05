@@ -58,8 +58,7 @@ public:
 
     Bool HasSection( const std::string& sectionName );
 
-    const IniSection* GetSection( const std::string& sectionName ) const;
-    IniSection*       GetSection( const std::string& sectionName );
+    IniSection GetSection( const std::string& sectionName );
 
 
 private:

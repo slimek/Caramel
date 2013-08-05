@@ -9,6 +9,8 @@
 #pragma once
 #endif
 
+#include <Caramel/String/Detail/StringCore.h>
+
 
 namespace Caramel
 {
@@ -20,7 +22,7 @@ namespace Caramel
 
 /// Primary Template ///
 
-template< typename CharType >
+template< typename CharT >
 struct CharTraits;
 
 
@@ -29,6 +31,9 @@ struct CharTraits;
 template<>
 struct CharTraits< Char > : public std::char_traits< Char >
 {
+    typedef Char CharType;
+    typedef Detail::StringCore CoreType;
+
     static const Char DOT_CHAR = '.';
 };
 
@@ -38,6 +43,9 @@ struct CharTraits< Char > : public std::char_traits< Char >
 template<>
 struct CharTraits< Wchar > : public std::char_traits< Wchar >
 {
+    typedef Wchar CharType;
+    typedef Detail::WstringCore CoreType;
+
     static const Wchar DOT_CHAR = '.';
 };
 

@@ -26,10 +26,22 @@ public:
     typedef String StringType;
     typedef Traits TraitsType;
 
+    typedef typename TraitsType::CharType CharType;
+
 
     /// Properties ///
 
     Bool IsEmpty() const { return m_string.empty(); }
+    Uint Length()  const { return m_string.length(); }
+
+    const CharType& operator[]( Uint pos ) const { return m_string[ pos ]; }
+
+
+    /// Extractors ///
+
+    Derived Substr( Uint start, Uint length ) const;
+
+    Derived Trim() const;
 
 
 protected:
@@ -58,6 +70,25 @@ template< typename Derived, typename String, typename Traits >
 inline BasicString< Derived, String, Traits >::BasicString( const String& s )
     : m_string( s )
 {
+}
+
+
+//
+// Extractors
+//
+
+template< typename Derived, typename String, typename Traits >
+inline Derived BasicString< Derived, String, Traits >::Substr( Uint start, Uint length ) const
+{
+    return Derived( m_string.substr( start, length ));
+}
+
+
+template< typename Derived, typename String, typename Traits >
+inline Derived BasicString< Derived, String, Traits >::Trim() const
+{
+    typedef typename Traits::CoreType Core;
+    return Derived( Core::Trim( m_string ));
 }
 
 

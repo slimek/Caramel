@@ -3,6 +3,7 @@
 #include <Caramel/CaramelPch.h>
 
 #include <Caramel/Functional/ScopeExit.h>
+#include <Caramel/String/Detail/StringCore.h>
 #include <Caramel/String/Sprintf.h>
 #include <Caramel/String/SprintfManager.h>
 #include <Caramel/String/Utf8String.h>
@@ -11,6 +12,7 @@
 #include <Caramel/Windows/WideString.h>
 #endif
 
+#include <boost/algorithm/string/trim.hpp>
 #include <codecvt>
 #include <cstdarg>
 #include <cstdio>
@@ -22,10 +24,11 @@ namespace Caramel
 //
 // Contents
 //
-// 1. Sprintf
-// 2. SprintfBuffer
-// 3. SprintfManager
-// 4. Utf8String
+//   Sprintf
+//   SprintfBuffer
+//   SprintfManager
+//   Utf8String
+//   Detail::StringCore
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -298,6 +301,22 @@ Utf8String& Utf8String::operator+=( const Utf8String& rhs )
     return *this;
 }
 
+
+namespace Detail
+{
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// String Core
+//
+
+std::string StringCore::Trim( const std::string& input )
+{
+    return boost::algorithm::trim_copy( input );
+}
+
+
+} // namespace Detail
 
 ///////////////////////////////////////////////////////////////////////////////
 

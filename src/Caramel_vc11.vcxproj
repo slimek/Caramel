@@ -30,6 +30,7 @@
     <ClInclude Include="..\include\Caramel\FileSystem\Path.h" />
     <ClInclude Include="..\include\Caramel\FileView\IniFileView.h" />
     <ClInclude Include="..\include\Caramel\FileView\IniSection.h" />
+    <ClInclude Include="..\include\Caramel\FileView\IniSyntax.h" />
     <ClInclude Include="..\include\Caramel\Functional\ScopeExit.h" />
     <ClInclude Include="..\include\Caramel\Io\FileStream.h" />
     <ClInclude Include="..\include\Caramel\Io\InputFileStream.h" />
@@ -37,6 +38,7 @@
     <ClInclude Include="..\include\Caramel\Io\TextReader.h" />
     <ClInclude Include="..\include\Caramel\Io\TextStreamReader.h" />
     <ClInclude Include="..\include\Caramel\Json\JsonValue.h" />
+    <ClInclude Include="..\include\Caramel\Lexical\Boolean.h" />
     <ClInclude Include="..\include\Caramel\Lexical\Integer.h" />
     <ClInclude Include="..\include\Caramel\Lexical\IntegerList.h" />
     <ClInclude Include="..\include\Caramel\Meta\IfThenElse.h" />
@@ -53,6 +55,7 @@
     <ClInclude Include="..\include\Caramel\String\CainLess.h" />
     <ClInclude Include="..\include\Caramel\String\CharTraits.h" />
     <ClInclude Include="..\include\Caramel\String\Detail\SprintfParameter.h" />
+    <ClInclude Include="..\include\Caramel\String\Detail\StringCore.h" />
     <ClInclude Include="..\include\Caramel\String\Inline\Sprintf_Sprintf.h" />
     <ClInclude Include="..\include\Caramel\String\Sprintf.h" />
     <ClInclude Include="..\include\Caramel\String\StringConvertible.h" />
@@ -68,6 +71,7 @@
     <ClInclude Include="Caramel\FileSystem\FileInfoImpl.h" />
     <ClInclude Include="Caramel\FileSystem\PathImpl.h" />
     <ClInclude Include="Caramel\FileView\IniFileViewImpl.h" />
+    <ClInclude Include="Caramel\FileView\IniSectionImpl.h" />
     <ClInclude Include="Caramel\Io\MbcsStreamReader.h" />
     <ClInclude Include="Caramel\Io\Utf16LeStreamReader.h" />
     <ClInclude Include="Caramel\Io\Utf8StreamReader.h" />

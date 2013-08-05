@@ -9,6 +9,9 @@
 #pragma once
 #endif
 
+#include <Caramel/String/Utf8String.h>
+#include <vector>
+
 
 namespace Caramel
 {
@@ -18,8 +21,46 @@ namespace Caramel
 // INI Section
 //
 
+class IniSectionImpl;
+
 class IniSection
 {
+    friend class IniFileView;
+
+public:
+
+    /// Value Accessors ///
+
+    Bool HasValue( const std::string& valueName ) const;
+
+
+    //
+    // Get Values 
+    // - These functions throw exceptions if ...
+    //   1. The value doesn't exist.
+    //   2. The value can't be converted to the type.
+    //
+
+    Bool   GetBoolValue ( const std::string& valueName ) const;
+    Int    GetIntValue  ( const std::string& valueName ) const;
+    Uint   GetUintValue ( const std::string& valueName ) const;
+    Float  GetFloatValue( const std::string& valueName ) const;
+    
+    Utf8String GetStringValue( const std::string& valueName) const;
+
+
+    //
+    // Get Array Values
+    //
+
+    std::vector< Utf8String > GetStringArrayValue( const std::string& valueName ) const;
+
+
+private:
+
+    explicit IniSection( std::shared_ptr< IniSectionImpl > impl );
+
+    std::shared_ptr< IniSectionImpl > m_impl;
 };
 
 

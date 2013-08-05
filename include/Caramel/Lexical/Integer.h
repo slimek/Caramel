@@ -9,6 +9,7 @@
 #pragma once
 #endif
 
+#include <Caramel/String/Utf8String.h>
 #include <type_traits>
 
 
@@ -25,12 +26,15 @@ namespace Lexical
 //   String must be decimal number.
 //
 
-template< typename ValueType >
+template< typename ValueT >
 class Integer
 {
-    static_assert( std::is_integral< ValueType >::value, "ValueType must be integral" );
+    static_assert( std::is_integral< ValueT >::value, "ValueT must be integral" );
 
 public:
+
+    typedef ValueT ValueType;
+
     Integer();
     explicit Integer( ValueType defaultValue );
 
@@ -48,6 +52,7 @@ public:
     //   or it is out of range.
     //
     Bool TryParse( const std::string& input );
+    Bool TryParse( const Utf8String& input );
 
 
 private:
@@ -61,19 +66,26 @@ private:
 // Implementations
 //
 
-template< typename ValueType >
-inline Integer< ValueType >::Integer()
+template< typename ValueT >
+inline Integer< ValueT >::Integer()
     : m_value( 0 )
     , m_outOfRange( false )
 {
 }
 
 
-template< typename ValueType >
-inline Integer< ValueType >::Integer( ValueType defaultValue )
+template< typename ValueT >
+inline Integer< ValueT >::Integer( ValueT defaultValue )
     : m_value( defaultValue )
     , m_outOfRange( false )
 {
+}
+
+
+template< typename ValueT >
+inline Bool Integer< ValueT >::TryParse( const Utf8String& input )
+{
+    return this->TryParse( input.ToString() );
 }
 
 

@@ -74,6 +74,9 @@ private:
 #define CARAMEL_NOT_IMPLEMENTED() \
     CARAMEL_THROW1( "Not Implemented" )
 
+#define CARAMEL_NOT_REACHED() \
+    CARAMEL_THROW1( "Not reached" )
+
 
 ///////////////////////////////////////////////////////////////////////////////
 

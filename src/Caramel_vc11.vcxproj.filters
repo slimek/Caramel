@@ -266,6 +266,18 @@
     <ClInclude Include="..\include\Caramel\Async\TimedBool.h">
       <Filter>1. Public Packages\Async</Filter>
     </ClInclude>
+    <ClInclude Include="Caramel\FileView\IniSectionImpl.h">
+      <Filter>2. Sources\FileView</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Lexical\Boolean.h">
+      <Filter>1. Public Packages\Lexical</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\FileView\IniSyntax.h">
+      <Filter>2. Sources\FileView</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\String\Detail\StringCore.h">
+      <Filter>1. Public Packages\String\Detail headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\CaramelPchCreator.cpp">
