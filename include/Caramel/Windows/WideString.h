@@ -31,7 +31,7 @@ namespace Windows
 
 class WideString : public BasicString< WideString, std::wstring, CharTraits< Wchar > >
 {
-    
+    friend class BasicString< WideString, std::wstring, CharTraits< Wchar > >;
 
 public:
 
@@ -42,6 +42,9 @@ public:
 
     std::string ToNarrow( TextEncoding encoding ) const;
 
+private:
+
+    std::wstring m_s;
 };
 
 

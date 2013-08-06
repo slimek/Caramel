@@ -102,14 +102,14 @@ Bool WideString::TryParse( const std::string& input, TextEncoding encoding )
 {
     if ( input.empty() )
     {
-        m_string.assign( std::wstring() );
+        m_s.assign( std::wstring() );
         return true;
     }
 
     if ( TEXT_ENCODING_UTF16_LE == encoding )
     {
         const Wchar* winput = reinterpret_cast< const Wchar* >( input.c_str() );
-        m_string.assign( winput, winput + input.length() / 2  );
+        m_s.assign( winput, winput + input.length() / 2  );
         return true;
     }
 
@@ -157,7 +157,7 @@ Bool WideString::TryParse( const std::string& input, TextEncoding encoding )
         return false;
     }
 
-    m_string.assign( &buffer[0] );
+    m_s.assign( &buffer[0] );
     return true;
 }
 
@@ -194,7 +194,7 @@ std::string WideString::ToNarrow( TextEncoding encoding ) const
 {
     CARAMEL_ASSERT( TEXT_ENCODING_UTF16_LE != encoding );
 
-    if ( m_string.empty() ) { return std::string(); }
+    if ( m_s.empty() ) { return std::string(); }
 
     if ( TEXT_ENCODING_WINDOWS_ACP == encoding )
     {
@@ -212,8 +212,8 @@ std::string WideString::ToNarrow( TextEncoding encoding ) const
         ::WideCharToMultiByte(
             encoding,            // code page
             0,
-            m_string.c_str(),
-            m_string.length() + 1,  // including the terminating '\0'
+            m_s.c_str(),
+            m_s.length() + 1,  // including the terminating '\0'
             NULL, 0, NULL, NULL
         );
 
@@ -224,12 +224,12 @@ std::string WideString::ToNarrow( TextEncoding encoding ) const
 
     std::string result;
 
-    DWORD errorCode = WideString_Encode( result, m_string, encoding, requiredSize );
+    DWORD errorCode = WideString_Encode( result, m_s, encoding, requiredSize );
     if ( ERROR_INSUFFICIENT_BUFFER == errorCode )
     {
         // Double the buffer and try again.
         
-        errorCode = WideString_Encode( result, m_string, encoding, requiredSize * 2 );
+        errorCode = WideString_Encode( result, m_s, encoding, requiredSize * 2 );
     }
 
     if ( S_OK != errorCode )

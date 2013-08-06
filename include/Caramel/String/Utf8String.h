@@ -32,7 +32,7 @@ class Utf8String : public BasicString< Utf8String, std::string, CharTraits< Char
                  , public StringConvertible< Utf8String >
                  , public boost::addable< Utf8String >
 {
-    typedef BasicString< Utf8String, std::string, CharTraits< Char > > Inherited;
+    friend class BasicString< Utf8String, std::string, CharTraits< Char > >;
 
 public:
     
@@ -75,16 +75,25 @@ public:
     Bool TryParse( const Byte* data, Uint length );
 
 
-    std::string ToString() const { return m_string; }
+    std::string ToString() const { return m_s; }
 
     // Cooperates with C-style functions
-    const Char* ToCstr() const { return m_string.c_str(); }
+    const Char* ToCstr() const { return m_s.c_str(); }
 
     // NOTE: No implicit conversion to std::string.
     //       Always use Utf8String as possible.
 
 
+private:
+    
+    /// Data Members ///
+
+    std::string m_s;
+
+
 #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+
+public:
 
     //
     // Windows Specific

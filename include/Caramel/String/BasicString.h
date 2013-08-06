@@ -18,6 +18,9 @@ namespace Caramel
 // Basic String
 //
 
+#define DERIVED_THIS  static_cast< Derived* >( this )
+#define CDERIVED_THIS static_cast< const Derived* >( this )
+
 template< typename Derived, typename String, typename Traits >
 class BasicString
 {
@@ -31,10 +34,10 @@ public:
 
     /// Properties ///
 
-    Bool IsEmpty() const { return m_string.empty(); }
-    Uint Length()  const { return m_string.length(); }
+    Bool IsEmpty() const { return CDERIVED_THIS->m_s.empty(); }
+    Uint Length()  const { return CDERIVED_THIS->m_s.length(); }
 
-    const CharType& operator[]( Uint pos ) const { return m_string[ pos ]; }
+    const CharType& operator[]( Uint pos ) const { return CDERIVED_THIS->m_s[ pos ]; }
 
 
     /// Extractors ///
@@ -46,35 +49,12 @@ public:
 
     void Trim();
 
-
-protected:
-
-    BasicString();
-    BasicString( const String& s );
-
-
-    /// Data Members ///
-
-    String m_string;
 };
 
 
 //
 // Implementation
 //
-
-template< typename Derived, typename String, typename Traits >
-inline BasicString< Derived, String, Traits >::BasicString()
-{
-}
-
-
-template< typename Derived, typename String, typename Traits >
-inline BasicString< Derived, String, Traits >::BasicString( const String& s )
-    : m_string( s )
-{
-}
-
 
 //
 // Extractors
@@ -83,7 +63,7 @@ inline BasicString< Derived, String, Traits >::BasicString( const String& s )
 template< typename Derived, typename String, typename Traits >
 inline Derived BasicString< Derived, String, Traits >::Substr( Uint start, Uint length ) const
 {
-    return Derived( m_string.substr( start, length ));
+    return Derived( CDERIVED_THIS->m_s.substr( start, length ));
 }
 
 
@@ -95,9 +75,12 @@ template< typename Derived, typename String, typename Traits >
 inline void BasicString< Derived, String, Traits >::Trim()
 {
     typedef typename Traits::CoreType Core;
-    Core::Trim( m_string );
+    Core::Trim( DERIVED_THIS->m_s );
 }
 
+
+#undef DERIVED_THIS
+#undef CDERIVED_THIS
 
 ///////////////////////////////////////////////////////////////////////////////
 

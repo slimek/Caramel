@@ -27,7 +27,7 @@ namespace Caramel
 class AnsiString : public BasicString< AnsiString, std::string, CharTraits< Char > >
                  , public StringConvertible< AnsiString >
 {
-    typedef BasicString< AnsiString, std::string, CharTraits< Char > > Inherited;
+    friend class BasicString< AnsiString, std::string, CharTraits< Char > >;
 
 public:
 
@@ -43,8 +43,14 @@ public:
 
     /// Conversions ///
 
-    operator std::string() const { return m_string; }
-    std::string ToString() const { return m_string; }
+    operator std::string() const { return m_s; }
+    std::string ToString() const { return m_s; }
+
+private:
+
+    /// Date Members ///
+
+    std::string m_s;
 
 };
 
@@ -59,18 +65,18 @@ AnsiString::AnsiString()
 
 
 AnsiString::AnsiString( const std::string& s )
-    : Inherited( s )
+    : m_s( s )
 {}
 
 
 AnsiString::AnsiString( const AnsiString& s )
-    : Inherited( s )
+    : m_s( s )
 {}
 
 
 template< Uint n >
 AnsiString::AnsiString( const Char(& sz)[n] )
-    : Inherited( std::string( sz, sz + n ))
+    : m_s( sz, sz + n )
 {}
 
 
