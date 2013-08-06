@@ -74,11 +74,7 @@ Path::Path( PathImpl* impl )
 
 
 Path::Path( const Utf8String& path )
-    #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
-    : m_impl( new PathImpl( boost::filesystem::path( path.ToWstring() )))
-    #else
-    : m_impl( new PathImpl( boost::filesystem::path( path.ToString() )))
-    #endif
+    : m_impl( new PathImpl( path ))
 {
 }
 
@@ -166,9 +162,17 @@ std::string Path::ToString()     const { return this->ToUtf8String().ToString();
 //
 // Combine
 //
-Path Path::Combine( const Path& subpath ) const
+void Path::Combine( const Path& subpath )
 {
-    return Path( new PathImpl( *m_impl / *subpath.m_impl ));
+    PathPtr temp = m_impl;
+    m_impl.reset( new PathImpl( *temp / *subpath.m_impl ));
+}
+
+
+Path& Path::operator/=( const Path& subpath )
+{
+    this->Combine( subpath );
+    return *this;
 }
 
 
@@ -176,16 +180,19 @@ Path Path::Combine( const Path& subpath ) const
 // Append Extension
 // - Whether or not the extension has a prefix '.', the result is append with just one '.'
 //
-Path Path::AppendExtension( const std::string& extension ) const
+void Path::AppendExtension( const std::string& extension )
 {
-    if ( extension.empty() ) { return *this; }
+    if ( extension.empty() ) { return; }
 
     const Utf8String u8Path( *this );
     const Utf8String u8Dot( '.' );
     const Utf8String u8Ext( extension );
 
-    return Path( '.' == extension[0] ? u8Path + u8Ext
-                                     : u8Path + u8Dot + u8Ext );
+    const Utf8String result = ( '.' == extension[0] )
+                            ? u8Path + u8Ext
+                            : u8Path + u8Dot + u8Ext;
+
+    m_impl.reset( new PathImpl( result ));
 }
 
 
@@ -197,6 +204,17 @@ PathImpl::PathImpl( boost::filesystem::path&& path )
     : boost::filesystem::path( path )
 {
 }
+
+
+PathImpl::PathImpl( const Utf8String& path )
+    #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+    : boost::filesystem::path( path.ToWstring() )
+    #else
+    : boost::filesystem::path( path.ToString() )
+    #endif
+{
+}
+
 
 
 ///////////////////////////////////////////////////////////////////////////////

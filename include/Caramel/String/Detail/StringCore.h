@@ -27,7 +27,7 @@ public:
 
     /// Algorithms ///
 
-    static std::string Trim( const std::string& input );
+    static void Trim( std::string& input );
 };
 
 

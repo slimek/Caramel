@@ -26,8 +26,11 @@ class PathImpl : public boost::filesystem::path
 public:
 
     explicit PathImpl( boost::filesystem::path&& path );
+    explicit PathImpl( const Utf8String& path );
     
 };
+
+typedef std::shared_ptr< PathImpl > PathPtr;
 
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -48,13 +48,14 @@ IniFileView::~IniFileView()
 
 void IniFileView::LoadFromFile( const Utf8String& fileName )
 {
-    const Path inputPath( fileName );
+    Path path( fileName );
+    
+    if ( ! path.HasExtension() )
+    {
+        path.AppendExtension( "ini" );
+    }
 
-    const Path fullPath = inputPath.HasExtension()
-                        ? inputPath
-                        : inputPath.AppendExtension( "ini" );
-
-    InputFileStream file( fullPath );
+    InputFileStream file( path );
     TextStreamReader reader( file );
 
     m_impl->LoadFromText( reader );
@@ -362,9 +363,10 @@ void IniSyntax::Parse()
         ++ pos;
     }
 
-    const Utf8String line = m_rawLine.Substr( 0, pos );
+    Utf8String line = m_rawLine.Substr( 0, pos );
+    line.Trim();
 
-    if ( line.Trim().IsEmpty() )
+    if ( line.IsEmpty() )
     {
         m_type = TYPE_BLANK;
         return;

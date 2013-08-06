@@ -11,6 +11,7 @@
 
 #include <Caramel/String/StringConvertible.h>
 #include <Caramel/String/Utf8String.h>
+#include <boost/operators.hpp>
 
 
 namespace Caramel
@@ -19,8 +20,7 @@ namespace Caramel
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Path
-// - Immutable
-//   Based on Boost.Filesystem library
+// - Based on Boost.Filesystem library
 //
 //   Used as function parameters in other FileSystem classes,
 //   Therefore it provides both std::string and const Char* constructors.
@@ -36,6 +36,7 @@ namespace Caramel
 class PathImpl;
 
 class Path : public StringConvertible< Path >
+           , public boost::dividable< Path >
 {
 public:
 
@@ -67,21 +68,18 @@ public:
 
 
     //
-    // Compositions
-    // - Don't change this object, return the result as a copy.
-    //
-
-    //
     // Combine
     // - Add separator between two paths if the first path doesn't end with a separator.
     //
-    Path Combine( const Path& subpath ) const;
+    void Combine( const Path& subpath );
+
+    Path& operator/=( const Path& subpath );
 
     //
     // Append Extension
     // - Whether or not the extension has a prefix '.', the result is append with just one '.'
     //
-    Path AppendExtension( const std::string& extension ) const;
+    void AppendExtension( const std::string& extension );
 
 
     //

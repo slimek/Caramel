@@ -41,7 +41,10 @@ public:
 
     Derived Substr( Uint start, Uint length ) const;
 
-    Derived Trim() const;
+
+    /// Manipulators ///
+
+    void Trim();
 
 
 protected:
@@ -84,11 +87,15 @@ inline Derived BasicString< Derived, String, Traits >::Substr( Uint start, Uint 
 }
 
 
+//
+// Manipulators
+//
+
 template< typename Derived, typename String, typename Traits >
-inline Derived BasicString< Derived, String, Traits >::Trim() const
+inline void BasicString< Derived, String, Traits >::Trim()
 {
     typedef typename Traits::CoreType Core;
-    return Derived( Core::Trim( m_string ));
+    Core::Trim( m_string );
 }
 
 

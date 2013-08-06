@@ -310,9 +310,9 @@ namespace Detail
 // String Core
 //
 
-std::string StringCore::Trim( const std::string& input )
+void StringCore::Trim( std::string& input )
 {
-    return boost::algorithm::trim_copy( input );
+    boost::algorithm::trim( input );
 }
 
 
