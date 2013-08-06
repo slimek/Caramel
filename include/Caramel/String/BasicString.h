@@ -40,9 +40,18 @@ public:
     const CharType& operator[]( Uint pos ) const { return CDERIVED_THIS->m_s[ pos ]; }
 
 
+    /// Predicates ///
+
+    Bool EndsWith( CharType c ) const;
+
+
     /// Extractors ///
 
+    Derived Substr( Uint start ) const;
     Derived Substr( Uint start, Uint length ) const;
+
+    Derived BeforeFirst( CharType c ) const;
+    Derived AfterFirst( CharType c ) const;
 
 
     /// Manipulators ///
@@ -52,18 +61,59 @@ public:
 };
 
 
+///////////////////////////////////////////////////////////////////////////////
 //
 // Implementation
 //
+
+//
+// Predicates
+//
+
+template< typename Derived, typename String, typename Traits >
+inline Bool BasicString< Derived, String, Traits >::EndsWith( CharType c ) const
+{
+    const std::string& s = CDERIVED_THIS->m_s;
+    if ( s.empty() ) { return false; }
+    return c == s[ s.length() - 1 ];
+}
+
 
 //
 // Extractors
 //
 
 template< typename Derived, typename String, typename Traits >
+inline Derived BasicString< Derived, String, Traits >::Substr( Uint start ) const
+{
+    return Derived( CDERIVED_THIS->m_s.substr( start ));
+}
+
+
+template< typename Derived, typename String, typename Traits >
 inline Derived BasicString< Derived, String, Traits >::Substr( Uint start, Uint length ) const
 {
     return Derived( CDERIVED_THIS->m_s.substr( start, length ));
+}
+
+
+template< typename Derived, typename String, typename Traits >
+inline Derived BasicString< Derived, String, Traits >::BeforeFirst( CharType c ) const
+{
+    const std::string& s = CDERIVED_THIS->m_s;
+    const Uint pos = s.find_first_of( c );
+    return std::string::npos == pos ? Derived( s )
+                                    : this->Substr( 0, pos );
+}
+
+
+template< typename Derived, typename String, typename Traits >
+inline Derived BasicString< Derived, String, Traits >::AfterFirst( CharType c ) const
+{
+    const std::string& s = CDERIVED_THIS->m_s;
+    const Uint pos = s.find_first_of( c );
+    return std::string::npos == pos ? Derived()
+                                    : this->Substr( pos + 1 );
 }
 
 
