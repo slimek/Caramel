@@ -164,6 +164,15 @@ std::string Path::ToString()     const { return this->ToUtf8String().ToString();
 //
 
 //
+// Combine
+//
+Path Path::Combine( const Path& subpath ) const
+{
+    return Path( new PathImpl( *m_impl / *subpath.m_impl ));
+}
+
+
+//
 // Append Extension
 // - Whether or not the extension has a prefix '.', the result is append with just one '.'
 //

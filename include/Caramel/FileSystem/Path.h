@@ -72,6 +72,12 @@ public:
     //
 
     //
+    // Combine
+    // - Add separator between two paths if the first path doesn't end with a separator.
+    //
+    Path Combine( const Path& subpath ) const;
+
+    //
     // Append Extension
     // - Whether or not the extension has a prefix '.', the result is append with just one '.'
     //
