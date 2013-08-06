@@ -45,8 +45,12 @@ public:
     Int    GetIntValue  ( const std::string& valueName ) const;
     Uint   GetUintValue ( const std::string& valueName ) const;
     Float  GetFloatValue( const std::string& valueName ) const;
-    
-    Utf8String GetStringValue( const std::string& valueName) const;
+
+    //
+    // Get String Value
+    // - If the value is quoted, the beginning and ending quotes would be removed.
+    //    
+    Utf8String GetStringValue( const std::string& valueName ) const;
 
 
     //

@@ -9,18 +9,28 @@
 #pragma once
 #endif
 
+#include <Caramel/Io/TextReader.h>
 #include <Caramel/String/Utf8String.h>
+#include <vector>
 
 
 namespace Caramel
 {
 
-///////////////////////////////////////////////////////////////////////////////
 //
 // INI Syntax
 //
+// There are two components here:
+// - INI Line
+// - INI Array
+//
 
-class IniSyntax
+///////////////////////////////////////////////////////////////////////////////
+//
+// INI Line
+//
+
+class IniLine
 {
 public:
 
@@ -30,10 +40,11 @@ public:
         TYPE_BLANK,    // Empty lines or comments
         TYPE_SECTION,
         TYPE_VALUE,
+        TYPE_ARRAY_BEGIN,
         TYPE_INVALID,
     };
 
-    explicit IniSyntax( const Utf8String& rawLine );
+    explicit IniLine( const Utf8String& rawLine );
 
     
     /// Properties ///
@@ -59,6 +70,43 @@ private:
     Utf8String  m_value;
     Int         m_valueBegin;
     Bool        m_quoted;
+};
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// INI Array
+//
+
+class IniArray
+{
+public:
+    
+    explicit IniArray( const Utf8String& firstRawLine );
+
+    Bool TryRead( TextReader& reader, Uint& lineNo );
+
+
+    /// Properties ///
+
+    std::vector< Utf8String > Values()   const { return m_values; }
+    std::vector< Utf8String > RawLines() const { return m_rawLines; }
+
+
+private:
+
+    Bool ParseLine( const Utf8String& rawLine, Uint& lineNo );
+
+
+    /// Data Members ///
+
+    Utf8String m_firstRawLine;
+
+    Bool m_failed;
+
+    std::vector< Utf8String > m_values;
+    std::vector< Utf8String > m_rawLines;
+
 };
 
 

@@ -13,6 +13,7 @@
 #include <Caramel/String/CainLess.h>
 #include <deque>
 #include <map>
+#include <vector>
 
 
 namespace Caramel
@@ -43,14 +44,23 @@ public:
 
     Utf8String GetStringValue( const std::string& valueName ) const;
 
+    std::vector< Utf8String > GetStringArrayValue( const std::string& valueName ) const;
+
 
     /// Value Manipulators ///
 
     void AddValue(
         const std::string& valueName, 
         const Utf8String&  value,
-        const Utf8String&  inputRawline
+        const Utf8String&  rawline
     );
+
+    void AddArrayValue(
+        const std::string& valueName,
+        const std::vector< Utf8String >& values,
+        const std::vector< Utf8String >& rawLines
+    );
+
 
 
 private:
@@ -80,6 +90,20 @@ private:
 
     typedef std::map< std::string, ValueEntry, CainLess > ValueMap;
     ValueMap m_values;
+
+
+    struct ArrayValueEntry
+    {
+        ArrayValueEntry()
+            : lastRawLineIndex( 0 )
+        {}
+
+        std::vector< Utf8String > values;
+        Uint lastRawLineIndex;
+    };
+
+    typedef std::map< std::string, ArrayValueEntry, CainLess > ArrayValueMap;
+    ArrayValueMap m_arrayValues;
 
 
     struct RawLineEntry
