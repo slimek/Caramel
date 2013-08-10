@@ -9,6 +9,7 @@
 #pragma once
 #endif
 
+#include <Caramel/Error/Detail/ExceptionCatcherCore.h>
 #include <Caramel/Error/Exception.h>
 #include <type_traits>
 
@@ -18,11 +19,11 @@ namespace Caramel
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Exception Catcher
+// Catch Exception & Exception Catcher
 //
 
 template< typename ResultT >
-class ExceptionCatcher
+class ExceptionCatcher : public Detail::ExceptionCatcherCore
 {
 public:
     
@@ -36,7 +37,27 @@ public:
 
 private:
 
+    template< typename Function >
+    void Invoke( Function f );
+
     ResultType m_result;
+};
+
+
+// Specialization of void Functions
+
+template<>
+class ExceptionCatcher< void > : public Detail::ExceptionCatcherCore
+{
+public:
+
+    template< typename Function >
+    ExceptionCatcher( Function f );
+
+private:
+
+    template< typename Function >
+    void Invoke( Function f );
 };
 
 
@@ -62,22 +83,81 @@ inline ExceptionCatcher< ResultT >::ExceptionCatcher( Function f )
 {
     try
     {
-        m_result = f();
+        this->Invoke( f );
     }
-    catch ( const Caramel::Exception& )
+    catch ( const Caramel::Exception& e )
     {
-        ;
+        this->OnCatchCaramelException( e );
     }
-    catch ( const std::exception& )
+    catch ( const std::exception& e )
     {
-        ;
+        this->OnCatchStdException( e );
     }
     catch ( ... )
     {
-        ;
+        this->OnCatchUnknown();
     }
 }
 
+
+template< typename Function >
+inline ExceptionCatcher< void >::ExceptionCatcher( Function f )
+{
+    try
+    {
+        this->Invoke( f );
+    }
+    catch ( const Caramel::Exception& e )
+    {
+        this->OnCatchCaramelException( e );
+    }
+    catch ( const std::exception& e )
+    {
+        this->OnCatchStdException( e );
+    }
+    catch ( ... )
+    {
+        this->OnCatchUnknown();
+    }
+}
+
+
+//
+// Windows Structured Exception Handling (SEH)
+//
+
+#if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+
+template< typename ResultT >
+template< typename Function >
+inline void ExceptionCatcher< ResultT >::Invoke( Function f )
+{
+    __try
+    {
+        m_result = f();
+    }
+    __except ( this->ExceptionFilter( GetExceptionInformation(), GetExceptionCode() ))
+    {
+        m_caught = true;
+    }
+}
+
+
+template< typename Function >
+inline void ExceptionCatcher< void >::Invoke( Function f )
+{
+    __try
+    {
+        f();
+    }
+    __except ( this->ExceptionFilter( GetExceptionInformation(), GetExceptionCode() ))
+    {
+        m_caught = true;
+    }
+}
+
+
+#endif // CARAMEL_SYSTEM_IS_WINDOWS
 
 ///////////////////////////////////////////////////////////////////////////////
 

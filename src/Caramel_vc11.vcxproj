@@ -25,6 +25,7 @@
     <ClInclude Include="..\include\Caramel\Chrono\Detail\SteadyClockCore.h" />
     <ClInclude Include="..\include\Caramel\Chrono\SteadyClock.h" />
     <ClInclude Include="..\include\Caramel\Error\Assert.h" />
+    <ClInclude Include="..\include\Caramel\Error\Detail\ExceptionCatcherCore.h" />
     <ClInclude Include="..\include\Caramel\Error\Exception.h" />
     <ClInclude Include="..\include\Caramel\Error\CatchException.h" />
     <ClInclude Include="..\include\Caramel\FileSystem\FileInfo.h" />

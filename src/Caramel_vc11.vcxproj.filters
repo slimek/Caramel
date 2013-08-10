@@ -102,6 +102,9 @@
     <Filter Include="1. Public Packages\Program">
       <UniqueIdentifier>{ff52e22e-0b27-4f0e-87cc-5dbba11b9ec6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\Error\Detail">
+      <UniqueIdentifier>{457395f5-7884-438a-be80-71b1fc0ab965}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -286,6 +289,9 @@
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Error\CatchException.h">
       <Filter>1. Public Packages\Error</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Error\Detail\ExceptionCatcherCore.h">
+      <Filter>1. Public Packages\Error\Detail</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
