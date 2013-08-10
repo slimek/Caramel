@@ -26,6 +26,7 @@
     <ClInclude Include="..\include\Caramel\Chrono\SteadyClock.h" />
     <ClInclude Include="..\include\Caramel\Error\Assert.h" />
     <ClInclude Include="..\include\Caramel\Error\Exception.h" />
+    <ClInclude Include="..\include\Caramel\Error\CatchException.h" />
     <ClInclude Include="..\include\Caramel\FileSystem\FileInfo.h" />
     <ClInclude Include="..\include\Caramel\FileSystem\Path.h" />
     <ClInclude Include="..\include\Caramel\FileView\IniFileView.h" />
@@ -48,6 +49,7 @@
     <ClInclude Include="..\include\Caramel\Numeric\NumberTraits.h" />
     <ClInclude Include="..\include\Caramel\Object\Detail\LifetimeTracker.h" />
     <ClInclude Include="..\include\Caramel\Object\Singleton.h" />
+    <ClInclude Include="..\include\Caramel\Program\ConsoleApplication.h" />
     <ClInclude Include="..\include\Caramel\Setup\Compiler.h" />
     <ClInclude Include="..\include\Caramel\Setup\System.h" />
     <ClInclude Include="..\include\Caramel\String\AnsiString.h" />
@@ -88,6 +90,7 @@
     <ClCompile Include="Caramel\Io.cpp" />
     <ClCompile Include="Caramel\Lexical.cpp" />
     <ClCompile Include="Caramel\Object.cpp" />
+    <ClCompile Include="Caramel\Program.cpp" />
     <ClCompile Include="Caramel\String.cpp" />
     <ClCompile Include="Caramel\Trace.cpp" />
     <ClCompile Include="Caramel\Windows.cpp" />

@@ -99,6 +99,9 @@
     <Filter Include="2. Sources\FileSystem">
       <UniqueIdentifier>{aa3087b5-7401-44cb-8a5b-a2e6eaf69ffa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\Program">
+      <UniqueIdentifier>{ff52e22e-0b27-4f0e-87cc-5dbba11b9ec6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -278,6 +281,12 @@
     <ClInclude Include="..\include\Caramel\String\Detail\StringCore.h">
       <Filter>1. Public Packages\String\Detail headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Program\ConsoleApplication.h">
+      <Filter>1. Public Packages\Program</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Error\CatchException.h">
+      <Filter>1. Public Packages\Error</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\CaramelPchCreator.cpp">
@@ -311,6 +320,9 @@
       <Filter>2. Sources</Filter>
     </ClCompile>
     <ClCompile Include="Caramel\FileSystem.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Caramel\Program.cpp">
       <Filter>2. Sources</Filter>
     </ClCompile>
   </ItemGroup>

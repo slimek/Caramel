@@ -2,10 +2,10 @@
 
 #include <Caramel/CaramelPch.h>
 
+#include <Caramel/Object/Singleton.h>
 #include <algorithm>
 #include <list>
 #include <mutex>
-#include <Caramel/Object/Singleton.h>
 
 
 namespace Caramel

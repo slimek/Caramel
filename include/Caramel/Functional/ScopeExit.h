@@ -18,7 +18,15 @@ namespace Caramel
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Scope Guard
+// Scope Exit & Scope Guard
+//
+// USAGE 1 - RAII :
+//
+//   After allocate a resource, call ScopeExit with the free function.
+//   This may ensure to release the resource when exiting the scope.
+//
+//     Resource* res = ResourceManager::Allocate();
+//     auto guard = ScopeExit( [ res ] { ResourceManager::Free( res ); } );
 //
 
 template< typename Function >
