@@ -293,6 +293,9 @@
     <ClInclude Include="..\include\Caramel\Error\Detail\ExceptionCatcherCore.h">
       <Filter>1. Public Packages\Error\Detail</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\String\Algorithm.h">
+      <Filter>1. Public Packages\String</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\CaramelPchCreator.cpp">

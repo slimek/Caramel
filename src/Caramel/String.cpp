@@ -3,6 +3,7 @@
 #include <Caramel/CaramelPch.h>
 
 #include <Caramel/Functional/ScopeExit.h>
+#include <Caramel/String/Algorithm.h>
 #include <Caramel/String/Detail/StringCore.h>
 #include <Caramel/String/Sprintf.h>
 #include <Caramel/String/SprintfManager.h>
@@ -28,6 +29,7 @@ namespace Caramel
 //   SprintfBuffer
 //   SprintfManager
 //   Utf8String
+//   Algorithm
 //   Detail::StringCore
 //
 
@@ -299,6 +301,44 @@ Utf8String& Utf8String::operator+=( const Utf8String& rhs )
 {
     m_s += rhs.m_s;
     return *this;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// String Algorithm
+//
+
+//
+// Predicates
+//
+
+Bool EndsWith( const std::string& s, Char c )
+{
+    if ( s.empty() ) { return false; }
+    return c == s[ s.length() - 1 ];
+}
+
+
+//
+// Extractors
+//
+
+std::string AfterFirst( const std::string& s, Char c )
+{
+    const Uint pos = s.find_first_of( c );
+    return std::string::npos == pos ? std::string()
+                                    : s.substr( pos + 1 );
+}
+
+
+//
+// Manipulators
+//
+
+void Trim( std::string& s )
+{
+    boost::algorithm::trim( s );
 }
 
 

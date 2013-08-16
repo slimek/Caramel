@@ -53,6 +53,7 @@
     <ClInclude Include="..\include\Caramel\Program\ConsoleApplication.h" />
     <ClInclude Include="..\include\Caramel\Setup\Compiler.h" />
     <ClInclude Include="..\include\Caramel\Setup\System.h" />
+    <ClInclude Include="..\include\Caramel\String\Algorithm.h" />
     <ClInclude Include="..\include\Caramel\String\AnsiString.h" />
     <ClInclude Include="..\include\Caramel\String\BasicString.h" />
     <ClInclude Include="..\include\Caramel\String\CainLess.h" />
