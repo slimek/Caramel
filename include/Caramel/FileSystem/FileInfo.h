@@ -10,7 +10,6 @@
 #endif
 
 #include <Caramel/FileSystem/Path.h>
-#include <Caramel/String/Utf8String.h>
 
 
 namespace Caramel
