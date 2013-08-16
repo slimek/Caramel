@@ -9,6 +9,7 @@
 #include <Caramel/Io/TextStreamReader.h>
 #include <Caramel/Lexical/Boolean.h>
 #include <Caramel/Lexical/Integer.h>
+#include <Caramel/String/Algorithm.h>
 #include <boost/tokenizer.hpp>
 #include <regex>
 
@@ -36,6 +37,15 @@ IniFileView::IniFileView()
 }
 
 
+IniFileView::IniFileView( const std::string& fileName )
+    : m_impl( new IniFileViewImpl )
+{
+    CARAMEL_CHECK_UTF8_ARGUMENT( u8FileName, fileName );
+
+    this->LoadFromFile( u8FileName );
+}
+
+
 IniFileView::IniFileView( const Utf8String& fileName )
     : m_impl( new IniFileViewImpl )
 {
@@ -45,6 +55,14 @@ IniFileView::IniFileView( const Utf8String& fileName )
 
 IniFileView::~IniFileView()
 {
+}
+
+
+void IniFileView::LoadFromFile( const std::string& fileName )
+{
+    CARAMEL_CHECK_UTF8_ARGUMENT( u8FileName, fileName );
+
+    this->LoadFromFile( u8FileName );
 }
 
 
@@ -96,10 +114,10 @@ IniFileViewImpl::IniFileViewImpl()
 void IniFileViewImpl::LoadFromText( TextReader& reader )
 {
     this->Clear();
-    this->AddSection( "", Utf8String() );
+    this->AddSection( "", "" );
 
     Uint lineNo = 0;
-    Utf8String rawLine;
+    std::string rawLine;
     while ( reader.ReadLine( rawLine ))
     {
         ++ lineNo;
@@ -159,7 +177,7 @@ void IniFileViewImpl::Clear()
 // Section Management
 //
 
-void IniFileViewImpl::AddSection( const std::string& sectionName, const Utf8String& rawLine )
+void IniFileViewImpl::AddSection( const std::string& sectionName, const std::string& rawLine )
 {
     SectionMap::iterator is = m_sectionMap.find( sectionName );
     if ( m_sectionMap.end() != is )
@@ -209,7 +227,7 @@ Bool IniSection::HasValue( const std::string& valueName ) const
 
 Bool IniSection::GetBoolValue( const std::string& valueName ) const
 {
-    const Utf8String value = m_impl->GetStringValue( valueName );
+    const std::string value = m_impl->GetStringValue( valueName );
 
     Lexical::Boolean bvalue;
     if ( bvalue.TryParse( value ))
@@ -224,7 +242,7 @@ Bool IniSection::GetBoolValue( const std::string& valueName ) const
 
 Int IniSection::GetIntValue( const std::string& valueName ) const
 {
-    const Utf8String value = m_impl->GetStringValue( valueName );
+    const std::string value = m_impl->GetStringValue( valueName );
 
     Lexical::Integer< Int > ivalue;
     if ( ivalue.TryParse( value ))
@@ -239,7 +257,7 @@ Int IniSection::GetIntValue( const std::string& valueName ) const
 
 Uint IniSection::GetUintValue( const std::string& valueName ) const
 {
-    const Utf8String value = m_impl->GetStringValue( valueName );
+    const std::string value = m_impl->GetStringValue( valueName );
 
     Lexical::Integer< Uint > uvalue;
     if ( uvalue.TryParse( value ))
@@ -258,13 +276,13 @@ Float IniSection::GetFloatValue( const std::string& valueName ) const
 }
 
 
-Utf8String IniSection::GetStringValue( const std::string& valueName ) const
+std::string IniSection::GetStringValue( const std::string& valueName ) const
 {
     return m_impl->GetStringValue( valueName );
 }
 
 
-std::vector< Utf8String > IniSection::GetStringArrayValue( const std::string& valueName ) const
+std::vector< std::string > IniSection::GetStringArrayValue( const std::string& valueName ) const
 {
     return m_impl->GetStringArrayValue( valueName );
 }
@@ -274,10 +292,10 @@ std::vector< Utf8String > IniSection::GetStringArrayValue( const std::string& va
 // Implementation
 //
 
-IniSectionImpl::IniSectionImpl( const std::string& name, const Utf8String& rawLine )
+IniSectionImpl::IniSectionImpl( const std::string& name, const std::string& rawLine )
     : m_name( name )
 {
-    if ( ! rawLine.IsEmpty() )
+    if ( ! rawLine.empty() )
     {
         this->AddRawLine( rawLine );
     }
@@ -295,7 +313,7 @@ Bool IniSectionImpl::HasValue( const std::string& valueName ) const
 }
 
 
-Utf8String IniSectionImpl::GetStringValue( const std::string& valueName ) const
+std::string IniSectionImpl::GetStringValue( const std::string& valueName ) const
 {
     ValueMap::const_iterator ivalue = m_values.find( valueName );
     if ( m_values.end() != ivalue )
@@ -306,12 +324,12 @@ Utf8String IniSectionImpl::GetStringValue( const std::string& valueName ) const
     ArrayValueMap::const_iterator iarray = m_arrayValues.find( valueName );
     if ( m_arrayValues.end() != iarray )
     {
-        const std::vector< Utf8String >& values = iarray->second.values;
+        const std::vector< std::string >& values = iarray->second.values;
         
-        if ( values.empty() ) { return Utf8String(); }
+        if ( values.empty() ) { return std::string(); }
 
-        Utf8String result = values[0];
-        const Utf8String sep( "," );
+        std::string result = values[0];
+        const std::string sep( "," );
         for ( Uint i = 1; i < values.size(); ++ i )
         {
             result += sep + values[i];
@@ -324,7 +342,7 @@ Utf8String IniSectionImpl::GetStringValue( const std::string& valueName ) const
 }
 
 
-std::vector< Utf8String > IniSectionImpl::GetStringArrayValue( const std::string& valueName ) const
+std::vector< std::string > IniSectionImpl::GetStringArrayValue( const std::string& valueName ) const
 {
     ArrayValueMap::const_iterator iarray = m_arrayValues.find( valueName );
     if ( m_arrayValues.end() != iarray )
@@ -340,7 +358,7 @@ std::vector< Utf8String > IniSectionImpl::GetStringArrayValue( const std::string
 //
 
 void IniSectionImpl::AddValue(
-    const std::string& valueName, const Utf8String& inputValue, const Utf8String& inputRawLine )
+    const std::string& valueName, const std::string& inputValue, const std::string& inputRawLine )
 {
     if ( this->HasValue( valueName ))
     {
@@ -363,8 +381,8 @@ void IniSectionImpl::AddValue(
 
 void IniSectionImpl::AddArrayValue(
     const std::string& valueName,
-    const std::vector< Utf8String >& inputValues,
-    const std::vector< Utf8String >& inputRawLines )
+    const std::vector< std::string >& inputValues,
+    const std::vector< std::string >& inputRawLines )
 {
     if ( this->HasValue( valueName ))
     {
@@ -385,7 +403,7 @@ void IniSectionImpl::AddArrayValue(
 }
 
 
-void IniSectionImpl::AddRawLine( const Utf8String& inputRawLine )
+void IniSectionImpl::AddRawLine( const std::string& inputRawLine )
 {
     RawLineEntry rawLine;
     rawLine.rawLine = inputRawLine;
@@ -399,11 +417,11 @@ void IniSectionImpl::AddRawLine( const Utf8String& inputRawLine )
 // INI Line
 //
 
-static Utf8String RemoveCommentsAndTrim( const Utf8String& rawLine )
+static std::string RemoveCommentsAndTrim( const std::string& rawLine )
 {
     Uint pos = 0;
     Bool quoted = false;
-    while ( pos < rawLine.Length() )
+    while ( pos < rawLine.length() )
     {
         const Char c = rawLine[ pos ];
         if (( ';' == c || '#' == c ) && ! quoted )
@@ -419,14 +437,14 @@ static Utf8String RemoveCommentsAndTrim( const Utf8String& rawLine )
         ++ pos;
     }
 
-    Utf8String line = rawLine.Substr( 0, pos );
-    line.Trim();
+    std::string line = rawLine.substr( 0, pos );
+    Trim( line );
 
     return line;
 }
 
 
-IniLine::IniLine( const Utf8String& rawLine )
+IniLine::IniLine( const std::string& rawLine )
     : m_rawLine( rawLine )
     , m_type( TYPE_UNDEF )
     , m_valueBegin( -1 )
@@ -438,18 +456,14 @@ IniLine::IniLine( const Utf8String& rawLine )
 
 void IniLine::Parse()
 {
-    const Utf8String line = RemoveCommentsAndTrim( m_rawLine );
+    const std::string line = RemoveCommentsAndTrim( m_rawLine );
     
-    if ( line.IsEmpty() )
+    if ( line.empty() )
     {
         m_type = TYPE_BLANK;
         return;
     }
 
-
-    // REMARKS: You can't pass a temporary variable to std::regex_match().
-    //          Therefore you need to copy line to a std::string before matching.
-    const std::string sline = line.ToString(); 
 
     std::smatch matches;
     const std::regex section    ( "\\[(.*)\\]" );
@@ -457,31 +471,31 @@ void IniLine::Parse()
     const std::regex quotedValue( "([^=\\s]*)\\s*=\\s*\"([^\"]*)\"" );
     const std::regex value      ( "([^=\\s]*)\\s*=\\s*([^\\s]*)" );
 
-    if ( std::regex_match( sline, matches, section ))
+    if ( std::regex_match( line, matches, section ))
     {
         m_type = TYPE_SECTION;
         m_name = matches[1];
     }
-    else if ( std::regex_match( sline, matches, arrayBegin ))
+    else if ( std::regex_match( line, matches, arrayBegin ))
     {
         m_type = TYPE_ARRAY_BEGIN;
         m_name = matches[1];
     }
-    else if ( std::regex_match( sline, matches, quotedValue ))
+    else if ( std::regex_match( line, matches, quotedValue ))
     {
         // REMARKS: You must match 'quotedValue' before 'value'.
 
         m_type = TYPE_VALUE;
         m_name = matches[1];
-        m_value = Utf8String( matches[2] );
+        m_value = matches[2];
         m_valueBegin = matches.position( 2 );
         m_quoted = true;
     }
-    else if ( std::regex_match( sline, matches, value ))
+    else if ( std::regex_match( line, matches, value ))
     {
         m_type = TYPE_VALUE;
         m_name = matches[1];
-        m_value = Utf8String( matches[2] );
+        m_value = matches[2];
         m_valueBegin = matches.position( 2 );
     }
     else
@@ -496,7 +510,7 @@ void IniLine::Parse()
 // INI Array
 //
 
-IniArray::IniArray( const Utf8String& firstRawLine )
+IniArray::IniArray( const std::string& firstRawLine )
     : m_firstRawLine( firstRawLine )
     , m_failed( false )
 {
@@ -505,12 +519,12 @@ IniArray::IniArray( const Utf8String& firstRawLine )
 
 Bool IniArray::TryRead( TextReader& reader, Uint& lineNo )
 {
-    const Utf8String line = RemoveCommentsAndTrim( m_firstRawLine );
-    const Utf8String values = line.AfterFirst( '{' );
+    const std::string line = RemoveCommentsAndTrim( m_firstRawLine );
+    const std::string values = AfterFirst( line, '{' );
 
     -- lineNo;  // The first raw line would be counted again.
 
-    Utf8String rawLine = values;
+    std::string rawLine = values;
     while ( this->ParseLine( values, lineNo ))
     {
         if ( ! reader.ReadLine( rawLine ))
@@ -523,20 +537,20 @@ Bool IniArray::TryRead( TextReader& reader, Uint& lineNo )
 }
 
 
-Bool IniArray::ParseLine( const Utf8String& rawLine, Uint& lineNo )
+Bool IniArray::ParseLine( const std::string& rawLine, Uint& lineNo )
 {
     ++ lineNo;
     m_rawLines.push_back( rawLine );
 
-    const Utf8String line = RemoveCommentsAndTrim( rawLine );
+    const std::string line = RemoveCommentsAndTrim( rawLine );
 
-    if ( ! ( line.EndsWith( ',' ) || line.EndsWith( '}' )))
+    if ( ! ( EndsWith( line, ',' ) || EndsWith( line, '}' )))
     {
         m_failed = true;
         return false;
     }
 
-    const std::string values = line.Substr( 0, line.Length() - 1 ).ToString();
+    const std::string values = line.substr( 0, line.length() - 1 );
 
     const boost::char_separator< Char > sep( "," );
     const boost::tokenizer< boost::char_separator< Char > > tokzer( values, sep );
@@ -544,12 +558,12 @@ Bool IniArray::ParseLine( const Utf8String& rawLine, Uint& lineNo )
 
     for ( Uint i = 0; i < tokens.size(); ++ i )
     {
-        Utf8String value( tokens[i] );
-        value.Trim();
+        std::string value( tokens[i] );
+        Trim( value );
         m_values.push_back( value );
     }
 
-    return ! line.EndsWith( '}' );
+    return ! EndsWith( line, '}' );
 }
 
 

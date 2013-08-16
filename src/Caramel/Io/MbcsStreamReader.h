@@ -33,7 +33,7 @@ public:
     // Implements TextReader
     //
 
-    Bool ReadLine( Utf8String& line );
+    Bool ReadLine( std::string& line );
 
 
 protected:

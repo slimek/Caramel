@@ -10,7 +10,6 @@
 #endif
 
 #include <Caramel/Io/TextReader.h>
-#include <Caramel/String/Utf8String.h>
 #include <vector>
 
 
@@ -44,7 +43,7 @@ public:
         TYPE_INVALID,
     };
 
-    explicit IniLine( const Utf8String& rawLine );
+    explicit IniLine( const std::string& rawLine );
 
     
     /// Properties ///
@@ -52,7 +51,7 @@ public:
     TypeValue Type() const { return m_type; }
 
     std::string Name()  const { return m_name; }
-    Utf8String  Value() const { return m_value; }
+    std::string Value() const { return m_value; }
 
 
 private:
@@ -62,12 +61,12 @@ private:
 
     /// Data Members ///
 
-    Utf8String m_rawLine;
+    std::string m_rawLine;
 
-    TypeValue m_type;
+    TypeValue   m_type;
 
     std::string m_name;
-    Utf8String  m_value;
+    std::string m_value;
     Int         m_valueBegin;
     Bool        m_quoted;
 };
@@ -82,30 +81,30 @@ class IniArray
 {
 public:
     
-    explicit IniArray( const Utf8String& firstRawLine );
+    explicit IniArray( const std::string& firstRawLine );
 
     Bool TryRead( TextReader& reader, Uint& lineNo );
 
 
     /// Properties ///
 
-    std::vector< Utf8String > Values()   const { return m_values; }
-    std::vector< Utf8String > RawLines() const { return m_rawLines; }
+    std::vector< std::string > Values()   const { return m_values; }
+    std::vector< std::string > RawLines() const { return m_rawLines; }
 
 
 private:
 
-    Bool ParseLine( const Utf8String& rawLine, Uint& lineNo );
+    Bool ParseLine( const std::string& rawLine, Uint& lineNo );
 
 
     /// Data Members ///
 
-    Utf8String m_firstRawLine;
+    std::string m_firstRawLine;
 
     Bool m_failed;
 
-    std::vector< Utf8String > m_values;
-    std::vector< Utf8String > m_rawLines;
+    std::vector< std::string > m_values;
+    std::vector< std::string > m_rawLines;
 
 };
 

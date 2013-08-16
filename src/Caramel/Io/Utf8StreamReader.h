@@ -30,7 +30,7 @@ public:
     // Implements TextReader ( Overwrites MbcsStreamReader )
     //
 
-    Bool ReadLine( Utf8String& line );
+    Bool ReadLine( std::string& line );
 
 
 private:

@@ -62,6 +62,14 @@ FileStream::~FileStream()
 }
 
 
+void FileStream::Open( const std::string& fileName )
+{
+    CARAMEL_CHECK_UTF8_ARGUMENT( u8FileName, fileName );
+
+    this->Open( u8FileName );
+}
+
+
 void FileStream::Open( const Utf8String& fileName )
 {
     if ( ! this->TryOpen( fileName ))
@@ -71,22 +79,30 @@ void FileStream::Open( const Utf8String& fileName )
 }
 
 
+Bool FileStream::TryOpen( const std::string& fileName )
+{
+    CARAMEL_CHECK_UTF8_ARGUMENT( u8FileName, fileName );
+
+    return this->TryOpen( u8FileName );
+}
+
 
 Bool FileStream::TryOpen( const Utf8String& fileName )
 {
     #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
     {
-        m_file = _wfopen( fileName.ToWstring().c_str(), m_openMode.ToWstring().c_str()  );
+        const Utf8String openMode( m_openMode );
+        m_file = _wfopen( fileName.ToWstring().c_str(), openMode.ToWstring().c_str() );
     }
     #else
     {
-        m_file = fopen( fileName.ToCstr(), m_openMode.ToCstr() );
+        m_file = fopen( fileName.ToCstr(), m_openMode.c_str() );
     }
     #endif
 
     if ( m_file )
     {
-        m_fileName = fileName;
+        m_fileName = fileName.ToString();
         return true;
     }
     else
@@ -243,16 +259,16 @@ void TextStreamReader::BuildReader( TextEncoding encoding )
 }
 
 
-Bool TextStreamReader::ReadLine( Utf8String& line )
+Bool TextStreamReader::ReadLine( std::string& line )
 {
     return m_reader->ReadLine( line );
 }
 
 
-Utf8String TextStreamReader::ReadAll()
+std::string TextStreamReader::ReadAll()
 {
     std::ostringstream builder;
-    Utf8String line;
+    std::string line;
     Bool firstLine = true;
 
     while ( this->ReadLine( line ))
@@ -269,7 +285,7 @@ Utf8String TextStreamReader::ReadAll()
         builder << line;
     }
 
-    return Utf8String( builder.str() );
+    return builder.str();
 }
 
 
@@ -286,18 +302,20 @@ MbcsStreamReader::MbcsStreamReader( InputStream& stream, TextEncoding encoding )
 }
 
 
-Bool MbcsStreamReader::ReadLine( Utf8String& line )
+Bool MbcsStreamReader::ReadLine( std::string& line )
 {
     if ( m_ended ) { return false; }
 
     const std::string chars = this->ReadCharLine();
 
-    const Bool encoded = line.TryParse( chars, m_encoding );
+    Utf8String u8Line;
+    const Bool encoded = u8Line.TryParse( chars, m_encoding );
     if ( ! encoded )
     {
         CARAMEL_THROW( "Convert from encoding %u failed", m_encoding );
     }
 
+    line = u8Line.ToString();
     return true;
 }
 
@@ -343,18 +361,20 @@ Utf8StreamReader::Utf8StreamReader( InputStream& stream )
 }
 
 
-Bool Utf8StreamReader::ReadLine( Utf8String& line )
+Bool Utf8StreamReader::ReadLine( std::string& line )
 {
     if ( m_ended ) { return false; }
 
     const std::string chars = this->ReadCharLine();
 
-    const Bool encoded = line.TryParse( chars );
+    Utf8String u8Line;
+    const Bool encoded = u8Line.TryParse( chars );
     if ( ! encoded )
     {
         CARAMEL_THROW( "Encoding is not UTF-8" );
     }
 
+    line = u8Line.ToString();
     return true;
 }
 
@@ -391,7 +411,7 @@ Utf16LeStreamReader::Utf16LeStreamReader( InputStream& stream )
 }
 
 
-Bool Utf16LeStreamReader::ReadLine( Utf8String& line )
+Bool Utf16LeStreamReader::ReadLine( std::string& line )
 {
     if ( m_ended ) { return false; }
 
@@ -418,12 +438,14 @@ Bool Utf16LeStreamReader::ReadLine( Utf8String& line )
         m_builder << c16[0] << c16[1];
     }
 
-    const Bool encoded = line.TryParse( m_builder.str(), TEXT_ENCODING_UTF16_LE );
+    Utf8String u8Line;
+    const Bool encoded = u8Line.TryParse( m_builder.str(), TEXT_ENCODING_UTF16_LE );
     if ( ! encoded )
     {
         CARAMEL_THROW( "Convert UTF-16 LE to UTF-8 failed" );
     }
 
+    line = u8Line.ToString();
     return true;
 }
 

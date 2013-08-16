@@ -30,7 +30,9 @@ class IniFileView
 public:
 
     IniFileView();
-    explicit IniFileView( const Utf8String& fileName );
+
+    explicit IniFileView( const std::string& fileName );
+    explicit IniFileView( const Utf8String&  fileName );
 
     ~IniFileView();
 
@@ -39,16 +41,20 @@ public:
     // Storage Operations
     //
 
-    void LoadFromFile( const Utf8String& fileName );
+    void LoadFromFile( const std::string& fileName );
+    void LoadFromFile( const Utf8String&  fileName );
+
     void LoadFromText( TextReader& reader );
 
-    void SaveToFile( const Utf8String& fileName, TextEncoding encoding );
+    void SaveToFile( const std::string& fileName, TextEncoding encoding );
+    void SaveToFile( const Utf8String&  fileName, TextEncoding encoding );
 
     //
     // Save to file with the encoding when the view is loaded.
     // If no file was loaded, the encoding would be UTF-8 with BOM.
     //
-    void SaveToFile( const Utf8String& fileName );
+    void SaveToFile( const std::string& fileName );
+    void SaveToFile( const Utf8String&  fileName );
 
 
     //

@@ -9,7 +9,6 @@
 #pragma once
 #endif
 
-#include <Caramel/String/Utf8String.h>
 #include <vector>
 
 
@@ -49,15 +48,16 @@ public:
     //
     // Get String Value
     // - If the value is quoted, the beginning and ending quotes would be removed.
+    //   The string is UTF-8 encoded.
     //    
-    Utf8String GetStringValue( const std::string& valueName ) const;
+    std::string GetStringValue( const std::string& valueName ) const;
 
 
     //
     // Get Array Values
     //
 
-    std::vector< Utf8String > GetStringArrayValue( const std::string& valueName ) const;
+    std::vector< std::string > GetStringArrayValue( const std::string& valueName ) const;
 
 
 private:

@@ -12,7 +12,6 @@
 #include <Caramel/Io/InputStream.h>
 #include <Caramel/Io/TextReader.h>
 #include <Caramel/String/TextEncoding.h>
-#include <Caramel/String/Utf8String.h>
 
 
 namespace Caramel
@@ -48,16 +47,16 @@ public:
 
 
     //
-    // Read Line
-    // - Returns false if EOF.
+    // Reads a line in UTF-8 encoded.
+    // Returns false if EOF.
     //
-    Bool ReadLine( Utf8String& line );
+    Bool ReadLine( std::string& line );
 
     //
-    // Read All
-    // - Read until the end of stream in a single string.
+    // Reads all data until the end of stream.
+    // Returns a string in UTF-8 encoded.
     //
-    Utf8String ReadAll();
+    std::string ReadAll();
 
 
 private:

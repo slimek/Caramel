@@ -38,7 +38,7 @@ public:
 
     /// Section Management ///
 
-    void AddSection( const std::string& sectionName, const Utf8String& rawLine );
+    void AddSection( const std::string& sectionName, const std::string& rawLine );
 
     IniSectionPtr FindSection( const std::string& sectionName ) const;
 

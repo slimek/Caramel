@@ -25,8 +25,11 @@ class FileStream
 {
 public:
 
-    void Open( const Utf8String& fileName );
-    Bool TryOpen( const Utf8String& fileName );
+    void Open( const std::string& fileName );
+    void Open( const Utf8String&  fileName );
+
+    Bool TryOpen( const std::string& fileName );
+    Bool TryOpen( const Utf8String&  fileName );
 
     void Close();
 
@@ -41,8 +44,8 @@ protected:
 
     FILE* m_file;
 
-    Utf8String m_openMode;
-    Utf8String m_fileName;
+    std::string m_openMode;
+    std::string m_fileName;
 
 };
 

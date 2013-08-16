@@ -30,7 +30,7 @@ class IniSectionImpl
 
 public:
     
-    IniSectionImpl( const std::string& name, const Utf8String& rawLine );
+    IniSectionImpl( const std::string& name, const std::string& rawLine );
 
 
     /// Properties ///
@@ -42,23 +42,23 @@ public:
 
     Bool HasValue( const std::string& valueName ) const;
 
-    Utf8String GetStringValue( const std::string& valueName ) const;
+    std::string GetStringValue( const std::string& valueName ) const;
 
-    std::vector< Utf8String > GetStringArrayValue( const std::string& valueName ) const;
+    std::vector< std::string > GetStringArrayValue( const std::string& valueName ) const;
 
 
     /// Value Manipulators ///
 
     void AddValue(
         const std::string& valueName, 
-        const Utf8String&  value,
-        const Utf8String&  rawline
+        const std::string& value,
+        const std::string& rawline
     );
 
     void AddArrayValue(
         const std::string& valueName,
-        const std::vector< Utf8String >& values,
-        const std::vector< Utf8String >& rawLines
+        const std::vector< std::string >& values,
+        const std::vector< std::string >& rawLines
     );
 
 
@@ -69,7 +69,7 @@ private:
     // Manipulations
     //
 
-    void AddRawLine( const Utf8String& rawLine );
+    void AddRawLine( const std::string& rawLine );
 
 
     //
@@ -84,8 +84,8 @@ private:
             : rawLineIndex( 0 )
         {}
 
-        Utf8String value;
-        Uint       rawLineIndex;
+        std::string value;
+        Uint        rawLineIndex;
     };
 
     typedef std::map< std::string, ValueEntry, CainLess > ValueMap;
@@ -98,7 +98,7 @@ private:
             : lastRawLineIndex( 0 )
         {}
 
-        std::vector< Utf8String > values;
+        std::vector< std::string > values;
         Uint lastRawLineIndex;
     };
 
@@ -108,7 +108,7 @@ private:
 
     struct RawLineEntry
     {
-        Utf8String  rawLine;
+        std::string rawLine;
         std::string valueName;
     };
 

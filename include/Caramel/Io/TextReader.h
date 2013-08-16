@@ -9,8 +9,6 @@
 #pragma once
 #endif
 
-#include <Caramel/String/Utf8String.h>
-
 
 namespace Caramel
 {
@@ -26,10 +24,10 @@ struct TextReader
     virtual ~TextReader() {}
 
     //
-    // Read Line
-    // - Returns false if EOF.
+    // Read a line in UTF-8 encoded.
+    // Returns false if EOF.
     //
-    virtual Bool ReadLine( Utf8String& line ) = 0;
+    virtual Bool ReadLine( std::string& line ) = 0;
 
 };
 
