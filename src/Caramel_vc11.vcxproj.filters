@@ -119,9 +119,6 @@
     <ClInclude Include="..\include\Caramel\String\Sprintf.h">
       <Filter>1. Public Packages\String</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\String\BasicString.h">
-      <Filter>1. Public Packages\String</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Caramel\String\CharTraits.h">
       <Filter>1. Public Packages\String</Filter>
     </ClInclude>
@@ -157,9 +154,6 @@
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Object\Detail\LifetimeTracker.h">
       <Filter>1. Public Packages\Object\Detail headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Caramel\String\AnsiString.h">
-      <Filter>1. Public Packages\String</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\String\Detail\SprintfParameter.h">
       <Filter>1. Public Packages\String\Detail headers</Filter>

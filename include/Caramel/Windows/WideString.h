@@ -12,8 +12,6 @@
 
 #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
 
-#include <Caramel/String/BasicString.h>
-#include <Caramel/String/CharTraits.h>
 #include <Caramel/String/TextEncoding.h>
 
 
@@ -29,10 +27,8 @@ namespace Windows
 // - A UTF-16 LE string based on std::wstring.
 //
 
-class WideString : public BasicString< WideString, std::wstring, CharTraits< Wchar > >
+class WideString
 {
-    friend class BasicString< WideString, std::wstring, CharTraits< Wchar > >;
-
 public:
 
     WideString();

@@ -10,8 +10,6 @@
 #endif
 
 #include <Caramel/Error/Exception.h>
-#include <Caramel/String/BasicString.h>
-#include <Caramel/String/CharTraits.h>
 #include <Caramel/String/StringConvertible.h>
 #include <Caramel/String/TextEncoding.h>
 #include <boost/operators.hpp>
@@ -29,26 +27,24 @@ namespace Caramel
 //   This is the default string type of all Caramel I/O components.
 //
 
-class Utf8String : public BasicString< Utf8String, std::string, CharTraits< Char > >
-                 , public StringConvertible< Utf8String >
+class Utf8String : public StringConvertible< Utf8String >
                  , public boost::addable< Utf8String >
 {
-    friend class BasicString< Utf8String, std::string, CharTraits< Char > >;
-
 public:
     
     Utf8String();
 
     explicit Utf8String( Char c );
 
+    //
     // Throws if 'text' is not UTF-8 encoded.
+    //
     explicit Utf8String( const std::string& u8Text );
 
     //
     // Construct from another coding
     // - Throws if 'text' can't be converted to UTF-8 by the specified encoding.
     //
-
     Utf8String( const std::string& text, TextEncoding encoding );
 
 
@@ -62,17 +58,20 @@ public:
     //
     // Conversions
     //
-    
+
     //
-    // Returns whether the input string is UTF-8 encoded.
-    // NOTES: An ASCII string would also satisfy the UTF-8 rule. 
+    // Tests if the input string is UTF-8 encoded    
     //
     Bool TryParse( const std::string& u8Text );
 
-    // convert from other encoding
+    //
+    // Converts from other encoding
+    //
     Bool TryParse( const std::string& text, TextEncoding encoding );
 
-    // convert from binary data, which should be a UTF-8 text.
+    //
+    // Converts from binary data, which should be a UTF-8 text
+    //
     Bool TryParse( const Byte* data, Uint length );
 
 
