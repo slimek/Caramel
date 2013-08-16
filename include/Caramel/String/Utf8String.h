@@ -9,6 +9,7 @@
 #pragma once
 #endif
 
+#include <Caramel/Error/Exception.h>
 #include <Caramel/String/BasicString.h>
 #include <Caramel/String/CharTraits.h>
 #include <Caramel/String/StringConvertible.h>
@@ -119,8 +120,21 @@ public:
 };
 
 
-///////////////////////////////////////////////////////////////////////////////
-
 } // namespace Caramel
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Macros
+//
+
+#define CARAMEL_CHECK_UTF8_ARGUMENT( u8str, str ) \
+    Caramel::Utf8String u8str; \
+    if ( ! u8str.TryParse( str )) \
+    { \
+        CARAMEL_THROW( #str " is not UTF-8 encoded" ); \
+    }
+
+
+///////////////////////////////////////////////////////////////////////////////
 
 #endif // __CARAMEL_STRING_UTF8_STRING_H
