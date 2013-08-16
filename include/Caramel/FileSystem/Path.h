@@ -45,9 +45,8 @@ public:
     Path( const Utf8String& u8path );
 
     //
-    // Construct from OS default encoding
+    // Throws if the path is not UTF-8 encoded.
     //
-
     Path( const std::string& path );
     Path( const Char* path );
 
@@ -69,32 +68,34 @@ public:
 
 
     //
-    // Combine
+    // Combine two path with native separator.
     // - Add separator between two paths if the first path doesn't end with a separator.
     //
     void Combine( const Path& subpath );
 
     Path& operator/=( const Path& subpath );
 
+
     //
-    // Append Extension
-    // - Whether or not the extension has a prefix '.', the result is append with just one '.'
+    // Manipulators
     //
+
+    // Whether or not the extension has a prefix '.', the result is append with just one '.'
     void AppendExtension( const std::string& extension );
 
-    // Insert a suffix after the stem.
+    // Insert a suffix after the stem, that is, before the last '.' character.
     void InsertStemSuffix( const std::string& suffix );
 
 
     //
     // Conversion
-    // - Path always can be converted to UTF-8 string.
+    // - Returns in UTF-8 string.
     //
 
-    operator   Utf8String()   const;
-    Utf8String ToUtf8String() const;
+    operator std::string() const;
+    std::string ToString() const;
 
-    std::string ToString()    const;
+    Utf8String ToUtf8String() const;
 
 
 #if defined( CARAMEL_SYSTEM_IS_WINDOWS )

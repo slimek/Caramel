@@ -86,14 +86,18 @@ Path::Path( const Utf8String& path )
 //
 
 Path::Path( const std::string& path )
-    : m_impl( new PathImpl( boost::filesystem::path( path )))
 {
+    CARAMEL_CHECK_UTF8_ARGUMENT( u8Path, path );
+
+    m_impl.reset( new PathImpl( u8Path ));
 }
 
 
 Path::Path( const Char* path )
-    : m_impl( new PathImpl( boost::filesystem::path( path )))
 {
+    CARAMEL_CHECK_UTF8_ARGUMENT( u8Path, path );
+
+    m_impl.reset( new PathImpl( u8Path ));
 }
 
 
@@ -147,22 +151,9 @@ Bool Path::HasExtension() const { return m_impl->has_extension(); }
 
 
 //
-// Conversions
-//
-
-Path::operator Utf8String() const { return this->ToUtf8String(); }
-
-Utf8String  Path::ToUtf8String() const { return Utf8String( m_impl->native() ); }
-std::string Path::ToString()     const { return this->ToUtf8String().ToString(); }
-
-
-//
-// Compositions
-//
-
-//
 // Combine
 //
+
 void Path::Combine( const Path& subpath )
 {
     PathPtr temp = m_impl;
@@ -178,22 +169,20 @@ Path& Path::operator/=( const Path& subpath )
 
 
 //
-// Append Extension
-// - Whether or not the extension has a prefix '.', the result is append with just one '.'
+// Manipulators
 //
+
 void Path::AppendExtension( const std::string& extension )
 {
     if ( extension.empty() ) { return; }
 
-    const Utf8String u8Path( *this );
-    const Utf8String u8Dot( '.' );
-    const Utf8String u8Ext( extension );
+    const std::string path = this->ToString();
 
-    const Utf8String result = ( '.' == extension[0] )
-                            ? u8Path + u8Ext
-                            : u8Path + u8Dot + u8Ext;
+    const std::string result = ( '.' == extension[0] )
+                             ? path + extension
+                             : path + '.' + extension;
 
-    m_impl.reset( new PathImpl( result ));
+    m_impl.reset( new PathImpl( Utf8String( result )));
 }
 
 
@@ -201,17 +190,26 @@ void Path::InsertStemSuffix( const std::string& suffix )
 {
     if ( suffix.empty() ) { return; }
 
-    const Path dir( this->Directory() );
-    const Path ext( this->Extension() );
+    const Path dir = this->Directory();
+    const Path ext = this->Extension();
 
-    const Utf8String newStemStr = this->Stem() + Utf8String( suffix );
-    const Path newStem( newStemStr );
+    const std::string newStem = this->Stem().ToString() + suffix;
 
-    Path result = dir / newStem;
+    Path result = dir / Path( newStem );
     result.AppendExtension( ext.ToString() );
 
     *this = result;
 }
+
+
+//
+// Conversions
+//
+
+Utf8String Path::ToUtf8String() const { return Utf8String( m_impl->native() ); }
+
+Path::operator std::string() const { return this->ToUtf8String().ToString(); }
+std::string Path::ToString() const { return this->ToUtf8String().ToString(); }
 
 
 //

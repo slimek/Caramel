@@ -11,6 +11,7 @@
 
 #include <Caramel/Io/FileStream.h>
 #include <Caramel/Io/InputStream.h>
+#include <Caramel/FileSystem/Path.h>
 #include <Caramel/String/Utf8String.h>
 
 
@@ -31,6 +32,7 @@ public:
 
     explicit InputFileStream( const std::string& fileName );
     explicit InputFileStream( const Utf8String&  fileName );
+    explicit InputFileStream( const Path&        fileName );
 
 
     //

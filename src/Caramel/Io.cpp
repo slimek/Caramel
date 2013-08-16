@@ -137,10 +137,26 @@ InputFileStream::InputFileStream()
 }
 
 
+InputFileStream::InputFileStream( const std::string& fileName )
+    : FileStream( "rb" )
+{
+    CARAMEL_CHECK_UTF8_ARGUMENT( u8FileName, fileName );
+
+    this->Open( u8FileName );
+}
+
+
 InputFileStream::InputFileStream( const Utf8String& fileName )
     : FileStream( "rb" )
 {
     this->Open( fileName );
+}
+
+
+InputFileStream::InputFileStream( const Path& fileName )
+    : FileStream( "rb" )
+{
+    this->Open( fileName.ToUtf8String() );
 }
 
 
