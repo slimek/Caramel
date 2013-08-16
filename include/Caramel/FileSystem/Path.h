@@ -56,6 +56,7 @@ public:
     // Splits
     //
 
+    Path Directory() const;
     Path Stem()      const;
     Path Extension() const;
 
@@ -80,6 +81,9 @@ public:
     // - Whether or not the extension has a prefix '.', the result is append with just one '.'
     //
     void AppendExtension( const std::string& extension );
+
+    // Insert a suffix after the stem.
+    void InsertStemSuffix( const std::string& suffix );
 
 
     //

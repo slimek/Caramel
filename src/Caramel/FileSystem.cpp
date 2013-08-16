@@ -134,6 +134,7 @@ std::wstring Path::ToWstring() const
 // Splits
 //
 
+Path Path::Directory() const { return Path( new PathImpl( m_impl->parent_path() )); }
 Path Path::Stem()      const { return Path( new PathImpl( m_impl->stem() )); }
 Path Path::Extension() const { return Path( new PathImpl( m_impl->extension() )); }
 
@@ -193,6 +194,23 @@ void Path::AppendExtension( const std::string& extension )
                             : u8Path + u8Dot + u8Ext;
 
     m_impl.reset( new PathImpl( result ));
+}
+
+
+void Path::InsertStemSuffix( const std::string& suffix )
+{
+    if ( suffix.empty() ) { return; }
+
+    const Path dir( this->Directory() );
+    const Path ext( this->Extension() );
+
+    const Utf8String newStemStr = this->Stem() + Utf8String( suffix );
+    const Path newStem( newStemStr );
+
+    Path result = dir / newStem;
+    result.AppendExtension( ext.ToString() );
+
+    *this = result;
 }
 
 
