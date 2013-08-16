@@ -4,7 +4,6 @@
 
 #include <Caramel/Functional/ScopeExit.h>
 #include <Caramel/String/Algorithm.h>
-#include <Caramel/String/Detail/StringCore.h>
 #include <Caramel/String/Sprintf.h>
 #include <Caramel/String/SprintfManager.h>
 #include <Caramel/String/Utf8String.h>
@@ -30,7 +29,6 @@ namespace Caramel
 //   SprintfManager
 //   Utf8String
 //   Algorithm
-//   Detail::StringCore
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -341,22 +339,6 @@ void Trim( std::string& s )
     boost::algorithm::trim( s );
 }
 
-
-namespace Detail
-{
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// String Core
-//
-
-void StringCore::Trim( std::string& input )
-{
-    boost::algorithm::trim( input );
-}
-
-
-} // namespace Detail
 
 ///////////////////////////////////////////////////////////////////////////////
 

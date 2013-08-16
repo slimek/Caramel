@@ -57,7 +57,6 @@
     <ClInclude Include="..\include\Caramel\String\CainLess.h" />
     <ClInclude Include="..\include\Caramel\String\CharTraits.h" />
     <ClInclude Include="..\include\Caramel\String\Detail\SprintfParameter.h" />
-    <ClInclude Include="..\include\Caramel\String\Detail\StringCore.h" />
     <ClInclude Include="..\include\Caramel\String\Inline\Sprintf_Sprintf.h" />
     <ClInclude Include="..\include\Caramel\String\Sprintf.h" />
     <ClInclude Include="..\include\Caramel\String\StringConvertible.h" />

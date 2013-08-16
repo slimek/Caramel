@@ -24,7 +24,6 @@ namespace Caramel
 // - A specialized string in UTF-8 encoding.
 //   All constructors and assignment would checking the encoding to ensure
 //   the input text is correct UTF-8 encoded.
-//   This is the default string type of all Caramel I/O components.
 //
 
 class Utf8String : public StringConvertible< Utf8String >
