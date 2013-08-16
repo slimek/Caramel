@@ -9,8 +9,6 @@
 #pragma once
 #endif
 
-#include <Caramel/String/Utf8String.h>
-
 
 namespace Caramel
 {
@@ -47,7 +45,6 @@ public:
     //   Otherwise returns false
     //
     Bool TryParse( const std::string& input );
-    Bool TryParse( const Utf8String& input );
 
 
 private:
@@ -69,12 +66,6 @@ inline Boolean::Boolean()
 inline Boolean::Boolean( Bool defaultValue )
     : m_value( defaultValue )
 {
-}
-
-
-inline Bool Boolean::TryParse( const Utf8String& input )
-{
-    return this->TryParse( input.ToString() );
 }
 
 

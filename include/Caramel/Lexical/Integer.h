@@ -9,7 +9,6 @@
 #pragma once
 #endif
 
-#include <Caramel/String/Utf8String.h>
 #include <type_traits>
 
 
@@ -52,7 +51,6 @@ public:
     //   or it is out of range.
     //
     Bool TryParse( const std::string& input );
-    Bool TryParse( const Utf8String& input );
 
 
 private:
@@ -79,13 +77,6 @@ inline Integer< ValueT >::Integer( ValueT defaultValue )
     : m_value( defaultValue )
     , m_outOfRange( false )
 {
-}
-
-
-template< typename ValueT >
-inline Bool Integer< ValueT >::TryParse( const Utf8String& input )
-{
-    return this->TryParse( input.ToString() );
 }
 
 
