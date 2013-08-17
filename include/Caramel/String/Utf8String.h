@@ -41,7 +41,7 @@ public:
     explicit Utf8String( const std::string& u8Text );
 
     //
-    // Construct from another coding
+    // Construct from another encoding
     // - Throws if 'text' can't be converted to UTF-8 by the specified encoding.
     //
     Utf8String( const std::string& text, TextEncoding encoding );
@@ -79,8 +79,8 @@ public:
     // Cooperates with C-style functions
     const Char* ToCstr() const { return m_s.c_str(); }
 
-    // NOTE: No implicit conversion to std::string.
-    //       Always use Utf8String as possible.
+    // NOTE: No implicit conversion to std::string,
+    //       which may cause overloading ambiguity.
 
 
 private:

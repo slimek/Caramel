@@ -153,13 +153,6 @@ InputFileStream::InputFileStream( const Utf8String& fileName )
 }
 
 
-InputFileStream::InputFileStream( const Path& fileName )
-    : FileStream( "rb" )
-{
-    this->Open( fileName.ToUtf8String() );
-}
-
-
 Uint InputFileStream::Read( Void* buffer, Uint size )
 {
     CARAMEL_ASSERT( m_file );

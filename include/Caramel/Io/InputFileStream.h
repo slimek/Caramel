@@ -32,7 +32,6 @@ public:
 
     explicit InputFileStream( const std::string& fileName );
     explicit InputFileStream( const Utf8String&  fileName );
-    explicit InputFileStream( const Path&        fileName );
 
 
     //
