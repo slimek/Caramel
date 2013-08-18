@@ -2,6 +2,7 @@
 
 #include <Caramel/CaramelPch.h>
 
+#include <Caramel/FileSystem/DirectoryInfoImpl.h>
 #include <Caramel/FileSystem/FileInfoImpl.h>
 #include <Caramel/FileSystem/PathImpl.h>
 
@@ -12,9 +13,37 @@ namespace Caramel
 //
 // Contents
 //
+//   DirectoryInfo
 //   FileInfo
 //   Path
 //
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Directory Info
+//
+
+DirectoryInfo::DirectoryInfo( const Path& path )
+    : m_impl( new DirectoryInfoImpl( *( path.m_impl )))
+{
+}
+
+
+DirectoryInfo::~DirectoryInfo()
+{
+}
+
+
+//
+// Implementations
+//
+
+DirectoryInfoImpl::DirectoryInfoImpl( const boost::filesystem::path& path )
+    : m_path( path )
+    , m_status( boost::filesystem::status( path ))
+{
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //

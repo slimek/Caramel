@@ -28,6 +28,7 @@
     <ClInclude Include="..\include\Caramel\Error\Detail\ExceptionCatcherCore.h" />
     <ClInclude Include="..\include\Caramel\Error\Exception.h" />
     <ClInclude Include="..\include\Caramel\Error\CatchException.h" />
+    <ClInclude Include="..\include\Caramel\FileSystem\DirectoryInfo.h" />
     <ClInclude Include="..\include\Caramel\FileSystem\FileInfo.h" />
     <ClInclude Include="..\include\Caramel\FileSystem\Path.h" />
     <ClInclude Include="..\include\Caramel\FileView\IniFileView.h" />
@@ -68,6 +69,7 @@
     <ClInclude Include="..\include\Caramel\Windows\WideString.h" />
     <ClInclude Include="Caramel\CaramelPch.h" />
     <ClInclude Include="Caramel\Chrono\ChronoManager.h" />
+    <ClInclude Include="Caramel\FileSystem\DirectoryInfoImpl.h" />
     <ClInclude Include="Caramel\FileSystem\FileInfoImpl.h" />
     <ClInclude Include="Caramel\FileSystem\PathImpl.h" />
     <ClInclude Include="Caramel\FileView\IniFileViewImpl.h" />

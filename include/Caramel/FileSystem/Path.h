@@ -38,6 +38,9 @@ class PathImpl;
 class Path : public StringConvertible< Path >
            , public boost::dividable< Path >
 {
+    friend class DirectoryInfo;
+    friend class FileInfo;
+
 public:
 
     Path();
@@ -123,8 +126,6 @@ private:
     explicit Path( PathImpl* impl );
 
     std::shared_ptr< PathImpl > m_impl;
-
-    friend class FileInfo;
 };
 
 

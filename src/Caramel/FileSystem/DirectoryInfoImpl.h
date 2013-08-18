@@ -1,7 +1,7 @@
-// Caramel C++ Library - File System Facility - File Info Private Header
+// Caramel C++ Library - File System Facility - Directory Info Private Header
 
-#ifndef __CARAMEL_FILE_SYSTEM_FILE_INFO_IMPL_H
-#define __CARAMEL_FILE_SYSTEM_FILE_INFO_IMPL_H
+#ifndef __CARAMEL_FILE_SYSTEM_DIRECTORY_INFO_IMPL_H
+#define __CARAMEL_FILE_SYSTEM_DIRECTORY_INFO_IMPL_H
 
 #include <Caramel/Caramel.h>
 
@@ -9,7 +9,7 @@
 #pragma once
 #endif
 
-#include <Caramel/FileSystem/FileInfo.h>
+#include <Caramel/FileSystem/DirectoryInfo.h>
 #include <boost/filesystem.hpp>
 
 
@@ -18,26 +18,26 @@ namespace Caramel
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// File Info
+// Directory Info
 //
 
-class FileInfoImpl
+class DirectoryInfoImpl
 {
-    friend class FileInfo;
+    friend class DirectoryInfo;
 
 public:
 
-    explicit FileInfoImpl( const boost::filesystem::path& path );
+    explicit DirectoryInfoImpl( const boost::filesystem::path& path );
 
 private:
 
     boost::filesystem::path        m_path;
     boost::filesystem::file_status m_status;
-
 };
+
 
 ///////////////////////////////////////////////////////////////////////////////
 
 } // namespace Caramel
 
-#endif // __CARAMEL_FILE_SYSTEM_FILE_INFO_IMPL_H
+#endif // __CARAMEL_FILE_SYSTEM_DIRECTORY_INFO_IMPL_H

@@ -281,6 +281,12 @@
     <ClInclude Include="..\include\Caramel\String\Algorithm.h">
       <Filter>1. Public Packages\String</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\FileSystem\DirectoryInfo.h">
+      <Filter>1. Public Packages\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Caramel\FileSystem\DirectoryInfoImpl.h">
+      <Filter>2. Sources\FileSystem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\CaramelPchCreator.cpp">
