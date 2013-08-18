@@ -39,7 +39,6 @@
     <ClInclude Include="..\include\Caramel\Io\InputStream.h" />
     <ClInclude Include="..\include\Caramel\Io\TextReader.h" />
     <ClInclude Include="..\include\Caramel\Io\TextStreamReader.h" />
-    <ClInclude Include="..\include\Caramel\Json\JsonValue.h" />
     <ClInclude Include="..\include\Caramel\Lexical\Boolean.h" />
     <ClInclude Include="..\include\Caramel\Lexical\Integer.h" />
     <ClInclude Include="..\include\Caramel\Lexical\IntegerList.h" />

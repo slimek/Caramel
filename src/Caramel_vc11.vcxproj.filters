@@ -48,9 +48,6 @@
     <Filter Include="1. Public Packages\String\Detail headers">
       <UniqueIdentifier>{371c93a3-2c32-4227-8257-2142070f310b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="1. Public Packages\Json">
-      <UniqueIdentifier>{f960189a-4e5f-4f2f-8c66-0b8b7ede4ef4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="1. Public Packages\Lexical">
       <UniqueIdentifier>{7500b9b7-34a6-45c1-88a9-9c008305f73d}</UniqueIdentifier>
     </Filter>
@@ -169,9 +166,6 @@
     </ClInclude>
     <ClInclude Include="..\include\Caramel\String\TextEncoding.h">
       <Filter>1. Public Packages\String</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Caramel\Json\JsonValue.h">
-      <Filter>1. Public Packages\Json</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Lexical\Integer.h">
       <Filter>1. Public Packages\Lexical</Filter>
