@@ -251,9 +251,6 @@
     <ClInclude Include="..\include\Caramel\Numeric\NumberTraits.h">
       <Filter>1. Public Packages\Numeric</Filter>
     </ClInclude>
-    <ClInclude Include="Caramel\FileSystem\FileInfoImpl.h">
-      <Filter>2. Sources\FileSystem</Filter>
-    </ClInclude>
     <ClInclude Include="Caramel\FileSystem\PathImpl.h">
       <Filter>2. Sources\FileSystem</Filter>
     </ClInclude>
@@ -283,9 +280,6 @@
     </ClInclude>
     <ClInclude Include="..\include\Caramel\FileSystem\DirectoryInfo.h">
       <Filter>1. Public Packages\FileSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="Caramel\FileSystem\DirectoryInfoImpl.h">
-      <Filter>2. Sources\FileSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

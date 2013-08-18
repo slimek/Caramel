@@ -22,14 +22,13 @@ namespace Caramel
 //   Based on Boost.Filesystem library
 //
 
-class DirectoryInfoImpl;
+class PathImpl;
 
 class DirectoryInfo
 {
 public:
 
     explicit DirectoryInfo( const Path& path );
-    ~DirectoryInfo();
 
 
     /// Properties ///
@@ -39,7 +38,7 @@ public:
 
 private:
 
-    std::unique_ptr< DirectoryInfoImpl > m_impl;
+    std::shared_ptr< PathImpl > m_path;
 };
 
 

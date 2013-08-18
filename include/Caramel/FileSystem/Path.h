@@ -124,6 +124,7 @@ public:
 private:
 
     explicit Path( PathImpl* impl );
+    explicit Path( std::shared_ptr< PathImpl > impl );
 
     std::shared_ptr< PathImpl > m_impl;
 };

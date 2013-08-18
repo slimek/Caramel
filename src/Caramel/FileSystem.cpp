@@ -2,8 +2,8 @@
 
 #include <Caramel/CaramelPch.h>
 
-#include <Caramel/FileSystem/DirectoryInfoImpl.h>
-#include <Caramel/FileSystem/FileInfoImpl.h>
+#include <Caramel/FileSystem/DirectoryInfo.h>
+#include <Caramel/FileSystem/FileInfo.h>
 #include <Caramel/FileSystem/PathImpl.h>
 
 
@@ -24,24 +24,17 @@ namespace Caramel
 //
 
 DirectoryInfo::DirectoryInfo( const Path& path )
-    : m_impl( new DirectoryInfoImpl( *( path.m_impl )))
+    : m_path( path.m_impl )
 {
 }
 
 
-DirectoryInfo::~DirectoryInfo()
+Bool DirectoryInfo::Exists() const
 {
-}
+    boost::filesystem::file_status status = boost::filesystem::status( *m_path );
 
-
-//
-// Implementations
-//
-
-DirectoryInfoImpl::DirectoryInfoImpl( const boost::filesystem::path& path )
-    : m_path( path )
-    , m_status( boost::filesystem::status( path ))
-{
+    return boost::filesystem::is_directory( status )
+        && boost::filesystem::exists( status );
 }
 
 
@@ -51,37 +44,23 @@ DirectoryInfoImpl::DirectoryInfoImpl( const boost::filesystem::path& path )
 //
 
 FileInfo::FileInfo( const Path& path )
-    : m_impl( new FileInfoImpl( *( path.m_impl )))
-{
-}
-
-
-FileInfo::~FileInfo()
+    : m_path( path.m_impl )
 {
 }
 
 
 Bool FileInfo::Exists() const
 {
-    return boost::filesystem::is_regular_file( m_impl->m_status )
-        && boost::filesystem::exists( m_impl->m_status );
+    boost::filesystem::file_status status = boost::filesystem::status( *m_path );
+
+    return boost::filesystem::is_regular_file( status )
+        && boost::filesystem::exists( status );
 }
 
 
 Path FileInfo::GetPath() const
 {
-    return Path( new PathImpl( boost::filesystem::path( m_impl->m_path )));
-}
-
-
-//
-// Implementations
-//
-
-FileInfoImpl::FileInfoImpl( const boost::filesystem::path& path )
-    : m_path( path )
-    , m_status( boost::filesystem::status( path ))
-{
+    return Path( m_path );
 }
 
 
@@ -97,6 +76,12 @@ Path::Path()
 
 
 Path::Path( PathImpl* impl )
+    : m_impl( impl )
+{
+}
+
+
+Path::Path( std::shared_ptr< PathImpl > impl )
     : m_impl( impl )
 {
 }
