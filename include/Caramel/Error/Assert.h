@@ -26,11 +26,19 @@
 #else  // NDEBUG
 
 #define CARAMEL_ASSERT( expr ) \
-    if ( !( expr )) { CARAMEL_THROW1( "Assertion failed : \"" #expr "\"" );  }
+    if ( !( expr )) { CARAMEL_THROW1( "Assertion failed : \"" #expr "\"" ); }
 
 #define CARAMEL_VERIFY( expr ) CARAMEL_ASSERT( expr )
 
 #endif // NDEBUG 
+
+
+//
+// Check Macros - Always on even in Release build
+//
+
+#define CARAMEL_CHECK( expr ) \
+    if ( !( expr )) { CARAMEL_THROW1( "Checking failed : \"" #expr "\"" ); }
 
 
 ///////////////////////////////////////////////////////////////////////////////
