@@ -25,6 +25,7 @@ class PathImpl : public boost::filesystem::path
 {
 public:
 
+    explicit PathImpl( const boost::filesystem::path& path );
     explicit PathImpl( boost::filesystem::path&& path );
     explicit PathImpl( const Utf8String& path );
     

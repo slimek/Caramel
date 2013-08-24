@@ -26,20 +26,22 @@ class PathImpl;
 
 class FileInfo
 {
+    friend class DirectoryInfo;
+
 public:
 
     explicit FileInfo( const Path& path );
 
     
-    //
-    // Accessors
-    //
-
-    Path GetPath() const;
+    /// Properties ///
 
     Bool Exists() const;
 
+    Path GetPath() const;
+
 protected:
+
+    explicit FileInfo( std::shared_ptr< PathImpl > path );
 
     std::shared_ptr< PathImpl > m_path;
 

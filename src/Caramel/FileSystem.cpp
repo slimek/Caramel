@@ -29,12 +29,82 @@ DirectoryInfo::DirectoryInfo( const Path& path )
 }
 
 
+DirectoryInfo::DirectoryInfo( std::shared_ptr< PathImpl > path )
+    : m_path( path )
+{
+}
+
+
+DirectoryInfo DirectoryInfo::Current()
+{
+    return DirectoryInfo( std::make_shared< PathImpl >( boost::filesystem::current_path() ));
+}
+
+
 Bool DirectoryInfo::Exists() const
 {
     boost::filesystem::file_status status = boost::filesystem::status( *m_path );
 
     return boost::filesystem::is_directory( status )
         && boost::filesystem::exists( status );
+}
+
+
+Path DirectoryInfo::GetPath() const
+{
+    return Path( m_path );
+}
+
+
+//
+// File / Directory Iteration
+//
+
+template< typename Value, typename Iterator >
+std::vector< Value > DirectoryInfo::Traverse( Bool wantsFileNotDir ) const
+{
+    Iterator iter( *m_path );
+    Iterator end;
+
+    std::vector< Value > values;
+
+    for ( ; iter != end; ++ iter )
+    {
+        const boost::filesystem::directory_entry entry = *iter;
+        const boost::filesystem::file_status status = entry.status();
+
+        const Bool accepts = wantsFileNotDir
+                           ? boost::filesystem::is_regular_file( status )
+                           : boost::filesystem::is_directory( status );
+
+        if ( accepts )
+        {
+            values.push_back( Value( std::make_shared< PathImpl >( entry.path() ) ));
+        }
+    }
+
+    return values;
+}
+
+
+std::vector< DirectoryInfo > DirectoryInfo::GetDirectories() const
+{
+    return Traverse<
+        DirectoryInfo, boost::filesystem::directory_iterator >( false );
+}
+
+
+std::vector< FileInfo > DirectoryInfo::GetFiles() const
+{
+    return Traverse<
+        FileInfo, boost::filesystem::directory_iterator >( true );
+}
+
+
+std::vector< FileInfo > DirectoryInfo::GetFilesRecursively() const
+{
+    return Traverse<
+        FileInfo, boost::filesystem::recursive_directory_iterator >( true );
 }
 
 
@@ -45,6 +115,12 @@ Bool DirectoryInfo::Exists() const
 
 FileInfo::FileInfo( const Path& path )
     : m_path( path.m_impl )
+{
+}
+
+
+FileInfo::FileInfo( std::shared_ptr< PathImpl > path )
+    : m_path( path )
 {
 }
 
@@ -71,12 +147,6 @@ Path FileInfo::GetPath() const
 
 Path::Path()
     : m_impl( new PathImpl( boost::filesystem::path() ))
-{
-}
-
-
-Path::Path( PathImpl* impl )
-    : m_impl( impl )
 {
 }
 
@@ -152,9 +222,9 @@ std::wstring Path::ToWstring() const
 // Splits
 //
 
-Path Path::Directory() const { return Path( new PathImpl( m_impl->parent_path() )); }
-Path Path::Stem()      const { return Path( new PathImpl( m_impl->stem() )); }
-Path Path::Extension() const { return Path( new PathImpl( m_impl->extension() )); }
+Path Path::Directory() const { return Path( std::make_shared< PathImpl >( m_impl->parent_path() )); }
+Path Path::Stem()      const { return Path( std::make_shared< PathImpl >( m_impl->stem() )); }
+Path Path::Extension() const { return Path( std::make_shared< PathImpl >( m_impl->extension() )); }
 
 
 //
@@ -229,6 +299,12 @@ std::string Path::ToString() const { return this->ToUtf8String().ToString(); }
 //
 // Implementation
 //
+
+PathImpl::PathImpl( const boost::filesystem::path& path )
+    : boost::filesystem::path( path )
+{
+}
+
 
 PathImpl::PathImpl( boost::filesystem::path&& path )
     : boost::filesystem::path( path )
