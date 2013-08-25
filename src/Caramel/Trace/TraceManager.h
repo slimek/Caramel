@@ -9,6 +9,7 @@
 #pragma once
 #endif
 
+#include <Caramel/Object/FacilityLongevity.h>
 #include <Caramel/Object/Singleton.h>
 #include <Caramel/Trace/ChannelImpl.h>
 #include <Caramel/Trace/Listeners.h>
@@ -27,7 +28,7 @@ namespace Trace
 // Trace Manager
 //
 
-class TraceManager : public Singleton< TraceManager >
+class TraceManager : public Singleton< TraceManager, FACILITY_LONGEVITY_TRACE >
 {
 public:
 

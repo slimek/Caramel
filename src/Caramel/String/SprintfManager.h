@@ -9,8 +9,8 @@
 #pragma once
 #endif
 
-#include <Caramel/Object/Singleton.h>
 #include <Caramel/Object/FacilityLongevity.h>
+#include <Caramel/Object/Singleton.h>
 #include <boost/lockfree/stack.hpp>
 
 
