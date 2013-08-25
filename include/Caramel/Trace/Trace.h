@@ -9,43 +9,24 @@
 #pragma once
 #endif
 
-#include <Caramel/Thread/Mutex.h>
+#include <Caramel/Trace/TraceTypes.h>
 
 
 namespace Caramel
 {
 
-///////////////////////////////////////////////////////////////////////////////
-//
-// Built-in Trace Channels
-//
-
-enum TraceChannelId : Int
+namespace Trace
 {
-    TRACE_CHANNEL_FAIL    = 1,
-    TRACE_CHANNEL_WARNING = 2,
-    TRACE_CHANNEL_INFO    = 3,
-    TRACE_CHANNEL_VERBOSE = 4,
-};
-
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Trace Output Functions
+// Write to Built-in Channels
 //
 
-void TraceWrite( Int channelId, const std::string& message );
-
-void TraceWriteHere( Int channelId, const std::string& function, const std::string& message );
+void WriteInfo( const std::string& message );
 
 
-//
-// External Mutex
-// - Locks the Trace for writing a block of messages.
-//
-
-Mutex& GetTraceMutex();
-
+} // namespace Trace
 
 } // namespace Caramel
 
@@ -54,16 +35,13 @@ Mutex& GetTraceMutex();
 // Trace Macros
 //
 
-#define CARAMEL_TRACE_LOCK() \
-    Caramel::Mutex::UniqueLock traceLock( Caramel::GetTraceMutex() )
-    
-
-#define CARAMEL_TRACE_FAIL_HERE( failMsg ) \
-    CARAMEL_TRACE_LOCK(); \
-    Caramel::TraceWriteHere( Caramel::TRACE_CHANNEL_FAIL, __FUNCTION__, failMsg )
+#define CARAMEL_TRACE_INFO( format_message, ... ) \
+    Caramel::Trace::WriteInfo( format_message, __VA_ARGS__ )
 
 
 ///////////////////////////////////////////////////////////////////////////////
+
+
 
 #endif // __CARAMEL_TRACE_TRACE_H
 

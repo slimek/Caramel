@@ -281,6 +281,18 @@
     <ClInclude Include="..\include\Caramel\FileSystem\DirectoryInfo.h">
       <Filter>1. Public Packages\FileSystem</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Trace\TraceTypes.h">
+      <Filter>1. Public Packages\Trace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Trace\Listeners.h">
+      <Filter>1. Public Packages\Trace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Trace\Channel.h">
+      <Filter>1. Public Packages\Trace</Filter>
+    </ClInclude>
+    <ClInclude Include="Caramel\Trace\ChannelImpl.h">
+      <Filter>2. Sources\Trace</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\CaramelPchCreator.cpp">
