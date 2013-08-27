@@ -293,6 +293,9 @@
     <ClInclude Include="Caramel\Trace\ChannelImpl.h">
       <Filter>2. Sources\Trace</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Program\ProgramOptions.h">
+      <Filter>1. Public Packages\Program</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\CaramelPchCreator.cpp">

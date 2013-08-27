@@ -51,6 +51,7 @@
     <ClInclude Include="..\include\Caramel\Object\Detail\LifetimeTracker.h" />
     <ClInclude Include="..\include\Caramel\Object\Singleton.h" />
     <ClInclude Include="..\include\Caramel\Program\ConsoleApplication.h" />
+    <ClInclude Include="..\include\Caramel\Program\ProgramOptions.h" />
     <ClInclude Include="..\include\Caramel\Setup\Compiler.h" />
     <ClInclude Include="..\include\Caramel\Setup\System.h" />
     <ClInclude Include="..\include\Caramel\String\Algorithm.h" />
