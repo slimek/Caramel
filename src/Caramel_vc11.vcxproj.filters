@@ -102,6 +102,9 @@
     <Filter Include="1. Public Packages\Error\Detail">
       <UniqueIdentifier>{457395f5-7884-438a-be80-71b1fc0ab965}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Sources\Program">
+      <UniqueIdentifier>{b325a304-91c1-474b-aed1-0e5777fe0b31}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -295,6 +298,9 @@
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Program\ProgramOptions.h">
       <Filter>1. Public Packages\Program</Filter>
+    </ClInclude>
+    <ClInclude Include="Caramel\Program\ProgramOptionsManager.h">
+      <Filter>2. Sources\Program</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

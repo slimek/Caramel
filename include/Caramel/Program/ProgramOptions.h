@@ -57,9 +57,13 @@ public:
 
 protected:
     
+    //
+    // If there is no ',' in name, it is a long name.
+    // Otherwise the part before ',' is long name, and after it is short name.
+    //
     explicit ProgramOption( const std::string& name );
 
-    std::string m_name;
+    std::string m_longName;
 };
 
 
