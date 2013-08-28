@@ -307,9 +307,18 @@ Utf8String& Utf8String::operator+=( const Utf8String& rhs )
 // String Algorithm
 //
 
+static const std::string::size_type STRING_NPOS = -1;
+
+
 //
 // Predicates
 //
+
+Bool Contains( const std::string& s, Char c )
+{
+    return STRING_NPOS != s.find_first_of( c );
+}
+
 
 Bool EndsWith( const std::string& s, Char c )
 {
@@ -322,11 +331,19 @@ Bool EndsWith( const std::string& s, Char c )
 // Extractors
 //
 
+std::string BeforeFirst( const std::string& s, Char c )
+{
+    const Uint pos = s.find_first_of( c );
+    return STRING_NPOS == pos ? s
+                              : s.substr( 0, pos );
+}
+
+
 std::string AfterFirst( const std::string& s, Char c )
 {
     const Uint pos = s.find_first_of( c );
-    return std::string::npos == pos ? std::string()
-                                    : s.substr( pos + 1 );
+    return STRING_NPOS == pos ? std::string()
+                              : s.substr( pos + 1 );
 }
 
 

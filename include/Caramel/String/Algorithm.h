@@ -18,6 +18,8 @@ namespace Caramel
 // String Predicates
 //
 
+Bool Contains( const std::string& s, Char c );
+
 Bool EndsWith( const std::string& s, Char c );
 
 
@@ -25,6 +27,8 @@ Bool EndsWith( const std::string& s, Char c );
 //
 // String Extractors
 //
+
+std::string BeforeFirst( const std::string& s, Char c );
 
 std::string AfterFirst( const std::string& s, Char c );
 
