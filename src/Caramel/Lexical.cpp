@@ -71,7 +71,7 @@ Bool Integer< Int32 >::TryParse( const std::string& input )
 {
     if ( input.empty() ) { return false; }
 
-    Char* stop = NULL;
+    Char* stop = nullptr;
     m_value = ::strtol( input.c_str(), &stop, 10 );
     
     return stop == ( input.data() + input.length() );
@@ -83,7 +83,7 @@ Bool Integer< Uint32 >::TryParse( const std::string& input )
 {
     if ( input.empty() ) { return false; }
 
-    Char* stop = NULL;
+    Char* stop = nullptr;
     m_value = ::strtoul( input.c_str(), &stop, 10 );
     
     return stop == ( input.data() + input.length() );
