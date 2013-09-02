@@ -80,6 +80,7 @@
     <ClInclude Include="Caramel\Io\Utf16LeStreamReader.h" />
     <ClInclude Include="Caramel\Io\Utf8StreamReader.h" />
     <ClInclude Include="Caramel\Object\FacilityLongevity.h" />
+    <ClInclude Include="Caramel\Program\ConsoleApplicationImpl.h" />
     <ClInclude Include="Caramel\Program\ProgramOptionsManager.h" />
     <ClInclude Include="Caramel\String\SprintfManager.h" />
     <ClInclude Include="Caramel\Trace\ChannelImpl.h" />

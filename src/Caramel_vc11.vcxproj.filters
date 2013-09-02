@@ -18,9 +18,6 @@
     <Filter Include="1. Public Packages\Meta">
       <UniqueIdentifier>{7d87e41c-8fa5-4c7b-bc8f-db7016d6f7d4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2. Sources\Precompiled Headers">
-      <UniqueIdentifier>{8b2e3277-36cd-42fa-8732-83043d356706}</UniqueIdentifier>
-    </Filter>
     <Filter Include="1. Public Packages\Value">
       <UniqueIdentifier>{8a8b007f-7ad8-4545-951a-f22db1335bb1}</UniqueIdentifier>
     </Filter>
@@ -105,6 +102,9 @@
     <Filter Include="2. Sources\Program">
       <UniqueIdentifier>{b325a304-91c1-474b-aed1-0e5777fe0b31}</UniqueIdentifier>
     </Filter>
+    <Filter Include="3. Precompiled Header">
+      <UniqueIdentifier>{6b2078f8-204b-415c-9dc4-1b54f1aed52f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -127,9 +127,6 @@
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Meta\Utility.h">
       <Filter>1. Public Packages\Meta</Filter>
-    </ClInclude>
-    <ClInclude Include="Caramel\CaramelPch.h">
-      <Filter>2. Sources\Precompiled Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Value\SharedArray.h">
       <Filter>1. Public Packages\Value</Filter>
@@ -302,11 +299,14 @@
     <ClInclude Include="Caramel\Program\ProgramOptionsManager.h">
       <Filter>2. Sources\Program</Filter>
     </ClInclude>
+    <ClInclude Include="Caramel\CaramelPch.h">
+      <Filter>3. Precompiled Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Caramel\Program\ConsoleApplicationImpl.h">
+      <Filter>2. Sources\Program</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Caramel\CaramelPchCreator.cpp">
-      <Filter>2. Sources\Precompiled Headers</Filter>
-    </ClCompile>
     <ClCompile Include="Caramel\Trace.cpp">
       <Filter>2. Sources</Filter>
     </ClCompile>
@@ -339,6 +339,9 @@
     </ClCompile>
     <ClCompile Include="Caramel\Program.cpp">
       <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Caramel\CaramelPchCreator.cpp">
+      <Filter>3. Precompiled Header</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

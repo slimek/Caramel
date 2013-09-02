@@ -18,17 +18,22 @@ namespace Caramel
 // Console Application
 //
 
+class ConsoleApplicationImpl;
+
 class ConsoleApplication
 {
 public:
 
     ConsoleApplication();
+    ~ConsoleApplication();
 
     Int Run();
 
 private:
 
     virtual Int Main() = 0;
+
+    std::unique_ptr< ConsoleApplicationImpl > m_impl;
 };
 
 

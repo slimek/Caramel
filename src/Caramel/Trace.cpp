@@ -26,6 +26,7 @@ namespace Trace
 // < Listeners >
 //   Listener
 //   StdoutListener
+//   Listeners
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -50,6 +51,17 @@ TraceManager::TraceManager()
     m_builtinChannels.insert( std::make_pair( Level::INFO,  &m_infoChannel ));
     m_builtinChannels.insert( std::make_pair( Level::WARN,  &m_warnChannel ));
     m_builtinChannels.insert( std::make_pair( Level::ERROR, &m_errorChannel ));
+}
+
+
+TraceManager::~TraceManager()
+{
+    ListenerSet::const_iterator iml = m_managedListeners.begin();
+    for ( ; m_managedListeners.end() != iml; ++ iml )
+    {
+        Listener* listener = *iml;
+        this->UnbindListenerFromAllChannels( listener );
+    }
 }
 
 
@@ -86,6 +98,16 @@ void TraceManager::WriteToBuiltinChannel( Level level, const std::string& messag
 
     BuiltinChannel* channel = m_builtinChannels.find( level )->second;
     channel->Write( message );
+}
+
+
+void TraceManager::AddManagedListener( Listener* listener )
+{
+    const Bool inserted = m_managedListeners.insert( listener ).second;
+    if ( ! inserted )
+    {
+        CARAMEL_THROW( "Listener is duplicate" );
+    }
 }
 
 
@@ -206,6 +228,17 @@ void Listener::UnbindAllChannels()
 void StdoutListener::Write( const std::string& message )
 {
     std::cout << message << std::endl;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Listeners
+//
+
+void Listeners::AddManaged( Listener* listener )
+{
+    TraceManager::Instance()->AddManagedListener( listener );
 }
 
 

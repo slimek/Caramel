@@ -3,7 +3,7 @@
 #include <Caramel/CaramelPch.h>
 
 #include <Caramel/Error/CatchException.h>
-#include <Caramel/Program/ConsoleApplication.h>
+#include <Caramel/Program/ConsoleApplicationImpl.h>
 #include <Caramel/Program/ProgramOptions.h>
 #include <Caramel/Program/ProgramOptionsManager.h>
 #include <Caramel/String/Algorithm.h>
@@ -37,6 +37,12 @@ namespace Caramel
 //
 
 ConsoleApplication::ConsoleApplication()
+    : m_impl( new ConsoleApplicationImpl )
+{
+}
+
+
+ConsoleApplication::~ConsoleApplication()
 {
 }
 
@@ -51,6 +57,22 @@ Int ConsoleApplication::Run()
         std::cin.get();
     }
     return xc.Result();
+}
+
+
+//
+// Implementation
+// - The thread creating and destroying ConsoleApplication
+//   should always be UI main thread.
+//
+
+ConsoleApplicationImpl::ConsoleApplicationImpl()
+    : m_stdoutListener( new Trace::StdoutListener )
+{
+    m_stdoutListener->BindChannel( Trace::Level::INFO );
+
+    // Pass ownership to trace listener.
+    Trace::Listeners::AddManaged( m_stdoutListener );
 }
 
 

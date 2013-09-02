@@ -27,10 +27,6 @@ namespace Caramel
 //   When the program enters the main entry, call ProgramOptions::ParseCommandLine()
 //   to generate all declared option values.
 // 
-//   The following class would also automatically parse the command line:
-//
-//     ConsoleApplication
-//
 
 ///////////////////////////////////////////////////////////////////////////////
 //

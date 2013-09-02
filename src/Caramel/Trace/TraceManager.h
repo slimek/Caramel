@@ -15,6 +15,7 @@
 #include <Caramel/Trace/Listeners.h>
 #include <boost/container/flat_map.hpp>
 #include <map>
+#include <set>
 
 
 namespace Caramel
@@ -33,12 +34,15 @@ class TraceManager : public Singleton< TraceManager, FACILITY_LONGEVITY_TRACE >
 public:
 
     TraceManager();
+    ~TraceManager();
 
     void BindListenerToBuiltinChannel( Level level, Listener* listener );
     
     void UnbindListenerFromAllChannels( Listener* listener );
 
     void WriteToBuiltinChannel( Level level, const std::string& message );
+
+    void AddManagedListener( Listener* listener );
 
 
 private:
@@ -59,6 +63,11 @@ private:
     typedef std::map< std::string, ChannelPtr > NamedChannelMap;
     NamedChannelMap m_namedChannels;
 
+
+    /// Managed Listeners ///
+
+    typedef std::set< Listener* > ListenerSet;
+    ListenerSet m_managedListeners;
 };
 
 
