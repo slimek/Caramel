@@ -9,6 +9,7 @@
 #pragma once
 #endif
 
+#include <Caramel/String/Sprintf.h>
 #include <Caramel/Trace/TraceTypes.h>
 
 
@@ -36,7 +37,7 @@ void WriteInfo( const std::string& message );
 //
 
 #define CARAMEL_TRACE_INFO( format_message, ... ) \
-    Caramel::Trace::WriteInfo( format_message, __VA_ARGS__ )
+    Caramel::Trace::WriteInfo( Sprintf( format_message, __VA_ARGS__ ))
 
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -22,6 +22,8 @@ class ConsoleApplication
 {
 public:
 
+    ConsoleApplication();
+
     Int Run();
 
 private:

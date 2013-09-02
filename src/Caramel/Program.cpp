@@ -7,6 +7,8 @@
 #include <Caramel/Program/ProgramOptions.h>
 #include <Caramel/Program/ProgramOptionsManager.h>
 #include <Caramel/String/Algorithm.h>
+#include <Caramel/String/Utf8String.h>
+
 #include <functional>
 #include <iostream>
 
@@ -22,15 +24,22 @@ namespace Caramel
 // 
 // < Program Options >
 //   ProgramOptionsManager
-//   ProgramOption
+//   ProgramOptions
+//   ProgramOptionValue
 //   ProgramOptionBool
 //   ProgramOptionString
+//   PositionalProgramOptionValues
 //
 
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Console Application
 //
+
+ConsoleApplication::ConsoleApplication()
+{
+}
+
 
 Int ConsoleApplication::Run()
 {
@@ -49,6 +58,12 @@ Int ConsoleApplication::Run()
 //
 // Program Options Manager
 //
+
+ProgramOptionsManager::ProgramOptionsManager()
+    : m_positionalAdded( false )
+{
+}
+
 
 //
 // Add Options
@@ -81,6 +96,22 @@ void ProgramOptionsManager::AddStringOptionWithDefault(
 }
 
 
+void ProgramOptionsManager::AddPositionalOptions( const std::vector< ProgramOptionValue >& options )
+{
+    if ( m_positionalAdded )
+    {
+        CARAMEL_THROW( "Positional options can only be added once" );
+    }
+
+    for ( Uint i = 0; i < options.size(); ++ i )
+    {
+        m_positionalDesc.add( options[i].GetLongName().c_str(), 1 );
+    }
+
+    m_positionalAdded = true;
+}
+
+
 //
 // Parsing
 //
@@ -91,9 +122,22 @@ void ProgramOptionsManager::ParseCommandLine()
 
     #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
     {
+        // NOTES: split_winmain() suppose the parameter is the lpCmdLine in WinMain(),
+        //        but the return value of GetCommandLine() has prepended the program path.
+        //        We need to remove the first argument manually.
+
+        const std::vector< std::wstring > wargs = po::split_winmain( ::GetCommandLineW() );
+        
+        std::vector< std::string > args;
+        for ( Uint i = 1; i < wargs.size(); ++ i )
+        {
+            args.push_back( Utf8String( wargs[i] ).ToString() );
+        }
+
         po::store(
-            po::command_line_parser( po::split_winmain( ::GetCommandLineA() ))
+            po::command_line_parser( args )
                 .options( m_optionsDesc )
+                .positional( m_positionalDesc )
                 .allow_unregistered()
                 .run(),
             m_variablesMap
@@ -132,10 +176,21 @@ std::string ProgramOptionsManager::GetStringOption( const std::string& longName 
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Program Option
+// Program Options
 //
 
-ProgramOption::ProgramOption( const std::string& name )
+void ProgramOptions::ParseCommandLine()
+{
+    ProgramOptionsManager::Instance()->ParseCommandLine();
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Program Option Value
+//
+
+ProgramOptionValue::ProgramOptionValue( const std::string& name )
 {
     m_longName = Contains( name, ',' )
                ? BeforeFirst( name, ',' )
@@ -143,15 +198,9 @@ ProgramOption::ProgramOption( const std::string& name )
 }
 
 
-Bool ProgramOption::Exists() const
+Bool ProgramOptionValue::Exists() const
 {
     return ProgramOptionsManager::Instance()->Contains( m_longName );
-}
-
-
-void ProgramOption::ParseCommandLine()
-{
-    ProgramOptionsManager::Instance()->ParseCommandLine();
 }
 
 
@@ -161,7 +210,7 @@ void ProgramOption::ParseCommandLine()
 //
 
 ProgramOptionBool::ProgramOptionBool( const std::string& name )
-    : ProgramOption( name )
+    : ProgramOptionValue( name )
 {
     ProgramOptionsManager::Instance()->AddBoolOption( name );
 }
@@ -173,14 +222,14 @@ ProgramOptionBool::ProgramOptionBool( const std::string& name )
 //
 
 ProgramOptionString::ProgramOptionString( const std::string& name )
-    : ProgramOption( name )
+    : ProgramOptionValue( name )
 {
     ProgramOptionsManager::Instance()->AddStringOption( name );
 }
 
 
 ProgramOptionString::ProgramOptionString( const std::string& name, const std::string& defaultValue )
-    : ProgramOption( name )
+    : ProgramOptionValue( name )
 {
     ProgramOptionsManager::Instance()->AddStringOptionWithDefault( name, defaultValue );
 }
@@ -189,6 +238,47 @@ ProgramOptionString::ProgramOptionString( const std::string& name, const std::st
 std::string ProgramOptionString::ToString() const
 {
     return ProgramOptionsManager::Instance()->GetStringOption( m_longName );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Positional Program Option Values
+//
+
+PositionalProgramOptionValues::PositionalProgramOptionValues(
+    const ProgramOptionValue& value1 )
+{
+    std::vector< ProgramOptionValue > values;
+    values.push_back( value1 );
+
+    ProgramOptionsManager::Instance()->AddPositionalOptions( values );
+}
+
+
+PositionalProgramOptionValues::PositionalProgramOptionValues(
+    const ProgramOptionValue& value1,
+    const ProgramOptionValue& value2 )
+{
+    std::vector< ProgramOptionValue > values;
+    values.push_back( value1 );
+    values.push_back( value2 );
+
+    ProgramOptionsManager::Instance()->AddPositionalOptions( values );
+}
+
+
+PositionalProgramOptionValues::PositionalProgramOptionValues(
+    const ProgramOptionValue& value1,
+    const ProgramOptionValue& value2,
+    const ProgramOptionValue& value3 )
+{
+    std::vector< ProgramOptionValue > values;
+    values.push_back( value1 );
+    values.push_back( value2 );
+    values.push_back( value3 );
+
+    ProgramOptionsManager::Instance()->AddPositionalOptions( values );
 }
 
 

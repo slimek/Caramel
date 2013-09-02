@@ -27,6 +27,7 @@
 #include <Caramel/Error/Assert.h>
 #include <Caramel/Error/Exception.h>
 #include <Caramel/String/Sprintf.h>
+#include <Caramel/Trace/Trace.h>
 
 
 #endif // __CARAMEL_CARAMEL_PCH_H

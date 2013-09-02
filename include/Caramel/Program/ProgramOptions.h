@@ -34,18 +34,13 @@ namespace Caramel
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Program Option
-// - Base class of other concrete value types.
+// Program Options
+// - Management to the whole facility.
 //
 
-class ProgramOption
+class ProgramOptions
 {
 public:
-
-    virtual ~ProgramOption() {}
-
-    Bool Exists() const;
-
 
     //
     // Throws if parse failed.
@@ -54,6 +49,25 @@ public:
     //
     static void ParseCommandLine();
 
+};
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Program Option Value
+// - Base class of other concrete value types.
+//
+
+class ProgramOptionValue
+{
+public:
+
+    virtual ~ProgramOptionValue() {}
+
+    Bool Exists() const;
+
+    std::string GetLongName() const { return m_longName; }
+
 
 protected:
     
@@ -61,7 +75,7 @@ protected:
     // If there is no ',' in name, it is a long name.
     // Otherwise the part before ',' is long name, and after it is short name.
     //
-    explicit ProgramOption( const std::string& name );
+    explicit ProgramOptionValue( const std::string& name );
 
     std::string m_longName;
 };
@@ -78,7 +92,7 @@ protected:
 //   doesn't exist in the command line arguments.
 //
 
-class ProgramOptionBool : public ProgramOption
+class ProgramOptionBool : public ProgramOptionValue
 {
 public:
 
@@ -102,7 +116,7 @@ public:
 //   static const ProgramOptionString s_code( "code,c", "1234" );
 //
 
-class ProgramOptionString : public ProgramOption
+class ProgramOptionString : public ProgramOptionValue
                           , public StringConvertible< ProgramOptionString >
 {
 public:
@@ -116,6 +130,33 @@ public:
     std::string ToString() const;
 
     operator std::string() const { return this->ToString(); }
+};
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Positional Program Option Values
+// - A program can create positional options only one time.
+//   You may register at most 3 option values.
+//
+
+class PositionalProgramOptionValues
+{
+public:
+    explicit PositionalProgramOptionValues(
+        const ProgramOptionValue& value1
+    );
+
+    PositionalProgramOptionValues(
+        const ProgramOptionValue& value1,
+        const ProgramOptionValue& value2
+    );
+
+    PositionalProgramOptionValues(
+        const ProgramOptionValue& value1,
+        const ProgramOptionValue& value2,
+        const ProgramOptionValue& value3
+    );
 };
 
 

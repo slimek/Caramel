@@ -11,6 +11,7 @@
 
 #include <Caramel/Object/Singleton.h>
 #include <boost/program_options.hpp>
+#include <vector>
 
 
 namespace Caramel
@@ -25,12 +26,16 @@ class ProgramOptionsManager : public Singleton< ProgramOptionsManager >
 {
 public:
 
+    ProgramOptionsManager();
+
     /// Add Options ///
 
     void AddBoolOption( const std::string& name );
 
     void AddStringOption( const std::string& name );
     void AddStringOptionWithDefault( const std::string& name, const std::string& defaultValue );
+
+    void AddPositionalOptions( const std::vector< ProgramOptionValue >& options );
 
 
     /// Parsing ///
@@ -49,6 +54,9 @@ private:
 
     boost::program_options::options_description m_optionsDesc;
     boost::program_options::variables_map       m_variablesMap;
+
+    Bool m_positionalAdded;
+    boost::program_options::positional_options_description m_positionalDesc;
 };
 
 
