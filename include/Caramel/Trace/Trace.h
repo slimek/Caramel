@@ -69,6 +69,24 @@ void WriteToBuiltinFailed( const std::string& message );
     CARAMEL_TRACE_WRITE_TO_BUILTIN( Caramel::Trace::Level::ERROR, format_message, __VA_ARGS__ )
 
 
+//
+// Write Trace with Location
+// - The format_message must be string literal.
+//
+
+#define CARAMEL_TRACE_DEBUG_HERE( format_message, ... ) \
+    CARAMEL_TRACE_WRITE_TO_BUILTIN( Caramel::Trace::Level::DEBUG, __FUNCTION__ ## " - " format_message, __VA_ARGS__ )
+
+#define CARAMEL_TRACE_INFO_HERE( format_message, ... ) \
+    CARAMEL_TRACE_WRITE_TO_BUILTIN( Caramel::Trace::Level::INFO, __FUNCTION__ ## " - " format_message, __VA_ARGS__ )
+
+#define CARAMEL_TRACE_WARN_HERE( format_message, ... ) \
+    CARAMEL_TRACE_WRITE_TO_BUILTIN( Caramel::Trace::Level::WARN, __FUNCTION__ ## " - " format_message, __VA_ARGS__ )
+
+#define CARAMEL_TRACE_ERROR_HERE( format_message, ... ) \
+    CARAMEL_TRACE_WRITE_TO_BUILTIN( Caramel::Trace::Level::ERROR, __FUNCTION__ ## " - " format_message, __VA_ARGS__ )
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 
