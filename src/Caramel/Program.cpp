@@ -68,7 +68,7 @@ Int ConsoleApplication::Run()
 ConsoleApplicationImpl::ConsoleApplicationImpl()
     : m_stdoutListener( new Trace::StdoutListener )
 {
-    m_stdoutListener->BindChannel( Trace::Level::INFO );
+    m_stdoutListener->BindBuiltinChannels( Trace::Level::INFO );
 
     // Pass ownership to trace listener.
     Trace::Listeners::AddManaged( m_stdoutListener );

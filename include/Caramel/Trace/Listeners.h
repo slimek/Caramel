@@ -40,11 +40,10 @@ public:
     // Bind listener to channels
     //
 
-    // Bind to built-in channel
-    void BindChannel( Level level );
+    // Bind to built-in channels all above the level.
+    void BindBuiltinChannels( Level minLevel );
 
-    // Bind by name
-    void BindChannel( const std::string& name );
+    void BindChannelByName( const std::string& channelName );
 
     // Bind to channel directly
     void BindChannel( Channel& channel );

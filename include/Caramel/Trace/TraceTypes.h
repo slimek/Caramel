@@ -37,12 +37,22 @@ enum class Level : Int
 
     DEAF    = 6,  // Set listener to be deaf
 
+    INVALID = -1,
+
 
     /// Aliases ///
 
     CHANNEL_DISABLED  = SILENT,
     LISTENER_DISABLED = DEAF,
 };
+
+
+/// Supporting Routings ///
+
+//
+// EXAMPLE: input DEBUG => output INFO
+//   
+Level NextLevel( Level lv );
 
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -22,6 +22,7 @@ namespace Trace
 //   Channel
 //   BuiltinChannel
 //   Write functions
+//   Level
 //
 // < Listeners >
 //   Listener
@@ -65,12 +66,18 @@ TraceManager::~TraceManager()
 }
 
 
-void TraceManager::BindListenerToBuiltinChannel( Level level, Listener* listener )
+void TraceManager::BindListenerToBuiltinChannels( Level minLevel, Listener* listener )
 {
-    CARAMEL_ASSERT( HasBuiltInChannel( level ));
+    CARAMEL_ASSERT( HasBuiltInChannel( minLevel ));
 
-    BuiltinChannel* channel = m_builtinChannels.find( level )->second;
-    channel->RegisterListener( listener );
+    Level level = minLevel;
+    while ( Level::ERROR >= level )
+    {
+        BuiltinChannel* channel = m_builtinChannels.find( level )->second;
+        channel->RegisterListener( listener );
+
+        level = NextLevel( level );
+    }
 }
 
 
@@ -167,30 +174,6 @@ void BuiltinChannel::Write( const std::string& message )
 // Write Functions
 //
 
-void WriteDebug( const std::string& message )
-{
-    TraceManager::Instance()->WriteToBuiltinChannel( Level::DEBUG, message );
-}
-
-
-void WriteInfo( const std::string& message )
-{
-    TraceManager::Instance()->WriteToBuiltinChannel( Level::INFO, message );
-}
-
-
-void WriteWarn( const std::string& message )
-{
-    TraceManager::Instance()->WriteToBuiltinChannel( Level::WARN, message );
-}
-
-
-void WriteError( const std::string& message )
-{
-    TraceManager::Instance()->WriteToBuiltinChannel( Level::ERROR, message );
-}
-
-
 void WriteToBuiltin( Level level, const std::string& message )
 {
     // Built-in channels don't accept level lower than DEBUG.
@@ -203,6 +186,34 @@ void WriteToBuiltin( Level level, const std::string& message )
     }
 
     TraceManager::Instance()->WriteToBuiltinChannel( level, message );
+}
+
+
+void WriteToBuiltinFailed( const std::string& message )
+{
+    TraceManager::Instance()->WriteToBuiltinChannel( Level::WARN, message + " (Trace::Write() failed)" );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Level
+//
+
+Level NextLevel( Level inputLevel )
+{
+    if ( ! ( Level::SILENT <= inputLevel && inputLevel < Level::DEAF ))
+    {
+        return Level::INVALID;
+    }
+
+    if ( Level::DEAF == inputLevel )
+    {
+        return Level::DEAF;
+    }
+
+    return static_cast< Level >( static_cast< Int >( inputLevel ) + 1 );
+
 }
 
 
@@ -226,16 +237,21 @@ Listener::~Listener()
 }
 
 
-void Listener::BindChannel( Level level )
+void Listener::BindBuiltinChannels( Level minLevel )
 {
-    if ( ! ( HasBuiltInChannel( level )))
+    if ( ! ( HasBuiltInChannel( minLevel )))
     {
-        CARAMEL_THROW( "Not level of built-in channel, level: %d", level );
+        CARAMEL_THROW( "Not level of built-in channel, minLevel: %d", minLevel );
     }
 
-    TraceManager::Instance()->BindListenerToBuiltinChannel( level, this );
+    TraceManager::Instance()->BindListenerToBuiltinChannels( minLevel, this );
 
     ++ m_boundCount;
+}
+
+
+void Listener::BindChannelByName( const std::string& channelName )
+{
 }
 
 

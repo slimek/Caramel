@@ -36,7 +36,10 @@ public:
     TraceManager();
     ~TraceManager();
 
-    void BindListenerToBuiltinChannel( Level level, Listener* listener );
+    //
+    // You would bind a listener to built-in channels all above the level.
+    //
+    void BindListenerToBuiltinChannels( Level minLevel, Listener* listener );
     
     void UnbindListenerFromAllChannels( Listener* listener );
 
