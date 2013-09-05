@@ -33,7 +33,7 @@ public:
     Listener();
     virtual ~Listener();
 
-    virtual void Write( const std::string& message ) = 0;
+    virtual void Write( Level level, const std::string& message ) = 0;
 
 
     //
@@ -68,7 +68,7 @@ class StdoutListener : public Listener
 {
 public:
 
-    void Write( const std::string& message );
+    void Write( Level level, const std::string& message );
 };
 
 

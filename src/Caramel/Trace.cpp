@@ -104,7 +104,7 @@ void TraceManager::WriteToBuiltinChannel( Level level, const std::string& messag
     CARAMEL_ASSERT( HasBuiltInChannel( level ));
 
     BuiltinChannel* channel = m_builtinChannels.find( level )->second;
-    channel->Write( message );
+    channel->Write( level, message );
 }
 
 
@@ -158,13 +158,13 @@ Bool ChannelImpl::TryUnregisterListener( Listener* listener )
 // Built-in Channel
 //
 
-void BuiltinChannel::Write( const std::string& message )
+void BuiltinChannel::Write( Level level, const std::string& message )
 {
     ListenerSet::const_iterator i = m_listeners.begin();
     for ( ; m_listeners.end() != i; ++ i )
     {
         Listener* listener = *i;
-        listener->Write( message );
+        listener->Write( level, message );
     }
 }
 
@@ -274,7 +274,7 @@ void Listener::UnbindAllChannels()
 // Stdout Listener
 //
 
-void StdoutListener::Write( const std::string& message )
+void StdoutListener::Write( Level, const std::string& message )
 {
     std::cout << message << std::endl;
 }
