@@ -141,36 +141,39 @@ void ProgramOptionsManager::ParseCommandLine()
 {
     namespace po = boost::program_options;
 
+    m_arguments.clear();
+
     #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
     {
         // NOTES: split_winmain() suppose the parameter is the lpCmdLine in WinMain(),
         //        but the return value of GetCommandLine() has prepended the program path.
-        //        We need to remove the first argument manually.
+        //        We need to remove the first argument manually, therefore the for loop
+        //        starts at 1, not 0.
 
         const std::vector< std::wstring > wargs = po::split_winmain( ::GetCommandLineW() );
         
-        std::vector< std::string > args;
         for ( Uint i = 1; i < wargs.size(); ++ i )
         {
-            args.push_back( Utf8String( wargs[i] ).ToString() );
+            m_arguments.push_back( Utf8String( wargs[i] ).ToString() );
         }
-
-        po::store(
-            po::command_line_parser( args )
-                .options( m_optionsDesc )
-                .positional( m_positionalDesc )
-                .allow_unregistered()
-                .run(),
-            m_variablesMap
-        );
-
-        po::notify( m_variablesMap );
     }
     #else
     {
         CARAMEl_NOT_IMPLEMETNED();
     }
     #endif
+
+
+    po::store(
+        po::command_line_parser( m_arguments )
+            .options( m_optionsDesc )
+            .positional( m_positionalDesc )
+            .allow_unregistered()
+            .run(),
+        m_variablesMap
+    );
+
+    po::notify( m_variablesMap );
 }
 
 

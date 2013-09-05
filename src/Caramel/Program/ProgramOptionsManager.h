@@ -52,6 +52,8 @@ public:
 
 private:
 
+    std::vector< std::string > m_arguments;
+
     boost::program_options::options_description m_optionsDesc;
     boost::program_options::variables_map       m_variablesMap;
 
