@@ -167,9 +167,42 @@ void BuiltinChannel::Write( const std::string& message )
 // Write Functions
 //
 
+void WriteDebug( const std::string& message )
+{
+    TraceManager::Instance()->WriteToBuiltinChannel( Level::DEBUG, message );
+}
+
+
 void WriteInfo( const std::string& message )
 {
     TraceManager::Instance()->WriteToBuiltinChannel( Level::INFO, message );
+}
+
+
+void WriteWarn( const std::string& message )
+{
+    TraceManager::Instance()->WriteToBuiltinChannel( Level::WARN, message );
+}
+
+
+void WriteError( const std::string& message )
+{
+    TraceManager::Instance()->WriteToBuiltinChannel( Level::ERROR, message );
+}
+
+
+void WriteToBuiltin( Level level, const std::string& message )
+{
+    // Built-in channels don't accept level lower than DEBUG.
+    if ( Level::DEBUG > level ) { return; }
+
+    // Treats level greater than ERROR as ERROR.
+    if ( Level::ERROR < level )
+    {
+        level = Level::ERROR;
+    }
+
+    TraceManager::Instance()->WriteToBuiltinChannel( level, message );
 }
 
 

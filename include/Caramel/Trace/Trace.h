@@ -24,7 +24,15 @@ namespace Trace
 // Write to Built-in Channels
 //
 
-void WriteInfo( const std::string& message );
+void WriteDebug( const std::string& message );
+void WriteInfo ( const std::string& message );
+void WriteWarn ( const std::string& message );
+void WriteError( const std::string& message );
+
+//
+// Level of bulit-in channels are DEBUG, INFO, WARN and ERROR.
+//
+void WriteToBuiltin( Level level, const std::string& message );
 
 
 } // namespace Trace
