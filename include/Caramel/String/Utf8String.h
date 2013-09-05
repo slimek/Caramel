@@ -99,7 +99,7 @@ public:
     // - In Windows, many APIs use wide string, in UTF-16 LE encoding.
     //   Here provides some wstring conversions to cooperate with Windows APIs.
     //
-    //   In other OS, like Linux or Mac, you should never use wstring...
+    //   In other OS, like Linux or Mac, you should NEVER use wstring...
     //   
 
     //

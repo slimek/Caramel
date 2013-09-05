@@ -8,7 +8,6 @@
 #include <Caramel/Program/ProgramOptionsManager.h>
 #include <Caramel/String/Algorithm.h>
 #include <Caramel/String/Utf8String.h>
-
 #include <functional>
 #include <iostream>
 

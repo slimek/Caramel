@@ -83,10 +83,20 @@ public:
     // Manipulators
     //
 
+    //
     // Whether or not the extension has a prefix '.', the result is append with just one '.'
+    // EXAMPLE:
+    //   ReadMe + .txt => ReadMe.txt
+    //   ReadMe + txt  => ReadMe.txt
+    //
     void AppendExtension( const std::string& extension );
 
+    //
     // Insert a suffix after the stem, that is, before the last '.' character.
+    // EXAMPLE
+    //   MyLog.txt     + _0815 => MyLog_0815.txt
+    //   MyLog.bak.txt + _0815 => MyLog.bak_0815.txt
+    //
     void InsertStemSuffix( const std::string& suffix );
 
 
