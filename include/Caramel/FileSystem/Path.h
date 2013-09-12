@@ -52,6 +52,9 @@ public:
     //
     Path( const std::string& path );
     Path( const Char* path );
+    
+    template< typename T >
+    Path( const StringConvertible< T >& path );
 
 
     //
@@ -135,8 +138,22 @@ private:
 
     explicit Path( std::shared_ptr< PathImpl > impl );
 
+    void Init( const std::string& path );
+
     std::shared_ptr< PathImpl > m_impl;
 };
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Implementation
+//
+
+template< typename T >
+Path::Path( const StringConvertible< T >& path )
+{
+    this->Init( static_cast< const T& >( path ).ToString() );
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////

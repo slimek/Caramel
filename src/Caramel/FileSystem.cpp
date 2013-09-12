@@ -171,13 +171,17 @@ Path::Path( const Utf8String& path )
 
 Path::Path( const std::string& path )
 {
-    CARAMEL_CHECK_UTF8_ARGUMENT( u8Path, path );
-
-    m_impl.reset( new PathImpl( u8Path ));
+    this->Init( path );
 }
 
 
 Path::Path( const Char* path )
+{
+    this->Init( path );
+}
+
+
+void Path::Init( const std::string& path )
 {
     CARAMEL_CHECK_UTF8_ARGUMENT( u8Path, path );
 
