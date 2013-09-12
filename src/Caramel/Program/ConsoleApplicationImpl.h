@@ -27,11 +27,6 @@ public:
 
     ConsoleApplicationImpl();
 
-private:
-
-    // The ownership of this listener would be passed to Trace facility.
-    Trace::StdoutListener* m_stdoutListener;
-
 };
 
 

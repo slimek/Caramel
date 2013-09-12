@@ -8,6 +8,11 @@
 #include <Caramel/Program/ProgramOptionsManager.h>
 #include <Caramel/String/Algorithm.h>
 #include <Caramel/String/Utf8String.h>
+
+#if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+#include <Caramel/Windows/DebuggerTraceListener.h>
+#endif
+
 #include <functional>
 #include <iostream>
 
@@ -66,12 +71,23 @@ Int ConsoleApplication::Run()
 //
 
 ConsoleApplicationImpl::ConsoleApplicationImpl()
-    : m_stdoutListener( new Trace::StdoutListener )
 {
-    m_stdoutListener->BindBuiltinChannels( Trace::Level::INFO );
+    auto stdoutListener = new Trace::StdoutListener;
+
+    stdoutListener->BindBuiltinChannels( Trace::Level::INFO );
 
     // Pass ownership to trace listener.
-    Trace::Listeners::AddManaged( m_stdoutListener );
+    Trace::Listeners::AddManaged( stdoutListener );
+
+    #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+    {
+        auto debuggerListener = new Windows::DebuggerTraceListener;
+
+        debuggerListener->BindBuiltinChannels( Trace::Level::DEBUG );
+
+        Trace::Listeners::AddManaged( debuggerListener );
+    }
+    #endif // CARAMEL_SYSTEM_IS_WINDOWS
 }
 
 

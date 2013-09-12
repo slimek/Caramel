@@ -5,6 +5,7 @@
 
 #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
 
+#include <Caramel/Windows/DebuggerTraceListener.h>
 #include <Caramel/Windows/FileInfo.h>
 #include <Caramel/Windows/WideString.h>
 #include <windows.h>
@@ -19,9 +20,31 @@ namespace Windows
 //
 // Contents
 //
+//   DebuggerTraceListener
 //   FileInfo
 //   WideString
 //
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Debugger Trace Listener
+//
+
+void DebuggerTraceListener::Write( Trace::Level, const std::string& message )
+{
+    Utf8String u8msg;
+    if ( u8msg.TryParse( message ))
+    {
+        ::OutputDebugStringW( u8msg.ToWstring().c_str() );
+        ::OutputDebugStringW( L"\n" );
+    }
+    else
+    {
+        ::OutputDebugStringA( message.c_str() );
+        ::OutputDebugStringA( "\n" );
+    }
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //
