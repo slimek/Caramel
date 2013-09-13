@@ -308,6 +308,12 @@
     <ClInclude Include="..\include\Caramel\Windows\DebuggerTraceListener.h">
       <Filter>1. Public Packages\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Setup\PchDefines.h">
+      <Filter>1. Public Packages\Setup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Setup\PchHeaders.h">
+      <Filter>1. Public Packages\Setup</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\Trace.cpp">

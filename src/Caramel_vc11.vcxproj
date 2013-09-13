@@ -53,6 +53,8 @@
     <ClInclude Include="..\include\Caramel\Program\ConsoleApplication.h" />
     <ClInclude Include="..\include\Caramel\Program\ProgramOptions.h" />
     <ClInclude Include="..\include\Caramel\Setup\Compiler.h" />
+    <ClInclude Include="..\include\Caramel\Setup\PchDefines.h" />
+    <ClInclude Include="..\include\Caramel\Setup\PchHeaders.h" />
     <ClInclude Include="..\include\Caramel\Setup\System.h" />
     <ClInclude Include="..\include\Caramel\String\Algorithm.h" />
     <ClInclude Include="..\include\Caramel\String\CainLess.h" />
