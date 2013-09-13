@@ -236,6 +236,7 @@ Path Path::Extension() const { return Path( std::make_shared< PathImpl >( m_impl
 //
 
 Bool Path::HasExtension() const { return m_impl->has_extension(); }
+Bool Path::IsAbsolute()   const { return m_impl->is_absolute(); }
 
 
 //

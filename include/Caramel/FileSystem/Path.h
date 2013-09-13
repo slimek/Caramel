@@ -71,6 +71,7 @@ public:
     //
 
     Bool HasExtension() const;
+    Bool IsAbsolute()   const;
 
 
     //
