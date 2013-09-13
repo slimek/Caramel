@@ -36,6 +36,11 @@ public:
     Bool IsOpen() const { return nullptr != m_file; }
 
 
+    /// Properties ///
+
+    FILE* GetFilePointer() const { return m_file; }
+
+
 protected:
 
     explicit FileStream( const std::string& openMode );
