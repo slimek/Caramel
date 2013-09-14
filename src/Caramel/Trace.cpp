@@ -37,7 +37,7 @@ namespace Trace
 
 inline static Bool HasBuiltInChannel( Level level )
 {
-    return Level::DEBUG <= level && level <= Level::ERROR;
+    return LEVEL_DEBUG <= level && level <= LEVEL_ERROR;
 }
 
 
@@ -48,10 +48,10 @@ inline static Bool HasBuiltInChannel( Level level )
 
 TraceManager::TraceManager()
 {
-    m_builtinChannels.insert( std::make_pair( Level::DEBUG, &m_debugChannel ));
-    m_builtinChannels.insert( std::make_pair( Level::INFO,  &m_infoChannel ));
-    m_builtinChannels.insert( std::make_pair( Level::WARN,  &m_warnChannel ));
-    m_builtinChannels.insert( std::make_pair( Level::ERROR, &m_errorChannel ));
+    m_builtinChannels.insert( std::make_pair( LEVEL_DEBUG, &m_debugChannel ));
+    m_builtinChannels.insert( std::make_pair( LEVEL_INFO,  &m_infoChannel ));
+    m_builtinChannels.insert( std::make_pair( LEVEL_WARN,  &m_warnChannel ));
+    m_builtinChannels.insert( std::make_pair( LEVEL_ERROR, &m_errorChannel ));
 }
 
 
@@ -71,7 +71,7 @@ void TraceManager::BindListenerToBuiltinChannels( Level minLevel, Listener* list
     CARAMEL_ASSERT( HasBuiltInChannel( minLevel ));
 
     Level level = minLevel;
-    while ( Level::ERROR >= level )
+    while ( LEVEL_ERROR >= level )
     {
         BuiltinChannel* channel = m_builtinChannels.find( level )->second;
         channel->RegisterListener( listener );
@@ -177,12 +177,12 @@ void BuiltinChannel::Write( Level level, const std::string& message )
 void WriteToBuiltin( Level level, const std::string& message )
 {
     // Built-in channels don't accept level lower than DEBUG.
-    if ( Level::DEBUG > level ) { return; }
+    if ( LEVEL_DEBUG > level ) { return; }
 
     // Treats level greater than ERROR as ERROR.
-    if ( Level::ERROR < level )
+    if ( LEVEL_ERROR < level )
     {
-        level = Level::ERROR;
+        level = LEVEL_ERROR;
     }
 
     TraceManager::Instance()->WriteToBuiltinChannel( level, message );
@@ -191,7 +191,7 @@ void WriteToBuiltin( Level level, const std::string& message )
 
 void WriteToBuiltinFailed( const std::string& message )
 {
-    TraceManager::Instance()->WriteToBuiltinChannel( Level::WARN, message + " (Trace::Write() failed)" );
+    TraceManager::Instance()->WriteToBuiltinChannel( LEVEL_WARN, message + " (Trace::Write() failed)" );
 }
 
 
@@ -202,14 +202,14 @@ void WriteToBuiltinFailed( const std::string& message )
 
 Level NextLevel( Level inputLevel )
 {
-    if ( ! ( Level::SILENT <= inputLevel && inputLevel < Level::DEAF ))
+    if ( ! ( LEVEL_SILENT <= inputLevel && inputLevel < LEVEL_DEAF ))
     {
-        return Level::INVALID;
+        return LEVEL_INVALID;
     }
 
-    if ( Level::DEAF == inputLevel )
+    if ( LEVEL_DEAF == inputLevel )
     {
-        return Level::DEAF;
+        return LEVEL_DEAF;
     }
 
     return static_cast< Level >( static_cast< Int >( inputLevel ) + 1 );

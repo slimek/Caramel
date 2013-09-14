@@ -25,25 +25,25 @@ namespace Trace
 // Level of Severity
 // - The higher value, the more important.
 //
-enum class Level : Int
+enum Level : Int
 {
-    SILENT  = 0,  // Set channel to be silent
+    LEVEL_SILENT  = 0,  // Set channel to be silent
 
-    VERBOSE = 1,
-    DEBUG   = 2,
-    INFO    = 3,
-    WARN    = 4,
-    ERROR   = 5,
+    LEVEL_VERBOSE = 1,
+    LEVEL_DEBUG   = 2,
+    LEVEL_INFO    = 3,
+    LEVEL_WARN    = 4,
+    LEVEL_ERROR   = 5,
 
-    DEAF    = 6,  // Set listener to be deaf
+    LEVEL_DEAF    = 6,  // Set listener to be deaf
 
-    INVALID = -1,
+    LEVEL_INVALID = -1,
 
 
     /// Aliases ///
 
-    CHANNEL_DISABLED  = SILENT,
-    LISTENER_DISABLED = DEAF,
+    LEVEL_CHANNEL_DISABLED  = LEVEL_SILENT,
+    LEVEL_LISTENER_DISABLED = LEVEL_DEAF,
 };
 
 

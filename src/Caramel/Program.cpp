@@ -74,7 +74,7 @@ ConsoleApplicationImpl::ConsoleApplicationImpl()
 {
     auto stdoutListener = new Trace::StdoutListener;
 
-    stdoutListener->BindBuiltinChannels( Trace::Level::INFO );
+    stdoutListener->BindBuiltinChannels( Trace::LEVEL_INFO );
 
     // Pass ownership to trace listener.
     Trace::Listeners::AddManaged( stdoutListener );
@@ -83,7 +83,7 @@ ConsoleApplicationImpl::ConsoleApplicationImpl()
     {
         auto debuggerListener = new Windows::DebuggerTraceListener;
 
-        debuggerListener->BindBuiltinChannels( Trace::Level::DEBUG );
+        debuggerListener->BindBuiltinChannels( Trace::LEVEL_DEBUG );
 
         Trace::Listeners::AddManaged( debuggerListener );
     }
