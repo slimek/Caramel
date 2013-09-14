@@ -5,9 +5,11 @@
 
 #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
 
+#include <Caramel/Windows/CrtDebug.h>
 #include <Caramel/Windows/DebuggerTraceListener.h>
 #include <Caramel/Windows/FileInfo.h>
 #include <Caramel/Windows/WideString.h>
+#include <crtdbg.h>
 #include <windows.h>
 
 
@@ -20,10 +22,24 @@ namespace Windows
 //
 // Contents
 //
+//   CrtDebug
 //   DebuggerTraceListener
 //   FileInfo
 //   WideString
 //
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// CRT Debug
+//
+
+void EnableMemoryLeakCheckAtExit()
+{
+    Int flags = _CrtSetDbgFlag( _CRTDBG_REPORT_FLAG );
+    flags |= _CRTDBG_LEAK_CHECK_DF;
+    _CrtSetDbgFlag( flags );
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //
