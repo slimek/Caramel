@@ -11,6 +11,7 @@
 
 #include <Caramel/Object/Detail/LifetimeTracker.h>
 #include <boost/noncopyable.hpp>
+#include <atomic>
 #include <mutex>
 
 #if defined( CARAMEL_COMPILER_IS_GCC )
@@ -41,9 +42,13 @@ private:
     static void Create();
     static void Destroy( T* );
 
-    static volatile T* m_instance;
+    static std::atomic< T* > m_instance;
     static std::once_flag m_created;
     static Bool m_destroyed;
+
+    // NOTE: m_destroyed has no function in code.
+    //       but you may use it to check if a singleton is created more than once
+    //       when debugging.
 };
 
 
@@ -57,7 +62,7 @@ private:
 //
 
 template< typename T, Uint longevity >
-volatile T* Singleton< T, longevity >::m_instance = nullptr;
+std::atomic< T* > Singleton< T, longevity >::m_instance = nullptr;
 
 template< typename T, Uint longevity >
 std::once_flag Singleton< T, longevity >::m_created;
@@ -72,11 +77,11 @@ Bool Singleton< T, longevity >::m_destroyed = false;
 template< typename T, Uint longevity >
 inline T* Singleton< T, longevity >::Instance()
 {
-    if ( m_instance ) { return const_cast< T* >( m_instance ); }
+    if ( m_instance.load() ) { return m_instance; }
 
     std::call_once( m_created, &Create );
 
-    return const_cast< T* >( m_instance );
+    return m_instance;
 }
 
 
@@ -89,7 +94,7 @@ inline void Singleton< T, longevity >::Create()
     m_instance = new T;
 
     Detail::LifetimeTrackerSortedList::Insert(
-        const_cast< T* >( m_instance ), longevity, &Singleton::Destroy );
+        m_instance.load(), longevity, &Singleton::Destroy );
 }
 
 
@@ -101,7 +106,7 @@ inline void Singleton< T, longevity >::Destroy( T* )
 {
     m_destroyed = true;
 
-    delete m_instance;
+    delete m_instance.load();
     m_instance = nullptr;
 }
 
