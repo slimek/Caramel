@@ -32,25 +32,26 @@ namespace Concurrent
 //
 // Concurrent Priority Queue
 // - Based on boost::heap::binomial_heap
+//   The value with smallest key would be popped first.
 //
 
-template< typename Priority, typename T >
+template< typename Key, typename Value >
 class PriorityQueue : public boost::noncopyable
 {
 public:
 
-    void Push( const Priority& p, const T& x );
+    void Push( const Key& k, const Value& v );
 
 
 private:
 
     struct Entry
     {
-        Priority priority;
-        T value;
+        Key key;
+        Value value;
 
         Entry();
-        Entry( const Priority& p, const T& value );
+        Entry( const Key& k, const Value& v );
 
         Bool operator<( const Entry& rhs ) const;
     };
@@ -67,12 +68,12 @@ private:
 // Implementation
 //
 
-template< typename Priority, typename T >
-inline void PriorityQueue< Priority, T >::Push( const Priority& p, const T& x )
+template< typename Key, typename Value >
+inline void PriorityQueue< Key, Value >::Push( const Key& k, const Value& v )
 {
     auto ulock = UniqueLock( m_heapMutex );
 
-    m_heap.push( Entry( p, x ));
+    m_heap.push( Entry( k, v ));
 }
 
 
