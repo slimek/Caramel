@@ -50,6 +50,7 @@ Workpile::Workpile()
 
 void Workpile::Submit( const Task& task )
 {
+    m_impl->m_delayedTasks.Push( 1, task );
 }
 
 

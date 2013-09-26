@@ -24,6 +24,7 @@
     <ClInclude Include="..\include\Caramel\Caramel.h" />
     <ClInclude Include="..\include\Caramel\Chrono\Detail\SteadyClockCore.h" />
     <ClInclude Include="..\include\Caramel\Chrono\SteadyClock.h" />
+    <ClInclude Include="..\include\Caramel\Concurrent\PriorityQueue.h" />
     <ClInclude Include="..\include\Caramel\Error\Assert.h" />
     <ClInclude Include="..\include\Caramel\Error\Detail\ExceptionCatcherCore.h" />
     <ClInclude Include="..\include\Caramel\Error\Exception.h" />
@@ -69,7 +70,7 @@
     <ClInclude Include="..\include\Caramel\Task\TaskExecutor.h" />
     <ClInclude Include="..\include\Caramel\Task\TaskTypes.h" />
     <ClInclude Include="..\include\Caramel\Task\Workpile.h" />
-    <ClInclude Include="..\include\Caramel\Thread\Mutex.h" />
+    <ClInclude Include="..\include\Caramel\Thread\MutexLocks.h" />
     <ClInclude Include="..\include\Caramel\Trace\Channel.h" />
     <ClInclude Include="..\include\Caramel\Trace\Listeners.h" />
     <ClInclude Include="..\include\Caramel\Trace\Trace.h" />

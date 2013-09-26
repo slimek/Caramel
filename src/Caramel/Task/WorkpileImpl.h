@@ -9,6 +9,7 @@
 #pragma once
 #endif
 
+#include <Caramel/Concurrent/PriorityQueue.h>
 #include <Caramel/Task/Workpile.h>
 
 
@@ -22,9 +23,14 @@ namespace Caramel
 
 class WorkpileImpl
 {
+    friend class Workpile;
+
 public:
 
 private:
+
+    typedef Concurrent::PriorityQueue< Int, Task > DelayedTaskQueue;
+    DelayedTaskQueue m_delayedTasks;
 
 };
 

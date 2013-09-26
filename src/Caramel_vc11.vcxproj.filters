@@ -111,6 +111,9 @@
     <Filter Include="2. Sources\Task">
       <UniqueIdentifier>{0fb274cb-3d31-4f1f-b6bf-39db22eec813}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\Concurrent">
+      <UniqueIdentifier>{f07852aa-7d21-4ae6-b4b2-8452db39978a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -145,9 +148,6 @@
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Trace\Trace.h">
       <Filter>1. Public Packages\Trace</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Caramel\Thread\Mutex.h">
-      <Filter>1. Public Packages\Thread</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Object\Singleton.h">
       <Filter>1. Public Packages\Object</Filter>
@@ -340,6 +340,12 @@
     </ClInclude>
     <ClInclude Include="Caramel\Task\WorkpileImpl.h">
       <Filter>2. Sources\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Concurrent\PriorityQueue.h">
+      <Filter>1. Public Packages\Concurrent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Thread\MutexLocks.h">
+      <Filter>1. Public Packages\Thread</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
