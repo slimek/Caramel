@@ -65,6 +65,10 @@
     <ClInclude Include="..\include\Caramel\String\StringConvertible.h" />
     <ClInclude Include="..\include\Caramel\String\TextEncoding.h" />
     <ClInclude Include="..\include\Caramel\String\Utf8String.h" />
+    <ClInclude Include="..\include\Caramel\Task\Task.h" />
+    <ClInclude Include="..\include\Caramel\Task\TaskExecutor.h" />
+    <ClInclude Include="..\include\Caramel\Task\TaskTypes.h" />
+    <ClInclude Include="..\include\Caramel\Task\Workpile.h" />
     <ClInclude Include="..\include\Caramel\Thread\Mutex.h" />
     <ClInclude Include="..\include\Caramel\Trace\Channel.h" />
     <ClInclude Include="..\include\Caramel\Trace\Listeners.h" />
@@ -87,6 +91,8 @@
     <ClInclude Include="Caramel\Program\ConsoleApplicationImpl.h" />
     <ClInclude Include="Caramel\Program\ProgramOptionsManager.h" />
     <ClInclude Include="Caramel\String\SprintfManager.h" />
+    <ClInclude Include="Caramel\Task\TaskImpl.h" />
+    <ClInclude Include="Caramel\Task\WorkpileImpl.h" />
     <ClInclude Include="Caramel\Trace\ChannelImpl.h" />
     <ClInclude Include="Caramel\Trace\TraceManager.h" />
   </ItemGroup>
@@ -104,6 +110,7 @@
     <ClCompile Include="Caramel\Object.cpp" />
     <ClCompile Include="Caramel\Program.cpp" />
     <ClCompile Include="Caramel\String.cpp" />
+    <ClCompile Include="Caramel\Task.cpp" />
     <ClCompile Include="Caramel\Trace.cpp" />
     <ClCompile Include="Caramel\Windows.cpp" />
   </ItemGroup>

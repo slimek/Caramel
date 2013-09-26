@@ -105,6 +105,12 @@
     <Filter Include="3. Precompiled Header">
       <UniqueIdentifier>{6b2078f8-204b-415c-9dc4-1b54f1aed52f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\Task">
+      <UniqueIdentifier>{b4abbdeb-1664-4058-af18-36b81192f386}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\Task">
+      <UniqueIdentifier>{0fb274cb-3d31-4f1f-b6bf-39db22eec813}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -317,6 +323,24 @@
     <ClInclude Include="..\include\Caramel\Windows\CrtDebug.h">
       <Filter>1. Public Packages\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Task\Task.h">
+      <Filter>1. Public Packages\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Task\TaskExecutor.h">
+      <Filter>1. Public Packages\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Task\Workpile.h">
+      <Filter>1. Public Packages\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="Caramel\Task\TaskImpl.h">
+      <Filter>2. Sources\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Task\TaskTypes.h">
+      <Filter>1. Public Packages\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="Caramel\Task\WorkpileImpl.h">
+      <Filter>2. Sources\Task</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\Trace.cpp">
@@ -354,6 +378,9 @@
     </ClCompile>
     <ClCompile Include="Caramel\CaramelPchCreator.cpp">
       <Filter>3. Precompiled Header</Filter>
+    </ClCompile>
+    <ClCompile Include="Caramel\Task.cpp">
+      <Filter>2. Sources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
