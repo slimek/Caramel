@@ -1,12 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Main Entry">
+    <Filter Include="1. Main Entry">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Tests">
+    <Filter Include="2. Tests">
       <UniqueIdentifier>{c34d4fba-1a27-475f-bec4-6eec171c9eb0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="3. Precompiled Header">
+      <UniqueIdentifier>{5bf651e5-940d-421f-bfc0-e548e50759fa}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="RunTest.cpp">
+      <Filter>1. Main Entry</Filter>
+    </ClCompile>
+    <ClCompile Include="CaramelTestPchCreator.cpp">
+      <Filter>3. Precompiled Header</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CaramelTestPch.h">
+      <Filter>3. Precompiled Header</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,0 +1,41 @@
+// Caramel C++ Library Test - Run Test Main Entry
+
+#include "CaramelTestPch.h"
+
+#include <Caramel/Program/ConsoleApplication.h>
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Run Test
+//
+
+class RunTest : public ConsoleApplication
+{
+private:
+
+    Int Main();
+};
+
+
+Int RunTest::Main()
+{
+    return EXIT_SUCCESS;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Main Entry
+//
+
+int main()
+{
+    //RunTest app;
+    //return app.Run();
+
+    return 0;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
