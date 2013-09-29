@@ -27,6 +27,11 @@
 #include <type_traits>
 #include <vector>
 
+// Windows SDK Headers
+#if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+#include <Windows.h>
+#endif
+
 // Caramel Headers
 #include <Caramel/Caramel.h>
 #include <Caramel/Error/Assert.h>

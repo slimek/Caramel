@@ -31,10 +31,8 @@ Int RunTest::Main()
 
 int main()
 {
-    //RunTest app;
-    //return app.Run();
-
-    return 0;
+    RunTest app;
+    return app.Run();
 }
 
 
