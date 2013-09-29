@@ -10,16 +10,8 @@
 #endif
 
 #include <Caramel/Thread/MutexLocks.h>
+#include <boost/heap/priority_queue.hpp>
 #include <boost/noncopyable.hpp>
-
-#if defined( CARAMEL_COMPILER_IS_MSVC )
-#pragma warning( push )
-#pragma warning( disable:4390 )
-#include <boost/heap/binomial_heap.hpp>
-#pragma warning( pop )
-#else
-#include <boost/heap/binomial_heap.hpp>
-#endif
 
 
 namespace Caramel
@@ -31,7 +23,7 @@ namespace Concurrent
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Concurrent Priority Queue
-// - Based on boost::heap::binomial_heap
+// - Based on boost::heap::priority_queue
 //   The value with smallest key would be popped first.
 //
 
@@ -56,10 +48,10 @@ private:
         Bool operator<( const Entry& rhs ) const;
     };
 
-    typedef boost::heap::binomial_heap< Entry > HeapType;
-    HeapType m_heap;
+    typedef boost::heap::priority_queue< Entry > QueueType;
+    QueueType m_queue;
 
-    std::mutex m_heapMutex;
+    std::mutex m_queueMutex;
 };
 
 
@@ -71,9 +63,9 @@ private:
 template< typename Key, typename Value >
 inline void PriorityQueue< Key, Value >::Push( const Key& k, const Value& v )
 {
-    auto ulock = UniqueLock( m_heapMutex );
+    auto ulock = UniqueLock( m_queueMutex );
 
-    m_heap.push( Entry( k, v ));
+    m_queue.push( Entry( k, v ));
 }
 
 
