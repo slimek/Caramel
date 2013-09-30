@@ -165,8 +165,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IntDir>..\obj\$(Configuration)$(Platform)_vc11\</IntDir>
-    <OutDir>..\lib\$(Configuration)$(Platform)\</OutDir>
+    <IntDir>..\obj\$(Platform).$(Configuration)\$(ProjectName)\</IntDir>
+    <OutDir>..\lib\$(Platform).$(Configuration)\</OutDir>
     <TargetName>$(ProjectName)_vc11</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -175,8 +175,8 @@
     <TargetName>$(ProjectName)_vc11</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IntDir>..\obj\$(Configuration)$(Platform)_vc11\</IntDir>
-    <OutDir>..\lib\$(Configuration)$(Platform)\</OutDir>
+    <IntDir>..\obj\$(Platform).$(Configuration)_vc11\</IntDir>
+    <OutDir>..\lib\$(Platform).$(Configuration)\</OutDir>
     <TargetName>$(ProjectName)_vc11</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -190,7 +190,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;CARAMEL_SOURCE;_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\include;..\..\Boost;..\..\..\lib-free\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\include;..\..\CandyJar\include</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
       <PrecompiledHeaderFile>Caramel/CaramelPch.h</PrecompiledHeaderFile>
@@ -222,7 +222,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;CARAMEL_SOURCE;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\include;..\..\Boost;..\..\..\lib-free\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\include;..\..\CandyJar\include</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeaderFile>Caramel/CaramelPch.h</PrecompiledHeaderFile>
     </ClCompile>
