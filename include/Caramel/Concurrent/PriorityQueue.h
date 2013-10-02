@@ -12,6 +12,7 @@
 #include <Caramel/Thread/MutexLocks.h>
 #include <boost/heap/priority_queue.hpp>
 #include <boost/noncopyable.hpp>
+#include <functional>
 
 
 namespace Caramel
@@ -24,31 +25,56 @@ namespace Concurrent
 //
 // Concurrent Priority Queue
 // - Based on boost::heap::priority_queue
-//   The value with smallest key would be popped first.
+//
+//   The default compare is std::less, which results in
+//   the value with the LARGEST key would be popped first.
+//
+//   If you want the SMALLEST key popped first, use std::greater.   
 //
 
-template< typename Key, typename Value >
+template< typename Key, typename Value, typename KeyCompare = std::less< Key > >
 class PriorityQueue : public boost::noncopyable
 {
 public:
 
+    /// Operations ///
+
     void Push( const Key& k, const Value& v );
+
+    Bool TryPop( Value& v );
+
+
+    /// Not Thread-safe Properties ///
+
+    Bool IsEmpty() const { return m_queue.empty(); }
 
 
 private:
+
+    /// Internal Types ///
 
     struct Entry
     {
         Key key;
         Value value;
 
-        Entry();
-        Entry( const Key& k, const Value& v );
-
-        Bool operator<( const Entry& rhs ) const;
+        Entry() {}
+        Entry( const Key& k, const Value& v ) : key( k ), value( v ) {}
     };
 
-    typedef boost::heap::priority_queue< Entry > QueueType;
+    template< typename KeyCompare >
+    struct EntryCompare
+    {
+        KeyCompare compare;
+
+        Bool operator()( const Entry& lhs, const Entry& rhs ) const { return compare( lhs.key, rhs.key ); }
+    };
+
+
+    /// Data Members ///
+
+    typedef boost::heap::priority_queue<
+        Entry, boost::heap::compare< EntryCompare< KeyCompare > > > QueueType;
     QueueType m_queue;
 
     std::mutex m_queueMutex;
@@ -60,12 +86,28 @@ private:
 // Implementation
 //
 
-template< typename Key, typename Value >
-inline void PriorityQueue< Key, Value >::Push( const Key& k, const Value& v )
+template< typename Key, typename Value, typename KeyCompare >
+inline void PriorityQueue< Key, Value, KeyCompare >::Push( const Key& k, const Value& v )
 {
     auto ulock = UniqueLock( m_queueMutex );
 
     m_queue.push( Entry( k, v ));
+}
+
+
+template< typename Key, typename Value, typename KeyCompare >
+inline Bool PriorityQueue< Key, Value, KeyCompare >::TryPop( Value& value )
+{
+    if ( m_queue.empty() ) { return false; }
+
+    auto ulock = UniqueLock( m_queueMutex );
+
+    if ( m_queue.empty() ) { return false; }
+
+    value = m_queue.top().value;
+    m_queue.pop();
+    
+    return true;
 }
 
 

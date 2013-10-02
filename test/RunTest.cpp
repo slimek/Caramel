@@ -3,6 +3,7 @@
 #include "CaramelTestPch.h"
 
 #include <Caramel/Program/ConsoleApplication.h>
+#include <UnitTest++/UnitTest++.h>
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -20,7 +21,7 @@ private:
 
 Int RunTest::Main()
 {
-    return EXIT_SUCCESS;
+    return UnitTest::RunAllTests();
 }
 
 

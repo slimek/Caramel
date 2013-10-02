@@ -20,6 +20,9 @@
 // Caramel Headers
 #include <Caramel/Setup/PchHeaders.h>
 
+// UnitTest++ Headers
+#include <UnitTest++/UnitTest++.h>
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //

@@ -11,6 +11,9 @@
     <Filter Include="3. Precompiled Header">
       <UniqueIdentifier>{5bf651e5-940d-421f-bfc0-e548e50759fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\Concurrent">
+      <UniqueIdentifier>{751a0151-c028-45dd-994c-22a136a657eb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RunTest.cpp">
@@ -18,6 +21,9 @@
     </ClCompile>
     <ClCompile Include="CaramelTestPchCreator.cpp">
       <Filter>3. Precompiled Header</Filter>
+    </ClCompile>
+    <ClCompile Include="Concurrent\PriorityQueueTest.cpp">
+      <Filter>2. Tests\Concurrent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
