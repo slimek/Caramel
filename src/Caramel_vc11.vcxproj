@@ -165,7 +165,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IntDir>..\obj\$(Platform).$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir>..\obj\$(Platform).$(Configuration)\$(ProjectName)_vc11\</IntDir>
     <OutDir>..\lib\$(Platform).$(Configuration)\</OutDir>
     <TargetName>$(ProjectName)_vc11</TargetName>
   </PropertyGroup>
@@ -175,7 +175,7 @@
     <TargetName>$(ProjectName)_vc11</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IntDir>..\obj\$(Platform).$(Configuration)_vc11\</IntDir>
+    <IntDir>..\obj\$(Platform).$(Configuration)\$(ProjectName)_vc11\</IntDir>
     <OutDir>..\lib\$(Platform).$(Configuration)\</OutDir>
     <TargetName>$(ProjectName)_vc11</TargetName>
   </PropertyGroup>
