@@ -9,6 +9,7 @@
 #pragma once
 #endif
 
+#include <Caramel/Chrono/Durations.h>
 #include <Caramel/Task/TaskTypes.h>
 
 
@@ -26,8 +27,28 @@ class Task
 {
 public:
 
-    Task();
-    explicit Task( TaskFunction&& f );
+    Task();  // Create a "not-a-task". Submit it results in nothing.
+
+    Task( const std::string& name, TaskFunction&& f );
+
+
+    /// Delay : Schedule the task after due time. ///
+
+    Task& DelayFor( const TickDuration& ticks );
+    Task& DelayFor( const SecondDuration& seconds );
+
+
+    /// Properties ///
+
+    std::string Name() const;
+
+    Bool IsEmpty()     const;  // "Not a task"
+    Bool IsCompleted() const;  // "Ran to Completion" or Cancelled
+
+
+    /// Internal Accessors ///
+    
+    std::shared_ptr< TaskImpl > GetImpl() const { return m_impl; }
 
 
 private:

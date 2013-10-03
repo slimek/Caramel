@@ -1,7 +1,7 @@
-// Caramel C++ Library - Task Facility - Workpile Header
+// Caramel C++ Library - Task Facility - Task Poller Header
 
-#ifndef __CARAMEL_TASK_WORKPILE_H
-#define __CARAMEL_TASK_WORKPILE_H
+#ifndef __CARAMEL_TASK_TASK_POLLER_H
+#define __CARAMEL_TASK_TASK_POLLER_H
 
 #include <Caramel/Caramel.h>
 
@@ -17,16 +17,16 @@ namespace Caramel
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Workpile
+// Task Poller
 //
 
-class WorkpileImpl;
+class TaskPollerImpl;
 
-class Workpile : public TaskExecutor
+class TaskPoller : public TaskExecutor
 {
 public:
 
-    Workpile();
+    TaskPoller();
 
     void Submit( const Task& task ) override;
 
@@ -35,7 +35,7 @@ public:
 
 private:
 
-    std::shared_ptr< WorkpileImpl > m_impl;
+    std::shared_ptr< TaskPollerImpl > m_impl;
 };
 
 
@@ -43,4 +43,4 @@ private:
 
 } // namespace Caramel
 
-#endif // __CARAMEL_TASK_WORKPILE_H
+#endif // __CARAMEL_TASK_TASK_POLLER_H

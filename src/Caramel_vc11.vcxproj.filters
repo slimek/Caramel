@@ -329,17 +329,11 @@
     <ClInclude Include="..\include\Caramel\Task\TaskExecutor.h">
       <Filter>1. Public Packages\Task</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\Task\Workpile.h">
-      <Filter>1. Public Packages\Task</Filter>
-    </ClInclude>
     <ClInclude Include="Caramel\Task\TaskImpl.h">
       <Filter>2. Sources\Task</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Task\TaskTypes.h">
       <Filter>1. Public Packages\Task</Filter>
-    </ClInclude>
-    <ClInclude Include="Caramel\Task\WorkpileImpl.h">
-      <Filter>2. Sources\Task</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Concurrent\PriorityQueue.h">
       <Filter>1. Public Packages\Concurrent</Filter>
@@ -349,6 +343,15 @@
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Concurrent\Queue.h">
       <Filter>1. Public Packages\Concurrent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Task\TaskPoller.h">
+      <Filter>1. Public Packages\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="Caramel\Task\TaskPollerImpl.h">
+      <Filter>2. Sources\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Chrono\Durations.h">
+      <Filter>1. Public Packages\Chrono</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

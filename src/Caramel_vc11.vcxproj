@@ -23,6 +23,7 @@
     <ClInclude Include="..\include\Caramel\Async\TimedBool.h" />
     <ClInclude Include="..\include\Caramel\Caramel.h" />
     <ClInclude Include="..\include\Caramel\Chrono\Detail\SteadyClockCore.h" />
+    <ClInclude Include="..\include\Caramel\Chrono\Durations.h" />
     <ClInclude Include="..\include\Caramel\Chrono\SteadyClock.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\PriorityQueue.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\Queue.h" />
@@ -70,7 +71,7 @@
     <ClInclude Include="..\include\Caramel\Task\Task.h" />
     <ClInclude Include="..\include\Caramel\Task\TaskExecutor.h" />
     <ClInclude Include="..\include\Caramel\Task\TaskTypes.h" />
-    <ClInclude Include="..\include\Caramel\Task\Workpile.h" />
+    <ClInclude Include="..\include\Caramel\Task\TaskPoller.h" />
     <ClInclude Include="..\include\Caramel\Thread\MutexLocks.h" />
     <ClInclude Include="..\include\Caramel\Trace\Channel.h" />
     <ClInclude Include="..\include\Caramel\Trace\Listeners.h" />
@@ -94,7 +95,7 @@
     <ClInclude Include="Caramel\Program\ProgramOptionsManager.h" />
     <ClInclude Include="Caramel\String\SprintfManager.h" />
     <ClInclude Include="Caramel\Task\TaskImpl.h" />
-    <ClInclude Include="Caramel\Task\WorkpileImpl.h" />
+    <ClInclude Include="Caramel\Task\TaskPollerImpl.h" />
     <ClInclude Include="Caramel\Trace\ChannelImpl.h" />
     <ClInclude Include="Caramel\Trace\TraceManager.h" />
   </ItemGroup>

@@ -24,13 +24,24 @@ class TaskImpl
 {
 public:
 
-    explicit TaskImpl( TaskFunction&& f );
+    TaskImpl( const std::string& name, TaskFunction&& f );
+
+
+    /// Properties ///
+
+    Bool IsDelayed() const;
+
+    TickDuration GetDelayDuration() const;
+
 
 private:
 
+    std::string  m_name;
     TaskFunction m_function;
 
 };
+
+typedef std::shared_ptr< TaskImpl > TaskPtr;
 
 
 ///////////////////////////////////////////////////////////////////////////////

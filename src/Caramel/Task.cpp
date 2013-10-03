@@ -3,7 +3,7 @@
 #include <Caramel/CaramelPch.h>
 
 #include <Caramel/Task/TaskImpl.h>
-#include <Caramel/Task/WorkpileImpl.h>
+#include <Caramel/Task/TaskPollerImpl.h>
 
 
 namespace Caramel
@@ -13,7 +13,7 @@ namespace Caramel
 // Contents
 //
 //   Task
-//   Workpile
+//   TaskPoller
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -21,8 +21,8 @@ namespace Caramel
 // Task
 //
 
-Task::Task( TaskFunction&& f )
-    : m_impl( new TaskImpl( std::move( f )))
+Task::Task( const std::string& name, TaskFunction&& f )
+    : m_impl( new TaskImpl( name, std::move( f )))
 {
 }
 
@@ -31,30 +31,40 @@ Task::Task( TaskFunction&& f )
 // Implementation
 //
 
-TaskImpl::TaskImpl( TaskFunction&& f )
-    : m_function( f )
+TaskImpl::TaskImpl( const std::string& name, TaskFunction&& f )
+    : m_name( name )
+    , m_function( f )
 {
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Workpile
+// TaskPoller
 //
 
-Workpile::Workpile()
-    : m_impl( new WorkpileImpl )
+TaskPoller::TaskPoller()
+    : m_impl( new TaskPollerImpl )
 {
 }
 
 
-void Workpile::Submit( const Task& task )
+void TaskPoller::Submit( const Task& inputTask )
 {
-    m_impl->m_delayedTasks.Push( 1, task );
+    TaskPtr task = inputTask.GetImpl();
+
+    if ( task->IsDelayed() )
+    {
+        m_impl->m_delayedTasks.Push( task->GetDelayDuration(), task );
+    }
+    else
+    {
+        m_impl->m_readyTasks.Push( task );
+    }
 }
 
 
-void Workpile::PollOne()
+void TaskPoller::PollOne()
 {
 }
 
