@@ -347,6 +347,9 @@
     <ClInclude Include="..\include\Caramel\Thread\MutexLocks.h">
       <Filter>1. Public Packages\Thread</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Concurrent\Queue.h">
+      <Filter>1. Public Packages\Concurrent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\Trace.cpp">
