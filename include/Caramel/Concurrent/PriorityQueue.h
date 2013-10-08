@@ -44,6 +44,12 @@ public:
     Bool TryPop( Value& v );
 
 
+    /// Thread-safe Properties ///
+
+    // Returns false if the queue is empty.
+    Bool PeekTopKey( Key& key ) const;
+
+
     /// Not Thread-safe Properties ///
 
     Bool IsEmpty() const { return m_queue.empty(); }
@@ -77,7 +83,7 @@ private:
         Entry, boost::heap::compare< EntryCompare< KeyCompare > > > QueueType;
     QueueType m_queue;
 
-    std::mutex m_queueMutex;
+    mutable std::mutex m_queueMutex;
 };
 
 
@@ -106,7 +112,22 @@ inline Bool PriorityQueue< Key, Value, KeyCompare >::TryPop( Value& value )
 
     value = m_queue.top().value;
     m_queue.pop();
-    
+
+    return true;
+}
+
+
+template< typename Key, typename Value, typename KeyCompare >
+inline Bool PriorityQueue< Key, Value, KeyCompare >::PeekTopKey( Key& key ) const
+{
+    if ( m_queue.empty() ) { return false; }
+
+    auto ulock = UniqueLock( m_queueMutex );
+
+    if ( m_queue.empty() ) { return false; }
+
+    key = m_queue.top().key;
+
     return true;
 }
 

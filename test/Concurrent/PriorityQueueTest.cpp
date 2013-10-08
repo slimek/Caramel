@@ -61,6 +61,40 @@ TEST( PriorityQueueTest )
 
         CHECK( false == queue.TryPop( value ));
     }
+
+    // Peek top key
+    {
+        typedef Concurrent::PriorityQueue< Int, std::string > QueueType;
+        QueueType queue;
+
+        Int key = 0;
+        std::string value;
+
+        CHECK( false == queue.PeekTopKey( key ));
+
+        queue.Push( 1, "one" );
+
+        CHECK( true == queue.PeekTopKey( key ));
+        CHECK( 1 == key );
+
+        queue.Push( 2, "two" );
+
+        CHECK( true == queue.PeekTopKey( key ));
+        CHECK( 2 == key );
+
+        queue.TryPop( value );
+
+        CHECK( "two" == value );
+
+        CHECK( true == queue.PeekTopKey( key ));
+        CHECK( 1 == key );
+
+        queue.TryPop( value );
+
+        CHECK( "one" == value );
+
+        CHECK( false == queue.PeekTopKey( key ));
+    }
 }
 
 

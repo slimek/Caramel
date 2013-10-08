@@ -4,7 +4,10 @@
 
 #include <Caramel/Program/ConsoleApplication.h>
 #include <UnitTest++/UnitTest++.h>
+#include <iostream>
 
+
+using namespace std;
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -21,7 +24,11 @@ private:
 
 Int RunTest::Main()
 {
-    return UnitTest::RunAllTests();
+    const Int result = UnitTest::RunAllTests();
+
+    cin.get();
+
+    return result;
 }
 
 
