@@ -353,6 +353,9 @@
     <ClInclude Include="..\include\Caramel\Chrono\Durations.h">
       <Filter>1. Public Packages\Chrono</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Object\AutoNumbered.h">
+      <Filter>1. Public Packages\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\Trace.cpp">
