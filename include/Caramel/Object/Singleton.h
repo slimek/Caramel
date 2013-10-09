@@ -11,12 +11,8 @@
 
 #include <Caramel/Object/Detail/LifetimeTracker.h>
 #include <boost/noncopyable.hpp>
+#include <boost/thread/once.hpp>
 #include <atomic>
-#include <mutex>
-
-#if defined( CARAMEL_COMPILER_IS_GCC )
-#include <thread>  // for std::call_once()
-#endif
 
 
 namespace Caramel
@@ -42,8 +38,8 @@ private:
     static void Create();
     static void Destroy( T* );
 
-    static std::atomic< T* > m_instance;
-    static std::once_flag m_created;
+    static volatile T* m_instance;
+    static boost::once_flag m_created;
     static Bool m_destroyed;
 
     // NOTE: m_destroyed has no function in code.
@@ -62,10 +58,10 @@ private:
 //
 
 template< typename T, Uint longevity >
-std::atomic< T* > Singleton< T, longevity >::m_instance = nullptr;
+volatile T* Singleton< T, longevity >::m_instance = nullptr;
 
 template< typename T, Uint longevity >
-std::once_flag Singleton< T, longevity >::m_created;
+boost::once_flag Singleton< T, longevity >::m_created = BOOST_ONCE_INIT;
 
 template< typename T, Uint longevity >
 Bool Singleton< T, longevity >::m_destroyed = false;
@@ -77,11 +73,11 @@ Bool Singleton< T, longevity >::m_destroyed = false;
 template< typename T, Uint longevity >
 inline T* Singleton< T, longevity >::Instance()
 {
-    if ( m_instance.load() ) { return m_instance; }
+    if ( m_instance ) { return const_cast< T* >( m_instance ); }
 
-    std::call_once( m_created, &Create );
+    boost::call_once( &Create, m_created );
 
-    return m_instance;
+    return const_cast< T* >( m_instance );
 }
 
 
@@ -91,10 +87,15 @@ inline T* Singleton< T, longevity >::Instance()
 template< typename T, Uint longevity >
 inline void Singleton< T, longevity >::Create()
 {
-    m_instance = new T;
+    T* instance = new T;
+    
+    // Make sure the instance is fully created before be assigned to m_instance.
+    std::atomic_thread_fence( std::memory_order_release );
+
+    m_instance = instance;
 
     Detail::LifetimeTrackerSortedList::Insert(
-        m_instance.load(), longevity, &Singleton::Destroy );
+        const_cast< T* >( m_instance ), longevity, &Singleton::Destroy );
 }
 
 
@@ -106,7 +107,7 @@ inline void Singleton< T, longevity >::Destroy( T* )
 {
     m_destroyed = true;
 
-    delete m_instance.load();
+    delete m_instance;
     m_instance = nullptr;
 }
 
