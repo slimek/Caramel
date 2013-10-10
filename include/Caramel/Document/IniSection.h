@@ -1,4 +1,4 @@
-// Caramel C++ Library - File View Amenity - INI Section Header
+// Caramel C++ Library - Document Facility - INI Section Header
 
 #ifndef __CARAMEL_FILE_VIEW_INI_SECTION_H
 #define __CARAMEL_FILE_VIEW_INI_SECTION_H
@@ -24,7 +24,7 @@ class IniSectionImpl;
 
 class IniSection
 {
-    friend class IniFileView;
+    friend class IniDocument;
 
 public:
 

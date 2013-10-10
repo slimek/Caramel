@@ -1,10 +1,10 @@
-// Caramel C++ Library - File View Facility - Implementation
+// Caramel C++ Library - Document Facility - Implementation
 
 #include <Caramel/CaramelPch.h>
 
-#include <Caramel/FileView/IniFileViewImpl.h>
-#include <Caramel/FileView/IniSectionImpl.h>
-#include <Caramel/FileView/IniSyntax.h>
+#include <Caramel/Document/IniDocumentImpl.h>
+#include <Caramel/Document/IniSectionImpl.h>
+#include <Caramel/Document/IniSyntax.h>
 #include <Caramel/Io/InputFileStream.h>
 #include <Caramel/Io/TextStreamReader.h>
 #include <Caramel/Lexical/Boolean.h>
@@ -20,7 +20,7 @@ namespace Caramel
 //
 // Contents
 //
-//   IniFileView
+//   IniDocument
 //   IniSection
 //   IniLine
 //   IniArray
@@ -28,17 +28,17 @@ namespace Caramel
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// INI File View
+// INI Document
 //
 
-IniFileView::IniFileView()
-    : m_impl( new IniFileViewImpl )
+IniDocument::IniDocument()
+    : m_impl( new IniDocumentImpl )
 {
 }
 
 
-IniFileView::IniFileView( const std::string& fileName )
-    : m_impl( new IniFileViewImpl )
+IniDocument::IniDocument( const std::string& fileName )
+    : m_impl( new IniDocumentImpl )
 {
     CARAMEL_CHECK_UTF8_ARGUMENT( u8FileName, fileName );
 
@@ -46,19 +46,19 @@ IniFileView::IniFileView( const std::string& fileName )
 }
 
 
-IniFileView::IniFileView( const Utf8String& fileName )
-    : m_impl( new IniFileViewImpl )
+IniDocument::IniDocument( const Utf8String& fileName )
+    : m_impl( new IniDocumentImpl )
 {
     this->LoadFromFile( fileName );
 }
 
 
-IniFileView::~IniFileView()
+IniDocument::~IniDocument()
 {
 }
 
 
-void IniFileView::LoadFromFile( const std::string& fileName )
+void IniDocument::LoadFromFile( const std::string& fileName )
 {
     CARAMEL_CHECK_UTF8_ARGUMENT( u8FileName, fileName );
 
@@ -66,7 +66,7 @@ void IniFileView::LoadFromFile( const std::string& fileName )
 }
 
 
-void IniFileView::LoadFromFile( const Utf8String& fileName )
+void IniDocument::LoadFromFile( const Utf8String& fileName )
 {
     Path path( fileName );
     
@@ -82,13 +82,13 @@ void IniFileView::LoadFromFile( const Utf8String& fileName )
 }
 
 
-void IniFileView::LoadFromText( TextReader& reader )
+void IniDocument::LoadFromText( TextReader& reader )
 {
     m_impl->LoadFromText( reader );
 }
 
 
-IniSection IniFileView::GetSection( const std::string& sectionName )
+IniSection IniDocument::GetSection( const std::string& sectionName )
 {
     IniSectionPtr section = m_impl->FindSection( sectionName );
     if ( ! section )
@@ -104,14 +104,14 @@ IniSection IniFileView::GetSection( const std::string& sectionName )
 // Implementation
 //
 
-IniFileViewImpl::IniFileViewImpl()
+IniDocumentImpl::IniDocumentImpl()
     : m_textEncoding( TEXT_ENCODING_UTF8 )
     , m_currSection( nullptr )
 {
 }
 
 
-void IniFileViewImpl::LoadFromText( TextReader& reader )
+void IniDocumentImpl::LoadFromText( TextReader& reader )
 {
     this->Clear();
     this->AddSection( "", "" );
@@ -165,7 +165,7 @@ void IniFileViewImpl::LoadFromText( TextReader& reader )
 // Manipulators
 //
 
-void IniFileViewImpl::Clear()
+void IniDocumentImpl::Clear()
 {
     m_currSection.reset();
     m_sectionMap.clear();
@@ -177,7 +177,7 @@ void IniFileViewImpl::Clear()
 // Section Management
 //
 
-void IniFileViewImpl::AddSection( const std::string& sectionName, const std::string& rawLine )
+void IniDocumentImpl::AddSection( const std::string& sectionName, const std::string& rawLine )
 {
     SectionMap::iterator is = m_sectionMap.find( sectionName );
     if ( m_sectionMap.end() != is )
@@ -193,7 +193,7 @@ void IniFileViewImpl::AddSection( const std::string& sectionName, const std::str
 }
 
 
-IniSectionPtr IniFileViewImpl::FindSection( const std::string& sectionName ) const
+IniSectionPtr IniDocumentImpl::FindSection( const std::string& sectionName ) const
 {
     SectionMap::const_iterator is = m_sectionMap.find( sectionName );
     if ( m_sectionMap.end() == is )

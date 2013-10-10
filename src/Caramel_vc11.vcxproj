@@ -29,6 +29,8 @@
     <ClInclude Include="..\include\Caramel\Chrono\TimePoints.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\PriorityQueue.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\Queue.h" />
+    <ClInclude Include="..\include\Caramel\Document\IniDocument.h" />
+    <ClInclude Include="..\include\Caramel\Document\IniSection.h" />
     <ClInclude Include="..\include\Caramel\Error\Assert.h" />
     <ClInclude Include="..\include\Caramel\Error\Detail\ExceptionCatcherCore.h" />
     <ClInclude Include="..\include\Caramel\Error\Exception.h" />
@@ -36,9 +38,6 @@
     <ClInclude Include="..\include\Caramel\FileSystem\DirectoryInfo.h" />
     <ClInclude Include="..\include\Caramel\FileSystem\FileInfo.h" />
     <ClInclude Include="..\include\Caramel\FileSystem\Path.h" />
-    <ClInclude Include="..\include\Caramel\FileView\IniFileView.h" />
-    <ClInclude Include="..\include\Caramel\FileView\IniSection.h" />
-    <ClInclude Include="..\include\Caramel\FileView\IniSyntax.h" />
     <ClInclude Include="..\include\Caramel\Functional\ScopeExit.h" />
     <ClInclude Include="..\include\Caramel\Io\FileStream.h" />
     <ClInclude Include="..\include\Caramel\Io\InputFileStream.h" />
@@ -87,9 +86,10 @@
     <ClInclude Include="..\include\Caramel\Windows\WideString.h" />
     <ClInclude Include="Caramel\CaramelPch.h" />
     <ClInclude Include="Caramel\Chrono\ChronoManager.h" />
+    <ClInclude Include="Caramel\Document\IniDocumentImpl.h" />
+    <ClInclude Include="Caramel\Document\IniSectionImpl.h" />
+    <ClInclude Include="Caramel\Document\IniSyntax.h" />
     <ClInclude Include="Caramel\FileSystem\PathImpl.h" />
-    <ClInclude Include="Caramel\FileView\IniFileViewImpl.h" />
-    <ClInclude Include="Caramel\FileView\IniSectionImpl.h" />
     <ClInclude Include="Caramel\Io\MbcsStreamReader.h" />
     <ClInclude Include="Caramel\Io\Utf16LeStreamReader.h" />
     <ClInclude Include="Caramel\Io\Utf8StreamReader.h" />
@@ -108,9 +108,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Caramel\Chrono.cpp" />
+    <ClCompile Include="Caramel\Document.cpp" />
     <ClCompile Include="Caramel\Error.cpp" />
     <ClCompile Include="Caramel\FileSystem.cpp" />
-    <ClCompile Include="Caramel\FileView.cpp" />
     <ClCompile Include="Caramel\Io.cpp" />
     <ClCompile Include="Caramel\Lexical.cpp" />
     <ClCompile Include="Caramel\Object.cpp" />

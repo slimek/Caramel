@@ -1,7 +1,7 @@
-// Caramel C++ Library - File View Facility - INI File Syntax Header
+// Caramel C++ Library - Document Facility - INI File Syntax Header
 
-#ifndef __CARAMEL_FILE_VIEW_INI_SYNTAX_H
-#define __CARAMEL_FILE_VIEW_INI_SYNTAX_H
+#ifndef __CARAMEL_DOCUMENT_INI_SYNTAX_H
+#define __CARAMEL_DOCUMENT_INI_SYNTAX_H
 
 #include <Caramel/Caramel.h>
 
@@ -113,4 +113,4 @@ private:
 
 } // namespace Caramel
 
-#endif // __CARAMEL_FILE_VIEW_INI_SYNTAX_H
+#endif // __CARAMEL_DOCUMENT_INI_SYNTAX_H

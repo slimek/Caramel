@@ -72,12 +72,6 @@
     <Filter Include="2. Sources\Io">
       <UniqueIdentifier>{6ad8dcd3-139d-409d-87e6-ef1c97fab225}</UniqueIdentifier>
     </Filter>
-    <Filter Include="1. Public Packages\FileView">
-      <UniqueIdentifier>{592e6b2b-56ba-4cda-917f-aa007e7a59d8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="2. Sources\FileView">
-      <UniqueIdentifier>{0447b952-dbca-4566-8b56-ba1801162fa4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="1. Public Packages\Async">
       <UniqueIdentifier>{541c1eaf-49ec-484b-86a4-743c6996827a}</UniqueIdentifier>
     </Filter>
@@ -113,6 +107,12 @@
     </Filter>
     <Filter Include="1. Public Packages\Concurrent">
       <UniqueIdentifier>{f07852aa-7d21-4ae6-b4b2-8452db39978a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Document">
+      <UniqueIdentifier>{ab228df0-452d-4d10-8714-2ecf850671dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\Document">
+      <UniqueIdentifier>{0447b952-dbca-4566-8b56-ba1801162fa4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -227,15 +227,6 @@
     <ClInclude Include="Caramel\Io\Utf16LeStreamReader.h">
       <Filter>2. Sources\Io</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\FileView\IniFileView.h">
-      <Filter>1. Public Packages\FileView</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Caramel\FileView\IniSection.h">
-      <Filter>1. Public Packages\FileView</Filter>
-    </ClInclude>
-    <ClInclude Include="Caramel\FileView\IniFileViewImpl.h">
-      <Filter>2. Sources\FileView</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Caramel\String\CainLess.h">
       <Filter>1. Public Packages\String</Filter>
     </ClInclude>
@@ -263,14 +254,8 @@
     <ClInclude Include="..\include\Caramel\Async\TimedBool.h">
       <Filter>1. Public Packages\Async</Filter>
     </ClInclude>
-    <ClInclude Include="Caramel\FileView\IniSectionImpl.h">
-      <Filter>2. Sources\FileView</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Caramel\Lexical\Boolean.h">
       <Filter>1. Public Packages\Lexical</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Caramel\FileView\IniSyntax.h">
-      <Filter>2. Sources\FileView</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Program\ConsoleApplication.h">
       <Filter>1. Public Packages\Program</Filter>
@@ -362,6 +347,21 @@
     <ClInclude Include="..\include\Caramel\Chrono\ChronoFwd.h">
       <Filter>1. Public Packages\Chrono</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Document\IniDocument.h">
+      <Filter>1. Public Packages\Document</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Document\IniSection.h">
+      <Filter>1. Public Packages\Document</Filter>
+    </ClInclude>
+    <ClInclude Include="Caramel\Document\IniDocumentImpl.h">
+      <Filter>2. Sources\Document</Filter>
+    </ClInclude>
+    <ClInclude Include="Caramel\Document\IniSectionImpl.h">
+      <Filter>2. Sources\Document</Filter>
+    </ClInclude>
+    <ClInclude Include="Caramel\Document\IniSyntax.h">
+      <Filter>2. Sources\Document</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\Trace.cpp">
@@ -385,9 +385,6 @@
     <ClCompile Include="Caramel\Io.cpp">
       <Filter>2. Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Caramel\FileView.cpp">
-      <Filter>2. Sources</Filter>
-    </ClCompile>
     <ClCompile Include="Caramel\Chrono.cpp">
       <Filter>2. Sources</Filter>
     </ClCompile>
@@ -401,6 +398,9 @@
       <Filter>3. Precompiled Header</Filter>
     </ClCompile>
     <ClCompile Include="Caramel\Task.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Caramel\Document.cpp">
       <Filter>2. Sources</Filter>
     </ClCompile>
   </ItemGroup>

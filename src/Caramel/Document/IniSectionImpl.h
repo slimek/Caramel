@@ -1,7 +1,7 @@
-// Caramel C++ Library - File View Amenity - INI Section Private Header
+// Caramel C++ Library - Document Facility - INI Section Private Header
 
-#ifndef __CARAMEL_FILE_VIEW_INI_SECTION_IMPL_H
-#define __CARAMEL_FILE_VIEW_INI_SECTION_IMPL_H
+#ifndef __CARAMEL_DOCUMENT_INI_SECTION_IMPL_H
+#define __CARAMEL_DOCUMENT_INI_SECTION_IMPL_H
 
 #include <Caramel/Caramel.h>
 
@@ -9,7 +9,7 @@
 #pragma once
 #endif
 
-#include <Caramel/FileView/IniSection.h>
+#include <Caramel/Document/IniSection.h>
 #include <Caramel/String/CainLess.h>
 #include <deque>
 #include <map>
@@ -26,7 +26,7 @@ namespace Caramel
 
 class IniSectionImpl
 {
-    friend class IniFileViewImpl;
+    friend class IniDocumentImpl;
 
 public:
     
@@ -123,4 +123,4 @@ typedef std::shared_ptr< IniSectionImpl > IniSectionPtr;
 
 } // namespace Caramel
 
-#endif // __CARAMEL_FILE_VIEW_INI_SECTION_IMPL_H
+#endif // __CARAMEL_DOCUMENT_INI_SECTION_IMPL_H

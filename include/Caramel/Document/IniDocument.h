@@ -1,7 +1,7 @@
-// Caramel C++ Library - File View Facility - INI File View Header
+// Caramel C++ Library - Document Facility - INI Document Header
 
-#ifndef __CARAMEL_FILE_VIEW_INI_FILE_VIEW_H
-#define __CARAMEL_FILE_VIEW_INI_FILE_VIEW_H
+#ifndef __CARAMEL_DOCUMENT_INI_DOCUMENT_H
+#define __CARAMEL_DOCUMENT_INI_DOCUMENT_H
 
 #include <Caramel/Caramel.h>
 
@@ -9,8 +9,8 @@
 #pragma once
 #endif
 
+#include <Caramel/Document/IniSection.h>
 #include <Caramel/FileSystem/Path.h>
-#include <Caramel/FileView/IniSection.h>
 #include <Caramel/Io/TextReader.h>
 #include <Caramel/String/Utf8String.h>
 
@@ -20,21 +20,21 @@ namespace Caramel
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// INI File View
+// INI Document
 //
 
-class IniFileViewImpl;
+class IniDocumentImpl;
 
-class IniFileView
+class IniDocument
 {
 public:
 
-    IniFileView();
+    IniDocument();
 
-    explicit IniFileView( const std::string& fileName );
-    explicit IniFileView( const Utf8String&  fileName );
+    explicit IniDocument( const std::string& fileName );
+    explicit IniDocument( const Utf8String&  fileName );
 
-    ~IniFileView();
+    ~IniDocument();
 
 
     //
@@ -73,7 +73,7 @@ private:
     // Data Members
     //
 
-    std::unique_ptr< IniFileViewImpl > m_impl;
+    std::unique_ptr< IniDocumentImpl > m_impl;
 };
 
 
@@ -81,5 +81,5 @@ private:
 
 } // namespace Caramel
 
-#endif // __CARAMEL_FILE_VIEW_INI_FILE_VIEW_H
+#endif // __CARAMEL_DOCUMENT_INI_DOCUMENT_H
 
