@@ -9,6 +9,8 @@
 #pragma once
 #endif
 
+#include <chrono>
+
 
 namespace Caramel
 {
@@ -19,22 +21,15 @@ namespace Caramel
 // - Unit in milliseconds
 //
 
-class TickDuration
+class TickDuration : public std::chrono::duration< Uint64, std::milli >
 {
+    typedef std::chrono::duration< Uint64, std::milli > Inherited;
+
 public:
 
     TickDuration();
     explicit TickDuration( Uint64 milliseconds );
 
-
-    /// Operators ///
-
-    Bool operator<( const TickDuration& rhs ) const { return m_value < rhs.m_value; }
-
-
-private:
-
-    Uint64 m_value;
 };
 
 

@@ -17,6 +17,9 @@
     <Filter Include="2. Tests\Task">
       <UniqueIdentifier>{adfcef7c-958a-4dfa-8b01-547f11b05f6e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\Chrono">
+      <UniqueIdentifier>{d4a51ee7-23f8-4866-9a48-04ea884f466e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RunTest.cpp">
@@ -30,6 +33,9 @@
     </ClCompile>
     <ClCompile Include="Task\TaskPollerTest.cpp">
       <Filter>2. Tests\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="Chrono\TimePointsTest.cpp">
+      <Filter>2. Tests\Chrono</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

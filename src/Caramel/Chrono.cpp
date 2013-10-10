@@ -4,6 +4,7 @@
 
 #include <Caramel/Chrono/ChronoManager.h>
 #include <Caramel/Chrono/Detail/SteadyClockCore.h>
+#include <Caramel/Chrono/Durations.h>
 
 
 namespace Caramel
@@ -14,6 +15,10 @@ namespace Caramel
 //
 //   ChronoManager
 //   Detail::SteadyClockCore
+//
+// < Durations >
+// 
+//   TickDuration
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -42,6 +47,23 @@ SteadyClockCore::TimePoint SteadyClockCore::Epoch()
 
 
 } // namespace Detail
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Tick Duration
+//
+
+TickDuration::TickDuration()
+    : Inherited( 0 )
+{
+}
+
+
+TickDuration::TickDuration( Uint64 ticks )
+    : Inherited( ticks )
+{
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 

@@ -2,6 +2,7 @@
 
 #include <Caramel/CaramelPch.h>
 
+#include <Caramel/Chrono/SteadyClock.h>
 #include <Caramel/Task/TaskImpl.h>
 #include <Caramel/Task/TaskPollerImpl.h>
 
@@ -38,6 +39,18 @@ TaskImpl::TaskImpl( const std::string& name, TaskFunction&& f )
 }
 
 
+Bool TaskImpl::IsDelayed() const
+{
+    return false;
+}
+
+
+TickDuration TaskImpl::GetDelayDuration() const
+{
+    return TickDuration();
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // TaskPoller
@@ -55,6 +68,8 @@ void TaskPoller::Submit( const Task& inputTask )
 
     if ( task->IsDelayed() )
     {
+        //const TickTimePoint dueTicks = TickClock::Now() + task->GetDelayDuration();
+
         m_impl->m_delayedTasks.Push( task->GetDelayDuration(), task );
     }
     else
@@ -66,6 +81,15 @@ void TaskPoller::Submit( const Task& inputTask )
 
 void TaskPoller::PollOne()
 {
+    TaskPtr task;
+
+    if ( m_impl->m_readyTasks.TryPop( task ))
+    {
+        // Invoke the task
+        return;
+    }
+
+    if ( m_impl->m_delayedTasks.IsEmpty() ) { return; }
 }
 
 
