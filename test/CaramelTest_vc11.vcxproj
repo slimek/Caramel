@@ -91,7 +91,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Chrono\TimePointsTest.cpp" />
+    <ClCompile Include="Chrono\TickClockTest.cpp" />
     <ClCompile Include="Concurrent\PriorityQueueTest.cpp" />
     <ClCompile Include="RunTest.cpp" />
     <ClCompile Include="Task\TaskPollerTest.cpp" />

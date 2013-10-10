@@ -9,6 +9,7 @@
 #pragma once
 #endif
 
+#include <Caramel/Chrono/ChronoFwd.h>
 #include <Caramel/Chrono/Detail/SteadyClockCore.h>
 #include <chrono>
 #include <limits>
@@ -27,9 +28,6 @@ template< typename UnitT, typename Ratio = std::ratio< 1 > >
 class SteadyClock
 {
     typedef std::chrono::steady_clock ClockType;
-    typedef ClockType::time_point TimePoint;
-
-    typedef std::chrono::duration< UnitT, Ratio > DurationType;
 
 public:
 
@@ -38,7 +36,14 @@ public:
     void Reset();
 
 
+    //
+    // Typedefs
+    //
+
     typedef UnitT UnitType;
+    typedef ClockType::time_point TimePoint;
+    typedef std::chrono::duration< UnitT, Ratio > DurationType;
+
 
     //
     // Duration
@@ -70,12 +75,6 @@ public:
 private:
     TimePoint m_markTime;
 };
-
-
-/// Common Typedefs ///
-
-typedef SteadyClock< Double >             SecondClock;
-typedef SteadyClock< Uint64, std::milli > TickClock;    // in milliseconds
 
 
 ///////////////////////////////////////////////////////////////////////////////

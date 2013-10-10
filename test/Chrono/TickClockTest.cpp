@@ -1,8 +1,8 @@
-// Caramel C++ Library Test - Chrono - Time Points Test
+// Caramel C++ Library Test - Chrono - Tick Clock Test
 
 #include "CaramelTestPch.h"
 
-#include <Caramel/Chrono/TimePoints.h>
+#include <Caramel/Chrono/TickClock.h>
 #include <UnitTest++/UnitTest++.h>
 
 
@@ -11,10 +11,10 @@ namespace Caramel
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Tick Time Point Test
+// Tick Clock Test
 //
 
-TEST( TickPointTest )
+TEST( TickClockTest )
 {
     //const TickPoint now = TickClock::Now();
 }

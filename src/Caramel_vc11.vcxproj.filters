@@ -332,14 +332,8 @@
     <ClInclude Include="Caramel\Task\TaskPollerImpl.h">
       <Filter>2. Sources\Task</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\Chrono\Durations.h">
-      <Filter>1. Public Packages\Chrono</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Caramel\Object\AutoNumbered.h">
       <Filter>1. Public Packages\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Caramel\Chrono\TimePoints.h">
-      <Filter>1. Public Packages\Chrono</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Chrono\ChronoFwd.h">
       <Filter>1. Public Packages\Chrono</Filter>
@@ -361,6 +355,9 @@
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Task\TaskFwd.h">
       <Filter>1. Public Packages\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Chrono\TickClock.h">
+      <Filter>1. Public Packages\Chrono</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

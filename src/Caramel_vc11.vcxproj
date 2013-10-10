@@ -24,9 +24,8 @@
     <ClInclude Include="..\include\Caramel\Caramel.h" />
     <ClInclude Include="..\include\Caramel\Chrono\ChronoFwd.h" />
     <ClInclude Include="..\include\Caramel\Chrono\Detail\SteadyClockCore.h" />
-    <ClInclude Include="..\include\Caramel\Chrono\Durations.h" />
     <ClInclude Include="..\include\Caramel\Chrono\SteadyClock.h" />
-    <ClInclude Include="..\include\Caramel\Chrono\TimePoints.h" />
+    <ClInclude Include="..\include\Caramel\Chrono\TickClock.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\PriorityQueue.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\Queue.h" />
     <ClInclude Include="..\include\Caramel\Document\IniDocument.h" />
