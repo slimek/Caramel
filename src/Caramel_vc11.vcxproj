@@ -72,7 +72,7 @@
     <ClInclude Include="..\include\Caramel\String\Utf8String.h" />
     <ClInclude Include="..\include\Caramel\Task\Task.h" />
     <ClInclude Include="..\include\Caramel\Task\TaskExecutor.h" />
-    <ClInclude Include="..\include\Caramel\Task\TaskTypes.h" />
+    <ClInclude Include="..\include\Caramel\Task\TaskFwd.h" />
     <ClInclude Include="..\include\Caramel\Task\TaskPoller.h" />
     <ClInclude Include="..\include\Caramel\Thread\MutexLocks.h" />
     <ClInclude Include="..\include\Caramel\Trace\Channel.h" />

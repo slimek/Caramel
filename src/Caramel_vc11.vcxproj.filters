@@ -317,9 +317,6 @@
     <ClInclude Include="Caramel\Task\TaskImpl.h">
       <Filter>2. Sources\Task</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\Task\TaskTypes.h">
-      <Filter>1. Public Packages\Task</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Caramel\Concurrent\PriorityQueue.h">
       <Filter>1. Public Packages\Concurrent</Filter>
     </ClInclude>
@@ -361,6 +358,9 @@
     </ClInclude>
     <ClInclude Include="Caramel\Document\IniSyntax.h">
       <Filter>2. Sources\Document</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Task\TaskFwd.h">
+      <Filter>1. Public Packages\Task</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

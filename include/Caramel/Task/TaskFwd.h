@@ -1,7 +1,7 @@
-// Caramel C++ Library - Task Facility - Task Types Header
+// Caramel C++ Library - Task Facility - Forwards Header
 
-#ifndef __CARAMEL_TASK_TASK_TYPES_H
-#define __CARAMEL_TASK_TASK_TYPES_H
+#ifndef __CARAMEL_TASK_TASK_FWD_H
+#define __CARAMEL_TASK_TASK_FWD_H
 
 #include <Caramel/Caramel.h>
 
@@ -37,4 +37,4 @@ class Workpile;
 
 } // namespace Caramel
 
-#endif // __CARAMEL_TASK_TASK_TYPES_H
+#endif // __CARAMEL_TASK_TASK_FWD_H

@@ -10,7 +10,7 @@
 #endif
 
 #include <Caramel/Chrono/Durations.h>
-#include <Caramel/Task/TaskTypes.h>
+#include <Caramel/Task/TaskFwd.h>
 
 
 namespace Caramel
