@@ -1,4 +1,4 @@
-// Caramel C++ Library - Chrono Facility - Steady Clock Header
+// Caramel C++ Library - Chrono Amenity - Steady Clock Header
 
 #ifndef __CARAMEL_CHRONO_STEADY_CLOCK_H
 #define __CARAMEL_CHRONO_STEADY_CLOCK_H
@@ -9,10 +9,7 @@
 #pragma once
 #endif
 
-#include <Caramel/Chrono/ChronoFwd.h>
-#include <Caramel/Chrono/Detail/SteadyClockCore.h>
-#include <chrono>
-#include <limits>
+#include <boost/chrono.hpp>
 
 
 namespace Caramel
@@ -21,13 +18,14 @@ namespace Caramel
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Steady Clock
-// - Default time unit is 1 second, i.e. ratio< 1 >.
+// - Because VC++ 2012/2013 steady_clock is NOT steady (derived from system_clock),
+//   We preferred Boost.Chrono implementation.
 //
 
-template< typename UnitT, typename Ratio = std::ratio< 1 > >
+template< typename UnitT, typename Ratio >
 class SteadyClock
 {
-    typedef std::chrono::steady_clock ClockType;
+    typedef boost::chrono::steady_clock ClockType;
 
 public:
 
@@ -41,35 +39,28 @@ public:
     //
 
     typedef UnitT UnitType;
-    typedef ClockType::time_point TimePoint;
-    typedef std::chrono::duration< UnitT, Ratio > DurationType;
+    typedef boost::chrono::duration< UnitT, Ratio > Duration;
+    typedef boost::chrono::time_point< ClockType, Duration > TimePoint;
 
 
     //
-    // Duration
+    // Elapsed
     // - The duration from the clock is created/reseted until now.
     //
-    UnitType Duration() const;
+    Duration Elapsed() const;
     
     //
     // Slice
     // - Get a slice of time :
     //   Return the Duration() and Reset() this clock.
     //
-    UnitType Slice();
+    Duration Slice();
     
     //
     // Now
     // - A convenient wrapper for the std::steady_clock::now.
-    //   Returns a monotolic time.
     //
-    static UnitType Now();
-
-    //
-    // Max Value
-    // - Depends on the unit type.
-    //
-    static UnitType MaxValue();
+    static TimePoint Now();
 
 
 private:
@@ -97,37 +88,29 @@ inline void SteadyClock< UnitT, Ratio >::Reset()
 
 
 template< typename UnitT, typename Ratio >
-inline UnitT SteadyClock< UnitT, Ratio >::Duration() const
+inline auto SteadyClock< UnitT, Ratio >::Elapsed() const -> Duration
 {
-    return std::chrono::duration_cast< DurationType >( ClockType::now() - m_markTime ).count();
+    return ClockType::now() - m_markTime;
 }
 
 
 template< typename UnitT, typename Ratio >
-inline UnitT SteadyClock< UnitT, Ratio >::Slice()
+inline auto SteadyClock< UnitT, Ratio >::Slice() -> Duration
 {
     // This function is equivalent to Duration() then Reset(),
     // but you must use the same now in both functions.
 
     const TimePoint now = ClockType::now();
-    const DurationType delta = std::chrono::duration_cast< DurationType >( now - m_markTime );
+    const DurationType delta = now - m_markTime;
     m_markTime = now;
-    return delta.count();
+    return delta;
 }
 
 
 template< typename UnitT, typename Ratio >
-inline UnitT SteadyClock< UnitT, Ratio >::Now()
+inline auto SteadyClock< UnitT, Ratio >::Now() -> TimePoint
 {
-    return std::chrono::duration_cast< DurationType >(
-        ClockType::now() - Detail::SteadyClockCore::Epoch() ).count();
-}
-
-
-template< typename UnitT, typename Ratio >
-inline UnitT SteadyClock< UnitT, Ratio >::MaxValue()
-{
-    return std::numeric_limits< UnitT >::max();
+    return boost::chrono::time_point_cast< Duration >( ClockType::now() );
 }
 
 

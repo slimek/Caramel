@@ -75,12 +75,6 @@
     <Filter Include="1. Public Packages\Async">
       <UniqueIdentifier>{541c1eaf-49ec-484b-86a4-743c6996827a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="1. Public Packages\Chrono\Detail headers">
-      <UniqueIdentifier>{0d1395fa-80d6-461d-a62a-5c2fdb59c18e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="2. Sources\Chrono">
-      <UniqueIdentifier>{e8979ed2-8d93-4e13-b503-2a7ee248426c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="1. Public Packages\Numeric">
       <UniqueIdentifier>{ab6a21d9-c585-4cc2-865b-a38a3f5d4f63}</UniqueIdentifier>
     </Filter>
@@ -236,12 +230,6 @@
     <ClInclude Include="..\include\Caramel\Async\FlowState.h">
       <Filter>1. Public Packages\Async</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\Chrono\Detail\SteadyClockCore.h">
-      <Filter>1. Public Packages\Chrono\Detail headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Caramel\Chrono\ChronoManager.h">
-      <Filter>2. Sources\Chrono</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Caramel\Numeric\NumberConvertible.h">
       <Filter>1. Public Packages\Numeric</Filter>
     </ClInclude>
@@ -335,9 +323,6 @@
     <ClInclude Include="..\include\Caramel\Object\AutoNumbered.h">
       <Filter>1. Public Packages\Object</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\Chrono\ChronoFwd.h">
-      <Filter>1. Public Packages\Chrono</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Caramel\Document\IniDocument.h">
       <Filter>1. Public Packages\Document</Filter>
     </ClInclude>
@@ -380,9 +365,6 @@
       <Filter>2. Sources</Filter>
     </ClCompile>
     <ClCompile Include="Caramel\Io.cpp">
-      <Filter>2. Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Caramel\Chrono.cpp">
       <Filter>2. Sources</Filter>
     </ClCompile>
     <ClCompile Include="Caramel\FileSystem.cpp">

@@ -35,7 +35,6 @@ public:
     /// Delay : Schedule the task after due time. ///
 
     Task& DelayFor( const TickDuration& ticks );
-    Task& DelayFor( const SecondDuration& seconds );
 
 
     /// Properties ///
