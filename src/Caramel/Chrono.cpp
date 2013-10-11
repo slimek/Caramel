@@ -4,7 +4,7 @@
 
 #include <Caramel/Chrono/ChronoManager.h>
 #include <Caramel/Chrono/Detail/SteadyClockCore.h>
-#include <Caramel/Chrono/Durations.h>
+#include <Caramel/Chrono/TickClock.h>
 
 
 namespace Caramel
@@ -59,7 +59,7 @@ TickDuration::TickDuration()
 }
 
 
-TickDuration::TickDuration( Uint64 ticks )
+TickDuration::TickDuration( Int64 ticks )
     : Inherited( ticks )
 {
 }

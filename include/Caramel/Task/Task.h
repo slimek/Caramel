@@ -9,7 +9,7 @@
 #pragma once
 #endif
 
-#include <Caramel/Chrono/Durations.h>
+#include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Task/TaskFwd.h>
 
 
