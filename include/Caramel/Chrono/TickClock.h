@@ -40,14 +40,24 @@ public:
     TickDuration( const TickClock::Duration& tdur );
     TickDuration( TickClock::Duration&& tdur );
 
+    template< typename Rep, typename Period >
+    TickDuration( const boost::chrono::duration< Rep, Period >& duration );
+
     explicit TickDuration( Int64 ticks );
 
 
-    /// Converters ///
+    /// Properties ///
 
-    Int64 ToNumber() const;
+    static TickDuration Zero()     { return TickDuration( TickClock::Duration::zero() ); }
+    static TickDuration MaxValue() { return TickDuration( TickClock::Duration::max() ); }
 
-    Int32 ToInt32() const;
+
+    /// Convertions ///
+
+    Int64 ToNumber() const { return this->count(); }
+
+    Int64 ToInt64()  const { return this->count(); }
+    Int32 ToInt32()  const { return static_cast< Int32 >( this->count() ); }
 };
 
 
@@ -68,6 +78,10 @@ public:
     TickPoint( const TickClock::TimePoint& tpoint );
     TickPoint( TickClock::TimePoint&& tpoint );
 
+
+    /// Properties ///
+
+    static TickPoint MaxValue() { return TickClock::TimePoint::max(); }
 };
 
 
@@ -92,21 +106,16 @@ inline TickDuration::TickDuration( TickClock::Duration&& tdur )
 }
 
 
+template< typename Rep, typename Period >
+inline TickDuration::TickDuration( const boost::chrono::duration< Rep, Period >& duration )
+    : TickClock::Duration( boost::chrono::duration_cast< TickClock::Duration >( duration ))
+{
+}
+
+
 inline TickDuration::TickDuration( Int64 ticks )
     : TickClock::Duration( ticks )
 {
-}
-
-
-inline Int64 TickDuration::ToNumber() const
-{
-    return this->count();
-}
-
-
-inline Int32 TickDuration::ToInt32() const
-{
-    return static_cast< Int32 >( this->count() );
 }
 
 

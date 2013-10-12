@@ -40,14 +40,24 @@ public:
     SecondDuration( const SecondClock::Duration& sdur );
     SecondDuration( SecondClock::Duration&& sdur );
 
+    template< typename Rep, typename Period >
+    SecondDuration( const boost::chrono::duration< Rep, Period >& duration );
+
     explicit SecondDuration( Double seconds );
 
 
-    /// Converters ///
+    /// Properties ///
 
-    Double ToNumber() const;
+    static SecondDuration Zero()     { return SecondDuration( SecondClock::Duration::zero() ); }
+    static SecondDuration MaxValue() { return SecondDuration( SecondClock::Duration::max() ); }
 
-    Float  ToFloat() const;
+
+    /// Convertions ///
+
+    Double ToNumber() const { return this->count(); }
+
+    Double ToDouble() const { return this->count(); }
+    Float  ToFloat()  const { return static_cast< Float >( this->count() ); }
 };
 
 
@@ -91,21 +101,16 @@ inline SecondDuration::SecondDuration( SecondClock::Duration&& sdur )
 }
 
 
+template< typename Rep, typename Period >
+inline SecondDuration::SecondDuration( const boost::chrono::duration< Rep, Period >& duration )
+    : SecondClock::Duration( boost::chrono::duration_cast< SecondClock::Duration >( duration ))
+{
+}
+
+
 inline SecondDuration::SecondDuration( Double seconds )
     : SecondClock::Duration( seconds )
 {
-}
-
-
-inline Double SecondDuration::ToNumber() const
-{
-    return this->count();
-}
-
-
-inline Float SecondDuration::ToFloat() const
-{
-    return static_cast< Float >( this->count() );
 }
 
 

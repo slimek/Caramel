@@ -22,7 +22,7 @@ namespace Caramel
 //   We preferred Boost.Chrono implementation.
 //
 
-template< typename UnitT, typename Ratio >
+template< typename Rep, typename Period >
 class SteadyClock
 {
     typedef boost::chrono::steady_clock ClockType;
@@ -38,8 +38,7 @@ public:
     // Typedefs
     //
 
-    typedef UnitT UnitType;
-    typedef boost::chrono::duration< UnitT, Ratio > Duration;
+    typedef boost::chrono::duration< Rep, Period > Duration;
     typedef boost::chrono::time_point< ClockType, Duration > TimePoint;
 
 

@@ -86,6 +86,14 @@ TEST( DurationConvertTest )
     const SecondDuration su( 1.0 );
 
     CHECK( tu == su );
+
+    const TickDuration tdur = su;
+
+    CHECK( 1000 == tdur.ToNumber() );
+
+    const SecondDuration sdur = tu;
+
+    CHECK( 1.0 == sdur.ToNumber() );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
