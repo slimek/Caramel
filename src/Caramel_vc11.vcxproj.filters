@@ -344,6 +344,9 @@
     <ClInclude Include="..\include\Caramel\Chrono\TickClock.h">
       <Filter>1. Public Packages\Chrono</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Chrono\SecondClock.h">
+      <Filter>1. Public Packages\Chrono</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\Trace.cpp">

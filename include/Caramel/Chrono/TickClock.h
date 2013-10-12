@@ -33,8 +33,6 @@ class TickClock : public SteadyClock< Int64, boost::milli >
 class TickDuration : public TickClock::Duration
                    , public NumberConvertible< TickDuration, Int64 >
 {
-    typedef TickClock::Duration Inherited;
-
 public:
 
     TickDuration() {}
@@ -79,7 +77,7 @@ public:
 //
 
 //
-// Time Duration
+// Tick Duration
 //
 
 inline TickDuration::TickDuration( const TickClock::Duration& tdur )
@@ -90,6 +88,12 @@ inline TickDuration::TickDuration( const TickClock::Duration& tdur )
 
 inline TickDuration::TickDuration( TickClock::Duration&& tdur )
     : TickClock::Duration( tdur )
+{
+}
+
+
+inline TickDuration::TickDuration( Int64 ticks )
+    : TickClock::Duration( ticks )
 {
 }
 
@@ -107,7 +111,7 @@ inline Int32 TickDuration::ToInt32() const
 
 
 //
-// Time Point
+// Tick Point
 //
 
 inline TickPoint::TickPoint( const TickClock::TimePoint& tpoint )

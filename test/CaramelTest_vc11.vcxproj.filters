@@ -34,7 +34,7 @@
     <ClCompile Include="Task\TaskPollerTest.cpp">
       <Filter>2. Tests\Task</Filter>
     </ClCompile>
-    <ClCompile Include="Chrono\TickClockTest.cpp">
+    <ClCompile Include="Chrono\ClockTest.cpp">
       <Filter>2. Tests\Chrono</Filter>
     </ClCompile>
   </ItemGroup>

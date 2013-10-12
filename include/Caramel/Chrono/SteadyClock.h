@@ -83,25 +83,25 @@ inline SteadyClock< UnitT, Ratio >::SteadyClock()
 template< typename UnitT, typename Ratio >
 inline void SteadyClock< UnitT, Ratio >::Reset()
 {
-    m_markTime = ClockType::now();
+    m_markTime = SteadyClock::Now();
 }
 
 
 template< typename UnitT, typename Ratio >
 inline auto SteadyClock< UnitT, Ratio >::Elapsed() const -> Duration
 {
-    return ClockType::now() - m_markTime;
+    return SteadyClock::Now() - m_markTime;
 }
 
 
 template< typename UnitT, typename Ratio >
 inline auto SteadyClock< UnitT, Ratio >::Slice() -> Duration
 {
-    // This function is equivalent to Duration() then Reset(),
+    // This function is equivalent to Elapsed() then Reset(),
     // but you must use the same now in both functions.
 
-    const TimePoint now = ClockType::now();
-    const DurationType delta = now - m_markTime;
+    const TimePoint now = SteadyClock::Now();
+    const Duration delta = now - m_markTime;
     m_markTime = now;
     return delta;
 }
