@@ -9,7 +9,7 @@
 #pragma once
 #endif
 
-#include <Caramel/Chrono/SteadyClock.h>
+#include <Caramel/Chrono/SecondClock.h>
 #include <Caramel/Numeric/NumberConvertible.h>
 #include <Caramel/Numeric/NumberTraits.h>
 #include <boost/operators.hpp>
@@ -35,7 +35,7 @@ namespace Caramel
 //       break;
 //
 
-template< typename StateT, typename ClockType = SteadyClock< Float > >
+template< typename StateT, typename ClockType = SecondClock >
 class FlowState
     : public NumberConvertible< FlowState< StateT, ClockType >
                               , typename NumberTraits< StateT >::NumberType >
@@ -89,9 +89,8 @@ public:
     // - The duration since the last transit.
     //
 
-    typedef typename ClockType::UnitType TimeUnit;
-
-    TimeUnit Elapsed() const { return ClockType::Now() - m_transitTime; }
+    typedef typename ClockType::Duration Duration;
+    Duration Elapsed() const { return ClockType::Now() - m_transitTime; }
 
 
     //
@@ -113,7 +112,8 @@ private:
     StateType m_currentState;
     StateType m_nextState;
 
-    TimeUnit m_transitTime;
+    typedef typename ClockType::TimePoint TimePoint;
+    TimePoint m_transitTime;
 
     Bool m_toTransit;
     Bool m_entering;

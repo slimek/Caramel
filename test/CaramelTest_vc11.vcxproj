@@ -87,6 +87,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Async\FlowStateTest.cpp" />
     <ClCompile Include="Async\TimedBoolTest.cpp" />
     <ClCompile Include="CaramelTestPchCreator.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

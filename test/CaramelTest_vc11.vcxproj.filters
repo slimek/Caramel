@@ -43,6 +43,9 @@
     <ClCompile Include="Async\TimedBoolTest.cpp">
       <Filter>2. Tests\Async</Filter>
     </ClCompile>
+    <ClCompile Include="Async\FlowStateTest.cpp">
+      <Filter>2. Tests\Async</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CaramelTestPch.h">
