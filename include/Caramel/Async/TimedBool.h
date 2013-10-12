@@ -9,7 +9,7 @@
 #pragma once
 #endif
 
-#include <Caramel/Chrono/SteadyClock.h>
+#include <Caramel/Chrono/TickClock.h>
 
 
 namespace Caramel
@@ -19,25 +19,28 @@ namespace Caramel
 //
 // Timed Bool
 // - Becomes true when expired.
+//
+//   Time precision is a tick, aka milliseconds.
+//   Representation unit is Uint64.
+//
+//   If the duration is negative, it would expired at once.
+//
 //   NOT thread-safe.
 //
 
-template< typename ClockType = SteadyClock< Float > >
 class TimedBool
 {
 public:
 
-    typedef typename ClockType::UnitType UnitType;
-
     TimedBool();
-    explicit TimedBool( UnitType duration );
+    explicit TimedBool( const TickDuration& duration );
 
 
     //
     // Manipulators
     //
 
-    void Start( UnitType duration );
+    void Start( const TickDuration& duration );
 
     //
     // Restart
@@ -72,16 +75,16 @@ public:
     // Properties
     //
 
-    UnitType Duration() const { return m_duration; }
-    UnitType Deadline() const { return m_deadline; }
+    TickDuration Duration() const { return m_duration; }
+    TickPoint    Deadline() const { return m_deadline; }
 
 
 private:
 
     /// Data Members ///
 
-    UnitType m_duration;
-    UnitType m_deadline;
+    TickDuration m_duration;
+    TickPoint    m_deadline;
 
 };
 
@@ -90,18 +93,16 @@ private:
 // Implementation
 //
 
-template< typename ClockType >
-inline TimedBool< ClockType >::TimedBool()
-    : m_duration( ClockType::MaxValue() )
-    , m_deadline( ClockType::MaxValue() )
+inline TimedBool::TimedBool()
+    : m_duration( TickDuration::MaxValue() )
+    , m_deadline( TickPoint::MaxValue() )
 {
 }
 
 
-template< typename ClockType >
-inline TimedBool< ClockType >::TimedBool( UnitType duration )
+inline TimedBool::TimedBool( const TickDuration& duration )
     : m_duration( duration )
-    , m_deadline( ClockType::Now() + duration )
+    , m_deadline( TickClock::Now() + duration )
 {
 }
 
@@ -110,25 +111,22 @@ inline TimedBool< ClockType >::TimedBool( UnitType duration )
 // Manipulators
 //
 
-template< typename ClockType >
-inline void TimedBool< ClockType >::Start( UnitType duration )
+inline void TimedBool::Start( const TickDuration& duration )
 {
     m_duration = duration;
-    m_deadline = ClockType::Now() + duration;
+    m_deadline = TickClock::Now() + duration;
 }
 
 
-template< typename ClockType >
-inline void TimedBool< ClockType >::Restart()
+inline void TimedBool::Restart()
 {
-    m_deadline = ClockType::Now() + m_duration;
+    m_deadline = TickClock::Now() + m_duration;
 }
 
 
-template< typename ClockType >
-inline void TimedBool< ClockType >::Continue()
+inline void TimedBool::Continue()
 {
-    const UnitType now = ClockType::Now();
+    const TickPoint now = TickClock::Now();
     while ( m_deadline < now )
     {
         m_deadline += m_duration;
@@ -136,24 +134,21 @@ inline void TimedBool< ClockType >::Continue()
 }
 
 
-template< typename ClockType >
-inline void TimedBool< ClockType >::ExpireNow()
+inline void TimedBool::ExpireNow()
 {
-    m_deadline = ClockType::Now();
+    m_deadline = TickClock::Now();
 }
 
 
-template< typename ClockType >
-inline TimedBool< ClockType >::operator Bool() const
+inline TimedBool::operator Bool() const
 {
-    return ClockType::Now() >= m_deadline;
+    return TickClock::Now() >= m_deadline;
 }
 
 
-template< typename ClockType >
-inline Bool TimedBool< ClockType >::ToBool() const
+inline Bool TimedBool::ToBool() const
 {
-    return ClockType::Now() >= m_deadline;
+    return TickClock::Now() >= m_deadline;
 }
 
 

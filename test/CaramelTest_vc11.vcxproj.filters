@@ -20,6 +20,9 @@
     <Filter Include="2. Tests\Chrono">
       <UniqueIdentifier>{d4a51ee7-23f8-4866-9a48-04ea884f466e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\Async">
+      <UniqueIdentifier>{7ed1a1fb-7828-4627-9346-3c2a1e564076}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RunTest.cpp">
@@ -36,6 +39,9 @@
     </ClCompile>
     <ClCompile Include="Chrono\ClockTest.cpp">
       <Filter>2. Tests\Chrono</Filter>
+    </ClCompile>
+    <ClCompile Include="Async\TimedBoolTest.cpp">
+      <Filter>2. Tests\Async</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
