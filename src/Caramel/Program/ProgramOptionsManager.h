@@ -9,6 +9,7 @@
 #pragma once
 #endif
 
+#include <Caramel/Object/FacilityLongevity.h>
 #include <Caramel/Object/Singleton.h>
 #include <boost/program_options.hpp>
 #include <vector>
@@ -22,7 +23,8 @@ namespace Caramel
 // Program Options Manager
 //
 
-class ProgramOptionsManager : public Singleton< ProgramOptionsManager >
+class ProgramOptionsManager
+    : public Singleton< ProgramOptionsManager, FACILITY_LONGEVITY_PROGRAM_OPTIONS >
 {
 public:
 

@@ -108,6 +108,12 @@
     <Filter Include="2. Sources\Document">
       <UniqueIdentifier>{0447b952-dbca-4566-8b56-ba1801162fa4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\Debug">
+      <UniqueIdentifier>{cc5fac38-7821-4ae3-9738-40fd5a496608}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\Debug">
+      <UniqueIdentifier>{277fca2d-07e1-4c1e-a4dc-2e3383cbdd92}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -347,6 +353,12 @@
     <ClInclude Include="..\include\Caramel\Chrono\SecondClock.h">
       <Filter>1. Public Packages\Chrono</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Debug\ScopeTiming.h">
+      <Filter>1. Public Packages\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="Caramel\Debug\DebugManager.h">
+      <Filter>2. Sources\Debug</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\Trace.cpp">
@@ -383,6 +395,9 @@
       <Filter>2. Sources</Filter>
     </ClCompile>
     <ClCompile Include="Caramel\Document.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Caramel\Debug.cpp">
       <Filter>2. Sources</Filter>
     </ClCompile>
   </ItemGroup>
