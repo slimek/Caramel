@@ -30,13 +30,30 @@ void DebugManager::UpdateTiming( Uint id, const TickDuration& elapsed )
 }
 
 
+void DebugManager::ReportTimingToTrace()
+{
+    CARAMEL_TRACE_DEBUG( "<Timing Report>" );
+
+    for ( Uint i = 0; i < NUM_TIMINGS; ++ i )
+    {
+        const Uint count = m_timings[i].count;
+
+        if ( 0 == count ) { continue; }
+
+        const Uint32 total = static_cast< Uint32 >( m_timings[i].total );
+
+        CARAMEL_TRACE_DEBUG( "[%u] : %u ms / %u", i, total, count );
+    }
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Scope Timing
 //
 
 ScopeTiming::ScopeTiming( Uint8 timingId )
-    : m_timingId( 0 )
+    : m_timingId( timingId )
     , m_startTime( TickClock::Now() )
     , m_stopped( false )
 {
@@ -58,6 +75,12 @@ void ScopeTiming::Stop()
     const TickDuration elapsed = TickClock::Now() - m_startTime;
 
     DebugManager::Instance()->UpdateTiming( m_timingId, elapsed );
+}
+
+
+void ScopeTiming::ReportToTrace()
+{
+    DebugManager::Instance()->ReportTimingToTrace();
 }
 
 
