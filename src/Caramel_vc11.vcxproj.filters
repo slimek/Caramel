@@ -114,6 +114,9 @@
     <Filter Include="2. Sources\Debug">
       <UniqueIdentifier>{277fca2d-07e1-4c1e-a4dc-2e3383cbdd92}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Sources\Thread">
+      <UniqueIdentifier>{2660e9fb-5e37-4c17-a535-221f86fb38ad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -359,6 +362,15 @@
     <ClInclude Include="Caramel\Debug\DebugManager.h">
       <Filter>2. Sources\Debug</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Thread\Thread.h">
+      <Filter>1. Public Packages\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="Caramel\Thread\ThreadImpl.h">
+      <Filter>2. Sources\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Thread\ThreadTypes.h">
+      <Filter>1. Public Packages\Thread</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\Trace.cpp">
@@ -398,6 +410,9 @@
       <Filter>2. Sources</Filter>
     </ClCompile>
     <ClCompile Include="Caramel\Debug.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Caramel\Thread.cpp">
       <Filter>2. Sources</Filter>
     </ClCompile>
   </ItemGroup>

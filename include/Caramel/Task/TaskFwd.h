@@ -30,7 +30,7 @@ typedef std::function< void() > TaskFunction;
 
 class Task;
 class TaskExecutor;
-class Workpile;
+class TaskPoller;
 
 
 ///////////////////////////////////////////////////////////////////////////////

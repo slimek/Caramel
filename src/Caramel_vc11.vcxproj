@@ -74,6 +74,8 @@
     <ClInclude Include="..\include\Caramel\Task\TaskFwd.h" />
     <ClInclude Include="..\include\Caramel\Task\TaskPoller.h" />
     <ClInclude Include="..\include\Caramel\Thread\MutexLocks.h" />
+    <ClInclude Include="..\include\Caramel\Thread\Thread.h" />
+    <ClInclude Include="..\include\Caramel\Thread\ThreadTypes.h" />
     <ClInclude Include="..\include\Caramel\Trace\Channel.h" />
     <ClInclude Include="..\include\Caramel\Trace\Listeners.h" />
     <ClInclude Include="..\include\Caramel\Trace\Trace.h" />
@@ -98,6 +100,7 @@
     <ClInclude Include="Caramel\String\SprintfManager.h" />
     <ClInclude Include="Caramel\Task\TaskImpl.h" />
     <ClInclude Include="Caramel\Task\TaskPollerImpl.h" />
+    <ClInclude Include="Caramel\Thread\ThreadImpl.h" />
     <ClInclude Include="Caramel\Trace\ChannelImpl.h" />
     <ClInclude Include="Caramel\Trace\TraceManager.h" />
   </ItemGroup>
@@ -116,6 +119,7 @@
     <ClCompile Include="Caramel\Program.cpp" />
     <ClCompile Include="Caramel\String.cpp" />
     <ClCompile Include="Caramel\Task.cpp" />
+    <ClCompile Include="Caramel\Thread.cpp" />
     <ClCompile Include="Caramel\Trace.cpp" />
     <ClCompile Include="Caramel\Windows.cpp" />
   </ItemGroup>

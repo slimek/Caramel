@@ -28,7 +28,7 @@ class ExceptionCatcher : public Detail::ExceptionCatcherCore
 public:
     
     template< typename Function >
-    ExceptionCatcher( Function f );
+    ExceptionCatcher( const Function& f );
 
     
     typedef ResultT ResultType;
@@ -38,7 +38,7 @@ public:
 private:
 
     template< typename Function >
-    void Invoke( Function f );
+    void Invoke( const Function& f );
 
     ResultType m_result;
 };
@@ -52,12 +52,12 @@ class ExceptionCatcher< void > : public Detail::ExceptionCatcherCore
 public:
 
     template< typename Function >
-    ExceptionCatcher( Function f );
+    ExceptionCatcher( const Function& f );
 
 private:
 
     template< typename Function >
-    void Invoke( Function f );
+    void Invoke( const Function& f );
 };
 
 
@@ -66,7 +66,7 @@ private:
 //
 
 template< typename Function >
-inline ExceptionCatcher< typename std::result_of< Function() >::type > CatchException( Function f )
+inline ExceptionCatcher< typename std::result_of< Function() >::type > CatchException( const Function& f )
 {
     return ExceptionCatcher< typename std::result_of< Function() >::type >( f );
 }
@@ -79,7 +79,7 @@ inline ExceptionCatcher< typename std::result_of< Function() >::type > CatchExce
 
 template< typename ResultT >
 template< typename Function >
-inline ExceptionCatcher< ResultT >::ExceptionCatcher( Function f )
+inline ExceptionCatcher< ResultT >::ExceptionCatcher( const Function& f )
 {
     try
     {
@@ -101,7 +101,7 @@ inline ExceptionCatcher< ResultT >::ExceptionCatcher( Function f )
 
 
 template< typename Function >
-inline ExceptionCatcher< void >::ExceptionCatcher( Function f )
+inline ExceptionCatcher< void >::ExceptionCatcher( const Function& f )
 {
     try
     {
@@ -130,7 +130,7 @@ inline ExceptionCatcher< void >::ExceptionCatcher( Function f )
 
 template< typename ResultT >
 template< typename Function >
-inline void ExceptionCatcher< ResultT >::Invoke( Function f )
+inline void ExceptionCatcher< ResultT >::Invoke( const Function& f )
 {
     __try
     {
@@ -144,7 +144,7 @@ inline void ExceptionCatcher< ResultT >::Invoke( Function f )
 
 
 template< typename Function >
-inline void ExceptionCatcher< void >::Invoke( Function f )
+inline void ExceptionCatcher< void >::Invoke( const Function& f )
 {
     __try
     {

@@ -23,6 +23,9 @@
     <Filter Include="2. Tests\Async">
       <UniqueIdentifier>{7ed1a1fb-7828-4627-9346-3c2a1e564076}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\Thread">
+      <UniqueIdentifier>{0016f775-00a3-437f-b5f6-b29286b5cea5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RunTest.cpp">
@@ -45,6 +48,9 @@
     </ClCompile>
     <ClCompile Include="Async\FlowStateTest.cpp">
       <Filter>2. Tests\Async</Filter>
+    </ClCompile>
+    <ClCompile Include="Thread\ThreadTest.cpp">
+      <Filter>2. Tests\Thread</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
