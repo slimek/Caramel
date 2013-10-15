@@ -9,8 +9,6 @@
 #pragma once
 #endif
 
-#include <Caramel/Chrono/TickClock.h>
-
 
 namespace Caramel
 {
@@ -19,28 +17,38 @@ namespace Caramel
 //
 // Timed Bool
 // - Becomes true when expired.
-//
-//   Time precision is a tick, aka milliseconds.
-//   Representation unit is Uint64.
-//
 //   If the duration is negative, it would expired at once.
 //
 //   NOT thread-safe.
 //
+//   Concept of ClockT:
+//   - Has typedefs of Duration, TimePoint
+//     Has static function Now()
+//     Its Duration and TimePoint have static function MaxValue().
+//
 
+template< typename ClockT >
 class TimedBool
 {
 public:
 
+    typedef ClockT ClockType;
+    typedef typename ClockType::TimePoint TimePoint;
+    typedef typename ClockType::Duration  DurationType;
+
+
     TimedBool();
-    explicit TimedBool( const TickDuration& duration );
+    explicit TimedBool( const DurationType& duration );
+
+    template< typename AnyDuration >
+    explicit TimedBool( const AnyDuration& duration );
 
 
     //
     // Manipulators
     //
 
-    void Start( const TickDuration& duration );
+    void Start( const DurationType& duration );
 
     //
     // Restart
@@ -75,16 +83,16 @@ public:
     // Properties
     //
 
-    TickDuration Duration() const { return m_duration; }
-    TickPoint    Deadline() const { return m_deadline; }
+    DurationType Duration() const { return m_duration; }
+    TimePoint    Deadline() const { return m_deadline; }
 
 
 private:
 
     /// Data Members ///
 
-    TickDuration m_duration;
-    TickPoint    m_deadline;
+    DurationType m_duration;
+    TimePoint    m_deadline;
 
 };
 
@@ -93,16 +101,27 @@ private:
 // Implementation
 //
 
-inline TimedBool::TimedBool()
-    : m_duration( TickDuration::MaxValue() )
-    , m_deadline( TickPoint::MaxValue() )
+template< typename ClockT >
+inline TimedBool< ClockT >::TimedBool()
+    : m_duration( DurationType::MaxValue() )
+    , m_deadline( TimePoint::MaxValue() )
 {
 }
 
 
-inline TimedBool::TimedBool( const TickDuration& duration )
+template< typename ClockT >
+inline TimedBool< ClockT >::TimedBool( const DurationType& duration )
     : m_duration( duration )
-    , m_deadline( TickClock::Now() + duration )
+    , m_deadline( ClockType::Now() + duration )
+{
+}
+
+
+template< typename ClockT >
+template< typename AnyDuration >
+inline TimedBool< ClockT >::TimedBool( const AnyDuration& duration )
+    : m_duration( duration )
+    , m_deadline( ClockType::Now() + m_duration )
 {
 }
 
@@ -111,22 +130,25 @@ inline TimedBool::TimedBool( const TickDuration& duration )
 // Manipulators
 //
 
-inline void TimedBool::Start( const TickDuration& duration )
+template< typename ClockT >
+inline void TimedBool< ClockT >::Start( const DurationType& duration )
 {
     m_duration = duration;
-    m_deadline = TickClock::Now() + duration;
+    m_deadline = ClockType::Now() + duration;
 }
 
 
-inline void TimedBool::Restart()
+template< typename ClockT >
+inline void TimedBool< ClockT >::Restart()
 {
-    m_deadline = TickClock::Now() + m_duration;
+    m_deadline = ClockType::Now() + m_duration;
 }
 
 
-inline void TimedBool::Continue()
+template< typename ClockT >
+inline void TimedBool< ClockT >::Continue()
 {
-    const TickPoint now = TickClock::Now();
+    const TimePoint now = ClockType::Now();
     while ( m_deadline < now )
     {
         m_deadline += m_duration;
@@ -134,21 +156,24 @@ inline void TimedBool::Continue()
 }
 
 
-inline void TimedBool::ExpireNow()
+template< typename ClockT >
+inline void TimedBool< ClockT >::ExpireNow()
 {
-    m_deadline = TickClock::Now();
+    m_deadline = ClockType::Now();
 }
 
 
-inline TimedBool::operator Bool() const
+template< typename ClockT >
+inline TimedBool< ClockT >::operator Bool() const
 {
-    return TickClock::Now() >= m_deadline;
+    return ClockType::Now() >= m_deadline;
 }
 
 
-inline Bool TimedBool::ToBool() const
+template< typename ClockT >
+inline Bool TimedBool< ClockT >::ToBool() const
 {
-    return TickClock::Now() >= m_deadline;
+    return ClockType::Now() >= m_deadline;
 }
 
 

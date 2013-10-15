@@ -4,6 +4,7 @@
 
 #include <Caramel/Async/TimedBool.h>
 #include <Caramel/Chrono/SecondClock.h>
+#include <Caramel/Chrono/TickClock.h>
 #include <UnitTest++/UnitTest++.h>
 #include <thread>
 
@@ -18,10 +19,12 @@ namespace Caramel
 
 TEST( TimedBoolTest )
 {
-    TimedBool tb1;
-    TimedBool tb2( Ticks( 90 ));
-    TimedBool tb3( Ticks( 90 ));
-    TimedBool tb4( Seconds( 0.09 ));
+    typedef TimedBool< TickClock > TickedBool;
+
+    TickedBool tb1;
+    TickedBool tb2( Ticks( 90 ));
+    TickedBool tb3( Ticks( 90 ));
+    TickedBool tb4( Seconds( 0.09 ));
 
     CHECK( false == tb1 );
     CHECK( false == tb2 );

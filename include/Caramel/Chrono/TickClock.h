@@ -18,27 +18,24 @@ namespace Caramel
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Tick Clock
+// Tick Clock Classes
 //
-
-class TickClock : public SteadyClock< Int64, boost::milli >
-{
-};
-
 
 //
 // Tick Duration
 //
 
-class TickDuration : public TickClock::Duration
+class TickDuration : public boost::chrono::duration< Int64, boost::milli >
                    , public NumberConvertible< TickDuration, Int64 >
 {
+    typedef boost::chrono::duration< Int64, boost::milli > Inherited;
+
 public:
 
     TickDuration() {}
     
-    TickDuration( const TickClock::Duration& tdur );
-    TickDuration( TickClock::Duration&& tdur );
+    TickDuration( const Inherited& duration );
+    TickDuration( Inherited&& duration );
 
     template< typename Rep, typename Period >
     TickDuration( const boost::chrono::duration< Rep, Period >& duration );
@@ -48,8 +45,8 @@ public:
 
     /// Properties ///
 
-    static TickDuration Zero()     { return TickDuration( TickClock::Duration::zero() ); }
-    static TickDuration MaxValue() { return TickDuration( TickClock::Duration::max() ); }
+    static TickDuration Zero()     { return TickDuration( Inherited::zero() ); }
+    static TickDuration MaxValue() { return TickDuration( Inherited::max() ); }
 
 
     /// Convertions ///
@@ -71,17 +68,37 @@ inline TickDuration Ticks( Int64 ticks )
 // Tick Point
 //
 
-class TickPoint : public TickClock::TimePoint
+class TickPoint
+    : public boost::chrono::time_point<
+        boost::chrono::steady_clock, boost::chrono::duration< Int64, boost::milli >
+      >
 {
+    typedef boost::chrono::time_point<
+        boost::chrono::steady_clock, boost::chrono::duration< Int64, boost::milli >
+    > Inherited;
+
 public:
     
-    TickPoint( const TickClock::TimePoint& tpoint );
-    TickPoint( TickClock::TimePoint&& tpoint );
+    typedef boost::chrono::duration< Int64, boost::milli > Duration;
+
+    TickPoint() {}
+
+    TickPoint( const Inherited& tpoint );
+    TickPoint( Inherited&& tpoint );
 
 
     /// Properties ///
 
-    static TickPoint MaxValue() { return TickClock::TimePoint::max(); }
+    static TickPoint MaxValue() { return Inherited::max(); }
+};
+
+
+//
+// Tick Clock
+//
+
+class TickClock : public SteadyClock< TickDuration, TickPoint >
+{
 };
 
 
@@ -94,27 +111,27 @@ public:
 // Tick Duration
 //
 
-inline TickDuration::TickDuration( const TickClock::Duration& tdur )
-    : TickClock::Duration( tdur )
+inline TickDuration::TickDuration( const Inherited& duration )
+    : Inherited( duration )
 {
 }
 
 
-inline TickDuration::TickDuration( TickClock::Duration&& tdur )
-    : TickClock::Duration( tdur )
+inline TickDuration::TickDuration( Inherited&& duration )
+    : Inherited( duration )
 {
 }
 
 
 template< typename Rep, typename Period >
 inline TickDuration::TickDuration( const boost::chrono::duration< Rep, Period >& duration )
-    : TickClock::Duration( boost::chrono::duration_cast< TickClock::Duration >( duration ))
+    : Inherited( boost::chrono::duration_cast< Inherited >( duration ))
 {
 }
 
 
 inline TickDuration::TickDuration( Int64 ticks )
-    : TickClock::Duration( ticks )
+    : Inherited( ticks )
 {
 }
 
@@ -123,14 +140,14 @@ inline TickDuration::TickDuration( Int64 ticks )
 // Tick Point
 //
 
-inline TickPoint::TickPoint( const TickClock::TimePoint& tpoint )
-    : TickClock::TimePoint( tpoint )
+inline TickPoint::TickPoint( const Inherited& tpoint )
+    : Inherited( tpoint )
 {
 }
 
 
-inline TickPoint::TickPoint( TickClock::TimePoint&& tpoint )
-    : TickClock::TimePoint( tpoint )
+inline TickPoint::TickPoint( Inherited&& tpoint )
+    : Inherited( tpoint )
 {
 }
 

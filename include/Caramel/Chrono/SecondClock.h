@@ -18,38 +18,35 @@ namespace Caramel
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Second Clock
+// Second Clock Classes
 //
-
-class SecondClock : public SteadyClock< Double, boost::ratio< 1 > >
-{
-};
-
 
 //
 // Second Duration
 //
 
-class SecondDuration : public SecondClock::Duration
-                     , public NumberConvertible< SecondDuration,  Double >
+class SecondDuration : public boost::chrono::duration< Double, boost::ratio< 1 > >
+                     , public NumberConvertible< SecondDuration, Double >
 {
+    typedef boost::chrono::duration< Double, boost::ratio< 1 > > Inherited;
+
 public:
 
     SecondDuration() {}
-
-    SecondDuration( const SecondClock::Duration& sdur );
-    SecondDuration( SecondClock::Duration&& sdur );
+    
+    SecondDuration( const Inherited& duration );
+    SecondDuration( Inherited&& duration );
 
     template< typename Rep, typename Period >
     SecondDuration( const boost::chrono::duration< Rep, Period >& duration );
 
-    explicit SecondDuration( Double seconds );
+    explicit SecondDuration( Double ticks );
 
 
     /// Properties ///
 
-    static SecondDuration Zero()     { return SecondDuration( SecondClock::Duration::zero() ); }
-    static SecondDuration MaxValue() { return SecondDuration( SecondClock::Duration::max() ); }
+    static SecondDuration Zero()     { return SecondDuration( Inherited::zero() ); }
+    static SecondDuration MaxValue() { return SecondDuration( Inherited::max() ); }
 
 
     /// Convertions ///
@@ -61,9 +58,9 @@ public:
 };
 
 
-inline SecondDuration Seconds( Double seconds )
+inline SecondDuration Seconds( Double ticks )
 {
-    return SecondDuration( seconds );
+    return SecondDuration( ticks );
 }
 
 
@@ -71,12 +68,37 @@ inline SecondDuration Seconds( Double seconds )
 // Second Point
 //
 
-class SecondPoint : public SecondClock::TimePoint
+class SecondPoint
+    : public boost::chrono::time_point<
+        boost::chrono::steady_clock, boost::chrono::duration< Double, boost::ratio< 1 > >
+      >
 {
+    typedef boost::chrono::time_point<
+        boost::chrono::steady_clock, boost::chrono::duration< Double, boost::ratio< 1 > >
+    > Inherited;
+
 public:
     
-    SecondPoint( const SecondClock::TimePoint& spoint );
-    SecondPoint( SecondClock::TimePoint&& spoint );
+    typedef boost::chrono::duration< Double, boost::ratio< 1 > > Duration;
+
+    SecondPoint() {}
+
+    SecondPoint( const Inherited& tpoint );
+    SecondPoint( Inherited&& tpoint );
+
+
+    /// Properties ///
+
+    static SecondPoint MaxValue() { return Inherited::max(); }
+};
+
+
+//
+// Second Clock
+//
+
+class SecondClock : public SteadyClock< SecondDuration, SecondPoint >
+{
 };
 
 
@@ -89,43 +111,43 @@ public:
 // Second Duration
 //
 
-inline SecondDuration::SecondDuration( const SecondClock::Duration& sdur )
-    : SecondClock::Duration( sdur )
+inline SecondDuration::SecondDuration( const Inherited& duration )
+    : Inherited( duration )
 {
 }
 
 
-inline SecondDuration::SecondDuration( SecondClock::Duration&& sdur )
-    : SecondClock::Duration( sdur )
+inline SecondDuration::SecondDuration( Inherited&& duration )
+    : Inherited( duration )
 {
 }
 
 
 template< typename Rep, typename Period >
 inline SecondDuration::SecondDuration( const boost::chrono::duration< Rep, Period >& duration )
-    : SecondClock::Duration( boost::chrono::duration_cast< SecondClock::Duration >( duration ))
+    : Inherited( boost::chrono::duration_cast< Inherited >( duration ))
 {
 }
 
 
-inline SecondDuration::SecondDuration( Double seconds )
-    : SecondClock::Duration( seconds )
+inline SecondDuration::SecondDuration( Double ticks )
+    : Inherited( ticks )
 {
 }
 
 
 //
-// Second Point
+// Tick Point
 //
 
-inline SecondPoint::SecondPoint( const SecondClock::TimePoint& spoint )
-    : SecondClock::TimePoint( spoint )
+inline SecondPoint::SecondPoint( const Inherited& tpoint )
+    : Inherited( tpoint )
 {
 }
 
 
-inline SecondPoint::SecondPoint( SecondClock::TimePoint&& spoint )
-    : SecondClock::TimePoint( spoint )
+inline SecondPoint::SecondPoint( Inherited&& tpoint )
+    : Inherited( tpoint )
 {
 }
 

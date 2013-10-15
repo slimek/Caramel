@@ -22,48 +22,37 @@ namespace Caramel
 //   We preferred Boost.Chrono implementation.
 //
 
-template< typename Rep, typename Period >
+template< typename DurationT, typename TimePointT >
 class SteadyClock
 {
     typedef boost::chrono::steady_clock ClockType;
 
 public:
 
+    typedef DurationT  Duration;
+    typedef TimePointT TimePoint;
+
+
     SteadyClock();
 
     void Reset();
 
 
-    //
-    // Typedefs
-    //
-
-    typedef boost::chrono::duration< Rep, Period > Duration;
-    typedef boost::chrono::time_point< ClockType, Duration > TimePoint;
-
-
-    //
-    // Elapsed
-    // - The duration from the clock is created/reseted until now.
-    //
+    // The duration from the clock created/reseted to now.
     Duration Elapsed() const;
-    
-    //
-    // Slice
-    // - Get a slice of time :
-    //   Return the Duration() and Reset() this clock.
-    //
+
+    // Get a slice of time :
+    // Returns the Elapsed() and then Reset() this clock.
     Duration Slice();
-    
-    //
-    // Now
-    // - A convenient wrapper for the std::steady_clock::now.
-    //
+
+    // A convenient wrapper for std::steady_clock::now.
     static TimePoint Now();
 
 
 private:
+
     TimePoint m_markTime;
+
 };
 
 
@@ -72,29 +61,29 @@ private:
 // Implementation
 //
 
-template< typename UnitT, typename Ratio >
-inline SteadyClock< UnitT, Ratio >::SteadyClock()
+template< typename DurationT, typename TimePointT >
+inline SteadyClock< DurationT, TimePointT >::SteadyClock()
 {
     this->Reset();
 }
 
 
-template< typename UnitT, typename Ratio >
-inline void SteadyClock< UnitT, Ratio >::Reset()
+template< typename DurationT, typename TimePointT >
+inline void SteadyClock< DurationT, TimePointT >::Reset()
 {
     m_markTime = SteadyClock::Now();
 }
 
 
-template< typename UnitT, typename Ratio >
-inline auto SteadyClock< UnitT, Ratio >::Elapsed() const -> Duration
+template< typename DurationT, typename TimePointT >
+inline DurationT SteadyClock< DurationT, TimePointT >::Elapsed() const
 {
-    return SteadyClock::Now() - m_markTime;
+    return DurationT( SteadyClock::Now() - m_markTime );
 }
 
 
-template< typename UnitT, typename Ratio >
-inline auto SteadyClock< UnitT, Ratio >::Slice() -> Duration
+template< typename DurationT, typename TimePointT >
+inline DurationT SteadyClock< DurationT, TimePointT >::Slice()
 {
     // This function is equivalent to Elapsed() then Reset(),
     // but you must use the same now in both functions.
@@ -106,10 +95,10 @@ inline auto SteadyClock< UnitT, Ratio >::Slice() -> Duration
 }
 
 
-template< typename UnitT, typename Ratio >
-inline auto SteadyClock< UnitT, Ratio >::Now() -> TimePoint
+template< typename DurationT, typename TimePointT >
+inline TimePointT SteadyClock< DurationT, TimePointT >::Now()
 {
-    return boost::chrono::time_point_cast< Duration >( ClockType::now() );
+    return boost::chrono::time_point_cast< TimePoint::Duration >( ClockType::now() );
 }
 
 
