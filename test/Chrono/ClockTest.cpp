@@ -37,6 +37,12 @@ TEST( TickClockTest )
     CHECK_CLOSE( Ticks( 0 ),    reseted, Ticks( 50 ));
     
     CARAMEL_TRACE_DEBUG( "Duration: %d", delta.ToInt32() );
+
+
+    /// Default Values of TickDuration ///
+
+    const TickDuration dur0;
+    CHECK( 0 == dur0.ToInt64() );
 }
 
 
