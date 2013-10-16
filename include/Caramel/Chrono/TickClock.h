@@ -99,6 +99,10 @@ public:
 
 class TickClock : public SteadyClock< TickDuration, TickPoint >
 {
+public:
+
+    static TickDuration MaxDuration()  { return TickDuration::MaxValue(); }
+    static TickPoint    MaxTimePoint() { return TickPoint::MaxValue(); }
 };
 
 

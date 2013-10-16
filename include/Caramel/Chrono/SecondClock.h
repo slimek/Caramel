@@ -99,6 +99,10 @@ public:
 
 class SecondClock : public SteadyClock< SecondDuration, SecondPoint >
 {
+public:
+
+    static SecondDuration MaxDuration()  { return SecondDuration::MaxValue(); }
+    static SecondPoint    MaxTimePoint() { return SecondPoint::MaxValue(); }
 };
 
 

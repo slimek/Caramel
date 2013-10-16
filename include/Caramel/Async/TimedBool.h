@@ -103,8 +103,8 @@ private:
 
 template< typename ClockT >
 inline TimedBool< ClockT >::TimedBool()
-    : m_duration( DurationType::MaxValue() )
-    , m_deadline( TimePoint::MaxValue() )
+    : m_duration( ClockType::MaxDuration() )
+    , m_deadline( ClockType::MaxTimePoint() )
 {
 }
 
