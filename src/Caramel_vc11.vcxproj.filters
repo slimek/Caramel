@@ -371,6 +371,9 @@
     <ClInclude Include="..\include\Caramel\Thread\ThreadTypes.h">
       <Filter>1. Public Packages\Thread</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Thread\ThisThread.h">
+      <Filter>1. Public Packages\Thread</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\Trace.cpp">
