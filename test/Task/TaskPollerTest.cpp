@@ -3,6 +3,7 @@
 #include "CaramelTestPch.h"
 
 #include <Caramel/Task/TaskPoller.h>
+#include <Caramel/Thread/ThisThread.h>
 #include <UnitTest++/UnitTest++.h>
 
 
@@ -13,6 +14,9 @@ namespace Caramel
 //
 // Task Poller Test
 //
+
+SUITE( TaskPollerSuite )
+{
 
 class TaskPollerTest : public UnitTest::Test
 {
@@ -26,9 +30,8 @@ private:
 
     /// Task Functions ///
 
-    void Work1();
-
     Bool m_work1Done;
+    Bool m_work2Done;
 
 
 
@@ -55,22 +58,34 @@ void TaskPollerTest::DoRun()
 {
     TaskPoller poller;
 
-    Task t1( "Work1", [=] { this->Work1(); } );
+    Task t1( "Work1", [=] { m_work1Done = true; } );
 
     poller.Submit( t1 );
     poller.PollOne();
 
-    CHECK( m_work1Done == true );
+    CHECK( true == m_work1Done );
+
+    Task t2( "Work2", [=] { m_work2Done = true; } );
+    t2.DelayFor( Ticks( 500 ));
+
+    poller.Submit( t2 );
+    poller.PollOne();
+
+    CHECK( false == m_work2Done );
+
+    ThisThread::SleepFor( Ticks( 550 ));
+
+    poller.PollOne();
+
+    CHECK( true == m_work2Done );
+
+
+
 }
 
 
-void TaskPollerTest::Work1()
-{
-    CHECK( m_work1Done == false );
-
-    m_work1Done = true;
 }
-
 
 ///////////////////////////////////////////////////////////////////////////////
+
 } // namespace Caramel

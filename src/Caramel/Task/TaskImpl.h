@@ -27,17 +27,30 @@ public:
     TaskImpl( const std::string& name, TaskFunction&& f );
 
 
+    /// Operations ///
+
+    void DelayFor( const TickDuration& duration );
+
+    void Run();
+
+
     /// Properties ///
 
-    Bool IsDelayed() const;
+    Bool IsDelayed() const { return m_delayed; }
 
-    TickDuration GetDelayDuration() const;
+    TickDuration GetDelayDuration() const { return m_delayDuration; }
 
 
 private:
 
     std::string  m_name;
     TaskFunction m_function;
+
+    
+    /// Delay ///
+
+    Bool m_delayed;
+    TickDuration m_delayDuration;
 
 };
 

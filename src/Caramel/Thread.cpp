@@ -3,6 +3,7 @@
 #include <Caramel/CaramelPch.h>
 
 #include <Caramel/Error/CatchException.h>
+#include <Caramel/Thread/ThisThread.h>
 #include <Caramel/Thread/ThreadImpl.h>
 
 
@@ -13,6 +14,7 @@ namespace Caramel
 // Contents
 //
 //   Thread
+//   ThisThread
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -70,6 +72,18 @@ void ThreadImpl::RunWork()
 void ThreadImpl::Join()
 {
     m_thread->join();
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// This Thread
+//
+
+void ThisThread::SleepFor( const TickDuration& duration )
+{
+    const std::chrono::milliseconds ms( duration.count() );
+    std::this_thread::sleep_for( ms );
 }
 
 
