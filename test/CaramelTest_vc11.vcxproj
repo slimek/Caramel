@@ -97,6 +97,7 @@
     <ClCompile Include="Concurrent\PriorityQueueTest.cpp" />
     <ClCompile Include="Document\IniDocumentTest.cpp" />
     <ClCompile Include="RunTest.cpp" />
+    <ClCompile Include="Statechart\StateMachineTest.cpp" />
     <ClCompile Include="Task\TaskPollerTest.cpp" />
     <ClCompile Include="Thread\ThreadTest.cpp" />
   </ItemGroup>
@@ -110,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Document\test1.ini" />
+    <None Include="Document\test2.ini" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -117,6 +117,12 @@
     <Filter Include="2. Sources\Thread">
       <UniqueIdentifier>{2660e9fb-5e37-4c17-a535-221f86fb38ad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\Statechart">
+      <UniqueIdentifier>{6b0e1fec-bd80-46b2-aae8-407516cc8f1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\Statechart">
+      <UniqueIdentifier>{3a837a21-86dc-42bf-83ae-73068f083897}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -374,6 +380,18 @@
     <ClInclude Include="..\include\Caramel\Thread\ThisThread.h">
       <Filter>1. Public Packages\Thread</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Statechart\StateMachine.h">
+      <Filter>1. Public Packages\Statechart</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Statechart\State.h">
+      <Filter>1. Public Packages\Statechart</Filter>
+    </ClInclude>
+    <ClInclude Include="Caramel\Statechart\StateMachineImpl.h">
+      <Filter>2. Sources\Statechart</Filter>
+    </ClInclude>
+    <ClInclude Include="Caramel\Statechart\StateImpl.h">
+      <Filter>2. Sources\Statechart</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\Trace.cpp">
@@ -416,6 +434,9 @@
       <Filter>2. Sources</Filter>
     </ClCompile>
     <ClCompile Include="Caramel\Thread.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Caramel\Statechart.cpp">
       <Filter>2. Sources</Filter>
     </ClCompile>
   </ItemGroup>

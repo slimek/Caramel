@@ -60,6 +60,8 @@
     <ClInclude Include="..\include\Caramel\Setup\PchDefines.h" />
     <ClInclude Include="..\include\Caramel\Setup\PchHeaders.h" />
     <ClInclude Include="..\include\Caramel\Setup\System.h" />
+    <ClInclude Include="..\include\Caramel\Statechart\State.h" />
+    <ClInclude Include="..\include\Caramel\Statechart\StateMachine.h" />
     <ClInclude Include="..\include\Caramel\String\Algorithm.h" />
     <ClInclude Include="..\include\Caramel\String\CainLess.h" />
     <ClInclude Include="..\include\Caramel\String\CharTraits.h" />
@@ -98,6 +100,8 @@
     <ClInclude Include="Caramel\Object\FacilityLongevity.h" />
     <ClInclude Include="Caramel\Program\ConsoleApplicationImpl.h" />
     <ClInclude Include="Caramel\Program\ProgramOptionsManager.h" />
+    <ClInclude Include="Caramel\Statechart\StateImpl.h" />
+    <ClInclude Include="Caramel\Statechart\StateMachineImpl.h" />
     <ClInclude Include="Caramel\String\SprintfManager.h" />
     <ClInclude Include="Caramel\Task\TaskImpl.h" />
     <ClInclude Include="Caramel\Task\TaskPollerImpl.h" />
@@ -118,6 +122,7 @@
     <ClCompile Include="Caramel\Lexical.cpp" />
     <ClCompile Include="Caramel\Object.cpp" />
     <ClCompile Include="Caramel\Program.cpp" />
+    <ClCompile Include="Caramel\Statechart.cpp" />
     <ClCompile Include="Caramel\String.cpp" />
     <ClCompile Include="Caramel\Task.cpp" />
     <ClCompile Include="Caramel\Thread.cpp" />

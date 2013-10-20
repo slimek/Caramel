@@ -29,6 +29,9 @@
     <Filter Include="2. Tests\Document">
       <UniqueIdentifier>{b63132cc-ca78-4ddb-ac2d-4e21aaa6726c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\Statechart">
+      <UniqueIdentifier>{ce57f6f0-c229-4b02-81ba-0bdd31393277}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RunTest.cpp">
@@ -58,6 +61,9 @@
     <ClCompile Include="Document\IniDocumentTest.cpp">
       <Filter>2. Tests\Document</Filter>
     </ClCompile>
+    <ClCompile Include="Statechart\StateMachineTest.cpp">
+      <Filter>2. Tests\Statechart</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CaramelTestPch.h">
@@ -66,6 +72,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Document\test1.ini">
+      <Filter>2. Tests\Document</Filter>
+    </None>
+    <None Include="Document\test2.ini">
       <Filter>2. Tests\Document</Filter>
     </None>
   </ItemGroup>
