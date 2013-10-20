@@ -40,6 +40,9 @@
 #define CARAMEL_CHECK( expr ) \
     if ( !( expr )) { CARAMEL_THROW1( "Checking failed : \"" #expr "\"" ); }
 
+#define CARAMEL_CHECK_MSG( expr, ... ) \
+    if ( !( expr )) { CARAMEL_THROW( __VA_ARGS__ ); }
+
 
 ///////////////////////////////////////////////////////////////////////////////
 

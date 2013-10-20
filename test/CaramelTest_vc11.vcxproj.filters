@@ -26,6 +26,9 @@
     <Filter Include="2. Tests\Thread">
       <UniqueIdentifier>{0016f775-00a3-437f-b5f6-b29286b5cea5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\Document">
+      <UniqueIdentifier>{b63132cc-ca78-4ddb-ac2d-4e21aaa6726c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RunTest.cpp">
@@ -52,10 +55,18 @@
     <ClCompile Include="Thread\ThreadTest.cpp">
       <Filter>2. Tests\Thread</Filter>
     </ClCompile>
+    <ClCompile Include="Document\IniDocumentTest.cpp">
+      <Filter>2. Tests\Document</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CaramelTestPch.h">
       <Filter>3. Precompiled Header</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Document\test1.ini">
+      <Filter>2. Tests\Document</Filter>
+    </None>
   </ItemGroup>
 </Project>
