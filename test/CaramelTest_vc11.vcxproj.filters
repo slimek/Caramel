@@ -64,6 +64,9 @@
     <ClCompile Include="Statechart\StateMachineTest.cpp">
       <Filter>2. Tests\Statechart</Filter>
     </ClCompile>
+    <ClCompile Include="Concurrent\MapTest.cpp">
+      <Filter>2. Tests\Concurrent</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CaramelTestPch.h">

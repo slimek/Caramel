@@ -94,6 +94,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Chrono\ClockTest.cpp" />
+    <ClCompile Include="Concurrent\MapTest.cpp" />
     <ClCompile Include="Concurrent\PriorityQueueTest.cpp" />
     <ClCompile Include="Document\IniDocumentTest.cpp" />
     <ClCompile Include="RunTest.cpp" />

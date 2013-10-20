@@ -392,6 +392,15 @@
     <ClInclude Include="Caramel\Statechart\StateImpl.h">
       <Filter>2. Sources\Statechart</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Concurrent\Map.h">
+      <Filter>1. Public Packages\Concurrent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Concurrent\BasicMap.h">
+      <Filter>1. Public Packages\Concurrent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Concurrent\ReplicatePolicies.h">
+      <Filter>1. Public Packages\Concurrent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\Trace.cpp">

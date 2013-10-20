@@ -9,8 +9,6 @@
 namespace Caramel
 {
 
-using namespace Statechart;
-
 SUITE( StateMachineSuite )
 {
 
@@ -21,7 +19,7 @@ SUITE( StateMachineSuite )
 
 TEST( StateMachineTest )
 {
-    StateMachine machine( "Basic" );
+    Statechart::StateMachine machine( "Basic" );
 
     machine.AddState( 1 );
 }
