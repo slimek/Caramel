@@ -2,6 +2,7 @@
 
 #include <Caramel/CaramelPch.h>
 
+#include <Caramel/Async/TimedBool.h>
 #include <Caramel/Chrono/SteadyClock.h>
 #include <Caramel/Task/TaskImpl.h>
 #include <Caramel/Task/TaskPollerImpl.h>
@@ -92,25 +93,33 @@ void TaskPoller::Submit( const Task& inputTask )
 
 void TaskPoller::PollOne()
 {
-    if ( ! m_impl->m_delayedTasks.IsEmpty() )
+    this->PollFor( Ticks::Zero() );
+}
+
+
+void TaskPoller::PollFor( const Ticks& sliceTicks )
+{
+    while ( ! m_impl->m_delayedTasks.IsEmpty() )
     {
         TickPoint dueTime;
         m_impl->m_delayedTasks.PeekTopKey( dueTime );
 
-        if ( dueTime < TickClock::Now() )
-        {
-            TaskPtr readyTask;
-            m_impl->m_delayedTasks.TryPop( readyTask );
-            m_impl->m_readyTasks.Push( readyTask );
-        }
+        if ( TickClock::Now() < dueTime ) { break; }
+
+        TaskPtr readyTask;
+        m_impl->m_delayedTasks.TryPop( readyTask );
+        m_impl->m_readyTasks.Push( readyTask );
     }
+
+    TimedBool< TickClock > sliceTimeout( sliceTicks );
 
     TaskPtr task;
 
-    if ( m_impl->m_readyTasks.TryPop( task ))
+    while ( m_impl->m_readyTasks.TryPop( task ))
     {
         task->Run();
-        return;
+
+        if ( sliceTimeout ) { break; }
     }
 }
 

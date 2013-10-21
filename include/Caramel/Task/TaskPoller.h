@@ -9,6 +9,7 @@
 #pragma once
 #endif
 
+#include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Task/TaskExecutor.h>
 
 
@@ -31,6 +32,12 @@ public:
     void Submit( const Task& task ) override;
 
     void PollOne();
+
+    //
+    // Poll at least one task.
+    // Then poll tasks until empty, or slice ticks timeout.
+    //
+    void PollFor( const Ticks& sliceTicks );
 
 
 private:
