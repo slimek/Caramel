@@ -77,6 +77,10 @@ std::string SprintfImpl( const Char* format, ... )
 
 SprintfBuffer::SprintfBuffer()
 {
+    // Keep a local copy here.
+    // Using PAD_CHAR in std::fill() would cause a linking error in Clang compiler.
+    const Uint8 padding = PAD_CHAR;
+
     // Align buffer acoording to the cache lines
     Void* p = &m_chunk[0];
     std::size_t space = CHUNK_SIZE;
@@ -85,7 +89,6 @@ SprintfBuffer::SprintfBuffer()
     CARAMEL_ASSERT( m_buffer + SIZE + sizeof( Uint32 ) <= &m_chunk[ CHUNK_SIZE ] );
 
     // Padding before head
-    const Uint8 padding = PAD_CHAR;
     std::fill( &m_chunk[0], m_buffer, padding );
 
     // Clear the buffer
