@@ -9,6 +9,8 @@
 #pragma once
 #endif
 
+#include <Caramel/Statechart/State.h>
+
 
 namespace Caramel
 {
@@ -23,6 +25,8 @@ namespace Statechart
 
 class StateImpl
 {
+    friend class State;
+
 public:
 
     explicit StateImpl( Int stateId );
@@ -33,6 +37,9 @@ private:
     /// Data Members ///
 
     Int m_id;
+
+    Action m_enterAction;
+    Action m_exitAction;
 };
 
 typedef std::shared_ptr< StateImpl > StatePtr;

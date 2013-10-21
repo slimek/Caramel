@@ -9,6 +9,7 @@
 #pragma once
 #endif
 
+#include <Caramel/Concurrent/Map.h>
 #include <Caramel/Statechart/StateMachine.h>
 #include <Caramel/Task/TaskExecutor.h>
 
@@ -24,11 +25,19 @@ namespace Statechart
 // State Machine
 //
 
+class StateImpl;
+typedef std::shared_ptr< StateImpl > StatePtr;
+
 class StateMachineImpl
 {
+    friend class StateMachine;
+
 public:
 
     explicit StateMachineImpl( const std::string& name );
+
+    void ProcessInitiate( StatePtr initialState );
+
 
 private:
 
@@ -37,6 +46,11 @@ private:
     std::string m_name;
 
     std::unique_ptr< TaskExecutor > m_taskExecutor;
+
+    typedef Concurrent::Map< Int, StatePtr > StateMap;
+    StateMap m_states;
+
+    Uint m_actionThreadId;
 };
 
 

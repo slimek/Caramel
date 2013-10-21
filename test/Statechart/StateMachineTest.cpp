@@ -17,11 +17,18 @@ SUITE( StateMachineSuite )
 // State Machine Test
 //
 
+static Bool s_state1Entered = false;
+
 TEST( StateMachineTest )
 {
     Statechart::StateMachine machine( "Basic" );
 
-    machine.AddState( 1 );
+    machine.AddState( 1 )
+           .EnterAction( [=] { s_state1Entered = true; } );
+
+    machine.Initiate( 1 );
+
+    //machine.Process();
 }
 
 

@@ -9,6 +9,8 @@
 #pragma once
 #endif
 
+#include <functional>
+
 
 namespace Caramel
 {
@@ -22,12 +24,20 @@ namespace Statechart
 //
 
 class StateImpl;
+typedef std::function< void() > Action;
 
 class State
 {
     friend class StateMachine;
 
 public:
+
+    //
+    // Enter / Exit Actions
+    // - Called when entering or exiting this state.
+    //
+    State& EnterAction( Action action );
+    State& ExitAction ( Action action );
 
 
 private:

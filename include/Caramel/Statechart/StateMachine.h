@@ -33,10 +33,15 @@ public:
     ~StateMachine();
 
     //
-    // Build the state machine.
+    // Build this state machine.
     // - This function can only be used before calling Initiate().
     //
     State AddState( Int stateId );
+
+    //
+    // Start this state machine, enter the initial state.
+    //
+    void Initiate( Int stateId );
 
 
 private:

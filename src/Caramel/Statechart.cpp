@@ -43,7 +43,28 @@ StateMachine::~StateMachine()
 State StateMachine::AddState( Int stateId )
 {
     StatePtr newState = std::make_shared< StateImpl >( stateId );
+    if ( ! m_impl->m_states.Insert( stateId, newState ))
+    {
+        CARAMEL_THROW( "State duplicate, machine: %s, stateId: %d", m_impl->m_name, stateId );
+    }
     return State( newState );
+}
+
+
+void StateMachine::Initiate( Int stateId )
+{
+    StatePtr initialState;
+    if ( ! m_impl->m_states.Find( stateId, initialState ))
+    {
+        CARAMEL_THROW( "State not found, machine: %s, stateId: %d", m_impl->m_name, stateId );
+    }
+
+    Task task(
+        Sprintf( "Machine[%s].ProcessInitiate[%d]", m_impl->m_name, stateId ),
+        [=] { m_impl->ProcessInitiate( initialState ); }
+    );
+
+    m_impl->m_taskExecutor->Submit( task );
 }
 
 
@@ -54,6 +75,12 @@ State StateMachine::AddState( Int stateId )
 StateMachineImpl::StateMachineImpl( const std::string& name )
     : m_name( name )
     , m_taskExecutor( new TaskPoller )
+    , m_actionThreadId( 0 )
+{
+}
+
+
+void StateMachineImpl::ProcessInitiate( StatePtr initialState )
 {
 }
 
@@ -66,6 +93,15 @@ StateMachineImpl::StateMachineImpl( const std::string& name )
 State::State( StatePtr impl )
     : m_impl( impl )
 {
+}
+
+
+State& State::EnterAction( Action action )
+{
+    CARAMEL_ASSERT( ! m_impl->m_enterAction );
+
+    m_impl->m_enterAction = action;
+    return *this;
 }
 
 
