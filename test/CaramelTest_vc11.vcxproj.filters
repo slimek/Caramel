@@ -32,6 +32,9 @@
     <Filter Include="2. Tests\Statechart">
       <UniqueIdentifier>{ce57f6f0-c229-4b02-81ba-0bdd31393277}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\Trace">
+      <UniqueIdentifier>{b1315ada-6de0-40db-b4da-34dddd377951}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RunTest.cpp">
@@ -66,6 +69,9 @@
     </ClCompile>
     <ClCompile Include="Concurrent\MapTest.cpp">
       <Filter>2. Tests\Concurrent</Filter>
+    </ClCompile>
+    <ClCompile Include="Trace\TraceTest.cpp">
+      <Filter>2. Tests\Trace</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

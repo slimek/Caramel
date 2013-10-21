@@ -101,6 +101,7 @@
     <ClCompile Include="Statechart\StateMachineTest.cpp" />
     <ClCompile Include="Task\TaskPollerTest.cpp" />
     <ClCompile Include="Thread\ThreadTest.cpp" />
+    <ClCompile Include="Trace\TraceTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CaramelTestPch.h" />
