@@ -84,6 +84,28 @@ void ThreadImpl::Join()
 // This Thread
 //
 
+Uint ThisThread::GetThreadId()
+{
+    #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+    {
+        return ::GetCurrentThreadId();
+    }
+    #elif defined( CARAMEL_SYSTEM_IS_IOS )
+    {
+        return ::pthread_mach_thread_np( ::pthread_self() );
+    }
+    #elif defined( CARAMEL_SYSTEM_IS_ANDROID )
+    {
+        return ::pthread_self();
+    }
+    #else
+    {
+        CARAMEL_NOT_IMPLEMENTED();
+    }
+    #endif    
+}
+
+
 void ThisThread::SleepFor( const TickDuration& duration )
 {
     const std::chrono::milliseconds ms( duration.count() );

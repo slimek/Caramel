@@ -7,17 +7,20 @@
 #include <Caramel/Thread/Thread.h>
 #include <UnitTest++/UnitTest++.h>
 
+#if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+#include <Windows.h>
+#endif
 
 namespace Caramel
+{
+
+SUITE( ThreadSuite )
 {
 
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Thread Test
 //
-
-SUITE( ThreadSuite )
-{
 
 TEST( ThreadTest )
 {
@@ -39,10 +42,19 @@ TEST( ThreadTest )
     CHECK_CLOSE( clock.Slice(), Ticks( 110 ), Ticks( 10 ));
 }
 
-}  // ThreadSuite
 
+TEST( ThreadIdTest )
+{
+    const Uint threadId = ThisThread::GetThreadId();
+
+    #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+    CHECK( threadId == ::GetCurrentThreadId() );
+    #endif
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////
+
+}  // SUITE ThreadSuite
 
 } // namespace Caramel
