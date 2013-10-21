@@ -12,6 +12,9 @@
 namespace Caramel
 {
 
+SUITE( TimedBoolSuite )
+{
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Timed Boolean Test
@@ -51,9 +54,17 @@ TEST( TimedBoolTest )
     
     CHECK( true  == tb3 );
     CHECK( false == tb4 );
+
+
+    /// Immediately Expires ///
+
+    TickedBool tb5( Ticks::Zero() );
+    CHECK( true == tb5 );
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////
+
+} // SUITE TimedBoolSuite
 
 } // namespace Caramel
