@@ -448,5 +448,14 @@
     <ClCompile Include="Caramel\Statechart.cpp">
       <Filter>2. Sources</Filter>
     </ClCompile>
+    <ClCompile Include="DateTime.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Configuration.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
