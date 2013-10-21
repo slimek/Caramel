@@ -71,16 +71,26 @@ void StateMachine::Initiate( Int stateId )
 }
 
 
+void StateMachine::Process( const Ticks& sliceTicks )
+{
+    CARAMEL_ASSERT( m_impl->m_builtinTaskPoller );
+
+    m_impl->m_builtinTaskPoller->PollFor( sliceTicks );
+}
+
+
 //
 // Implementation
 //
 
 StateMachineImpl::StateMachineImpl( const std::string& name )
     : m_name( name )
-    , m_taskExecutor( new TaskPoller )
+    , m_taskExecutor( nullptr )
+    , m_builtinTaskPoller( new TaskPoller )
     , m_transitNumber( 0 )
     , m_actionThreadId( 0 )
 {
+    m_taskExecutor = m_builtinTaskPoller.get();
 }
 
 

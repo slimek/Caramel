@@ -9,6 +9,7 @@
 #pragma once
 #endif
 
+#include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Statechart/State.h>
 
 
@@ -42,6 +43,15 @@ public:
     // Start this state machine, enter the initial state.
     //
     void Initiate( Int stateId );
+
+    //
+    // Process enqueued events.
+    // - Call this function ONLY when you using the built-in TaskPoller.
+    // - If no event exists, it returns immediately.
+    //   If some events exist, process at least one event,
+    //   then process the rest events until empty, or until slice ticks spent.
+    //
+    void Process( const Ticks& sliceTicks = Ticks::Zero() );
 
 
 private:

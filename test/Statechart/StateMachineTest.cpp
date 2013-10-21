@@ -28,7 +28,9 @@ TEST( StateMachineTest )
 
     machine.Initiate( 1 );
 
-    //machine.Process();
+    machine.Process();
+
+    CHECK( true == s_state1Entered );
 }
 
 

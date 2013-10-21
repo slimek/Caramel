@@ -11,7 +11,7 @@
 
 #include <Caramel/Concurrent/Map.h>
 #include <Caramel/Statechart/StateMachine.h>
-#include <Caramel/Task/TaskExecutor.h>
+#include <Caramel/Task/TaskPoller.h>
 #include <mutex>
 
 
@@ -62,7 +62,9 @@ private:
 
     std::string m_name;
 
-    std::unique_ptr< TaskExecutor > m_taskExecutor;
+    TaskExecutor* m_taskExecutor;
+    std::unique_ptr< TaskPoller > m_builtinTaskPoller;
+    
 
     typedef Concurrent::Map< Int, StatePtr > StateMap;
     StateMap m_states;
