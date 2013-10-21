@@ -9,6 +9,7 @@
 #pragma once
 #endif
 
+#include <Caramel/Meta/IntegralTypes.h>
 #include <type_traits>
 
 
@@ -80,8 +81,18 @@ inline Integer< ValueT >::Integer( ValueT defaultValue )
 }
     
 
-template<>
-Bool Integer< Int32 >::TryParse( const std::string& );
+//
+// Explicit declare TryParse() function of all specializations
+// - Otherwise, Clang has "explicit specialization after instantiation" errors in Lexical.cpp
+//
+
+#define CARAMEL_LEXICAL_INTEGER_DECLARE( type ) \
+    template<> \
+    Bool Integer< type >::TryParse( const std::string& );
+
+CARAMEL_META_INTEGRAL_TYPES_ALL( CARAMEL_LEXICAL_INTEGER_DECLARE )
+
+#undef CARAMEL_LEXICAL_INTEGER_DECLARE
 
 
 ///////////////////////////////////////////////////////////////////////////////

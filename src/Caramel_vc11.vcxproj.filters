@@ -401,6 +401,9 @@
     <ClInclude Include="..\include\Caramel\Concurrent\ReplicatePolicies.h">
       <Filter>1. Public Packages\Concurrent</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Meta\IntegralTypes.h">
+      <Filter>1. Public Packages\Meta</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\Trace.cpp">

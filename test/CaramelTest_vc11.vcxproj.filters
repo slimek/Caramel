@@ -35,6 +35,9 @@
     <Filter Include="2. Tests\Trace">
       <UniqueIdentifier>{b1315ada-6de0-40db-b4da-34dddd377951}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\Lexical">
+      <UniqueIdentifier>{ca981491-234d-4efa-aa34-73aafdc529ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RunTest.cpp">
@@ -72,6 +75,9 @@
     </ClCompile>
     <ClCompile Include="Trace\TraceTest.cpp">
       <Filter>2. Tests\Trace</Filter>
+    </ClCompile>
+    <ClCompile Include="Lexical\LexicalIntegerTest.cpp">
+      <Filter>2. Tests\Lexical</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
