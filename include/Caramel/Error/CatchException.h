@@ -157,6 +157,22 @@ inline void ExceptionCatcher< void >::Invoke( const Function& f )
 }
 
 
+#else
+    
+template< typename ResultT >
+template< typename Function >
+inline void ExceptionCatcher< ResultT >::Invoke( const Function& f )
+{
+    m_result = f();
+}
+
+
+template< typename Function >
+inline void ExceptionCatcher< void >::Invoke( const Function& f )
+{
+    f();
+}
+    
 #endif // CARAMEL_SYSTEM_IS_WINDOWS
 
 ///////////////////////////////////////////////////////////////////////////////

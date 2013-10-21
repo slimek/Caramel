@@ -98,7 +98,7 @@ inline DurationT SteadyClock< DurationT, TimePointT >::Slice()
 template< typename DurationT, typename TimePointT >
 inline TimePointT SteadyClock< DurationT, TimePointT >::Now()
 {
-    return boost::chrono::time_point_cast< TimePoint::Duration >( ClockType::now() );
+    return boost::chrono::time_point_cast< typename TimePoint::Duration >( ClockType::now() );
 }
 
 

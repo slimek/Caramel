@@ -1,0 +1,842 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6DAFE1B4181511D000859097 /* CaramelPchCreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAFE17E181511D000859097 /* CaramelPchCreator.cpp */; };
+		6DAFE1B5181511D000859097 /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAFE181181511D000859097 /* Debug.cpp */; };
+		6DAFE1B6181511D000859097 /* Document.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAFE186181511D000859097 /* Document.cpp */; };
+		6DAFE1B7181511D000859097 /* Error.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAFE187181511D000859097 /* Error.cpp */; };
+		6DAFE1B8181511D000859097 /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAFE18A181511D000859097 /* FileSystem.cpp */; };
+		6DAFE1B9181511D000859097 /* Io.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAFE18F181511D000859097 /* Io.cpp */; };
+		6DAFE1BA181511D000859097 /* Lexical.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAFE190181511D000859097 /* Lexical.cpp */; };
+		6DAFE1BB181511D000859097 /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAFE193181511D000859097 /* Object.cpp */; };
+		6DAFE1BC181511D000859097 /* Program.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAFE197181511D000859097 /* Program.cpp */; };
+		6DAFE1BD181511D000859097 /* Statechart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAFE19B181511D000859097 /* Statechart.cpp */; };
+		6DAFE1BE181511D000859097 /* String.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAFE19E181511D000859097 /* String.cpp */; };
+		6DAFE1BF181511D000859097 /* Task.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAFE1A2181511D000859097 /* Task.cpp */; };
+		6DAFE1C0181511D000859097 /* Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAFE1A5181511D000859097 /* Thread.cpp */; };
+		6DAFE1C1181511D000859097 /* Trace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAFE1A9181511D000859097 /* Trace.cpp */; };
+		6DAFE1C2181511D000859097 /* Windows.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAFE1AA181511D000859097 /* Windows.cpp */; };
+		6DAFE1C4181511D000859097 /* Configuration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAFE1B1181511D000859097 /* Configuration.cpp */; };
+		6DAFE1C5181511D000859097 /* DateTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAFE1B2181511D000859097 /* DateTime.cpp */; };
+		6DAFE1C6181511D000859097 /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAFE1B3181511D000859097 /* Random.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6DAFE0EB1815118B00859097 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		6DAFE0ED1815118B00859097 /* libCaramel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCaramel.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DAFE119181511BD00859097 /* FlowState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlowState.h; sourceTree = "<group>"; };
+		6DAFE11A181511BD00859097 /* TimedBool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimedBool.h; sourceTree = "<group>"; };
+		6DAFE11B181511BD00859097 /* Caramel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Caramel.h; sourceTree = "<group>"; };
+		6DAFE11D181511BD00859097 /* SecondClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondClock.h; sourceTree = "<group>"; };
+		6DAFE11E181511BD00859097 /* SteadyClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SteadyClock.h; sourceTree = "<group>"; };
+		6DAFE11F181511BD00859097 /* TickClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TickClock.h; sourceTree = "<group>"; };
+		6DAFE121181511BD00859097 /* BasicMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicMap.h; sourceTree = "<group>"; };
+		6DAFE122181511BD00859097 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
+		6DAFE123181511BD00859097 /* PriorityQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriorityQueue.h; sourceTree = "<group>"; };
+		6DAFE124181511BD00859097 /* Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Queue.h; sourceTree = "<group>"; };
+		6DAFE125181511BD00859097 /* ReplicatePolicies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplicatePolicies.h; sourceTree = "<group>"; };
+		6DAFE127181511BD00859097 /* ScopeTiming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScopeTiming.h; sourceTree = "<group>"; };
+		6DAFE129181511BD00859097 /* IniDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IniDocument.h; sourceTree = "<group>"; };
+		6DAFE12A181511BD00859097 /* IniSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IniSection.h; sourceTree = "<group>"; };
+		6DAFE12C181511BD00859097 /* Assert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Assert.h; sourceTree = "<group>"; };
+		6DAFE12D181511BD00859097 /* CatchException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatchException.h; sourceTree = "<group>"; };
+		6DAFE12F181511BD00859097 /* ExceptionCatcherCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExceptionCatcherCore.h; sourceTree = "<group>"; };
+		6DAFE130181511BD00859097 /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exception.h; sourceTree = "<group>"; };
+		6DAFE132181511BD00859097 /* DirectoryInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectoryInfo.h; sourceTree = "<group>"; };
+		6DAFE133181511BD00859097 /* FileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileInfo.h; sourceTree = "<group>"; };
+		6DAFE134181511BD00859097 /* Path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Path.h; sourceTree = "<group>"; };
+		6DAFE136181511BD00859097 /* ScopeExit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScopeExit.h; sourceTree = "<group>"; };
+		6DAFE138181511BD00859097 /* FileStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileStream.h; sourceTree = "<group>"; };
+		6DAFE139181511BD00859097 /* InputFileStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputFileStream.h; sourceTree = "<group>"; };
+		6DAFE13A181511BD00859097 /* InputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputStream.h; sourceTree = "<group>"; };
+		6DAFE13B181511BD00859097 /* TextReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextReader.h; sourceTree = "<group>"; };
+		6DAFE13C181511BD00859097 /* TextStreamReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextStreamReader.h; sourceTree = "<group>"; };
+		6DAFE13E181511BE00859097 /* Boolean.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Boolean.h; sourceTree = "<group>"; };
+		6DAFE13F181511BE00859097 /* Integer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Integer.h; sourceTree = "<group>"; };
+		6DAFE140181511BE00859097 /* IntegerList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntegerList.h; sourceTree = "<group>"; };
+		6DAFE142181511BE00859097 /* IfThenElse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IfThenElse.h; sourceTree = "<group>"; };
+		6DAFE143181511BE00859097 /* Select.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Select.h; sourceTree = "<group>"; };
+		6DAFE144181511BE00859097 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
+		6DAFE146181511BE00859097 /* NumberConvertible.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberConvertible.h; sourceTree = "<group>"; };
+		6DAFE147181511BE00859097 /* NumberTraits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberTraits.h; sourceTree = "<group>"; };
+		6DAFE149181511BE00859097 /* AutoNumbered.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoNumbered.h; sourceTree = "<group>"; };
+		6DAFE14B181511BE00859097 /* LifetimeTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LifetimeTracker.h; sourceTree = "<group>"; };
+		6DAFE14C181511BE00859097 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
+		6DAFE14E181511BE00859097 /* ConsoleApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleApplication.h; sourceTree = "<group>"; };
+		6DAFE14F181511BE00859097 /* ProgramOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramOptions.h; sourceTree = "<group>"; };
+		6DAFE151181511BE00859097 /* Compiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Compiler.h; sourceTree = "<group>"; };
+		6DAFE152181511BE00859097 /* PchDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PchDefines.h; sourceTree = "<group>"; };
+		6DAFE153181511BE00859097 /* PchHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PchHeaders.h; sourceTree = "<group>"; };
+		6DAFE154181511BE00859097 /* System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
+		6DAFE156181511BE00859097 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
+		6DAFE157181511BE00859097 /* StateMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateMachine.h; sourceTree = "<group>"; };
+		6DAFE159181511BE00859097 /* Algorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Algorithm.h; sourceTree = "<group>"; };
+		6DAFE15A181511BE00859097 /* CainLess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CainLess.h; sourceTree = "<group>"; };
+		6DAFE15B181511BE00859097 /* CharTraits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharTraits.h; sourceTree = "<group>"; };
+		6DAFE15D181511BE00859097 /* SprintfParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SprintfParameter.h; sourceTree = "<group>"; };
+		6DAFE15F181511BE00859097 /* Sprintf_Sprintf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sprintf_Sprintf.h; sourceTree = "<group>"; };
+		6DAFE160181511BE00859097 /* Sprintf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sprintf.h; sourceTree = "<group>"; };
+		6DAFE161181511BE00859097 /* StringConvertible.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringConvertible.h; sourceTree = "<group>"; };
+		6DAFE162181511BE00859097 /* TextEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextEncoding.h; sourceTree = "<group>"; };
+		6DAFE163181511BE00859097 /* Utf8String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utf8String.h; sourceTree = "<group>"; };
+		6DAFE165181511BE00859097 /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
+		6DAFE166181511BE00859097 /* TaskExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskExecutor.h; sourceTree = "<group>"; };
+		6DAFE167181511BE00859097 /* TaskFwd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskFwd.h; sourceTree = "<group>"; };
+		6DAFE168181511BE00859097 /* TaskPoller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskPoller.h; sourceTree = "<group>"; };
+		6DAFE16A181511BE00859097 /* MutexLocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MutexLocks.h; sourceTree = "<group>"; };
+		6DAFE16B181511BE00859097 /* ThisThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThisThread.h; sourceTree = "<group>"; };
+		6DAFE16C181511BE00859097 /* Thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Thread.h; sourceTree = "<group>"; };
+		6DAFE16D181511BE00859097 /* ThreadTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreadTypes.h; sourceTree = "<group>"; };
+		6DAFE16F181511BE00859097 /* Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Channel.h; sourceTree = "<group>"; };
+		6DAFE170181511BE00859097 /* Listeners.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Listeners.h; sourceTree = "<group>"; };
+		6DAFE171181511BE00859097 /* Trace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trace.h; sourceTree = "<group>"; };
+		6DAFE172181511BE00859097 /* TraceTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TraceTypes.h; sourceTree = "<group>"; };
+		6DAFE174181511BE00859097 /* SharedArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedArray.h; sourceTree = "<group>"; };
+		6DAFE176181511BE00859097 /* CrtDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrtDebug.h; sourceTree = "<group>"; };
+		6DAFE177181511BE00859097 /* DebuggerTraceListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebuggerTraceListener.h; sourceTree = "<group>"; };
+		6DAFE178181511BE00859097 /* FileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileInfo.h; sourceTree = "<group>"; };
+		6DAFE179181511BE00859097 /* WideString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WideString.h; sourceTree = "<group>"; };
+		6DAFE17D181511D000859097 /* CaramelPch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaramelPch.h; sourceTree = "<group>"; };
+		6DAFE17E181511D000859097 /* CaramelPchCreator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CaramelPchCreator.cpp; sourceTree = "<group>"; };
+		6DAFE180181511D000859097 /* DebugManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugManager.h; sourceTree = "<group>"; };
+		6DAFE181181511D000859097 /* Debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Debug.cpp; sourceTree = "<group>"; };
+		6DAFE183181511D000859097 /* IniDocumentImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IniDocumentImpl.h; sourceTree = "<group>"; };
+		6DAFE184181511D000859097 /* IniSectionImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IniSectionImpl.h; sourceTree = "<group>"; };
+		6DAFE185181511D000859097 /* IniSyntax.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IniSyntax.h; sourceTree = "<group>"; };
+		6DAFE186181511D000859097 /* Document.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Document.cpp; sourceTree = "<group>"; };
+		6DAFE187181511D000859097 /* Error.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Error.cpp; sourceTree = "<group>"; };
+		6DAFE189181511D000859097 /* PathImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathImpl.h; sourceTree = "<group>"; };
+		6DAFE18A181511D000859097 /* FileSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
+		6DAFE18C181511D000859097 /* MbcsStreamReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MbcsStreamReader.h; sourceTree = "<group>"; };
+		6DAFE18D181511D000859097 /* Utf16LeStreamReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utf16LeStreamReader.h; sourceTree = "<group>"; };
+		6DAFE18E181511D000859097 /* Utf8StreamReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utf8StreamReader.h; sourceTree = "<group>"; };
+		6DAFE18F181511D000859097 /* Io.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Io.cpp; sourceTree = "<group>"; };
+		6DAFE190181511D000859097 /* Lexical.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Lexical.cpp; sourceTree = "<group>"; };
+		6DAFE192181511D000859097 /* FacilityLongevity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacilityLongevity.h; sourceTree = "<group>"; };
+		6DAFE193181511D000859097 /* Object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Object.cpp; sourceTree = "<group>"; };
+		6DAFE195181511D000859097 /* ConsoleApplicationImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleApplicationImpl.h; sourceTree = "<group>"; };
+		6DAFE196181511D000859097 /* ProgramOptionsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramOptionsManager.h; sourceTree = "<group>"; };
+		6DAFE197181511D000859097 /* Program.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Program.cpp; sourceTree = "<group>"; };
+		6DAFE199181511D000859097 /* StateImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateImpl.h; sourceTree = "<group>"; };
+		6DAFE19A181511D000859097 /* StateMachineImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateMachineImpl.h; sourceTree = "<group>"; };
+		6DAFE19B181511D000859097 /* Statechart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Statechart.cpp; sourceTree = "<group>"; };
+		6DAFE19D181511D000859097 /* SprintfManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SprintfManager.h; sourceTree = "<group>"; };
+		6DAFE19E181511D000859097 /* String.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = String.cpp; sourceTree = "<group>"; };
+		6DAFE1A0181511D000859097 /* TaskImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskImpl.h; sourceTree = "<group>"; };
+		6DAFE1A1181511D000859097 /* TaskPollerImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskPollerImpl.h; sourceTree = "<group>"; };
+		6DAFE1A2181511D000859097 /* Task.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Task.cpp; sourceTree = "<group>"; };
+		6DAFE1A4181511D000859097 /* ThreadImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreadImpl.h; sourceTree = "<group>"; };
+		6DAFE1A5181511D000859097 /* Thread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Thread.cpp; sourceTree = "<group>"; };
+		6DAFE1A7181511D000859097 /* ChannelImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelImpl.h; sourceTree = "<group>"; };
+		6DAFE1A8181511D000859097 /* TraceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TraceManager.h; sourceTree = "<group>"; };
+		6DAFE1A9181511D000859097 /* Trace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Trace.cpp; sourceTree = "<group>"; };
+		6DAFE1AA181511D000859097 /* Windows.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Windows.cpp; sourceTree = "<group>"; };
+		6DAFE1B1181511D000859097 /* Configuration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Configuration.cpp; sourceTree = "<group>"; };
+		6DAFE1B2181511D000859097 /* DateTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DateTime.cpp; sourceTree = "<group>"; };
+		6DAFE1B3181511D000859097 /* Random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Random.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6DAFE0EA1815118B00859097 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6DAFE0E41815118B00859097 = {
+			isa = PBXGroup;
+			children = (
+				6DAFE17A181511C300859097 /* Caramel */,
+				6DAFE0EE1815118B00859097 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6DAFE0EE1815118B00859097 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE0ED1815118B00859097 /* libCaramel.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6DAFE116181511BD00859097 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE117181511BD00859097 /* Caramel */,
+			);
+			name = include;
+			path = ../include;
+			sourceTree = "<group>";
+		};
+		6DAFE117181511BD00859097 /* Caramel */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE118181511BD00859097 /* Async */,
+				6DAFE11B181511BD00859097 /* Caramel.h */,
+				6DAFE11C181511BD00859097 /* Chrono */,
+				6DAFE120181511BD00859097 /* Concurrent */,
+				6DAFE126181511BD00859097 /* Debug */,
+				6DAFE128181511BD00859097 /* Document */,
+				6DAFE12B181511BD00859097 /* Error */,
+				6DAFE131181511BD00859097 /* FileSystem */,
+				6DAFE135181511BD00859097 /* Functional */,
+				6DAFE137181511BD00859097 /* Io */,
+				6DAFE13D181511BE00859097 /* Lexical */,
+				6DAFE141181511BE00859097 /* Meta */,
+				6DAFE145181511BE00859097 /* Numeric */,
+				6DAFE148181511BE00859097 /* Object */,
+				6DAFE14D181511BE00859097 /* Program */,
+				6DAFE150181511BE00859097 /* Setup */,
+				6DAFE155181511BE00859097 /* Statechart */,
+				6DAFE158181511BE00859097 /* String */,
+				6DAFE164181511BE00859097 /* Task */,
+				6DAFE169181511BE00859097 /* Thread */,
+				6DAFE16E181511BE00859097 /* Trace */,
+				6DAFE173181511BE00859097 /* Value */,
+				6DAFE175181511BE00859097 /* Windows */,
+			);
+			path = Caramel;
+			sourceTree = "<group>";
+		};
+		6DAFE118181511BD00859097 /* Async */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE119181511BD00859097 /* FlowState.h */,
+				6DAFE11A181511BD00859097 /* TimedBool.h */,
+			);
+			path = Async;
+			sourceTree = "<group>";
+		};
+		6DAFE11C181511BD00859097 /* Chrono */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE11D181511BD00859097 /* SecondClock.h */,
+				6DAFE11E181511BD00859097 /* SteadyClock.h */,
+				6DAFE11F181511BD00859097 /* TickClock.h */,
+			);
+			path = Chrono;
+			sourceTree = "<group>";
+		};
+		6DAFE120181511BD00859097 /* Concurrent */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE121181511BD00859097 /* BasicMap.h */,
+				6DAFE122181511BD00859097 /* Map.h */,
+				6DAFE123181511BD00859097 /* PriorityQueue.h */,
+				6DAFE124181511BD00859097 /* Queue.h */,
+				6DAFE125181511BD00859097 /* ReplicatePolicies.h */,
+			);
+			path = Concurrent;
+			sourceTree = "<group>";
+		};
+		6DAFE126181511BD00859097 /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE127181511BD00859097 /* ScopeTiming.h */,
+			);
+			path = Debug;
+			sourceTree = "<group>";
+		};
+		6DAFE128181511BD00859097 /* Document */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE129181511BD00859097 /* IniDocument.h */,
+				6DAFE12A181511BD00859097 /* IniSection.h */,
+			);
+			path = Document;
+			sourceTree = "<group>";
+		};
+		6DAFE12B181511BD00859097 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE12C181511BD00859097 /* Assert.h */,
+				6DAFE12D181511BD00859097 /* CatchException.h */,
+				6DAFE12E181511BD00859097 /* Detail */,
+				6DAFE130181511BD00859097 /* Exception.h */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		6DAFE12E181511BD00859097 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE12F181511BD00859097 /* ExceptionCatcherCore.h */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		6DAFE131181511BD00859097 /* FileSystem */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE132181511BD00859097 /* DirectoryInfo.h */,
+				6DAFE133181511BD00859097 /* FileInfo.h */,
+				6DAFE134181511BD00859097 /* Path.h */,
+			);
+			path = FileSystem;
+			sourceTree = "<group>";
+		};
+		6DAFE135181511BD00859097 /* Functional */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE136181511BD00859097 /* ScopeExit.h */,
+			);
+			path = Functional;
+			sourceTree = "<group>";
+		};
+		6DAFE137181511BD00859097 /* Io */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE138181511BD00859097 /* FileStream.h */,
+				6DAFE139181511BD00859097 /* InputFileStream.h */,
+				6DAFE13A181511BD00859097 /* InputStream.h */,
+				6DAFE13B181511BD00859097 /* TextReader.h */,
+				6DAFE13C181511BD00859097 /* TextStreamReader.h */,
+			);
+			path = Io;
+			sourceTree = "<group>";
+		};
+		6DAFE13D181511BE00859097 /* Lexical */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE13E181511BE00859097 /* Boolean.h */,
+				6DAFE13F181511BE00859097 /* Integer.h */,
+				6DAFE140181511BE00859097 /* IntegerList.h */,
+			);
+			path = Lexical;
+			sourceTree = "<group>";
+		};
+		6DAFE141181511BE00859097 /* Meta */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE142181511BE00859097 /* IfThenElse.h */,
+				6DAFE143181511BE00859097 /* Select.h */,
+				6DAFE144181511BE00859097 /* Utility.h */,
+			);
+			path = Meta;
+			sourceTree = "<group>";
+		};
+		6DAFE145181511BE00859097 /* Numeric */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE146181511BE00859097 /* NumberConvertible.h */,
+				6DAFE147181511BE00859097 /* NumberTraits.h */,
+			);
+			path = Numeric;
+			sourceTree = "<group>";
+		};
+		6DAFE148181511BE00859097 /* Object */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE149181511BE00859097 /* AutoNumbered.h */,
+				6DAFE14A181511BE00859097 /* Detail */,
+				6DAFE14C181511BE00859097 /* Singleton.h */,
+			);
+			path = Object;
+			sourceTree = "<group>";
+		};
+		6DAFE14A181511BE00859097 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE14B181511BE00859097 /* LifetimeTracker.h */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		6DAFE14D181511BE00859097 /* Program */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE14E181511BE00859097 /* ConsoleApplication.h */,
+				6DAFE14F181511BE00859097 /* ProgramOptions.h */,
+			);
+			path = Program;
+			sourceTree = "<group>";
+		};
+		6DAFE150181511BE00859097 /* Setup */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE151181511BE00859097 /* Compiler.h */,
+				6DAFE152181511BE00859097 /* PchDefines.h */,
+				6DAFE153181511BE00859097 /* PchHeaders.h */,
+				6DAFE154181511BE00859097 /* System.h */,
+			);
+			path = Setup;
+			sourceTree = "<group>";
+		};
+		6DAFE155181511BE00859097 /* Statechart */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE156181511BE00859097 /* State.h */,
+				6DAFE157181511BE00859097 /* StateMachine.h */,
+			);
+			path = Statechart;
+			sourceTree = "<group>";
+		};
+		6DAFE158181511BE00859097 /* String */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE159181511BE00859097 /* Algorithm.h */,
+				6DAFE15A181511BE00859097 /* CainLess.h */,
+				6DAFE15B181511BE00859097 /* CharTraits.h */,
+				6DAFE15C181511BE00859097 /* Detail */,
+				6DAFE15E181511BE00859097 /* Inline */,
+				6DAFE160181511BE00859097 /* Sprintf.h */,
+				6DAFE161181511BE00859097 /* StringConvertible.h */,
+				6DAFE162181511BE00859097 /* TextEncoding.h */,
+				6DAFE163181511BE00859097 /* Utf8String.h */,
+			);
+			path = String;
+			sourceTree = "<group>";
+		};
+		6DAFE15C181511BE00859097 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE15D181511BE00859097 /* SprintfParameter.h */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		6DAFE15E181511BE00859097 /* Inline */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE15F181511BE00859097 /* Sprintf_Sprintf.h */,
+			);
+			path = Inline;
+			sourceTree = "<group>";
+		};
+		6DAFE164181511BE00859097 /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE165181511BE00859097 /* Task.h */,
+				6DAFE166181511BE00859097 /* TaskExecutor.h */,
+				6DAFE167181511BE00859097 /* TaskFwd.h */,
+				6DAFE168181511BE00859097 /* TaskPoller.h */,
+			);
+			path = Task;
+			sourceTree = "<group>";
+		};
+		6DAFE169181511BE00859097 /* Thread */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE16A181511BE00859097 /* MutexLocks.h */,
+				6DAFE16B181511BE00859097 /* ThisThread.h */,
+				6DAFE16C181511BE00859097 /* Thread.h */,
+				6DAFE16D181511BE00859097 /* ThreadTypes.h */,
+			);
+			path = Thread;
+			sourceTree = "<group>";
+		};
+		6DAFE16E181511BE00859097 /* Trace */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE16F181511BE00859097 /* Channel.h */,
+				6DAFE170181511BE00859097 /* Listeners.h */,
+				6DAFE171181511BE00859097 /* Trace.h */,
+				6DAFE172181511BE00859097 /* TraceTypes.h */,
+			);
+			path = Trace;
+			sourceTree = "<group>";
+		};
+		6DAFE173181511BE00859097 /* Value */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE174181511BE00859097 /* SharedArray.h */,
+			);
+			path = Value;
+			sourceTree = "<group>";
+		};
+		6DAFE175181511BE00859097 /* Windows */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE176181511BE00859097 /* CrtDebug.h */,
+				6DAFE177181511BE00859097 /* DebuggerTraceListener.h */,
+				6DAFE178181511BE00859097 /* FileInfo.h */,
+				6DAFE179181511BE00859097 /* WideString.h */,
+			);
+			path = Windows;
+			sourceTree = "<group>";
+		};
+		6DAFE17A181511C300859097 /* Caramel */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE17B181511D000859097 /* src */,
+				6DAFE116181511BD00859097 /* include */,
+			);
+			name = Caramel;
+			sourceTree = "<group>";
+		};
+		6DAFE17B181511D000859097 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE17C181511D000859097 /* Caramel */,
+				6DAFE1B1181511D000859097 /* Configuration.cpp */,
+				6DAFE1B2181511D000859097 /* DateTime.cpp */,
+				6DAFE1B3181511D000859097 /* Random.cpp */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		6DAFE17C181511D000859097 /* Caramel */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE17D181511D000859097 /* CaramelPch.h */,
+				6DAFE17E181511D000859097 /* CaramelPchCreator.cpp */,
+				6DAFE17F181511D000859097 /* Debug */,
+				6DAFE181181511D000859097 /* Debug.cpp */,
+				6DAFE182181511D000859097 /* Document */,
+				6DAFE186181511D000859097 /* Document.cpp */,
+				6DAFE187181511D000859097 /* Error.cpp */,
+				6DAFE188181511D000859097 /* FileSystem */,
+				6DAFE18A181511D000859097 /* FileSystem.cpp */,
+				6DAFE18B181511D000859097 /* Io */,
+				6DAFE18F181511D000859097 /* Io.cpp */,
+				6DAFE190181511D000859097 /* Lexical.cpp */,
+				6DAFE191181511D000859097 /* Object */,
+				6DAFE193181511D000859097 /* Object.cpp */,
+				6DAFE194181511D000859097 /* Program */,
+				6DAFE197181511D000859097 /* Program.cpp */,
+				6DAFE198181511D000859097 /* Statechart */,
+				6DAFE19B181511D000859097 /* Statechart.cpp */,
+				6DAFE19C181511D000859097 /* String */,
+				6DAFE19E181511D000859097 /* String.cpp */,
+				6DAFE19F181511D000859097 /* Task */,
+				6DAFE1A2181511D000859097 /* Task.cpp */,
+				6DAFE1A3181511D000859097 /* Thread */,
+				6DAFE1A5181511D000859097 /* Thread.cpp */,
+				6DAFE1A6181511D000859097 /* Trace */,
+				6DAFE1A9181511D000859097 /* Trace.cpp */,
+				6DAFE1AA181511D000859097 /* Windows.cpp */,
+			);
+			path = Caramel;
+			sourceTree = "<group>";
+		};
+		6DAFE17F181511D000859097 /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE180181511D000859097 /* DebugManager.h */,
+			);
+			path = Debug;
+			sourceTree = "<group>";
+		};
+		6DAFE182181511D000859097 /* Document */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE183181511D000859097 /* IniDocumentImpl.h */,
+				6DAFE184181511D000859097 /* IniSectionImpl.h */,
+				6DAFE185181511D000859097 /* IniSyntax.h */,
+			);
+			path = Document;
+			sourceTree = "<group>";
+		};
+		6DAFE188181511D000859097 /* FileSystem */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE189181511D000859097 /* PathImpl.h */,
+			);
+			path = FileSystem;
+			sourceTree = "<group>";
+		};
+		6DAFE18B181511D000859097 /* Io */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE18C181511D000859097 /* MbcsStreamReader.h */,
+				6DAFE18D181511D000859097 /* Utf16LeStreamReader.h */,
+				6DAFE18E181511D000859097 /* Utf8StreamReader.h */,
+			);
+			path = Io;
+			sourceTree = "<group>";
+		};
+		6DAFE191181511D000859097 /* Object */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE192181511D000859097 /* FacilityLongevity.h */,
+			);
+			path = Object;
+			sourceTree = "<group>";
+		};
+		6DAFE194181511D000859097 /* Program */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE195181511D000859097 /* ConsoleApplicationImpl.h */,
+				6DAFE196181511D000859097 /* ProgramOptionsManager.h */,
+			);
+			path = Program;
+			sourceTree = "<group>";
+		};
+		6DAFE198181511D000859097 /* Statechart */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE199181511D000859097 /* StateImpl.h */,
+				6DAFE19A181511D000859097 /* StateMachineImpl.h */,
+			);
+			path = Statechart;
+			sourceTree = "<group>";
+		};
+		6DAFE19C181511D000859097 /* String */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE19D181511D000859097 /* SprintfManager.h */,
+			);
+			path = String;
+			sourceTree = "<group>";
+		};
+		6DAFE19F181511D000859097 /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE1A0181511D000859097 /* TaskImpl.h */,
+				6DAFE1A1181511D000859097 /* TaskPollerImpl.h */,
+			);
+			path = Task;
+			sourceTree = "<group>";
+		};
+		6DAFE1A3181511D000859097 /* Thread */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE1A4181511D000859097 /* ThreadImpl.h */,
+			);
+			path = Thread;
+			sourceTree = "<group>";
+		};
+		6DAFE1A6181511D000859097 /* Trace */ = {
+			isa = PBXGroup;
+			children = (
+				6DAFE1A7181511D000859097 /* ChannelImpl.h */,
+				6DAFE1A8181511D000859097 /* TraceManager.h */,
+			);
+			path = Trace;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6DAFE0EC1815118B00859097 /* Caramel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6DAFE1101815118B00859097 /* Build configuration list for PBXNativeTarget "Caramel" */;
+			buildPhases = (
+				6DAFE0E91815118B00859097 /* Sources */,
+				6DAFE0EA1815118B00859097 /* Frameworks */,
+				6DAFE0EB1815118B00859097 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Caramel;
+			productName = Caramel;
+			productReference = 6DAFE0ED1815118B00859097 /* libCaramel.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6DAFE0E51815118B00859097 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = Sixion;
+			};
+			buildConfigurationList = 6DAFE0E81815118B00859097 /* Build configuration list for PBXProject "Caramel" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6DAFE0E41815118B00859097;
+			productRefGroup = 6DAFE0EE1815118B00859097 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6DAFE0EC1815118B00859097 /* Caramel */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6DAFE0E91815118B00859097 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DAFE1BF181511D000859097 /* Task.cpp in Sources */,
+				6DAFE1B7181511D000859097 /* Error.cpp in Sources */,
+				6DAFE1B8181511D000859097 /* FileSystem.cpp in Sources */,
+				6DAFE1BD181511D000859097 /* Statechart.cpp in Sources */,
+				6DAFE1C5181511D000859097 /* DateTime.cpp in Sources */,
+				6DAFE1C6181511D000859097 /* Random.cpp in Sources */,
+				6DAFE1BB181511D000859097 /* Object.cpp in Sources */,
+				6DAFE1BC181511D000859097 /* Program.cpp in Sources */,
+				6DAFE1BA181511D000859097 /* Lexical.cpp in Sources */,
+				6DAFE1C4181511D000859097 /* Configuration.cpp in Sources */,
+				6DAFE1B4181511D000859097 /* CaramelPchCreator.cpp in Sources */,
+				6DAFE1C0181511D000859097 /* Thread.cpp in Sources */,
+				6DAFE1B5181511D000859097 /* Debug.cpp in Sources */,
+				6DAFE1B6181511D000859097 /* Document.cpp in Sources */,
+				6DAFE1C2181511D000859097 /* Windows.cpp in Sources */,
+				6DAFE1C1181511D000859097 /* Trace.cpp in Sources */,
+				6DAFE1BE181511D000859097 /* String.cpp in Sources */,
+				6DAFE1B9181511D000859097 /* Io.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		6DAFE10E1815118B00859097 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CONFIGURATION_BUILD_DIR = Caramel/lib;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					../include,
+					../src,
+					../../CandyJar/include,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SEPARATE_STRIP = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6DAFE10F1815118B00859097 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CONFIGURATION_BUILD_DIR = Caramel/lib;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					../include,
+					../src,
+					../../CandyJar/include,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				SDKROOT = iphoneos;
+				SEPARATE_STRIP = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6DAFE1111815118B00859097 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Caramel.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		6DAFE1121815118B00859097 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Caramel.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6DAFE0E81815118B00859097 /* Build configuration list for PBXProject "Caramel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DAFE10E1815118B00859097 /* Debug */,
+				6DAFE10F1815118B00859097 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6DAFE1101815118B00859097 /* Build configuration list for PBXNativeTarget "Caramel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DAFE1111815118B00859097 /* Debug */,
+				6DAFE1121815118B00859097 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6DAFE0E51815118B00859097 /* Project object */;
+}

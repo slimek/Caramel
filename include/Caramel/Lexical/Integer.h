@@ -78,6 +78,10 @@ inline Integer< ValueT >::Integer( ValueT defaultValue )
     , m_outOfRange( false )
 {
 }
+    
+
+template<>
+Bool Integer< Int32 >::TryParse( const std::string& );
 
 
 ///////////////////////////////////////////////////////////////////////////////

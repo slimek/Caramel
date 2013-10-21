@@ -6,3 +6,8 @@ obj/
 ipch
 *.opensdf
 bin/
+xcschememanagement.plist
+*.xcscheme
+*.xcuserstate
+*.xcworkspacedata
+*.a

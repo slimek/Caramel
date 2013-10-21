@@ -66,6 +66,10 @@ ThreadImpl::ThreadImpl( const std::string& name, WorkFunction work )
 void ThreadImpl::RunWork()
 {
     auto xc = CatchException( m_workFunction );
+    if ( xc )
+    {
+        CARAMEL_TRACE_WARN( "Exception caugut, thread name: %s", m_name );
+    }
 }
 
 

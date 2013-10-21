@@ -43,13 +43,17 @@
 // System - iOS
 //
 
-#if ( defined( CARAMEL_COMPILER_IS_GCC ) || defined( CARAMEL_COMPILER_IS_CLANG )) \
- && ( defined( TARGET_OS_IPHONE ) || defined( TARGET_IPHONE_SIMULATOR ))
+#if ( defined( CARAMEL_COMPILER_IS_GCC ) || defined( CARAMEL_COMPILER_IS_CLANG ))
+
+#include <TargetConditionals.h>
+
+#if( defined( TARGET_OS_IPHONE ) || defined( TARGET_IPHONE_SIMULATOR ))
 
 #define CARAMEL_SYSTEM_IS_IOS
 
 #define CARAMEL_SYSTEM_NAME "iOS"
 
+#endif
 
 #endif // iOS
 

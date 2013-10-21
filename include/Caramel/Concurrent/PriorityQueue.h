@@ -68,7 +68,6 @@ private:
         Entry( const Key& k, const Value& v ) : key( k ), value( v ) {}
     };
 
-    template< typename KeyCompare >
     struct EntryCompare
     {
         KeyCompare compare;
@@ -80,7 +79,7 @@ private:
     /// Data Members ///
 
     typedef boost::heap::priority_queue<
-        Entry, boost::heap::compare< EntryCompare< KeyCompare > > > QueueType;
+        Entry, boost::heap::compare< EntryCompare > > QueueType;
     QueueType m_queue;
 
     mutable std::mutex m_queueMutex;

@@ -175,7 +175,7 @@ void ProgramOptionsManager::ParseCommandLine()
     }
     #else
     {
-        CARAMEl_NOT_IMPLEMETNED();
+        CARAMEL_NOT_IMPLEMENTED();
     }
     #endif
 

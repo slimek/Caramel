@@ -49,7 +49,7 @@ void WriteToBuiltinFailed( const std::string& message );
 #define CARAMEL_TRACE_WRITE_TO_BUILTIN( level, format_message, ... ) \
     { \
         try { \
-            Caramel::Trace::WriteToBuiltin( level, Caramel::Sprintf( format_message, __VA_ARGS__ )); \
+            Caramel::Trace::WriteToBuiltin( level, Caramel::Sprintf( format_message, ##__VA_ARGS__ )); \
         } catch ( ... ) { \
             Caramel::Trace::WriteToBuiltinFailed( format_message ); \
         } \
@@ -57,7 +57,7 @@ void WriteToBuiltinFailed( const std::string& message );
 
 
 #define CARAMEL_TRACE_DEBUG( format_message, ... ) \
-    CARAMEL_TRACE_WRITE_TO_BUILTIN( Caramel::Trace::LEVEL_DEBUG, format_message, __VA_ARGS__ )
+    CARAMEL_TRACE_WRITE_TO_BUILTIN( Caramel::Trace::LEVEL_DEBUG, format_message, ##__VA_ARGS__ )
 
 #define CARAMEL_TRACE_INFO( format_message, ... ) \
     CARAMEL_TRACE_WRITE_TO_BUILTIN( Caramel::Trace::LEVEL_INFO, format_message, __VA_ARGS__ )

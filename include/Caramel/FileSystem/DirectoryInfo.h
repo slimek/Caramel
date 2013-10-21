@@ -23,6 +23,7 @@ namespace Caramel
 //   Based on Boost.Filesystem library
 //
 
+class FileInfo;
 class PathImpl;
 
 class DirectoryInfo
