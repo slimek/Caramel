@@ -85,7 +85,8 @@ SprintfBuffer::SprintfBuffer()
     CARAMEL_ASSERT( m_buffer + SIZE + sizeof( Uint32 ) <= &m_chunk[ CHUNK_SIZE ] );
 
     // Padding before head
-    std::fill( &m_chunk[0], m_buffer, PAD_CHAR );
+    const Uint8 padding = PAD_CHAR;
+    std::fill( &m_chunk[0], m_buffer, padding );
 
     // Clear the buffer
     std::fill( m_buffer, m_buffer + SIZE, 0 );
@@ -95,7 +96,7 @@ SprintfBuffer::SprintfBuffer()
     *tailGuard = TAIL_GUARD;
 
     // Padding after tail
-    std::fill( m_buffer + SIZE + sizeof( Uint32 ), &m_chunk[ CHUNK_SIZE ], PAD_CHAR );
+    std::fill( m_buffer + SIZE + sizeof( Uint32 ), &m_chunk[ CHUNK_SIZE ], padding );
 }
 
 
