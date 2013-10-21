@@ -12,6 +12,7 @@
 #include <Caramel/Concurrent/Map.h>
 #include <Caramel/Statechart/StateMachine.h>
 #include <Caramel/Task/TaskExecutor.h>
+#include <mutex>
 
 
 namespace Caramel
@@ -39,7 +40,23 @@ public:
     void ProcessInitiate( StatePtr initialState );
 
 
+    //
+    // Timer
+    // - StartTimer() starts a timer of current state.
+    //   This timer would be cancelled when exiting the current state.
+    // - CancelTimer() would cancel the current timer, if exists.
+    //
+    void StartTimer( const TickDuration& ticks );
+    void CancelTimer();
+
+
 private:
+
+    /// Internal Functions ///
+
+    void EnterState();
+    void ExitState();
+
 
     /// Data Members ///
 
@@ -50,7 +67,14 @@ private:
     typedef Concurrent::Map< Int, StatePtr > StateMap;
     StateMap m_states;
 
+    StatePtr m_currentState;
+
+    Uint      m_transitNumber;     // How many times of transition.
+    TickPoint m_currentStartTime;  // The start time of current state.
+
     Uint m_actionThreadId;
+
+    std::mutex m_mutex;
 };
 
 

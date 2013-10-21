@@ -2,9 +2,12 @@
 
 #include <Caramel/CaramelPch.h>
 
+#include <Caramel/Error/CatchException.h>
+#include <Caramel/Functional/ScopeExit.h>
 #include <Caramel/Statechart/StateImpl.h>
 #include <Caramel/Statechart/StateMachineImpl.h>
 #include <Caramel/Task/TaskPoller.h>
+#include <Caramel/Thread/ThisThread.h>
 
 
 namespace Caramel
@@ -75,6 +78,7 @@ void StateMachine::Initiate( Int stateId )
 StateMachineImpl::StateMachineImpl( const std::string& name )
     : m_name( name )
     , m_taskExecutor( new TaskPoller )
+    , m_transitNumber( 0 )
     , m_actionThreadId( 0 )
 {
 }
@@ -82,6 +86,46 @@ StateMachineImpl::StateMachineImpl( const std::string& name )
 
 void StateMachineImpl::ProcessInitiate( StatePtr initialState )
 {
+    auto ulock = UniqueLock( m_mutex );
+
+    m_actionThreadId = ThisThread::GetThreadId();
+    auto guard = ScopeExit( [=] { m_actionThreadId = 0; } );
+
+    m_currentState = initialState;
+
+    this->EnterState();
+}
+
+
+void StateMachineImpl::StartTimer( const TickDuration& ticks )
+{
+    CARAMEL_NOT_IMPLEMENTED();
+}
+
+
+//
+// State Actions
+//
+
+void StateMachineImpl::EnterState()
+{
+    ++ m_transitNumber;
+    m_currentStartTime = TickClock::Now();
+
+    if ( m_currentState->m_enterAction )
+    {
+        auto xc = CatchException( [=] { m_currentState->m_enterAction(); } );
+        if ( xc )
+        {
+            CARAMEL_TRACE_WARN(
+                "Enter action throws, machine: %s, stateId: %d", m_name, m_currentState->m_id );
+        }
+    }
+
+    if ( TickDuration::Zero() < m_currentState->m_autoTimerDuration )
+    {
+        this->StartTimer( m_currentState->m_autoTimerDuration );
+    }
 }
 
 

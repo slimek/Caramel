@@ -9,6 +9,7 @@
 #pragma once
 #endif
 
+#include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Statechart/State.h>
 
 
@@ -26,6 +27,7 @@ namespace Statechart
 class StateImpl
 {
     friend class State;
+    friend class StateMachineImpl;
 
 public:
 
@@ -40,6 +42,9 @@ private:
 
     Action m_enterAction;
     Action m_exitAction;
+
+    TickDuration m_autoTimerDuration;   // Zero means not enabled
+    Action m_timerAction;
 };
 
 typedef std::shared_ptr< StateImpl > StatePtr;
