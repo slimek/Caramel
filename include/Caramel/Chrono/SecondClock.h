@@ -22,31 +22,31 @@ namespace Caramel
 //
 
 //
-// Second Duration
+// Seconds - Second Duration
 //
 
-class SecondDuration : public boost::chrono::duration< Double, boost::ratio< 1 > >
-                     , public NumberConvertible< SecondDuration, Double >
+class Seconds : public boost::chrono::duration< Double, boost::ratio< 1 > >
+              , public NumberConvertible< Seconds, Double >
 {
     typedef boost::chrono::duration< Double, boost::ratio< 1 > > Inherited;
 
 public:
 
-    SecondDuration() {}
+    Seconds() {}
     
-    SecondDuration( const Inherited& duration );
-    SecondDuration( Inherited&& duration );
+    Seconds( const Inherited& duration );
+    Seconds( Inherited&& duration );
 
     template< typename Rep, typename Period >
-    SecondDuration( const boost::chrono::duration< Rep, Period >& duration );
+    Seconds( const boost::chrono::duration< Rep, Period >& duration );
 
-    explicit SecondDuration( Double ticks );
+    explicit Seconds( Double ticks );
 
 
     /// Properties ///
 
-    static SecondDuration Zero()     { return SecondDuration( Inherited::zero() ); }
-    static SecondDuration MaxValue() { return SecondDuration( Inherited::max() ); }
+    static Seconds Zero()     { return Seconds( Inherited::zero() ); }
+    static Seconds MaxValue() { return Seconds( Inherited::max() ); }
 
 
     /// Convertions ///
@@ -56,12 +56,6 @@ public:
     Double ToDouble() const { return this->count(); }
     Float  ToFloat()  const { return static_cast< Float >( this->count() ); }
 };
-
-
-inline SecondDuration Seconds( Double ticks )
-{
-    return SecondDuration( ticks );
-}
 
 
 //
@@ -97,12 +91,12 @@ public:
 // Second Clock
 //
 
-class SecondClock : public SteadyClock< SecondDuration, SecondPoint >
+class SecondClock : public SteadyClock< Seconds, SecondPoint >
 {
 public:
 
-    static SecondDuration MaxDuration()  { return SecondDuration::MaxValue(); }
-    static SecondPoint    MaxTimePoint() { return SecondPoint::MaxValue(); }
+    static Seconds     MaxDuration()  { return Seconds::MaxValue(); }
+    static SecondPoint MaxTimePoint() { return SecondPoint::MaxValue(); }
 };
 
 
@@ -115,26 +109,26 @@ public:
 // Second Duration
 //
 
-inline SecondDuration::SecondDuration( const Inherited& duration )
+inline Seconds::Seconds( const Inherited& duration )
     : Inherited( duration )
 {
 }
 
 
-inline SecondDuration::SecondDuration( Inherited&& duration )
+inline Seconds::Seconds( Inherited&& duration )
     : Inherited( duration )
 {
 }
 
 
 template< typename Rep, typename Period >
-inline SecondDuration::SecondDuration( const boost::chrono::duration< Rep, Period >& duration )
+inline Seconds::Seconds( const boost::chrono::duration< Rep, Period >& duration )
     : Inherited( boost::chrono::duration_cast< Inherited >( duration ))
 {
 }
 
 
-inline SecondDuration::SecondDuration( Double ticks )
+inline Seconds::Seconds( Double ticks )
     : Inherited( ticks )
 {
 }

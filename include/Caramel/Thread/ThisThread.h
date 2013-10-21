@@ -26,7 +26,7 @@ public:
 
     static Uint GetThreadId();
 
-    static void SleepFor( const TickDuration& duration );
+    static void SleepFor( const Ticks& duration );
 };
 
 

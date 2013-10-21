@@ -43,7 +43,7 @@ private:
     Action m_enterAction;
     Action m_exitAction;
 
-    TickDuration m_autoTimerDuration;   // Zero means not enabled
+    Ticks m_autoTimerDuration;   // Zero means not enabled
     Action m_timerAction;
 };
 

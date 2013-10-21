@@ -46,7 +46,7 @@ public:
     //   This timer would be cancelled when exiting the current state.
     // - CancelTimer() would cancel the current timer, if exists.
     //
-    void StartTimer( const TickDuration& ticks );
+    void StartTimer( const Ticks& ticks );
     void CancelTimer();
 
 

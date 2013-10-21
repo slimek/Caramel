@@ -22,31 +22,31 @@ namespace Caramel
 //
 
 //
-// Tick Duration
+// Ticks - Tick Duration
 //
 
-class TickDuration : public boost::chrono::duration< Int64, boost::milli >
-                   , public NumberConvertible< TickDuration, Int64 >
+class Ticks : public boost::chrono::duration< Int64, boost::milli >
+            , public NumberConvertible< Ticks, Int64 >
 {
     typedef boost::chrono::duration< Int64, boost::milli > Inherited;
 
 public:
 
-    TickDuration() {}
+    Ticks() {}
     
-    TickDuration( const Inherited& duration );
-    TickDuration( Inherited&& duration );
+    Ticks( const Inherited& duration );
+    Ticks( Inherited&& duration );
 
     template< typename Rep, typename Period >
-    TickDuration( const boost::chrono::duration< Rep, Period >& duration );
+    Ticks( const boost::chrono::duration< Rep, Period >& duration );
 
-    explicit TickDuration( Int64 ticks );
+    explicit Ticks( Int64 ticks );
 
 
     /// Properties ///
 
-    static TickDuration Zero()     { return TickDuration( Inherited::zero() ); }
-    static TickDuration MaxValue() { return TickDuration( Inherited::max() ); }
+    static Ticks Zero()     { return Ticks( Inherited::zero() ); }
+    static Ticks MaxValue() { return Ticks( Inherited::max() ); }
 
 
     /// Convertions ///
@@ -56,12 +56,6 @@ public:
     Int64 ToInt64()  const { return this->count(); }
     Int32 ToInt32()  const { return static_cast< Int32 >( this->count() ); }
 };
-
-
-inline TickDuration Ticks( Int64 ticks )
-{
-    return TickDuration( ticks );
-}
 
 
 //
@@ -97,12 +91,12 @@ public:
 // Tick Clock
 //
 
-class TickClock : public SteadyClock< TickDuration, TickPoint >
+class TickClock : public SteadyClock< Ticks, TickPoint >
 {
 public:
 
-    static TickDuration MaxDuration()  { return TickDuration::MaxValue(); }
-    static TickPoint    MaxTimePoint() { return TickPoint::MaxValue(); }
+    static Ticks     MaxDuration()  { return Ticks::MaxValue(); }
+    static TickPoint MaxTimePoint() { return TickPoint::MaxValue(); }
 };
 
 
@@ -115,26 +109,26 @@ public:
 // Tick Duration
 //
 
-inline TickDuration::TickDuration( const Inherited& duration )
+inline Ticks::Ticks( const Inherited& duration )
     : Inherited( duration )
 {
 }
 
 
-inline TickDuration::TickDuration( Inherited&& duration )
+inline Ticks::Ticks( Inherited&& duration )
     : Inherited( duration )
 {
 }
 
 
 template< typename Rep, typename Period >
-inline TickDuration::TickDuration( const boost::chrono::duration< Rep, Period >& duration )
+inline Ticks::Ticks( const boost::chrono::duration< Rep, Period >& duration )
     : Inherited( boost::chrono::duration_cast< Inherited >( duration ))
 {
 }
 
 
-inline TickDuration::TickDuration( Int64 ticks )
+inline Ticks::Ticks( Int64 ticks )
     : Inherited( ticks )
 {
 }

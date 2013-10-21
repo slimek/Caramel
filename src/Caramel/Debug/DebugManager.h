@@ -29,7 +29,7 @@ public:
 
     /// Timing ///
 
-    void UpdateTiming( Uint id, const TickDuration& elapsed );
+    void UpdateTiming( Uint id, const Ticks& elapsed );
 
     void ReportTimingToTrace();
 

@@ -28,7 +28,7 @@ Task::Task( const std::string& name, TaskFunction&& f )
 }
 
 
-Task& Task::DelayFor( const TickDuration& duration )
+Task& Task::DelayFor( const Ticks& duration )
 {
     m_impl->DelayFor( duration );
     return *this;
@@ -47,7 +47,7 @@ TaskImpl::TaskImpl( const std::string& name, TaskFunction&& f )
 }
 
 
-void TaskImpl::DelayFor( const TickDuration& duration )
+void TaskImpl::DelayFor( const Ticks& duration )
 {
     CARAMEL_ASSERT( ! m_delayed );
 

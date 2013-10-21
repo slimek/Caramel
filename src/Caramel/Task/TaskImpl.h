@@ -29,7 +29,7 @@ public:
 
     /// Operations ///
 
-    void DelayFor( const TickDuration& duration );
+    void DelayFor( const Ticks& duration );
 
     void Run();
 
@@ -38,7 +38,7 @@ public:
 
     Bool IsDelayed() const { return m_delayed; }
 
-    TickDuration GetDelayDuration() const { return m_delayDuration; }
+    Ticks GetDelayDuration() const { return m_delayDuration; }
 
 
 private:
@@ -50,7 +50,7 @@ private:
     /// Delay ///
 
     Bool m_delayed;
-    TickDuration m_delayDuration;
+    Ticks m_delayDuration;
 
 };
 

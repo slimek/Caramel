@@ -97,7 +97,7 @@ void StateMachineImpl::ProcessInitiate( StatePtr initialState )
 }
 
 
-void StateMachineImpl::StartTimer( const TickDuration& ticks )
+void StateMachineImpl::StartTimer( const Ticks& ticks )
 {
     CARAMEL_NOT_IMPLEMENTED();
 }
@@ -122,7 +122,7 @@ void StateMachineImpl::EnterState()
         }
     }
 
-    if ( TickDuration::Zero() < m_currentState->m_autoTimerDuration )
+    if ( Ticks::Zero() < m_currentState->m_autoTimerDuration )
     {
         this->StartTimer( m_currentState->m_autoTimerDuration );
     }

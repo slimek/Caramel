@@ -21,7 +21,7 @@ namespace Caramel
 // Debug Manager
 //
 
-void DebugManager::UpdateTiming( Uint id, const TickDuration& elapsed )
+void DebugManager::UpdateTiming( Uint id, const Ticks& elapsed )
 {
     CARAMEL_ASSERT( NUM_TIMINGS > id );
 
@@ -72,7 +72,7 @@ void ScopeTiming::Stop()
 
     m_stopped = true;
 
-    const TickDuration elapsed = TickClock::Now() - m_startTime;
+    const Ticks elapsed = TickClock::Now() - m_startTime;
 
     DebugManager::Instance()->UpdateTiming( m_timingId, elapsed );
 }

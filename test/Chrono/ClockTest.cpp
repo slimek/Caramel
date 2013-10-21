@@ -24,13 +24,13 @@ TEST( TickClockTest )
     std::this_thread::sleep_for( std::chrono::seconds( 1 ));
 
     const TickPoint now2 = TickClock::Now();
-    const TickDuration delta = now2 - now1;
+    const Ticks delta = now2 - now1;
     
     CHECK_CLOSE( 1000, delta.ToNumber(), 50 );
 
-    const TickDuration elapsed = clock.Elapsed();
-    const TickDuration slice   = clock.Slice();
-    const TickDuration reseted = clock.Elapsed();
+    const Ticks elapsed = clock.Elapsed();
+    const Ticks slice   = clock.Slice();
+    const Ticks reseted = clock.Elapsed();
 
     CHECK_CLOSE( Ticks( 1000 ), elapsed, Ticks( 50 ));
     CHECK_CLOSE( Ticks( 1000 ), slice,   Ticks( 50 ));
@@ -39,9 +39,9 @@ TEST( TickClockTest )
     CARAMEL_TRACE_DEBUG( "Duration: %d", delta.ToInt32() );
 
 
-    /// Default Values of TickDuration ///
+    /// Default Values of Ticks ///
 
-    const TickDuration dur0;
+    const Ticks dur0;
     CHECK( 0 == dur0.ToInt64() );
 }
 
@@ -59,13 +59,13 @@ TEST( SecondClockTest )
     std::this_thread::sleep_for( std::chrono::seconds( 1 ));
 
     const SecondPoint now2 = SecondClock::Now();
-    const SecondDuration delta = now2 - now1;
+    const Seconds delta = now2 - now1;
     
     CHECK_CLOSE( 1.0, delta.ToNumber(), 0.05 );
 
-    const SecondDuration elapsed = clock.Elapsed();
-    const SecondDuration slice   = clock.Slice();
-    const SecondDuration reseted = clock.Elapsed();
+    const Seconds elapsed = clock.Elapsed();
+    const Seconds slice   = clock.Slice();
+    const Seconds reseted = clock.Elapsed();
 
     CHECK_CLOSE( Seconds( 1 ), elapsed, Seconds( 0.05 ));
     CHECK_CLOSE( Seconds( 1 ), slice,   Seconds( 0.05 ));
@@ -82,22 +82,22 @@ TEST( SecondClockTest )
 
 TEST( DurationConvertTest )
 {
-    const TickDuration   tz( 0 );
-    const SecondDuration sz( 0 );
+    const Ticks   tz( 0 );
+    const Seconds sz( 0 );
 
     CHECK( tz == sz );
 
 
-    const TickDuration   tu( 1000 );
-    const SecondDuration su( 1.0 );
+    const Ticks   tu( 1000 );
+    const Seconds su( 1.0 );
 
     CHECK( tu == su );
 
-    const TickDuration tdur = su;
+    const Ticks tdur = su;
 
     CHECK( 1000 == tdur.ToNumber() );
 
-    const SecondDuration sdur = tu;
+    const Seconds sdur = tu;
 
     CHECK( 1.0 == sdur.ToNumber() );
 }
