@@ -30,6 +30,15 @@ TEST( ConcurrentMapTest )
     map.Insert( 3, "Alice" );
 
     CHECK( false == map.Insert( 3, "Pachouli" ));
+
+    CHECK( true == map.Contains( 1 ));
+    CHECK( false == map.Contains( 4 ));
+
+    std::string temp;
+    CHECK( true == map.Find( 1, temp ));
+    CHECK( "Reimu" == temp );
+
+    CHECK( false == map.Find( 4, temp ));
 }
 
 

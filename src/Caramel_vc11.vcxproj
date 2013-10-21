@@ -25,7 +25,7 @@
     <ClInclude Include="..\include\Caramel\Chrono\SecondClock.h" />
     <ClInclude Include="..\include\Caramel\Chrono\SteadyClock.h" />
     <ClInclude Include="..\include\Caramel\Chrono\TickClock.h" />
-    <ClInclude Include="..\include\Caramel\Concurrent\BasicMap.h" />
+    <ClInclude Include="..\include\Caramel\Concurrent\Detail\BasicMap.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\Map.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\PriorityQueue.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\Queue.h" />

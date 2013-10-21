@@ -20,6 +20,9 @@ namespace Caramel
 namespace Concurrent
 {
 
+namespace Detail
+{
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Concurrent Basic Map
@@ -27,7 +30,8 @@ namespace Concurrent
 //
 
 template< typename MapType, typename ReplicatePolicy >
-class BasicMap : public boost::noncopyable
+class BasicMap : public ReplicatePolicy::template Dictionary< MapType::key_type, MapType::mapped_type >
+               , public boost::noncopyable
 {
 public:
 
@@ -59,9 +63,7 @@ private:
     /// Data Members ///
 
     MapType m_map;
-    std::mutex m_mapMutex;
-
-    Replicator m_replicator;
+    mutable std::mutex m_mapMutex;
 };
 
 
@@ -77,7 +79,19 @@ template< typename MapT, typename ReplicateP >
 Bool BasicMap< MapT, ReplicateP >::Contains( const Key& k ) const
 {
     auto ulock = UniqueLock( m_mapMutex );
-    return m_mpa.end() != m_map.find( k );
+    return m_map.end() != m_map.find( k );
+}
+
+
+template< typename MapT, typename ReplicateP >
+Bool BasicMap< MapT, ReplicateP >::Find( const Key& k, Value& v ) const
+{
+    auto ulock = UniqueLock( m_mapMutex );
+
+    auto iter = m_map.find( k );
+    if ( m_map.end() == iter ) { return false; }
+    v = iter->second;
+    return true;
 }
 
 
@@ -94,7 +108,7 @@ Bool BasicMap< MapT, ReplicateP >::Insert( const Key& k, const Value& v )
 
     if ( inserted )
     {
-        m_replicator.Insert( k, v );
+        this->Replicator::Insert( k, v );
     }
 
     return inserted;
@@ -102,6 +116,8 @@ Bool BasicMap< MapT, ReplicateP >::Insert( const Key& k, const Value& v )
 
 
 ///////////////////////////////////////////////////////////////////////////////
+
+} // namespace Detail
 
 } // namespace Concurrent
 

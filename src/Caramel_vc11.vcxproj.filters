@@ -123,6 +123,9 @@
     <Filter Include="2. Sources\Statechart">
       <UniqueIdentifier>{3a837a21-86dc-42bf-83ae-73068f083897}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\Concurrent\Detail">
+      <UniqueIdentifier>{3042db54-b50f-4f1d-ac86-11a32fc71898}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -395,14 +398,14 @@
     <ClInclude Include="..\include\Caramel\Concurrent\Map.h">
       <Filter>1. Public Packages\Concurrent</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\Concurrent\BasicMap.h">
-      <Filter>1. Public Packages\Concurrent</Filter>
+    <ClInclude Include="..\include\Caramel\Meta\IntegralTypes.h">
+      <Filter>1. Public Packages\Meta</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Concurrent\Detail\BasicMap.h">
+      <Filter>1. Public Packages\Concurrent\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Concurrent\ReplicatePolicies.h">
       <Filter>1. Public Packages\Concurrent</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Caramel\Meta\IntegralTypes.h">
-      <Filter>1. Public Packages\Meta</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

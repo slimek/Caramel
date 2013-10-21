@@ -9,7 +9,7 @@
 #pragma once
 #endif
 
-#include <Caramel/Concurrent/BasicMap.h>
+#include <Caramel/Concurrent/Detail/BasicMap.h>
 #include <Caramel/Concurrent/ReplicatePolicies.h>
 #include <map>
 
@@ -29,7 +29,7 @@ namespace Concurrent
 //
 
 template< typename Key, typename Value, typename ReplicatePolicy = ReplicateNothing >
-class Map : public BasicMap< std::map< Key, Value >, ReplicatePolicy >
+class Map : public Detail::BasicMap< std::map< Key, Value >, ReplicatePolicy >
 {
 };
 
