@@ -33,6 +33,7 @@
     <ClInclude Include="..\include\Caramel\Debug\ScopeTiming.h" />
     <ClInclude Include="..\include\Caramel\Document\IniDocument.h" />
     <ClInclude Include="..\include\Caramel\Document\IniSection.h" />
+    <ClInclude Include="..\include\Caramel\Enum\EnumLookupTable.h" />
     <ClInclude Include="..\include\Caramel\Error\Assert.h" />
     <ClInclude Include="..\include\Caramel\Error\Detail\ExceptionCatcherCore.h" />
     <ClInclude Include="..\include\Caramel\Error\Exception.h" />

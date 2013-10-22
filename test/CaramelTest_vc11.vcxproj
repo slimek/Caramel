@@ -97,6 +97,7 @@
     <ClCompile Include="Concurrent\MapTest.cpp" />
     <ClCompile Include="Concurrent\PriorityQueueTest.cpp" />
     <ClCompile Include="Document\IniDocumentTest.cpp" />
+    <ClCompile Include="Enum\EnumLookupTest.cpp" />
     <ClCompile Include="Lexical\LexicalIntegerTest.cpp" />
     <ClCompile Include="RunTest.cpp" />
     <ClCompile Include="Statechart\StateMachineTest.cpp" />

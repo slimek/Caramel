@@ -126,6 +126,9 @@
     <Filter Include="1. Public Packages\Concurrent\Detail">
       <UniqueIdentifier>{3042db54-b50f-4f1d-ac86-11a32fc71898}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\Enum">
+      <UniqueIdentifier>{e1398d39-d758-48ac-8a09-173ea187b462}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -406,6 +409,9 @@
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Concurrent\ReplicatePolicies.h">
       <Filter>1. Public Packages\Concurrent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Enum\EnumLookupTable.h">
+      <Filter>1. Public Packages\Enum</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

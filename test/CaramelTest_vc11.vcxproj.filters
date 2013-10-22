@@ -38,6 +38,9 @@
     <Filter Include="2. Tests\Lexical">
       <UniqueIdentifier>{ca981491-234d-4efa-aa34-73aafdc529ac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\Enum">
+      <UniqueIdentifier>{e0c62408-017b-4300-beca-9579f6e614a4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RunTest.cpp">
@@ -78,6 +81,9 @@
     </ClCompile>
     <ClCompile Include="Lexical\LexicalIntegerTest.cpp">
       <Filter>2. Tests\Lexical</Filter>
+    </ClCompile>
+    <ClCompile Include="Enum\EnumLookupTest.cpp">
+      <Filter>2. Tests\Enum</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
