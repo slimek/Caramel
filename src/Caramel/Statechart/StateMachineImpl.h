@@ -9,7 +9,8 @@
 #pragma once
 #endif
 
-#include <Caramel/Concurrent/Map.h>
+#include <Caramel/Concurrent/HashMap.h>
+#include <Caramel/Statechart/StateImpl.h>
 #include <Caramel/Statechart/StateMachine.h>
 #include <Caramel/Task/TaskPoller.h>
 #include <mutex>
@@ -25,9 +26,6 @@ namespace Statechart
 //
 // State Machine
 //
-
-class StateImpl;
-typedef std::shared_ptr< StateImpl > StatePtr;
 
 class StateMachineImpl
 {
@@ -70,7 +68,7 @@ private:
     std::unique_ptr< TaskPoller > m_builtinTaskPoller;
     
 
-    typedef Concurrent::Map< Int, StatePtr > StateMap;
+    typedef Concurrent::HashMap< Int, StatePtr > StateMap;
     StateMap m_states;
 
     StatePtr m_currentState;

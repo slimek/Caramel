@@ -10,7 +10,7 @@
 #endif
 
 #include <Caramel/Chrono/TickClock.h>
-#include <Caramel/Concurrent/Map.h>
+#include <Caramel/Concurrent/HashMap.h>
 #include <Caramel/Statechart/State.h>
 #include <Caramel/Statechart/Transition.h>
 
@@ -48,7 +48,7 @@ private:
     Action m_enterAction;
     Action m_exitAction;
 
-    typedef Concurrent::Map< Int, TransitionPtr > TransitionMap;
+    typedef Concurrent::HashMap< Int, TransitionPtr > TransitionMap;
     TransitionMap m_transitions;
 
     Ticks m_autoTimerDuration;   // Zero means not enabled
