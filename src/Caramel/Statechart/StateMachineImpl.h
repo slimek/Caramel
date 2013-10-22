@@ -39,6 +39,10 @@ public:
 
     void ProcessInitiate( StatePtr initialState );
 
+    void ProcessEvent( Int eventId );
+
+    void DoTransit( StatePtr targetState );
+
 
     //
     // Timer

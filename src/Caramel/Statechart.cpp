@@ -6,6 +6,7 @@
 #include <Caramel/Functional/ScopeExit.h>
 #include <Caramel/Statechart/StateImpl.h>
 #include <Caramel/Statechart/StateMachineImpl.h>
+#include <Caramel/Statechart/Transition.h>
 #include <Caramel/Task/TaskPoller.h>
 #include <Caramel/Thread/ThisThread.h>
 
@@ -45,7 +46,7 @@ StateMachine::~StateMachine()
 
 State StateMachine::AddState( Int stateId )
 {
-    StatePtr newState = std::make_shared< StateImpl >( stateId );
+    StatePtr newState = std::make_shared< StateImpl >( stateId, m_impl->m_name );
     if ( ! m_impl->m_states.Insert( stateId, newState ))
     {
         CARAMEL_THROW( "State duplicate, machine: %s, stateId: %d", m_impl->m_name, stateId );
@@ -65,6 +66,17 @@ void StateMachine::Initiate( Int stateId )
     Task task(
         Sprintf( "Machine[%s].ProcessInitiate[%d]", m_impl->m_name, stateId ),
         [=] { m_impl->ProcessInitiate( initialState ); }
+    );
+
+    m_impl->m_taskExecutor->Submit( task );
+}
+
+
+void StateMachine::PostEvent( Int eventId )
+{
+    Task task(
+        Sprintf( "Machine[%s].ProcessEvent[%d]", m_impl->m_name, eventId ),
+        [=] { m_impl->ProcessEvent( eventId ); }
     );
 
     m_impl->m_taskExecutor->Submit( task );
@@ -107,6 +119,42 @@ void StateMachineImpl::ProcessInitiate( StatePtr initialState )
 }
 
 
+void StateMachineImpl::ProcessEvent( Int eventId )
+{
+    auto ulock = UniqueLock( m_mutex );
+
+    m_actionThreadId = ThisThread::GetThreadId();
+    auto guard = ScopeExit( [=] { m_actionThreadId = 0; } );
+
+    TransitionPtr transition;
+    if ( m_currentState->m_transitions.Find( eventId, transition ))
+    {
+        StatePtr targetState;
+        CARAMEL_VERIFY( m_states.Find( transition->targetStateId, targetState ));
+
+        this->DoTransit( targetState );
+        return;
+    }
+
+    // Otherwise, discard this event
+    CARAMEL_TRACE_DEBUG( "%s discards event %d", m_currentState->GetName(), eventId );
+}
+
+
+void StateMachineImpl::DoTransit( StatePtr targetState )
+{
+    // REMARKS: At this point, the m_mutex should have been locked.
+
+    this->ExitState();
+
+    // TODO: Add transition action here
+
+    m_currentState = targetState;
+
+    this->EnterState();
+}
+
+
 void StateMachineImpl::StartTimer( const Ticks& ticks )
 {
     CARAMEL_NOT_IMPLEMENTED();
@@ -127,14 +175,28 @@ void StateMachineImpl::EnterState()
         auto xc = CatchException( [=] { m_currentState->m_enterAction(); } );
         if ( xc )
         {
-            CARAMEL_TRACE_WARN(
-                "Enter action throws, machine: %s, stateId: %d", m_name, m_currentState->m_id );
+            CARAMEL_TRACE_WARN( "%s enter action throws", m_currentState->GetName() );
         }
     }
 
     if ( Ticks::Zero() < m_currentState->m_autoTimerDuration )
     {
         this->StartTimer( m_currentState->m_autoTimerDuration );
+    }
+}
+
+
+void StateMachineImpl::ExitState()
+{
+    // TODO: Cancel the timer.
+
+    if ( m_currentState->m_exitAction )
+    {
+        auto xc = CatchException( [=] { m_currentState->m_exitAction(); } );
+        if ( xc )
+        {
+            CARAMEL_TRACE_WARN( "%s exit action throws", m_currentState->GetName() );
+        }
     }
 }
 
@@ -159,12 +221,37 @@ State& State::EnterAction( Action action )
 }
 
 
+State& State::ExitAction( Action action )
+{
+    CARAMEL_ASSERT( ! m_impl->m_exitAction );
+
+    m_impl->m_exitAction = action;
+    return *this;
+}
+
+
+State& State::Transition( Int eventId, Int targetStateId )
+{
+    auto transition = std::make_shared< Statechart::Transition >( targetStateId );
+    if ( ! m_impl->m_transitions.Insert( eventId, transition ))
+    {
+        CARAMEL_THROW(
+            "%s transition duplicate, eventId: %d, targetStateId: %d",
+            m_impl->GetName(), eventId, targetStateId
+        );
+    }
+
+    return *this;
+}
+
+
 //
 // Implementation
 //
 
-StateImpl::StateImpl( Int stateId )
+StateImpl::StateImpl( Int stateId, const std::string& machineName )
     : m_id( stateId )
+    , m_name( Sprintf( "Machine[%s].State[%d]", machineName, stateId ))
 {
 }
 

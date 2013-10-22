@@ -10,7 +10,9 @@
 #endif
 
 #include <Caramel/Chrono/TickClock.h>
+#include <Caramel/Concurrent/Map.h>
 #include <Caramel/Statechart/State.h>
+#include <Caramel/Statechart/Transition.h>
 
 
 namespace Caramel
@@ -31,7 +33,9 @@ class StateImpl
 
 public:
 
-    explicit StateImpl( Int stateId );
+    explicit StateImpl( Int stateId, const std::string& machineName );
+
+    std::string GetName() const { return m_name; }
 
 
 private:
@@ -39,9 +43,13 @@ private:
     /// Data Members ///
 
     Int m_id;
+    std::string m_name;
 
     Action m_enterAction;
     Action m_exitAction;
+
+    typedef Concurrent::Map< Int, TransitionPtr > TransitionMap;
+    TransitionMap m_transitions;
 
     Ticks m_autoTimerDuration;   // Zero means not enabled
     Action m_timerAction;

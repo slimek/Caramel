@@ -107,6 +107,7 @@
     <ClInclude Include="Caramel\Program\ProgramOptionsManager.h" />
     <ClInclude Include="Caramel\Statechart\StateImpl.h" />
     <ClInclude Include="Caramel\Statechart\StateMachineImpl.h" />
+    <ClInclude Include="Caramel\Statechart\Transition.h" />
     <ClInclude Include="Caramel\String\SprintfManager.h" />
     <ClInclude Include="Caramel\Task\TaskImpl.h" />
     <ClInclude Include="Caramel\Task\TaskPollerImpl.h" />

@@ -413,6 +413,9 @@
     <ClInclude Include="..\include\Caramel\Enum\EnumLookupTable.h">
       <Filter>1. Public Packages\Enum</Filter>
     </ClInclude>
+    <ClInclude Include="Caramel\Statechart\Transition.h">
+      <Filter>2. Sources\Statechart</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\Trace.cpp">

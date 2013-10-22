@@ -45,6 +45,11 @@ public:
     void Initiate( Int stateId );
 
     //
+    // Enqueue this event for later processing.
+    //
+    void PostEvent( Int eventId );
+
+    //
     // Process enqueued events.
     // - Call this function ONLY when you using the built-in TaskPoller.
     // - If no event exists, it returns immediately.

@@ -33,11 +33,16 @@ class State
 public:
 
     //
-    // Enter / Exit Actions
-    // - Called when entering or exiting this state.
+    // Called when entering or exiting this state.
     //
     State& EnterAction( Action action );
     State& ExitAction ( Action action );
+
+
+    //
+    // When the event triggered, transit to the target state.
+    //
+    State& Transition( Int eventId, Int targetStateId );
 
 
 private:
