@@ -34,65 +34,61 @@ public:
 
     typedef ClockT ClockType;
     typedef typename ClockType::TimePoint TimePoint;
-    typedef typename ClockType::Duration  DurationType;
+    typedef typename ClockType::Duration  Duration;
 
 
     TimedBool();
-    explicit TimedBool( const DurationType& duration );
+    explicit TimedBool( const Duration& duration );
 
     template< typename AnyDuration >
     explicit TimedBool( const AnyDuration& duration );
 
 
-    //
-    // Manipulators
-    //
+    /// Manipulators ///
 
-    void Start( const DurationType& duration );
+    void Start( const Duration& duration );
+
+    template< typename AnyDuration >
+    void Start( const AnyDuration& duration );
+
 
     //
-    // Restart
-    // - Start this time with previous duration.
+    // Start this time with previous duration.
     //
     void Restart();
 
     //
-    // Continue
-    // - Advance the deadline with the duration until it is later than now.
-    //   This produce stable intervals.
+    // Advance the deadline with the duration until it is later than now.
+    // This produce stable intervals.
     //
     void Continue();
 
     //
-    // Expire Now
-    // - Immediate expire this timer.
+    // Immediate expire this timer.
     //
     void ExpireNow();
 
 
-    //
-    // Boolean Accessors
-    //
+    /// Boolean Conversions ///
 
     operator Bool() const;
 
-    Bool ToBool() const;
+    Bool ToBool()    const;
+    Bool IsExpired() const;
     
 
-    //
-    // Properties
-    //
+    /// Properties ///
 
-    DurationType Duration() const { return m_duration; }
-    TimePoint    Deadline() const { return m_deadline; }
+    Duration  GetDuration() const { return m_duration; }
+    TimePoint GetDeadline() const { return m_deadline; }
 
 
 private:
 
     /// Data Members ///
 
-    DurationType m_duration;
-    TimePoint    m_deadline;
+    Duration  m_duration;
+    TimePoint m_deadline;
 
 };
 
@@ -110,19 +106,17 @@ inline TimedBool< ClockT >::TimedBool()
 
 
 template< typename ClockT >
-inline TimedBool< ClockT >::TimedBool( const DurationType& duration )
-    : m_duration( duration )
-    , m_deadline( ClockType::Now() + duration )
+inline TimedBool< ClockT >::TimedBool( const Duration& duration )
 {
+    this->Start( duration );
 }
 
 
 template< typename ClockT >
 template< typename AnyDuration >
 inline TimedBool< ClockT >::TimedBool( const AnyDuration& duration )
-    : m_duration( duration )
-    , m_deadline( ClockType::Now() + m_duration )
 {
+    this->Start( duration );
 }
 
 
@@ -131,17 +125,34 @@ inline TimedBool< ClockT >::TimedBool( const AnyDuration& duration )
 //
 
 template< typename ClockT >
-inline void TimedBool< ClockT >::Start( const DurationType& duration )
+inline void TimedBool< ClockT >::Start( const Duration& duration )
 {
     m_duration = duration;
-    m_deadline = ClockType::Now() + duration;
+    this->Restart();
+}
+
+
+template< typename ClockT >
+template< typename AnyDuration >
+inline void TimedBool< ClockT >::Start( const AnyDuration& duration )
+{
+    m_duration = Duration( duration );
+    this->Restart();
 }
 
 
 template< typename ClockT >
 inline void TimedBool< ClockT >::Restart()
 {
-    m_deadline = ClockType::Now() + m_duration;
+    const TimePoint now = ClockType::Now();
+    if ( ClockType::MaxTimePoint() - now < m_duration )
+    {
+        m_deadline = ClockType::MaxTimePoint();
+    }
+    else
+    {
+        m_deadline = now + m_duration;
+    }
 }
 
 
@@ -151,7 +162,15 @@ inline void TimedBool< ClockT >::Continue()
     const TimePoint now = ClockType::Now();
     while ( m_deadline < now )
     {
-        m_deadline += m_duration;
+        if ( ClockType::MaxTimePoint() - now < m_duration )
+        {
+            m_deadline = ClockType::MaxTimePoint();
+            break;
+        }
+        else
+        {
+            m_deadline += m_duration;
+        }
     }
 }
 
@@ -161,6 +180,11 @@ inline void TimedBool< ClockT >::ExpireNow()
 {
     m_deadline = ClockType::Now();
 }
+
+
+//
+// Boolean Conversions
+// - These three conversions have the same result.
 
 
 template< typename ClockT >
@@ -173,7 +197,14 @@ inline TimedBool< ClockT >::operator Bool() const
 template< typename ClockT >
 inline Bool TimedBool< ClockT >::ToBool() const
 {
-    return ClockType::Now() >= m_deadline;
+    return this->operator Bool();
+}
+
+
+template< typename ClockT >
+inline Bool TimedBool< ClockT >::IsExpired() const
+{
+    return this->operator Bool();
 }
 
 

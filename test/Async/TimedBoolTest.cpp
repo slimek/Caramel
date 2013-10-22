@@ -20,7 +20,7 @@ SUITE( TimedBoolSuite )
 // Timed Boolean Test
 //
 
-TEST( TimedBoolTest )
+TEST( TickedBoolTest )
 {
     typedef TimedBool< TickClock > TickedBool;
 
@@ -60,6 +60,43 @@ TEST( TimedBoolTest )
 
     TickedBool tb5( Ticks::Zero() );
     CHECK( true == tb5 );
+
+
+    /// Never Expires ///
+
+    TickedBool tb6( Ticks::MaxValue() );
+    CHECK( false == tb6 );
+
+
+    /// Boolean Conversions ///
+
+    CHECK( true == tb5.ToBool() );
+    CHECK( true == tb5.IsExpired() );
+
+    CHECK( false == tb6.ToBool() );
+    CHECK( false == tb6.IsExpired() );
+
+
+    /// Start and Continue ///
+
+    TickedBool tb7;
+    TickedBool tb8;
+
+    tb7.Start( Seconds( 0.06 ));
+    tb8.Start( Ticks( 60 ));
+
+    std::this_thread::sleep_for( std::chrono::milliseconds( 100 ));
+
+    CHECK( true == tb7 );
+    CHECK( true == tb8 );
+
+    tb7.Restart();
+    tb8.Continue();
+
+    std::this_thread::sleep_for( std::chrono::milliseconds( 40 ));
+
+    CHECK( false == tb7 );
+    CHECK( true == tb8 );
 }
 
 
