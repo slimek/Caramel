@@ -416,6 +416,9 @@
     <ClInclude Include="Caramel\Statechart\Transition.h">
       <Filter>2. Sources\Statechart</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Concurrent\HashMap.h">
+      <Filter>1. Public Packages\Concurrent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caramel\Trace.cpp">
