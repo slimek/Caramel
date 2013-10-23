@@ -32,6 +32,7 @@ class WideString
 public:
 
     WideString();
+    WideString( const std::wstring& s );
     WideString( const std::string& input, TextEncoding encoding );
 
     Bool TryParse( const std::string& input, TextEncoding encoding );

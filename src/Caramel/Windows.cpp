@@ -128,6 +128,12 @@ WideString::WideString()
 }
 
 
+WideString::WideString( const std::wstring& s )
+    : m_s( s )
+{
+}
+
+
 WideString::WideString( const std::string& input, TextEncoding encoding )
 {
     if ( ! this->TryParse( input, encoding ))
