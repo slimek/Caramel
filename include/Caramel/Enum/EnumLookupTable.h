@@ -29,7 +29,7 @@ template< typename EnumType >
 class EnumLookupTable
 {
     static_assert(
-        sizeof( Int32 ) >= sizeof( NumberTraits< EnumType >::NumberType ),
+        sizeof( Int32 ) >= sizeof( typename NumberTraits< EnumType >::NumberType ),
         "EnumLookupTable doesn't support 64-bit enum type"
     );
 
