@@ -30,7 +30,7 @@ namespace Detail
 //
 
 template< typename MapType, typename ReplicatePolicy >
-class BasicMap : public ReplicatePolicy::template Dictionary< MapType::key_type, MapType::mapped_type >
+class BasicMap : public ReplicatePolicy::template Dictionary< typename MapType::key_type, typename MapType::mapped_type >
                , public boost::noncopyable
 {
 public:
