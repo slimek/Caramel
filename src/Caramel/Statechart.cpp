@@ -92,6 +92,16 @@ void StateMachine::Process( const Ticks& sliceTicks )
 
 
 //
+// Properties
+//
+
+Int StateMachine::GetCurrentStateId() const
+{
+    return m_impl->m_currentState->GetId();
+}
+
+
+//
 // Implementation
 //
 

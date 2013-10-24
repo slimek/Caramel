@@ -35,6 +35,7 @@ public:
 
     explicit StateImpl( Int stateId, const std::string& machineName );
 
+    Int         GetId()   const { return m_id; }
     std::string GetName() const { return m_name; }
 
 

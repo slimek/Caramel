@@ -59,6 +59,11 @@ public:
     void Process( const Ticks& sliceTicks = Ticks::Zero() );
 
 
+    /// Properties ///
+
+    Int GetCurrentStateId() const;
+
+
 private:
 
     std::unique_ptr< StateMachineImpl > m_impl;
