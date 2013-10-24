@@ -61,7 +61,8 @@ TraceManager::~TraceManager()
     for ( ; m_managedListeners.end() != iml; ++ iml )
     {
         Listener* listener = *iml;
-        this->UnbindListenerFromAllChannels( listener );
+        listener->UnbindAllChannels();
+        delete listener;
     }
 }
 
