@@ -48,6 +48,10 @@ public:
     // A convenient wrapper for std::steady_clock::now.
     static TimePoint Now();
 
+    // Returns duration since the clock's epoch.
+    // - In Win32 it is since system started.
+    static Duration SinceEpoch();
+
 
 private:
 
@@ -99,6 +103,13 @@ template< typename DurationT, typename TimePointT >
 inline TimePointT SteadyClock< DurationT, TimePointT >::Now()
 {
     return boost::chrono::time_point_cast< typename TimePoint::Duration >( ClockType::now() );
+}
+
+
+template< typename DurationT, typename TimePointT >
+inline DurationT SteadyClock< DurationT, TimePointT >::SinceEpoch()
+{
+    return Duration( Now().time_since_epoch() );
 }
 
 

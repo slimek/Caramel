@@ -72,6 +72,10 @@ TEST( SecondClockTest )
     CHECK_CLOSE( Seconds( 0 ), reseted, Seconds( 0.05 ));
     
     CARAMEL_TRACE_DEBUG( "Duration: %f", delta );
+
+    const Seconds sinceEpoch = SecondClock::SinceEpoch();
+
+    CARAMEL_TRACE_DEBUG( "Since Epoch seconds: %f", sinceEpoch );
 }
 
 
