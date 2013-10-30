@@ -1,0 +1,479 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="1. Public Packages">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="2. Sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="1. Public Packages\Setup">
+      <UniqueIdentifier>{89fa98a4-8038-4edc-a486-950d46af92da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\String">
+      <UniqueIdentifier>{fbd4695d-d5a5-40e1-8171-65d53259e9e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Meta">
+      <UniqueIdentifier>{7d87e41c-8fa5-4c7b-bc8f-db7016d6f7d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Value">
+      <UniqueIdentifier>{8a8b007f-7ad8-4545-951a-f22db1335bb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Error">
+      <UniqueIdentifier>{be99fd4f-31a7-46eb-9e45-b9ce451933ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Trace">
+      <UniqueIdentifier>{e2e7a6dc-fee1-435e-8d25-202b90861e6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Thread">
+      <UniqueIdentifier>{ca13aaa6-4019-457e-8881-5526f7e89171}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Object">
+      <UniqueIdentifier>{00a1ce5e-5e58-42f0-9a44-837c5b74db8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Object\Detail headers">
+      <UniqueIdentifier>{d28a9a7e-028d-4862-ab2a-16e04456458e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\String\Inline headers">
+      <UniqueIdentifier>{5e2af97b-94fe-40ea-b155-7171182bd52b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\String\Detail headers">
+      <UniqueIdentifier>{371c93a3-2c32-4227-8257-2142070f310b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Lexical">
+      <UniqueIdentifier>{7500b9b7-34a6-45c1-88a9-9c008305f73d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Chrono">
+      <UniqueIdentifier>{b9527995-68be-4694-bb0c-1b22f6babd52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\FileSystem">
+      <UniqueIdentifier>{c9f622dd-a423-4a8d-b682-bb4368bc6a29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Functional">
+      <UniqueIdentifier>{c33da385-93c6-4050-871b-0524d1549407}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Io">
+      <UniqueIdentifier>{2cf66935-4cd4-44d6-b7c1-8964bf374360}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Windows">
+      <UniqueIdentifier>{c8fd4531-ad69-4323-b08a-aa82f670d38b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Async">
+      <UniqueIdentifier>{541c1eaf-49ec-484b-86a4-743c6996827a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Numeric">
+      <UniqueIdentifier>{ab6a21d9-c585-4cc2-865b-a38a3f5d4f63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Program">
+      <UniqueIdentifier>{ff52e22e-0b27-4f0e-87cc-5dbba11b9ec6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Error\Detail">
+      <UniqueIdentifier>{457395f5-7884-438a-be80-71b1fc0ab965}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Precompiled Header">
+      <UniqueIdentifier>{6b2078f8-204b-415c-9dc4-1b54f1aed52f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Task">
+      <UniqueIdentifier>{b4abbdeb-1664-4058-af18-36b81192f386}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Concurrent">
+      <UniqueIdentifier>{f07852aa-7d21-4ae6-b4b2-8452db39978a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Document">
+      <UniqueIdentifier>{ab228df0-452d-4d10-8714-2ecf850671dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Debug">
+      <UniqueIdentifier>{cc5fac38-7821-4ae3-9738-40fd5a496608}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Statechart">
+      <UniqueIdentifier>{6b0e1fec-bd80-46b2-aae8-407516cc8f1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Concurrent\Detail">
+      <UniqueIdentifier>{3042db54-b50f-4f1d-ac86-11a32fc71898}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Enum">
+      <UniqueIdentifier>{e1398d39-d758-48ac-8a09-173ea187b462}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\Debug">
+      <UniqueIdentifier>{81665bab-ad28-48d8-bced-9ef0dcbba987}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\Document">
+      <UniqueIdentifier>{6dffa6d3-6cb6-4bc5-9c1f-36785852a816}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\FileSystem">
+      <UniqueIdentifier>{3a94915b-589e-4745-93dc-1998c678a489}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\Io">
+      <UniqueIdentifier>{03a80efe-7cbc-4f48-8f21-df328f4a309f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\Object">
+      <UniqueIdentifier>{a3605ee7-d3b8-46b0-a10e-7cdd42834e7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\Program">
+      <UniqueIdentifier>{9096bec8-2fb9-439b-8001-c768ba297cd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\Statechart">
+      <UniqueIdentifier>{ea550cc8-e80e-4a72-8dab-aae3e7d44bd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\String">
+      <UniqueIdentifier>{3fd5bffa-bcde-4464-9f9e-7b45129cd881}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\Task">
+      <UniqueIdentifier>{7dc9d0b1-f9db-4db8-a4b9-c3119736701d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\Thread">
+      <UniqueIdentifier>{def6a9ba-d5c7-4f06-beaa-62003255e505}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\Trace">
+      <UniqueIdentifier>{d853c725-f0e2-4551-ba6b-f76ddbe933cb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\Caramel\Caramel.h">
+      <Filter>1. Public Packages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Setup\Compiler.h">
+      <Filter>1. Public Packages\Setup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Setup\System.h">
+      <Filter>1. Public Packages\Setup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\String\Sprintf.h">
+      <Filter>1. Public Packages\String</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\String\CharTraits.h">
+      <Filter>1. Public Packages\String</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\String\StringConvertible.h">
+      <Filter>1. Public Packages\String</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Meta\Utility.h">
+      <Filter>1. Public Packages\Meta</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Value\SharedArray.h">
+      <Filter>1. Public Packages\Value</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Error\Assert.h">
+      <Filter>1. Public Packages\Error</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Error\Exception.h">
+      <Filter>1. Public Packages\Error</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Trace\Trace.h">
+      <Filter>1. Public Packages\Trace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Object\Singleton.h">
+      <Filter>1. Public Packages\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Object\Detail\LifetimeTracker.h">
+      <Filter>1. Public Packages\Object\Detail headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\String\Detail\SprintfParameter.h">
+      <Filter>1. Public Packages\String\Detail headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Meta\IfThenElse.h">
+      <Filter>1. Public Packages\Meta</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Meta\Select.h">
+      <Filter>1. Public Packages\Meta</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\String\Utf8String.h">
+      <Filter>1. Public Packages\String</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\String\TextEncoding.h">
+      <Filter>1. Public Packages\String</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Lexical\Integer.h">
+      <Filter>1. Public Packages\Lexical</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Lexical\IntegerList.h">
+      <Filter>1. Public Packages\Lexical</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Chrono\SteadyClock.h">
+      <Filter>1. Public Packages\Chrono</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\FileSystem\FileInfo.h">
+      <Filter>1. Public Packages\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\FileSystem\Path.h">
+      <Filter>1. Public Packages\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\String\Inline\Sprintf_Sprintf.h">
+      <Filter>1. Public Packages\String\Inline headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Functional\ScopeExit.h">
+      <Filter>1. Public Packages\Functional</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Io\TextStreamReader.h">
+      <Filter>1. Public Packages\Io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Io\InputStream.h">
+      <Filter>1. Public Packages\Io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Io\TextReader.h">
+      <Filter>1. Public Packages\Io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Io\InputFileStream.h">
+      <Filter>1. Public Packages\Io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Windows\WideString.h">
+      <Filter>1. Public Packages\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Io\FileStream.h">
+      <Filter>1. Public Packages\Io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\String\CainLess.h">
+      <Filter>1. Public Packages\String</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Windows\FileInfo.h">
+      <Filter>1. Public Packages\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Async\FlowState.h">
+      <Filter>1. Public Packages\Async</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Numeric\NumberConvertible.h">
+      <Filter>1. Public Packages\Numeric</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Numeric\NumberTraits.h">
+      <Filter>1. Public Packages\Numeric</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Async\TimedBool.h">
+      <Filter>1. Public Packages\Async</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Lexical\Boolean.h">
+      <Filter>1. Public Packages\Lexical</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Program\ConsoleApplication.h">
+      <Filter>1. Public Packages\Program</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Error\CatchException.h">
+      <Filter>1. Public Packages\Error</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Error\Detail\ExceptionCatcherCore.h">
+      <Filter>1. Public Packages\Error\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\String\Algorithm.h">
+      <Filter>1. Public Packages\String</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\FileSystem\DirectoryInfo.h">
+      <Filter>1. Public Packages\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Trace\TraceTypes.h">
+      <Filter>1. Public Packages\Trace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Trace\Listeners.h">
+      <Filter>1. Public Packages\Trace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Trace\Channel.h">
+      <Filter>1. Public Packages\Trace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Program\ProgramOptions.h">
+      <Filter>1. Public Packages\Program</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Windows\DebuggerTraceListener.h">
+      <Filter>1. Public Packages\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Setup\PchDefines.h">
+      <Filter>1. Public Packages\Setup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Setup\PchHeaders.h">
+      <Filter>1. Public Packages\Setup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Windows\CrtDebug.h">
+      <Filter>1. Public Packages\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Task\Task.h">
+      <Filter>1. Public Packages\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Task\TaskExecutor.h">
+      <Filter>1. Public Packages\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Concurrent\PriorityQueue.h">
+      <Filter>1. Public Packages\Concurrent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Thread\MutexLocks.h">
+      <Filter>1. Public Packages\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Concurrent\Queue.h">
+      <Filter>1. Public Packages\Concurrent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Task\TaskPoller.h">
+      <Filter>1. Public Packages\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Object\AutoNumbered.h">
+      <Filter>1. Public Packages\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Document\IniDocument.h">
+      <Filter>1. Public Packages\Document</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Document\IniSection.h">
+      <Filter>1. Public Packages\Document</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Task\TaskFwd.h">
+      <Filter>1. Public Packages\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Chrono\TickClock.h">
+      <Filter>1. Public Packages\Chrono</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Chrono\SecondClock.h">
+      <Filter>1. Public Packages\Chrono</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Debug\ScopeTiming.h">
+      <Filter>1. Public Packages\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Thread\Thread.h">
+      <Filter>1. Public Packages\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Thread\ThreadTypes.h">
+      <Filter>1. Public Packages\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Thread\ThisThread.h">
+      <Filter>1. Public Packages\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Statechart\StateMachine.h">
+      <Filter>1. Public Packages\Statechart</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Statechart\State.h">
+      <Filter>1. Public Packages\Statechart</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Concurrent\Map.h">
+      <Filter>1. Public Packages\Concurrent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Meta\IntegralTypes.h">
+      <Filter>1. Public Packages\Meta</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Concurrent\Detail\BasicMap.h">
+      <Filter>1. Public Packages\Concurrent\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Concurrent\ReplicatePolicies.h">
+      <Filter>1. Public Packages\Concurrent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Enum\EnumLookupTable.h">
+      <Filter>1. Public Packages\Enum</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Concurrent\HashMap.h">
+      <Filter>1. Public Packages\Concurrent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CaramelPch.h">
+      <Filter>3. Precompiled Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Debug\DebugManager.h">
+      <Filter>2. Sources\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Document\IniDocumentImpl.h">
+      <Filter>2. Sources\Document</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Document\IniSectionImpl.h">
+      <Filter>2. Sources\Document</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Document\IniSyntax.h">
+      <Filter>2. Sources\Document</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\FileSystem\PathImpl.h">
+      <Filter>2. Sources\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Io\MbcsStreamReader.h">
+      <Filter>2. Sources\Io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Io\Utf8StreamReader.h">
+      <Filter>2. Sources\Io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Io\Utf16LeStreamReader.h">
+      <Filter>2. Sources\Io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Object\FacilityLongevity.h">
+      <Filter>2. Sources\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Program\ConsoleApplicationImpl.h">
+      <Filter>2. Sources\Program</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Program\ProgramOptionsManager.h">
+      <Filter>2. Sources\Program</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Statechart\StateImpl.h">
+      <Filter>2. Sources\Statechart</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Statechart\StateMachineImpl.h">
+      <Filter>2. Sources\Statechart</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Statechart\Transition.h">
+      <Filter>2. Sources\Statechart</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\String\SprintfManager.h">
+      <Filter>2. Sources\String</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Task\TaskImpl.h">
+      <Filter>2. Sources\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Task\TaskPollerImpl.h">
+      <Filter>2. Sources\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Thread\ThreadImpl.h">
+      <Filter>2. Sources\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Trace\ChannelImpl.h">
+      <Filter>2. Sources\Trace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Trace\TraceManager.h">
+      <Filter>2. Sources\Trace</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\CaramelPchCreator.cpp">
+      <Filter>3. Precompiled Header</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Configuration.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\DateTime.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Debug.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Document.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Error.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\FileSystem.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Io.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Lexical.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Object.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Program.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Random.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Statechart.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\String.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Task.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Thread.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Trace.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Windows.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
