@@ -113,7 +113,7 @@
     <None Include="Document\test2.ini" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Caramel.vcproj\Caramel_vc11.vcxproj">
+    <ProjectReference Include="..\Caramel.vsproj\Caramel_vc11.vcxproj">
       <Project>{ed63d1e4-3de9-4273-a22a-8b558e1bd6c0}</Project>
     </ProjectReference>
   </ItemGroup>
