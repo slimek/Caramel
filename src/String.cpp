@@ -7,15 +7,14 @@
 #include <Caramel/String/Algorithm.h>
 #include <Caramel/String/Sprintf.h>
 #include <Caramel/String/Utf8String.h>
+#include <boost/algorithm/string/trim.hpp>
+#include <cstdarg>
+#include <cstdio>
 
 #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
 #include <Caramel/Windows/WideString.h>
-#endif
-
-#include <boost/algorithm/string/trim.hpp>
 #include <codecvt>
-#include <cstdarg>
-#include <cstdio>
+#endif
 
 
 namespace Caramel
@@ -84,7 +83,17 @@ SprintfBuffer::SprintfBuffer()
     // Align buffer acoording to the cache lines
     Void* p = &m_chunk[0];
     std::size_t space = CHUNK_SIZE;
-    m_buffer = reinterpret_cast< Char* >( std::align( BUFFER_ALIGN, SIZE, p, space ));
+
+    #if defined( CARAMEL_SYSTEM_IS_ANDROID )
+    {
+        // As at Nov.2013, Andoird NDK GNU C++ 4.8 doesn't support std::align
+        m_buffer = reinterpret_cast< Char* >( p );
+    }
+    #else
+    {
+        m_buffer = reinterpret_cast< Char* >( std::align( BUFFER_ALIGN, SIZE, p, space ));
+    }
+    #endif
 
     CARAMEL_ASSERT( m_buffer + SIZE + sizeof( Uint32 ) <= &m_chunk[ CHUNK_SIZE ] );
 
