@@ -13,7 +13,7 @@
 // System - Windows
 //
 
-#if defined( WIN32 ) || defined( _WIN32 ) || defined( __WIN32__ )
+#if defined( _WIN32 ) || defined( _WIN64 )
 
 #define CARAMEL_SYSTEM_IS_WINDOWS
 
@@ -43,7 +43,7 @@
 // System - iOS
 //
 
-#if ( defined( CARAMEL_COMPILER_IS_GCC ) || defined( CARAMEL_COMPILER_IS_CLANG ))
+#if defined( __APPLE__ ) && defined( __MACH__ )
 
 #include <TargetConditionals.h>
 
@@ -55,7 +55,8 @@
 
 #endif
 
-#endif // iOS
+#endif // __APPLE__ and __MACH__
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //
