@@ -25,7 +25,7 @@ namespace Caramel
 namespace Detail
 {
 
-void CARAMEL_CDECL AtExit()
+void AtExit()
 {
     LifetimeTracker* tracker = LifetimeTrackerSortedList::PopFront();
     delete tracker;
