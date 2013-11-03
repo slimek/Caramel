@@ -421,9 +421,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\CaramelPchCreator.cpp">
-      <Filter>3. Precompiled Header</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Configuration.cpp">
       <Filter>2. Sources</Filter>
     </ClCompile>
@@ -474,6 +471,9 @@
     </ClCompile>
     <ClCompile Include="..\src\Windows.cpp">
       <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\CaramelPch.cpp">
+      <Filter>3. Precompiled Header</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
