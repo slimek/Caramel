@@ -10,8 +10,8 @@
 #endif
 
 #include <Caramel/Object/Detail/LifetimeTracker.h>
+#include <Caramel/Thread/SpinMutex.h>
 #include <boost/noncopyable.hpp>
-#include <boost/thread/once.hpp>
 #include <atomic>
 
 
@@ -39,7 +39,7 @@ private:
     static void Destroy( T* );
 
     static volatile T* m_instance;
-    static boost::once_flag m_created;
+    static SpinMutex m_mutex;
     static Bool m_destroyed;
 
     // NOTE: m_destroyed has no function in code.
@@ -61,7 +61,7 @@ template< typename T, Uint longevity >
 volatile T* Singleton< T, longevity >::m_instance = nullptr;
 
 template< typename T, Uint longevity >
-boost::once_flag Singleton< T, longevity >::m_created = BOOST_ONCE_INIT;
+SpinMutex Singleton< T, longevity >::m_mutex;
 
 template< typename T, Uint longevity >
 Bool Singleton< T, longevity >::m_destroyed = false;
@@ -75,7 +75,14 @@ inline T* Singleton< T, longevity >::Instance()
 {
     if ( m_instance ) { return const_cast< T* >( m_instance ); }
 
-    boost::call_once( &Create, m_created );
+    /// Dobule-checking Lock ///
+
+    SpinMutex::ScopedLock lock( m_mutex );
+
+    if ( ! m_instance )
+    {
+        Create();
+    }
 
     return const_cast< T* >( m_instance );
 }
