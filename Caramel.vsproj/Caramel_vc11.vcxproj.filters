@@ -419,6 +419,9 @@
     <ClInclude Include="..\src\Trace\TraceManager.h">
       <Filter>2. Sources\Trace</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Thread\SpinMutex.h">
+      <Filter>1. Public Packages\Thread</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

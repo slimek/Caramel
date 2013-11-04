@@ -85,6 +85,9 @@
     <ClCompile Include="Enum\EnumLookupTest.cpp">
       <Filter>2. Tests\Enum</Filter>
     </ClCompile>
+    <ClCompile Include="Thread\SpinMutexTest.cpp">
+      <Filter>2. Tests\Thread</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CaramelTestPch.h">

@@ -102,6 +102,7 @@
     <ClCompile Include="RunTest.cpp" />
     <ClCompile Include="Statechart\StateMachineTest.cpp" />
     <ClCompile Include="Task\TaskPollerTest.cpp" />
+    <ClCompile Include="Thread\SpinMutexTest.cpp" />
     <ClCompile Include="Thread\ThreadTest.cpp" />
     <ClCompile Include="Trace\TraceTest.cpp" />
   </ItemGroup>

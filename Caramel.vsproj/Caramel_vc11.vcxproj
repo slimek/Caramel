@@ -82,6 +82,7 @@
     <ClInclude Include="..\include\Caramel\Task\TaskFwd.h" />
     <ClInclude Include="..\include\Caramel\Task\TaskPoller.h" />
     <ClInclude Include="..\include\Caramel\Thread\MutexLocks.h" />
+    <ClInclude Include="..\include\Caramel\Thread\SpinMutex.h" />
     <ClInclude Include="..\include\Caramel\Thread\ThisThread.h" />
     <ClInclude Include="..\include\Caramel\Thread\Thread.h" />
     <ClInclude Include="..\include\Caramel\Thread\ThreadTypes.h" />
