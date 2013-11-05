@@ -144,6 +144,9 @@
     <Filter Include="1. Public Packages\Math">
       <UniqueIdentifier>{6909fe9d-0905-4c72-948f-b191ca2fe5a3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\Value\Detail headers">
+      <UniqueIdentifier>{dddb83b1-4558-4057-bbbc-d48e3210aabc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -466,6 +469,15 @@
     </ClInclude>
     <ClInclude Include="..\src\DateTime\TimeDuration.h">
       <Filter>2. Sources\DateTime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Value\NamedValues.h">
+      <Filter>1. Public Packages\Value</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Value\Detail\NamedValueRef.h">
+      <Filter>1. Public Packages\Value\Detail headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Value\Detail\NamedValueEntry.h">
+      <Filter>1. Public Packages\Value\Detail headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

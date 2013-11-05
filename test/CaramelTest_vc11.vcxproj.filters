@@ -50,6 +50,9 @@
     <Filter Include="2. Tests\Random">
       <UniqueIdentifier>{bdde6b14-b2e1-4fd3-a302-81848006edad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\Value">
+      <UniqueIdentifier>{88123525-9169-468f-b7b6-555814f3b14e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RunTest.cpp">
@@ -111,6 +114,9 @@
     </ClCompile>
     <ClCompile Include="String\StringAlgorithmTest.cpp">
       <Filter>2. Tests\String</Filter>
+    </ClCompile>
+    <ClCompile Include="Value\NamedValuesTest.cpp">
+      <Filter>2. Tests\Value</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

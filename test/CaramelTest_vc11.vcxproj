@@ -110,6 +110,7 @@
     <ClCompile Include="Thread\SpinMutexTest.cpp" />
     <ClCompile Include="Thread\ThreadTest.cpp" />
     <ClCompile Include="Trace\TraceTest.cpp" />
+    <ClCompile Include="Value\NamedValuesTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CaramelTestPch.h" />

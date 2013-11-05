@@ -96,6 +96,9 @@
     <ClInclude Include="..\include\Caramel\Trace\Listeners.h" />
     <ClInclude Include="..\include\Caramel\Trace\Trace.h" />
     <ClInclude Include="..\include\Caramel\Trace\TraceTypes.h" />
+    <ClInclude Include="..\include\Caramel\Value\Detail\NamedValueEntry.h" />
+    <ClInclude Include="..\include\Caramel\Value\Detail\NamedValueRef.h" />
+    <ClInclude Include="..\include\Caramel\Value\NamedValues.h" />
     <ClInclude Include="..\include\Caramel\Value\SharedArray.h" />
     <ClInclude Include="..\include\Caramel\Windows\CrtDebug.h" />
     <ClInclude Include="..\include\Caramel\Windows\DebuggerTraceListener.h" />
