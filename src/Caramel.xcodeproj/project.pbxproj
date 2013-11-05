@@ -25,11 +25,6 @@
 		6D0351CA18179DDD000D771E /* Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D0351AE18179DDD000D771E /* Thread.cpp */; };
 		6D0351CB18179DDD000D771E /* Trace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D0351B218179DDD000D771E /* Trace.cpp */; };
 		6D0351CC18179DDD000D771E /* Windows.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D0351B318179DDD000D771E /* Windows.cpp */; };
-		6DAFE21F1815255000859097 /* libBoost.Thread.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DAFE21A1815255000859097 /* libBoost.Thread.a */; };
-		6DAFE328181528D400859097 /* libBoost.Chrono.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DAFE324181528D400859097 /* libBoost.Chrono.a */; };
-		6DAFE329181528D400859097 /* libBoost.Filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DAFE325181528D400859097 /* libBoost.Filesystem.a */; };
-		6DAFE32A181528D500859097 /* libBoost.ProgramOptions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DAFE326181528D400859097 /* libBoost.ProgramOptions.a */; };
-		6DAFE32B181528D500859097 /* libBoost.System.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DAFE327181528D400859097 /* libBoost.System.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -160,11 +155,6 @@
 		6D0351B218179DDD000D771E /* Trace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Trace.cpp; sourceTree = "<group>"; };
 		6D0351B318179DDD000D771E /* Windows.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Windows.cpp; sourceTree = "<group>"; };
 		6DAFE0ED1815118B00859097 /* libCaramel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCaramel.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		6DAFE21A1815255000859097 /* libBoost.Thread.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBoost.Thread.a; sourceTree = "<group>"; };
-		6DAFE324181528D400859097 /* libBoost.Chrono.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBoost.Chrono.a; sourceTree = "<group>"; };
-		6DAFE325181528D400859097 /* libBoost.Filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBoost.Filesystem.a; sourceTree = "<group>"; };
-		6DAFE326181528D400859097 /* libBoost.ProgramOptions.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBoost.ProgramOptions.a; sourceTree = "<group>"; };
-		6DAFE327181528D400859097 /* libBoost.System.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBoost.System.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,11 +162,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6DAFE32A181528D500859097 /* libBoost.ProgramOptions.a in Frameworks */,
-				6DAFE32B181528D500859097 /* libBoost.System.a in Frameworks */,
-				6DAFE329181528D400859097 /* libBoost.Filesystem.a in Frameworks */,
-				6DAFE21F1815255000859097 /* libBoost.Thread.a in Frameworks */,
-				6DAFE328181528D400859097 /* libBoost.Chrono.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -643,7 +628,6 @@
 		6DAFE0E41815118B00859097 = {
 			isa = PBXGroup;
 			children = (
-				6DAFE2171815252500859097 /* CandyJar */,
 				6DAFE17A181511C300859097 /* Caramel */,
 				6DAFE0EE1815118B00859097 /* Products */,
 			);
@@ -664,35 +648,6 @@
 				6D03517D18179DDC000D771E /* src */,
 			);
 			name = Caramel;
-			sourceTree = "<group>";
-		};
-		6DAFE2171815252500859097 /* CandyJar */ = {
-			isa = PBXGroup;
-			children = (
-				6DAFE2181815255000859097 /* lib */,
-			);
-			name = CandyJar;
-			sourceTree = "<group>";
-		};
-		6DAFE2181815255000859097 /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				6DAFE2191815255000859097 /* ios */,
-			);
-			name = lib;
-			path = ../../CandyJar/lib;
-			sourceTree = "<group>";
-		};
-		6DAFE2191815255000859097 /* ios */ = {
-			isa = PBXGroup;
-			children = (
-				6DAFE324181528D400859097 /* libBoost.Chrono.a */,
-				6DAFE325181528D400859097 /* libBoost.Filesystem.a */,
-				6DAFE326181528D400859097 /* libBoost.ProgramOptions.a */,
-				6DAFE327181528D400859097 /* libBoost.System.a */,
-				6DAFE21A1815255000859097 /* libBoost.Thread.a */,
-			);
-			path = ios;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -787,7 +742,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CONFIGURATION_BUILD_DIR = Caramel/lib/ios;
+				CONFIGURATION_BUILD_DIR = "Caramel/lib/ios$(EFFECTIVE_PLATFORM_NAME)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -811,8 +766,11 @@
 					../../CandyJar/include,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = ../../CandyJar/lib/ios;
-				ONLY_ACTIVE_ARCH = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"\"../../CandyJar/lib/ios$(EFFECTIVE_PLATFORM_NAME)\"",
+					"\"Caramel/lib/ios$(EFFECTIVE_PLATFORM_NAME)\"",
+				);
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SEPARATE_STRIP = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -836,7 +794,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CONFIGURATION_BUILD_DIR = Caramel/lib/ios;
+				CONFIGURATION_BUILD_DIR = "Caramel/lib/ios$(EFFECTIVE_PLATFORM_NAME)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -854,7 +812,11 @@
 					../../CandyJar/include,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = ../../CandyJar/lib/ios;
+				LIBRARY_SEARCH_PATHS = (
+					"\"../../CandyJar/lib/ios$(EFFECTIVE_PLATFORM_NAME)\"",
+					"\"Caramel/lib/ios$(EFFECTIVE_PLATFORM_NAME)\"",
+				);
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SEPARATE_STRIP = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -868,10 +830,11 @@
 				DSTROOT = /tmp/Caramel.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/ShuaiTseng/Documents/work/CandyJar/lib/ios,
-					/Users/ShuaiTseng/Documents/work/Caramel/src/Caramel/lib/ios,
+					"/Users/ShuaiTseng/Documents/work/CandyJar/lib/ios-iphoneos",
+					"/Users/ShuaiTseng/Documents/work/CandyJar/lib/ios-iphonesimulator",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -885,10 +848,11 @@
 				DSTROOT = /tmp/Caramel.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/ShuaiTseng/Documents/work/CandyJar/lib/ios,
-					/Users/ShuaiTseng/Documents/work/Caramel/src/Caramel/lib/ios,
+					"/Users/ShuaiTseng/Documents/work/CandyJar/lib/ios-iphoneos",
+					"/Users/ShuaiTseng/Documents/work/CandyJar/lib/ios-iphonesimulator",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
