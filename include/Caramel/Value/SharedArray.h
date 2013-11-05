@@ -1,4 +1,4 @@
-// Caramel C++ Library - Value Amenity - Shared Array Header
+// Caramel C++ Library - Value Facility - Shared Array Header
 
 #ifndef __CARAMEL_VALUE_SHARED_ARRAY_H
 #define __CARAMEL_VALUE_SHARED_ARRAY_H

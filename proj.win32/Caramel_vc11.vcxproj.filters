@@ -147,6 +147,9 @@
     <Filter Include="1. Public Packages\Value\Detail headers">
       <UniqueIdentifier>{dddb83b1-4558-4057-bbbc-d48e3210aabc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Sources\Value">
+      <UniqueIdentifier>{c8fcc489-7171-46d6-9cfd-505a7031b032}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -476,8 +479,11 @@
     <ClInclude Include="..\include\Caramel\Value\Detail\NamedValueRef.h">
       <Filter>1. Public Packages\Value\Detail headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\Value\Detail\NamedValueEntry.h">
-      <Filter>1. Public Packages\Value\Detail headers</Filter>
+    <ClInclude Include="..\src\Value\NamedValuesImpl.h">
+      <Filter>2. Sources\Value</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Value\NamedValueEntry.h">
+      <Filter>2. Sources\Value</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -536,6 +542,9 @@
       <Filter>3. Precompiled Header</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Math.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Value.cpp">
       <Filter>2. Sources</Filter>
     </ClCompile>
   </ItemGroup>

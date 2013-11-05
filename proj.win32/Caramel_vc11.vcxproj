@@ -96,7 +96,6 @@
     <ClInclude Include="..\include\Caramel\Trace\Listeners.h" />
     <ClInclude Include="..\include\Caramel\Trace\Trace.h" />
     <ClInclude Include="..\include\Caramel\Trace\TraceTypes.h" />
-    <ClInclude Include="..\include\Caramel\Value\Detail\NamedValueEntry.h" />
     <ClInclude Include="..\include\Caramel\Value\Detail\NamedValueRef.h" />
     <ClInclude Include="..\include\Caramel\Value\NamedValues.h" />
     <ClInclude Include="..\include\Caramel\Value\SharedArray.h" />
@@ -129,6 +128,8 @@
     <ClInclude Include="..\src\Thread\ThreadImpl.h" />
     <ClInclude Include="..\src\Trace\ChannelImpl.h" />
     <ClInclude Include="..\src\Trace\TraceManager.h" />
+    <ClInclude Include="..\src\Value\NamedValueEntry.h" />
+    <ClInclude Include="..\src\Value\NamedValuesImpl.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\CaramelPch.cpp">
@@ -152,6 +153,7 @@
     <ClCompile Include="..\src\Task.cpp" />
     <ClCompile Include="..\src\Thread.cpp" />
     <ClCompile Include="..\src\Trace.cpp" />
+    <ClCompile Include="..\src\Value.cpp" />
     <ClCompile Include="..\src\Windows.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

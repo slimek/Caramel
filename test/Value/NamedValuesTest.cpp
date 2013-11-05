@@ -19,6 +19,9 @@ SUITE( NamedValuesSuite )
 
 TEST( NamedValuesTest )
 {
+    NamedValues nv;
+
+    nv[ "miko" ] = "Reimu";
 }
 
 

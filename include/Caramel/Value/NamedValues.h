@@ -1,4 +1,4 @@
-// Caramel C++ Library - Value Amenity - Named Values Header
+// Caramel C++ Library - Value Facility - Named Values Header
 
 #ifndef __CARAMEL_VALUE_NAMED_VALUES_H
 #define __CARAMEL_VALUE_NAMED_VALUES_H
@@ -18,14 +18,24 @@ namespace Caramel
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Named Values
+// - Copy-on-write.
 //
+
+class NamedValuesImpl;
 
 class NamedValues
 {
 public:
+
+    NamedValues();
     
-    Detail::MutableNamedValueRef operator[]( const std::string& name );
-    Detail::ConstNamedValueRef   operator[]( const std::string& name ) const;
+    Detail::NamedValueRef      operator[]( const std::string& name );
+    Detail::ConstNamedValueRef operator[]( const std::string& name ) const;
+
+
+private:
+
+    std::shared_ptr< NamedValuesImpl > m_impl;
 };
 
 
