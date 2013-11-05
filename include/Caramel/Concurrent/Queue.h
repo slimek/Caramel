@@ -10,7 +10,6 @@
 #endif
 
 #include <Caramel/Thread/MutexLocks.h>
-#include <boost/lockfree/queue.hpp>
 #include <boost/noncopyable.hpp>
 #include <deque>
 

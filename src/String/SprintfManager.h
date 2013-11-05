@@ -10,8 +10,8 @@
 #endif
 
 #include "Object/FacilityLongevity.h"
+#include <Caramel/Concurrent/Queue.h>
 #include <Caramel/Object/Singleton.h>
-#include <boost/lockfree/stack.hpp>
 
 
 namespace Caramel
@@ -69,8 +69,8 @@ public:
 
 private:
 
-    typedef boost::lockfree::stack< SprintfBuffer* > BufferStack;
-    BufferStack m_buffers;
+    typedef Concurrent::Queue< SprintfBuffer* > BufferQueue;
+    BufferQueue m_buffers;
 };
 
 

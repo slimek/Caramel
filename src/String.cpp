@@ -127,15 +127,14 @@ Bool SprintfBuffer::CheckGuard() const
 //
 
 SprintfManager::SprintfManager()
-    : m_buffers( 1 )   // <= Number of free-list nodes.
-{                      //    Nodes may be allocated dynamically when necessary,
-}                      //    Give only 1 node for the first call is OK.
+{
+}
 
 
 SprintfManager::~SprintfManager()
 {
     SprintfBuffer* buffer = nullptr;
-    while ( m_buffers.pop( buffer ))
+    while ( m_buffers.TryPop( buffer ))
     {
         delete buffer;
     }
@@ -145,7 +144,7 @@ SprintfManager::~SprintfManager()
 SprintfBuffer* SprintfManager::AllocateBuffer()
 {
     SprintfBuffer* buffer = nullptr;
-    if ( ! m_buffers.pop( buffer ))
+    if ( ! m_buffers.TryPop( buffer ))
     {
         buffer = new SprintfBuffer;
     }
@@ -157,7 +156,7 @@ SprintfBuffer* SprintfManager::AllocateBuffer()
 
 void SprintfManager::FreeBuffer( SprintfBuffer* buffer )
 {
-    CARAMEL_VERIFY( m_buffers.push( buffer ));
+    m_buffers.Push( buffer );
 }
 
 
