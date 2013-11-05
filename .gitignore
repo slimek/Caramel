@@ -1,11 +1,24 @@
-*.sdf
-*.user
-lib/
+# Common Generated Files
 obj/
-*.suo
-ipch
+lib/
+
+# Visual Studio Generated Files
+ipch/
+[Dd]ebug*/
+[Rr]elease*/
 *.opensdf
+*.sdf
+*.suo
+*.user
+
+# Eclipse + NDK Generated Files
 bin/
+gen/
+libs/
+.settings/
+project.properties
+
+# Xcode Generated Files
 xcschememanagement.plist
 *.xcscheme
 *.xcuserstate
