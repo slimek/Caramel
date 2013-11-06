@@ -26,7 +26,7 @@ class SpinMutex : public boost::noncopyable
 {
 public:
 
-    class ScopedLock
+    class ScopedLock : public boost::noncopyable
     {
     public:
         ScopedLock( SpinMutex& mutex );
