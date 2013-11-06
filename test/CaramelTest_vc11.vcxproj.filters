@@ -49,9 +49,6 @@
     <ClCompile Include="RunTest.cpp">
       <Filter>1. Main Entry</Filter>
     </ClCompile>
-    <ClCompile Include="CaramelTestPchCreator.cpp">
-      <Filter>3. Precompiled Header</Filter>
-    </ClCompile>
     <ClCompile Include="Concurrent\PriorityQueueTest.cpp">
       <Filter>2. Tests\Concurrent</Filter>
     </ClCompile>
@@ -93,6 +90,9 @@
     </ClCompile>
     <ClCompile Include="String\SprintfTest.cpp">
       <Filter>2. Tests\String</Filter>
+    </ClCompile>
+    <ClCompile Include="CaramelTestPch.cpp">
+      <Filter>3. Precompiled Header</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
