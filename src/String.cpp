@@ -82,7 +82,6 @@ SprintfBuffer::SprintfBuffer()
 
     // Align buffer acoording to the cache lines
     Void* p = &m_chunk[0];
-    std::size_t space = CHUNK_SIZE;
 
     #if defined( CARAMEL_SYSTEM_IS_ANDROID )
     {
@@ -91,6 +90,7 @@ SprintfBuffer::SprintfBuffer()
     }
     #else
     {
+        std::size_t space = CHUNK_SIZE;
         m_buffer = reinterpret_cast< Char* >( std::align( BUFFER_ALIGN, SIZE, p, space ));
     }
     #endif
