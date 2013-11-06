@@ -250,6 +250,15 @@ Int IniSection::GetIntValue( const std::string& valueName ) const
         return ivalue;
     }
 
+    // Boolean is convertible to Int
+
+    Lexical::Boolean bvalue;
+    if ( bvalue.TryParse( value ))
+    {
+        return bvalue ? 1 : 0;
+    }
+
+
     CARAMEL_THROW( "Can't convert value %s \"%s\" to Int, in section %s",
                    valueName, value, m_impl->GetName() );
 }
@@ -264,6 +273,15 @@ Uint IniSection::GetUintValue( const std::string& valueName ) const
     {
         return uvalue;
     }
+
+    // Boolean is convertible to Uint
+
+    Lexical::Boolean bvalue;
+    if ( bvalue.TryParse( value ))
+    {
+        return bvalue ? 1 : 0;
+    }
+
 
     CARAMEL_THROW( "Can't convert value %s \"%s\" to Int, in section %s",
                    valueName, value, m_impl->GetName() );

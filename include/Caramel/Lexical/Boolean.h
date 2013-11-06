@@ -39,8 +39,8 @@ public:
     // - Returns true if the input string is the followin format,
     //   case insensitive:
     //
-    //   True  : "true", "t", "yes", "ok", integers not 0
-    //   False : "false", "f", "no", "0"
+    //   True  : "true",  non-Zero integer
+    //   False : "false", 0
     //
     //   Otherwise returns false
     //
