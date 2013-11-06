@@ -48,18 +48,24 @@ ExceptionCatcherCore::ExceptionCatcherCore()
 void ExceptionCatcherCore::OnCatchCaramelException( const Exception& e )
 {
     m_caught = true;
+
+    CARAMEL_TRACE_ERROR( "Caramel::Exception caught, what: %s", e.What() );
 }
 
 
 void ExceptionCatcherCore::OnCatchStdException( const std::exception& e )
 {
     m_caught = true;
+
+    CARAMEL_TRACE_ERROR( "std::exception caught, what: %s", e.what() );
 }
 
 
 void ExceptionCatcherCore::OnCatchUnknown()
 {
     m_caught = true;
+
+    CARAMEL_TRACE_ERROR( "Unknown exception caught" );
 }
 
 
