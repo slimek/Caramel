@@ -113,6 +113,14 @@ public:
 
 
 template<>
+class SprintfParameter< const Char* >
+{
+public:
+    const Char* operator()( const Char* sz ) const { return sz; }
+};
+
+
+template<>
 class SprintfParameter< Char* >
 {
 public:
