@@ -4,7 +4,7 @@
 
 #include <Caramel/Lexical/Boolean.h>
 #include <Caramel/Lexical/Integer.h>
-#include <regex>
+#include <boost/regex.hpp>
 
 
 namespace Caramel
@@ -40,15 +40,15 @@ Bool Boolean::TryParse( const std::string& input )
 
     // Test if the input is a boolean string
 
-    const std::regex isTrue( "true", std::regex::icase );
-    if ( std::regex_match( input, isTrue ))
+    const boost::regex isTrue( "true", boost::regex::icase );
+    if ( boost::regex_match( input, isTrue ))
     {
         m_value = true;
         return true;
     }
 
-    const std::regex isFalse( "false", std::regex::icase );
-    if ( std::regex_match( input, isFalse ))
+    const boost::regex isFalse( "false", boost::regex::icase );
+    if ( boost::regex_match( input, isFalse ))
     {
         m_value = false;
         return true;
@@ -71,8 +71,8 @@ Bool Integer< Int32 >::TryParse( const std::string& input )
 {
     if ( input.empty() ) { return false; }
 
-    const std::regex isHex( "0[xX][[:xdigit:]]+" );
-    const Int radix = std::regex_match( input, isHex )
+    const boost::regex isHex( "0[xX][[:xdigit:]]+" );
+    const Int radix = boost::regex_match( input, isHex )
                     ? 16 : 10;
 
     Char* stop = nullptr;

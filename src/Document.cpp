@@ -10,8 +10,8 @@
 #include <Caramel/Lexical/Boolean.h>
 #include <Caramel/Lexical/Integer.h>
 #include <Caramel/String/Algorithm.h>
+#include <boost/regex.hpp>
 #include <boost/tokenizer.hpp>
-#include <regex>
 
 
 namespace Caramel
@@ -483,23 +483,23 @@ void IniLine::Parse()
     }
 
 
-    std::smatch matches;
-    const std::regex section    ( "\\[(.*)\\]" );
-    const std::regex arrayBegin ( "([^=\\s]*)\\[\\]\\s*=\\s*\\{.*" );
-    const std::regex quotedValue( "([^=\\s]*)\\s*=\\s*\"([^\"]*)\"" );
-    const std::regex value      ( "([^=\\s]*)\\s*=\\s*([^\\s]*)" );
+    boost::smatch matches;
+    const boost::regex section    ( "\\[(.*)\\]" );
+    const boost::regex arrayBegin ( "([^=\\s]*)\\[\\]\\s*=\\s*\\{.*" );
+    const boost::regex quotedValue( "([^=\\s]*)\\s*=\\s*\"([^\"]*)\"" );
+    const boost::regex value      ( "([^=\\s]*)\\s*=\\s*([^\\s]*)" );
 
-    if ( std::regex_match( line, matches, section ))
+    if ( boost::regex_match( line, matches, section ))
     {
         m_type = TYPE_SECTION;
         m_name = matches[1];
     }
-    else if ( std::regex_match( line, matches, arrayBegin ))
+    else if ( boost::regex_match( line, matches, arrayBegin ))
     {
         m_type = TYPE_ARRAY_BEGIN;
         m_name = matches[1];
     }
-    else if ( std::regex_match( line, matches, quotedValue ))
+    else if ( boost::regex_match( line, matches, quotedValue ))
     {
         // REMARKS: You must match 'quotedValue' before 'value'.
 
@@ -509,7 +509,7 @@ void IniLine::Parse()
         m_valueBegin = matches.position( 2 );
         m_quoted = true;
     }
-    else if ( std::regex_match( line, matches, value ))
+    else if ( boost::regex_match( line, matches, value ))
     {
         m_type = TYPE_VALUE;
         m_name = matches[1];
