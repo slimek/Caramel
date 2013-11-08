@@ -71,12 +71,17 @@ Bool Integer< Int32 >::TryParse( const std::string& input )
 {
     if ( input.empty() ) { return false; }
 
-    const boost::regex isHex( "0[xX][[:xdigit:]]+" );
-    const Int radix = boost::regex_match( input, isHex )
-                    ? 16 : 10;
-
     Char* stop = nullptr;
-    m_value = static_cast< Int32 >( ::strtol( input.c_str(), &stop, radix ));
+
+    const boost::regex isHex( "0[xX][[:xdigit:]]+" );
+    if ( boost::regex_match( input, isHex ))
+    {
+        m_value = static_cast< Int32 >( ::strtoul( input.c_str(), &stop, 16 ));
+    }
+    else
+    {
+        m_value = static_cast< Int32 >( ::strtol( input.c_str(), &stop, 10 ));
+    }
     
     return stop == ( input.data() + input.length() );
 }

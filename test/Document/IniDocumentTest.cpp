@@ -56,11 +56,18 @@ TEST( IniDocumentFundamentalTest )
     CHECK( 1 == ints.GetIntValue( "IntOne" ));
     CHECK( 7 == ints.GetIntValue( "IntSeven" ));
     CHECK( INT_MAX == ints.GetIntValue( "IntIntMax" ));
+    CHECK( -1 == ints.GetIntValue( "IntNegOne" ));
+    CHECK( INT_MIN == ints.GetIntValue( "IntIntMin" ));
+
     CHECK( 1 == ints.GetIntValue( "IntHexOne" ));           // 0x1
     CHECK( 1 == ints.GetIntValue( "IntHexOneLong" ));       // 0x00000001
-    CHECK( INT_MAX == ints.GetIntValue( "IntHexIntMax" ));  // 0x7FFFFFFF
+    CHECK( -1 == ints.GetIntValue( "IntHexNegOne" ));       // 0xffffffff
+    CHECK( INT_MAX == ints.GetIntValue( "IntHexIntMax" ));  // 0x7fffffff
+    CHECK( INT_MIN == ints.GetIntValue( "IntHexIntMin" ));  // 0x80000000
+    CHECK( 15 == ints.GetIntValue( "IntHexFifteenUpper" )); // 0XF
 
-    CHECK_THROW( ints.GetIntValue( "IntBad" ), Caramel::Exception );
+    CHECK_THROW( ints.GetIntValue( "IntBad1" ), Caramel::Exception );
+    CHECK_THROW( ints.GetIntValue( "IntBad2" ), Caramel::Exception );
 }
 
 
