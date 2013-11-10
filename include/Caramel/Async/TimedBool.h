@@ -53,13 +53,13 @@ public:
 
 
     //
-    // Start this time with previous duration.
+    // Start this timer with previous duration.
     //
     void Restart();
 
     //
     // Advance the deadline with the duration until it is later than now.
-    // This produce stable intervals.
+    // This produces stable intervals.
     //
     void Continue();
 
