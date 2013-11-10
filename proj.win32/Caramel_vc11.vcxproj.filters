@@ -129,6 +129,12 @@
     <Filter Include="2. Sources\Trace">
       <UniqueIdentifier>{d853c725-f0e2-4551-ba6b-f76ddbe933cb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\DateTime">
+      <UniqueIdentifier>{05640d41-7c1d-4e07-a0b1-410edf11edaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\DateTime">
+      <UniqueIdentifier>{cab6a67c-61f0-4410-9f06-16d45acbdbe6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -421,6 +427,12 @@
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Thread\SpinMutex.h">
       <Filter>1. Public Packages\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\DateTime\DateTime.h">
+      <Filter>1. Public Packages\DateTime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\DateTime\DateTimeImpl.h">
+      <Filter>2. Sources\DateTime</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

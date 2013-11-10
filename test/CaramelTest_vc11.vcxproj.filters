@@ -44,6 +44,9 @@
     <Filter Include="2. Tests\String">
       <UniqueIdentifier>{232ab07f-a2cb-4b1a-88de-2456efc629a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\DateTime">
+      <UniqueIdentifier>{8f699dd0-6fb0-49dd-a99b-94841a61ff07}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RunTest.cpp">
@@ -93,6 +96,9 @@
     </ClCompile>
     <ClCompile Include="CaramelTestPch.cpp">
       <Filter>3. Precompiled Header</Filter>
+    </ClCompile>
+    <ClCompile Include="DateTime\DateTimeTest.cpp">
+      <Filter>2. Tests\DateTime</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
