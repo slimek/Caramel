@@ -93,7 +93,16 @@ Bool Integer< Uint32 >::TryParse( const std::string& input )
     if ( input.empty() ) { return false; }
 
     Char* stop = nullptr;
-    m_value = static_cast< Uint32 >( ::strtoul( input.c_str(), &stop, 10 ));
+
+    const boost::regex isHex( "0[xX][[:xdigit:]]+" );
+    if ( boost::regex_match( input, isHex ))
+    {
+        m_value = static_cast< Uint32 >( ::strtoul( input.c_str(), &stop, 16 ));
+    }
+    else
+    {
+        m_value = static_cast< Uint32 >( ::strtoul( input.c_str(), &stop, 10 ));    
+    }
     
     return stop == ( input.data() + input.length() );
 }

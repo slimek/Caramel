@@ -68,6 +68,26 @@ TEST( IniDocumentFundamentalTest )
 
     CHECK_THROW( ints.GetIntValue( "IntBad1" ), Caramel::Exception );
     CHECK_THROW( ints.GetIntValue( "IntBad2" ), Caramel::Exception );
+
+
+    /// Unsigned Integers ///
+
+    CHECK( 0 == ints.GetUintValue( "IntZero" ));
+    CHECK( 1 == ints.GetUintValue( "IntOne" ));
+    CHECK( 7 == ints.GetUintValue( "IntSeven" ));
+    CHECK( INT_MAX == ints.GetUintValue( "IntIntMax" ));
+    CHECK( UINT_MAX == ints.GetUintValue( "IntNegOne" ));
+    CHECK( (Uint32)INT_MAX + 1 == ints.GetUintValue( "IntIntMin" ));
+
+    CHECK( 1 == ints.GetUintValue( "IntHexOne" ));                      // 0x1
+    CHECK( 1 == ints.GetUintValue( "IntHexOneLong" ));                  // 0x00000001
+    CHECK( UINT_MAX == ints.GetUintValue( "IntHexNegOne" ));            // 0xffffffff
+    CHECK( INT_MAX == ints.GetUintValue( "IntHexIntMax" ));             // 0x7fffffff
+    CHECK( (Uint32)INT_MAX + 1 == ints.GetUintValue( "IntHexIntMin" )); // 0x80000000
+    CHECK( 15 == ints.GetUintValue( "IntHexFifteenUpper" ));            // 0XF
+
+    CHECK_THROW( ints.GetUintValue( "IntBad1" ), Caramel::Exception );
+    CHECK_THROW( ints.GetUintValue( "IntBad2" ), Caramel::Exception );
 }
 
 
