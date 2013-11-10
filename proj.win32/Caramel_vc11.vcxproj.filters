@@ -434,6 +434,12 @@
     <ClInclude Include="..\src\DateTime\DateTimeImpl.h">
       <Filter>2. Sources\DateTime</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\DateTime\TimeSpan.h">
+      <Filter>1. Public Packages\DateTime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\DateTime\TimeSpanImpl.h">
+      <Filter>2. Sources\DateTime</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

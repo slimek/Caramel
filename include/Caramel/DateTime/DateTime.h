@@ -9,6 +9,8 @@
 #pragma once
 #endif
 
+#include <Caramel/DateTime/TimeSpan.h>
+
 
 namespace Caramel
 {
@@ -16,7 +18,7 @@ namespace Caramel
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Date Time
-// - Immutable
+// - Immutable.
 //
 
 class DateTimeImpl;
@@ -43,6 +45,16 @@ public:
     Int Hour()   const;
     Int Minute() const;
     Int Second() const;
+
+    
+    /// Operators ///
+
+    //
+    // DateTime = DateTime + TimeSpan
+    // TimeSpan = DateTime - DateTime
+    //
+    DateTime operator+( const TimeSpan& rhs ) const;
+    TimeSpan operator-( const DateTime& rhs ) const;
 
 
     /// Conversions ///

@@ -3,6 +3,7 @@
 #include "CaramelPch.h"
 
 #include "DateTime/DateTimeImpl.h"
+#include "DateTime/TimeSpanImpl.h"
 
 
 namespace Caramel
@@ -12,6 +13,7 @@ namespace Caramel
 // Contents
 //
 //   DateTime
+//   TimeSpan
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -61,6 +63,22 @@ Int DateTime::Second() const { return m_impl->time_of_day().seconds(); }
 
 
 //
+// Operators
+//
+
+DateTime DateTime::operator+( const TimeSpan& rhs ) const
+{
+    return DateTime( std::make_shared< DateTimeImpl >( *m_impl + *rhs.m_impl ));
+}
+
+
+TimeSpan DateTime::operator-( const DateTime& rhs ) const
+{
+    return TimeSpan( std::make_shared< TimeSpanImpl >( *m_impl - *rhs.m_impl ));
+}
+
+
+//
 // Conversions
 //
 
@@ -74,7 +92,7 @@ std::string DateTime::ToString() const
 
 std::string DateTime::ToIsoString() const
 {
-    return boost::posix_time::to_iso_string( *m_impl );
+    return boost::posix_time::to_iso_extended_string( *m_impl );
 }
 
 
@@ -89,6 +107,78 @@ DateTimeImpl::DateTimeImpl()
 
 DateTimeImpl::DateTimeImpl( boost::posix_time::ptime&& pt )
     : boost::posix_time::ptime( pt )
+{
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Time Span
+//
+
+TimeSpan::TimeSpan()
+    : m_impl( new TimeSpanImpl )
+{
+}
+
+
+TimeSpan::TimeSpan( std::shared_ptr< TimeSpanImpl > impl )
+    : m_impl( impl )
+{
+}
+
+
+//
+// Creators
+//
+
+TimeSpan TimeSpan::FromString( const std::string& s )
+{
+    return TimeSpan( std::make_shared< TimeSpanImpl >( boost::posix_time::duration_from_string( s )));
+}
+
+
+//
+// Accessors
+//
+
+Seconds TimeSpan::TotalSeconds() const
+{
+    return Seconds( m_impl->total_seconds() );
+}
+
+
+//
+// Operators
+//
+
+Bool TimeSpan::operator==( const TimeSpan& rhs ) const
+{
+    return *m_impl == *rhs.m_impl;
+}
+
+
+//
+// Conversions
+//
+
+std::string TimeSpan::ToString() const
+{
+    return boost::posix_time::to_simple_string( *m_impl );
+}
+
+
+//
+// Implementation
+//
+
+TimeSpanImpl::TimeSpanImpl()
+{
+}
+
+
+TimeSpanImpl::TimeSpanImpl( boost::posix_time::time_duration&& td )
+    : boost::posix_time::time_duration( td )
 {
 }
 
