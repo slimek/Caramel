@@ -7,6 +7,7 @@ LOCAL_MODULE := Caramel
 MY_SRC_DIR := ../../src
 
 LOCAL_SRC_FILES := \
+	$(MY_SRC_DIR)/DateTime.cpp \
 	$(MY_SRC_DIR)/Error.cpp \
 	$(MY_SRC_DIR)/Lexical.cpp \
 	$(MY_SRC_DIR)/Object.cpp \
