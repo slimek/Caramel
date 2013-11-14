@@ -135,6 +135,12 @@
     <Filter Include="2. Sources\DateTime">
       <UniqueIdentifier>{cab6a67c-61f0-4410-9f06-16d45acbdbe6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\Random">
+      <UniqueIdentifier>{03a91328-4669-4345-bb2a-598742858a0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\Random">
+      <UniqueIdentifier>{76b67c44-b5ba-44e5-bcc9-223fe356d567}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -439,6 +445,15 @@
     </ClInclude>
     <ClInclude Include="..\src\DateTime\TimeSpanImpl.h">
       <Filter>2. Sources\DateTime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Random\UniformRandom.h">
+      <Filter>1. Public Packages\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Random\RandomManager.h">
+      <Filter>2. Sources\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Random\RandomImpl.h">
+      <Filter>2. Sources\Random</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

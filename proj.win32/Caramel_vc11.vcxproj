@@ -64,6 +64,7 @@
     <ClInclude Include="..\include\Caramel\Object\Singleton.h" />
     <ClInclude Include="..\include\Caramel\Program\ConsoleApplication.h" />
     <ClInclude Include="..\include\Caramel\Program\ProgramOptions.h" />
+    <ClInclude Include="..\include\Caramel\Random\UniformRandom.h" />
     <ClInclude Include="..\include\Caramel\Setup\Compiler.h" />
     <ClInclude Include="..\include\Caramel\Setup\PchDefines.h" />
     <ClInclude Include="..\include\Caramel\Setup\PchHeaders.h" />
@@ -111,6 +112,8 @@
     <ClInclude Include="..\src\Object\FacilityLongevity.h" />
     <ClInclude Include="..\src\Program\ConsoleApplicationImpl.h" />
     <ClInclude Include="..\src\Program\ProgramOptionsManager.h" />
+    <ClInclude Include="..\src\Random\RandomImpl.h" />
+    <ClInclude Include="..\src\Random\RandomManager.h" />
     <ClInclude Include="..\src\Statechart\StateImpl.h" />
     <ClInclude Include="..\src\Statechart\StateMachineImpl.h" />
     <ClInclude Include="..\src\Statechart\Transition.h" />

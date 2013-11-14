@@ -100,6 +100,7 @@
     <ClCompile Include="Document\IniDocumentTest.cpp" />
     <ClCompile Include="Enum\EnumLookupTest.cpp" />
     <ClCompile Include="Lexical\LexicalIntegerTest.cpp" />
+    <ClCompile Include="Random\RandomTest.cpp" />
     <ClCompile Include="RunTest.cpp" />
     <ClCompile Include="Statechart\StateMachineTest.cpp" />
     <ClCompile Include="String\SprintfTest.cpp" />

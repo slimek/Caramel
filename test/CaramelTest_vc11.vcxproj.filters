@@ -47,6 +47,9 @@
     <Filter Include="2. Tests\DateTime">
       <UniqueIdentifier>{8f699dd0-6fb0-49dd-a99b-94841a61ff07}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\Random">
+      <UniqueIdentifier>{bdde6b14-b2e1-4fd3-a302-81848006edad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RunTest.cpp">
@@ -99,6 +102,9 @@
     </ClCompile>
     <ClCompile Include="DateTime\DateTimeTest.cpp">
       <Filter>2. Tests\DateTime</Filter>
+    </ClCompile>
+    <ClCompile Include="Random\RandomTest.cpp">
+      <Filter>2. Tests\Random</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
