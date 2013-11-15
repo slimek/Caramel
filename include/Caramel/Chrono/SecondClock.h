@@ -40,7 +40,7 @@ public:
     template< typename Rep, typename Period >
     Seconds( const boost::chrono::duration< Rep, Period >& duration );
 
-    explicit Seconds( Double ticks );
+    explicit Seconds( Double seconds );
 
 
     /// Properties ///
@@ -128,14 +128,14 @@ inline Seconds::Seconds( const boost::chrono::duration< Rep, Period >& duration 
 }
 
 
-inline Seconds::Seconds( Double ticks )
-    : Inherited( ticks )
+inline Seconds::Seconds( Double seconds )
+    : Inherited( seconds )
 {
 }
 
 
 //
-// Tick Point
+// Second Point
 //
 
 inline SecondPoint::SecondPoint( const Inherited& tpoint )
