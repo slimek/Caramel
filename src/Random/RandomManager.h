@@ -33,6 +33,7 @@ public:
 
     /// Global Ganerate Functions ///
 
+    Int  GenRandomInt ( Int  minValue, Int  maxValue );
     Uint GenRandomUint( Uint minValue, Uint maxValue );
 
 

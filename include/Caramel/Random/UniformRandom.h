@@ -30,6 +30,7 @@ namespace Caramel
 //       GenRandomUint( 1, 6 );
 //
 
+Int  GenRandomInt ( Int  minValue, Int  maxValue );
 Uint GenRandomUint( Uint minValue, Uint maxValue );
 
 

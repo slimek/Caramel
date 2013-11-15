@@ -29,6 +29,7 @@ public:
 
     /// Generate Functions ///
 
+    Int32  NextInt32 ( Int32  minValue, Int32  maxValue );
     Uint32 NextUint32( Uint32 minValue, Uint32 maxValue );
 
 

@@ -20,27 +20,53 @@ SUITE( RandomSuite )
 
 TEST( UniformRandomTest )
 {
-    const Uint vMin = 0;
-    const Uint vMax = 65536;
-
-    Bool metMin = false;
-    Bool metMax = false;
-
-    SecondClock clock;
-    Uint count = 0;
-
-    for ( ;; )
     {
-        const Uint value = GenRandomUint( vMin, vMax );
-        ++ count;
+        const Int vMin = -32768;
+        const Int vMax = 32767;
 
-        if ( vMin == value ) { metMin = true; }
-        if ( vMax == value ) { metMax = true; }
+        Bool metMin = false;
+        Bool metMax = false;
 
-        if ( metMin && metMax ) { break; }
+        SecondClock clock;
+        Uint count = 0;
+
+        for ( ;; )
+        {
+            const Int value = GenRandomInt( vMin, vMax );
+            ++ count;
+
+            if ( vMin == value ) { metMin = true; }
+            if ( vMax == value ) { metMax = true; }
+
+            if ( metMin && metMax ) { break; }
+        }
+
+        CARAMEL_TRACE_INFO( "Test GenRandomInt() count: %u, elapsed: %f", count, clock.Elapsed() );
     }
 
-    CARAMEL_TRACE_INFO( "Test GenRandomUint() count: %u, elapsed: %f", count, clock.Elapsed() );
+    {
+        const Uint vMin = 0;
+        const Uint vMax = 65536;
+
+        Bool metMin = false;
+        Bool metMax = false;
+
+        SecondClock clock;
+        Uint count = 0;
+
+        for ( ;; )
+        {
+            const Uint value = GenRandomUint( vMin, vMax );
+            ++ count;
+
+            if ( vMin == value ) { metMin = true; }
+            if ( vMax == value ) { metMax = true; }
+
+            if ( metMin && metMax ) { break; }
+        }
+
+        CARAMEL_TRACE_INFO( "Test GenRandomUint() count: %u, elapsed: %f", count, clock.Elapsed() );
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
