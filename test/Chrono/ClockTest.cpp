@@ -11,6 +11,9 @@
 namespace Caramel
 {
 
+SUITE( ClockSuite )
+{
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Tick Clock Test
@@ -104,8 +107,29 @@ TEST( DurationConvertTest )
     const Seconds sdur = tu;
 
     CHECK( 1.0 == sdur.ToNumber() );
+
+
+    /// Truncation ///
+
+    Seconds s1( 1.5 );
+
+    CHECK( Seconds( 1.0 ) == Seconds::TruncFrom( s1 ));
+    s1.Trunc();
+    CHECK( Seconds( 1.0 ) == s1 );
+
+    Seconds s2( -1.5 );
+
+    CHECK( Seconds( -1.0 ) == Seconds::TruncFrom( s2 ));
+    s2.Trunc();
+    CHECK( Seconds( -1.0 ) == s2 );
+
+    Seconds s3( 125 );
+
+    CHECK( Seconds( 125 ) == Seconds::TruncFrom( s3 ));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+} // SUITE ClockSuite
 
 } // namespace Caramel

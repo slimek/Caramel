@@ -10,6 +10,7 @@
 #endif
 
 #include <Caramel/Chrono/SteadyClock.h>
+#include <Caramel/Math/Floating.h>
 #include <Caramel/Numeric/NumberConvertible.h>
 
 
@@ -55,6 +56,13 @@ public:
 
     Double ToDouble() const { return this->count(); }
     Float  ToFloat()  const { return static_cast< Float >( this->count() ); }
+
+
+    /// Operators ///
+
+    // Removing the fraction part, results in an integral value.
+    void Trunc();
+    static Seconds TruncFrom( const Seconds& s );
 };
 
 
@@ -131,6 +139,18 @@ inline Seconds::Seconds( const boost::chrono::duration< Rep, Period >& duration 
 inline Seconds::Seconds( Double seconds )
     : Inherited( seconds )
 {
+}
+
+
+inline void Seconds::Trunc()
+{
+    *this = TruncFrom( *this );
+}
+
+
+inline Seconds Seconds::TruncFrom( const Seconds& s )
+{
+    return Seconds( Math::Trunc( s.ToDouble() ));
 }
 
 
