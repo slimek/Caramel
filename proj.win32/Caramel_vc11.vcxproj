@@ -53,6 +53,7 @@
     <ClInclude Include="..\include\Caramel\Lexical\Boolean.h" />
     <ClInclude Include="..\include\Caramel\Lexical\Integer.h" />
     <ClInclude Include="..\include\Caramel\Lexical\IntegerList.h" />
+    <ClInclude Include="..\include\Caramel\Math\Floating.h" />
     <ClInclude Include="..\include\Caramel\Meta\IfThenElse.h" />
     <ClInclude Include="..\include\Caramel\Meta\IntegralTypes.h" />
     <ClInclude Include="..\include\Caramel\Meta\Select.h" />
@@ -137,6 +138,7 @@
     <ClCompile Include="..\src\FileSystem.cpp" />
     <ClCompile Include="..\src\Io.cpp" />
     <ClCompile Include="..\src\Lexical.cpp" />
+    <ClCompile Include="..\src\Math.cpp" />
     <ClCompile Include="..\src\Object.cpp" />
     <ClCompile Include="..\src\Program.cpp" />
     <ClCompile Include="..\src\Random.cpp" />

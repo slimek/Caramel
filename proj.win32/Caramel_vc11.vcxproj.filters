@@ -141,6 +141,9 @@
     <Filter Include="2. Sources\Random">
       <UniqueIdentifier>{76b67c44-b5ba-44e5-bcc9-223fe356d567}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\Math">
+      <UniqueIdentifier>{6909fe9d-0905-4c72-948f-b191ca2fe5a3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -455,6 +458,9 @@
     <ClInclude Include="..\src\Random\RandomImpl.h">
       <Filter>2. Sources\Random</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Math\Floating.h">
+      <Filter>1. Public Packages\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">
@@ -510,6 +516,9 @@
     </ClCompile>
     <ClCompile Include="..\src\CaramelPch.cpp">
       <Filter>3. Precompiled Header</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Math.cpp">
+      <Filter>2. Sources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
