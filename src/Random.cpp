@@ -66,14 +66,14 @@ RandomImpl::RandomImpl( Uint32 seed )
 
 Int32 RandomImpl::NextInt32( Int32 minValue, Int32 maxValue )
 {
-    std::uniform_int< Int32 > dist( minValue, maxValue );
+    std::uniform_int_distribution< Int32 > dist( minValue, maxValue );
     return dist( m_random );
 }
 
 
 Uint32 RandomImpl::NextUint32( Uint32 minValue, Uint32 maxValue )
 {
-    std::uniform_int< Uint32 > dist( minValue, maxValue );
+    std::uniform_int_distribution< Uint32 > dist( minValue, maxValue );
     return dist( m_random );
 }
 
