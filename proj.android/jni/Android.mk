@@ -4,18 +4,20 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE := Caramel
 
-MY_SRC_DIR := ../../src
+CRM_SRC := ../../src
 
 LOCAL_SRC_FILES := \
-	$(MY_SRC_DIR)/DateTime.cpp \
-	$(MY_SRC_DIR)/Error.cpp \
-	$(MY_SRC_DIR)/Lexical.cpp \
-	$(MY_SRC_DIR)/Object.cpp \
-	$(MY_SRC_DIR)/Statechart.cpp \
-	$(MY_SRC_DIR)/String.cpp \
-	$(MY_SRC_DIR)/Task.cpp \
-	$(MY_SRC_DIR)/Thread.cpp \
-	$(MY_SRC_DIR)/Trace.cpp
+	$(CRM_SRC)/DateTime.cpp \
+	$(CRM_SRC)/Error.cpp \
+	$(CRM_SRC)/Lexical.cpp \
+	$(CRM_SRC)/Math.cpp \
+	$(CRM_SRC)/Object.cpp \
+	$(CRM_SRC)/Random.cpp \
+	$(CRM_SRC)/Statechart.cpp \
+	$(CRM_SRC)/String.cpp \
+	$(CRM_SRC)/Task.cpp \
+	$(CRM_SRC)/Thread.cpp \
+	$(CRM_SRC)/Trace.cpp
 
 LOCAL_C_INCLUDES := \
 	$(LOCAL_PATH)/../../src \
