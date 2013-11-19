@@ -3,6 +3,7 @@
 #include "CaramelPch.h"
 
 #include <Caramel/Lexical/Boolean.h>
+#include <Caramel/Lexical/Floating.h>
 #include <Caramel/Lexical/Integer.h>
 #include <boost/regex.hpp>
 
@@ -17,6 +18,7 @@ namespace Lexical
 // Contents
 //
 //   Boolean
+//   Floating
 //   Integer
 //
 
@@ -58,6 +60,40 @@ Bool Boolean::TryParse( const std::string& input )
     // Then, the input can not be parsed to a boolean.
     return false;
 }
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Floating
+// - Convert strings to floatings.
+//
+
+template<>
+Bool Floating< Float >::TryParse( const std::string& input )
+{
+    if ( input.empty() ) { return false; }
+
+    Char* stop = nullptr;
+
+    // TODO: VC2012 doesn't support C++11 strtof()
+    m_value = static_cast< Float >( ::strtod( input.c_str(), &stop ));
+
+    return stop == ( input.data() + input.length() );
+}
+
+
+template<>
+Bool Floating< Double >::TryParse( const std::string& input )
+{
+    if ( input.empty() ) { return false; }
+
+    Char* stop = nullptr;
+    m_value = ::strtod( input.c_str(), &stop );
+
+    return stop == ( input.data() + input.length() );
+}
+
+
 
 
 ///////////////////////////////////////////////////////////////////////////////

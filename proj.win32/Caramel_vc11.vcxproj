@@ -51,6 +51,7 @@
     <ClInclude Include="..\include\Caramel\Io\TextReader.h" />
     <ClInclude Include="..\include\Caramel\Io\TextStreamReader.h" />
     <ClInclude Include="..\include\Caramel\Lexical\Boolean.h" />
+    <ClInclude Include="..\include\Caramel\Lexical\Floating.h" />
     <ClInclude Include="..\include\Caramel\Lexical\Integer.h" />
     <ClInclude Include="..\include\Caramel\Lexical\IntegerList.h" />
     <ClInclude Include="..\include\Caramel\Math\Floating.h" />

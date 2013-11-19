@@ -461,6 +461,9 @@
     <ClInclude Include="..\include\Caramel\Math\Floating.h">
       <Filter>1. Public Packages\Math</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Lexical\Floating.h">
+      <Filter>1. Public Packages\Lexical</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">
