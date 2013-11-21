@@ -30,22 +30,33 @@ RandomManager::RandomManager()
 }
 
 
-Int RandomManager::GenRandomInt( Int minValue, Int maxValue )
+Int32 RandomManager::GenRandomInt32( Int32 minValue, Int32 maxValue )
 {
+    std::uniform_int_distribution< Int32 > dist( minValue, maxValue );
+
     auto ulock = UniqueLock( m_mutex );
 
-    return static_cast< Int32 >( m_random.
-        NextInt32( static_cast< Int32 >( minValue ), static_cast< Int32 >( maxValue )));
+    return dist( m_random.GetRef() );
 }
 
 
-Uint RandomManager::GenRandomUint( Uint minValue, Uint maxValue )
+Uint32 RandomManager::GenRandomUint32( Uint32 minValue, Uint32 maxValue )
 {
+    std::uniform_int_distribution< Uint32 > dist( minValue, maxValue );
+
     auto ulock = UniqueLock( m_mutex );
 
-    return static_cast< Uint32 >( m_random.
-        NextUint32( static_cast< Uint32 >( minValue ), static_cast< Uint32 >( maxValue ))
-    );
+    return dist( m_random.GetRef() );
+}
+
+
+Float RandomManager::GenRandomFloat( Float lowerBound, Float upperBound )
+{
+    std::uniform_real_distribution< Float > dist( lowerBound, upperBound );
+
+    auto ulock = UniqueLock( m_mutex );
+
+    return dist( m_random.GetRef() );
 }
 
 
@@ -57,24 +68,6 @@ Uint RandomManager::GenRandomUint( Uint minValue, Uint maxValue )
 RandomImpl::RandomImpl( Uint32 seed )
     : m_random( seed )
 {
-}
-
-
-//
-// Generate Functions
-//
-
-Int32 RandomImpl::NextInt32( Int32 minValue, Int32 maxValue )
-{
-    std::uniform_int_distribution< Int32 > dist( minValue, maxValue );
-    return dist( m_random );
-}
-
-
-Uint32 RandomImpl::NextUint32( Uint32 minValue, Uint32 maxValue )
-{
-    std::uniform_int_distribution< Uint32 > dist( minValue, maxValue );
-    return dist( m_random );
 }
 
 
@@ -92,7 +85,8 @@ Int GenRandomInt( Int minValue, Int maxValue )
 {
     CARAMEL_ASSERT( minValue <= maxValue );
 
-    return RandomManager::Instance()->GenRandomInt( minValue, maxValue );
+    return static_cast< Int >( RandomManager::Instance()->
+        GenRandomInt32( static_cast< Int32 >( minValue ), static_cast< Int32 >( maxValue )));
 }
 
 
@@ -100,7 +94,16 @@ Uint GenRandomUint( Uint minValue, Uint maxValue )
 {
     CARAMEL_ASSERT( minValue <= maxValue );
 
-    return RandomManager::Instance()->GenRandomUint( minValue, maxValue );
+    return static_cast< Uint >( RandomManager::Instance()->
+        GenRandomUint32( static_cast< Uint32 >( minValue ), static_cast< Uint32 >( maxValue )));
+}
+
+
+Float GenRandomFloat( Float lowerBound, Float upperBound )
+{
+    CARAMEL_ASSERT( lowerBound < upperBound );
+
+    return RandomManager::Instance()->GenRandomFloat( lowerBound, upperBound );
 }
 
 

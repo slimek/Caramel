@@ -34,6 +34,24 @@ Int  GenRandomInt ( Int  minValue, Int  maxValue );
 Uint GenRandomUint( Uint minValue, Uint maxValue );
 
 
+//
+// Generate Random Floatings
+// - Generate values between 'lowerBound' and 'upperBound' (exclusive? see below).
+//   This function is thread-safe.
+//
+//   EXAMPLE:
+//
+//   If you call this:
+//
+//       GenRandomFloat( 0, 1 );
+//
+//   You will get a value from 0 to very close to 1, but ...
+//   It may or may not returns 1, it depends on the precision and compiler implementations.
+//
+
+Float GenRandomFloat( Float lowerBound, Float upperBound );
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // namespace Caramel

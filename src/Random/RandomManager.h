@@ -33,8 +33,10 @@ public:
 
     /// Global Ganerate Functions ///
 
-    Int  GenRandomInt ( Int  minValue, Int  maxValue );
-    Uint GenRandomUint( Uint minValue, Uint maxValue );
+    Int32  GenRandomInt32 ( Int32  minValue, Int32  maxValue );
+    Uint32 GenRandomUint32( Uint32 minValue, Uint32 maxValue );
+
+    Float GenRandomFloat( Float lowerBound, Float upperBound );
 
 
 private:
