@@ -109,6 +109,9 @@
     <ClCompile Include="Lexical\LexicalFloatingTest.cpp">
       <Filter>2. Tests\Lexical</Filter>
     </ClCompile>
+    <ClCompile Include="String\StringAlgorithmTest.cpp">
+      <Filter>2. Tests\String</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CaramelTestPch.h">

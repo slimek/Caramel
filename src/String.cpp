@@ -7,6 +7,7 @@
 #include <Caramel/String/Algorithm.h>
 #include <Caramel/String/Sprintf.h>
 #include <Caramel/String/Utf8String.h>
+#include <boost/algorithm/string/predicate.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <cstdarg>
 #include <cstdio>
@@ -328,7 +329,7 @@ static const std::string::size_type STRING_NPOS = -1;
 
 Bool Contains( const std::string& s, Char c )
 {
-    return STRING_NPOS != s.find_first_of( c );
+    return boost::algorithm::contains( s, std::string( 1, c ));
 }
 
 
@@ -336,6 +337,18 @@ Bool EndsWith( const std::string& s, Char c )
 {
     if ( s.empty() ) { return false; }
     return c == s[ s.length() - 1 ];
+}
+
+
+Bool CainStartsWith( const std::string& input, const std::string& test )
+{
+    return boost::algorithm::istarts_with( input, test );
+}
+
+
+Bool CainEquals( const std::string& input, const std::string& test )
+{
+    return boost::algorithm::iequals( input, test );
 }
 
 

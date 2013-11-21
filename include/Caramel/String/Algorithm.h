@@ -18,9 +18,20 @@ namespace Caramel
 // String Predicates
 //
 
+// String : Char
+
 Bool Contains( const std::string& s, Char c );
 
 Bool EndsWith( const std::string& s, Char c );
+
+
+/// Case insensitive ///
+
+// String : String
+
+Bool CainStartsWith( const std::string& input, const std::string& test );
+
+Bool CainEquals( const std::string& input, const std::string& test );
 
 
 ///////////////////////////////////////////////////////////////////////////////
