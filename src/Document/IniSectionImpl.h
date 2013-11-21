@@ -44,7 +44,7 @@ public:
 
     std::string GetStringValue( const std::string& valueName ) const;
 
-    std::vector< std::string > GetStringArrayValue( const std::string& valueName ) const;
+    //std::vector< std::string > GetStringArrayValue( const std::string& valueName ) const;
 
 
     /// Value Manipulators ///
@@ -55,12 +55,11 @@ public:
         const std::string& rawline
     );
 
-    void AddArrayValue(
-        const std::string& valueName,
-        const std::vector< std::string >& values,
-        const std::vector< std::string >& rawLines
-    );
-
+    //void AddArrayValue(
+    //    const std::string& valueName,
+    //    const std::vector< std::string >& values,
+    //    const std::vector< std::string >& rawLines
+    //);
 
 
 private:
@@ -92,18 +91,18 @@ private:
     ValueMap m_values;
 
 
-    struct ArrayValueEntry
-    {
-        ArrayValueEntry()
-            : lastRawLineIndex( 0 )
-        {}
-
-        std::vector< std::string > values;
-        Uint lastRawLineIndex;
-    };
-
-    typedef std::map< std::string, ArrayValueEntry, CainLess > ArrayValueMap;
-    ArrayValueMap m_arrayValues;
+    //struct ArrayValueEntry
+    //{
+    //    ArrayValueEntry()
+    //        : lastRawLineIndex( 0 )
+    //    {}
+    //
+    //    std::vector< std::string > values;
+    //    Uint lastRawLineIndex;
+    //};
+    //
+    //typedef std::map< std::string, ArrayValueEntry, CainLess > ArrayValueMap;
+    //ArrayValueMap m_arrayValues;
 
 
     struct RawLineEntry

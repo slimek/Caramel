@@ -56,8 +56,7 @@ public:
     //
     // Get Array Values
     //
-
-    std::vector< std::string > GetStringArrayValue( const std::string& valueName ) const;
+    //std::vector< std::string > GetStringArrayValue( const std::string& valueName ) const;
 
 
 private:

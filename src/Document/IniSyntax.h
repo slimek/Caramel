@@ -19,9 +19,8 @@ namespace Caramel
 //
 // INI Syntax
 //
-// There are two components here:
+// Components:
 // - INI Line
-// - INI Array
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -39,7 +38,6 @@ public:
         TYPE_BLANK,    // Empty lines or comments
         TYPE_SECTION,
         TYPE_VALUE,
-        TYPE_ARRAY_BEGIN,
         TYPE_INVALID,
     };
 
@@ -69,43 +67,6 @@ private:
     std::string m_value;
     Int         m_valueBegin;
     Bool        m_quoted;
-};
-
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// INI Array
-//
-
-class IniArray
-{
-public:
-    
-    explicit IniArray( const std::string& firstRawLine );
-
-    Bool TryRead( TextReader& reader, Uint& lineNo );
-
-
-    /// Properties ///
-
-    std::vector< std::string > Values()   const { return m_values; }
-    std::vector< std::string > RawLines() const { return m_rawLines; }
-
-
-private:
-
-    Bool ParseLine( const std::string& rawLine, Uint& lineNo );
-
-
-    /// Data Members ///
-
-    std::string m_firstRawLine;
-
-    Bool m_failed;
-
-    std::vector< std::string > m_values;
-    std::vector< std::string > m_rawLines;
-
 };
 
 
