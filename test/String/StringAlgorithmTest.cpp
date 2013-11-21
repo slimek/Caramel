@@ -53,6 +53,24 @@ TEST( StringPredicateTest )
 }
 
 
+TEST( StringExtractorTest )
+{
+    /// String : Char ///
+
+    CHECK( "Al"    == BeforeFirst( "Alice", 'i' ));
+    CHECK( ""      == BeforeFirst( "Alice", 'A' ));
+    CHECK( "Alic"  == BeforeFirst( "Alice", 'e' ));
+    CHECK( "Alice" == BeforeFirst( "Alice", 'f' ));  // Returns whole string if not found.
+    CHECK( ""      == BeforeFirst( "",      'f' ));
+
+    CHECK( "ce"    == AfterFirst( "Alice", 'i' ));
+    CHECK( "lice"  == AfterFirst( "Alice", 'A' ));
+    CHECK( ""      == AfterFirst( "Alice", 'e' ));
+    CHECK( ""      == AfterFirst( "Alice", 'f' ));  // Returns empty string if not found.
+    CHECK( ""      == AfterFirst( "",      'f' ));
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE StringAlgorithm

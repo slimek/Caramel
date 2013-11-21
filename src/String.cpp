@@ -9,6 +9,7 @@
 #include <Caramel/String/Utf8String.h>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/algorithm/string/trim.hpp>
+#include <boost/range/irange.hpp>
 #include <cstdarg>
 #include <cstdio>
 
@@ -320,7 +321,10 @@ Utf8String& Utf8String::operator+=( const Utf8String& rhs )
 // String Algorithm
 //
 
-static const std::string::size_type STRING_NPOS = -1;
+inline boost::integer_range< Char > CharRange( Char c )
+{
+    return boost::irange( c, static_cast< Char >( c + 1 ));
+}
 
 
 //
@@ -329,14 +333,13 @@ static const std::string::size_type STRING_NPOS = -1;
 
 Bool Contains( const std::string& s, Char c )
 {
-    return boost::algorithm::contains( s, std::string( 1, c ));
+    return boost::algorithm::contains( s, CharRange( c ));
 }
 
 
 Bool EndsWith( const std::string& s, Char c )
 {
-    if ( s.empty() ) { return false; }
-    return c == s[ s.length() - 1 ];
+    return boost::algorithm::ends_with( s, CharRange( c ));
 }
 
 
@@ -358,17 +361,16 @@ Bool CainEquals( const std::string& input, const std::string& test )
 
 std::string BeforeFirst( const std::string& s, Char c )
 {
-    const Uint pos = s.find_first_of( c );
-    return STRING_NPOS == pos ? s
-                              : s.substr( 0, pos );
+    auto range = boost::algorithm::find_first( s, CharRange( c ));
+    return std::string( s.begin(), range.begin() );
 }
 
 
 std::string AfterFirst( const std::string& s, Char c )
 {
-    const Uint pos = s.find_first_of( c );
-    return STRING_NPOS == pos ? std::string()
-                              : s.substr( pos + 1 );
+    auto range = boost::algorithm::find_first( s, CharRange( c ));
+    return range.empty() ? std::string()
+                         : std::string( range.begin() + 1, s.end() );
 }
 
 
