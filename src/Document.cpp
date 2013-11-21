@@ -10,7 +10,7 @@
 #include <Caramel/Lexical/Boolean.h>
 #include <Caramel/Lexical/Integer.h>
 #include <Caramel/String/Algorithm.h>
-#include <boost/regex.hpp>
+#include <boost/xpressive/xpressive_dynamic.hpp>
 
 
 namespace Caramel
@@ -469,18 +469,19 @@ void IniLine::Parse()
         return;
     }
 
+    using namespace boost::xpressive;
 
-    boost::smatch matches;
-    const boost::regex section    ( "\\[(.*)\\]" );
-    const boost::regex quotedValue( "([^=\\s]*)\\s*=\\s*\"([^\"]*)\"" );
-    const boost::regex value      ( "([^=\\s]*)\\s*=\\s*([^\\s]*)" );
+    smatch matches;
+    const sregex section     = sregex::compile( "\\[(.*)\\]" );
+    const sregex quotedValue = sregex::compile( "([^=\\s]*)\\s*=\\s*\"([^\"]*)\"" );
+    const sregex value       = sregex::compile( "([^=\\s]*)\\s*=\\s*([^\\s]*)" );
 
-    if ( boost::regex_match( line, matches, section ))
+    if ( regex_match( line, matches, section ))
     {
         m_type = TYPE_SECTION;
         m_name = matches[1];
     }
-    else if ( boost::regex_match( line, matches, quotedValue ))
+    else if ( regex_match( line, matches, quotedValue ))
     {
         // REMARKS: You must match 'quotedValue' before 'value'.
 
@@ -490,7 +491,7 @@ void IniLine::Parse()
         m_valueBegin = matches.position( 2 );
         m_quoted = true;
     }
-    else if ( boost::regex_match( line, matches, value ))
+    else if ( regex_match( line, matches, value ))
     {
         m_type = TYPE_VALUE;
         m_name = matches[1];
