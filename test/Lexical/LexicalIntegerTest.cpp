@@ -2,6 +2,7 @@
 
 #include "CaramelTestPch.h"
 
+#include <Caramel/Lexical/Boolean.h>
 #include <Caramel/Lexical/Integer.h>
 #include <UnitTest++/UnitTest++.h>
 
@@ -31,6 +32,20 @@ TEST( LexicalIntegerTest )
 
         CHECK( false == lexInt32.TryParse( "abc" ));
         CHECK( false == lexInt32.TryParse( "123.0" ));
+
+        CHECK( true == lexInt32.TryParse( "0x0" ));
+        CHECK( 0 == lexInt32 );
+
+        CHECK( true == lexInt32.TryParse( "0x1" ));
+        CHECK( 1 == lexInt32 );
+
+        CHECK( true == lexInt32.TryParse( "0x7d" ));
+        CHECK( 125 == lexInt32 );
+
+        CHECK( true == lexInt32.TryParse( "0XFFFFFFFF" ));
+        CHECK( -1 == lexInt32 );
+
+        CHECK( false == lexInt32.TryParse( "0xFg" ));
     }
 
 
@@ -41,9 +56,82 @@ TEST( LexicalIntegerTest )
         CHECK( true == lexUint32.TryParse( "123" ));
         CHECK( 123 == lexUint32 );
 
+        CHECK( true == lexUint32.TryParse( "0x0" ));
+        CHECK( 0 == lexUint32 );
+
+        CHECK( true == lexUint32.TryParse( "0x1" ));
+        CHECK( 1 == lexUint32 );
+
+        CHECK( true == lexUint32.TryParse( "0x7d" ));
+        CHECK( 125 == lexUint32 );
+
+        CHECK( true == lexUint32.TryParse( "0XFFFFFFFF" ));
+        CHECK( UINT32_MAX == lexUint32 );
+
+
+        // Negative values would be cast to unsigned.
+
         CHECK( true == lexUint32.TryParse( "-456" ));
-        CHECK(( 0xFFFFFFFF - 455 ) == lexUint32 );
+        CHECK(( UINT32_MAX - 455 ) == lexUint32 );
     }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Lexical Boolean Test
+//
+
+TEST( LexicalBooleanTest )
+{
+    Lexical::Boolean lexBool;
+
+    /// Text ///
+
+    CHECK( true == lexBool.TryParse( "true" ));
+    CHECK( true == lexBool );
+
+    CHECK( true == lexBool.TryParse( "True" ));
+    CHECK( true == lexBool );
+
+    CHECK( true == lexBool.TryParse( "TRUE" ));
+    CHECK( true == lexBool );
+
+    CHECK( true == lexBool.TryParse( "false" ));
+    CHECK( false == lexBool );
+
+    CHECK( true == lexBool.TryParse( "False" ));
+    CHECK( false == lexBool );
+
+    CHECK( true == lexBool.TryParse( "FALSE" ));
+    CHECK( false == lexBool );
+
+    CHECK( false == lexBool.TryParse( "Alice" ));
+    CHECK( false == lexBool.TryParse( "" ));
+
+    
+    /// Integers ///
+
+    CHECK( true == lexBool.TryParse( "0" ));
+    CHECK( false == lexBool );
+
+    CHECK( true == lexBool.TryParse( "1" ));
+    CHECK( true == lexBool );
+
+    CHECK( true == lexBool.TryParse( "125" ));
+    CHECK( true == lexBool );
+
+    CHECK( true == lexBool.TryParse( "-1" ));
+    CHECK( true == lexBool );
+
+    CHECK( true == lexBool.TryParse( "0x0" ));
+    CHECK( false == lexBool );
+
+    CHECK( true == lexBool.TryParse( "0x1" ));
+    CHECK( true == lexBool );
+
+    CHECK( true == lexBool.TryParse( "0xFF" ));
+    CHECK( true == lexBool );
 }
 
 

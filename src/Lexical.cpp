@@ -5,7 +5,7 @@
 #include <Caramel/Lexical/Boolean.h>
 #include <Caramel/Lexical/Floating.h>
 #include <Caramel/Lexical/Integer.h>
-#include <boost/regex.hpp>
+#include <Caramel/String/Algorithm.h>
 
 
 namespace Caramel
@@ -42,15 +42,13 @@ Bool Boolean::TryParse( const std::string& input )
 
     // Test if the input is a boolean string
 
-    const boost::regex isTrue( "true", boost::regex::icase );
-    if ( boost::regex_match( input, isTrue ))
+    if ( CainEquals( input, "true" ))
     {
         m_value = true;
         return true;
     }
 
-    const boost::regex isFalse( "false", boost::regex::icase );
-    if ( boost::regex_match( input, isFalse ))
+    if ( CainEquals( input, "false" ))
     {
         m_value = false;
         return true;
@@ -109,8 +107,7 @@ Bool Integer< Int32 >::TryParse( const std::string& input )
 
     Char* stop = nullptr;
 
-    const boost::regex isHex( "0[xX][[:xdigit:]]+" );
-    if ( boost::regex_match( input, isHex ))
+    if ( CainStartsWith( input, "0x" ))
     {
         m_value = static_cast< Int32 >( ::strtoul( input.c_str(), &stop, 16 ));
     }
@@ -130,8 +127,7 @@ Bool Integer< Uint32 >::TryParse( const std::string& input )
 
     Char* stop = nullptr;
 
-    const boost::regex isHex( "0[xX][[:xdigit:]]+" );
-    if ( boost::regex_match( input, isHex ))
+    if ( CainStartsWith( input, "0x" ))
     {
         m_value = static_cast< Uint32 >( ::strtoul( input.c_str(), &stop, 16 ));
     }
