@@ -62,6 +62,8 @@ public:
     std::string ToString() const;
     std::string ToIsoString() const;
 
+    Bool TryParse( const std::string& s );
+
 
 private:
 

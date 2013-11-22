@@ -96,6 +96,20 @@ std::string DateTime::ToIsoString() const
 }
 
 
+Bool DateTime::TryParse( const std::string& input )
+{
+    try
+    {
+        *this = DateTime::FromString( input );
+        return true;
+    }
+    catch ( const boost::bad_lexical_cast& )
+    {
+        return false;
+    }
+}
+
+
 //
 // Implementation
 //
