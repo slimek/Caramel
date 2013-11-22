@@ -48,6 +48,26 @@ TEST( DateTimeTest )
 }
 
 
+TEST( TimeSpanTest )
+{
+    const TimeSpan time0;
+
+    CHECK( 0 == time0.TotalHours() );
+    CHECK( Seconds::Zero() == time0.TotalSeconds() );
+
+    const auto time1 = TimeSpan::FromString( "12:30:00" );
+
+    CHECK( 12.5 == time1.TotalHours() );
+    CHECK( Seconds( 45000 ) == time1.TotalSeconds() );
+
+    const auto time2 = TimeSpan::FromString( "1:40:05" );
+
+    CHECK( 6005.0 / 3600.0 == time2.TotalHours() );
+    CHECK( Seconds( 6005 ) == time2.TotalSeconds() );
+
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE DateTimeSuite

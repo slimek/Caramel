@@ -41,10 +41,12 @@ public:
 
     /// Accessors ///
 
+
     //
-    // Total duration
-    // - Cooperate with SecondClock.
+    // Total Durations
+    // - Seconds can cooperate with SecondClock.
     //
+    Double  TotalHours()   const;
     Seconds TotalSeconds() const;
 
 

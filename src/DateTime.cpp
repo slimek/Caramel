@@ -156,6 +156,12 @@ TimeSpan TimeSpan::FromString( const std::string& s )
 // Accessors
 //
 
+Double TimeSpan::TotalHours() const
+{
+    return static_cast< Double >( m_impl->total_seconds() ) / 3600;
+}
+
+
 Seconds TimeSpan::TotalSeconds() const
 {
     return Seconds( m_impl->total_seconds() );
