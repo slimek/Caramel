@@ -127,6 +127,39 @@ TEST( TimeSpanTest )
         CHECK( time1 <= time3 );
         CHECK( time1 >= time3 );
     }
+
+    /// Cooperation with Seconds ///
+    {
+        const TimeSpan time0;
+        const TimeSpan time1 = Hours( 5 ) + Minutes( 20 );
+        const TimeSpan time2 = Seconds( 19200 );
+
+        CHECK( time1 == time2 );
+
+        const Seconds secs0 = time0;
+        const Seconds secs1 = time1;
+
+        CHECK( Seconds::Zero()  == secs0 );
+        CHECK( Seconds( 19200 ) == secs1 );
+
+        CHECK( secs0 == time0 );
+        CHECK( secs1 == time1 );
+
+        const Seconds secs2( 12000 );
+
+        CHECK( secs2 <  time1 );
+        CHECK( secs2 <= time1 );
+        CHECK( time1 >  secs2 );
+        CHECK( time1 >= secs2 );
+        CHECK( time1 != secs2 );
+        CHECK( secs2 != time1 );
+        CHECK( false == ( secs2 >  time1 ));
+        CHECK( false == ( secs2 >= time1 ));
+        CHECK( false == ( time1 <  secs2 ));
+        CHECK( false == ( time1 <= secs2 ));
+        CHECK( false == ( time1 == secs2 ));
+        CHECK( false == ( secs2 == time1 ));
+    }
 }
 
 

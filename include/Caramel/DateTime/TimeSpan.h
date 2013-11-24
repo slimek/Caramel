@@ -26,6 +26,7 @@ namespace Caramel
 class TimeSpanImpl;
 
 class TimeSpan : public boost::totally_ordered< TimeSpan >
+               , public boost::totally_ordered< TimeSpan, Caramel::Seconds >
                , public boost::additive< TimeSpan >
 {
     friend class DateTime;
@@ -68,6 +69,9 @@ public:
     Bool operator==( const TimeSpan& rhs ) const;
     Bool operator< ( const TimeSpan& rhs ) const;
 
+    Bool operator==( const Caramel::Seconds& rhs ) const;
+    Bool operator< ( const Caramel::Seconds& rhs ) const;
+
     TimeSpan& operator+=( const TimeSpan& rhs );
     TimeSpan& operator-=( const TimeSpan& rhs );
 
@@ -75,6 +79,8 @@ public:
     /// Conversions ///
 
     std::string ToString() const;
+
+    operator Caramel::Seconds() const;
 
 
 protected:

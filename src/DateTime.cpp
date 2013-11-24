@@ -197,6 +197,18 @@ Bool TimeSpan::operator<( const TimeSpan& rhs ) const
 }
 
 
+Bool TimeSpan::operator==( const Caramel::Seconds& rhs ) const
+{
+    return this->TotalSeconds() == rhs.ToDouble();
+}
+
+
+Bool TimeSpan::operator<( const Caramel::Seconds& rhs ) const
+{
+    return this->TotalSeconds() < rhs.ToDouble();
+}
+
+
 TimeSpan& TimeSpan::operator+=( const TimeSpan& rhs )
 {
     *m_impl += *rhs.m_impl;
@@ -219,6 +231,13 @@ std::string TimeSpan::ToString() const
 {
     return boost::posix_time::to_simple_string( *m_impl );
 }
+
+
+TimeSpan::operator Caramel::Seconds() const
+{
+    return Caramel::Seconds( this->TotalSeconds() );
+}
+
 
 
 //
