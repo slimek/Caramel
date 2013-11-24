@@ -136,6 +136,15 @@ TimeSpan::TimeSpan()
 }
 
 
+TimeSpan::TimeSpan( const Caramel::Seconds& seconds )
+{
+    CARAMEL_ASSERT( LONG_MAX >= seconds.ToDouble() );
+
+    m_impl.reset( new TimeSpanImpl(
+        boost::posix_time::seconds( static_cast< Long >( seconds.ToDouble() ))));
+}
+
+
 TimeSpan::TimeSpan( std::shared_ptr< TimeSpanImpl > impl )
     : m_impl( impl )
 {
@@ -148,7 +157,8 @@ TimeSpan::TimeSpan( std::shared_ptr< TimeSpanImpl > impl )
 
 TimeSpan TimeSpan::FromString( const std::string& s )
 {
-    return TimeSpan( std::make_shared< TimeSpanImpl >( boost::posix_time::duration_from_string( s )));
+    return TimeSpan( std::make_shared< TimeSpanImpl >(
+        boost::posix_time::duration_from_string( s )));
 }
 
 
@@ -181,6 +191,26 @@ Bool TimeSpan::operator==( const TimeSpan& rhs ) const
 }
 
 
+Bool TimeSpan::operator<( const TimeSpan& rhs ) const
+{
+    return *m_impl < *rhs.m_impl;
+}
+
+
+TimeSpan& TimeSpan::operator+=( const TimeSpan& rhs )
+{
+    *m_impl += *rhs.m_impl;
+    return *this;
+}
+
+
+TimeSpan& TimeSpan::operator-=( const TimeSpan& rhs )
+{
+    *m_impl -= *rhs.m_impl;
+    return *this;
+}
+
+
 //
 // Conversions
 //
@@ -188,6 +218,24 @@ Bool TimeSpan::operator==( const TimeSpan& rhs ) const
 std::string TimeSpan::ToString() const
 {
     return boost::posix_time::to_simple_string( *m_impl );
+}
+
+
+//
+// Helper Classes
+//
+
+Hours::Hours( Int32 hours )
+    : TimeSpan( std::make_shared< TimeSpanImpl >(
+        boost::posix_time::hours( static_cast< Long >( hours ))))
+{
+}
+
+
+Minutes::Minutes( Int32 minutes )
+    : TimeSpan( std::make_shared< TimeSpanImpl >(
+        boost::posix_time::minutes( static_cast< Long >( minutes ))))
+{
 }
 
 

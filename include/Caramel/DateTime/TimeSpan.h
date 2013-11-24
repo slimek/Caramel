@@ -9,6 +9,7 @@
 #pragma once
 #endif
 
+#include <Caramel/Chrono/SecondClock.h>
 #include <boost/operators.hpp>
 
 
@@ -24,13 +25,17 @@ namespace Caramel
 
 class TimeSpanImpl;
 
-class TimeSpan : public boost::equality_comparable< TimeSpan >
+class TimeSpan : public boost::totally_ordered< TimeSpan >
+               , public boost::additive< TimeSpan >
 {
     friend class DateTime;
+    friend class Hours;
+    friend class Seconds;
 
 public:
 
     TimeSpan();
+    TimeSpan( const Caramel::Seconds& seconds );
 
 
     /// Creators///
@@ -61,6 +66,10 @@ public:
     /// Operators ///
 
     Bool operator==( const TimeSpan& rhs ) const;
+    Bool operator< ( const TimeSpan& rhs ) const;
+
+    TimeSpan& operator+=( const TimeSpan& rhs );
+    TimeSpan& operator-=( const TimeSpan& rhs );
 
 
     /// Conversions ///
@@ -68,12 +77,34 @@ public:
     std::string ToString() const;
 
 
-private:
+protected:
 
     explicit TimeSpan( std::shared_ptr< TimeSpanImpl > impl );
 
     std::shared_ptr< TimeSpanImpl > m_impl;
 };
+
+
+//
+// Helper Classes to Make TimeSpan
+//
+
+class Hours : public TimeSpan
+{
+public:
+    explicit Hours( Int32 hours );
+};
+
+
+class Minutes : public TimeSpan
+{
+public:
+    explicit Minutes( Int32 minutes );
+};
+
+
+// NOTES: Seconds( n ) would make a duration of SecondClock,
+//        but it can convert to TimeSpan implicitly.
 
 
 ///////////////////////////////////////////////////////////////////////////////

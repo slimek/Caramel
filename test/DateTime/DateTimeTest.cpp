@@ -100,6 +100,33 @@ TEST( TimeSpanTest )
         CHECK( 452708.0 / 60.0    == time3.TotalMinutes() );
         CHECK( 452708             == time3.TotalSeconds() );
     }
+
+    /// Comparison ///
+    {
+        const TimeSpan time0;
+        const TimeSpan time1 = Hours( 5 ) + Minutes( 20 );
+        const TimeSpan time2 = Hours( 6 ) - Minutes( 30 ) + Seconds( 15 );
+        const TimeSpan time3 = time1;
+
+        CHECK( TimeSpan::FromString( "0:00" )    == time0 );
+        CHECK( TimeSpan::FromString( "5:20" )    == time1 );
+        CHECK( TimeSpan::FromString( "5:30:15" ) == time2 );
+
+        CHECK( time2 >  time1 );
+        CHECK( time2 >= time1 );
+        CHECK( time1 <  time2 );
+        CHECK( time1 <= time2 );
+        CHECK( time1 != time2 );
+        
+        CHECK( false == ( time1 >  time2 ));
+        CHECK( false == ( time2 <  time1 ));
+        CHECK( false == ( time1 == time2 ));
+
+        CHECK( time1 == time1 + time0 );
+        CHECK( time1 == time3 );
+        CHECK( time1 <= time3 );
+        CHECK( time1 >= time3 );
+    }
 }
 
 
