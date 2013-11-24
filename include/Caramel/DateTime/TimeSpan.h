@@ -9,7 +9,6 @@
 #pragma once
 #endif
 
-#include <Caramel/Chrono/SecondClock.h>
 #include <boost/operators.hpp>
 
 
@@ -41,13 +40,22 @@ public:
 
     /// Accessors ///
 
+    //
+    // Components
+    //
+    Int32 Days()    const;
+    Int32 Hours()   const;  // 0 - 23
+    Int32 Minutes() const;  // 0 - 59
+    Int32 Seconds() const;  // 0 - 59
+
 
     //
     // Total Durations
-    // - Seconds can cooperate with SecondClock.
     //
-    Double  TotalHours()   const;
-    Seconds TotalSeconds() const;
+    Double TotalDays()    const;
+    Double TotalHours()   const;
+    Double TotalMinutes() const;
+    Double TotalSeconds() const;
 
 
     /// Operators ///

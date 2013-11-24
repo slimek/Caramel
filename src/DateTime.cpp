@@ -156,15 +156,18 @@ TimeSpan TimeSpan::FromString( const std::string& s )
 // Accessors
 //
 
-Double TimeSpan::TotalHours() const
-{
-    return static_cast< Double >( m_impl->total_seconds() ) / 3600;
-}
+Int32 TimeSpan::Days()    const { return m_impl->hours() / 24; }
+Int32 TimeSpan::Hours()   const { return m_impl->hours() % 24; }
+Int32 TimeSpan::Minutes() const { return m_impl->minutes(); }
+Int32 TimeSpan::Seconds() const { return m_impl->seconds(); }
 
+Double TimeSpan::TotalDays()    const { return this->TotalSeconds() / 86400; }
+Double TimeSpan::TotalHours()   const { return this->TotalSeconds() / 3600; }
+Double TimeSpan::TotalMinutes() const { return this->TotalSeconds() / 60; }
 
-Seconds TimeSpan::TotalSeconds() const
+Double TimeSpan::TotalSeconds() const
 {
-    return Seconds( m_impl->total_seconds() );
+    return static_cast< Double >( m_impl->total_seconds() );
 }
 
 
