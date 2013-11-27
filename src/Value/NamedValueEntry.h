@@ -2,28 +2,52 @@
 
 #ifndef __CARAMEL_VALUE_NAMED_VALUE_ENTRY_H
 #define __CARAMEL_VALUE_NAMED_VALUE_ENTRY_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
+#include <boost/variant.hpp>
 
 
 namespace Caramel
 {
+
+namespace Detail
+{
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Named Value Type
+//
+
+enum NamedValueType
+{
+    NAMED_VALUE_UNDEF = 0,
+
+    NAMED_VALUE_BOOL,
+    NAMED_VALUE_INT,
+    NAMED_VALUE_UINT,
+    NAMED_VALUE_DOUBLE,
+    NAMED_VALUE_STRING,
+};
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Named Value Entry
 //
 
-class NamedValueEntry
+struct NamedValueEntry
 {
+    NamedValueEntry() : type( NAMED_VALUE_UNDEF ) {}
+
+    boost::variant< Uint, Double, std::string > value;
+    NamedValueType type;
 };
 
 
 ///////////////////////////////////////////////////////////////////////////////
+
+} // namespace Detail
 
 } // namespace Caramel
 

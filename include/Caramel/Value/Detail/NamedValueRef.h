@@ -19,7 +19,7 @@ class NamedValues;
 namespace Detail
 {
 
-class NamedValueEntry;
+struct NamedValueEntry;
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -31,6 +31,17 @@ class ConstNamedValueRef
 public:
 
     ConstNamedValueRef( const std::string& name, NamedValueEntry* entry );
+
+
+    /// Accessors ///
+
+    std::string AsString() const;
+
+
+protected:
+
+    std::string      m_name;
+    NamedValueEntry* m_entry;
 };
 
 
@@ -43,13 +54,21 @@ class NamedValueRef : public ConstNamedValueRef
 {
 public:
 
-    NamedValueRef( NamedValues* parent, const std::string& name, NamedValueEntry* entry );
+    NamedValueRef( NamedValues* host, const std::string& name, NamedValueEntry* entry );
 
+
+    /// Operators ///
 
     NamedValueRef& operator=( Bool v );
     NamedValueRef& operator=( Int v );
     NamedValueRef& operator=( Double v );
     NamedValueRef& operator=( const std::string& v );
+    NamedValueRef& operator=( const Char* v );
+
+
+private:
+
+    NamedValues* m_host;
 };
 
 

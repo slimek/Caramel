@@ -22,6 +22,10 @@ TEST( NamedValuesTest )
     NamedValues nv;
 
     nv[ "miko" ] = "Reimu";
+
+    std::string s = nv[ "miko" ].AsString();
+
+    //CHECK( "Reimu" == nv[ "miko" ].AsString() );
 }
 
 

@@ -24,14 +24,16 @@ namespace Caramel
 
 class NamedValuesImpl
 {
+    friend class NamedValues;
+
 public:
 
-    typedef std::map< std::string, NamedValueEntry > ValueMap;
-
+    Detail::NamedValueEntry* InsertValue( const std::string& name );
 
 private:
 
-    ValueMap m_values;
+    typedef std::map< std::string, Detail::NamedValueEntry > ValueMap;
+    ValueMap m_valueEntries;
 };
 
 

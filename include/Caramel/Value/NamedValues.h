@@ -25,6 +25,8 @@ class NamedValuesImpl;
 
 class NamedValues
 {
+    friend class Detail::NamedValueRef;
+
 public:
 
     NamedValues();
