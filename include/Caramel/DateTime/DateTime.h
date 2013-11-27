@@ -9,6 +9,7 @@
 #pragma once
 #endif
 
+#include <Caramel/DateTime/TimeOfDay.h>
 #include <Caramel/DateTime/TimeSpan.h>
 
 
@@ -45,6 +46,8 @@ public:
     Int Hour()   const;
     Int Minute() const;
     Int Second() const;
+
+    Caramel::TimeOfDay TimeOfDay() const;
 
     
     /// Operators ///

@@ -23,7 +23,7 @@ namespace Caramel
 //   Immutable.
 //
 
-class TimeSpanImpl;
+class TimeDuration;
 
 class TimeSpan : public boost::totally_ordered< TimeSpan >
                , public boost::totally_ordered< TimeSpan, Caramel::Seconds >
@@ -85,9 +85,9 @@ public:
 
 protected:
 
-    explicit TimeSpan( std::shared_ptr< TimeSpanImpl > impl );
+    explicit TimeSpan( std::shared_ptr< TimeDuration > impl );
 
-    std::shared_ptr< TimeSpanImpl > m_impl;
+    std::shared_ptr< TimeDuration > m_impl;
 };
 
 

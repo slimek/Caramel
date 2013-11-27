@@ -3,7 +3,9 @@
 #include "CaramelPch.h"
 
 #include "DateTime/DateTimeImpl.h"
-#include "DateTime/TimeSpanImpl.h"
+#include "DateTime/TimeDuration.h"
+#include <Caramel/DateTime/TimeOfDay.h>
+#include <Caramel/DateTime/TimeSpan.h>
 
 
 namespace Caramel
@@ -14,6 +16,7 @@ namespace Caramel
 //
 //   DateTime
 //   TimeSpan
+//   TimeOfDay
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -61,6 +64,11 @@ Int DateTime::Hour()   const { return m_impl->time_of_day().hours(); }
 Int DateTime::Minute() const { return m_impl->time_of_day().minutes(); }
 Int DateTime::Second() const { return m_impl->time_of_day().seconds(); }
 
+TimeOfDay DateTime::TimeOfDay() const
+{
+    return Caramel::TimeOfDay( std::make_shared< TimeDuration >( m_impl->time_of_day() ));
+}
+
 
 //
 // Operators
@@ -74,7 +82,7 @@ DateTime DateTime::operator+( const TimeSpan& rhs ) const
 
 TimeSpan DateTime::operator-( const DateTime& rhs ) const
 {
-    return TimeSpan( std::make_shared< TimeSpanImpl >( *m_impl - *rhs.m_impl ));
+    return TimeSpan( std::make_shared< TimeDuration >( *m_impl - *rhs.m_impl ));
 }
 
 
@@ -131,7 +139,7 @@ DateTimeImpl::DateTimeImpl( boost::posix_time::ptime&& pt )
 //
 
 TimeSpan::TimeSpan()
-    : m_impl( new TimeSpanImpl )
+    : m_impl( new TimeDuration )
 {
 }
 
@@ -140,12 +148,12 @@ TimeSpan::TimeSpan( const Caramel::Seconds& seconds )
 {
     CARAMEL_ASSERT( LONG_MAX >= seconds.ToDouble() );
 
-    m_impl.reset( new TimeSpanImpl(
+    m_impl.reset( new TimeDuration(
         boost::posix_time::seconds( static_cast< Long >( seconds.ToDouble() ))));
 }
 
 
-TimeSpan::TimeSpan( std::shared_ptr< TimeSpanImpl > impl )
+TimeSpan::TimeSpan( std::shared_ptr< TimeDuration > impl )
     : m_impl( impl )
 {
 }
@@ -157,7 +165,7 @@ TimeSpan::TimeSpan( std::shared_ptr< TimeSpanImpl > impl )
 
 TimeSpan TimeSpan::FromString( const std::string& s )
 {
-    return TimeSpan( std::make_shared< TimeSpanImpl >(
+    return TimeSpan( std::make_shared< TimeDuration >(
         boost::posix_time::duration_from_string( s )));
 }
 
@@ -245,31 +253,106 @@ TimeSpan::operator Caramel::Seconds() const
 //
 
 Hours::Hours( Int32 hours )
-    : TimeSpan( std::make_shared< TimeSpanImpl >(
+    : TimeSpan( std::make_shared< TimeDuration >(
         boost::posix_time::hours( static_cast< Long >( hours ))))
 {
 }
 
 
 Minutes::Minutes( Int32 minutes )
-    : TimeSpan( std::make_shared< TimeSpanImpl >(
+    : TimeSpan( std::make_shared< TimeDuration >(
         boost::posix_time::minutes( static_cast< Long >( minutes ))))
 {
 }
 
 
+///////////////////////////////////////////////////////////////////////////////
 //
-// Implementation
+// Time of Day
 //
 
-TimeSpanImpl::TimeSpanImpl()
+TimeOfDay::TimeOfDay()
+    : m_impl( new TimeDuration )
 {
 }
 
 
-TimeSpanImpl::TimeSpanImpl( boost::posix_time::time_duration&& td )
-    : boost::posix_time::time_duration( td )
+TimeOfDay::TimeOfDay( std::shared_ptr< TimeDuration > impl )
+    : m_impl( impl )
 {
+}
+
+
+//
+// Creators
+//
+
+TimeOfDay TimeOfDay::Now()
+{
+    return TimeOfDay( std::make_shared< TimeDuration >(
+        boost::posix_time::second_clock::local_time().time_of_day() ));
+}
+
+
+TimeOfDay TimeOfDay::FromHMS( Int hour, Int minute, Int second )
+{
+    auto tdur = std::make_shared< TimeDuration >(
+        boost::posix_time::time_duration( hour, minute, second ));
+
+    if ( tdur->is_negative() || 24 <= tdur->hours() )
+    {
+        CARAMEL_THROW( "Out of range, %d:%d:%d", hour, minute, second );
+    }
+
+    return TimeOfDay( tdur );
+}
+
+
+TimeOfDay TimeOfDay::FromString( const std::string& s )
+{
+    auto tdur = std::make_shared< TimeDuration >( boost::posix_time::duration_from_string( s ));
+
+    if ( tdur->is_negative() || 24 <= tdur->hours() )
+    {
+        CARAMEL_THROW( "Out of range, input: %s", s );
+    }
+
+    return TimeOfDay( tdur );
+}
+
+
+//
+// Accessors
+//
+
+Int TimeOfDay::Hour()   const { return m_impl->hours(); }
+Int TimeOfDay::Minute() const { return m_impl->minutes(); }
+Int TimeOfDay::Second() const { return m_impl->seconds(); }
+
+
+//
+// Operators
+//
+
+Bool TimeOfDay::operator==( const TimeOfDay& rhs ) const
+{
+    return *m_impl == *rhs.m_impl;
+}
+
+
+Bool TimeOfDay::operator<( const TimeOfDay& rhs ) const
+{
+    return *m_impl < *rhs.m_impl;
+}
+
+
+//
+// Conversions
+//
+
+std::string TimeOfDay::ToString() const
+{
+    return boost::posix_time::to_simple_string( *m_impl );
 }
 
 

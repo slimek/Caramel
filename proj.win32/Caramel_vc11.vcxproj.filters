@@ -446,9 +446,6 @@
     <ClInclude Include="..\include\Caramel\DateTime\TimeSpan.h">
       <Filter>1. Public Packages\DateTime</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\DateTime\TimeSpanImpl.h">
-      <Filter>2. Sources\DateTime</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Caramel\Random\UniformRandom.h">
       <Filter>1. Public Packages\Random</Filter>
     </ClInclude>
@@ -463,6 +460,12 @@
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Lexical\Floating.h">
       <Filter>1. Public Packages\Lexical</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\DateTime\TimeOfDay.h">
+      <Filter>1. Public Packages\DateTime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\DateTime\TimeDuration.h">
+      <Filter>2. Sources\DateTime</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -32,6 +32,7 @@
     <ClInclude Include="..\include\Caramel\Concurrent\Queue.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\ReplicatePolicies.h" />
     <ClInclude Include="..\include\Caramel\DateTime\DateTime.h" />
+    <ClInclude Include="..\include\Caramel\DateTime\TimeOfDay.h" />
     <ClInclude Include="..\include\Caramel\DateTime\TimeSpan.h" />
     <ClInclude Include="..\include\Caramel\Debug\ScopeTiming.h" />
     <ClInclude Include="..\include\Caramel\Document\IniDocument.h" />
@@ -102,7 +103,7 @@
     <ClInclude Include="..\include\Caramel\Windows\WideString.h" />
     <ClInclude Include="..\src\CaramelPch.h" />
     <ClInclude Include="..\src\DateTime\DateTimeImpl.h" />
-    <ClInclude Include="..\src\DateTime\TimeSpanImpl.h" />
+    <ClInclude Include="..\src\DateTime\TimeDuration.h" />
     <ClInclude Include="..\src\Debug\DebugManager.h" />
     <ClInclude Include="..\src\Document\IniDocumentImpl.h" />
     <ClInclude Include="..\src\Document\IniSectionImpl.h" />
