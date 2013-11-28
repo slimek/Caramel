@@ -95,6 +95,45 @@ TEST( NamedValuesTest )
 }
 
 
+TEST( NameValuesValueMapTest )
+{
+    NamedValues nv;
+
+    nv[ "Alice" ]  = "doll master";
+    nv[ "Reimu" ]  = "miko";
+    nv[ "Marisa" ] = "witch";
+
+    const auto values = nv.GetValueMap();
+
+    auto iv = values.begin();
+    CHECK( "Alice" == iv->first && "doll master" == iv->second );
+
+    ++ iv;
+    CHECK( "Marisa" == iv->first && "witch" == iv->second );
+
+    ++ iv;
+    CHECK( "Reimu" == iv->first && "miko" == iv->second );
+
+    ++ iv;
+    CHECK( values.end() == iv );
+}
+
+
+TEST( NamedValuesChainTest )
+{
+    auto nv = NamedValues
+        ( "Chirno", 123 )
+        ( "Mystia", "Lorelei" )
+        ( "Kogasa", 3.14 )
+        ( "Parsee", false );
+
+    CHECK( 123       == nv[ "Chirno" ].AsInt() );
+    CHECK( "Lorelei" == nv[ "Mystia" ].AsString() );
+    CHECK( 3.14      == nv[ "Kogasa" ].AsDouble() );
+    CHECK( false     == nv[ "Parsee" ].AsBool() );
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE NamedValuesSuite

@@ -32,6 +32,12 @@ NamedValues::NamedValues()
 }
 
 
+void NamedValues::Init()
+{
+    m_impl.reset( new NamedValuesImpl );
+}
+
+
 //
 // Accessors
 //
@@ -59,6 +65,24 @@ Detail::ConstNamedValueRef NamedValues::operator[]( const std::string& name ) co
     }
 
     return Detail::ConstNamedValueRef( name, &( ientry->second ));
+}
+
+
+NamedValues::ValueMap NamedValues::GetValueMap() const
+{
+    ValueMap vmap;
+
+    auto ientry = m_impl->m_valueEntries.begin();
+    for ( ; m_impl->m_valueEntries.end() != ientry; ++ ientry )
+    {
+        const std::string name = ientry->first;
+        
+        Detail::ConstNamedValueRef valueRef( name, &( ientry->second ));
+
+        vmap.insert( std::make_pair( name, valueRef.AsString() ));
+    }
+
+    return vmap;
 }
 
 

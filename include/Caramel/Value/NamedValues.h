@@ -10,6 +10,7 @@
 #endif
 
 #include <Caramel/Value/Detail/NamedValueRef.h>
+#include <map>
 
 
 namespace Caramel
@@ -31,14 +32,56 @@ public:
 
     NamedValues();
     
+
+    /// Insert Values by Chaining ///
+
+    template< typename T >
+    NamedValues( const std::string& name, const T& value );
+
+    template< typename T >
+    NamedValues& operator()( const std::string& name, const T& value );
+
+
+    /// Access a Value ///
+
     Detail::NamedValueRef      operator[]( const std::string& name );
     Detail::ConstNamedValueRef operator[]( const std::string& name ) const;
 
 
+    /// Access all Values ///
+
+    // Returns all values in ( name, value ) string pairs.
+    typedef std::map< std::string, std::string > ValueMap;
+    ValueMap GetValueMap() const;
+
+
 private:
+
+    void Init();
 
     std::shared_ptr< NamedValuesImpl > m_impl;
 };
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Implementation
+//
+
+template< typename T >
+inline NamedValues::NamedValues( const std::string& name, const T& value )
+{
+    this->Init();
+    this->operator[]( name ) = value;
+}
+
+
+template< typename T >
+inline NamedValues& NamedValues::operator()( const std::string& name, const T& value )
+{
+    this->operator[]( name ) = value;
+    return *this;
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////
