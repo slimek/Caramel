@@ -140,6 +140,39 @@ Bool Integer< Uint32 >::TryParse( const std::string& input )
 }
 
 
+//
+// Convert Int64 to String
+// - Visual C++ doesn't support strtoull() until 2013.
+//
+
+#if defined( CARAMEL_COMPILER_IS_MSVC )
+#define CARAMEL_STRTOLL  _strtoi64
+#define CARAMEL_STRTOULL _strtoui64
+#else
+#define CARAMEL_STRTOLL  strtoll
+#define CARAMEL_STRTOULL strtoull
+#endif
+
+template<>
+Bool Integer< Int64 >::TryParse( const std::string& input )
+{
+    if ( input.empty() ) { return false; }
+
+    Char* stop = nullptr;
+
+    if ( CainStartsWith( input, "0x" ))
+    {
+        m_value = static_cast< Int64 >( CARAMEL_STRTOULL( input.c_str(), &stop, 16 ));
+    }
+    else
+    {
+        m_value = static_cast< Int64 >( CARAMEL_STRTOLL( input.c_str(), &stop, 10 ));
+    }
+    
+    return stop == ( input.data() + input.length() );
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // namespace Lexical
