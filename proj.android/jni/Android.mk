@@ -17,7 +17,8 @@ LOCAL_SRC_FILES := \
 	$(CRM_SRC)/String.cpp \
 	$(CRM_SRC)/Task.cpp \
 	$(CRM_SRC)/Thread.cpp \
-	$(CRM_SRC)/Trace.cpp
+	$(CRM_SRC)/Trace.cpp \
+	$(CRM_SRC)/Value.cpp
 
 LOCAL_C_INCLUDES := \
 	$(LOCAL_PATH)/../../src \
