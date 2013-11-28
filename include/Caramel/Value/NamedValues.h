@@ -42,13 +42,18 @@ public:
     NamedValues& operator()( const std::string& name, const T& value );
 
 
+    /// Properties ///
+
+    Uint Size() const;
+
+
     /// Access a Value ///
 
     Detail::NamedValueRef      operator[]( const std::string& name );
     Detail::ConstNamedValueRef operator[]( const std::string& name ) const;
 
 
-    /// Access all Values ///
+    /// Copy all Values ///
 
     // Returns all values in ( name, value ) string pairs.
     typedef std::map< std::string, std::string > ValueMap;

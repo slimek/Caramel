@@ -39,6 +39,16 @@ void NamedValues::Init()
 
 
 //
+// Properties
+//
+
+Uint NamedValues::Size() const
+{
+    return static_cast< Uint >( m_impl->m_valueEntries.size() );
+}
+
+
+//
 // Accessors
 //
 

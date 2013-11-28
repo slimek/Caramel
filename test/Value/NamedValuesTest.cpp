@@ -115,6 +115,8 @@ TEST( NameValuesValueMapTest )
     nv[ "Reimu" ]  = "miko";
     nv[ "Marisa" ] = "witch";
 
+    CHECK( 3 == nv.Size() );
+
     const auto values = nv.GetValueMap();
 
     auto iv = values.begin();
