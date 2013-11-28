@@ -6,6 +6,7 @@
 #include <Caramel/Lexical/Boolean.h>
 #include <Caramel/Lexical/Floating.h>
 #include <Caramel/Lexical/Integer.h>
+#include <Caramel/String/ToString.h>
 
 
 namespace Caramel
@@ -92,7 +93,31 @@ ConstNamedValueRef::ConstNamedValueRef( const std::string& name, NamedValueEntry
 
 Bool ConstNamedValueRef::AsBool() const
 {
-    return m_entry->GetBool();
+    switch ( m_entry->type )
+    {
+    case NAMED_VALUE_BOOL:
+        return m_entry->GetBool();
+
+    case NAMED_VALUE_INT:
+    case NAMED_VALUE_UINT:
+        return ( 0 != m_entry->GetInt() );
+
+    case NAMED_VALUE_DOUBLE:
+        return ( 0.0 != m_entry->GetDouble() );
+    
+    case NAMED_VALUE_STRING:
+    {
+        Lexical::Boolean xbool;
+        if ( ! xbool.TryParse( m_entry->GetString() ))
+        {
+            CARAMEL_THROW( "Can't convert string value to bool, name: %s", m_name );
+        }
+        return xbool;
+    }
+
+    default:
+        CARAMEL_NOT_REACHED();
+    }
 }
 
 
@@ -154,13 +179,47 @@ Uint ConstNamedValueRef::AsUint() const
 
 Double ConstNamedValueRef::AsDouble() const
 {
-    return m_entry->GetDouble();
+    switch ( m_entry->type )
+    {
+    case NAMED_VALUE_BOOL:
+    case NAMED_VALUE_INT:
+        return static_cast< Double >( m_entry->GetInt() );
+
+    case NAMED_VALUE_UINT:
+        return static_cast< Double >( m_entry->GetUint() );
+
+    case NAMED_VALUE_DOUBLE:
+        return m_entry->GetDouble();
+
+    case NAMED_VALUE_STRING:
+    {
+        Lexical::Floating< Double > xdouble;
+        if ( ! xdouble.TryParse( m_entry->GetString() ))
+        {
+            CARAMEL_THROW( "Can't convert string value to double, name: %s", m_name );
+        }
+        return xdouble;
+    }
+
+    default:
+        CARAMEL_NOT_REACHED();
+    }
 }
 
 
 std::string ConstNamedValueRef::AsString() const
 {
-    return m_entry->GetString();
+    switch ( m_entry->type )
+    {
+    case NAMED_VALUE_BOOL:   return ToString( m_entry->GetBool() );
+    case NAMED_VALUE_INT:    return ToString( m_entry->GetInt() );
+    case NAMED_VALUE_UINT:   return ToString( m_entry->GetUint() );
+    case NAMED_VALUE_DOUBLE: return ToString( m_entry->GetDouble() );
+    case NAMED_VALUE_STRING: return m_entry->GetString();
+
+    default:
+        CARAMEL_NOT_REACHED();
+    }
 }
 
 
