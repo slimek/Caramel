@@ -485,6 +485,9 @@
     <ClInclude Include="..\src\Value\NamedValueEntry.h">
       <Filter>2. Sources\Value</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\String\ToString.h">
+      <Filter>1. Public Packages\String</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

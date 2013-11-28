@@ -118,6 +118,9 @@
     <ClCompile Include="Value\NamedValuesTest.cpp">
       <Filter>2. Tests\Value</Filter>
     </ClCompile>
+    <ClCompile Include="String\StringToStringTest.cpp">
+      <Filter>2. Tests\String</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CaramelTestPch.h">

@@ -6,12 +6,14 @@
 #include <Caramel/Functional/ScopeExit.h>
 #include <Caramel/String/Algorithm.h>
 #include <Caramel/String/Sprintf.h>
+#include <Caramel/String/ToString.h>
 #include <Caramel/String/Utf8String.h>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/range/irange.hpp>
 #include <cstdarg>
 #include <cstdio>
+#include <sstream>
 
 #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
 #include <Caramel/Windows/WideString.h>
@@ -30,6 +32,7 @@ namespace Caramel
 //   SprintfManager
 //   Utf8String
 //   Algorithm
+//   ToString
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -382,6 +385,53 @@ void Trim( std::string& s )
 {
     boost::algorithm::trim( s );
 }
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// ToString
+//
+
+std::string ToString( Bool x )
+{
+    return x ? "true" : "false";
+}
+
+
+//
+// Integers
+//
+
+template< typename T >
+std::string IntegerToString( T x )
+{
+    std::stringstream ss;
+    ss << std::dec << x;
+    return ss.str();
+}
+
+std::string ToString( Int16 x )  { return IntegerToString( x ); }
+std::string ToString( Uint16 x ) { return IntegerToString( x ); }
+std::string ToString( Int32 x )  { return IntegerToString( x ); }
+std::string ToString( Uint32 x ) { return IntegerToString( x ); }
+std::string ToString( Int64 x )  { return IntegerToString( x ); }
+std::string ToString( Uint64 x ) { return IntegerToString( x ); }
+
+
+//
+// Floatings
+//
+
+template< typename T >
+std::string FloatingToString( T x )
+{
+    std::stringstream ss;
+    ss << x;
+    return ss.str();
+}
+
+std::string ToString( Float  x ) { return FloatingToString( x ); } 
+std::string ToString( Double x ) { return FloatingToString( x ); }
 
 
 ///////////////////////////////////////////////////////////////////////////////

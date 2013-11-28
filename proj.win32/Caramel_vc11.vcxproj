@@ -82,6 +82,7 @@
     <ClInclude Include="..\include\Caramel\String\Sprintf.h" />
     <ClInclude Include="..\include\Caramel\String\StringConvertible.h" />
     <ClInclude Include="..\include\Caramel\String\TextEncoding.h" />
+    <ClInclude Include="..\include\Caramel\String\ToString.h" />
     <ClInclude Include="..\include\Caramel\String\Utf8String.h" />
     <ClInclude Include="..\include\Caramel\Task\Task.h" />
     <ClInclude Include="..\include\Caramel\Task\TaskExecutor.h" />
