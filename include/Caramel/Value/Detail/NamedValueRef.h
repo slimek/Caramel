@@ -38,6 +38,7 @@ public:
     Bool        AsBool()   const;
     Int         AsInt()    const;
     Uint        AsUint()   const;
+    Int64       AsInt64()  const;
     Double      AsDouble() const;
     std::string AsString() const;
 
@@ -66,6 +67,7 @@ public:
     NamedValueRef& operator=( Bool v );
     NamedValueRef& operator=( Int v );
     NamedValueRef& operator=( Uint v );
+    NamedValueRef& operator=( Int64 v );
     NamedValueRef& operator=( Double v );
     NamedValueRef& operator=( const std::string& v );
     NamedValueRef& operator=( const Char* v );

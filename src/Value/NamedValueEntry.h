@@ -26,6 +26,7 @@ enum NamedValueType
     NAMED_VALUE_BOOL,
     NAMED_VALUE_INT,
     NAMED_VALUE_UINT,
+    NAMED_VALUE_INT64,
     NAMED_VALUE_DOUBLE,
     NAMED_VALUE_STRING,
 };
@@ -44,11 +45,12 @@ struct NamedValueEntry
     Bool        GetBool()   const;
     Int         GetInt()    const;
     Uint        GetUint()   const;
+    Int64       GetInt64()  const;
     Double      GetDouble() const;
     std::string GetString() const;
 
 
-    boost::variant< Uint, Double, std::string > value;
+    boost::variant< Int64, Double, std::string > value;
     NamedValueType type;
 };
 

@@ -126,6 +126,9 @@ Bool ConstNamedValueRef::AsBool() const
     case NAMED_VALUE_UINT:
         return ( 0 != m_entry->GetInt() );
 
+    case NAMED_VALUE_INT64:
+        return ( 0 != m_entry->GetInt64() );
+
     case NAMED_VALUE_DOUBLE:
         return ( 0.0 != m_entry->GetDouble() );
     
@@ -164,6 +167,9 @@ Int ConstNamedValueRef::AsInt() const
         return xint;
     }
 
+    case NAMED_VALUE_INT64:
+        CARAMEL_THROW( "Can't convert int64 value to int, name: %s", m_name );
+
     case NAMED_VALUE_DOUBLE:
         CARAMEL_THROW( "Can't convert double value to int, name: %s", m_name );
     
@@ -192,9 +198,41 @@ Uint ConstNamedValueRef::AsUint() const
         return xuint;
     }
 
+    case NAMED_VALUE_INT64:
+        CARAMEL_THROW( "Can't convert int64 value to uint, name: %s", m_name );
+
     case NAMED_VALUE_DOUBLE:
         CARAMEL_THROW( "Can't convert double value to uint, name: %s", m_name );
     
+    default:
+        CARAMEL_NOT_REACHED();
+    }
+}
+
+
+Int64 ConstNamedValueRef::AsInt64() const
+{
+    switch ( m_entry->type )
+    {
+    case NAMED_VALUE_BOOL:
+    case NAMED_VALUE_INT:
+    case NAMED_VALUE_UINT:
+    case NAMED_VALUE_INT64:
+        return m_entry->GetInt64();
+
+    case NAMED_VALUE_STRING:
+    {
+        Lexical::Integer< Int64 > xuint;
+        if ( ! xuint.TryParse( m_entry->GetString() ))
+        {
+            CARAMEL_THROW( "Can't convert string value to int64, name: %s", m_name );
+        }
+        return xuint;
+    }
+
+    case NAMED_VALUE_DOUBLE:
+        CARAMEL_THROW( "Can't convert double value to int64, name: %s", m_name );
+
     default:
         CARAMEL_NOT_REACHED();
     }
@@ -211,6 +249,9 @@ Double ConstNamedValueRef::AsDouble() const
 
     case NAMED_VALUE_UINT:
         return static_cast< Double >( m_entry->GetUint() );
+
+    case NAMED_VALUE_INT64:
+        return static_cast< Double >( m_entry->GetInt64() );
 
     case NAMED_VALUE_DOUBLE:
         return m_entry->GetDouble();
@@ -238,6 +279,7 @@ std::string ConstNamedValueRef::AsString() const
     case NAMED_VALUE_BOOL:   return ToString( m_entry->GetBool() );
     case NAMED_VALUE_INT:    return ToString( m_entry->GetInt() );
     case NAMED_VALUE_UINT:   return ToString( m_entry->GetUint() );
+    case NAMED_VALUE_INT64:  return ToString( m_entry->GetInt64() );
     case NAMED_VALUE_DOUBLE: return ToString( m_entry->GetDouble() );
     case NAMED_VALUE_STRING: return m_entry->GetString();
 
@@ -263,7 +305,7 @@ NamedValueRef& NamedValueRef::operator=( Bool value )
 {
     this->PrepareEntry();
 
-    m_entry->value = ( value ? 1u : 0u );
+    m_entry->value = static_cast< Int64 >( value ? 1 : 0 );
     m_entry->type  = NAMED_VALUE_BOOL;
 
     return *this;
@@ -274,7 +316,7 @@ NamedValueRef& NamedValueRef::operator=( Int value )
 {
     this->PrepareEntry();
 
-    m_entry->value = static_cast< Uint >( value );
+    m_entry->value = static_cast< Int64 >( value );
     m_entry->type  = NAMED_VALUE_INT;
 
     return *this;
@@ -285,8 +327,19 @@ NamedValueRef& NamedValueRef::operator=( Uint value )
 {
     this->PrepareEntry();
 
-    m_entry->value = value;
+    m_entry->value = static_cast< Int64 >( value );
     m_entry->type  = NAMED_VALUE_UINT;
+
+    return *this;
+}
+
+
+NamedValueRef& NamedValueRef::operator=( Int64 value )
+{
+    this->PrepareEntry();
+
+    m_entry->value = value;
+    m_entry->type  = NAMED_VALUE_INT64;
 
     return *this;
 }
@@ -341,19 +394,25 @@ void NamedValueRef::PrepareEntry()
 
 Bool NamedValueEntry::GetBool() const
 {
-    return 0 != boost::get< Uint >( value );
+    return 0 != boost::get< Int64 >( value );
 }
 
 
 Int NamedValueEntry::GetInt() const
 {
-    return static_cast< Int >( boost::get< Uint >( value ));
+    return static_cast< Int >( boost::get< Int64 >( value ));
 }
 
 
 Uint NamedValueEntry::GetUint() const
 {
-    return boost::get< Uint >( value );
+    return static_cast< Uint >( boost::get< Int64 >( value ));
+}
+
+
+Int64 NamedValueEntry::GetInt64() const
+{
+    return boost::get< Int64 >( value );
 }
 
 

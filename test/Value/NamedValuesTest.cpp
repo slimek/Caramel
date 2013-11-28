@@ -32,32 +32,41 @@ TEST( NamedValuesTest )
     nv[ "ratio" ]   = 1.15;
     nv[ "stage" ]   = -10;
     nv[ "missed" ]  = 0;
+    nv[ "score" ]   = INT64_MAX;
 
     // With same type
-    CHECK( "Reimu"  == nv[ "miko" ].AsString() );
-    CHECK( "Marisa" == nv[ "witch" ].AsString() );
-    CHECK( true     == nv[ "isRed" ].AsBool() );
-    CHECK( false    == nv[ "isBlack" ].AsBool() );
-    CHECK( 3        == nv[ "life" ].AsInt() );
-    CHECK( 3        == nv[ "life" ].AsUint() );
-    CHECK( 1.15     == nv[ "ratio" ].AsDouble() );
-    CHECK( -10      == nv[ "stage" ].AsInt() );
-    CHECK( 0        == nv[ "missed" ].AsInt() );
+    CHECK( "Reimu"   == nv[ "miko" ].AsString() );
+    CHECK( "Marisa"  == nv[ "witch" ].AsString() );
+    CHECK( true      == nv[ "isRed" ].AsBool() );
+    CHECK( false     == nv[ "isBlack" ].AsBool() );
+    CHECK( 3         == nv[ "life" ].AsInt() );
+    CHECK( 3         == nv[ "life" ].AsUint() );
+    CHECK( 1.15      == nv[ "ratio" ].AsDouble() );
+    CHECK( -10       == nv[ "stage" ].AsInt() );
+    CHECK( 0         == nv[ "missed" ].AsInt() );
+    CHECK( INT64_MAX == nv[ "score" ].AsInt64() );
 
-    CHECK( "Reimu"  == cnv[ "miko" ].AsString() );
-    CHECK( "Marisa" == cnv[ "witch" ].AsString() );
-    CHECK( true     == cnv[ "isRed" ].AsBool() );
-    CHECK( false    == cnv[ "isBlack" ].AsBool() );
-    CHECK( 3        == cnv[ "life" ].AsInt() );
-    CHECK( 3        == cnv[ "life" ].AsUint() );
-    CHECK( 1.15     == cnv[ "ratio" ].AsDouble() );
-    CHECK( 0        == cnv[ "missed" ].AsInt() );
+    CHECK( "Reimu"   == cnv[ "miko" ].AsString() );
+    CHECK( "Marisa"  == cnv[ "witch" ].AsString() );
+    CHECK( true      == cnv[ "isRed" ].AsBool() );
+    CHECK( false     == cnv[ "isBlack" ].AsBool() );
+    CHECK( 3         == cnv[ "life" ].AsInt() );
+    CHECK( 3         == cnv[ "life" ].AsUint() );
+    CHECK( 1.15      == cnv[ "ratio" ].AsDouble() );
+    CHECK( 0         == cnv[ "missed" ].AsInt() );
+    CHECK( INT64_MAX == cnv[ "score" ].AsInt64() );
 
     // Convert to Bool
     CHECK( true  == cnv[ "life" ].AsBool() );
     CHECK( true  == cnv[ "ratio" ].AsBool() );
     CHECK( false == cnv[ "missed" ].AsBool() );
+    CHECK( true  == cnv[ "score" ].AsBool() );
 
+    // Convert to Double
+    CHECK( 1.0   == cnv[ "isRed" ].AsDouble() );
+    CHECK( 3.0   == cnv[ "life" ].AsDouble() );
+    CHECK( -10.0 == cnv[ "stage" ].AsDouble() );
+    CHECK( static_cast< Double >( INT64_MAX ) == cnv[ "score" ].AsDouble() );
 
     // Convert to String
     CHECK( "true"   == cnv[ "isRed" ].AsString() );
@@ -65,6 +74,7 @@ TEST( NamedValuesTest )
     CHECK( "3"      == cnv[ "life" ].AsString() );
     CHECK( "1.15"   == cnv[ "ratio" ].AsString() );
     CHECK( "-10"    == cnv[ "stage" ].AsString() );
+    CHECK( "9223372036854775807" == cnv[ "score" ].AsString() );
 
     /// Convert from String ///
 
@@ -73,12 +83,14 @@ TEST( NamedValuesTest )
     nv[ "number3" ] = "3.1416";
     nv[ "yes" ] = "true";
     nv[ "no" ]  = "false";
+    nv[ "bigNumber" ] = "12345678900";
 
     CHECK( 1023   == cnv[ "number1" ].AsInt() );
     CHECK( -375   == cnv[ "number2" ].AsInt() );
     CHECK( 3.1416 == cnv[ "number3" ].AsDouble() );
     CHECK( true   == cnv[ "yes" ].AsBool() );
     CHECK( false  == cnv[ "no" ].AsBool() );
+    CHECK( 12345678900LL == cnv[ "bigNumber" ].AsInt64() );
 
 
     /// Short Integers ///
@@ -125,12 +137,14 @@ TEST( NamedValuesChainTest )
         ( "Chirno", 123 )
         ( "Mystia", "Lorelei" )
         ( "Kogasa", 3.14 )
-        ( "Parsee", false );
+        ( "Parsee", false )
+        ( "Hina",   INT64_MAX );
 
     CHECK( 123       == nv[ "Chirno" ].AsInt() );
     CHECK( "Lorelei" == nv[ "Mystia" ].AsString() );
     CHECK( 3.14      == nv[ "Kogasa" ].AsDouble() );
     CHECK( false     == nv[ "Parsee" ].AsBool() );
+    CHECK( INT64_MAX == nv[ "Hina" ].AsInt64() );
 }
 
 
