@@ -40,6 +40,14 @@ struct NamedValueEntry
 {
     NamedValueEntry() : type( NAMED_VALUE_UNDEF ) {}
 
+    // Throws if the type is incorrect
+    Bool        GetBool()   const;
+    Int         GetInt()    const;
+    Uint        GetUint()   const;
+    Double      GetDouble() const;
+    std::string GetString() const;
+
+
     boost::variant< Uint, Double, std::string > value;
     NamedValueType type;
 };

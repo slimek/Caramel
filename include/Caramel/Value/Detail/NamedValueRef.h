@@ -35,6 +35,10 @@ public:
 
     /// Accessors ///
 
+    Bool        AsBool()   const;
+    Int         AsInt()    const;
+    Uint        AsUint()   const;
+    Double      AsDouble() const;
     std::string AsString() const;
 
 
@@ -61,12 +65,15 @@ public:
 
     NamedValueRef& operator=( Bool v );
     NamedValueRef& operator=( Int v );
+    NamedValueRef& operator=( Uint v );
     NamedValueRef& operator=( Double v );
     NamedValueRef& operator=( const std::string& v );
     NamedValueRef& operator=( const Char* v );
 
 
 private:
+
+    void PrepareEntry();
 
     NamedValues* m_host;
 };
