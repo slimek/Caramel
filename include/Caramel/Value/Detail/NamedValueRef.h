@@ -39,6 +39,7 @@ public:
     Int         AsInt()    const;
     Uint        AsUint()   const;
     Int64       AsInt64()  const;
+    Uint64      AsUint64() const;
     Double      AsDouble() const;
     std::string AsString() const;
 
@@ -67,15 +68,13 @@ public:
     NamedValueRef& operator=( Bool v );
     NamedValueRef& operator=( Int v );
     NamedValueRef& operator=( Uint v );
+    NamedValueRef& operator=( Long v );
+    NamedValueRef& operator=( Ulong v );
     NamedValueRef& operator=( Int64 v );
+    NamedValueRef& operator=( Uint64 v );
     NamedValueRef& operator=( Double v );
     NamedValueRef& operator=( const std::string& v );
     NamedValueRef& operator=( const Char* v );
-
-    // Overloadings for Xcode, which can't convert Long to Int implicitly.
-    // - Get their values by AsInt() and AsUint(), respectively.
-    NamedValueRef& operator=( Long v );
-    NamedValueRef& operator=( Ulong v );
 
 
 private:

@@ -33,28 +33,31 @@ TEST( NamedValuesTest )
     nv[ "stage" ]   = -10;
     nv[ "missed" ]  = 0;
     nv[ "score" ]   = INT64_MAX;
+    nv[ "hiscore" ] = UINT64_MAX;
 
     // With same type
-    CHECK( "Reimu"   == nv[ "miko" ].AsString() );
-    CHECK( "Marisa"  == nv[ "witch" ].AsString() );
-    CHECK( true      == nv[ "isRed" ].AsBool() );
-    CHECK( false     == nv[ "isBlack" ].AsBool() );
-    CHECK( 3         == nv[ "life" ].AsInt() );
-    CHECK( 3         == nv[ "life" ].AsUint() );
-    CHECK( 1.15      == nv[ "ratio" ].AsDouble() );
-    CHECK( -10       == nv[ "stage" ].AsInt() );
-    CHECK( 0         == nv[ "missed" ].AsInt() );
-    CHECK( INT64_MAX == nv[ "score" ].AsInt64() );
+    CHECK( "Reimu"    == nv[ "miko" ].AsString() );
+    CHECK( "Marisa"   == nv[ "witch" ].AsString() );
+    CHECK( true       == nv[ "isRed" ].AsBool() );
+    CHECK( false      == nv[ "isBlack" ].AsBool() );
+    CHECK( 3          == nv[ "life" ].AsInt() );
+    CHECK( 3          == nv[ "life" ].AsUint() );
+    CHECK( 1.15       == nv[ "ratio" ].AsDouble() );
+    CHECK( -10        == nv[ "stage" ].AsInt() );
+    CHECK( 0          == nv[ "missed" ].AsInt() );
+    CHECK( INT64_MAX  == nv[ "score" ].AsInt64() );
+    CHECK( UINT64_MAX == nv[ "hiscore" ].AsUint64() );
 
-    CHECK( "Reimu"   == cnv[ "miko" ].AsString() );
-    CHECK( "Marisa"  == cnv[ "witch" ].AsString() );
-    CHECK( true      == cnv[ "isRed" ].AsBool() );
-    CHECK( false     == cnv[ "isBlack" ].AsBool() );
-    CHECK( 3         == cnv[ "life" ].AsInt() );
-    CHECK( 3         == cnv[ "life" ].AsUint() );
-    CHECK( 1.15      == cnv[ "ratio" ].AsDouble() );
-    CHECK( 0         == cnv[ "missed" ].AsInt() );
-    CHECK( INT64_MAX == cnv[ "score" ].AsInt64() );
+    CHECK( "Reimu"    == cnv[ "miko" ].AsString() );
+    CHECK( "Marisa"   == cnv[ "witch" ].AsString() );
+    CHECK( true       == cnv[ "isRed" ].AsBool() );
+    CHECK( false      == cnv[ "isBlack" ].AsBool() );
+    CHECK( 3          == cnv[ "life" ].AsInt() );
+    CHECK( 3          == cnv[ "life" ].AsUint() );
+    CHECK( 1.15       == cnv[ "ratio" ].AsDouble() );
+    CHECK( 0          == cnv[ "missed" ].AsInt() );
+    CHECK( INT64_MAX  == cnv[ "score" ].AsInt64() );
+    CHECK( UINT64_MAX == cnv[ "hiscore" ].AsUint64() );
 
     // Convert to Bool
     CHECK( true  == cnv[ "life" ].AsBool() );
@@ -113,8 +116,8 @@ TEST( NamedValuesTest )
     nv[ "lmax" ]  = lmax;
     nv[ "ulmax" ] = ulmax;
 
-    CHECK( 2147483647L  == cnv[ "lmax" ].AsInt() );
-    CHECK( 4294967295UL == cnv[ "ulmax" ].AsUint() );
+    CHECK( LONG_MAX  == cnv[ "lmax" ].AsInt() );
+    CHECK( ULONG_MAX == cnv[ "ulmax" ].AsUint() );
 }
 
 
