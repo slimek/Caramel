@@ -25,6 +25,7 @@
 		6DBA562118289B5D00F33DDA /* Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DBA560918289B5D00F33DDA /* Thread.cpp */; };
 		6DBA562218289B5D00F33DDA /* Trace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DBA560D18289B5D00F33DDA /* Trace.cpp */; };
 		6DBA562318289B5D00F33DDA /* Windows.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DBA560E18289B5D00F33DDA /* Windows.cpp */; };
+		6DBD23D318488F1F006779E8 /* Value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DBD23D218488F1F006779E8 /* Value.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -156,6 +157,11 @@
 		6DBA560C18289B5D00F33DDA /* TraceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TraceManager.h; sourceTree = "<group>"; };
 		6DBA560D18289B5D00F33DDA /* Trace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Trace.cpp; sourceTree = "<group>"; };
 		6DBA560E18289B5D00F33DDA /* Windows.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Windows.cpp; sourceTree = "<group>"; };
+		6DBD23CD18488AEE006779E8 /* NamedValueRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NamedValueRef.h; sourceTree = "<group>"; };
+		6DBD23CE18488AEE006779E8 /* NamedValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NamedValues.h; sourceTree = "<group>"; };
+		6DBD23D018488F1F006779E8 /* NamedValueEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NamedValueEntry.h; sourceTree = "<group>"; };
+		6DBD23D118488F1F006779E8 /* NamedValuesImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NamedValuesImpl.h; sourceTree = "<group>"; };
+		6DBD23D218488F1F006779E8 /* Value.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Value.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -485,6 +491,8 @@
 		6DBA55CE18289B5D00F33DDA /* Value */ = {
 			isa = PBXGroup;
 			children = (
+				6DBD23CC18488AEE006779E8 /* Detail */,
+				6DBD23CE18488AEE006779E8 /* NamedValues.h */,
 				6DBA55CF18289B5D00F33DDA /* SharedArray.h */,
 			);
 			path = Value;
@@ -534,6 +542,8 @@
 				6DBA560918289B5D00F33DDA /* Thread.cpp */,
 				6DBA560A18289B5D00F33DDA /* Trace */,
 				6DBA560D18289B5D00F33DDA /* Trace.cpp */,
+				6DBD23CF18488F1F006779E8 /* Value */,
+				6DBD23D218488F1F006779E8 /* Value.cpp */,
 				6DBA560E18289B5D00F33DDA /* Windows.cpp */,
 			);
 			path = src;
@@ -643,6 +653,23 @@
 			path = Trace;
 			sourceTree = "<group>";
 		};
+		6DBD23CC18488AEE006779E8 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				6DBD23CD18488AEE006779E8 /* NamedValueRef.h */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		6DBD23CF18488F1F006779E8 /* Value */ = {
+			isa = PBXGroup;
+			children = (
+				6DBD23D018488F1F006779E8 /* NamedValueEntry.h */,
+				6DBD23D118488F1F006779E8 /* NamedValuesImpl.h */,
+			);
+			path = Value;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -699,6 +726,7 @@
 				6DBA561718289B5D00F33DDA /* Error.cpp in Sources */,
 				6DBA561B18289B5D00F33DDA /* Object.cpp in Sources */,
 				6DBA561918289B5D00F33DDA /* Io.cpp in Sources */,
+				6DBD23D318488F1F006779E8 /* Value.cpp in Sources */,
 				6DBA561518289B5D00F33DDA /* Debug.cpp in Sources */,
 				6DBA562118289B5D00F33DDA /* Thread.cpp in Sources */,
 				6DBA561F18289B5D00F33DDA /* String.cpp in Sources */,
