@@ -15,7 +15,33 @@ namespace Caramel
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Named Values
-// - Copy-on-write.
+// - A general name-value pair collections.
+//   Supporting value types: Bool, Int, Uint, Int64, Double, std::string.
+//
+// USAGE:
+//
+// < Adding Values >
+// 1. Add values by operator[], or
+//
+//    Caramel::NamedValues nv;
+//    nv[ "name" ]   = "Reimu";
+//    nv[ "age" ]    = 16;
+//    nv[ "canFly" ] = true;
+//
+// 2. Make values by chaining, fit for function parameters.
+//
+//    player->InitSettings( Caramel::NamedValues
+//        ( "name",   "Reimu" )
+//        ( "age",     16 )
+//        ( "canFly", true )
+//    );
+//
+// < Getting Values >
+// Access values by "AsXxx" functions.
+//
+//    m_name   = nv[ "name" ].AsString();
+//    m_age    = nv[ "age" ].AsInt();
+//    m_canFly = nv[ "canFly" ].AsBool();
 //
 
 class NamedValuesImpl;
