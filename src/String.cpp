@@ -414,6 +414,8 @@ std::string ToString( Int16 x )  { return IntegerToString( x ); }
 std::string ToString( Uint16 x ) { return IntegerToString( x ); }
 std::string ToString( Int32 x )  { return IntegerToString( x ); }
 std::string ToString( Uint32 x ) { return IntegerToString( x ); }
+std::string ToString( Long x )   { return IntegerToString( x ); }
+std::string ToString( Ulong x )  { return IntegerToString( x ); }
 std::string ToString( Int64 x )  { return IntegerToString( x ); }
 std::string ToString( Uint64 x ) { return IntegerToString( x ); }
 

@@ -39,6 +39,8 @@ std::string ToString( Int16  x );
 std::string ToString( Uint16 x );
 std::string ToString( Int32  x );
 std::string ToString( Uint32 x );
+std::string ToString( Long   x );
+std::string ToString( Ulong  x );
 std::string ToString( Int64  x );
 std::string ToString( Uint64 x );
 

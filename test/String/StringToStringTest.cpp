@@ -57,6 +57,17 @@ TEST( StringToStringTest )
         CHECK( "32767" == ToString( i16max ));
         CHECK( "65535" == ToString( u16max ));
 
+        const Long lz = 0;
+        const Ulong ulz = 0;
+        const Long lmin = LONG_MIN;
+        const Long lmax = LONG_MAX;
+        const Ulong ulmax = ULONG_MAX;
+
+        CHECK( "0" == ToString( lz ));
+        CHECK( "0" == ToString( ulz ));
+        CHECK( "-2147483648" == ToString( lmin ));
+        CHECK( "2147483647"  == ToString( lmax ));
+        CHECK( "4294967295"  == ToString( ulmax ));
     }
 
     /// Floatings ///
