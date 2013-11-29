@@ -173,6 +173,26 @@ Bool Integer< Int64 >::TryParse( const std::string& input )
 }
 
 
+template<>
+Bool Integer< Uint64 >::TryParse( const std::string& input )
+{
+    if ( input.empty() ) { return false; }
+
+    Char* stop = nullptr;
+
+    if ( CainStartsWith( input, "0x" ))
+    {
+        m_value = static_cast< Uint64 >( CARAMEL_STRTOULL( input.c_str(), &stop, 16 ));
+    }
+    else
+    {
+        m_value = static_cast< Uint64 >( CARAMEL_STRTOULL( input.c_str(), &stop, 10 ));
+    }
+    
+    return stop == ( input.data() + input.length() );
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // namespace Lexical

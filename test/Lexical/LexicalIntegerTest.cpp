@@ -91,6 +91,29 @@ TEST( LexicalIntegerTest )
         CHECK( true == lexInt64.TryParse( "0xFFFFFFFFFFFFFFFF" ));
         CHECK( -1 == lexInt64 );
     }
+
+    /// Uint64 ///
+    {
+        Lexical::Integer< Uint64 > lexUint64;
+
+        CHECK( true == lexUint64.TryParse( "123" ));
+        CHECK( 123 == lexUint64 );
+
+        CHECK( true == lexUint64.TryParse( "0x0" ));
+        CHECK( 0 == lexUint64 );
+
+        CHECK( true == lexUint64.TryParse( "9223372036854775807" ));
+        CHECK( INT64_MAX == lexUint64 );
+
+        CHECK( true == lexUint64.TryParse( "0xFFFFFFFFFFFFFFFF" ));
+        CHECK( UINT64_MAX == lexUint64 );
+
+
+        // Negative values would be cast to unsigned.
+
+        CHECK( true == lexUint64.TryParse( "-456" ));
+        CHECK(( UINT64_MAX - 455 ) == lexUint64 );
+    }
 }
 
 
