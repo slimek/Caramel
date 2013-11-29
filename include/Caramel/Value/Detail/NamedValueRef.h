@@ -72,6 +72,11 @@ public:
     NamedValueRef& operator=( const std::string& v );
     NamedValueRef& operator=( const Char* v );
 
+    // Overloadings for Xcode, which can't convert Long to Int implicitly.
+    // - Get their values by AsInt() and AsUint(), respectively.
+    NamedValueRef& operator=( Long v );
+    NamedValueRef& operator=( Ulong v );
+
 
 private:
 

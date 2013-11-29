@@ -355,6 +355,28 @@ NamedValueRef& NamedValueRef::operator=( Int64 value )
 }
 
 
+NamedValueRef& NamedValueRef::operator=( Long value )
+{
+    this->PrepareEntry();
+
+    m_entry->value = static_cast< Int64 >( value );
+    m_entry->type  = NAMED_VALUE_INT;
+
+    return *this;
+}
+
+
+NamedValueRef& NamedValueRef::operator=( Ulong value )
+{
+    this->PrepareEntry();
+
+    m_entry->value = static_cast< Int64 >( value );
+    m_entry->type  = NAMED_VALUE_UINT;
+
+    return *this;
+}
+
+
 NamedValueRef& NamedValueRef::operator=( Double value )
 {
     this->PrepareEntry();

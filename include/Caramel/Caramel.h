@@ -36,6 +36,7 @@ typedef long    Long;
 
 typedef unsigned char   Byte;
 typedef unsigned int    Uint;
+typedef unsigned long   Ulong;
 
 
 /// Integers with Bits Specified ///
