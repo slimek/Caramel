@@ -9,6 +9,8 @@
 #pragma once
 #endif
 
+#include <vector>
+
 
 namespace Caramel
 {
@@ -28,6 +30,10 @@ public:
     ~ConsoleApplication();
 
     Int Run();
+    Int Run( Int argc, Char* argv[] );
+
+    std::vector< std::string > GetArguments() const;
+
 
 private:
 

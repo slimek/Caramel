@@ -30,7 +30,7 @@ private:
 
 Int RunTest::Main()
 {
-    ProgramOptions::ParseCommandLine();
+    ProgramOptions::ParseArguments( this->GetArguments() );
 
     Int result = 0;
     
@@ -62,10 +62,10 @@ Int RunTest::Main()
 // Main Entry
 //
 
-int main()
+int main( int argc, char* argv[] )
 {
     RunTest app;
-    return app.Run();
+    return app.Run( argc, argv );
 }
 
 

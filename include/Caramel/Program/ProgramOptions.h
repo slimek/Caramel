@@ -24,7 +24,9 @@ namespace Caramel
 //   Based on Boost.ProgramOptions library.
 //   You may see its document for the options argument rules.
 //
-//   When the program enters the main entry, call ProgramOptions::ParseCommandLine()
+//   When the program enters the main entry, call one of the functions:
+//   - ProgramOptions::ParseArguments()
+//   - ProgramOptions::ParseCommandLine() (Windows only)
 //   to generate all declared option values.
 // 
 
@@ -39,12 +41,22 @@ class ProgramOptions
 public:
 
     //
-    // Throws if parse failed.
-    // - For example, if an option required an integer but the input command
+    // Parsing
+    // - Throws if parse failed.
+    //   For example, if an option required an integer but the input command
     //   line has no argument, or it can not be converted to an integer.
     //
+
+    static void ParseArguments( const std::vector< std::string >& arguments );
+
+    
+    #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+
+    // Windows only
+    // - Uses Windows API GetCommandLine() to get the internal copy of command line.
     static void ParseCommandLine();
 
+    #endif // CARAMEL_SYSTEM_IS_WINDOWS
 };
 
 

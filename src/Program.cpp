@@ -64,6 +64,20 @@ Int ConsoleApplication::Run()
 }
 
 
+Int ConsoleApplication::Run( Int argc, Char* argv[] )
+{
+    m_impl->BuildArguments( argc, argv );
+
+    return this->Run();
+}
+
+
+std::vector< std::string > ConsoleApplication::GetArguments() const
+{
+    return m_impl->GetArguments();
+}
+
+
 //
 // Implementation
 // - The thread creating and destroying ConsoleApplication
@@ -88,6 +102,19 @@ ConsoleApplicationImpl::ConsoleApplicationImpl()
         Trace::Listeners::AddManaged( debuggerListener );
     }
     #endif // CARAMEL_SYSTEM_IS_WINDOWS
+}
+
+
+void ConsoleApplicationImpl::BuildArguments( Int argc, Char* argv[] )
+{
+    CARAMEL_ASSERT( 1 <= argc );
+
+    // The first argument is program path, we don't need it
+
+    for ( Int i = 1; i < argc; ++ i )
+    {
+        m_arguments.push_back( std::string( argv[i] ));
+    }
 }
 
 
@@ -153,32 +180,11 @@ void ProgramOptionsManager::AddPositionalOptions( const std::vector< ProgramOpti
 // Parsing
 //
 
-void ProgramOptionsManager::ParseCommandLine()
+void ProgramOptionsManager::ParseArguments( const std::vector< std::string >& arguments )
 {
     namespace po = boost::program_options;
 
-    m_arguments.clear();
-
-    #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
-    {
-        // NOTES: split_winmain() suppose the parameter is the lpCmdLine in WinMain(),
-        //        but the return value of GetCommandLine() has prepended the program path.
-        //        We need to remove the first argument manually, therefore the for loop
-        //        starts at 1, not 0.
-
-        const std::vector< std::wstring > wargs = po::split_winmain( ::GetCommandLineW() );
-        
-        for ( Uint i = 1; i < wargs.size(); ++ i )
-        {
-            m_arguments.push_back( Utf8String( wargs[i] ).ToString() );
-        }
-    }
-    #else
-    {
-        CARAMEL_NOT_IMPLEMENTED();
-    }
-    #endif
-
+    m_arguments = arguments;
 
     po::store(
         po::command_line_parser( m_arguments )
@@ -191,6 +197,33 @@ void ProgramOptionsManager::ParseCommandLine()
 
     po::notify( m_variablesMap );
 }
+
+
+#if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+
+void ProgramOptionsManager::ParseCommandLine()
+{
+    namespace po = boost::program_options;
+
+    std::vector< std::string > arguments;
+
+    // NOTES: split_winmain() suppose the parameter is the lpCmdLine in WinMain(),
+    //        but the return value of GetCommandLine() has prepended the program path.
+    //        We need to remove the first argument manually, therefore the for loop
+    //        starts at 1, not 0.
+
+    const std::vector< std::wstring > wargs = po::split_winmain( ::GetCommandLineW() );
+        
+    for ( Uint i = 1; i < wargs.size(); ++ i )
+    {
+        arguments.push_back( Utf8String( wargs[i] ).ToString() );
+    }
+
+    this->ParseArguments( arguments );
+}
+
+#endif // CARAMEL_SYSTEM_IS_WINDOWS
+
 
 
 //
@@ -219,10 +252,20 @@ std::string ProgramOptionsManager::GetStringOption( const std::string& longName 
 // Program Options
 //
 
+void ProgramOptions::ParseArguments( const std::vector< std::string >& arguments )
+{
+    ProgramOptionsManager::Instance()->ParseArguments( arguments );
+}
+
+
+#if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+
 void ProgramOptions::ParseCommandLine()
 {
     ProgramOptionsManager::Instance()->ParseCommandLine();
 }
+
+#endif // CARAMEL_SYSTEM_IS_WINDOWS
 
 
 ///////////////////////////////////////////////////////////////////////////////

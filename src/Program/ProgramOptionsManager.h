@@ -43,6 +43,7 @@ public:
 
     /// Parsing ///
 
+    void ParseArguments( const std::vector< std::string >& arguments );
     void ParseCommandLine();
 
 

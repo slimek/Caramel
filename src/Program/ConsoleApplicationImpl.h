@@ -27,6 +27,14 @@ public:
 
     ConsoleApplicationImpl();
 
+    void BuildArguments( Int argc, Char* argv[] );
+
+    std::vector< std::string > GetArguments() const { return m_arguments; }
+
+
+private:
+
+    std::vector< std::string > m_arguments;
 };
 
 
