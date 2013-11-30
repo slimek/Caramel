@@ -5,6 +5,7 @@
 #include <Caramel/Chrono/SecondClock.h>
 #include <Caramel/Random/UniformRandom.h>
 #include <UnitTest++/UnitTest++.h>
+#include <cfloat>
 
 
 namespace Caramel
