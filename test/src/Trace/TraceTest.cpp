@@ -84,19 +84,19 @@ TEST( TraceTest )
     /// Message with hosting function name ///
 
     CARAMEL_TRACE_DEBUG_HERE( "Debug" );
-    CHECK( __FUNCTION__ " - Debug" == lis.Msg() );
+    CHECK( Sprintf( "%s - Debug", __FUNCTION__ ) == lis.Msg() );
     CHECK( Trace::LEVEL_DEBUG == lis.Lv() );
 
     CARAMEL_TRACE_INFO_HERE( "Info" );
-    CHECK( __FUNCTION__ " - Info" == lis.Msg() );
+    CHECK( Sprintf( "%s - Info", __FUNCTION__ ) == lis.Msg() );
     CHECK( Trace::LEVEL_INFO == lis.Lv() );
 
     CARAMEL_TRACE_WARN_HERE( "Warn" );
-    CHECK( __FUNCTION__ " - Warn" == lis.Msg() );
+    CHECK( Sprintf( "%s - Warn", __FUNCTION__ ) == lis.Msg() );
     CHECK( Trace::LEVEL_WARN == lis.Lv() );
 
     CARAMEL_TRACE_ERROR_HERE( "Error" );
-    CHECK( __FUNCTION__ " - Error" == lis.Msg() );
+    CHECK( Sprintf( "%s - Error", __FUNCTION__ ) == lis.Msg() );
     CHECK( Trace::LEVEL_ERROR == lis.Lv() );
 }
 

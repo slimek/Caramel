@@ -75,16 +75,16 @@ void WriteToBuiltinFailed( const std::string& message );
 //
 
 #define CARAMEL_TRACE_DEBUG_HERE( format_message, ... ) \
-    CARAMEL_TRACE_WRITE_TO_BUILTIN( Caramel::Trace::LEVEL_DEBUG, __FUNCTION__ ## " - " format_message, ##__VA_ARGS__ )
+    CARAMEL_TRACE_WRITE_TO_BUILTIN( Caramel::Trace::LEVEL_DEBUG, "%s - " ## format_message, __FUNCTION__, ##__VA_ARGS__ )
 
 #define CARAMEL_TRACE_INFO_HERE( format_message, ... ) \
-    CARAMEL_TRACE_WRITE_TO_BUILTIN( Caramel::Trace::LEVEL_INFO, __FUNCTION__ ## " - " format_message, ##__VA_ARGS__ )
+    CARAMEL_TRACE_WRITE_TO_BUILTIN( Caramel::Trace::LEVEL_INFO, "%s - " ## format_message, __FUNCTION__, ##__VA_ARGS__ )
 
 #define CARAMEL_TRACE_WARN_HERE( format_message, ... ) \
-    CARAMEL_TRACE_WRITE_TO_BUILTIN( Caramel::Trace::LEVEL_WARN, __FUNCTION__ ## " - " format_message, ##__VA_ARGS__ )
+    CARAMEL_TRACE_WRITE_TO_BUILTIN( Caramel::Trace::LEVEL_WARN, "%s - " ## format_message, __FUNCTION__, ##__VA_ARGS__ )
 
 #define CARAMEL_TRACE_ERROR_HERE( format_message, ... ) \
-    CARAMEL_TRACE_WRITE_TO_BUILTIN( Caramel::Trace::LEVEL_ERROR, __FUNCTION__ ## " - " format_message, ##__VA_ARGS__ )
+    CARAMEL_TRACE_WRITE_TO_BUILTIN( Caramel::Trace::LEVEL_ERROR, "%s - " ## format_message, __FUNCTION__, ##__VA_ARGS__ )
 
 
 ///////////////////////////////////////////////////////////////////////////////
