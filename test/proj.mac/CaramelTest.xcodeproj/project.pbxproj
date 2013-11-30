@@ -29,7 +29,18 @@
 		6A706EB81849859D004C9602 /* ThreadTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A706EA01849859D004C9602 /* ThreadTest.cpp */; };
 		6A706EB91849859D004C9602 /* TraceTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A706EA21849859D004C9602 /* TraceTest.cpp */; };
 		6A706EBA1849859D004C9602 /* NamedValuesTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A706EA41849859D004C9602 /* NamedValuesTest.cpp */; };
+		6AAF38F11849D3B00010FAF1 /* libCaramel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AAF38F01849D3940010FAF1 /* libCaramel.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6AAF38EF1849D3940010FAF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6AAF38EB1849D3930010FAF1 /* Caramel.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6A23F6861849A13C00FD4293;
+			remoteInfo = Caramel;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		6A706E6F1849853D004C9602 /* CopyFiles */ = {
@@ -70,6 +81,7 @@
 		6A706EA21849859D004C9602 /* TraceTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TraceTest.cpp; sourceTree = "<group>"; };
 		6A706EA41849859D004C9602 /* NamedValuesTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NamedValuesTest.cpp; sourceTree = "<group>"; };
 		6A706EBB184985D3004C9602 /* CaramelTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CaramelTest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6AAF38EB1849D3930010FAF1 /* Caramel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Caramel.xcodeproj; path = ../../proj.mac/Caramel.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AAF38F11849D3B00010FAF1 /* libCaramel.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +99,7 @@
 		6A706E681849853D004C9602 = {
 			isa = PBXGroup;
 			children = (
+				6AAF38EB1849D3930010FAF1 /* Caramel.xcodeproj */,
 				6A706E7D1849859D004C9602 /* src */,
 				6A706EBB184985D3004C9602 /* CaramelTest */,
 			);
@@ -236,6 +250,14 @@
 			path = Value;
 			sourceTree = "<group>";
 		};
+		6AAF38EC1849D3930010FAF1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6AAF38F01849D3940010FAF1 /* libCaramel.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -275,12 +297,28 @@
 			mainGroup = 6A706E681849853D004C9602;
 			productRefGroup = 6A706E681849853D004C9602;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 6AAF38EC1849D3930010FAF1 /* Products */;
+					ProjectRef = 6AAF38EB1849D3930010FAF1 /* Caramel.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				6A706E701849853D004C9602 /* CaramelTest */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		6AAF38F01849D3940010FAF1 /* libCaramel.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libCaramel.a;
+			remoteRef = 6AAF38EF1849D3940010FAF1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6A706E6D1849853D004C9602 /* Sources */ = {
@@ -358,6 +396,9 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-lBoost.Chrono",
+					"-lBoost.DateTime",
+					"-lBoost.Filesystem",
+					"-lBoost.ProgramOptions",
 					"-lBoost.System",
 					"-lUnitTest++",
 				);
@@ -403,6 +444,9 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = (
 					"-lBoost.Chrono",
+					"-lBoost.DateTime",
+					"-lBoost.Filesystem",
+					"-lBoost.ProgramOptions",
 					"-lBoost.System",
 					"-lUnitTest++",
 				);
