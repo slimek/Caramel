@@ -55,83 +55,83 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="RunTest.cpp">
+    <ClCompile Include="..\src\RunTest.cpp">
       <Filter>1. Main Entry</Filter>
     </ClCompile>
-    <ClCompile Include="Concurrent\PriorityQueueTest.cpp">
+    <ClCompile Include="..\src\Concurrent\PriorityQueueTest.cpp">
       <Filter>2. Tests\Concurrent</Filter>
     </ClCompile>
-    <ClCompile Include="Task\TaskPollerTest.cpp">
+    <ClCompile Include="..\src\Task\TaskPollerTest.cpp">
       <Filter>2. Tests\Task</Filter>
     </ClCompile>
-    <ClCompile Include="Chrono\ClockTest.cpp">
+    <ClCompile Include="..\src\Chrono\ClockTest.cpp">
       <Filter>2. Tests\Chrono</Filter>
     </ClCompile>
-    <ClCompile Include="Async\TimedBoolTest.cpp">
+    <ClCompile Include="..\src\Async\TimedBoolTest.cpp">
       <Filter>2. Tests\Async</Filter>
     </ClCompile>
-    <ClCompile Include="Async\FlowStateTest.cpp">
+    <ClCompile Include="..\src\Async\FlowStateTest.cpp">
       <Filter>2. Tests\Async</Filter>
     </ClCompile>
-    <ClCompile Include="Thread\ThreadTest.cpp">
+    <ClCompile Include="..\src\Thread\ThreadTest.cpp">
       <Filter>2. Tests\Thread</Filter>
     </ClCompile>
-    <ClCompile Include="Document\IniDocumentTest.cpp">
+    <ClCompile Include="..\src\Document\IniDocumentTest.cpp">
       <Filter>2. Tests\Document</Filter>
     </ClCompile>
-    <ClCompile Include="Statechart\StateMachineTest.cpp">
+    <ClCompile Include="..\src\Statechart\StateMachineTest.cpp">
       <Filter>2. Tests\Statechart</Filter>
     </ClCompile>
-    <ClCompile Include="Concurrent\MapTest.cpp">
+    <ClCompile Include="..\src\Concurrent\MapTest.cpp">
       <Filter>2. Tests\Concurrent</Filter>
     </ClCompile>
-    <ClCompile Include="Trace\TraceTest.cpp">
+    <ClCompile Include="..\src\Trace\TraceTest.cpp">
       <Filter>2. Tests\Trace</Filter>
     </ClCompile>
-    <ClCompile Include="Lexical\LexicalIntegerTest.cpp">
+    <ClCompile Include="..\src\Lexical\LexicalIntegerTest.cpp">
       <Filter>2. Tests\Lexical</Filter>
     </ClCompile>
-    <ClCompile Include="Enum\EnumLookupTest.cpp">
+    <ClCompile Include="..\src\Enum\EnumLookupTest.cpp">
       <Filter>2. Tests\Enum</Filter>
     </ClCompile>
-    <ClCompile Include="Thread\SpinMutexTest.cpp">
+    <ClCompile Include="..\src\Thread\SpinMutexTest.cpp">
       <Filter>2. Tests\Thread</Filter>
     </ClCompile>
-    <ClCompile Include="String\SprintfTest.cpp">
+    <ClCompile Include="..\src\String\SprintfTest.cpp">
       <Filter>2. Tests\String</Filter>
     </ClCompile>
-    <ClCompile Include="CaramelTestPch.cpp">
+    <ClCompile Include="..\src\CaramelTestPch.cpp">
       <Filter>3. Precompiled Header</Filter>
     </ClCompile>
-    <ClCompile Include="DateTime\DateTimeTest.cpp">
+    <ClCompile Include="..\src\DateTime\DateTimeTest.cpp">
       <Filter>2. Tests\DateTime</Filter>
     </ClCompile>
-    <ClCompile Include="Random\RandomTest.cpp">
+    <ClCompile Include="..\src\Random\RandomTest.cpp">
       <Filter>2. Tests\Random</Filter>
     </ClCompile>
-    <ClCompile Include="Lexical\LexicalFloatingTest.cpp">
+    <ClCompile Include="..\src\Lexical\LexicalFloatingTest.cpp">
       <Filter>2. Tests\Lexical</Filter>
     </ClCompile>
-    <ClCompile Include="String\StringAlgorithmTest.cpp">
+    <ClCompile Include="..\src\String\StringAlgorithmTest.cpp">
       <Filter>2. Tests\String</Filter>
     </ClCompile>
-    <ClCompile Include="Value\NamedValuesTest.cpp">
+    <ClCompile Include="..\src\Value\NamedValuesTest.cpp">
       <Filter>2. Tests\Value</Filter>
     </ClCompile>
-    <ClCompile Include="String\StringToStringTest.cpp">
+    <ClCompile Include="..\src\String\StringToStringTest.cpp">
       <Filter>2. Tests\String</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CaramelTestPch.h">
+    <ClInclude Include="..\src\CaramelTestPch.h">
       <Filter>3. Precompiled Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Document\test1.ini">
+    <None Include="..\src\Document\test1.ini">
       <Filter>2. Tests\Document</Filter>
     </None>
-    <None Include="Document\test2.ini">
+    <None Include="..\src\Document\test2.ini">
       <Filter>2. Tests\Document</Filter>
     </None>
   </ItemGroup>

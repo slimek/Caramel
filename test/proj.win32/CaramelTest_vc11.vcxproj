@@ -56,13 +56,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\include;..\..\CandyJar\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\src;..\..\include;..\..\..\CandyJar\include</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>CaramelTestPch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\..\CandyJar\lib\$(Platform).$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\CandyJar\lib\$(Platform).$(Configuration)</AdditionalLibraryDirectories>
       <AdditionalDependencies>UnitTest++.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -74,7 +74,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\include;..\..\CandyJar\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\src;..\..\include;..\..\..\CandyJar\include</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>CaramelTestPch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
@@ -82,46 +82,46 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>..\..\CandyJar\lib\$(Platform).$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\CandyJar\lib\$(Platform).$(Configuration)</AdditionalLibraryDirectories>
       <AdditionalDependencies>UnitTest++.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Async\FlowStateTest.cpp" />
-    <ClCompile Include="Async\TimedBoolTest.cpp" />
-    <ClCompile Include="CaramelTestPch.cpp">
+    <ClCompile Include="..\src\Async\FlowStateTest.cpp" />
+    <ClCompile Include="..\src\Async\TimedBoolTest.cpp" />
+    <ClCompile Include="..\src\CaramelTestPch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Chrono\ClockTest.cpp" />
-    <ClCompile Include="Concurrent\MapTest.cpp" />
-    <ClCompile Include="Concurrent\PriorityQueueTest.cpp" />
-    <ClCompile Include="DateTime\DateTimeTest.cpp" />
-    <ClCompile Include="Document\IniDocumentTest.cpp" />
-    <ClCompile Include="Enum\EnumLookupTest.cpp" />
-    <ClCompile Include="Lexical\LexicalFloatingTest.cpp" />
-    <ClCompile Include="Lexical\LexicalIntegerTest.cpp" />
-    <ClCompile Include="Random\RandomTest.cpp" />
-    <ClCompile Include="RunTest.cpp" />
-    <ClCompile Include="Statechart\StateMachineTest.cpp" />
-    <ClCompile Include="String\SprintfTest.cpp" />
-    <ClCompile Include="String\StringAlgorithmTest.cpp" />
-    <ClCompile Include="String\StringToStringTest.cpp" />
-    <ClCompile Include="Task\TaskPollerTest.cpp" />
-    <ClCompile Include="Thread\SpinMutexTest.cpp" />
-    <ClCompile Include="Thread\ThreadTest.cpp" />
-    <ClCompile Include="Trace\TraceTest.cpp" />
-    <ClCompile Include="Value\NamedValuesTest.cpp" />
+    <ClCompile Include="..\src\Chrono\ClockTest.cpp" />
+    <ClCompile Include="..\src\Concurrent\MapTest.cpp" />
+    <ClCompile Include="..\src\Concurrent\PriorityQueueTest.cpp" />
+    <ClCompile Include="..\src\DateTime\DateTimeTest.cpp" />
+    <ClCompile Include="..\src\Document\IniDocumentTest.cpp" />
+    <ClCompile Include="..\src\Enum\EnumLookupTest.cpp" />
+    <ClCompile Include="..\src\Lexical\LexicalFloatingTest.cpp" />
+    <ClCompile Include="..\src\Lexical\LexicalIntegerTest.cpp" />
+    <ClCompile Include="..\src\Random\RandomTest.cpp" />
+    <ClCompile Include="..\src\RunTest.cpp" />
+    <ClCompile Include="..\src\Statechart\StateMachineTest.cpp" />
+    <ClCompile Include="..\src\String\SprintfTest.cpp" />
+    <ClCompile Include="..\src\String\StringAlgorithmTest.cpp" />
+    <ClCompile Include="..\src\String\StringToStringTest.cpp" />
+    <ClCompile Include="..\src\Task\TaskPollerTest.cpp" />
+    <ClCompile Include="..\src\Thread\SpinMutexTest.cpp" />
+    <ClCompile Include="..\src\Thread\ThreadTest.cpp" />
+    <ClCompile Include="..\src\Trace\TraceTest.cpp" />
+    <ClCompile Include="..\src\Value\NamedValuesTest.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CaramelTestPch.h" />
+    <ClInclude Include="..\src\CaramelTestPch.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Document\test1.ini" />
-    <None Include="Document\test2.ini" />
+    <None Include="..\src\Document\test1.ini" />
+    <None Include="..\src\Document\test2.ini" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\proj.win32\Caramel_vc11.vcxproj">
+    <ProjectReference Include="..\..\proj.win32\Caramel_vc11.vcxproj">
       <Project>{ed63d1e4-3de9-4273-a22a-8b558e1bd6c0}</Project>
     </ProjectReference>
   </ItemGroup>
