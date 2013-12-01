@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_FILE_SYSTEM_PATH_H
 #define __CARAMEL_FILE_SYSTEM_PATH_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <Caramel/String/StringConvertible.h>
 #include <Caramel/String/Utf8String.h>
 #include <boost/operators.hpp>

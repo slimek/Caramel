@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_STRING_CAIN_LESS_H
 #define __CARAMEL_STRING_CAIN_LESS_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <boost/algorithm/string/predicate.hpp>
 
 

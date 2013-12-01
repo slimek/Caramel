@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_STRING_SPRINTF_H
 #define __CARAMEL_STRING_SPRINTF_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <Caramel/String/Detail/SprintfParameter.h>
 
 

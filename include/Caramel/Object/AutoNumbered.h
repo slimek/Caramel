@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_OBJECT_AUTO_NUMBERED_H
 #define __CARAMEL_OBJECT_AUTO_NUMBERED_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <atomic>
 
 

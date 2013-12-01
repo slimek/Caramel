@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_TRACE_TRACE_MANAGER_H
 #define __CARAMEL_TRACE_TRACE_MANAGER_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include "Object/FacilityLongevity.h"
 #include "Trace/ChannelImpl.h"
 #include <Caramel/Object/Singleton.h>

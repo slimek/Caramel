@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_STATECHART_STATE_MACHINE_IMPL_H
 #define __CARAMEL_STATECHART_STATE_MACHINE_IMPL_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include "Statechart/StateImpl.h"
 #include <Caramel/Concurrent/HashMap.h>
 #include <Caramel/Statechart/StateMachine.h>

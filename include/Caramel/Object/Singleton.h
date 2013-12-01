@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_OBJECT_SINGLETON_H
 #define __CARAMEL_OBJECT_SINGLETON_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <Caramel/Object/Detail/LifetimeTracker.h>
 #include <Caramel/Thread/SpinMutex.h>
 #include <boost/noncopyable.hpp>

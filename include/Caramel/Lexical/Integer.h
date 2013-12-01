@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_LEXICAL_INTEGER_H
 #define __CARAMEL_LEXICAL_INTEGER_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <Caramel/Meta/IntegralTypes.h>
 #include <type_traits>
 

@@ -2,12 +2,9 @@
 
 #ifndef __CARAMEL_VALUE_NAMED_VALUE_REF_H
 #define __CARAMEL_VALUE_NAMED_VALUE_REF_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
 
 
 namespace Caramel

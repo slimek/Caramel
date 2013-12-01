@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_THREAD_THREAD_TYPES_H
 #define __CARAMEL_THREAD_THREAD_TYPES_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <functional>
 
 

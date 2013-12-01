@@ -2,12 +2,9 @@
 
 #ifndef __CARAMEL_OBJECT_DETAIL_LIFETIME_TRACKER_H
 #define __CARAMEL_OBJECT_DETAIL_LIFETIME_TRACKER_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
 
 
 namespace Caramel

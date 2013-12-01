@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_TASK_TASK_FWD_H
 #define __CARAMEL_TASK_TASK_FWD_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <functional>
 
 

@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_TRACE_TRACE_H
 #define __CARAMEL_TRACE_TRACE_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <Caramel/String/Sprintf.h>
 #include <Caramel/Trace/TraceTypes.h>
 

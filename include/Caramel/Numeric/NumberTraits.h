@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_NUMERIC_NUMBER_TRAITS_H
 #define __CARAMEL_NUMERIC_NUMBER_TRAITS_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <Caramel/Meta/IfThenElse.h>
 #include <type_traits>
 

@@ -2,12 +2,9 @@
 
 #ifndef __CARAMEL_MATH_FLOATING_H
 #define __CARAMEL_MATH_FLOATING_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
 
 
 namespace Caramel

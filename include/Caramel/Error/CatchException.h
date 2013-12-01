@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_ERROR_CATCH_EXCEPTION_H
 #define __CARAMEL_ERROR_CATCH_EXCEPTION_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <Caramel/Error/Detail/ExceptionCatcherCore.h>
 #include <Caramel/Error/Exception.h>
 #include <type_traits>

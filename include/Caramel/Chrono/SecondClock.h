@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_CHRONO_SECOND_CLOCK_H
 #define __CARAMEL_CHRONO_SECOND_CLOCK_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <Caramel/Chrono/SteadyClock.h>
 #include <Caramel/Math/Floating.h>
 #include <Caramel/Numeric/NumberConvertible.h>

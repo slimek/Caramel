@@ -22,7 +22,6 @@
 
 // Compiler settings
 
-#define CARAMEL_COMPILER_HAS_PRAGMA_ONCE
 #define CARAMEL_STDCALL      __stdcall
 #define CARAMEL_CDECL        __cdecl
 #define CARAMEL_DEPRECATED   __declspec( deprecated )
@@ -49,7 +48,6 @@
 
 // Compiler settings
 
-#define CARAMEL_HAS_PRAGMA_ONCE
 #define CARAMEL_STDCALL    __attribute__(( stdcall ))
 #define CARAMEL_CDECL      __attribute__(( cdecl ))
 #define CARAMEL_DEPRECATED

@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_ENUM_LOOKUP_TABLE_H
 #define __CARAMEL_ENUM_LOOKUP_TABLE_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <Caramel/Lexical/Integer.h>
 #include <Caramel/Numeric/NumberTraits.h>
 #include <Caramel/String/CainLess.h>

@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_STRING_DETAIL_SPRINTF_PARAMETER_H
 #define __CARAMEL_STRING_DETAIL_SPRINTF_PARAMETER_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <Caramel/Meta/IfThenElse.h>
 #include <Caramel/Numeric/NumberConvertible.h>
 #include <Caramel/String/StringConvertible.h>

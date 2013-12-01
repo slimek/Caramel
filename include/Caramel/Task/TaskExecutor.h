@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_TASK_TASK_EXECUTOR_H
 #define __CARAMEL_TASK_TASK_EXECUTOR_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <Caramel/Task/Task.h>
 
 

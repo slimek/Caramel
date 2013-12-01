@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_THREAD_THIS_THREAD_H
 #define __CARAMEL_THREAD_THIS_THREAD_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <Caramel/Chrono/TickClock.h>
 
 

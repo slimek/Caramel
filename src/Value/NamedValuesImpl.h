@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_VALUE_NAMED_VALUES_IMPL_H
 #define __CARAMEL_VALUE_NAMED_VALUES_IMPL_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include "Value/NamedValueEntry.h"
 #include <Caramel/Value/NamedValues.h>
 #include <map>

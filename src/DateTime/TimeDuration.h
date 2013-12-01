@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_DATE_TIME_TIME_DURATION_H
 #define __CARAMEL_DATE_TIME_TIME_DURATION_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <boost/date_time/posix_time/posix_time.hpp>
 
 

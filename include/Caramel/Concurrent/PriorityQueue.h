@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_CONTURRENT_PRIORITY_QUEUE_H
 #define __CARAMEL_CONTURRENT_PRIORITY_QUEUE_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <Caramel/Thread/MutexLocks.h>
 #include <boost/heap/priority_queue.hpp>
 #include <boost/noncopyable.hpp>

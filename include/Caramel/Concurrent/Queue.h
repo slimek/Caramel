@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_CONCURRENT_QUEUE_H
 #define __CARAMEL_CONCURRENT_QUEUE_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <Caramel/Thread/MutexLocks.h>
 #include <boost/noncopyable.hpp>
 #include <deque>

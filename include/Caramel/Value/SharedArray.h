@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_VALUE_SHARED_ARRAY_H
 #define __CARAMEL_VALUE_SHARED_ARRAY_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <Caramel/Error/Assert.h>
 #include <Caramel/Trace/Trace.h>
 #include <boost/shared_array.hpp>

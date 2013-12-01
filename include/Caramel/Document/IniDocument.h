@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_DOCUMENT_INI_DOCUMENT_H
 #define __CARAMEL_DOCUMENT_INI_DOCUMENT_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <Caramel/Document/IniSection.h>
 #include <Caramel/FileSystem/Path.h>
 #include <Caramel/Io/TextReader.h>

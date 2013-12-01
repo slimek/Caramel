@@ -2,13 +2,10 @@
 
 #ifndef __CARAMEL_CARAMEL_H
 #define __CARAMEL_CARAMEL_H
+#pragma once
 
 #include <Caramel/Setup/Compiler.h>
 #include <Caramel/Setup/System.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
 
 // mandatory ANSI C++ 11 headers
 #include <cstdint>

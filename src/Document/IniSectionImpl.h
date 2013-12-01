@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_DOCUMENT_INI_SECTION_IMPL_H
 #define __CARAMEL_DOCUMENT_INI_SECTION_IMPL_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <Caramel/Document/IniSection.h>
 #include <Caramel/String/CainLess.h>
 #include <deque>

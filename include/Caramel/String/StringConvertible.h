@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_STRING_STRING_CONVERTIBLE_H
 #define __CARAMEL_STRING_STRING_CONVERTIBLE_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <Caramel/Meta/Utility.h>
 #include <iosfwd>
 #include <type_traits>

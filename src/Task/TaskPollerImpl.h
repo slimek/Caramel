@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_TASK_TASK_POLLER_IMPL_H
 #define __CARAMEL_TASK_TASK_POLLER_IMPL_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include "Task/TaskImpl.h"
 #include <Caramel/Concurrent/PriorityQueue.h>
 #include <Caramel/Concurrent/Queue.h>

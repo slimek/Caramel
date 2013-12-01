@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_DATE_TIME_TIME_SPAN_H
 #define __CARAMEL_DATE_TIME_TIME_SPAN_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <Caramel/Chrono/SecondClock.h>
 #include <boost/operators.hpp>
 

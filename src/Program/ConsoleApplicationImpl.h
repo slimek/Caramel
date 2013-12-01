@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_PROGRAM_CONSOLE_APPLICATION_IMPL_H
 #define __CARAMEL_PROGRAM_CONSOLE_APPLICATION_IMPL_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <Caramel/Program/ConsoleApplication.h>
 #include <Caramel/Trace/Listeners.h>
 

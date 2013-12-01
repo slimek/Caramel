@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_META_IF_THEN_ELSE_H
 #define __CARAMEL_META_IF_THEN_ELSE_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <Caramel/Meta/Select.h>
 
 

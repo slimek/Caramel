@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_DEBUG_SCOPE_TIMING_H
 #define __CARAMEL_DEBUG_SCOPE_TIMING_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <Caramel/Chrono/TickClock.h>
 
 

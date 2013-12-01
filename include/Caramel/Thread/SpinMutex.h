@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_THREAD_SPIN_MUTEX_H
 #define __CARAMEL_THREAD_SPIN_MUTEX_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <boost/noncopyable.hpp>
 #include <boost/smart_ptr/detail/spinlock_pool.hpp>
 

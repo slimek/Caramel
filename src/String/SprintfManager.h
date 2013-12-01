@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_STRING_SPRINTF_MANAGER_H
 #define __CARAMEL_STRING_SPRINTF_MANAGER_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include "Object/FacilityLongevity.h"
 #include <Caramel/Concurrent/Queue.h>
 #include <Caramel/Object/Singleton.h>

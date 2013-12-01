@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_STATECHART_STATE_IMPL_H
 #define __CARAMEL_STATECHART_STATE_IMPL_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include "Statechart/Transition.h"
 #include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Concurrent/HashMap.h>

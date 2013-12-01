@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_IO_TEXT_STREAM_READER_H
 #define __CARAMEL_IO_TEXT_STREAM_READER_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <Caramel/Io/InputStream.h>
 #include <Caramel/Io/TextReader.h>
 #include <Caramel/String/TextEncoding.h>

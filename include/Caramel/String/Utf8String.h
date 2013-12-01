@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_STRING_UTF8_STRING_H
 #define __CARAMEL_STRING_UTF8_STRING_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <Caramel/Error/Exception.h>
 #include <Caramel/String/StringConvertible.h>
 #include <Caramel/String/TextEncoding.h>

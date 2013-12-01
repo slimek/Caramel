@@ -2,12 +2,9 @@
 
 #ifndef __CARAMEL_WINDOWS_WIDE_STRING_H
 #define __CARAMEL_WINDOWS_WIDE_STRING_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
 
 
 #if defined( CARAMEL_SYSTEM_IS_WINDOWS )

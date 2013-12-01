@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_ASYNC_FLOW_STATE_H
 #define __CARAMEL_ASYNC_FLOW_STATE_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <Caramel/Chrono/SecondClock.h>
 #include <Caramel/Numeric/NumberConvertible.h>
 #include <Caramel/Numeric/NumberTraits.h>

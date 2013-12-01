@@ -2,13 +2,9 @@
 
 #ifndef __CARAMEL_IO_FILE_STREAM_H
 #define __CARAMEL_IO_FILE_STREAM_H
+#pragma once
 
 #include <Caramel/Caramel.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
-#pragma once
-#endif
-
 #include <Caramel/String/Utf8String.h>
 #include <cstdio>
 
