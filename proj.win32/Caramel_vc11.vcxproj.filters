@@ -488,6 +488,9 @@
     <ClInclude Include="..\include\Caramel\String\ToString.h">
       <Filter>1. Public Packages\String</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Setup\Version.h">
+      <Filter>1. Public Packages\Setup</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">
