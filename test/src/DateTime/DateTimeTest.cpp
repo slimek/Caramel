@@ -45,6 +45,15 @@ TEST( DateTimeTest )
 
     CHECK( "2013-04-05 02:35:18" == time3.ToString() );
 
+
+    /// Valid Test ///
+
+    const DateTime dtnil;  // not initialized / not a date-time
+
+    CHECK( true  == now.IsValid() );
+    CHECK( true  == time1.IsValid() );
+    CHECK( false == dtnil.IsValid() );
+
 }
 
 

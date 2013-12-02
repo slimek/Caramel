@@ -53,6 +53,13 @@ DateTime DateTime::FromString( const std::string& s )
 
 
 //
+// Properties
+//
+
+Bool DateTime::IsValid() const { return ! m_impl->is_not_a_date_time(); }
+
+
+//
 // Accessors
 //
 

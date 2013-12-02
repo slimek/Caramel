@@ -33,6 +33,11 @@ public:
     static DateTime FromString( const std::string& s );
 
 
+    /// Properties ///
+
+    Bool IsValid() const;  // False if impl is "not a date time".
+
+
     /// Accessors ///
 
     Int Year()  const;
