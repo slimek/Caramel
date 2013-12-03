@@ -1,6 +1,7 @@
 // Caramel C++ Library - Precompiled Header Creator
 
 #include "CaramelPch.h"
+#include <boost/version.hpp>
 
 void CaramelPchDummy() {}
 
@@ -26,6 +27,11 @@ static_assert( 4 == sizeof( Long ),  "sizeof( Long ) should be 4" );
 static_assert( 4 == sizeof( Ulong ), "sizeof( Ulong ) should be 4" );
 
 #endif
+
+
+/// Boost Versions ///
+
+static_assert( 105400 == BOOST_VERSION, "Boost version not matched" );
 
 
 ///////////////////////////////////////////////////////////////////////////////
