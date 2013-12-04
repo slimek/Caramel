@@ -108,16 +108,16 @@ TEST( NamedValuesTest )
     CHECK( 65535 == cnv[ "u16max" ].AsInt() );
 
 
-    /// Long Integers ///
+    /// Long Integers - Treats long as int32 ///
 
-    const Long  lmax  = LONG_MAX;
-    const Ulong ulmax = ULONG_MAX;
+    const Long  lmax  = INT32_MAX;
+    const Ulong ulmax = UINT32_MAX;
 
     nv[ "lmax" ]  = lmax;
     nv[ "ulmax" ] = ulmax;
 
-    CHECK( LONG_MAX  == cnv[ "lmax" ].AsInt() );
-    CHECK( ULONG_MAX == cnv[ "ulmax" ].AsUint() );
+    CHECK( INT32_MAX  == cnv[ "lmax" ].AsInt() );
+    CHECK( UINT32_MAX == cnv[ "ulmax" ].AsUint() );
 }
 
 
