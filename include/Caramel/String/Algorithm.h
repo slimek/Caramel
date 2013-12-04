@@ -22,6 +22,12 @@ Bool Contains( const std::string& s, Char c );
 Bool EndsWith( const std::string& s, Char c );
 
 
+// String : String
+
+Bool StartsWith( const std::string& input, const std::string& test );
+Bool EndsWith  ( const std::string& input, const std::string& test );
+
+
 /// Case insensitive ///
 
 // String : String

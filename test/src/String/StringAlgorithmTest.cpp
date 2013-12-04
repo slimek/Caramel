@@ -31,6 +31,26 @@ TEST( StringPredicateTest )
     CHECK( false == EndsWith( "Alice", 'c' ));
     CHECK( false == EndsWith( "",      'f' ));
 
+    /// String : String ///
+
+    CHECK( true  == StartsWith( "Alice", "A" ));
+    CHECK( true  == StartsWith( "Alice", "Ali" ));
+    CHECK( true  == StartsWith( "Alice", "Alice" ));
+    CHECK( true  == StartsWith( "Alice", "" ));
+    CHECK( false == StartsWith( "Alice", "ali" ));
+    CHECK( false == StartsWith( "Alice", "bad" ));
+    CHECK( false == StartsWith( "Alice", "Alice3" ));
+    CHECK( false == StartsWith( "",      "Ali" ));
+
+    CHECK( true  == EndsWith( "Alice", "e" ));
+    CHECK( true  == EndsWith( "Alice", "ice" ));
+    CHECK( true  == EndsWith( "Alice", "Alice" ));
+    CHECK( true  == EndsWith( "Alice", "" ));
+    CHECK( false == EndsWith( "Alice", "E" ));
+    CHECK( false == EndsWith( "Alice", "bad" ));
+    CHECK( false == EndsWith( "Alice", "Alice3" ));
+    CHECK( false == EndsWith( "",      "ice" ));
+
 
     //
     // Case Insensitive
