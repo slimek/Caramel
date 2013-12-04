@@ -40,7 +40,7 @@ public:
     /// Properties ///
 
     Bool IsEmpty() const { return m_map.empty(); }
-    Uint Size()    const { return m_map.size(); }
+    Uint Size()    const { return static_cast< Uint >( m_map.size() ); }
 
 
     /// Accessors ///
