@@ -16,7 +16,6 @@
 #if defined( _WIN32 ) || defined( _WIN64 )
 
 #define CARAMEL_SYSTEM_IS_WINDOWS
-
 #define CARAMEL_SYSTEM_NAME "Windows"
 
 
@@ -40,20 +39,25 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// System - iOS
+// System - iOS / Mac OS X
 //
 
 #if defined( __APPLE__ ) && defined( __MACH__ )
 
 #include <TargetConditionals.h>
 
-#if( defined( TARGET_OS_IPHONE ) || defined( TARGET_IPHONE_SIMULATOR ))
+#if defined( TARGET_OS_IPHONE ) || defined( TARGET_IPHONE_SIMULATOR )
 
 #define CARAMEL_SYSTEM_IS_IOS
-
 #define CARAMEL_SYSTEM_NAME "iOS"
 
+#elif defined( TARGET_OS_MAC )
+
+#define CARAMEL_SYSTEM_IS_OSX
+#define CARAMEL_SYSTEM_NAME "OS X"
+
 #endif
+
 
 #endif // __APPLE__ and __MACH__
 
@@ -66,7 +70,6 @@
 #if defined( ANDROID ) || defined( __ANDROID__ )
 
 #define CARAMEL_SYSTEM_IS_ANDROID
-
 #define CARAMEL_SYSTEM_NAME "Android"
 
 
