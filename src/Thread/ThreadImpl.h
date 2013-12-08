@@ -6,6 +6,7 @@
 
 #include <Caramel/Caramel.h>
 #include "Thread/ThreadIdImpl.h"
+#include <Caramel/Async/WaitableBool.h>
 #include <Caramel/Thread/Thread.h>
 #include <thread>
 
@@ -20,6 +21,8 @@ namespace Caramel
 
 class ThreadImpl
 {
+    friend class Thread;
+
 public:
 
     ThreadImpl( const std::string& name, WorkFunction work );
@@ -36,7 +39,8 @@ private:
 
     std::unique_ptr< std::thread > m_thread;
 
-    ThreadIdPtr m_threadId;
+    ThreadIdPtr  m_threadId;
+    WaitableBool m_started;
 };
 
 

@@ -21,7 +21,7 @@ class ThisThread
 {
 public:
 
-    static ThreadId GetThreadId();
+    static ThreadId GetId();
 
     static void SleepFor( const Ticks& duration );
 };

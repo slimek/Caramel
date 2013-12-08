@@ -40,6 +40,8 @@ public:
 
     /// Properties ///
 
+    ThreadId GetId() const;
+
 
 private:
 

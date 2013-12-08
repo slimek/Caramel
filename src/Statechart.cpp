@@ -119,7 +119,7 @@ void StateMachineImpl::ProcessInitiate( StatePtr initialState )
 {
     auto ulock = UniqueLock( m_mutex );
 
-    m_actionThreadId = ThisThread::GetThreadId();
+    m_actionThreadId = ThisThread::GetId();
     auto guard = ScopeExit( [=] { m_actionThreadId = ThreadId(); } );
 
     m_currentState = initialState;
@@ -132,7 +132,7 @@ void StateMachineImpl::ProcessEvent( Int eventId )
 {
     auto ulock = UniqueLock( m_mutex );
 
-    m_actionThreadId = ThisThread::GetThreadId();
+    m_actionThreadId = ThisThread::GetId();
     auto guard = ScopeExit( [=] { m_actionThreadId = ThreadId(); } );
 
     TransitionPtr transition;

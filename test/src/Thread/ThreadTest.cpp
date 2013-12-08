@@ -2,6 +2,7 @@
 
 #include "CaramelTestPch.h"
 
+#include <Caramel/Async/WaitableBool.h>
 #include <Caramel/Chrono/SecondClock.h>
 #include <Caramel/Thread/ThisThread.h>
 #include <Caramel/Thread/Thread.h>
@@ -47,11 +48,51 @@ TEST( ThreadTest )
 
 TEST( ThreadIdTest )
 {
-    auto threadId = ThisThread::GetThreadId();
+    /// Current Thread ///
+
+    auto threadId = ThisThread::GetId();
 
     #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
-    CHECK( threadId.GetNativeId() == ::GetCurrentThreadId() );
+    {
+        const Uint32 curId = ::GetCurrentThreadId();
+
+        CHECK( threadId.GetNativeId() == curId );
+        CHECK( threadId.ToString() == Sprintf( "%u", curId ));
+    }
     #endif
+
+    /// Operators ///
+
+    // Both are "not a thread"
+    ThreadId id01;
+    ThreadId id02;
+    
+    CHECK( id01 == id02 );
+    CHECK( false == ( id01 < id02 ));
+    CHECK( false == ( id02 < id01 ));
+
+    CHECK( id01 != threadId );
+    CHECK( id01 <  threadId );
+
+
+    /// Compare with Another Thread ///
+
+    ThreadId t1Id;
+    WaitableBool ready;
+    Bool checked = false;
+
+    Thread t1( "Test1", [&]
+    {
+        ready.Wait();
+        checked = ( t1Id == ThisThread::GetId() );
+    });
+
+    t1Id = t1.GetId();
+    ready = true;
+
+    t1.Join();
+
+    CHECK( checked );
 }
 
 

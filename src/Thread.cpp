@@ -56,7 +56,17 @@ void Thread::Start( const std::string& name, WorkFunction work )
 void Thread::Join()
 {
     CARAMEL_ASSERT( m_impl );
-    m_impl->Join();
+    m_impl->m_thread->join();
+}
+
+
+//
+// Properties
+//
+
+ThreadId Thread::GetId() const
+{
+    return ThreadId( m_impl->m_threadId );
 }
 
 
@@ -69,12 +79,15 @@ ThreadImpl::ThreadImpl( const std::string& name, WorkFunction work )
     , m_workFunction( work )
 {
     m_thread.reset( new std::thread( [=] { this->RunWork(); } ));
-    m_threadId = std::make_shared< ThreadIdImpl >( m_thread->get_id() );
+    m_started.Wait();
 }
 
 
 void ThreadImpl::RunWork()
 {
+    m_threadId = std::make_shared< ThreadIdImpl >( std::this_thread::get_id() );
+    m_started = true;
+
     auto xc = CatchException( m_workFunction );
     if ( xc )
     {
@@ -102,6 +115,31 @@ ThreadId::ThreadId()
 ThreadId::ThreadId( ThreadIdPtr impl )
     : m_impl( impl )
 {
+}
+
+
+//
+// Operators
+//
+
+Bool ThreadId::operator==( const ThreadId& rhs ) const
+{
+    if ( ! m_impl && ! rhs.m_impl ) { return true; }  // Both are "not a thread"
+
+    if ( ! m_impl || ! rhs.m_impl ) { return false; }
+
+    return *m_impl == *rhs.m_impl;
+}
+
+
+Bool ThreadId::operator<( const ThreadId& rhs ) const
+{
+    if ( ! m_impl && ! rhs.m_impl ) { return false; }
+
+    if ( ! m_impl && rhs.m_impl ) { return true; }
+    if ( m_impl && ! rhs.m_impl ) { return false; }
+
+    return *m_impl < *rhs.m_impl;
 }
 
 
@@ -160,7 +198,7 @@ ThreadIdImpl::ThreadIdImpl( const std::thread::id& threadId )
 // This Thread
 //
 
-ThreadId ThisThread::GetThreadId()
+ThreadId ThisThread::GetId()
 {
     return ThreadId( std::make_shared< ThreadIdImpl >( std::this_thread::get_id() ));
 }
