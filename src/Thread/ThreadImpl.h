@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
+#include "Thread/ThreadIdImpl.h"
 #include <Caramel/Thread/Thread.h>
 #include <thread>
 
@@ -34,6 +35,8 @@ private:
     WorkFunction m_workFunction;
 
     std::unique_ptr< std::thread > m_thread;
+
+    ThreadIdPtr m_threadId;
 };
 
 

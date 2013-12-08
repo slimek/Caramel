@@ -491,6 +491,12 @@
     <ClInclude Include="..\include\Caramel\Setup\Version.h">
       <Filter>1. Public Packages\Setup</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Thread\ThreadId.h">
+      <Filter>1. Public Packages\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Thread\ThreadIdImpl.h">
+      <Filter>2. Sources\Thread</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

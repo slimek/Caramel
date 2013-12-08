@@ -9,6 +9,7 @@
 #include <Caramel/Concurrent/HashMap.h>
 #include <Caramel/Statechart/StateMachine.h>
 #include <Caramel/Task/TaskPoller.h>
+#include <Caramel/Thread/ThreadId.h>
 #include <mutex>
 
 
@@ -72,7 +73,7 @@ private:
     Uint      m_transitNumber;     // How many times of transition.
     TickPoint m_currentStartTime;  // The start time of current state.
 
-    Uint m_actionThreadId;
+    ThreadId m_actionThreadId;
 
     std::mutex m_mutex;
 };

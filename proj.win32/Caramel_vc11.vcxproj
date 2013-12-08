@@ -93,6 +93,7 @@
     <ClInclude Include="..\include\Caramel\Thread\SpinMutex.h" />
     <ClInclude Include="..\include\Caramel\Thread\ThisThread.h" />
     <ClInclude Include="..\include\Caramel\Thread\Thread.h" />
+    <ClInclude Include="..\include\Caramel\Thread\ThreadId.h" />
     <ClInclude Include="..\include\Caramel\Thread\ThreadTypes.h" />
     <ClInclude Include="..\include\Caramel\Trace\Channel.h" />
     <ClInclude Include="..\include\Caramel\Trace\Listeners.h" />
@@ -127,6 +128,7 @@
     <ClInclude Include="..\src\String\SprintfManager.h" />
     <ClInclude Include="..\src\Task\TaskImpl.h" />
     <ClInclude Include="..\src\Task\TaskPollerImpl.h" />
+    <ClInclude Include="..\src\Thread\ThreadIdImpl.h" />
     <ClInclude Include="..\src\Thread\ThreadImpl.h" />
     <ClInclude Include="..\src\Trace\ChannelImpl.h" />
     <ClInclude Include="..\src\Trace\TraceManager.h" />

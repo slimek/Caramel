@@ -6,6 +6,7 @@
 
 #include <Caramel/Caramel.h>
 #include <Caramel/Chrono/TickClock.h>
+#include <Caramel/Thread/ThreadId.h>
 
 
 namespace Caramel
@@ -20,7 +21,7 @@ class ThisThread
 {
 public:
 
-    static Uint GetThreadId();
+    static ThreadId GetThreadId();
 
     static void SleepFor( const Ticks& duration );
 };

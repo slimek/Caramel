@@ -2,9 +2,17 @@
 
 #include "CaramelPch.h"
 
+#include "Thread/ThreadIdImpl.h"
 #include "Thread/ThreadImpl.h"
 #include <Caramel/Error/CatchException.h>
 #include <Caramel/Thread/ThisThread.h>
+#include <sstream>
+
+#if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+#include <Windows.h>
+#else
+#include <pthread.h>
+#endif
 
 
 namespace Caramel
@@ -14,6 +22,7 @@ namespace Caramel
 // Contents
 //
 //   Thread
+//   ThreadId
 //   ThisThread
 //
 
@@ -60,6 +69,7 @@ ThreadImpl::ThreadImpl( const std::string& name, WorkFunction work )
     , m_workFunction( work )
 {
     m_thread.reset( new std::thread( [=] { this->RunWork(); } ));
+    m_threadId = std::make_shared< ThreadIdImpl >( m_thread->get_id() );
 }
 
 
@@ -81,28 +91,78 @@ void ThreadImpl::Join()
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// This Thread
+// Thread ID
 //
 
-Uint ThisThread::GetThreadId()
+ThreadId::ThreadId()
+{
+}
+
+
+ThreadId::ThreadId( ThreadIdPtr impl )
+    : m_impl( impl )
+{
+}
+
+
+//
+// Properties
+//
+
+std::string ThreadId::ToString() const
+{
+    if ( ! m_impl ) { return "(null)"; }
+
+    std::stringstream ss;
+    ss << *m_impl;
+    return ss.str();
+}
+
+
+Uint32 ThreadId::GetNativeId() const
+{
+    if ( ! m_impl ) { return 0; }
+
+    if ( ! m_impl->m_nativeId )
+    {
+        CARAMEL_THROW( "Native id not supported in this system" );
+    }
+
+    return *( m_impl->m_nativeId );
+}
+
+
+//
+// Implementation
+//
+
+ThreadIdImpl::ThreadIdImpl( const std::thread::id& threadId )
+    : std::thread::id( threadId )
 {
     #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
     {
-        return ::GetCurrentThreadId();
+        m_nativeId = ::GetCurrentThreadId();
     }
-    #elif defined( CARAMEL_SYSTEM_IS_IOS )
+    #elif defined( CARAMEL_SYSTEM_IS_IOS ) || defined( CARAMEL_SYSTEM_IS_OSX )
     {
-        return ::pthread_mach_thread_np( ::pthread_self() );
+        m_nativeId = ::pthread_mach_thread_np( ::pthread_self() );
     }
     #elif defined( CARAMEL_SYSTEM_IS_ANDROID )
     {
-        return ::pthread_self();
+        m_nativeId = ::pthread_self();
     }
-    #else
-    {
-        CARAMEL_NOT_IMPLEMENTED();
-    }
-    #endif    
+    #endif
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// This Thread
+//
+
+ThreadId ThisThread::GetThreadId()
+{
+    return ThreadId( std::make_shared< ThreadIdImpl >( std::this_thread::get_id() ));
 }
 
 

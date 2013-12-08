@@ -11,6 +11,8 @@
 #include <Windows.h>
 #endif
 
+#include <thread>
+
 namespace Caramel
 {
 
@@ -45,10 +47,10 @@ TEST( ThreadTest )
 
 TEST( ThreadIdTest )
 {
-    const Uint threadId = ThisThread::GetThreadId();
+    auto threadId = ThisThread::GetThreadId();
 
     #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
-    CHECK( threadId == ::GetCurrentThreadId() );
+    CHECK( threadId.GetNativeId() == ::GetCurrentThreadId() );
     #endif
 }
 

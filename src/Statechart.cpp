@@ -110,7 +110,6 @@ StateMachineImpl::StateMachineImpl( const std::string& name )
     , m_taskExecutor( nullptr )
     , m_builtinTaskPoller( new TaskPoller )
     , m_transitNumber( 0 )
-    , m_actionThreadId( 0 )
 {
     m_taskExecutor = m_builtinTaskPoller.get();
 }
@@ -121,7 +120,7 @@ void StateMachineImpl::ProcessInitiate( StatePtr initialState )
     auto ulock = UniqueLock( m_mutex );
 
     m_actionThreadId = ThisThread::GetThreadId();
-    auto guard = ScopeExit( [=] { m_actionThreadId = 0; } );
+    auto guard = ScopeExit( [=] { m_actionThreadId = ThreadId(); } );
 
     m_currentState = initialState;
 
@@ -134,7 +133,7 @@ void StateMachineImpl::ProcessEvent( Int eventId )
     auto ulock = UniqueLock( m_mutex );
 
     m_actionThreadId = ThisThread::GetThreadId();
-    auto guard = ScopeExit( [=] { m_actionThreadId = 0; } );
+    auto guard = ScopeExit( [=] { m_actionThreadId = ThreadId(); } );
 
     TransitionPtr transition;
     if ( m_currentState->m_transitions.Find( eventId, transition ))
