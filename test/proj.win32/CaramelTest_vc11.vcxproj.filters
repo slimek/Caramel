@@ -121,6 +121,9 @@
     <ClCompile Include="..\src\String\StringToStringTest.cpp">
       <Filter>2. Tests\String</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Async\WaitableBoolTest.cpp">
+      <Filter>2. Tests\Async</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">

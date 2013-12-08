@@ -497,6 +497,9 @@
     <ClInclude Include="..\src\Thread\ThreadIdImpl.h">
       <Filter>2. Sources\Thread</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Async\WaitableBool.h">
+      <Filter>1. Public Packages\Async</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">
