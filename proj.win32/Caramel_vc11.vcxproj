@@ -113,7 +113,7 @@
     <ClInclude Include="..\src\Debug\DebugManager.h" />
     <ClInclude Include="..\src\Document\IniDocumentImpl.h" />
     <ClInclude Include="..\src\Document\IniSectionImpl.h" />
-    <ClInclude Include="..\src\Document\IniSyntax.h" />
+    <ClInclude Include="..\src\Document\IniLine.h" />
     <ClInclude Include="..\src\FileSystem\PathImpl.h" />
     <ClInclude Include="..\src\Io\MbcsStreamReader.h" />
     <ClInclude Include="..\src\Io\Utf16LeStreamReader.h" />

@@ -389,9 +389,6 @@
     <ClInclude Include="..\src\Document\IniSectionImpl.h">
       <Filter>2. Sources\Document</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Document\IniSyntax.h">
-      <Filter>2. Sources\Document</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\FileSystem\PathImpl.h">
       <Filter>2. Sources\FileSystem</Filter>
     </ClInclude>
@@ -499,6 +496,9 @@
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Async\WaitableBool.h">
       <Filter>1. Public Packages\Async</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Document\IniLine.h">
+      <Filter>2. Sources\Document</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

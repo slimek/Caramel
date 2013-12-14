@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
+#include "Document/IniSectionImpl.h"
 #include <Caramel/Document/IniDocument.h>
 #include <Caramel/String/CainLess.h>
 #include <map>
@@ -13,9 +14,6 @@
 namespace Caramel
 {
 
-class IniSectionImpl;
-typedef std::shared_ptr< IniSectionImpl > IniSectionPtr;
-
 ///////////////////////////////////////////////////////////////////////////////
 //
 // INI File View
@@ -23,8 +21,6 @@ typedef std::shared_ptr< IniSectionImpl > IniSectionPtr;
 
 class IniDocumentImpl
 {
-    friend class IniFileView;
-
 public:
 
     IniDocumentImpl();

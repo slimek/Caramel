@@ -3,8 +3,8 @@
 #include "CaramelPch.h"
 
 #include "Document/IniDocumentImpl.h"
+#include "Document/IniLine.h"
 #include "Document/IniSectionImpl.h"
-#include "Document/IniSyntax.h"
 #include <Caramel/Io/InputFileStream.h>
 #include <Caramel/Io/TextStreamReader.h>
 #include <Caramel/Lexical/Boolean.h>
