@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
+#include <type_traits>
 
 
 namespace Caramel
@@ -36,8 +37,8 @@ template< typename T > T MakeT();
 // Boolean Types
 //
 
-struct TrueType  { static const Bool VALUE = true; };
-struct FalseType { static const Bool VALUE = false; };
+struct TrueType  : public std::true_type  { static const Bool VALUE = true; };
+struct FalseType : public std::false_type { static const Bool VALUE = false; };
 
 template< Bool expr > struct BoolType;
 
