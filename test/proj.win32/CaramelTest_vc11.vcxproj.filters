@@ -124,6 +124,9 @@
     <ClCompile Include="..\src\Async\WaitableBoolTest.cpp">
       <Filter>2. Tests\Async</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Value\AnyTest.cpp">
+      <Filter>2. Tests\Value</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">

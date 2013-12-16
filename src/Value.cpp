@@ -2,11 +2,14 @@
 
 #include "CaramelPch.h"
 
+#include "Value/AnyHoldersImpl.h"
 #include "Value/NamedValuesImpl.h"
 #include <Caramel/Lexical/Boolean.h>
 #include <Caramel/Lexical/Floating.h>
 #include <Caramel/Lexical/Integer.h>
 #include <Caramel/String/ToString.h>
+#include <Caramel/Value/Any.h>
+#include <limits>
 
 
 namespace Caramel
@@ -15,11 +18,101 @@ namespace Caramel
 //
 // Contents
 //
+//   AnyNumber
 //   NamedValues
 //   ConstNamedValueRef
 //   NamedValueRef
 //   NamedValueEntry
 //
+
+namespace Detail
+{
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Any Number
+//
+
+AnyNumber::AnyNumber( Int value )
+    : m_impl( new AnyNumberImpl( static_cast< Int64 >( value )))
+{}
+
+AnyNumber::AnyNumber( Uint value )
+    : m_impl( new AnyNumberImpl( static_cast< Int64 >( value )))
+{}
+
+
+AnyNumber::~AnyNumber()
+{
+}
+
+
+//
+// Implementation
+//
+
+AnyNumberImpl::AnyNumberImpl( Int64 value )
+    : m_type( ANY_NUMBER_INT64 )
+    , m_value( value )
+{
+}
+
+
+template< typename T >
+void AnyNumberImpl::Get( T& value ) const
+{
+    const T MAX_VALUE = std::numeric_limits< T >::max();
+    const T MIN_VALUE = std::numeric_limits< T >::min();
+
+    switch ( m_type )
+    {
+    case ANY_NUMBER_INT64:
+    {
+        const Int64 ivalue = boost::get< Int64 >( m_value );
+        CARAMEL_CHECK( MAX_VALUE >= ivalue && ivalue >= MIN_VALUE );
+        value = static_cast< T >( ivalue );
+        break;
+    }
+
+    case ANY_NUMBER_UINT64:
+    {
+        const Uint64 uvalue = boost::get< Uint64 >( m_value );
+        CARAMEL_CHECK( MAX_VALUE >= uvalue && uvalue >= MIN_VALUE );
+        value = static_cast< T >( uvalue );
+        break;
+    }
+
+    case ANY_NUMBER_DOUBLE:
+    {
+        const Double dvalue = boost::get< Double >( m_value );
+        CARAMEL_CHECK( MAX_VALUE >= dvalue && dvalue >= MIN_VALUE );
+        value = static_cast< T >( dvalue );
+        break;
+    }
+
+    default:
+        CARAMEL_NOT_REACHED();
+    }
+}
+
+
+//
+// Retrieve Value
+//
+
+void AnyNumber::Get( Int& value ) const
+{
+    m_impl->Get( value );
+}
+
+
+void AnyNumber::Get( Uint& value ) const
+{
+    m_impl->Get( value );
+}
+
+
+} // namespace Detail
 
 ///////////////////////////////////////////////////////////////////////////////
 //
