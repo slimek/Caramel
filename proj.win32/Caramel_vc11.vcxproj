@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\Caramel\Async\AnyEvent.h" />
     <ClInclude Include="..\include\Caramel\Async\FlowState.h" />
     <ClInclude Include="..\include\Caramel\Async\TimedBool.h" />
     <ClInclude Include="..\include\Caramel\Async\WaitableBool.h" />

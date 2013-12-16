@@ -90,6 +90,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\Async\AnyEventTest.cpp" />
     <ClCompile Include="..\src\Async\FlowStateTest.cpp" />
     <ClCompile Include="..\src\Async\TimedBoolTest.cpp" />
     <ClCompile Include="..\src\Async\WaitableBoolTest.cpp" />

@@ -133,6 +133,9 @@
     <ClCompile Include="..\src\Numeric\NumberTraitsTest.cpp">
       <Filter>2. Tests\Numeric</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Async\AnyEventTest.cpp">
+      <Filter>2. Tests\Async</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">

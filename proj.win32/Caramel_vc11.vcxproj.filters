@@ -512,6 +512,9 @@
     <ClInclude Include="..\include\Caramel\Value\Detail\AnyCasters.h">
       <Filter>1. Public Packages\Value\Detail headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Async\AnyEvent.h">
+      <Filter>1. Public Packages\Async</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">
