@@ -19,6 +19,7 @@ namespace Caramel
 // Contents
 //
 //   AnyNumber
+//   AnyString
 //   NamedValues
 //   ConstNamedValueRef
 //   NamedValueRef
@@ -109,6 +110,25 @@ void AnyNumber::Get( Int& value ) const
 void AnyNumber::Get( Uint& value ) const
 {
     m_impl->Get( value );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Any String
+//
+
+AnyString::AnyString( const std::string& s )
+    : m_value( s )
+{
+}
+
+
+AnyString::AnyString( const Char* sz )
+{
+    CARAMEL_ASSERT( sz );
+
+    m_value = sz;
 }
 
 

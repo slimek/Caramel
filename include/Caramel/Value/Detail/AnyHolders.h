@@ -6,6 +6,9 @@
 
 #include <Caramel/Caramel.h>
 #include <Caramel/Error/Exception.h>
+#include <Caramel/Meta/IfThenElse.h>
+#include <Caramel/Meta/IsGeneralString.h>
+#include <type_traits>
 
 
 namespace Caramel
@@ -71,13 +74,66 @@ private:
 
 
 //
+// Any String
+//
+
+class AnyString : public AnyHolder
+{
+public:
+
+    explicit AnyString( const std::string& s );
+    explicit AnyString( const Char* sz );
+
+
+    //
+    // Retrieve Value
+    // - AnyString can only retrieve value by std::string type.
+    //
+    template< typename T >
+    static T CastTo( const AnyHolder* holder )
+    {
+        static_assert( std::is_same< T, std::string >::value, "T must be std::string" );
+
+        auto astring = dynamic_cast< const AnyString* >( holder );
+        if ( ! astring )
+        {
+            CARAMEL_THROW( "Not a Any String type" );
+        }
+
+        return astring->m_value;
+    }
+
+
+private:
+    
+    std::string m_value;    
+};
+
+
+//
+// Any Object
+// - All types other than numerica or string.
+//
+
+template< typename T >
+class AnyObject : public AnyHolder
+{
+};
+
+
+//
 // Holder Select
 //
 
 template< typename T >
 struct AnyHolderSelect
 {
-    typedef AnyNumber Type;
+    typedef typename IfThenElse2T
+    <
+        std::is_arithmetic< T >::value, AnyNumber,
+        IsGeneralString< T >::VALUE,    AnyString,
+                                        AnyObject< T >
+    >::Type Type;
 };
 
 

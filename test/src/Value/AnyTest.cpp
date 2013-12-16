@@ -55,6 +55,23 @@ TEST( AnyNumberTest )
 }
 
 
+TEST( AnyStringTest )
+{
+    Any as( std::string( "Alice" ));
+    Any asz1( "Cirno" );
+
+    Char* marisa = "Marisa";
+    Any asz2( marisa );
+
+    CHECK( "Alice"  == as.To< std::string >() );
+    CHECK( "Cirno"  == asz1.To< std::string >() );
+    CHECK( "Marisa" == asz2.To< std::string >() );
+
+    // String type Any can only cast to std::string.
+    // CHECK( as.To< const Char* >() );
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE AnySuite
