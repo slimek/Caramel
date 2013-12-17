@@ -19,6 +19,7 @@ namespace Caramel
 // Contents
 //
 //   AnyNumber
+//   AnyEnum
 //   AnyString
 //   NamedValues
 //   ConstNamedValueRef
@@ -110,6 +111,34 @@ void AnyNumber::Get( Int& value ) const
 void AnyNumber::Get( Uint& value ) const
 {
     m_impl->Get( value );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Any Enum
+//
+
+template< typename T >
+void AnyEnum_Get( T& value, Int64 enumValue )
+{
+    const T MAX_VALUE = std::numeric_limits< T >::max();
+    const T MIN_VALUE = std::numeric_limits< T >::min();
+
+    CARAMEL_CHECK( MAX_VALUE >= enumValue && enumValue >= MIN_VALUE );
+    value = static_cast< T >( enumValue );
+}
+
+
+void AnyEnum::Get( Int& value ) const
+{
+    AnyEnum_Get( value, this->ToInt64() );
+}
+
+
+void AnyEnum::Get( Uint& value ) const
+{
+    AnyEnum_Get( value, this->ToInt64() );
 }
 
 

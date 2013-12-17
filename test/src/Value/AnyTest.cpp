@@ -4,7 +4,6 @@
 
 #include <Caramel/Value/Any.h>
 #include <UnitTest++/UnitTest++.h>
-#include <boost/any.hpp>
 
 
 namespace Caramel
@@ -69,6 +68,29 @@ TEST( AnyStringTest )
 
     // String type Any can only cast to std::string.
     // CHECK( as.As< const Char* >() );
+}
+
+
+enum Color
+{
+    COLOR_BLACK = 0,
+    COLOR_BLUE  = 42,
+};
+
+enum FillMode
+{
+    FILL_BLANK = 0,
+    FILL_SOLID = 255,
+};
+
+TEST( AnyEnumTest )
+{
+    Any ae( COLOR_BLUE );
+
+    CHECK( 42         == ae.As< Int >() );
+    CHECK( COLOR_BLUE == ae.As< Color >() );
+
+    CHECK_THROW( ae.As< FillMode >(), Caramel::Exception );
 }
 
 

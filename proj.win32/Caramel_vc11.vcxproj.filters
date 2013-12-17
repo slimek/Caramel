@@ -512,6 +512,9 @@
     <ClInclude Include="..\include\Caramel\Meta\IsGeneralString.h">
       <Filter>1. Public Packages\Meta</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Value\Detail\AnyCasters.h">
+      <Filter>1. Public Packages\Value\Detail headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

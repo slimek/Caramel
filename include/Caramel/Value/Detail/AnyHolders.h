@@ -49,27 +49,59 @@ public:
 
     /// Retrieve Value ///
 
-    template< typename T >
-    static T CastTo( const AnyHolder* holder )
-    {
-        auto number = dynamic_cast< const AnyNumber* >( holder );
-        if ( ! number )
-        {
-            CARAMEL_THROW( "Not a Any Number type" );
-        }
-
-        T value = 0;
-        number->Get( value );
-        return value;        
-    }
-
-
     void Get( Int& value ) const;
     void Get( Uint& value ) const;
 
 
 private:
+
     std::unique_ptr< AnyNumberImpl > m_impl;
+};
+
+
+//
+// Any Enum
+//
+
+class AnyEnum : public AnyHolder
+{
+public:
+
+
+    /// Retrieve Value ////
+
+    void Get( Int& value ) const;
+    void Get( Uint& value ) const;
+
+    virtual Int64 ToInt64() const = 0;
+
+
+    /// Type Info ///
+
+    virtual const std::type_info& GetType() const = 0;
+};
+
+
+template< typename T >
+class AnyEnumConcrete : public AnyEnum
+{
+    static_assert( std::is_enum< T >::value, "T must be enum type" );
+    static_assert( 4 >= sizeof( T ), "64-bit enum is not supported" );
+
+public:
+    
+    explicit AnyEnumConcrete( T value )
+        : m_value( value )
+    {}
+
+    Int64 ToInt64() const { return static_cast< Int64 > ( m_value ); }
+
+    const std::type_info& GetType() const { return typeid( T ); }
+
+
+private:
+
+    T m_value;
 };
 
 
@@ -85,23 +117,9 @@ public:
     explicit AnyString( const Char* sz );
 
 
-    //
-    // Retrieve Value
-    // - AnyString can only retrieve value by std::string type.
-    //
-    template< typename T >
-    static T CastTo( const AnyHolder* holder )
-    {
-        static_assert( std::is_same< T, std::string >::value, "T must be std::string" );
+    /// Retrieve Value ///
 
-        auto astring = dynamic_cast< const AnyString* >( holder );
-        if ( ! astring )
-        {
-            CARAMEL_THROW( "Not a Any String type" );
-        }
-
-        return astring->m_value;
-    }
+    std::string Get() const { return m_value; }
 
 
 private:
@@ -128,9 +146,10 @@ class AnyObject : public AnyHolder
 template< typename T >
 struct AnyHolderSelect
 {
-    typedef typename IfThenElse2T
+    typedef typename IfThenElse3T
     <
         std::is_arithmetic< T >::value, AnyNumber,
+        std::is_enum< T >::value,       AnyEnumConcrete< T >,
         IsGeneralString< T >::VALUE,    AnyString,
                                         AnyObject< T >
     >::Type Type;

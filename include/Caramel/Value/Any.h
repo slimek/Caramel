@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
+#include <Caramel/Value/Detail/AnyCasters.h>
 #include <Caramel/Value/Detail/AnyHolders.h>
 
 
@@ -58,8 +59,8 @@ inline Any::Any( const T& value )
 template< typename T >
 inline T Any::As() const
 {
-    typedef Detail::AnyHolderSelect< T >::Type HolderType;
-    return HolderType::CastTo< T >( m_holder.get() );
+    typedef Detail::AnyCasterSelect< T >::Type Caster;
+    return Caster::CastTo< T >( m_holder.get() );
 }
 
 
