@@ -506,9 +506,6 @@
     <ClInclude Include="..\include\Caramel\Value\Detail\AnyHolders.h">
       <Filter>1. Public Packages\Value\Detail headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Value\AnyHoldersImpl.h">
-      <Filter>2. Sources\Value</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Caramel\Meta\IsGeneralString.h">
       <Filter>1. Public Packages\Meta</Filter>
     </ClInclude>

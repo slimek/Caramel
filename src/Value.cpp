@@ -2,7 +2,6 @@
 
 #include "CaramelPch.h"
 
-#include "Value/AnyHoldersImpl.h"
 #include "Value/NamedValuesImpl.h"
 #include <Caramel/Lexical/Boolean.h>
 #include <Caramel/Lexical/Floating.h>
@@ -18,7 +17,7 @@ namespace Caramel
 //
 // Contents
 //
-//   AnyNumber
+//   AnyInteger
 //   AnyEnum
 //   AnyString
 //   NamedValues
@@ -35,66 +34,17 @@ namespace Detail
 // Any Number
 //
 
-AnyNumber::AnyNumber( Int value )
-    : m_impl( new AnyNumberImpl( static_cast< Int64 >( value )))
-{}
-
-AnyNumber::AnyNumber( Uint value )
-    : m_impl( new AnyNumberImpl( static_cast< Int64 >( value )))
-{}
-
-
-AnyNumber::~AnyNumber()
-{
-}
-
-
-//
-// Implementation
-//
-
-AnyNumberImpl::AnyNumberImpl( Int64 value )
-    : m_type( ANY_NUMBER_INT64 )
+AnyInteger::AnyInteger( Int value )
+    : m_isUint64( false )
     , m_value( value )
 {
 }
 
 
-template< typename T >
-void AnyNumberImpl::Get( T& value ) const
+AnyInteger::AnyInteger( Uint value )
+    : m_isUint64( false )
+    , m_value( value )
 {
-    const T MAX_VALUE = std::numeric_limits< T >::max();
-    const T MIN_VALUE = std::numeric_limits< T >::min();
-
-    switch ( m_type )
-    {
-    case ANY_NUMBER_INT64:
-    {
-        const Int64 ivalue = boost::get< Int64 >( m_value );
-        CARAMEL_CHECK( MAX_VALUE >= ivalue && ivalue >= MIN_VALUE );
-        value = static_cast< T >( ivalue );
-        break;
-    }
-
-    case ANY_NUMBER_UINT64:
-    {
-        const Uint64 uvalue = boost::get< Uint64 >( m_value );
-        CARAMEL_CHECK( MAX_VALUE >= uvalue && uvalue >= MIN_VALUE );
-        value = static_cast< T >( uvalue );
-        break;
-    }
-
-    case ANY_NUMBER_DOUBLE:
-    {
-        const Double dvalue = boost::get< Double >( m_value );
-        CARAMEL_CHECK( MAX_VALUE >= dvalue && dvalue >= MIN_VALUE );
-        value = static_cast< T >( dvalue );
-        break;
-    }
-
-    default:
-        CARAMEL_NOT_REACHED();
-    }
 }
 
 
@@ -102,15 +52,27 @@ void AnyNumberImpl::Get( T& value ) const
 // Retrieve Value
 //
 
-void AnyNumber::Get( Int& value ) const
+template< typename T >
+void AnyInteger_Get( T& value, Int64 intValue )
 {
-    m_impl->Get( value );
+    const T MAX_VALUE = std::numeric_limits< T >::max();
+    const T MIN_VALUE = std::numeric_limits< T >::min();
+
+    CARAMEL_CHECK( MIN_VALUE <= intValue && intValue <= MAX_VALUE );
+    
+    value = static_cast< T >( intValue );
 }
 
 
-void AnyNumber::Get( Uint& value ) const
+void AnyInteger::Get( Int& value ) const
 {
-    m_impl->Get( value );
+    AnyInteger_Get( value, m_value );
+}
+
+
+void AnyInteger::Get( Uint& value ) const
+{
+    AnyInteger_Get( value, m_value );
 }
 
 
@@ -125,7 +87,7 @@ void AnyEnum_Get( T& value, Int64 enumValue )
     const T MAX_VALUE = std::numeric_limits< T >::max();
     const T MIN_VALUE = std::numeric_limits< T >::min();
 
-    CARAMEL_CHECK( MAX_VALUE >= enumValue && enumValue >= MIN_VALUE );
+    CARAMEL_CHECK( MIN_VALUE <= enumValue && enumValue <= MAX_VALUE );
     value = static_cast< T >( enumValue );
 }
 

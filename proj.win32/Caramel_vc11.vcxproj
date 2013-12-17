@@ -137,7 +137,6 @@
     <ClInclude Include="..\src\Thread\ThreadImpl.h" />
     <ClInclude Include="..\src\Trace\ChannelImpl.h" />
     <ClInclude Include="..\src\Trace\TraceManager.h" />
-    <ClInclude Include="..\src\Value\AnyHoldersImpl.h" />
     <ClInclude Include="..\src\Value\NamedValueEntry.h" />
     <ClInclude Include="..\src\Value\NamedValuesImpl.h" />
   </ItemGroup>

@@ -37,10 +37,10 @@ struct AnyIntegerCaster
 
         T value = 0;
 
-        auto number = dynamic_cast< const AnyNumber* >( holder );
-        if ( number )
+        auto integer = dynamic_cast< const AnyInteger* >( holder );
+        if ( integer )
         {
-            number->Get( value );
+            integer->Get( value );
             return value;        
         }
         

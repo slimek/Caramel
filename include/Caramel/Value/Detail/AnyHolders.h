@@ -31,22 +31,17 @@ public:
 
 
 //
-// Any Number
-// - For numeric fundamental types
+// Any Integer
 //
 
-class AnyNumberImpl;
-
-class AnyNumber : public AnyHolder
+class AnyInteger : public AnyHolder
 {
 public:
-    
-    explicit AnyNumber( Int value );
-    explicit AnyNumber( Uint value );
 
-    ~AnyNumber();
-    
+    explicit AnyInteger( Int value );
+    explicit AnyInteger( Uint value );
 
+    
     /// Retrieve Value ///
 
     void Get( Int& value ) const;
@@ -55,7 +50,8 @@ public:
 
 private:
 
-    std::unique_ptr< AnyNumberImpl > m_impl;
+    Bool  m_isUint64;
+    Int64 m_value;
 };
 
 
@@ -66,7 +62,6 @@ private:
 class AnyEnum : public AnyHolder
 {
 public:
-
 
     /// Retrieve Value ////
 
@@ -148,7 +143,7 @@ struct AnyHolderSelect
 {
     typedef typename IfThenElse3T
     <
-        std::is_arithmetic< T >::value, AnyNumber,
+        std::is_integral< T >::value,   AnyInteger,
         std::is_enum< T >::value,       AnyEnumConcrete< T >,
         IsGeneralString< T >::VALUE,    AnyString,
                                         AnyObject< T >
