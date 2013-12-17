@@ -29,7 +29,7 @@ public:
     /// Retrieve Value ///
 
     template< typename T >
-    T To() const;
+    T As() const;
 
 
     /// Properties ///
@@ -56,7 +56,7 @@ inline Any::Any( const T& value )
 
 
 template< typename T >
-inline T Any::To() const
+inline T Any::As() const
 {
     typedef Detail::AnyHolderSelect< T >::Type HolderType;
     return HolderType::CastTo< T >( m_holder.get() );

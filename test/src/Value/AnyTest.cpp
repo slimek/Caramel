@@ -32,26 +32,26 @@ TEST( AnyNumberTest )
 {
     Any ai( 42 );
     
-    CHECK( 42 == ai.To< Int >() );
-    CHECK( 42 == ai.To< Uint >() );
+    CHECK( 42 == ai.As< Int >() );
+    CHECK( 42 == ai.As< Uint >() );
 
     Any au( 216u );
 
-    CHECK( 216 == au.To< Int >() );
-    CHECK( 216 == au.To< Uint >() );
+    CHECK( 216 == au.As< Int >() );
+    CHECK( 216 == au.As< Uint >() );
 
 
     /// Out of Range would throw exceptions ///
 
     Any aux( 0xFFFFFFFF );
 
-    CHECK( 0xFFFFFFFF == aux.To< Uint >() );
-    CHECK_THROW( aux.To< Int >(), Caramel::Exception );
+    CHECK( 0xFFFFFFFF == aux.As< Uint >() );
+    CHECK_THROW( aux.As< Int >(), Caramel::Exception );
 
     Any aii( -1 );
 
-    CHECK( -1 == aii.To< Int >() );
-    CHECK_THROW( aii.To< Uint >(), Caramel::Exception );
+    CHECK( -1 == aii.As< Int >() );
+    CHECK_THROW( aii.As< Uint >(), Caramel::Exception );
 }
 
 
@@ -63,12 +63,12 @@ TEST( AnyStringTest )
     Char* marisa = "Marisa";
     Any asz2( marisa );
 
-    CHECK( "Alice"  == as.To< std::string >() );
-    CHECK( "Cirno"  == asz1.To< std::string >() );
-    CHECK( "Marisa" == asz2.To< std::string >() );
+    CHECK( "Alice"  == as.As< std::string >() );
+    CHECK( "Cirno"  == asz1.As< std::string >() );
+    CHECK( "Marisa" == asz2.As< std::string >() );
 
     // String type Any can only cast to std::string.
-    // CHECK( as.To< const Char* >() );
+    // CHECK( as.As< const Char* >() );
 }
 
 
