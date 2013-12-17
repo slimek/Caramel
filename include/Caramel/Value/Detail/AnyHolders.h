@@ -47,6 +47,9 @@ public:
     void Get( Int& value ) const;
     void Get( Uint& value ) const;
 
+    void Get( Float& value ) const;
+    void Get( Double& value ) const;
+
 
 private:
 

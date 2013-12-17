@@ -63,6 +63,22 @@ struct AnyIntegerCaster
 
 struct AnyFloatingCaster
 {
+    template< typename T >
+    static T CastTo( const AnyHolder* holder )
+    {
+        static_assert( std::is_floating_point< T >::value, "Not a floating type" );
+
+        T value = 0;
+
+        auto integer = dynamic_cast< const AnyInteger* >( holder );
+        if ( integer )
+        {
+            integer->Get( value );
+            return value;
+        }
+
+        CARAMEL_THROW( "Not an AnyFloating or AnyInteger type" );
+    }
 };
 
 

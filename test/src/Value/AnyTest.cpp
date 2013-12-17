@@ -2,6 +2,7 @@
 
 #include "CaramelTestPch.h"
 
+#include <Caramel/Numeric/NumberTraits.h>
 #include <Caramel/Value/Any.h>
 #include <UnitTest++/UnitTest++.h>
 
@@ -27,7 +28,7 @@ TEST( AnyEmptyTest )
 }
 
 
-TEST( AnyNumberTest )
+TEST( AnyIntegerTest )
 {
     Any ai( 42 );
     
@@ -51,6 +52,13 @@ TEST( AnyNumberTest )
 
     CHECK( -1 == aii.As< Int >() );
     CHECK_THROW( aii.As< Uint >(), Caramel::Exception );
+
+
+    /// Convert to Floating ///
+
+    CHECK( 42.0 == ai.As< Double >() );
+    CHECK( -1.0 == aii.As< Double >() );
+    CHECK( (Double)0xFFFFFFFF == aux.As< Double >() );
 }
 
 
@@ -91,6 +99,35 @@ TEST( AnyEnumTest )
     CHECK( COLOR_BLUE == ae.As< Color >() );
 
     CHECK_THROW( ae.As< FillMode >(), Caramel::Exception );
+}
+
+
+TEST( AnyIntegerToFloatingTest )
+{
+    Any az( 0 );
+    Any ai32max( INT32_MAX );
+    Any ai32min( INT32_MIN );
+
+    CHECK( 0 == az.As< Float >() );
+    CHECK( 0 == az.As< Double >() );
+
+    CHECK( INT32_MAX == ai32max.As< Double >() );
+    CHECK( INT32_MIN == ai32min.As< Double >() );
+
+    CHECK_THROW( ai32max.As< Float >(), Caramel::Exception );
+    CHECK_THROW( ai32min.As< Float >(), Caramel::Exception );
+
+    
+    /// Conversion Limits ///
+
+    const Int32 i32femax = NumberTraits< Float >::MAX_EXACT_INT32;
+    const Int32 i32femin = NumberTraits< Float >::MIN_EXACT_INT32;
+
+    Any ai32femax( i32femax );
+    Any ai32femin( i32femin );
+
+    CHECK( i32femax == ai32femax.As< Float >() );
+    CHECK( i32femin == ai32femin.As< Float >() );
 }
 
 
