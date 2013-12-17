@@ -5,7 +5,7 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
-#include <boost/any.hpp>
+#include <Caramel/Value/Any.h>
 #include <type_traits>
 
 
@@ -28,10 +28,6 @@ public:
     template< typename T >
     AnyEvent( Int id, const T& value );
 
-    // Special case
-    // - const Char* is converted to std::string automatically.
-    AnyEvent( Int id, const Char* value );
-
 
     /// Properties ///
 
@@ -44,7 +40,7 @@ public:
 private:
 
     Int m_id;
-    boost::any m_value;
+    Any m_value;
 
 };
 
@@ -69,17 +65,10 @@ inline AnyEvent::AnyEvent( Int id, const T& value )
 }
 
 
-inline AnyEvent::AnyEvent( Int id, const Char* value )
-    : m_id( id )
-    , m_value( std::string( value ))
-{
-}
-
-
 template< typename T >
 inline T AnyEvent::Value() const
 {
-    return boost::any_cast< T >( m_value );
+    return m_value.template As< T >();
 }
 
 
