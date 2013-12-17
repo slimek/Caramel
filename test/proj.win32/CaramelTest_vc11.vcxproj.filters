@@ -53,6 +53,9 @@
     <Filter Include="2. Tests\Value">
       <UniqueIdentifier>{88123525-9169-468f-b7b6-555814f3b14e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\Numeric">
+      <UniqueIdentifier>{8db9de3a-0d32-4eea-b857-88d51dab9790}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\RunTest.cpp">
@@ -126,6 +129,9 @@
     </ClCompile>
     <ClCompile Include="..\src\Value\AnyTest.cpp">
       <Filter>2. Tests\Value</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Numeric\NumberTraitsTest.cpp">
+      <Filter>2. Tests\Numeric</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

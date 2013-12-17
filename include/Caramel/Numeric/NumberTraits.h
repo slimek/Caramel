@@ -66,6 +66,38 @@ struct NumberTraits
 {};
 
 
+//
+// Specialization for Floating Types
+//
+
+template<>
+struct NumberTraits< Float >
+    : public Detail::NumberTraits_Arithmetic< Float >
+{
+    //
+    // Exact Integer Limits
+    // - You may convert these integers to Double without losing precision.
+    //
+    static const Int32  MAX_EXACT_INT32  = 0xFFFFFF;  // 24 bits
+    static const Int32  MIN_EXACT_INT32  = - MAX_EXACT_INT32;
+    static const Uint32 MAX_EXACT_UINT32 = MAX_EXACT_INT32;
+};
+
+
+template<>
+struct NumberTraits< Double >
+    : public Detail::NumberTraits_Arithmetic< Double >
+{
+    //
+    // Exact Integer Limits
+    // - You may convert these integers to Double without losing precision.
+    //
+    static const Int64  MAX_EXACT_INT64  = 0x1FFFFFFFFFFFFFll;  // 53 bits
+    static const Int64  MIN_EXACT_INT64  = - MAX_EXACT_INT64;
+    static const Uint64 MAX_EXACT_UINT64 = MAX_EXACT_INT64;
+};
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // namespace Caramel

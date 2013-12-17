@@ -105,6 +105,7 @@
     <ClCompile Include="..\src\Enum\EnumLookupTest.cpp" />
     <ClCompile Include="..\src\Lexical\LexicalFloatingTest.cpp" />
     <ClCompile Include="..\src\Lexical\LexicalIntegerTest.cpp" />
+    <ClCompile Include="..\src\Numeric\NumberTraitsTest.cpp" />
     <ClCompile Include="..\src\Random\RandomTest.cpp" />
     <ClCompile Include="..\src\RunTest.cpp" />
     <ClCompile Include="..\src\Statechart\StateMachineTest.cpp" />
