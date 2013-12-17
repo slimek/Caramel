@@ -51,7 +51,7 @@ private:
 
 template< typename T >
 inline Any::Any( const T& value )
-    : m_holder( new Detail::AnyHolderSelect< T >::Type( value ))
+    : m_holder( new typename Detail::AnyHolderSelect< T >::Type( value ))
 {
 }
 
@@ -59,8 +59,8 @@ inline Any::Any( const T& value )
 template< typename T >
 inline T Any::As() const
 {
-    typedef Detail::AnyCasterSelect< T >::Type Caster;
-    return Caster::CastTo< T >( m_holder.get() );
+    typedef typename Detail::AnyCasterSelect< T >::Type Caster;
+    return Caster::template CastTo< T >( m_holder.get() );
 }
 
 
