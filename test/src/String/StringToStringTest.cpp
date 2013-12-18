@@ -91,6 +91,18 @@ TEST( StringToStringTest )
 }
 
 
+TEST( StringToStringTTest )
+{
+    CHECK( "Int32"  == ToStringT< Int32 >() );
+    CHECK( "Uint32" == ToStringT< Uint32 >() );
+    CHECK( "Int64"  == ToStringT< Int64 >() );
+    CHECK( "Uint64" == ToStringT< Uint64 >() );
+
+    CHECK( "Float"  == ToStringT< Float >() );
+    CHECK( "Double" == ToStringT< Double >() );
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE StringToStringSuite

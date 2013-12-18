@@ -33,6 +33,7 @@ namespace Caramel
 //   Utf8String
 //   Algorithm
 //   ToString
+//   ToStringT
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -446,6 +447,20 @@ std::string FloatingToString( T x )
 
 std::string ToString( Float  x ) { return FloatingToString( x ); } 
 std::string ToString( Double x ) { return FloatingToString( x ); }
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// To String <Type>
+//
+
+template<> std::string ToStringT< Int32 >()  { return "Int32"; }
+template<> std::string ToStringT< Uint32 >() { return "Uint32"; }
+template<> std::string ToStringT< Int64 >()  { return "Int64"; }
+template<> std::string ToStringT< Uint64 >() { return "Uint64"; }
+
+template<> std::string ToStringT< Float >()  { return "Float"; }
+template<> std::string ToStringT< Double >() { return "Double"; }
 
 
 ///////////////////////////////////////////////////////////////////////////////

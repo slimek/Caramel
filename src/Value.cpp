@@ -85,10 +85,8 @@ void AnyInteger_GetFloating( T& value, U intValue )
 {
     if ( ! NumberConverter< T, U >::CanExactConvert( intValue ))
     {
-        CARAMEL_THROW( "Can't exactly convert integer to floating, value: %s", ToString( intValue ));
-
-        //CARAMEL_THROW( "Can't exactly convert %s to %s, value: %s",
-        //               ToStringT< U >(), ToStringT< T >(), ToString( intValue ));
+        CARAMEL_THROW( "Can't exactly convert %s to %s, value: %s",
+                       ToStringT< U >(), ToStringT< T >(), ToString( intValue ));
     }
 
     value = static_cast< T >( intValue );

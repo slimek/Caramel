@@ -57,6 +57,32 @@ inline std::string ToString( const std::string& x ) { return x; }
 
 
 ///////////////////////////////////////////////////////////////////////////////
+//
+// To String Function Templates
+// - Try to retrieve the name of types.
+//
+
+// Primary Template
+// - Not defined by default.
+template< typename T > std::string ToStringT();
+
+
+//
+// Fundamental Overloadings
+//
+
+// Integers
+template<> std::string ToStringT< Int32 >();
+template<> std::string ToStringT< Uint32 >();
+template<> std::string ToStringT< Int64 >();
+template<> std::string ToStringT< Uint64 >();
+
+// Floatings
+template<> std::string ToStringT< Float >();
+template<> std::string ToStringT< Double >();
+
+
+///////////////////////////////////////////////////////////////////////////////
 
 } // namespace Caramel
 
