@@ -59,6 +59,29 @@ private:
 
 
 //
+// Any String
+//
+
+class AnyString : public AnyHolder
+{
+public:
+
+    explicit AnyString( const std::string& s );
+    explicit AnyString( const Char* sz );
+
+
+    /// Retrieve Value ///
+
+    std::string Get() const { return m_value; }
+
+
+private:
+    
+    std::string m_value;    
+};
+
+
+//
 // Any Enum
 //
 
@@ -100,29 +123,6 @@ public:
 private:
 
     T m_value;
-};
-
-
-//
-// Any String
-//
-
-class AnyString : public AnyHolder
-{
-public:
-
-    explicit AnyString( const std::string& s );
-    explicit AnyString( const Char* sz );
-
-
-    /// Retrieve Value ///
-
-    std::string Get() const { return m_value; }
-
-
-private:
-    
-    std::string m_value;    
 };
 
 
@@ -176,8 +176,8 @@ struct AnyHolderSelect
     typedef typename IfThenElse3T
     <
         std::is_integral< T >::value,   AnyInteger,
-        std::is_enum< T >::value,       AnyEnumConcrete< T >,
         IsGeneralString< T >::VALUE,    AnyString,
+        std::is_enum< T >::value,       AnyEnumConcrete< T >,
                                         AnyObjectConcrete< T >
     >::Type Type;
 };
