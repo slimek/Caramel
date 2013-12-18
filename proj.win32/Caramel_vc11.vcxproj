@@ -63,6 +63,7 @@
     <ClInclude Include="..\include\Caramel\Meta\IsGeneralString.h" />
     <ClInclude Include="..\include\Caramel\Meta\Select.h" />
     <ClInclude Include="..\include\Caramel\Meta\Utility.h" />
+    <ClInclude Include="..\include\Caramel\Numeric\NumberConverter.h" />
     <ClInclude Include="..\include\Caramel\Numeric\NumberConvertible.h" />
     <ClInclude Include="..\include\Caramel\Numeric\NumberTraits.h" />
     <ClInclude Include="..\include\Caramel\Object\AutoNumbered.h" />

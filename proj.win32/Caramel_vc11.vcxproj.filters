@@ -515,6 +515,9 @@
     <ClInclude Include="..\include\Caramel\Async\AnyEvent.h">
       <Filter>1. Public Packages\Async</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Numeric\NumberConverter.h">
+      <Filter>1. Public Packages\Numeric</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

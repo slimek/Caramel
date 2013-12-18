@@ -6,6 +6,7 @@
 #include <Caramel/Lexical/Boolean.h>
 #include <Caramel/Lexical/Floating.h>
 #include <Caramel/Lexical/Integer.h>
+#include <Caramel/Numeric/NumberConverter.h>
 #include <Caramel/Numeric/NumberTraits.h>
 #include <Caramel/String/ToString.h>
 #include <Caramel/Value/Any.h>
@@ -82,7 +83,13 @@ void AnyInteger::Get( Uint& value ) const
 template< typename T, typename U >
 void AnyInteger_GetFloating( T& value, U intValue )
 {
-    CARAMEL_CHECK( NumberTraits< T >::CanExactConvert( intValue ));
+    if ( ! NumberConverter< T, U >::CanExactConvert( intValue ))
+    {
+        CARAMEL_THROW( "Can't exactly convert integer to floating, value: %s", ToString( intValue ));
+
+        //CARAMEL_THROW( "Can't exactly convert %s to %s, value: %s",
+        //               ToStringT< U >(), ToStringT< T >(), ToString( intValue ));
+    }
 
     value = static_cast< T >( intValue );
 }
