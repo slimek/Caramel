@@ -454,8 +454,15 @@ std::string ToString( Double x ) { return FloatingToString( x ); }
 // To String <Type>
 //
 
+template<> std::string ToStringT< Bool >()   { return "Bool"; }
+template<> std::string ToStringT< Char >()   { return "Char"; }
+template<> std::string ToStringT< Byte >()   { return "Byte"; }
+template<> std::string ToStringT< Int16 >()  { return "Int16"; }
+template<> std::string ToStringT< Uint16 >() { return "Uint16"; }
 template<> std::string ToStringT< Int32 >()  { return "Int32"; }
 template<> std::string ToStringT< Uint32 >() { return "Uint32"; }
+template<> std::string ToStringT< Long >()   { return "Long"; }
+template<> std::string ToStringT< Ulong >()  { return "Ulong"; }
 template<> std::string ToStringT< Int64 >()  { return "Int64"; }
 template<> std::string ToStringT< Uint64 >() { return "Uint64"; }
 

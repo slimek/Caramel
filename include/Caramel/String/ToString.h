@@ -72,8 +72,15 @@ template< typename T > std::string ToStringT();
 //
 
 // Integers
+template<> std::string ToStringT< Bool >();
+template<> std::string ToStringT< Char >();
+template<> std::string ToStringT< Byte >();
+template<> std::string ToStringT< Int16 >();
+template<> std::string ToStringT< Uint16 >();
 template<> std::string ToStringT< Int32 >();
 template<> std::string ToStringT< Uint32 >();
+template<> std::string ToStringT< Long >();
+template<> std::string ToStringT< Ulong >();
 template<> std::string ToStringT< Int64 >();
 template<> std::string ToStringT< Uint64 >();
 

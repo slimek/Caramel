@@ -93,8 +93,15 @@ TEST( StringToStringTest )
 
 TEST( StringToStringTTest )
 {
+    CHECK( "Bool"   == ToStringT< Bool >() );
+    CHECK( "Char"   == ToStringT< Char >() );
+    CHECK( "Byte"   == ToStringT< Byte >() );
+    CHECK( "Int16"  == ToStringT< Int16 >() );
+    CHECK( "Uint16" == ToStringT< Uint16 >() );
     CHECK( "Int32"  == ToStringT< Int32 >() );
     CHECK( "Uint32" == ToStringT< Uint32 >() );
+    CHECK( "Long"   == ToStringT< Long >() );
+    CHECK( "Ulong"  == ToStringT< Ulong >() );
     CHECK( "Int64"  == ToStringT< Int64 >() );
     CHECK( "Uint64" == ToStringT< Uint64 >() );
 
