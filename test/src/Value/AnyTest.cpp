@@ -131,6 +131,34 @@ TEST( AnyIntegerToFloatingTest )
 }
 
 
+TEST( AnyObjectTest )
+{
+    /// Pair Struct ///
+
+    typedef std::pair< Int, std::string > IdName;
+
+    IdName src;
+    src.first  = 42;
+    src.second = "Eirin";
+
+    Any ain( src );
+
+    IdName dest = ain.As< IdName >();
+
+    CHECK( 42      == dest.first );
+    CHECK( "Eirin" == dest.second );
+
+
+    /// Smart Pointer ///
+
+    std::shared_ptr< Float > real( new Float( 3.14f ));
+
+    Any asp( real );
+
+    CHECK( 3.14f == *( asp.As< std::shared_ptr< Float > >() ));
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE AnySuite

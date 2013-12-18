@@ -140,6 +140,17 @@ struct AnyStringCaster
 
 struct AnyObjectCaster
 {
+    template< typename T >
+    static T CastTo( const AnyHolder* holder )
+    {
+        auto object = dynamic_cast< const AnyObject* >( holder );
+        if ( ! object )
+        {
+            CARAMEL_THROW( "Not an AnyObject type" );
+        }
+
+        return *reinterpret_cast< const T* >( object->GetValue() );
+    }
 };
 
 

@@ -92,9 +92,9 @@ public:
         : m_value( value )
     {}
 
-    Int64 ToInt64() const { return static_cast< Int64 > ( m_value ); }
+    Int64 ToInt64() const override { return static_cast< Int64 > ( m_value ); }
 
-    const std::type_info& GetType() const { return typeid( T ); }
+    const std::type_info& GetType() const override { return typeid( T ); }
 
 
 private:
@@ -131,9 +131,38 @@ private:
 // - All types other than numerica or string.
 //
 
-template< typename T >
 class AnyObject : public AnyHolder
 {
+public:
+
+    /// Retrieve Value ///
+
+    virtual const Void* GetValue() const = 0;
+
+
+    /// Type Info ///
+
+    virtual const std::type_info& GetType() const = 0;
+};
+
+
+template< typename T >
+class AnyObjectConcrete : public AnyObject
+{
+public:
+
+    explicit AnyObjectConcrete( const T& value )
+        : m_value( value )
+    {}
+
+    const Void* GetValue() const override { return &m_value; }
+
+    const std::type_info& GetType() const override { return typeid( T ); }
+
+
+private:
+
+    T m_value;
 };
 
 
@@ -149,7 +178,7 @@ struct AnyHolderSelect
         std::is_integral< T >::value,   AnyInteger,
         std::is_enum< T >::value,       AnyEnumConcrete< T >,
         IsGeneralString< T >::VALUE,    AnyString,
-                                        AnyObject< T >
+                                        AnyObjectConcrete< T >
     >::Type Type;
 };
 
