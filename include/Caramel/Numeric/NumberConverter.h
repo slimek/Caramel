@@ -23,6 +23,54 @@ struct NumberConverter;
 
 
 //
+// Specialization - Output to Int32
+//
+
+template<>
+struct NumberConverter< Int32, Int64 >
+{
+    static Bool CanExactConvert( Int64 value )
+    {
+        return INT32_MIN <= value && value <= INT32_MAX;
+    }
+};
+
+
+template<>
+struct NumberConverter< Int32, Uint64 >
+{
+    static Bool CanExactConvert( Uint64 value )
+    {
+        return value <= INT32_MAX;
+    }
+};
+
+
+//
+// Specialization - Output to Uint32
+//
+
+template<>
+struct NumberConverter< Uint32, Int64 >
+{
+    static Bool CanExactConvert( Int64 value )
+    {
+        return 0 <= value && value <= UINT32_MAX;
+    }
+};
+
+
+template<>
+struct NumberConverter< Uint32, Uint64 >
+{
+    static Bool CanExactConvert( Uint64 value )
+    {
+        return value <= UINT32_MAX;
+    }
+};
+
+
+//
 // Specialization - Output to Float
 //
 

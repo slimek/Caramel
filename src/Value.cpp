@@ -52,15 +52,18 @@ AnyInteger::AnyInteger( Uint value )
 
 //
 // Retrieve Value
+// - We allow conversion only when it doesn't lose precision,
+//   i.e. conversion of "exactly".
 //
 
 template< typename T, typename U >
-void AnyInteger_GetInteger( T& value, U intValue )
+void AnyInteger_Get( T& value, U intValue )
 {
-    const T MAX_VALUE = std::numeric_limits< T >::max();
-    const T MIN_VALUE = std::numeric_limits< T >::min();
-
-    CARAMEL_CHECK( MIN_VALUE <= intValue && intValue <= MAX_VALUE );
+    if ( ! NumberConverter< T, U >::CanExactConvert( intValue ))
+    {
+        CARAMEL_THROW( "Can't exactly convert %s to %s, value: %s",
+                       ToStringT< U >(), ToStringT< T >(), ToString( intValue ));
+    }
     
     value = static_cast< T >( intValue );
 }
@@ -68,42 +71,29 @@ void AnyInteger_GetInteger( T& value, U intValue )
 
 void AnyInteger::Get( Int& value ) const
 {
-    m_isUint64 ? AnyInteger_GetInteger( value, static_cast< Uint64 >( m_value ))
-               : AnyInteger_GetInteger( value, m_value );
+    m_isUint64 ? AnyInteger_Get( value, static_cast< Uint64 >( m_value ))
+               : AnyInteger_Get( value, m_value );
 }
 
 
 void AnyInteger::Get( Uint& value ) const
 {
-    m_isUint64 ? AnyInteger_GetInteger( value, static_cast< Uint64 >( m_value ))
-               : AnyInteger_GetInteger( value, m_value );
-}
-
-
-template< typename T, typename U >
-void AnyInteger_GetFloating( T& value, U intValue )
-{
-    if ( ! NumberConverter< T, U >::CanExactConvert( intValue ))
-    {
-        CARAMEL_THROW( "Can't exactly convert %s to %s, value: %s",
-                       ToStringT< U >(), ToStringT< T >(), ToString( intValue ));
-    }
-
-    value = static_cast< T >( intValue );
+    m_isUint64 ? AnyInteger_Get( value, static_cast< Uint64 >( m_value ))
+               : AnyInteger_Get( value, m_value );
 }
 
 
 void AnyInteger::Get( Float& value ) const
 {
-    m_isUint64 ? AnyInteger_GetFloating( value, static_cast< Uint64 >( m_value ))
-               : AnyInteger_GetFloating( value, m_value );
+    m_isUint64 ? AnyInteger_Get( value, static_cast< Uint64 >( m_value ))
+               : AnyInteger_Get( value, m_value );
 }
 
 
 void AnyInteger::Get( Double& value ) const
 {
-    m_isUint64 ? AnyInteger_GetFloating( value, static_cast< Uint64 >( m_value ))
-               : AnyInteger_GetFloating( value, m_value );
+    m_isUint64 ? AnyInteger_Get( value, static_cast< Uint64 >( m_value ))
+               : AnyInteger_Get( value, m_value );
 }
 
 
