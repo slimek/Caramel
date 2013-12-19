@@ -41,7 +41,6 @@ public:
     explicit AnyInteger( Int value );
     explicit AnyInteger( Uint value );
 
-    
     /// Retrieve Value ///
 
     void Get( Int& value ) const;
@@ -49,7 +48,6 @@ public:
 
     void Get( Float& value ) const;
     void Get( Double& value ) const;
-
 
 private:
 
@@ -69,11 +67,9 @@ public:
     explicit AnyString( const std::string& s );
     explicit AnyString( const Char* sz );
 
-
     /// Retrieve Value ///
 
     std::string Get() const { return m_value; }
-
 
 private:
     
@@ -95,7 +91,6 @@ public:
     void Get( Uint& value ) const;
 
     virtual Int64 ToInt64() const = 0;
-
 
     /// Type Info ///
 
@@ -119,7 +114,6 @@ public:
 
     const std::type_info& GetType() const override { return typeid( T ); }
 
-
 private:
 
     T m_value;
@@ -138,7 +132,6 @@ public:
     /// Retrieve Value ///
 
     virtual const Void* GetValue() const = 0;
-
 
     /// Type Info ///
 
@@ -159,7 +152,6 @@ public:
 
     const std::type_info& GetType() const override { return typeid( T ); }
 
-
 private:
 
     T m_value;
@@ -175,10 +167,10 @@ struct AnyHolderSelect
 {
     typedef typename IfThenElse3T
     <
-        std::is_integral< T >::value,   AnyInteger,
-        IsGeneralString< T >::VALUE,    AnyString,
-        std::is_enum< T >::value,       AnyEnumConcrete< T >,
-                                        AnyObjectConcrete< T >
+        std::is_integral< T >::value,       AnyInteger,
+        IsGeneralString< T >::VALUE,        AnyString,
+        std::is_enum< T >::value,           AnyEnumConcrete< T >,
+                                            AnyObjectConcrete< T >
     >::Type Type;
 };
 
