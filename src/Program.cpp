@@ -10,7 +10,7 @@
 #include <Caramel/String/Utf8String.h>
 
 #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
-#include <Caramel/Windows/DebuggerTraceListener.h>
+#include <Caramel/Windows/DebuggerTraceAdapter.h>
 #endif
 
 #include <functional>
@@ -86,7 +86,7 @@ std::vector< std::string > ConsoleApplication::GetArguments() const
 
 ConsoleApplicationImpl::ConsoleApplicationImpl()
 {
-    auto stdoutListener = new Trace::StdoutListener;
+    auto stdoutListener = new Trace::StdoutAdapter;
 
     stdoutListener->BindBuiltinChannels( Trace::LEVEL_INFO );
 
@@ -95,7 +95,7 @@ ConsoleApplicationImpl::ConsoleApplicationImpl()
 
     #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
     {
-        auto debuggerListener = new Windows::DebuggerTraceListener;
+        auto debuggerListener = new Windows::DebuggerTraceAdapter;
 
         debuggerListener->BindBuiltinChannels( Trace::LEVEL_DEBUG );
 

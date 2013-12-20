@@ -26,7 +26,7 @@ namespace Trace
 //
 // < Listeners >
 //   Listener
-//   StdoutListener
+//   StdoutAdapter
 //   Listeners
 //
 
@@ -275,7 +275,7 @@ void Listener::UnbindAllChannels()
 // Stdout Listener
 //
 
-void StdoutListener::Write( Level, const std::string& message )
+void StdoutAdapter::Write( Level, const std::string& message )
 {
     std::cout << message << std::endl;
 }

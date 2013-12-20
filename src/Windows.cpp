@@ -6,7 +6,7 @@
 #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
 
 #include <Caramel/Windows/CrtDebug.h>
-#include <Caramel/Windows/DebuggerTraceListener.h>
+#include <Caramel/Windows/DebuggerTraceAdapter.h>
 #include <Caramel/Windows/FileInfo.h>
 #include <Caramel/Windows/WideString.h>
 #include <crtdbg.h>
@@ -23,7 +23,7 @@ namespace Windows
 // Contents
 //
 //   CrtDebug
-//   DebuggerTraceListener
+//   DebuggerTraceAdapter
 //   FileInfo
 //   WideString
 //
@@ -46,7 +46,7 @@ void EnableMemoryLeakCheckAtExit()
 // Debugger Trace Listener
 //
 
-void DebuggerTraceListener::Write( Trace::Level, const std::string& message )
+void DebuggerTraceAdapter::Write( Trace::Level, const std::string& message )
 {
     Utf8String u8msg;
     if ( u8msg.TryParse( message ))

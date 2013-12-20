@@ -1,7 +1,7 @@
-// Caramel C++ Library - Windows Facility - Debugger Trace Listener Header
+// Caramel C++ Library - Windows Facility - Debugger Trace Adapter Header
 
-#ifndef __CARAMEL_WINDOWS_DEBUGGER_TRACE_LISTENER_H
-#define __CARAMEL_WINDOWS_DEBUGGER_TRACE_LISTENER_H
+#ifndef __CARAMEL_WINDOWS_DEBUGGER_TRACE_ADAPTER_H
+#define __CARAMEL_WINDOWS_DEBUGGER_TRACE_ADAPTER_H
 #pragma once
 
 #include <Caramel/Caramel.h>
@@ -23,7 +23,7 @@ namespace Windows
 // Debugger Trace Listener
 //
 
-class DebuggerTraceListener : public Trace::Listener
+class DebuggerTraceAdapter : public Trace::Listener
 {
 public:
 
@@ -39,4 +39,4 @@ public:
 
 #endif // CARAMEL_SYSTEM_IS_WINDOWS
 
-#endif // __CARAMEL_WINDOWS_DEBUGGER_TRACE_LISTENER_H
+#endif // __CARAMEL_WINDOWS_DEBUGGER_TRACE_ADAPTER_H

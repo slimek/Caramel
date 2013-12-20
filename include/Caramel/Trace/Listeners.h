@@ -56,11 +56,11 @@ private:
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Stdout Listener
-// - Output trace to std::cout.
+// Stdout Adapter
+// - Redirect trace messages to std::cout.
 //
 
-class StdoutListener : public Listener
+class StdoutAdapter : public Listener
 {
 public:
 
