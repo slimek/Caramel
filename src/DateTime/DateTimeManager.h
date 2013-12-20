@@ -30,6 +30,8 @@ public:
     /// Formatters ///
 
     std::string FormatDate( const boost::gregorian::date& date, const std::string& format );
+    std::string FormatDateTime( const boost::posix_time::ptime& dateTime, const std::string& format );
+
 
 private:
 

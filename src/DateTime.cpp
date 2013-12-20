@@ -18,38 +18,12 @@ namespace Caramel
 //
 // Contents
 //
-//   DateTimeManager
 //   Date
 //   DateTime
 //   TimeSpan
 //   TimeOfDay
+//   DateTimeManager
 //
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// DateTime Manager
-//
-
-DateTimeManager::DateTimeManager()
-    : m_dateFacet( new DateFacet )
-    , m_timeFacet( new TimeFacet )
-{
-    m_dateStream.imbue( std::locale( std::locale::classic(), m_dateFacet ));
-    m_timeStream.imbue( std::locale( std::locale::classic(), m_timeFacet ));
-}
-
-
-std::string DateTimeManager::FormatDate(
-    const boost::gregorian::date& date, const std::string& format )
-{
-    auto ulock = UniqueLock( m_mutex );
-
-    m_dateFacet->format( format.c_str() );
-    m_dateStream.str( "" );
-    m_dateStream << date;
-    return m_dateStream.str();
-}
-
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -269,6 +243,12 @@ std::string DateTime::ToString() const
 std::string DateTime::ToIsoString() const
 {
     return boost::posix_time::to_iso_extended_string( *m_impl );
+}
+
+
+std::string DateTime::Format( const std::string& format ) const
+{
+    return DateTimeManager::Instance()->FormatDateTime( *m_impl, format );
 }
 
 
@@ -521,6 +501,44 @@ Bool TimeOfDay::operator<( const TimeOfDay& rhs ) const
 std::string TimeOfDay::ToString() const
 {
     return boost::posix_time::to_simple_string( *m_impl );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// DateTime Manager
+//
+
+DateTimeManager::DateTimeManager()
+    : m_dateFacet( new DateFacet )
+    , m_timeFacet( new TimeFacet )
+{
+    m_dateStream.imbue( std::locale( std::locale::classic(), m_dateFacet ));
+    m_timeStream.imbue( std::locale( std::locale::classic(), m_timeFacet ));
+}
+
+
+std::string DateTimeManager::FormatDate(
+    const boost::gregorian::date& date, const std::string& format )
+{
+    auto ulock = UniqueLock( m_mutex );
+
+    m_dateFacet->format( format.c_str() );
+    m_dateStream.str( "" );
+    m_dateStream << date;
+    return m_dateStream.str();
+}
+
+
+std::string DateTimeManager::FormatDateTime(
+    const boost::posix_time::ptime& dateTime, const std::string& format )
+{
+    auto ulock = UniqueLock( m_mutex );
+
+    m_timeFacet->format( format.c_str() );
+    m_timeStream.str( "" );
+    m_timeStream << dateTime;
+    return m_timeStream.str();
 }
 
 

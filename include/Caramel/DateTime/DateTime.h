@@ -30,6 +30,9 @@ public:
     /// Creators ///
 
     static DateTime Now();
+
+    // Accepted formats:
+    //   YYYY-MM-DD hh:mm[:ss]
     static DateTime FromString( const std::string& s );
 
 
@@ -65,6 +68,9 @@ public:
 
     std::string ToString() const;
     std::string ToIsoString() const;
+
+    // According to strftime() format.
+    std::string Format( const std::string& format ) const;
 
     Bool TryParse( const std::string& s );
 

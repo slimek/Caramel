@@ -53,7 +53,17 @@ TEST( DateTimeTest )
     CHECK( true  == now.IsValid() );
     CHECK( true  == time1.IsValid() );
     CHECK( false == dtnil.IsValid() );
+}
 
+
+TEST( DateTimeFormatTest )
+{
+    const auto dt = DateTime::FromString( "2013-04-05 6:17:28" );
+
+    CHECK( "2013/04/05" == dt.Format( "%Y/%m/%d" ));
+    CHECK( "06:17:28"   == dt.Format( "%H:%M:%S" ));
+    
+    CHECK( "April 05 '13 is Friday" == dt.Format( "%B %d '%y is %A" ));
 }
 
 
