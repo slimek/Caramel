@@ -21,6 +21,8 @@ class DateImpl;
 
 class Date : public boost::totally_ordered< Date >
 {
+    friend class DateTime;
+
 public:
 
     Date();

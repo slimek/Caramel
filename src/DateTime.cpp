@@ -165,6 +165,12 @@ DateTime::DateTime()
 }
 
 
+DateTime::DateTime( const Caramel::Date& date, const Caramel::TimeOfDay& time )
+    : m_impl( std::make_shared< DateTimeImpl >( boost::posix_time::ptime( *date.m_impl, *time.m_impl )))
+{
+}
+
+
 DateTime::DateTime( std::shared_ptr< DateTimeImpl > impl )
     : m_impl( impl )
 {
@@ -205,6 +211,13 @@ Int DateTime::Day()   const { return m_impl->date().day(); }
 Int DateTime::Hour()   const { return m_impl->time_of_day().hours(); }
 Int DateTime::Minute() const { return m_impl->time_of_day().minutes(); }
 Int DateTime::Second() const { return m_impl->time_of_day().seconds(); }
+
+
+Date DateTime::Date() const
+{
+    return Caramel::Date( std::make_shared< DateImpl >( m_impl->date() ));
+}
+
 
 TimeOfDay DateTime::TimeOfDay() const
 {

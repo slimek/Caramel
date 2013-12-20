@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
+#include <Caramel/DateTime/Date.h>
 #include <Caramel/DateTime/TimeOfDay.h>
 #include <Caramel/DateTime/TimeSpan.h>
 #include <boost/operators.hpp>
@@ -26,6 +27,7 @@ class DateTime : public boost::totally_ordered< DateTime >
 public:
 
     DateTime();
+    DateTime( const Caramel::Date& date, const Caramel::TimeOfDay& time );
 
 
     /// Creators ///
@@ -52,6 +54,7 @@ public:
     Int Minute() const;
     Int Second() const;
 
+    Caramel::Date      Date()      const;
     Caramel::TimeOfDay TimeOfDay() const;
 
     
@@ -87,6 +90,16 @@ private:
 
     std::shared_ptr< DateTimeImpl > m_impl;
 };
+
+
+//
+// Stand-alone Operators
+//
+
+inline DateTime operator+( const Date& date, const TimeOfDay& time )
+{
+    return DateTime( date, time );
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////

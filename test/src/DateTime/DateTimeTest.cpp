@@ -259,6 +259,28 @@ TEST( TimeOfDay )
 }
 
 
+TEST( DateAndTimeOfDayTest )
+{
+    // Combine Date and TimeOfDay to DateTime
+    {
+        const auto date = Date::FromString( "2013/04/05" );
+        const auto time = TimeOfDay::FromString( "6:17" );
+
+        const auto dateTime = date + time;
+
+        CHECK( "2013-04-05 06:17:00" == dateTime.ToString() );
+    }
+
+    // Split Date and TimeOfDay from DateTime
+    {
+        const auto dateTime = DateTime::FromString( "1987/06/05 4:32:10" );
+
+        CHECK( Date::FromYMD( 1987, 6, 5 ) == dateTime.Date() );
+        CHECK( TimeOfDay::FromHMS( 4, 32, 10 ) == dateTime.TimeOfDay() );
+    }
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE DateTimeSuite
