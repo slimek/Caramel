@@ -5,6 +5,7 @@
 #include <Caramel/Numeric/NumberTraits.h>
 #include <Caramel/Value/Any.h>
 #include <UnitTest++/UnitTest++.h>
+#include <vector>
 
 
 namespace Caramel
@@ -194,6 +195,47 @@ TEST( AnyObjectTest )
     Any asp( real );
 
     CHECK( 3.14f == *( asp.As< std::shared_ptr< Float > >() ));
+}
+
+
+struct Shape
+{
+    virtual ~Shape() {}
+    virtual std::string GetName() const = 0;
+};
+
+struct Circle : public Shape
+{
+    std::string GetName() const override { return "Circle"; }
+};
+
+struct Square : public Shape
+{
+    std::string GetName() const override { return "Square"; }
+};
+
+
+TEST( AnyPolymorphicTest )
+{
+    std::vector< Any > anys;
+
+    const auto circle = new Circle;
+    const auto square = new Square;
+
+    anys.push_back( MakeAny< Shape* >( circle ));
+    anys.push_back( MakeAny< Shape* >( square ));
+
+    CHECK( "Circle" == anys[0].As< Shape* >()->GetName() );
+    CHECK( "Square" == anys[1].As< Shape* >()->GetName() );
+
+    const auto spCircle = std::make_shared< Circle >();
+    const auto spSquare = std::make_shared< Square >();
+
+    anys.push_back( MakeAny< std::shared_ptr< Shape > >( spCircle ));
+    anys.push_back( MakeAny< std::shared_ptr< Shape > >( spSquare ));
+
+    CHECK( "Circle" == anys[2].As< std::shared_ptr< Shape > >()->GetName() );
+    CHECK( "Square" == anys[3].As< std::shared_ptr< Shape > >()->GetName() );
 }
 
 

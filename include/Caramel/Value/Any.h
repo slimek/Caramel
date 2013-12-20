@@ -44,6 +44,18 @@ private:
 };
 
 
+//
+// Stand-alone Creators
+// - For polymorphic work-around.
+//
+
+template< typename T >
+inline Any MakeAny( const T& value )
+{
+    return Any( value );
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Implementation
