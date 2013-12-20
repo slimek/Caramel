@@ -216,6 +216,10 @@ TimeOfDay DateTime::TimeOfDay() const
 // Operators
 //
 
+Bool DateTime::operator==( const DateTime& rhs ) const { return *m_impl == *rhs.m_impl; }
+Bool DateTime::operator< ( const DateTime& rhs ) const { return *m_impl <  *rhs.m_impl; }
+
+
 DateTime DateTime::operator+( const TimeSpan& rhs ) const
 {
     return DateTime( std::make_shared< DateTimeImpl >( *m_impl + *rhs.m_impl ));

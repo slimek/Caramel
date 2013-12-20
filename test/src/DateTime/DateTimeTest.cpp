@@ -67,6 +67,29 @@ TEST( DateTimeFormatTest )
 }
 
 
+TEST( DateTimeComparisonsTest )
+{
+    const auto dt1 = DateTime::FromString( "1987-06-23 4:56" );
+    const auto dt2 = DateTime::FromString( "2013-04-05 6:17" );
+
+    CHECK( dt1 != dt2 );
+    CHECK( dt1 <  dt2 );
+    CHECK( dt1 <= dt2 );
+    CHECK( false == ( dt1 == dt2 ));
+    CHECK( false == ( dt1 >  dt2 ));
+    CHECK( false == ( dt1 >= dt2 ));
+
+    const auto dt3 = dt1;
+
+    CHECK( dt1 == dt3 );
+    CHECK( dt1 <= dt3 );
+    CHECK( dt1 >= dt3 );
+    CHECK( false == ( dt1 != dt3 ));
+    CHECK( false == ( dt1 <  dt3 ));
+    CHECK( false == ( dt1 >  dt3 ));
+}
+
+
 TEST( TimeSpanTest )
 {
     /// Accessors ///

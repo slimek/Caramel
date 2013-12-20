@@ -7,6 +7,7 @@
 #include <Caramel/Caramel.h>
 #include <Caramel/DateTime/TimeOfDay.h>
 #include <Caramel/DateTime/TimeSpan.h>
+#include <boost/operators.hpp>
 
 
 namespace Caramel
@@ -20,7 +21,7 @@ namespace Caramel
 
 class DateTimeImpl;
 
-class DateTime
+class DateTime : public boost::totally_ordered< DateTime >
 {
 public:
 
@@ -55,6 +56,11 @@ public:
 
     
     /// Operators ///
+
+    // Comparisons
+    Bool operator==( const DateTime& rhs ) const;
+    Bool operator< ( const DateTime& rhs ) const;
+
 
     //
     // DateTime = DateTime + TimeSpan
