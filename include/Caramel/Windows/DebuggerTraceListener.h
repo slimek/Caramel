@@ -27,7 +27,7 @@ class DebuggerTraceListener : public Trace::Listener
 {
 public:
 
-    void Write( Trace::Level level, const std::string& message );
+    void Write( Trace::Level level, const std::string& message ) override;
 };
 
 

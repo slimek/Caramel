@@ -64,7 +64,7 @@ class StdoutListener : public Listener
 {
 public:
 
-    void Write( Level level, const std::string& message );
+    void Write( Level level, const std::string& message ) override;
 };
 
 

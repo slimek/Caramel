@@ -53,7 +53,7 @@ public:
 
     /// Implements Listener ///
 
-    void Write( Level level, const std::string& message );
+    void Write( Level level, const std::string& message ) override;
 };
 
 
