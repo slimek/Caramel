@@ -77,6 +77,13 @@ struct AnyFloatingCaster
             return value;
         }
 
+        auto floating = dynamic_cast< const AnyFloating* >( holder );
+        if ( floating )
+        {
+            floating->Get( value );
+            return value;
+        }
+
         CARAMEL_THROW( "Not an AnyFloating or AnyInteger type" );
     }
 };

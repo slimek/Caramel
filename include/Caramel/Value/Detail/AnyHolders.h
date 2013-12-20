@@ -57,6 +57,28 @@ private:
 
 
 //
+// Any Floating
+//
+
+class AnyFloating : public AnyHolder
+{
+public:
+
+    explicit AnyFloating( Float value );
+    explicit AnyFloating( Double value );
+
+    /// Retrieve Value ///
+
+    void Get( Float& value ) const;
+    void Get( Double& value ) const;
+
+private:
+
+    Double m_value;
+};
+
+
+//
 // Any String
 //
 
@@ -165,9 +187,10 @@ private:
 template< typename T >
 struct AnyHolderSelect
 {
-    typedef typename IfThenElse3T
+    typedef typename IfThenElse4T
     <
         std::is_integral< T >::value,       AnyInteger,
+        std::is_floating_point< T >::value, AnyFloating,
         IsGeneralString< T >::VALUE,        AnyString,
         std::is_enum< T >::value,           AnyEnumConcrete< T >,
                                             AnyObjectConcrete< T >

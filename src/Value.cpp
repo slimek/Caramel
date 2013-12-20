@@ -20,6 +20,7 @@ namespace Caramel
 // Contents
 //
 //   AnyInteger
+//   AnyFloating
 //   AnyEnum
 //   AnyString
 //   NamedValues
@@ -33,7 +34,7 @@ namespace Detail
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Any Number
+// Any Integer
 //
 
 AnyInteger::AnyInteger( Int value )
@@ -94,6 +95,44 @@ void AnyInteger::Get( Double& value ) const
 {
     m_isUint64 ? AnyInteger_Get( value, static_cast< Uint64 >( m_value ))
                : AnyInteger_Get( value, m_value );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Any Floating
+//
+
+AnyFloating::AnyFloating( Float value )
+    : m_value( value )
+{
+}
+
+
+AnyFloating::AnyFloating( Double value )
+    : m_value( value )
+{
+}
+
+
+//
+// Retrieve Value
+//
+
+void AnyFloating::Get( Float& value ) const
+{
+    if ( ! NumberConverter< Float, Double >::CanExactConvert( m_value ))
+    {
+        CARAMEL_THROW( "Can't exactly convert Double to Float, value: %e", m_value );
+    }
+
+    value = static_cast< Float >( m_value );
+}
+
+
+void AnyFloating::Get( Double& value ) const
+{
+    value = m_value;
 }
 
 

@@ -110,6 +110,15 @@ struct NumberConverter< Float, Uint64 >
     }
 };
 
+template<>
+struct NumberConverter< Float, Double >
+{
+    static Bool CanExactConvert( Double value )
+    {
+        return -FLT_MAX <= value && value <= FLT_MAX;
+    }
+};
+
 
 //
 // Specialization - Output to Double

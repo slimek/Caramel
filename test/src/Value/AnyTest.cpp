@@ -128,6 +128,44 @@ TEST( AnyIntegerToFloatingTest )
 
     CHECK( i32femax == ai32femax.As< Float >() );
     CHECK( i32femin == ai32femin.As< Float >() );
+
+    Any ai32feover ( i32femax + 1 );
+    Any ai32feunder( i32femin - 1 );
+
+    CHECK_THROW( ai32feover.As< Float >(),  Caramel::Exception );
+    CHECK_THROW( ai32feunder.As< Float >(), Caramel::Exception );
+}
+
+
+TEST( AnyFloatingTest )
+{
+    Any az( 0.0 );
+    Any as( 42.0 );
+    Any ap( 3.1416 );
+
+    Any afmin( FLT_MIN );
+    Any afpmax( FLT_MAX );
+    Any afnmax( -FLT_MAX );
+    Any afeps( FLT_EPSILON );
+
+    Any admax( DBL_MAX );
+
+    CHECK( 0.0f == az.As< Float >() );
+    CHECK( 0.0  == az.As< Double >() );
+
+    CHECK( 42.0f == as.As< Float >() );
+    CHECK( 42.0  == as.As< Double >() );
+
+    CHECK( 3.1416f == ap.As< Float >() );
+    CHECK( 3.1416  == ap.As< Double >() );
+
+    CHECK(  FLT_MIN == afmin.As< Float >() );
+    CHECK(  FLT_MAX == afpmax.As< Float >() );
+    CHECK( -FLT_MAX == afnmax.As< Float >() );
+    CHECK(  FLT_EPSILON == afeps.As< Float >() );
+
+    CHECK( DBL_MAX == admax.As< Double >() );
+    CHECK_THROW( admax.As< Float >(), Caramel::Exception );
 }
 
 
