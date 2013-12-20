@@ -52,6 +52,9 @@
 #define CARAMEL_CDECL      __attribute__(( cdecl ))
 #define CARAMEL_DEPRECATED
 
+// For INT32_MIN and other limit defines
+#define __STDC_LIMIT_MACROS
+
 
 #endif // GNU C++
 
