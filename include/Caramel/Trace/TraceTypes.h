@@ -46,10 +46,10 @@ enum Level : Int
 
 /// Supporting Routings ///
 
-//
 // EXAMPLE: input DEBUG => output INFO
-//   
 Level NextLevel( Level lv );
+
+Bool ExistsBuiltinChannel( Level lv );
 
 
 ///////////////////////////////////////////////////////////////////////////////

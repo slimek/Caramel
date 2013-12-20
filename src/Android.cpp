@@ -34,7 +34,7 @@ LogTraceAdapter::LogTraceAdapter( const std::string& tagName )
 
 void LogTraceAdapter::Write( Trace::Level level, const std::string& message )
 {
-    CARAMEL_ASSERT( Trace::LEVEL_VERBOSE <= level && level <= Trace::LEVEL_ERROR );
+    CARAMEL_ASSERT( Trace::ExistsBuiltinChannel( level ));
 
     const auto priority = static_cast< android_LogPriority >( static_cast< Int >( level ) + 1 );
 

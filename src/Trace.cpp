@@ -32,17 +32,6 @@ namespace Trace
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Internal Predicates
-//
-
-inline static Bool HasBuiltInChannel( Level level )
-{
-    return LEVEL_DEBUG <= level && level <= LEVEL_ERROR;
-}
-
-
-///////////////////////////////////////////////////////////////////////////////
-//
 // Trace Manager
 //
 
@@ -69,7 +58,7 @@ TraceManager::~TraceManager()
 
 void TraceManager::BindListenerToBuiltinChannels( Level minLevel, Listener* listener )
 {
-    CARAMEL_ASSERT( HasBuiltInChannel( minLevel ));
+    CARAMEL_ASSERT( ExistsBuiltinChannel( minLevel ));
 
     Level level = minLevel;
     while ( LEVEL_ERROR >= level )
@@ -102,7 +91,7 @@ void TraceManager::UnbindListenerFromAllChannels( Listener* listener )
 
 void TraceManager::WriteToBuiltinChannel( Level level, const std::string& message )
 {
-    CARAMEL_ASSERT( HasBuiltInChannel( level ));
+    CARAMEL_ASSERT( ExistsBuiltinChannel( level ));
 
     BuiltinChannel* channel = m_builtinChannels.find( level )->second;
     channel->Write( level, message );
@@ -218,6 +207,12 @@ Level NextLevel( Level inputLevel )
 }
 
 
+Bool ExistsBuiltinChannel( Level level )
+{
+    return LEVEL_DEBUG <= level && level <= LEVEL_ERROR;
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Listener
@@ -240,7 +235,7 @@ Listener::~Listener()
 
 void Listener::BindBuiltinChannels( Level minLevel )
 {
-    if ( ! ( HasBuiltInChannel( minLevel )))
+    if ( ! ( ExistsBuiltinChannel( minLevel )))
     {
         CARAMEL_THROW( "Not level of built-in channel, minLevel: %d", minLevel );
     }
