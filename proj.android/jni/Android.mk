@@ -7,6 +7,7 @@ LOCAL_MODULE := Caramel
 CRM_SRC := ../../src
 
 LOCAL_SRC_FILES := \
+	$(CRM_SRC)/Android.cpp \
 	$(CRM_SRC)/DateTime.cpp \
 	$(CRM_SRC)/Error.cpp \
 	$(CRM_SRC)/Lexical.cpp \

@@ -150,6 +150,12 @@
     <Filter Include="2. Sources\Value">
       <UniqueIdentifier>{c8fcc489-7171-46d6-9cfd-505a7031b032}</UniqueIdentifier>
     </Filter>
+    <Filter Include="4. Non-Win32 Platform">
+      <UniqueIdentifier>{a319d735-f046-4772-a383-bd90b97179ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="4. Non-Win32 Platform\Android">
+      <UniqueIdentifier>{86cb10dd-06a2-41c5-95c5-0d17c409abc0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -527,6 +533,9 @@
     <ClInclude Include="..\src\DateTime\DateTimeManager.h">
       <Filter>2. Sources\DateTime</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Android\LogTraceAdapter.h">
+      <Filter>4. Non-Win32 Platform\Android</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">
@@ -588,6 +597,9 @@
     </ClCompile>
     <ClCompile Include="..\src\Value.cpp">
       <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Android.cpp">
+      <Filter>4. Non-Win32 Platform</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
