@@ -2,10 +2,14 @@
 
 #include "CaramelPch.h"
 
+#include "DateTime/DateImpl.h"
 #include "DateTime/DateTimeImpl.h"
+#include "DateTime/DateTimeManager.h"
 #include "DateTime/TimeDuration.h"
 #include <Caramel/DateTime/TimeOfDay.h>
 #include <Caramel/DateTime/TimeSpan.h>
+#include <Caramel/Thread/MutexLocks.h>
+#include <boost/xpressive/xpressive_dynamic.hpp>
 
 
 namespace Caramel
@@ -14,10 +18,167 @@ namespace Caramel
 //
 // Contents
 //
+//   DateTimeManager
+//   Date
 //   DateTime
 //   TimeSpan
 //   TimeOfDay
 //
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// DateTime Manager
+//
+
+DateTimeManager::DateTimeManager()
+    : m_dateFacet( new DateFacet )
+    , m_timeFacet( new TimeFacet )
+{
+    m_dateStream.imbue( std::locale( std::locale::classic(), m_dateFacet ));
+    m_timeStream.imbue( std::locale( std::locale::classic(), m_timeFacet ));
+}
+
+
+std::string DateTimeManager::FormatDate(
+    const boost::gregorian::date& date, const std::string& format )
+{
+    auto ulock = UniqueLock( m_mutex );
+
+    m_dateFacet->format( format.c_str() );
+    m_dateStream.str( "" );
+    m_dateStream << date;
+    return m_dateStream.str();
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Date
+//
+
+Date::Date()
+    : m_impl( new DateImpl )
+{
+}
+
+
+Date::Date( std::shared_ptr< DateImpl > impl )
+    : m_impl( impl )
+{
+}
+
+
+//
+// Creators
+//
+
+Date Date::Today()
+{
+    return Date( std::make_shared< DateImpl >( boost::gregorian::day_clock::local_day() ));   
+}
+
+
+Date Date::FromYMD( Int year, Int month, Int day )
+{
+    return Date( std::make_shared< DateImpl >( boost::gregorian::date( year, month, day )));
+}
+
+
+Date Date::FromString( const std::string& s )
+{
+    return Date( std::make_shared< DateImpl >( boost::gregorian::from_string( s )));
+}
+
+
+Date Date::FromMacro( const Char* inputDate )
+{
+    CARAMEL_ASSERT( inputDate );
+
+    using namespace boost::xpressive;
+
+    const std::string sdate = inputDate;
+
+    // The ANSI C __DATE__ macro is in "Mmm dd yyyy" format
+
+    smatch matches;
+    static const sregex spec = sregex::compile( "(\\w{3})\\s+(\\d{1,2})\\s+(\\d{4})" );
+
+    if ( ! regex_match( sdate, matches, spec ))
+    {
+        CARAMEL_THROW( "Not match ANSI C __DATE__ format: %s", sdate );
+    }
+
+    const std::string smonth = matches[1].str();
+    const std::string sday   = matches[2].str();
+    const std::string syear  = matches[3].str();
+
+    return FromString( Sprintf( "%s-%s-%s", syear, smonth, sday ));
+}
+
+
+//
+// Properties
+//
+
+Bool Date::IsValid() const
+{
+    return ! m_impl->is_not_a_date();
+}
+
+
+//
+// Accessors
+//
+
+Int Date::Year()  const { return m_impl->year(); }
+Int Date::Month() const { return m_impl->month(); }
+Int Date::Day()   const { return m_impl->day(); }
+
+
+//
+// Operators
+//
+
+Bool Date::operator==( const Date& rhs ) const { return *m_impl == *rhs.m_impl; }
+Bool Date::operator< ( const Date& rhs ) const { return *m_impl <  *rhs.m_impl; }
+
+
+//
+// Conversions
+//
+
+std::string Date::ToString() const
+{
+    return boost::gregorian::to_iso_extended_string( *m_impl );
+}
+
+
+std::string Date::ToIsoString() const
+{
+    return boost::gregorian::to_iso_string( *m_impl );
+}
+
+
+std::string Date::Format( const std::string& format ) const
+{
+    return DateTimeManager::Instance()->FormatDate( *m_impl, format );
+}
+
+
+//
+// Implementation
+//
+
+DateImpl::DateImpl()
+{
+}
+
+
+DateImpl::DateImpl( boost::gregorian::date&& date )
+    : boost::gregorian::date( date )
+{
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //

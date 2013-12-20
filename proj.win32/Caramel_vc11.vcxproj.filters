@@ -518,6 +518,15 @@
     <ClInclude Include="..\include\Caramel\Numeric\NumberConverter.h">
       <Filter>1. Public Packages\Numeric</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\DateTime\Date.h">
+      <Filter>1. Public Packages\DateTime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\DateTime\DateImpl.h">
+      <Filter>2. Sources\DateTime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\DateTime\DateTimeManager.h">
+      <Filter>2. Sources\DateTime</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">
