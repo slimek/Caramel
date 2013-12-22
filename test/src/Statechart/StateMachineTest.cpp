@@ -24,6 +24,7 @@ enum StateId
 {
     S_INITIAL,
     S_WAITING,
+    S_FINAL,
 };
 
 enum EventId
@@ -82,6 +83,66 @@ TEST( StateMachineEventTest )
     CHECK( "Alice" == buffer );
     CHECK( 2 == enterCount );   // Initiate gives one enter.
     CHECK( 1 == exitCount );
+}
+
+
+TEST( StateMachineBuildFailedTest )
+{
+    Statechart::StateMachine machine( "BuildFailed" );
+
+    Int count = 0;
+
+    machine.AddState( S_FINAL );
+
+    // Duplicate states
+    CHECK_THROW( machine.AddState( S_FINAL ), Caramel::Exception );
+
+    // Duplicate enter actions
+    CHECK_THROW(
+        machine.AddState( S_FINAL + 1 )
+               .EnterAction( [&] { ++ count; } )
+               .EnterAction( [&] { -- count; } ),
+        Caramel::Exception
+    );
+
+    // Duplicate exit actions
+    CHECK_THROW(
+        machine.AddState( S_FINAL + 2 )
+               .ExitAction( [&] { ++ count; } )
+               .ExitAction( [&] { -- count; } ),
+        Caramel::Exception
+    );
+
+    // Duplicate events for transition
+    CHECK_THROW(
+        machine.AddState( S_FINAL + 3 )
+               .Transition( E_STRING, S_FINAL )
+               .Transition( E_STRING, S_FINAL + 1 ),
+        Caramel::Exception
+    );
+}
+
+
+TEST( StateMachineRunFailedTest)
+{
+    Statechart::StateMachine machine( "RunFailed" );;
+
+    machine.AddState( S_INITIAL )
+           .Transition( E_START, S_WAITING );
+
+    // Post events before initiated
+    CHECK_THROW( machine.PostEvent( E_START ), Caramel::Exception );
+
+    // Process before initiated
+    CHECK_THROW( machine.Process(), Caramel::Exception );
+
+    // Initiate at an unknown state
+    CHECK_THROW( machine.Initiate( S_FINAL ), Caramel::Exception );
+
+    machine.Initiate( S_INITIAL );
+
+    // Initiate twice
+    CHECK_THROW( machine.Initiate( S_INITIAL ), Caramel::Exception );
 }
 
 

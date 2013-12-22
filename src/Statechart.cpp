@@ -46,6 +46,8 @@ StateMachine::~StateMachine()
 
 State StateMachine::AddState( Int stateId )
 {
+    CARAMEL_ASSERT( ! m_impl->m_initiated );
+
     StatePtr newState = std::make_shared< StateImpl >( stateId, m_impl->m_name );
     if ( ! m_impl->m_states.Insert( stateId, newState ))
     {
@@ -57,11 +59,15 @@ State StateMachine::AddState( Int stateId )
 
 void StateMachine::Initiate( Int stateId )
 {
+    CARAMEL_ASSERT( ! m_impl->m_initiated );
+
     StatePtr initialState;
     if ( ! m_impl->m_states.Find( stateId, initialState ))
     {
         CARAMEL_THROW( "State not found, machine: %s, stateId: %d", m_impl->m_name, stateId );
     }
+
+    m_impl->m_initiated = true;
 
     Task task(
         Sprintf( "Machine[%s].ProcessInitiate[%d]", m_impl->m_name, stateId ),
@@ -86,6 +92,8 @@ void StateMachine::PostEvent( Int eventId, const Any& value )
 
 void StateMachine::PostEvent( const AnyEvent& evt )
 {
+    CARAMEL_ASSERT( m_impl->m_initiated );
+
     Task task(
         Sprintf( "Machine[%s].ProcessEvent[%d]", m_impl->m_name, evt.Id() ),
         [=] { m_impl->ProcessEvent( evt ); }
@@ -98,6 +106,7 @@ void StateMachine::PostEvent( const AnyEvent& evt )
 void StateMachine::Process( const Ticks& sliceTicks )
 {
     CARAMEL_ASSERT( m_impl->m_builtinTaskPoller );
+    CARAMEL_ASSERT( m_impl->m_initiated );
 
     m_impl->m_builtinTaskPoller->PollFor( sliceTicks );
 }
@@ -127,6 +136,7 @@ StateMachineImpl::StateMachineImpl( const std::string& name )
     : m_name( name )
     , m_taskExecutor( nullptr )
     , m_builtinTaskPoller( new TaskPoller )
+    , m_initiated( false )
     , m_transitNumber( 0 )
 {
     m_taskExecutor = m_builtinTaskPoller.get();

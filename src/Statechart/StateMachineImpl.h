@@ -64,11 +64,11 @@ private:
 
     TaskExecutor* m_taskExecutor;
     std::unique_ptr< TaskPoller > m_builtinTaskPoller;
-    
 
     typedef Concurrent::HashMap< Int, StatePtr > StateMap;
     StateMap m_states;
 
+    Bool     m_initiated;
     StatePtr m_currentState;
 
     Uint      m_transitNumber;     // How many times of transition.
