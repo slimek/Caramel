@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
+#include <Caramel/Error/Exception.h>
 #include <Caramel/Value/Any.h>
 #include <type_traits>
 
@@ -21,6 +22,9 @@ class AnyEvent
 {
 public:
 
+    // Not an event
+    AnyEvent();
+
     // Make an Event without value
     explicit AnyEvent( Int id );
 
@@ -31,18 +35,24 @@ public:
 
     /// Properties ///
 
-    Int Id() const { return m_id; }
+    Bool IsValid()  const { return m_valid; }
+    Bool HasValue() const { return ! m_value.IsEmpty(); }
+
+
+    /// Accessors ///
+
+    Int Id() const;
 
     template< typename T >
     T Value() const;
 
-    Bool HasValue() const { return ! m_value.IsEmpty(); }
 
 
 private:
 
-    Int m_id;
-    Any m_value;
+    Bool m_valid;
+    Int  m_id;
+    Any  m_value;
 
 };
 
@@ -51,29 +61,55 @@ private:
 // Implementation
 //
 
+inline AnyEvent::AnyEvent()
+    : m_valid( false )
+    , m_id( 0 )
+{
+}
+
+
 inline AnyEvent::AnyEvent( Int id )
-    : m_id( id )
+    : m_valid( true )
+    , m_id( id )
 {
 }
 
 
 inline AnyEvent::AnyEvent( Int id, const Any& value )
-    : m_id( id )
+    : m_valid( true )
+    , m_id( id )
     , m_value( value )
 {
 }
 
 
 inline AnyEvent::AnyEvent( Int id, Any&& value )
-    : m_id( id )
+    : m_valid( true )
+    , m_id( id )
     , m_value( value )
 {
+}
+
+
+inline Int AnyEvent::Id() const
+{
+    if ( ! m_valid )
+    {
+        CARAMEL_THROW( "Not an event" );
+    }
+
+    return m_id;
 }
 
 
 template< typename T >
 inline T AnyEvent::Value() const
 {
+    if ( ! m_valid )
+    {
+        CARAMEL_THROW( "Not an event" );
+    }
+
     return m_value.template As< T >();
 }
 

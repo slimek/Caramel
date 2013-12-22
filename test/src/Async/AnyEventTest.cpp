@@ -20,12 +20,31 @@ SUITE( AnyEventSuite )
 
 TEST( AnyEventTest )
 {
-    auto evt1 = AnyEvent( 1 );           // empty event;
+    /// Not an Event ///
+
+    const AnyEvent evt0;
+
+    CHECK( false == evt0.IsValid() );
+    CHECK( false == evt0.HasValue() );
+    CHECK_THROW( evt0.Id(), Caramel::Exception );
+    CHECK_THROW( evt0.Value< Int >(), Caramel::Exception );
+
+
+    /// Empty Event ///
+
+    auto evt1 = AnyEvent( 1 );
+
+    CHECK( true  == evt1.IsValid() );
+    CHECK( false == evt1.HasValue() );
+    CHECK( 1 == evt1.Id() );
+    CHECK_THROW( evt1.Value< Int >(), Caramel::Exception );
+
+
+    /// Normal Event ///
+
     auto evt2 = AnyEvent( 2, "Alice" );
     auto evt3 = AnyEvent( 3, 42 );
 
-    CHECK( 1 == evt1.Id() );
-    CHECK( false == evt1.HasValue() );
     
     CHECK( 2 == evt2.Id() );
     CHECK( "Alice" == evt2.Value< std::string >() );
@@ -36,8 +55,9 @@ TEST( AnyEventTest )
     CHECK( 42 == evt3.Value< Uint >() );
     CHECK( 42 == evt3.Value< Float >() );
 
-    // An empty event can't get a value.
-    CHECK_THROW( evt1.Value< Int >(), Caramel::Exception );    
+    // Invalid conversion
+    CHECK_THROW( evt2.Value< Int >(), Caramel::Exception );
+    CHECK_THROW( evt3.Value< std::string >(), Caramel::Exception );
 }
 
 
@@ -71,7 +91,7 @@ TEST( AnyEventQueueTest )
     equeue.Push( AnyEvent( EVENT_WIDGET, w ));
     equeue.Push( AnyEvent( EVENT_INT, 42 ));
 
-    AnyEvent evt( EVENT_NONE );
+    AnyEvent evt;
     while ( equeue.TryPop( evt ))
     {
         switch ( evt.Id() )
