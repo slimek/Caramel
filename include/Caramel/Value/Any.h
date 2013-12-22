@@ -26,6 +26,9 @@ public:
     template< typename T >
     Any( const T& value );
 
+    template< typename T >
+    Any& operator=( const T& value );
+
     
     /// Retrieve Value ///
 
@@ -65,6 +68,14 @@ template< typename T >
 inline Any::Any( const T& value )
     : m_holder( new typename Detail::AnyHolderSelect< T >::Type( value ))
 {
+}
+
+
+template< typename T >
+inline Any& Any::operator=( const T& value )
+{
+    m_holder.reset( new typename Detail::AnyHolderSelect< T >::Type( value ));
+    return *this;
 }
 
 

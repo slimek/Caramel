@@ -23,6 +23,7 @@ TEST( AnyEmptyTest )
 {
     Any a0;
     CHECK( true == a0.IsEmpty() );
+    CHECK_THROW( a0.As< Int >(), Caramel::Exception );
 
     Any ai( 1 );
     CHECK( false == ai.IsEmpty() );
@@ -219,11 +220,11 @@ TEST( AnyPolymorphicTest )
 {
     std::vector< Any > anys;
 
-    const auto circle = new Circle;
-    const auto square = new Square;
+    const auto circle = std::make_shared< Circle >();
+    const auto square = std::make_shared< Square >();
 
-    anys.push_back( MakeAny< Shape* >( circle ));
-    anys.push_back( MakeAny< Shape* >( square ));
+    anys.push_back( MakeAny< Shape* >( circle.get() ));
+    anys.push_back( MakeAny< Shape* >( square.get() ));
 
     CHECK( "Circle" == anys[0].As< Shape* >()->GetName() );
     CHECK( "Square" == anys[1].As< Shape* >()->GetName() );
@@ -236,6 +237,29 @@ TEST( AnyPolymorphicTest )
 
     CHECK( "Circle" == anys[2].As< std::shared_ptr< Shape > >()->GetName() );
     CHECK( "Square" == anys[3].As< std::shared_ptr< Shape > >()->GetName() );
+}
+
+
+TEST( AnyAssignTest )
+{
+    Any a1;
+
+    CHECK( true == a1.IsEmpty() );
+
+    a1 = 42;
+
+    CHECK( false == a1.IsEmpty() );
+    CHECK( 42 == a1.As< Int >() );
+    
+    a1 = "Alice";
+
+    CHECK( "Alice" == a1.As< std::string >() );
+
+    Any a2( 3.1416 );
+
+    a1 = a2;
+
+    CHECK( 3.1416 == a1.As< Double >() );
 }
 
 
