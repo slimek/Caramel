@@ -43,6 +43,20 @@ void LogTraceAdapter::Write( Trace::Level level, const std::string& message )
 
 
 ///////////////////////////////////////////////////////////////////////////////
+//
+// Validation
+//
+
+#define STATIC_ASSERT_LOG_TRACE_LEVEL( name ) \
+    static_assert( ANDROID_LOG_ ## name == static_cast< Int >( Trace::LEVEL_ ## name + 1 ), "Log level " # name )
+
+STATIC_ASSERT_LOG_TRACE_LEVEL( DEBUG );
+STATIC_ASSERT_LOG_TRACE_LEVEL( INFO );
+STATIC_ASSERT_LOG_TRACE_LEVEL( WARN );
+STATIC_ASSERT_LOG_TRACE_LEVEL( ERROR );
+
+
+///////////////////////////////////////////////////////////////////////////////
 
 } // namespace Android
 
