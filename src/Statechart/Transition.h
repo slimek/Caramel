@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
+#include <Caramel/Statechart/State.h>
 
 
 namespace Caramel
@@ -24,11 +25,13 @@ struct Transition
         : targetStateId( 0 )
     {}
 
-    explicit Transition( Int targetStateId )
+    Transition( Int targetStateId, Action action )
         : targetStateId( targetStateId )
+        , action( action )
     {}
 
-    Int targetStateId;
+    Int    targetStateId;
+    Action action;
 };
 
 typedef std::shared_ptr< Transition > TransitionPtr;

@@ -74,9 +74,21 @@ void StateMachine::Initiate( Int stateId )
 
 void StateMachine::PostEvent( Int eventId )
 {
+    this->PostEvent( AnyEvent( eventId ));
+}
+
+
+void StateMachine::PostEvent( Int eventId, const Any& value )
+{
+    this->PostEvent( AnyEvent( eventId, value ));
+}
+
+
+void StateMachine::PostEvent( const AnyEvent& evt )
+{
     Task task(
-        Sprintf( "Machine[%s].ProcessEvent[%d]", m_impl->m_name, eventId ),
-        [=] { m_impl->ProcessEvent( eventId ); }
+        Sprintf( "Machine[%s].ProcessEvent[%d]", m_impl->m_name, evt.Id() ),
+        [=] { m_impl->ProcessEvent( evt ); }
     );
 
     m_impl->m_taskExecutor->Submit( task );
@@ -98,6 +110,12 @@ void StateMachine::Process( const Ticks& sliceTicks )
 Int StateMachine::GetCurrentStateId() const
 {
     return m_impl->m_currentState->GetId();
+}
+
+
+AnyEvent StateMachine::GetActiveEvent() const
+{
+    return m_impl->m_activeEvent;
 }
 
 
@@ -128,35 +146,41 @@ void StateMachineImpl::ProcessInitiate( StatePtr initialState )
 }
 
 
-void StateMachineImpl::ProcessEvent( Int eventId )
+void StateMachineImpl::ProcessEvent( const AnyEvent& evt )
 {
     auto ulock = UniqueLock( m_mutex );
 
     m_actionThreadId = ThisThread::GetId();
-    auto guard = ScopeExit( [=] { m_actionThreadId = ThreadId(); } );
+    auto tidGuard = ScopeExit( [=] { m_actionThreadId = ThreadId(); } );
+
+    m_activeEvent = evt;
+    auto evtGuard = ScopeExit( [=] { m_activeEvent = AnyEvent(); } );
 
     TransitionPtr transition;
-    if ( m_currentState->m_transitions.Find( eventId, transition ))
+    if ( m_currentState->m_transitions.Find( evt.Id(), transition ))
     {
         StatePtr targetState;
         CARAMEL_VERIFY( m_states.Find( transition->targetStateId, targetState ));
 
-        this->DoTransit( targetState );
+        this->DoTransit( transition, targetState );
         return;
     }
 
     // Otherwise, discard this event
-    CARAMEL_TRACE_DEBUG( "%s discards event %d", m_currentState->GetName(), eventId );
+    CARAMEL_TRACE_DEBUG( "%s discards event %d", m_currentState->GetName(), evt.Id() );
 }
 
 
-void StateMachineImpl::DoTransit( StatePtr targetState )
+void StateMachineImpl::DoTransit( TransitionPtr transition, StatePtr targetState )
 {
     // REMARKS: At this point, the m_mutex should have been locked.
 
     this->ExitState();
 
-    // TODO: Add transition action here
+    if ( transition->action )
+    {
+        transition->action();
+    }
 
     m_currentState = targetState;
 
@@ -239,9 +263,9 @@ State& State::ExitAction( Action action )
 }
 
 
-State& State::Transition( Int eventId, Int targetStateId )
+State& State::Transition( Int eventId, Int targetStateId, Action action )
 {
-    auto transition = std::make_shared< Statechart::Transition >( targetStateId );
+    auto transition = std::make_shared< Statechart::Transition >( targetStateId, action );
     if ( ! m_impl->m_transitions.Insert( eventId, transition ))
     {
         CARAMEL_THROW(

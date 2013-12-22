@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
+#include <Caramel/Async/AnyEvent.h>
 #include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Statechart/State.h>
 
@@ -29,21 +30,19 @@ public:
     explicit StateMachine( const std::string& name );
     ~StateMachine();
 
-    //
     // Build this state machine.
     // - This function can only be used before calling Initiate().
-    //
     State AddState( Int stateId );
 
-    //
+    
     // Start this state machine, enter the initial state.
-    //
     void Initiate( Int stateId );
 
-    //
-    // Enqueue this event for later processing.
-    //
+    // Enqueue an event for later processing.
     void PostEvent( Int eventId );
+    void PostEvent( Int eventId, const Any& value );
+    void PostEvent( const AnyEvent& anyEvent );
+
 
     //
     // Process enqueued events.
@@ -58,6 +57,10 @@ public:
     /// Properties ///
 
     Int GetCurrentStateId() const;
+
+    // Return the event to cause the current action.
+    // - When you are not in an action handler, this returns a "not an event" event.
+    AnyEvent GetActiveEvent() const;
 
 
 private:

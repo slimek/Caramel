@@ -26,12 +26,11 @@ enum StateId
     S_WAITING,
 };
 
-
 enum EventId
 {
     E_START,
+    E_STRING,
 };
-
 
 TEST( StateMachineTest )
 {
@@ -54,6 +53,35 @@ TEST( StateMachineTest )
     machine.Process();
 
     CHECK( true == s_initialExited );
+}
+
+
+TEST( StateMachineEventTest )
+{
+    Statechart::StateMachine machine( "Event" );
+
+    std::string buffer;
+    Int enterCount = 0;
+    Int exitCount = 0;
+
+    machine.AddState( S_WAITING )
+           .Transition( E_STRING, S_WAITING, [&]
+                {
+                    const auto evt = machine.GetActiveEvent();
+                    buffer = evt.Value< std::string >();
+                })
+           .EnterAction( [&] { ++ enterCount; } )
+           .ExitAction( [&] { ++ exitCount; } );
+
+    machine.Initiate( S_WAITING );
+    machine.Process();
+    
+    machine.PostEvent( E_STRING, "Alice" );
+    machine.Process();
+
+    CHECK( "Alice" == buffer );
+    CHECK( 2 == enterCount );   // Initiate gives one enter.
+    CHECK( 1 == exitCount );
 }
 
 

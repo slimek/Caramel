@@ -6,6 +6,7 @@
 
 #include <Caramel/Caramel.h>
 #include "Statechart/StateImpl.h"
+#include "Statechart/Transition.h"
 #include <Caramel/Concurrent/HashMap.h>
 #include <Caramel/Statechart/StateMachine.h>
 #include <Caramel/Task/TaskPoller.h>
@@ -34,9 +35,9 @@ public:
 
     void ProcessInitiate( StatePtr initialState );
 
-    void ProcessEvent( Int eventId );
+    void ProcessEvent( const AnyEvent& evt );
 
-    void DoTransit( StatePtr targetState );
+    void DoTransit( TransitionPtr transition, StatePtr targetState );
 
 
     //
@@ -74,6 +75,7 @@ private:
     TickPoint m_currentStartTime;  // The start time of current state.
 
     ThreadId m_actionThreadId;
+    AnyEvent m_activeEvent;
 
     std::mutex m_mutex;
 };

@@ -38,7 +38,7 @@ public:
     //
     // When the event triggered, transit to the target state.
     //
-    State& Transition( Int eventId, Int targetStateId );
+    State& Transition( Int eventId, Int targetStateId, Action action = Action() );
 
 
 private:
