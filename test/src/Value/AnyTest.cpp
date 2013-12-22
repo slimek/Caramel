@@ -229,11 +229,8 @@ TEST( AnyPolymorphicTest )
     CHECK( "Circle" == anys[0].As< Shape* >()->GetName() );
     CHECK( "Square" == anys[1].As< Shape* >()->GetName() );
 
-    const auto spCircle = std::make_shared< Circle >();
-    const auto spSquare = std::make_shared< Square >();
-
-    anys.push_back( MakeAny< std::shared_ptr< Shape > >( spCircle ));
-    anys.push_back( MakeAny< std::shared_ptr< Shape > >( spSquare ));
+    anys.push_back( MakeAny< std::shared_ptr< Shape > >( circle ));
+    anys.push_back( MakeAny< std::shared_ptr< Shape > >( square ));
 
     CHECK( "Circle" == anys[2].As< std::shared_ptr< Shape > >()->GetName() );
     CHECK( "Square" == anys[3].As< std::shared_ptr< Shape > >()->GetName() );

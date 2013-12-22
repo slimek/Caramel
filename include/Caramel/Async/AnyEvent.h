@@ -20,13 +20,13 @@ namespace Caramel
 class AnyEvent
 {
 public:
+
     // Make an Event without value
     explicit AnyEvent( Int id );
 
-    // Make an Event with value
-    // - But the T can't be a pointer.
-    template< typename T >
-    AnyEvent( Int id, const T& value );
+    // Make an Event with any value
+    AnyEvent( Int id, const Any& value );
+    AnyEvent( Int id, Any&& value );
 
 
     /// Properties ///
@@ -35,6 +35,8 @@ public:
 
     template< typename T >
     T Value() const;
+
+    Bool HasValue() const { return ! m_value.IsEmpty(); }
 
 
 private:
@@ -55,13 +57,17 @@ inline AnyEvent::AnyEvent( Int id )
 }
 
 
-template< typename T >
-inline AnyEvent::AnyEvent( Int id, const T& value )
+inline AnyEvent::AnyEvent( Int id, const Any& value )
     : m_id( id )
     , m_value( value )
 {
-    static_assert( ! std::is_pointer< T >::value,
-        "Pass a raw pointer into the asynchronous AnyEvent is dangerous" );
+}
+
+
+inline AnyEvent::AnyEvent( Int id, Any&& value )
+    : m_id( id )
+    , m_value( value )
+{
 }
 
 
