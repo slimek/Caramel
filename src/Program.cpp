@@ -167,7 +167,7 @@ void ProgramOptionsManager::AddPositionalOptions( const std::vector< ProgramOpti
         CARAMEL_THROW( "Positional options can only be added once" );
     }
 
-    for ( Uint i = 0; i < options.size(); ++ i )
+    for ( Usize i = 0; i < options.size(); ++ i )
     {
         m_positionalDesc.add( options[i].GetLongName().c_str(), 1 );
     }
@@ -214,7 +214,7 @@ void ProgramOptionsManager::ParseCommandLine()
 
     const std::vector< std::wstring > wargs = po::split_winmain( ::GetCommandLineW() );
         
-    for ( Uint i = 1; i < wargs.size(); ++ i )
+    for ( Usize i = 1; i < wargs.size(); ++ i )
     {
         arguments.push_back( Utf8String( wargs[i] ).ToString() );
     }

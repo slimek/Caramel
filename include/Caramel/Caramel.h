@@ -57,7 +57,17 @@ typedef double Double;
 
 /// Others ///
 
-typedef void Void;   // only for a typeless pointer, void*   
+// Only for a typeless pointer, void*   
+typedef void Void;   
+
+//
+// Use Usize where return a std::size_t from STL.
+// Known defines are:
+//            VC++      GNU C++
+//   32-bit | Uint32  | Long (32-bit)
+//   64-bit | Uint64  | Long (64-bit)
+//
+typedef std::size_t Usize;   
 
 
 ///////////////////////////////////////////////////////////////////////////////

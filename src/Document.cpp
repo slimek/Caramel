@@ -424,7 +424,7 @@ void IniSectionImpl::AddRawLine( const std::string& inputRawLine )
 
 static std::string RemoveCommentsAndTrim( const std::string& rawLine )
 {
-    Uint pos = 0;
+    Usize pos = 0;
     Bool quoted = false;
     while ( pos < rawLine.length() )
     {

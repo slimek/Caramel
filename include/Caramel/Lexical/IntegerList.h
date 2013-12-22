@@ -58,7 +58,7 @@ inline Bool IntegerList< ValueType >::TryParse( const std::string& input, const 
     std::deque< std::string > tokens;
     boost::split( tokens, input, boost::is_any_of( separators ));
 
-    for ( Uint i = 0; i < tokens.size(); ++ i )
+    for ( Usize i = 0; i < tokens.size(); ++ i )
     {
         Integer< ValueType > ivalue;
         if ( !ivalue.TryParse( tokens[i] ))

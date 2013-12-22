@@ -231,7 +231,7 @@ inline static Bool Utf8String_IsTrail( Byte b )
 
 Bool Utf8String::TryParse( const std::string& u8Text )
 {
-    Uint pos = 0;
+    Usize pos = 0;
 
     while ( u8Text.length() > pos )
     {
