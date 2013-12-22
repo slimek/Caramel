@@ -17,9 +17,6 @@ SUITE( StateMachineSuite )
 // State Machine Test
 //
 
-static Bool s_initialEntered = false;
-static Bool s_initialExited = false;
-
 enum StateId
 {
     S_INITIAL,
@@ -37,23 +34,56 @@ TEST( StateMachineTest )
 {
     Statechart::StateMachine machine( "Basic" );
 
+    Bool initialEntered = false;
+    Bool initialExited  = false;
+    Bool waitingEntered = false;
+
     machine.AddState( S_INITIAL )
-           .EnterAction( [=] { s_initialEntered = true; } )
-           .ExitAction( [=] { s_initialExited = true; } )
+           .EnterAction( [&] { initialEntered = true; } )
+           .ExitAction( [&] { initialExited = true; } )
            .Transition( E_START, S_WAITING );
 
-    machine.AddState( S_WAITING );
+    machine.AddState( S_WAITING )
+           .EnterAction( [&] { waitingEntered = true; } );
 
     machine.Initiate( S_INITIAL );
-    machine.Process();
 
-    CHECK( true == s_initialEntered );
-    CHECK( false == s_initialExited );
+    CHECK( false == initialEntered );
+    CHECK( false == initialExited );
+    CHECK( false == waitingEntered );
 
     machine.PostEvent( E_START );
     machine.Process();
 
-    CHECK( true == s_initialExited );
+    CHECK( false == initialEntered );
+    CHECK( true  == initialExited );
+    CHECK( true  == waitingEntered );
+}
+
+
+TEST( StateMachineStateVariableTest )
+{
+    Statechart::StateMachine machine( "StateVariable" );
+
+    Bool initialExited = false;
+    Bool transited = false;
+    Bool waitingEntered = false;
+
+    Statechart::State initial = machine.AddState( S_INITIAL );
+    Statechart::State waiting = machine.AddState( S_WAITING );
+
+    initial.ExitAction ( [&] { initialExited = true; } )
+           .Transition( E_START, S_WAITING, [&] { transited = true; } );
+     
+    waiting.EnterAction( [&] { waitingEntered = true; } );
+
+    machine.Initiate( S_INITIAL );
+    machine.PostEvent( E_START );
+    machine.Process();
+
+    CHECK( true == initialExited );
+    CHECK( true == transited );
+    CHECK( true == waitingEntered );
 }
 
 
@@ -75,13 +105,12 @@ TEST( StateMachineEventTest )
            .ExitAction( [&] { ++ exitCount; } );
 
     machine.Initiate( S_WAITING );
-    machine.Process();
     
     machine.PostEvent( E_STRING, "Alice" );
     machine.Process();
 
     CHECK( "Alice" == buffer );
-    CHECK( 2 == enterCount );   // Initiate gives one enter.
+    CHECK( 1 == enterCount );
     CHECK( 1 == exitCount );
 }
 
@@ -123,7 +152,7 @@ TEST( StateMachineBuildFailedTest )
 }
 
 
-TEST( StateMachineRunFailedTest)
+TEST( StateMachineRunFailedTest )
 {
     Statechart::StateMachine machine( "RunFailed" );;
 

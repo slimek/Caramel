@@ -33,8 +33,6 @@ public:
 
     explicit StateMachineImpl( const std::string& name );
 
-    void ProcessInitiate( StatePtr initialState );
-
     void ProcessEvent( const AnyEvent& evt );
 
     void DoTransit( TransitionPtr transition, StatePtr targetState );

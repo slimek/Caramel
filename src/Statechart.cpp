@@ -46,7 +46,7 @@ StateMachine::~StateMachine()
 
 State StateMachine::AddState( Int stateId )
 {
-    CARAMEL_ASSERT( ! m_impl->m_initiated );
+    CARAMEL_CHECK( ! m_impl->m_initiated );
 
     StatePtr newState = std::make_shared< StateImpl >( stateId, m_impl->m_name );
     if ( ! m_impl->m_states.Insert( stateId, newState ))
@@ -59,7 +59,7 @@ State StateMachine::AddState( Int stateId )
 
 void StateMachine::Initiate( Int stateId )
 {
-    CARAMEL_ASSERT( ! m_impl->m_initiated );
+    CARAMEL_CHECK( ! m_impl->m_initiated );
 
     StatePtr initialState;
     if ( ! m_impl->m_states.Find( stateId, initialState ))
@@ -67,14 +67,8 @@ void StateMachine::Initiate( Int stateId )
         CARAMEL_THROW( "State not found, machine: %s, stateId: %d", m_impl->m_name, stateId );
     }
 
+    m_impl->m_currentState = initialState;
     m_impl->m_initiated = true;
-
-    Task task(
-        Sprintf( "Machine[%s].ProcessInitiate[%d]", m_impl->m_name, stateId ),
-        [=] { m_impl->ProcessInitiate( initialState ); }
-    );
-
-    m_impl->m_taskExecutor->Submit( task );
 }
 
 
@@ -92,7 +86,7 @@ void StateMachine::PostEvent( Int eventId, const Any& value )
 
 void StateMachine::PostEvent( const AnyEvent& evt )
 {
-    CARAMEL_ASSERT( m_impl->m_initiated );
+    CARAMEL_CHECK( m_impl->m_initiated );
 
     Task task(
         Sprintf( "Machine[%s].ProcessEvent[%d]", m_impl->m_name, evt.Id() ),
@@ -105,8 +99,8 @@ void StateMachine::PostEvent( const AnyEvent& evt )
 
 void StateMachine::Process( const Ticks& sliceTicks )
 {
-    CARAMEL_ASSERT( m_impl->m_builtinTaskPoller );
-    CARAMEL_ASSERT( m_impl->m_initiated );
+    CARAMEL_CHECK( m_impl->m_builtinTaskPoller );
+    CARAMEL_CHECK( m_impl->m_initiated );
 
     m_impl->m_builtinTaskPoller->PollFor( sliceTicks );
 }
@@ -140,19 +134,6 @@ StateMachineImpl::StateMachineImpl( const std::string& name )
     , m_transitNumber( 0 )
 {
     m_taskExecutor = m_builtinTaskPoller.get();
-}
-
-
-void StateMachineImpl::ProcessInitiate( StatePtr initialState )
-{
-    auto ulock = UniqueLock( m_mutex );
-
-    m_actionThreadId = ThisThread::GetId();
-    auto guard = ScopeExit( [=] { m_actionThreadId = ThreadId(); } );
-
-    m_currentState = initialState;
-
-    this->EnterState();
 }
 
 
@@ -257,7 +238,7 @@ State::State( StatePtr impl )
 
 State& State::EnterAction( Action action )
 {
-    CARAMEL_ASSERT( ! m_impl->m_enterAction );
+    CARAMEL_CHECK( ! m_impl->m_enterAction );
 
     m_impl->m_enterAction = action;
     return *this;
@@ -266,7 +247,7 @@ State& State::EnterAction( Action action )
 
 State& State::ExitAction( Action action )
 {
-    CARAMEL_ASSERT( ! m_impl->m_exitAction );
+    CARAMEL_CHECK( ! m_impl->m_exitAction );
 
     m_impl->m_exitAction = action;
     return *this;
