@@ -32,10 +32,19 @@ public:
     WideString( const std::wstring& s );
     WideString( const std::string& input, TextEncoding encoding );
 
+
+    /// Accessors ///
+
+    const Wchar* ToCstr() const { return m_s.c_str(); }
+
+
+    /// Conversion ///
+
     Bool TryParse( const std::string& input, TextEncoding encoding );
 
     std::string ToNarrow( TextEncoding encoding ) const;
 
+    
 private:
 
     std::wstring m_s;
