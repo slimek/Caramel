@@ -33,7 +33,7 @@ void Execute()
     for ( Uint i = 0; i < 10000; ++ i )
     {
         const std::string step1 = Sprintf( "Hello UnitTest! count: %d", i );
-        Sprintf( "[%04d] : %s", step1 );
+        Sprintf( "[%04d] : %s", i, step1 );
     }
 }
 
