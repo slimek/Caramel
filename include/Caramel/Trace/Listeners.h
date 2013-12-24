@@ -70,6 +70,30 @@ public:
 
 ///////////////////////////////////////////////////////////////////////////////
 //
+// Message Queue
+// - Put messages into a queue.
+//
+
+class MessageQueueImpl;
+
+class MessageQueue : public Listener
+{
+public:
+    
+    MessageQueue();
+
+    void Write( Level level, const std::string& message ) override;
+
+    Bool TryPop( Level& level, std::string& message );
+
+private:
+    
+    std::shared_ptr< MessageQueueImpl > m_impl;
+};
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
 // Listeners
 // - The listeners management of the whole facility.
 //

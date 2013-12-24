@@ -3,6 +3,7 @@
 #include "CaramelPch.h"
 
 #include "Trace/ChannelImpl.h"
+#include "Trace/ListenersImpl.h"
 #include "Trace/TraceManager.h"
 #include <Caramel/Trace/Listeners.h>
 #include <Caramel/Trace/Trace.h>
@@ -27,6 +28,7 @@ namespace Trace
 // < Listeners >
 //   Listener
 //   StdoutAdapter
+//   MessageQueue
 //   Listeners
 //
 
@@ -273,6 +275,39 @@ void Listener::UnbindAllChannels()
 void StdoutAdapter::Write( Level, const std::string& message )
 {
     std::cout << message << std::endl;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Message Queue
+//
+
+MessageQueue::MessageQueue()
+    : m_impl( new MessageQueueImpl )
+{
+}
+
+
+void MessageQueue::Write( Level level, const std::string& message )
+{
+    m_impl->m_queue.Push( MessageEntry( level, message ));
+}
+
+
+Bool MessageQueue::TryPop( Level& level, std::string& message )
+{
+    MessageEntry entry;
+    if ( m_impl->m_queue.TryPop( entry ))
+    {
+        level = entry.level;
+        message = entry.message;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 

@@ -101,6 +101,36 @@ TEST( TraceTest )
 }
 
 
+TEST( TraceMessageQueueTest )
+{
+    using namespace Trace;
+
+    MessageQueue queue;
+    queue.BindBuiltinChannels( LEVEL_DEBUG );
+    auto guard = ScopeExit( [&] { queue.UnbindAllChannels(); } );
+
+    Level level = LEVEL_SILENT;
+    std::string message;
+
+    CHECK( false == queue.TryPop( level, message ));
+
+    CARAMEL_TRACE_INFO( "Alice" );
+
+    CHECK( true == queue.TryPop( level, message ));
+    CHECK( LEVEL_INFO == level && "Alice" == message );
+    CHECK( false == queue.TryPop( level, message ));
+
+    CARAMEL_TRACE_ERROR( "Reimu" );
+    CARAMEL_TRACE_WARN( "Marisa" );
+
+    CHECK( true == queue.TryPop( level, message ));
+    CHECK( LEVEL_ERROR == level && "Reimu" == message );
+    CHECK( true == queue.TryPop( level, message ));
+    CHECK( LEVEL_WARN == level && "Marisa" == message );
+    CHECK( false == queue.TryPop( level, message ));
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE TraceSuite

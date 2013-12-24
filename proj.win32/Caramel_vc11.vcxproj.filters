@@ -536,6 +536,9 @@
     <ClInclude Include="..\include\Caramel\Windows\DebuggerTraceAdapter.h">
       <Filter>1. Public Packages\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Trace\ListenersImpl.h">
+      <Filter>2. Sources\Trace</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">
