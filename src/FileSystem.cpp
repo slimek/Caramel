@@ -240,6 +240,14 @@ Bool Path::IsAbsolute()   const { return m_impl->is_absolute(); }
 
 
 //
+// Comparisons
+//
+
+Bool Path::operator==( const Path& rhs ) const { return *m_impl == *rhs.m_impl; }
+Bool Path::operator< ( const Path& rhs ) const { return *m_impl <  *rhs.m_impl; }
+
+
+//
 // Combine
 //
 

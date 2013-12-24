@@ -32,6 +32,7 @@ namespace Caramel
 class PathImpl;
 
 class Path : public StringConvertible< Path >
+           , public boost::totally_ordered< Path >
            , public boost::dividable< Path >
 {
     friend class DirectoryInfo;
@@ -53,35 +54,34 @@ public:
     Path( const StringConvertible< T >& path );
 
 
-    //
-    // Splits
-    //
+    /// Splits ///
 
     Path Directory() const;
     Path Stem()      const;
-    Path Extension() const;
+    Path Extension() const;  // Returns with "." prefix
 
 
-    //
-    // Predicates
-    //
+    /// Predicates ///
 
     Bool HasExtension() const;
     Bool IsAbsolute()   const;
 
+    
+    /// Comparisions ///
 
-    //
+    Bool operator==( const Path& rhs ) const;
+    Bool operator< ( const Path& rhs ) const;
+
+
     // Combine two path with native separator.
     // - Add separator between two paths if the first path doesn't end with a separator.
-    //
+
     void Combine( const Path& subpath );
 
     Path& operator/=( const Path& subpath );
 
 
-    //
-    // Manipulators
-    //
+    /// Manipulators ///
 
     //
     // Whether or not the extension has a prefix '.', the result is append with just one '.'

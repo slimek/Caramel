@@ -105,6 +105,7 @@
     <ClCompile Include="..\src\DateTime\DateTimeTest.cpp" />
     <ClCompile Include="..\src\Document\IniDocumentTest.cpp" />
     <ClCompile Include="..\src\Enum\EnumLookupTest.cpp" />
+    <ClCompile Include="..\src\FileSystem\PathTest.cpp" />
     <ClCompile Include="..\src\Lexical\LexicalFloatingTest.cpp" />
     <ClCompile Include="..\src\Lexical\LexicalIntegerTest.cpp" />
     <ClCompile Include="..\src\Numeric\NumberTraitsTest.cpp" />
