@@ -54,9 +54,9 @@ TEST( SpinMutexTest )
 
     /// Race Test ///
 
-    Thread t1( "Exec1", [=] { Execute(); } );
-    Thread t2( "Exec2", [=] { Execute(); } );
-    Thread t3( "Exec3", [=] { Execute(); } );
+    Thread t1( "SpinMutexExec1", [=] { Execute(); } );
+    Thread t2( "SpinMutexExec2", [=] { Execute(); } );
+    Thread t3( "SpinMutexExec3", [=] { Execute(); } );
 
     t1.Join();
     t2.Join();

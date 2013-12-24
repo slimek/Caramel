@@ -39,9 +39,9 @@ void Execute()
 
 TEST( ConcurrentSprintfTest )
 {
-    Thread t1( "Exec1", [=] { Execute(); } );
-    Thread t2( "Exec2", [=] { Execute(); } );
-    Thread t3( "Exec3", [=] { Execute(); } );
+    Thread t1( "SprintfExec1", [=] { Execute(); } );
+    Thread t2( "SprintfExec2", [=] { Execute(); } );
+    Thread t3( "SprintfExec3", [=] { Execute(); } );
 
     t1.Join();
     t2.Join();
