@@ -10,6 +10,7 @@ LOCAL_SRC_FILES := \
 	$(CRM_SRC)/Android.cpp \
 	$(CRM_SRC)/DateTime.cpp \
 	$(CRM_SRC)/Error.cpp \
+	$(CRM_SRC)/FileSystem.cpp \
 	$(CRM_SRC)/Lexical.cpp \
 	$(CRM_SRC)/Math.cpp \
 	$(CRM_SRC)/Object.cpp \
