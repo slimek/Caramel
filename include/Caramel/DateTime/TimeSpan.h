@@ -31,7 +31,10 @@ class TimeSpan : public boost::totally_ordered< TimeSpan >
 
 public:
 
-    TimeSpan();
+    TimeSpan();  // Default: 0h 0m 0s
+
+    TimeSpan( Int hours, Int minutes, Int seconds );
+
     TimeSpan( const Caramel::Seconds& seconds );
 
 

@@ -28,13 +28,14 @@ class TimeOfDay : public boost::totally_ordered< TimeOfDay >
 
 public:
 
-    TimeOfDay();
+    TimeOfDay();  // Default: 00:00:00
+
+    TimeOfDay( Int hour, Int minute, Int second );
 
 
     /// Creators ///
 
     static TimeOfDay Now();
-    static TimeOfDay FromHMS( Int hour, Int minute, Int second );
     static TimeOfDay FromString( const std::string& s );
 
 

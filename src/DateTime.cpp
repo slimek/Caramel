@@ -36,6 +36,12 @@ Date::Date()
 }
 
 
+Date::Date( Int year, Int month, Int day )
+    : m_impl( new DateImpl( boost::gregorian::date( year, month, day )))
+{
+}
+
+
 Date::Date( std::shared_ptr< DateImpl > impl )
     : m_impl( impl )
 {
@@ -49,12 +55,6 @@ Date::Date( std::shared_ptr< DateImpl > impl )
 Date Date::Today()
 {
     return Date( std::make_shared< DateImpl >( boost::gregorian::day_clock::local_day() ));   
-}
-
-
-Date Date::FromYMD( Int year, Int month, Int day )
-{
-    return Date( std::make_shared< DateImpl >( boost::gregorian::date( year, month, day )));
 }
 
 
@@ -309,6 +309,12 @@ TimeSpan::TimeSpan()
 }
 
 
+TimeSpan::TimeSpan( Int hours, Int minutes, Int seconds )
+    : m_impl( new TimeDuration( boost::posix_time::time_duration( hours, minutes, seconds )))
+{
+}
+
+
 TimeSpan::TimeSpan( const Caramel::Seconds& seconds )
 {
     CARAMEL_ASSERT( LONG_MAX >= seconds.ToDouble() );
@@ -442,6 +448,21 @@ TimeOfDay::TimeOfDay()
 }
 
 
+TimeOfDay::TimeOfDay( Int hour, Int minute, Int second )
+{
+    auto tdur = std::make_shared< TimeDuration >(
+        boost::posix_time::time_duration( hour, minute, second ));
+
+    if ( tdur->is_negative() || 24 <= tdur->hours() )
+    {
+        CARAMEL_THROW( "Out of range, %d:%d:%d", hour, minute, second );
+    }
+
+    m_impl = tdur;
+}
+
+
+
 TimeOfDay::TimeOfDay( std::shared_ptr< TimeDuration > impl )
     : m_impl( impl )
 {
@@ -456,20 +477,6 @@ TimeOfDay TimeOfDay::Now()
 {
     return TimeOfDay( std::make_shared< TimeDuration >(
         boost::posix_time::second_clock::local_time().time_of_day() ));
-}
-
-
-TimeOfDay TimeOfDay::FromHMS( Int hour, Int minute, Int second )
-{
-    auto tdur = std::make_shared< TimeDuration >(
-        boost::posix_time::time_duration( hour, minute, second ));
-
-    if ( tdur->is_negative() || 24 <= tdur->hours() )
-    {
-        CARAMEL_THROW( "Out of range, %d:%d:%d", hour, minute, second );
-    }
-
-    return TimeOfDay( tdur );
 }
 
 

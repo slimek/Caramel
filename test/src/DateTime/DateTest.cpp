@@ -25,7 +25,7 @@ TEST( DateTest )
     CHECK( false == notDate.IsValid() );
     CHECK( true  == today.IsValid() );
 
-    const auto d1 = Date::FromYMD( 2013, 4, 5 );
+    const Date d1( 2013, 4, 5 );
 
     CHECK( 2013 == d1.Year() );
     CHECK( 4    == d1.Month() );

@@ -141,6 +141,13 @@ TEST( TimeSpanTest )
         CHECK( 452708.0 / 3600.0  == time3.TotalHours() );
         CHECK( 452708.0 / 60.0    == time3.TotalMinutes() );
         CHECK( 452708             == time3.TotalSeconds() );
+
+        const TimeSpan time4( 42, 15, 5 );
+
+        CHECK( 1  == time4.Days() );
+        CHECK( 18 == time4.Hours() );
+        CHECK( 15 == time4.Minutes() );
+        CHECK( 5  == time4.Seconds() );
     }
 
     /// Comparison ///
@@ -207,11 +214,15 @@ TEST( TimeSpanTest )
 
 TEST( TimeOfDay )
 {
+    const TimeOfDay td0;
+
+    CHECK( TimeOfDay( 0, 0, 0 ) == td0 );
+
     const auto now = TimeOfDay::Now();
     const auto zero = TimeOfDay::FromString( "0:00:00" );
 
     CHECK( "00:00:00" == zero.ToString() );
-    CHECK( TimeOfDay::FromHMS( 0, 0, 0 ) == zero );
+    CHECK( TimeOfDay( 0, 0, 0 ) == zero );
     CHECK( 0 == zero.Hour() );
     CHECK( 0 == zero.Minute() );
     CHECK( 0 == zero.Second() );
@@ -219,7 +230,7 @@ TEST( TimeOfDay )
     const auto tod1 = TimeOfDay::FromString( "12:34:56" );
 
     CHECK( "12:34:56" == tod1.ToString() );
-    CHECK( TimeOfDay::FromHMS( 12, 34, 56 ) == tod1 );
+    CHECK( TimeOfDay( 12, 34, 56 ) == tod1 );
     CHECK( 12 == tod1.Hour() );
     CHECK( 34 == tod1.Minute() );
     CHECK( 56 == tod1.Second() );
@@ -227,17 +238,17 @@ TEST( TimeOfDay )
     CHECK( "23:59:59" == TimeOfDay::FromString( "23:59:59" ).ToString() );
 
     // Time of Day can be longer than a day
-    CHECK_THROW( TimeOfDay::FromHMS( 24, 0, 0 ), Exception );
+    CHECK_THROW( TimeOfDay( 24, 0, 0 ), Exception );
     CHECK_THROW( TimeOfDay::FromString( "24:00:00" ), Exception );
 
     // Time of Day can not be negative.
-    CHECK_THROW( TimeOfDay::FromHMS( -1, 30, 15 ), Exception );
+    CHECK_THROW( TimeOfDay( -1, 30, 15 ), Exception );
     CHECK_THROW( TimeOfDay::FromString( "-01:30:15" ), Exception );
 
 
     /// Comparisons ///
 
-    const auto tod2 = TimeOfDay::FromHMS( 13, 45, 00 );
+    const auto tod2 = TimeOfDay( 13, 45, 00 );
 
     CHECK( tod2 >  tod1 );
     CHECK( tod2 >= tod1 );
@@ -255,7 +266,7 @@ TEST( TimeOfDay )
     const auto dt1 = DateTime::FromString( "2013/5/7 14:30:15" );
 
     CHECK( TimeOfDay() == dt0.TimeOfDay() );
-    CHECK( TimeOfDay::FromHMS( 14, 30, 15 ) == dt1.TimeOfDay() );
+    CHECK( TimeOfDay( 14, 30, 15 ) == dt1.TimeOfDay() );
 }
 
 
@@ -275,8 +286,8 @@ TEST( DateAndTimeOfDayTest )
     {
         const auto dateTime = DateTime::FromString( "1987/06/05 4:32:10" );
 
-        CHECK( Date::FromYMD( 1987, 6, 5 ) == dateTime.Date() );
-        CHECK( TimeOfDay::FromHMS( 4, 32, 10 ) == dateTime.TimeOfDay() );
+        CHECK( Date( 1987, 6, 5 ) == dateTime.Date() );
+        CHECK( TimeOfDay( 4, 32, 10 ) == dateTime.TimeOfDay() );
     }
 }
 

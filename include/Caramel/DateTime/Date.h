@@ -25,7 +25,9 @@ class Date : public boost::totally_ordered< Date >
 
 public:
 
-    Date();
+    Date(); // Default: "not a date"
+
+    Date( Int year, Int month, Int day );
 
     
     /// Properties ///
@@ -36,7 +38,6 @@ public:
     /// Creators ///
 
     static Date Today();
-    static Date FromYMD( Int year, Int month, Int day );
 
     // Accepted formats:
     //   YYYY-MM-DD

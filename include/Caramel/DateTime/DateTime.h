@@ -26,7 +26,8 @@ class DateTime : public boost::totally_ordered< DateTime >
 {
 public:
 
-    DateTime();
+    DateTime(); // Default: "not a datetime"
+
     DateTime( const Caramel::Date& date, const Caramel::TimeOfDay& time );
 
 
