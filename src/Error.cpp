@@ -204,15 +204,19 @@ void Alert(
             CARAMEL_NOT_IMPLEMENTED();
         }
         #endif
+        return;
+
+    default:
+        CARAMEL_TRACE_WARN( "Invalid result: %d", result );
+        // Pass through
 
     case ALERT_RESULT_ABORT:
-        abort();
+        CARAMEL_TRACE_INFO( "Program aborts by alert result" );
+        ::abort();
+        return;
 
     case ALERT_RESULT_CONTINUE_ONCE:
         CARAMEL_NOT_IMPLEMENTED();
-
-    default:
-        CARAMEL_NOT_REACHED();
     }
 }
 
