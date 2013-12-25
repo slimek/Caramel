@@ -42,6 +42,7 @@
     <ClInclude Include="..\include\Caramel\Document\IniDocument.h" />
     <ClInclude Include="..\include\Caramel\Document\IniSection.h" />
     <ClInclude Include="..\include\Caramel\Enum\EnumLookupTable.h" />
+    <ClInclude Include="..\include\Caramel\Error\Alert.h" />
     <ClInclude Include="..\include\Caramel\Error\Assert.h" />
     <ClInclude Include="..\include\Caramel\Error\Detail\ExceptionCatcherCore.h" />
     <ClInclude Include="..\include\Caramel\Error\Exception.h" />
@@ -124,6 +125,7 @@
     <ClInclude Include="..\src\Document\IniDocumentImpl.h" />
     <ClInclude Include="..\src\Document\IniSectionImpl.h" />
     <ClInclude Include="..\src\Document\IniLine.h" />
+    <ClInclude Include="..\src\Error\ErrorManager.h" />
     <ClInclude Include="..\src\FileSystem\PathImpl.h" />
     <ClInclude Include="..\src\Io\MbcsStreamReader.h" />
     <ClInclude Include="..\src\Io\Utf16LeStreamReader.h" />

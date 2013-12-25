@@ -156,6 +156,9 @@
     <Filter Include="4. Non-Win32 Platform\Android">
       <UniqueIdentifier>{86cb10dd-06a2-41c5-95c5-0d17c409abc0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Sources\Error">
+      <UniqueIdentifier>{ae3f59d8-d443-44ee-8af2-50ecf613e657}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -538,6 +541,12 @@
     </ClInclude>
     <ClInclude Include="..\src\Trace\ListenersImpl.h">
       <Filter>2. Sources\Trace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Error\Alert.h">
+      <Filter>1. Public Packages\Error</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Error\ErrorManager.h">
+      <Filter>2. Sources\Error</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -59,6 +59,9 @@
     <Filter Include="2. Tests\FileSystem">
       <UniqueIdentifier>{5dd1b698-8089-4cc1-8614-b3063af7bb85}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\Error">
+      <UniqueIdentifier>{2669aa0d-c160-4865-9748-d25c4cbabb53}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\RunTest.cpp">
@@ -144,6 +147,9 @@
     </ClCompile>
     <ClCompile Include="..\src\FileSystem\PathTest.cpp">
       <Filter>2. Tests\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Error\AlertTest.cpp">
+      <Filter>2. Tests\Error</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

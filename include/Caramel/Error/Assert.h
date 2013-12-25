@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
+#include <Caramel/Error/Alert.h>
 #include <Caramel/Error/Exception.h>
 
 
@@ -22,7 +23,10 @@
 #else  // NDEBUG
 
 #define CARAMEL_ASSERT( expr ) \
-    if ( !( expr )) { CARAMEL_THROW1( "Assertion failed : \"" #expr "\"" ); }
+    if ( !( expr )) \
+    { \
+        Caramel::Alert( __LINE__, __FILE__, __FUNCTION__, #expr ); \
+    }
 
 #define CARAMEL_VERIFY( expr ) CARAMEL_ASSERT( expr )
 
