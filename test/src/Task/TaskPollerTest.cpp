@@ -5,6 +5,7 @@
 #include <Caramel/Task/TaskPoller.h>
 #include <Caramel/Thread/ThisThread.h>
 #include <UnitTest++/UnitTest++.h>
+#include <vector>
 
 
 namespace Caramel
@@ -18,74 +19,69 @@ namespace Caramel
 SUITE( TaskPollerSuite )
 {
 
-class TaskPollerTest : public UnitTest::Test
-{
-public:
-    TaskPollerTest();
-
-private:
-    void RunImpl() const override;
-
-    void DoRun();
-
-    /// Task Functions ///
-
-    Bool m_work1Done;
-    Bool m_work2Done;
-
-
-
-} TaskPollerTestInstance;
-
-
-UnitTest::ListAdder adderTaskPollerTest( UnitTest::Test::GetTestList(), &TaskPollerTestInstance );
-
-
-TaskPollerTest::TaskPollerTest()
-    : UnitTest::Test( "TaskPollerTest", UnitTestSuite::GetSuiteName(), __FILE__, __LINE__ )
-    , m_work1Done( false )
-{
-}
-
-
-void TaskPollerTest::RunImpl() const
-{
-    const_cast< TaskPollerTest* >( this )->DoRun();
-}
-
-
-void TaskPollerTest::DoRun()
+TEST( TaskPollerDelayTest )
 {
     TaskPoller poller;
 
-    Task t1( "Work1", [=] { m_work1Done = true; } );
+    Bool work1Done = false;
+    Bool work2Done = false;
+
+    Task t1( "Work1", [&] { work1Done = true; } );
 
     poller.Submit( t1 );
     poller.PollOne();
 
-    CHECK( true == m_work1Done );
+    CHECK( true == work1Done );
 
-    Task t2( "Work2", [=] { m_work2Done = true; } );
+    Task t2( "Work2", [&] { work2Done = true; } );
     t2.DelayFor( Ticks( 500 ));
 
     poller.Submit( t2 );
     poller.PollOne();
 
-    CHECK( false == m_work2Done );
+    CHECK( false == work2Done );
 
-    ThisThread::SleepFor( Ticks( 550 ));
+    ThisThread::SleepFor( Ticks( 500 ));
 
     poller.PollOne();
 
-    CHECK( true == m_work2Done );
-
-
-
+    CHECK( true == work2Done );
 }
 
 
+TEST( TaskPollerStrandTest )
+{
+    TaskPoller poller;
+    Strand strand;
+
+    std::vector< Bool > dones( 3 );
+
+    Task t0( "Work0", [&] { dones[0] = true; } );
+    t0.Enstrand( strand );
+
+    Task t1( "Work1", [&] { dones[1] = true; } );
+    t1.Enstrand( strand );
+
+    Task t2( "Work2", [&] { dones[2] = true; } );
+    t2.Enstrand( strand );
+
+    poller.Submit( t0 );
+    poller.Submit( t1 );
+    poller.Submit( t2 );
+
+    poller.PollOne();
+
+    strand.CancelAll();
+
+    poller.PollOne();
+
+    CHECK( true  == dones[0] );
+    CHECK( false == dones[1] );
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////
+
+} // SUITE TaskPollerSuite
 
 } // namespace Caramel

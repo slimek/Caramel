@@ -33,6 +33,9 @@ public:
     Task& DelayFor( const Ticks& ticks );
 
 
+    Task& Enstrand( const Strand& strand );
+
+
     /// Properties ///
 
     std::string Name() const;

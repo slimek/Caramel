@@ -24,6 +24,7 @@ typedef std::function< void() > TaskFunction;
 // Forwards Declaration
 //
 
+class Strand;
 class Task;
 class TaskExecutor;
 class TaskPoller;
