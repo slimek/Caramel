@@ -5,6 +5,8 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
+#include <Caramel/DateTime/DateTimeFwd.h>
+#include <Caramel/DateTime/Days.h>
 #include <boost/operators.hpp>
 
 

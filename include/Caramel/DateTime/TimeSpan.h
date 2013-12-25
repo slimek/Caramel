@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
+#include <Caramel/DateTime/DateTimeFwd.h>
 #include <Caramel/Chrono/SecondClock.h>
 #include <boost/operators.hpp>
 
@@ -16,7 +17,6 @@ namespace Caramel
 //
 // Time Span
 // - Represents the duration between two DateTime values.
-//   Immutable.
 //
 
 class TimeDuration;
@@ -73,6 +73,8 @@ public:
 
     TimeSpan& operator+=( const TimeSpan& rhs );
     TimeSpan& operator-=( const TimeSpan& rhs );
+
+    TimeSpan operator-() const;
 
 
     /// Conversions ///

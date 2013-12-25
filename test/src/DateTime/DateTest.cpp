@@ -96,6 +96,56 @@ TEST( DateMacroTest )
 }
 
 
+TEST( DaysTest )
+{
+    const Days d0;
+
+    CHECK( Days( 0 ) == d0 );
+
+    const Days d1( 42 );
+    const Days d2( -90 );
+
+    CHECK( 42  == d1.ToInt() );
+    CHECK( -90 == d2.ToInt() );
+}
+
+
+TEST( DaysComparisonTest )
+{
+    const Days d1( 1 );
+    const Days d2( 42 );
+
+    CHECK( d1 <  d2 );
+    CHECK( d1 <= d2 );
+    CHECK( d1 != d2 );
+    CHECK( false == ( d1 >  d2 ));
+    CHECK( false == ( d1 >= d2 ));
+    CHECK( false == ( d1 == d2 ));
+
+    const Days d3 = d1;
+
+    CHECK( d1 <= d3 );
+    CHECK( d1 >= d3 );
+    CHECK( d1 == d3 );
+    CHECK( false == ( d1 <  d3 ));
+    CHECK( false == ( d1 >  d3 ));
+    CHECK( false == ( d1 != d3 ));
+}
+
+
+TEST( DaysArithmeticTest )
+{
+    const Days d0( 0 );
+    const Days d1( 42 );
+    const Days d2( 3 );
+
+    const Days dr = d1 - d2;
+
+    CHECK( Days( 45 ) == d1 + d2 );
+    CHECK( Days( 39 ) == d1 - d2 );
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE DateSuite

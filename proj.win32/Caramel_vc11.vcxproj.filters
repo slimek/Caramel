@@ -548,6 +548,15 @@
     <ClInclude Include="..\src\Error\ErrorManager.h">
       <Filter>2. Sources\Error</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\DateTime\Days.h">
+      <Filter>1. Public Packages\DateTime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\DateTime\DateTimeFwd.h">
+      <Filter>1. Public Packages\DateTime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\DateTime\DaysImpl.h">
+      <Filter>2. Sources\DateTime</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

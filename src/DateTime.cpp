@@ -2,6 +2,7 @@
 
 #include "CaramelPch.h"
 
+#include "DateTime/DaysImpl.h"
 #include "DateTime/DateImpl.h"
 #include "DateTime/DateTimeImpl.h"
 #include "DateTime/DateTimeManager.h"
@@ -19,6 +20,7 @@ namespace Caramel
 // Contents
 //
 //   Date
+//   Days
 //   DateTime
 //   TimeSpan
 //   TimeOfDay
@@ -152,6 +154,52 @@ DateImpl::DateImpl( boost::gregorian::date&& date )
     : boost::gregorian::date( date )
 {
 }
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Days
+//
+
+Days::Days()
+    : m_impl( new DaysImpl )
+{
+}
+
+
+Days::Days( Int days )
+    : m_impl( new DaysImpl( boost::gregorian::days( days )))
+{
+}
+
+
+//
+// Operators
+//
+
+Bool Days::operator==( const Days& rhs ) const { return *m_impl == *rhs.m_impl; }
+Bool Days::operator< ( const Days& rhs ) const { return *m_impl <  *rhs.m_impl; }
+
+Days& Days::operator+=( const Days& rhs )
+{
+    m_impl = std::make_shared< DaysImpl >( *m_impl );
+    *m_impl += *rhs.m_impl;
+    return *this;
+}
+
+Days& Days::operator-=( const Days& rhs )
+{
+    m_impl = std::make_shared< DaysImpl >( *m_impl );
+    *m_impl -= *rhs.m_impl;
+    return *this;
+}
+
+
+//
+// Conversions
+//
+
+Int Days::ToInt() const { return static_cast< Int >( m_impl->days() ); }
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -390,6 +438,7 @@ Bool TimeSpan::operator<( const Caramel::Seconds& rhs ) const
 
 TimeSpan& TimeSpan::operator+=( const TimeSpan& rhs )
 {
+    m_impl = std::make_shared< TimeDuration >( *m_impl );
     *m_impl += *rhs.m_impl;
     return *this;
 }
@@ -397,8 +446,15 @@ TimeSpan& TimeSpan::operator+=( const TimeSpan& rhs )
 
 TimeSpan& TimeSpan::operator-=( const TimeSpan& rhs )
 {
+    m_impl = std::make_shared< TimeDuration >( *m_impl );
     *m_impl -= *rhs.m_impl;
     return *this;
+}
+
+
+TimeSpan TimeSpan::operator-() const
+{
+    return TimeSpan( std::make_shared< TimeDuration >( - *m_impl ));
 }
 
 

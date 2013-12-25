@@ -36,6 +36,8 @@
     <ClInclude Include="..\include\Caramel\Concurrent\ReplicatePolicies.h" />
     <ClInclude Include="..\include\Caramel\DateTime\Date.h" />
     <ClInclude Include="..\include\Caramel\DateTime\DateTime.h" />
+    <ClInclude Include="..\include\Caramel\DateTime\DateTimeFwd.h" />
+    <ClInclude Include="..\include\Caramel\DateTime\Days.h" />
     <ClInclude Include="..\include\Caramel\DateTime\TimeOfDay.h" />
     <ClInclude Include="..\include\Caramel\DateTime\TimeSpan.h" />
     <ClInclude Include="..\include\Caramel\Debug\ScopeTiming.h" />
@@ -120,6 +122,7 @@
     <ClInclude Include="..\src\DateTime\DateImpl.h" />
     <ClInclude Include="..\src\DateTime\DateTimeImpl.h" />
     <ClInclude Include="..\src\DateTime\DateTimeManager.h" />
+    <ClInclude Include="..\src\DateTime\DaysImpl.h" />
     <ClInclude Include="..\src\DateTime\TimeDuration.h" />
     <ClInclude Include="..\src\Debug\DebugManager.h" />
     <ClInclude Include="..\src\Document\IniDocumentImpl.h" />

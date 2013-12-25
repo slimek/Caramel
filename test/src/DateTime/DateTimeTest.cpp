@@ -209,6 +209,25 @@ TEST( TimeSpanTest )
         CHECK( false == ( time1 == secs2 ));
         CHECK( false == ( secs2 == time1 ));
     }
+
+    /// Arithmetic ///
+    {
+        const TimeSpan t1( 0, 0, 42 );
+        const TimeSpan t2( 0, 0, 3 );
+
+        CHECK( TimeSpan( 0, 0, 45 ) == t1 + t2 );
+        CHECK( TimeSpan( 0, 0, 39 ) == t1 - t2 );
+
+        TimeSpan t3 = t1;
+        t3 += Hours( 1 );
+        CHECK( TimeSpan( 1, 0, 42 ) == t3 );
+
+        TimeSpan t4 = t1;
+        t4 -= Minutes( 30 );
+        CHECK( -TimeSpan( 0, 29, 18 ) == t4 );
+
+        CHECK( Seconds( 42 ) == t1 );  // t1 should not be modified
+    }
 }
 
 
