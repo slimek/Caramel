@@ -23,6 +23,8 @@ class DaysImpl;
 class Days : public boost::totally_ordered< Days >
            , public boost::additive< Days >
 {
+    friend class Date;
+
 public:
 
     Days();  // Default: 0 days
@@ -47,6 +49,8 @@ public:
 
 
 private:
+
+    explicit Days( std::shared_ptr< DaysImpl > impl );
 
     std::shared_ptr< DaysImpl > m_impl;
 };

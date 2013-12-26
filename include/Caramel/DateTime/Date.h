@@ -16,12 +16,14 @@ namespace Caramel
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Date
-// - Immutable
+// - A specific date in Gregorian Calendar.
+//   Based on boost::gregorian::date
 //
 
 class DateImpl;
 
 class Date : public boost::totally_ordered< Date >
+           , public boost::additive< Date, Days >
 {
     friend class DateTime;
 
@@ -32,11 +34,6 @@ public:
     Date( Int year, Int month, Int day );
 
     
-    /// Properties ///
-
-    Bool IsValid() const;  // False if impl is "not a date".
-
-
     /// Creators ///
 
     static Date Today();
@@ -50,6 +47,11 @@ public:
     static Date FromMacro( const Char* date );
     
 
+    /// Properties ///
+
+    Bool IsValid() const;  // False if impl is "not a date".
+
+
     /// Accessors ///
 
     Int Year()  const;
@@ -61,6 +63,14 @@ public:
 
     Bool operator==( const Date& rhs ) const;
     Bool operator< ( const Date& rhs ) const;
+
+    // Date = Date + Days
+    // Date = Date - Days
+    Date& operator+=( const Days& rhs );
+    Date& operator-=( const Days& rhs );
+
+    // Days = Date - Date
+    Days operator-( const Date& rhs ) const;
 
 
     /// Conversions ///

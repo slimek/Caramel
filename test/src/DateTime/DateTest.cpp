@@ -135,14 +135,79 @@ TEST( DaysComparisonTest )
 
 TEST( DaysArithmeticTest )
 {
-    const Days d0( 0 );
     const Days d1( 42 );
     const Days d2( 3 );
 
-    const Days dr = d1 - d2;
-
     CHECK( Days( 45 ) == d1 + d2 );
     CHECK( Days( 39 ) == d1 - d2 );
+
+    const Days dz;
+
+    CHECK( d1 == d1 + dz );
+    CHECK( d1 == d1 - dz );
+
+    // Binary operators should not change d1's value.
+    CHECK( Days( 42 ) == d1 );
+
+
+    /// Self Operators ///
+
+    Days d3( 18 );
+
+    d3 += Days( 5 );
+    CHECK( Days( 23 ) == d3 );
+
+    d3 -= Days( 9 );
+    CHECK( Days( 14 ) == d3 );
+}
+
+
+TEST( DateDaysArithmeticTest )
+{
+    const Date d1( 1987, 6, 5 );
+    
+    CHECK( Date( 1987, 7, 4 ) == d1 + Days( 29 ));
+    CHECK( Date( 1987, 6, 4 ) == d1 - Days( 1 ));
+
+    const Days dz;
+
+    CHECK( d1 == d1 + dz );
+    CHECK( d1 == d1 - dz );
+
+    // Binary operators should not change d1's value.
+    CHECK( Date( 1987, 6, 5 ) == d1 );
+
+
+    /// Test Leap Year ///
+
+    const Date d2( 2003, 2, 27 );
+    const Date d3( 2004, 2, 27 );
+
+    CHECK( Date( 2003, 3, 2 ) == d2 + Days( 3 ));
+    CHECK( Date( 2004, 3, 1 ) == d3 + Days( 3 ));
+
+
+    /// Self Operators ///
+
+    Date d4( 2013, 4, 5 );
+
+    d4 += Days( 3 );
+    CHECK( Date( 2013, 4, 8 ) == d4 );
+
+    d4 -= Days( 8 );
+    CHECK( Date( 2013, 3, 31 ) == d4 );
+
+
+    /// Difference of Dates ///
+
+    const Date d5( 2013, 5, 6 );
+
+    CHECK( Days( 0 )   == d4 - d4 );
+    CHECK( Days( 365 ) == d3 - d2 );
+    CHECK( Days( -36 ) == d4 - d5 );  // d4 now is 2013/3/31
+
+    // Binary operators should not change d4's value.
+    CHECK( Date( 2013, 3, 31 ) == d4 );
 }
 
 

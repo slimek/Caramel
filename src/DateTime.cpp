@@ -119,6 +119,23 @@ Int Date::Day()   const { return m_impl->day(); }
 Bool Date::operator==( const Date& rhs ) const { return *m_impl == *rhs.m_impl; }
 Bool Date::operator< ( const Date& rhs ) const { return *m_impl <  *rhs.m_impl; }
 
+Date& Date::operator+=( const Days& rhs )
+{
+    AddAssign( m_impl, rhs.m_impl );
+    return *this;
+}
+
+Date& Date::operator-=( const Days& rhs )
+{
+    SubstractAssign( m_impl, rhs.m_impl );
+    return *this;
+}
+
+Days Date::operator-( const Date& rhs ) const
+{
+    return Days( std::make_shared< DaysImpl >( *m_impl - *rhs.m_impl ));
+}
+
 
 //
 // Conversions
@@ -170,6 +187,12 @@ Days::Days()
 
 Days::Days( Int days )
     : m_impl( new DaysImpl( boost::gregorian::days( days )))
+{
+}
+
+
+Days::Days( std::shared_ptr< DaysImpl > impl )
+    : m_impl( impl )
 {
 }
 
