@@ -65,7 +65,6 @@ TEST( DateStringTest )
     CHECK( 5    == d1.Day() );
 
     CHECK( "2013-04-05" == d1.ToString() );
-    CHECK( "20130405"   == d1.ToIsoString() );
 
     const auto d2 = Date::FromString( "2013-4-5" );
 

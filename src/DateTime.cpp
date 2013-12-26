@@ -147,12 +147,6 @@ std::string Date::ToString() const
 }
 
 
-std::string Date::ToIsoString() const
-{
-    return boost::gregorian::to_iso_string( *m_impl );
-}
-
-
 std::string Date::Format( const std::string& format ) const
 {
     return DateTimeManager::Instance()->FormatDate( *m_impl, format );

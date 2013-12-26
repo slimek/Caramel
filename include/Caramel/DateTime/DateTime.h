@@ -77,8 +77,8 @@ public:
 
     /// Conversions ///
 
-    std::string ToString() const;
-    std::string ToIsoString() const;
+    std::string ToString() const;     // YYYY-MM-DD hh:mm:ss
+    std::string ToIsoString() const;  // YYYY-MM-DDThh:mm:ss
 
     // According to strftime() format.
     std::string Format( const std::string& format ) const;
