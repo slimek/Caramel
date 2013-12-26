@@ -9,6 +9,7 @@
 #include "DateTime/TimeDuration.h"
 #include <Caramel/DateTime/TimeOfDay.h>
 #include <Caramel/DateTime/TimeSpan.h>
+#include <Caramel/Memory/SharedPtrUtils.h>
 #include <Caramel/Thread/MutexLocks.h>
 #include <boost/xpressive/xpressive_dynamic.hpp>
 
@@ -182,15 +183,13 @@ Bool Days::operator< ( const Days& rhs ) const { return *m_impl <  *rhs.m_impl; 
 
 Days& Days::operator+=( const Days& rhs )
 {
-    m_impl = std::make_shared< DaysImpl >( *m_impl );
-    *m_impl += *rhs.m_impl;
+    AddAssign( m_impl, rhs.m_impl );
     return *this;
 }
 
 Days& Days::operator-=( const Days& rhs )
 {
-    m_impl = std::make_shared< DaysImpl >( *m_impl );
-    *m_impl -= *rhs.m_impl;
+    SubstractAssign( m_impl, rhs.m_impl );
     return *this;
 }
 
@@ -438,16 +437,14 @@ Bool TimeSpan::operator<( const Caramel::Seconds& rhs ) const
 
 TimeSpan& TimeSpan::operator+=( const TimeSpan& rhs )
 {
-    m_impl = std::make_shared< TimeDuration >( *m_impl );
-    *m_impl += *rhs.m_impl;
+    AddAssign( m_impl, rhs.m_impl );
     return *this;
 }
 
 
 TimeSpan& TimeSpan::operator-=( const TimeSpan& rhs )
 {
-    m_impl = std::make_shared< TimeDuration >( *m_impl );
-    *m_impl -= *rhs.m_impl;
+    SubstractAssign( m_impl, rhs.m_impl );
     return *this;
 }
 

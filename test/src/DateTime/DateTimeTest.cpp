@@ -227,6 +227,10 @@ TEST( TimeSpanTest )
         CHECK( -TimeSpan( 0, 29, 18 ) == t4 );
 
         CHECK( Seconds( 42 ) == t1 );  // t1 should not be modified
+
+        const TimeSpan t5 = Hours( 6 ) + Minutes( 49 ) - Seconds( 36 );
+
+        CHECK( TimeSpan( 6, 48, 24 ) == t5 );
     }
 }
 

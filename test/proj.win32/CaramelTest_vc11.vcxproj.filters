@@ -62,6 +62,9 @@
     <Filter Include="2. Tests\Error">
       <UniqueIdentifier>{2669aa0d-c160-4865-9748-d25c4cbabb53}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\Memory">
+      <UniqueIdentifier>{95602195-845d-44e2-ae23-1bccc8622c1d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\RunTest.cpp">
@@ -150,6 +153,9 @@
     </ClCompile>
     <ClCompile Include="..\src\Error\AlertTest.cpp">
       <Filter>2. Tests\Error</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Memory\SharedPtrUtilsTest.cpp">
+      <Filter>2. Tests\Memory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

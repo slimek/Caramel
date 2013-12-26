@@ -159,6 +159,9 @@
     <Filter Include="2. Sources\Error">
       <UniqueIdentifier>{ae3f59d8-d443-44ee-8af2-50ecf613e657}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\Memory">
+      <UniqueIdentifier>{088d2772-d823-45cb-ad38-5e6b69460f3d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -556,6 +559,9 @@
     </ClInclude>
     <ClInclude Include="..\src\DateTime\DaysImpl.h">
       <Filter>2. Sources\DateTime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Memory\SharedPtrUtils.h">
+      <Filter>1. Public Packages\Memory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
