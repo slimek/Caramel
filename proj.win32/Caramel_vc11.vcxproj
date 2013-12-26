@@ -36,7 +36,6 @@
     <ClInclude Include="..\include\Caramel\Concurrent\ReplicatePolicies.h" />
     <ClInclude Include="..\include\Caramel\DateTime\Date.h" />
     <ClInclude Include="..\include\Caramel\DateTime\DateTime.h" />
-    <ClInclude Include="..\include\Caramel\DateTime\DateTimeFwd.h" />
     <ClInclude Include="..\include\Caramel\DateTime\Days.h" />
     <ClInclude Include="..\include\Caramel\DateTime\TimeOfDay.h" />
     <ClInclude Include="..\include\Caramel\DateTime\TimeSpan.h" />

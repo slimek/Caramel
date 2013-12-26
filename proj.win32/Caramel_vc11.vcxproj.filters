@@ -162,6 +162,9 @@
     <Filter Include="1. Public Packages\Memory">
       <UniqueIdentifier>{088d2772-d823-45cb-ad38-5e6b69460f3d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\DateTime\Detail headers">
+      <UniqueIdentifier>{27db88a5-44ef-42b9-a35a-a7140031b244}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -552,9 +555,6 @@
       <Filter>2. Sources\Error</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\DateTime\Days.h">
-      <Filter>1. Public Packages\DateTime</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Caramel\DateTime\DateTimeFwd.h">
       <Filter>1. Public Packages\DateTime</Filter>
     </ClInclude>
     <ClInclude Include="..\src\DateTime\DaysImpl.h">

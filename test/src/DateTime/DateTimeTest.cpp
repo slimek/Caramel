@@ -235,7 +235,7 @@ TEST( TimeSpanTest )
 }
 
 
-TEST( TimeOfDay )
+TEST( TimeOfDayTest )
 {
     const TimeOfDay td0;
 

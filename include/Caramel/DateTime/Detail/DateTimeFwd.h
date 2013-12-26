@@ -1,7 +1,7 @@
-// Caramel C++ Library - DateTime Facility - Forwards Declaration Header
+// Caramel C++ Library - DateTime Facility - Detail Forwards Declaration Header
 
-#ifndef __CARAMEL_DATE_TIME_DATE_TIME_FWD_H
-#define __CARAMEL_DATE_TIME_DATE_TIME_FWD_H
+#ifndef __CARAMEL_DATE_TIME_DETAIL_DATE_TIME_FWD_H
+#define __CARAMEL_DATE_TIME_DETAIL_DATE_TIME_FWD_H
 #pragma once
 
 #include <Caramel/Caramel.h>
@@ -26,4 +26,4 @@ class TimeOfDay;
 
 } // namespace Caramel
 
-#endif // __CARAMEL_DATE_TIME_DATE_TIME_FWD_H
+#endif // __CARAMEL_DATE_TIME_DETAIL_DATE_TIME_FWD_H
