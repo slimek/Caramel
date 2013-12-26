@@ -192,6 +192,16 @@ Days::Days( std::shared_ptr< DaysImpl > impl )
 
 
 //
+// Creators
+//
+
+Days Days::MaxValue()
+{
+    return Days( std::make_shared< DaysImpl >( boost::gregorian::days( INT_MAX )));
+}
+
+
+//
 // Operators
 //
 
@@ -220,7 +230,15 @@ Int Days::ToInt() const { return static_cast< Int >( m_impl->days() ); }
 
 Days::operator TimeSpan() const
 {
-    return Hours( this->ToInt() * 24 );
+    const Int MAX_DAYS_TO_TIME_SPAN = INT_MAX / 24;
+    const Int days = this->ToInt();
+
+    if ( MAX_DAYS_TO_TIME_SPAN <= days )
+    {
+        CARAMEL_THROW( "Out of convertible range, days: %d", days );
+    }
+
+    return Hours( days * 24 );
 }
 
 
@@ -657,27 +675,27 @@ std::string DateTimeManager::FormatDateTime(
 
 static_assert(
     std::is_same< boost::gregorian::greg_year::value_type, Uint16 >::value,
-    "Type of greg_year is Uint16" );
+    "Type of greg_year should be Uint16" );
 
 static_assert(
     std::is_same< boost::gregorian::greg_month::value_type, Uint16 >::value,
-    "Type of greg_month is Uint16" );
+    "Type of greg_month should be Uint16" );
 
 static_assert(
     std::is_same< boost::gregorian::greg_day::value_type, Uint16 >::value,
-    "Type of greg_day is Uint16" );
+    "Type of greg_day should be Uint16" );
 
 static_assert(
     std::is_same< boost::posix_time::time_duration::hour_type, Int32 >::value,
-    "Type of hour_type is Int32" );
+    "Type of hour_type should be Int32" );
 
 static_assert(
     std::is_same< boost::posix_time::time_duration::min_type, Int32 >::value,
-    "Type of min_type is Int32" );
+    "Type of min_type should be Int32" );
 
 static_assert(
     std::is_same< boost::posix_time::time_duration::sec_type, Int32 >::value,
-    "Type of sec_type is Int32" );
+    "Type of sec_type should be Int32" );
 
     
 

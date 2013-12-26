@@ -221,6 +221,10 @@ TEST( DaysTimeSpanTest )
 
     CHECK( Hours( 24 ) == Days( 1 ));
     CHECK( Hours( -72 ) == Days( -3 ));
+
+    const auto dmax = Days::MaxValue();
+
+    CHECK_THROW( static_cast< TimeSpan >( dmax ), Caramel::Exception );
 }
 
 

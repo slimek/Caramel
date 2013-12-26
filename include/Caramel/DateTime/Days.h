@@ -32,6 +32,11 @@ public:
     explicit Days( Int days );
 
 
+    /// Creators ///
+
+    static Days MaxValue();
+
+
     /// Operators ///
 
     Bool operator==( const Days& rhs ) const;
