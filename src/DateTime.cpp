@@ -218,6 +218,12 @@ Days& Days::operator-=( const Days& rhs )
 Int Days::ToInt() const { return static_cast< Int >( m_impl->days() ); }
 
 
+Days::operator TimeSpan() const
+{
+    return Hours( this->ToInt() * 24 );
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Date Time
@@ -297,9 +303,17 @@ Bool DateTime::operator==( const DateTime& rhs ) const { return *m_impl == *rhs.
 Bool DateTime::operator< ( const DateTime& rhs ) const { return *m_impl <  *rhs.m_impl; }
 
 
-DateTime DateTime::operator+( const TimeSpan& rhs ) const
+DateTime& DateTime::operator+=( const TimeSpan& rhs )
 {
-    return DateTime( std::make_shared< DateTimeImpl >( *m_impl + *rhs.m_impl ));
+    AddAssign( m_impl, rhs.m_impl );
+    return *this;
+}
+
+
+DateTime& DateTime::operator-=( const TimeSpan& rhs )
+{
+    SubstractAssign( m_impl, rhs.m_impl );
+    return *this;
 }
 
 

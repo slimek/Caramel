@@ -3,6 +3,8 @@
 #include "CaramelTestPch.h"
 
 #include <Caramel/DateTime/Date.h>
+#include <Caramel/DateTime/Days.h>
+#include <Caramel/DateTime/TimeSpan.h>
 #include <UnitTest++/UnitTest++.h>
 
 
@@ -207,6 +209,18 @@ TEST( DateDaysArithmeticTest )
 
     // Binary operators should not change d4's value.
     CHECK( Date( 2013, 3, 31 ) == d4 );
+}
+
+
+TEST( DaysTimeSpanTest )
+{
+    const Days d0( 0 );
+    const TimeSpan t0 = d0;
+
+    CHECK( 0 == t0.TotalSeconds() );
+
+    CHECK( Hours( 24 ) == Days( 1 ));
+    CHECK( Hours( -72 ) == Days( -3 ));
 }
 
 

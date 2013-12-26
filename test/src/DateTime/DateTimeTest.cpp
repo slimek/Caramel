@@ -45,6 +45,10 @@ TEST( DateTimeTest )
 
     CHECK( "2013-04-05 02:35:18" == time3.ToString() );
 
+    const auto time4 = time2 - TimeSpan::FromString( "15:47:36" );
+
+    CHECK( "2013-04-04 08:12:24" == time4.ToString() );
+
 
     /// Valid Test ///
 
@@ -312,6 +316,15 @@ TEST( DateAndTimeOfDayTest )
         CHECK( Date( 1987, 6, 5 ) == dateTime.Date() );
         CHECK( TimeOfDay( 4, 32, 10 ) == dateTime.TimeOfDay() );
     }
+}
+
+
+TEST( DaysTest )
+{
+    const auto dt = DateTime::FromString( "2013/04/05 6:17:28" );
+
+    CHECK( DateTime::FromString( "2013/05/04 6:17:28" ) == dt + Days( 29 ));
+    CHECK( DateTime::FromString( "2013/03/31 6:17:28" ) == dt - Days( 5 ));
 }
 
 

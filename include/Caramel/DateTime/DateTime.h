@@ -18,12 +18,12 @@ namespace Caramel
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Date Time
-// - Immutable.
 //
 
 class DateTimeImpl;
 
 class DateTime : public boost::totally_ordered< DateTime >
+               , public boost::additive< DateTime, TimeSpan >
 {
 public:
 
@@ -67,11 +67,12 @@ public:
     Bool operator< ( const DateTime& rhs ) const;
 
 
-    //
     // DateTime = DateTime + TimeSpan
+    // DateTime = DateTime - TimeSpan
+    DateTime& operator+=( const TimeSpan& rhs );
+    DateTime& operator-=( const TimeSpan& rhs );
+
     // TimeSpan = DateTime - DateTime
-    //
-    DateTime operator+( const TimeSpan& rhs ) const;
     TimeSpan operator-( const DateTime& rhs ) const;
 
 
