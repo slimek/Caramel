@@ -153,35 +153,6 @@ LONG ExceptionCatcherCore::ExceptionFilter( EXCEPTION_POINTERS* exception, DWORD
 // Alert
 //
 
-AlertResult DefaultAlertHandler(
-    Int line, const std::string& file, const std::string& function,
-    const std::string& message )
-{
-    // Use ASNI C assert mechanism
-    // - It depends on the platform implementation.
-    //   Usually it can abort or break program itself.
-
-    #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
-    {
-        const Utf8String file( file );
-        const Utf8String message( message );
-
-        _wassert( message.ToWstring().c_str(), file.ToWstring().c_str(), line );
-    }
-    #elif defined( CARAMEL_SYSTEM_IS_ANDROID )
-    {
-        __assert2( file.c_str(), line, function.c_str(), message.c_str() );
-    }
-    #else
-    {
-        throw Exception( line, file, function, "Assert failed: " + message );
-    }
-    #endif
-
-    return ALERT_RESULT_CONTINUE_ALL;
-}
-
-
 void Alert(
     Int line, const std::string& file, const std::string& function,
     const std::string& message )
@@ -221,9 +192,72 @@ void Alert(
 }
 
 
+//
+// Handlers
+//
+
 AlertHandler SetAlertHandler( AlertHandler newHandler )
 {
     return ErrorManager::Instance()->SetAlertHandler( newHandler );
+}
+
+
+#if defined( NDEBUG )
+
+AlertResult DefaultAlertHandler(
+    Int line, const std::string& file, const std::string& function,
+    const std::string& message )
+{
+    return TraceAlertHandler( line, file, function, message );
+}
+
+#else
+
+AlertResult DefaultAlertHandler(
+    Int line, const std::string& file, const std::string& function,
+    const std::string& message )
+{
+    // Use ASNI C assert mechanism
+    // - It depends on the platform implementation.
+    //   Usually it can abort or break program itself.
+
+    #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+    {
+        const Utf8String file( file );
+        const Utf8String message( message );
+
+        _wassert( message.ToWstring().c_str(), file.ToWstring().c_str(), line );
+    }
+    #elif defined( CARAMEL_SYSTEM_IS_ANDROID )
+    {
+        __assert2( file.c_str(), line, function.c_str(), message.c_str() );
+    }
+    #elif defined( CARAMEL_SYSTEM_IS_IOS )
+    {
+        ; // TODO: Add iOS assert() implementation
+    }
+    #else
+    {
+        throw Exception( line, file, function, "Assert failed: " + message );
+    }
+    #endif
+
+    return ALERT_RESULT_CONTINUE_ALL;
+}
+
+#endif // NDEBUG
+
+
+AlertResult TraceAlertHandler(
+    Int line, const std::string& file, const std::string& function,
+    const std::string& message )
+{
+    CARAMEL_TRACE_WARN(
+        "ALERT WARNING: \"%s\" line %d, function: \"%s\"\n%s",
+        file, line, function, message
+    );
+
+    return ALERT_RESULT_CONTINUE_ALL;
 }
 
 

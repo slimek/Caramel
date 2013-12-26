@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
+#include <Caramel/String/Sprintf.h>
 
 
 namespace Caramel
@@ -13,8 +14,9 @@ namespace Caramel
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Alert
-// - Call Alert Handler internally. This is the basis of Caramel.Assert .
-//
+// - Call Alert Handler internally.
+//   This is the basis of Caramel.Assert
+// 
 
 void Alert(
     Int line, const std::string& file, const std::string& function,
@@ -61,14 +63,35 @@ typedef AlertResult (* AlertHandler )
 // Returns the previous handler.
 AlertHandler SetAlertHandler( AlertHandler newHandler );
 
+//
+// Default handler
+// - In Debug build, call the assert() implementation of each system.
+//   In Release build, trace parameters in warn level.
+//
 AlertResult DefaultAlertHandler(
     Int line, const std::string& file, const std::string& function,
     const std::string& message
 );
 
 
-///////////////////////////////////////////////////////////////////////////////
+// Trace parameters in warn level.
+AlertResult TraceAlertHandler(
+    Int line, const std::string& file, const std::string& function,
+    const std::string& message
+);
+
 
 } // namespace Caramel
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Alert Macro
+//
+
+#define CARAMEL_ALERT( ... ) \
+    Caramel::Alert( __LINE__, __FILE__, __FUNCTION__, Sprintf( __VA_ARGS__ ))
+
+
+///////////////////////////////////////////////////////////////////////////////
 
 #endif // __CARAMEL_ERROR_ALERT_H
