@@ -6,6 +6,7 @@
 
 #include <Caramel/Caramel.h>
 #include <Caramel/Numeric/NumberTraits.h>
+#include <cfloat>
 
 
 namespace Caramel
