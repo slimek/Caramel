@@ -233,7 +233,7 @@ Days::operator TimeSpan() const
     const Int MAX_DAYS_TO_TIME_SPAN = INT_MAX / 24;
     const Int days = this->ToInt();
 
-    if ( MAX_DAYS_TO_TIME_SPAN <= days )
+    if ( MAX_DAYS_TO_TIME_SPAN < days )
     {
         CARAMEL_THROW( "Out of convertible range, days: %d", days );
     }
