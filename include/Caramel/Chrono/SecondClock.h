@@ -99,8 +99,13 @@ class SecondClock : public SteadyClock< Seconds, SecondPoint >
 {
 public:
 
-    static Seconds     MaxDuration()  { return Seconds::MaxValue(); }
-    static SecondPoint MaxTimePoint() { return SecondPoint::MaxValue(); }
+    /// Inherited Functions: ///
+
+    // void Reset();
+    // Seconds Elasped() const;
+    // Seconds Slice();
+    // static SecondPoint Now();
+    // static Seconds SinceEpoch();
 };
 
 

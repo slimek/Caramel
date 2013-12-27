@@ -91,8 +91,13 @@ class TickClock : public SteadyClock< Ticks, TickPoint >
 {
 public:
 
-    static Ticks     MaxDuration()  { return Ticks::MaxValue(); }
-    static TickPoint MaxTimePoint() { return TickPoint::MaxValue(); }
+    /// Inherited Functions: ///
+
+    // void Reset();
+    // Ticks Elasped() const;
+    // Ticks Slice();
+    // static TickPoint Now();
+    // static Ticks SinceEpoch();
 };
 
 

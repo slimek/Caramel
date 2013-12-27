@@ -96,8 +96,8 @@ private:
 
 template< typename ClockT >
 inline TimedBool< ClockT >::TimedBool()
-    : m_duration( ClockType::MaxDuration() )
-    , m_deadline( ClockType::MaxTimePoint() )
+    : m_duration( Duration::MaxValue() )
+    , m_deadline( TimePoint::MaxValue() )
 {
 }
 
@@ -142,9 +142,9 @@ template< typename ClockT >
 inline void TimedBool< ClockT >::Restart()
 {
     const TimePoint now = ClockType::Now();
-    if ( ClockType::MaxTimePoint() - now < m_duration )
+    if ( TimePoint::MaxValue() - now < m_duration )
     {
-        m_deadline = ClockType::MaxTimePoint();
+        m_deadline = TimePoint::MaxValue();
     }
     else
     {
@@ -159,9 +159,9 @@ inline void TimedBool< ClockT >::Continue()
     const TimePoint now = ClockType::Now();
     while ( m_deadline < now )
     {
-        if ( ClockType::MaxTimePoint() - now < m_duration )
+        if ( TimePoint::MaxValue() - now < m_duration )
         {
-            m_deadline = ClockType::MaxTimePoint();
+            m_deadline = TimePoint::MaxValue();
             break;
         }
         else
