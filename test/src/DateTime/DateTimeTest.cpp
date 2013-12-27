@@ -17,10 +17,25 @@ SUITE( DateTimeSuite )
 // Date Time Test
 //
 
-TEST( DateTimeTest )
+TEST( DateTimeBasicTest )
 {
+    const DateTime undef;
     const auto now = DateTime::Now();
+    const auto min = DateTime::MinValue();
+    const auto max = DateTime::MaxValue();
 
+    CHECK( false == undef.IsValid() );
+    CHECK( true  == now.IsValid() );
+    CHECK( min < now && now < max );
+
+    // Limit values: these are Boost.DateTime spec
+    CHECK( "1400-01-01 00:00:00"        == min.ToString() );
+    CHECK( "9999-12-31 23:59:59.999999" == max.ToString() );
+}
+
+
+TEST( DateTimeStringTest )
+{
     const auto time1 = DateTime::FromString( "2013-04-05 18:09:30" );
 
     CHECK( "2013-04-05 18:09:30" == time1.ToString() );
@@ -48,15 +63,6 @@ TEST( DateTimeTest )
     const auto time4 = time2 - TimeSpan::FromString( "15:47:36" );
 
     CHECK( "2013-04-04 08:12:24" == time4.ToString() );
-
-
-    /// Valid Test ///
-
-    const DateTime dtnil;  // not initialized / not a date-time
-
-    CHECK( true  == now.IsValid() );
-    CHECK( true  == time1.IsValid() );
-    CHECK( false == dtnil.IsValid() );
 }
 
 
@@ -235,6 +241,19 @@ TEST( TimeSpanTest )
         const TimeSpan t5 = Hours( 6 ) + Minutes( 49 ) - Seconds( 36 );
 
         CHECK( TimeSpan( 6, 48, 24 ) == t5 );
+    }
+
+    /// Limit Values ///
+    {
+        const auto min = TimeSpan::MinValue();
+        const auto max = TimeSpan::MaxValue();
+
+        const Double minDays = min.TotalDays();
+        const Double maxDays = max.TotalDays();
+
+        // This depends on the implementation
+        CHECK( -24042 > minDays && minDays > -24043 );  // About 65.8 Years
+        CHECK(  24042 < maxDays && maxDays <  24043 );
     }
 }
 

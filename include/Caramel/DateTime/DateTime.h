@@ -36,6 +36,9 @@ public:
 
     static DateTime Now();
 
+    static DateTime MinValue();
+    static DateTime MaxValue();
+
     // Accepted formats:
     //   YYYY-MM-DD hh:mm[:ss]
     static DateTime FromString( const std::string& s );

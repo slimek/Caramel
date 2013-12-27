@@ -40,6 +40,9 @@ public:
 
     /// Creators///
 
+    static TimeSpan MinValue();
+    static TimeSpan MaxValue();
+
     static TimeSpan FromString( const std::string& s );
 
 

@@ -271,7 +271,22 @@ DateTime::DateTime( std::shared_ptr< DateTimeImpl > impl )
 
 DateTime DateTime::Now()
 {
-    return DateTime( std::make_shared< DateTimeImpl >( boost::posix_time::second_clock::local_time() ));
+    return DateTime( std::make_shared< DateTimeImpl >(
+        boost::posix_time::second_clock::local_time() ));
+}
+
+
+DateTime DateTime::MinValue()
+{
+    return DateTime( std::make_shared< DateTimeImpl >(
+        boost::posix_time::ptime( boost::posix_time::min_date_time )));
+}
+
+
+DateTime DateTime::MaxValue()
+{
+    return DateTime( std::make_shared< DateTimeImpl >(
+        boost::posix_time::ptime( boost::posix_time::max_date_time )));
 }
 
 
@@ -429,6 +444,24 @@ TimeSpan::TimeSpan( std::shared_ptr< TimeDuration > impl )
 //
 // Creators
 //
+
+TimeSpan TimeSpan::MinValue()
+{
+    const auto minImpl = boost::posix_time::time_duration::impl_type::min().as_number();
+
+    return TimeSpan( std::make_shared< TimeDuration >(
+        boost::posix_time::time_duration( 0, 0, 0, minImpl )));
+}
+
+
+TimeSpan TimeSpan::MaxValue()
+{
+    const auto maxImpl = boost::posix_time::time_duration::impl_type::max().as_number();
+
+    return TimeSpan( std::make_shared< TimeDuration >(
+        boost::posix_time::time_duration( 0, 0, 0, maxImpl )));
+}
+
 
 TimeSpan TimeSpan::FromString( const std::string& s )
 {
