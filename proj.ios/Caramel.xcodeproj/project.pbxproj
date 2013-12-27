@@ -180,6 +180,7 @@
 		6DA1098A1856ABA700588AA2 /* Value.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Value.cpp; sourceTree = "<group>"; };
 		6DA1098B1856ABA700588AA2 /* Windows.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Windows.cpp; sourceTree = "<group>"; };
 		6DAFE0ED1815118B00859097 /* libCaramel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCaramel.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DD0E7A4186C3A6B00414066 /* NumberConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberConverter.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -395,6 +396,7 @@
 		6DA1090B1856ABA700588AA2 /* Numeric */ = {
 			isa = PBXGroup;
 			children = (
+				6DD0E7A4186C3A6B00414066 /* NumberConverter.h */,
 				6DA1090C1856ABA700588AA2 /* NumberConvertible.h */,
 				6DA1090D1856ABA700588AA2 /* NumberTraits.h */,
 			);
