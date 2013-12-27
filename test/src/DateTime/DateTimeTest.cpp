@@ -338,7 +338,7 @@ TEST( DateAndTimeOfDayTest )
 }
 
 
-TEST( DaysTest )
+TEST( DateTimeOpDaysTest )
 {
     const auto dt = DateTime::FromString( "2013/04/05 6:17:28" );
 

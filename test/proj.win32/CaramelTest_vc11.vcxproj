@@ -102,6 +102,7 @@
     <ClCompile Include="..\src\Concurrent\MapTest.cpp" />
     <ClCompile Include="..\src\Concurrent\PriorityQueueTest.cpp" />
     <ClCompile Include="..\src\DateTime\DateTest.cpp" />
+    <ClCompile Include="..\src\DateTime\DateTimeBoolTest.cpp" />
     <ClCompile Include="..\src\DateTime\DateTimeTest.cpp" />
     <ClCompile Include="..\src\Document\IniDocumentTest.cpp" />
     <ClCompile Include="..\src\Enum\EnumLookupTest.cpp" />

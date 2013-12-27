@@ -90,6 +90,12 @@ public:
     Bool TryParse( const std::string& s );
 
 
+    /// Typedefs as a Clock type - Supports TimedBool ///
+
+    typedef TimeSpan Duration;
+    typedef DateTime TimePoint;
+
+
 private:
 
     explicit DateTime( std::shared_ptr< DateTimeImpl > impl );

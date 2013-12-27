@@ -157,6 +157,9 @@
     <ClCompile Include="..\src\Memory\SharedPtrUtilsTest.cpp">
       <Filter>2. Tests\Memory</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\DateTime\DateTimeBoolTest.cpp">
+      <Filter>2. Tests\DateTime</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">
