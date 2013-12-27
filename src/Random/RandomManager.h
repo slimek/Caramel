@@ -32,7 +32,8 @@ public:
     Int32  GenRandomInt32 ( Int32  minValue, Int32  maxValue );
     Uint32 GenRandomUint32( Uint32 minValue, Uint32 maxValue );
 
-    Float GenRandomFloat( Float lowerBound, Float upperBound );
+    Float  GenRandomFloat ( Float  lowerBound, Float  upperBound );
+    Double GenRandomDouble( Double lowerBound, Double upperBound );
 
 
 private:

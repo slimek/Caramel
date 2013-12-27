@@ -100,6 +100,36 @@ TEST( UniformRandomTest )
 
         CARAMEL_TRACE_DEBUG( "Test GenRandomFloat() count: %u, elapsed: %f", count, clock.Elapsed() );
     }
+
+    /// Double ///
+    {
+        const Double vLower = 0;
+        const Double vUpper = 1;
+
+        const Double gap = 1e-6;
+
+        const Double vLowerThreshold = vLower + gap;
+        const Double vUpperThreshold = vUpper - gap;
+
+        Bool metLower = false;
+        Bool metUpper = false;
+
+        SecondClock clock;
+        Uint count = 0;
+
+        for ( ;; )
+        {
+            const Double value = GenRandomDouble( vLower, vUpper );
+            ++ count;
+
+            if ( vLowerThreshold > value ) { metLower = true; }
+            if ( vUpperThreshold < value ) { metUpper = true; }
+
+            if ( metLower && metUpper ) { break; }
+        }
+
+        CARAMEL_TRACE_DEBUG( "Test GenRandomDouble() count: %u, elapsed: %f", count, clock.Elapsed() );
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////

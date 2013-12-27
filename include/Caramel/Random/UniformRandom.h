@@ -46,7 +46,8 @@ Uint GenRandomUint( Uint minValue, Uint maxValue );
 //   It may or may not returns 1, it depends on the precision and compiler implementations.
 //
 
-Float GenRandomFloat( Float lowerBound, Float upperBound );
+Float  GenRandomFloat ( Float  lowerBound, Float  upperBound );
+Double GenRandomDouble( Double lowerBound, Double upperBound );
 
 
 ///////////////////////////////////////////////////////////////////////////////

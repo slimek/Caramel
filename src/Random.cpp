@@ -60,6 +60,16 @@ Float RandomManager::GenRandomFloat( Float lowerBound, Float upperBound )
 }
 
 
+Double RandomManager::GenRandomDouble( Double lowerBound, Double upperBound )
+{
+    std::uniform_real_distribution< Double > dist( lowerBound, upperBound );
+
+    auto ulock = UniqueLock( m_mutex );
+
+    return dist( m_random.GetRef() );
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Random
@@ -104,6 +114,14 @@ Float GenRandomFloat( Float lowerBound, Float upperBound )
     CARAMEL_ASSERT( lowerBound < upperBound );
 
     return RandomManager::Instance()->GenRandomFloat( lowerBound, upperBound );
+}
+
+
+Double GenRandomDouble( Double lowerBound, Double upperBound )
+{
+    CARAMEL_ASSERT( lowerBound < upperBound );
+
+    return RandomManager::Instance()->GenRandomDouble( lowerBound, upperBound );
 }
 
 
