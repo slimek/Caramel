@@ -563,6 +563,15 @@
     <ClInclude Include="..\include\Caramel\Memory\SharedPtrUtils.h">
       <Filter>1. Public Packages\Memory</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\String\Format.h">
+      <Filter>1. Public Packages\String</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\String\Detail\Formatter.h">
+      <Filter>1. Public Packages\String\Detail headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\String\FormatterImpl.h">
+      <Filter>2. Sources\String</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

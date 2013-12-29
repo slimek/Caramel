@@ -160,6 +160,9 @@
     <ClCompile Include="..\src\DateTime\DateTimeBoolTest.cpp">
       <Filter>2. Tests\DateTime</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\String\FormatTest.cpp">
+      <Filter>2. Tests\String</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">

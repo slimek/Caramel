@@ -115,6 +115,7 @@
     <ClCompile Include="..\src\Random\RandomTest.cpp" />
     <ClCompile Include="..\src\RunTest.cpp" />
     <ClCompile Include="..\src\Statechart\StateMachineTest.cpp" />
+    <ClCompile Include="..\src\String\FormatTest.cpp" />
     <ClCompile Include="..\src\String\SprintfTest.cpp" />
     <ClCompile Include="..\src\String\StringAlgorithmTest.cpp" />
     <ClCompile Include="..\src\String\StringToStringTest.cpp" />

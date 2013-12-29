@@ -2,9 +2,12 @@
 
 #include "CaramelPch.h"
 
+#include "String/FormatterImpl.h"
 #include "String/SprintfManager.h"
 #include <Caramel/Functional/ScopeExit.h>
+#include <Caramel/Lexical/Integer.h>
 #include <Caramel/String/Algorithm.h>
+#include <Caramel/String/Format.h>
 #include <Caramel/String/Sprintf.h>
 #include <Caramel/String/ToString.h>
 #include <Caramel/String/Utf8String.h>
@@ -34,6 +37,7 @@ namespace Caramel
 //   Algorithm
 //   ToString
 //   ToStringT
+//   Formatter
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -468,6 +472,98 @@ template<> std::string ToStringT< Uint64 >() { return "Uint64"; }
 
 template<> std::string ToStringT< Float >()  { return "Float"; }
 template<> std::string ToStringT< Double >() { return "Double"; }
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Formatter
+//
+
+namespace Detail
+{
+
+Formatter::Formatter( const std::string& format )
+    : m_impl( new FormatterImpl( format ))
+{
+}
+
+
+void Formatter::Feed( Uint index, Int value )
+{
+    for ( Usize i = 0; i < m_impl->m_items.size(); ++ i )
+    {
+        FormatterImpl::FormatItem& item = m_impl->m_items[i];
+
+        if ( index != item.argIndex ) { continue; }
+
+        item.content = ToString( value );
+    }
+}
+
+
+std::string Formatter::GetString() const
+{
+    return m_impl->GetString();
+}
+
+
+//
+// Implementation
+//
+
+FormatterImpl::FormatterImpl( const std::string& format )
+{
+    std::string buffer = format;
+    std::string head = "";
+
+    while ( Contains( buffer, '}' ))
+    {
+        const std::string piece = BeforeFirst( buffer, '}' );
+        buffer = AfterFirst( buffer, '}' );
+
+        if ( ! Contains( piece, '{' ))
+        {
+            head += piece + "}";
+            continue;
+        }
+        
+        head += BeforeFirst( piece, '{' );
+
+        const std::string sindex = AfterFirst( piece, '{' );
+        Lexical::Integer< Uint > index;
+        
+        if ( ! index.TryParse( sindex ))
+        {
+            continue;
+        }
+
+        FormatItem item;
+        item.argIndex = index;
+        item.head = head;
+        head.clear();
+        
+        m_items.push_back( item );
+    }
+
+    m_tail = buffer;
+}
+
+
+std::string FormatterImpl::GetString() const
+{
+    std::ostringstream stream;
+
+    for ( Usize i = 0; i < m_items.size(); ++ i )
+    {
+        stream << m_items[i].head << m_items[i].content;
+    }
+    stream << m_tail;
+
+    return stream.str();
+}
+
+
+} // namespace Detail
 
 
 ///////////////////////////////////////////////////////////////////////////////
