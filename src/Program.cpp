@@ -214,9 +214,9 @@ void ProgramOptionsManager::ParseCommandLine()
 
     const std::vector< std::wstring > wargs = po::split_winmain( ::GetCommandLineW() );
         
-    for ( Usize i = 1; i < wargs.size(); ++ i )
+    for ( const std::wstring& warg : wargs )
     {
-        arguments.push_back( Utf8String( wargs[i] ).ToString() );
+        arguments.push_back( Utf8String( warg ).ToString() );
     }
 
     this->ParseArguments( arguments );

@@ -246,12 +246,11 @@ NamedValues::ValueMap NamedValues::GetValueMap() const
 {
     ValueMap vmap;
 
-    auto ientry = m_impl->m_valueEntries.begin();
-    for ( ; m_impl->m_valueEntries.end() != ientry; ++ ientry )
+    for ( auto& entry : m_impl->m_valueEntries )
     {
-        const std::string name = ientry->first;
+        const std::string name = entry.first;
         
-        Detail::ConstNamedValueRef valueRef( name, &( ientry->second ));
+        Detail::ConstNamedValueRef valueRef( name, &( entry.second ));
 
         vmap.insert( std::make_pair( name, valueRef.AsString() ));
     }

@@ -48,10 +48,8 @@ TraceManager::TraceManager()
 
 TraceManager::~TraceManager()
 {
-    ListenerSet::const_iterator iml = m_managedListeners.begin();
-    for ( ; m_managedListeners.end() != iml; ++ iml )
+    for ( Listener* listener : m_managedListeners )
     {
-        Listener* listener = *iml;
         listener->UnbindAllChannels();
         delete listener;
     }
@@ -75,17 +73,15 @@ void TraceManager::BindListenerToBuiltinChannels( Level minLevel, Listener* list
 
 void TraceManager::UnbindListenerFromAllChannels( Listener* listener )
 {
-    BuiltinChannelMap::const_iterator ibc = m_builtinChannels.begin();
-    for ( ; m_builtinChannels.end() != ibc; ++ ibc )
+    for ( const auto& ibc : m_builtinChannels )
     {
-        BuiltinChannel* channel = ibc->second;
+        BuiltinChannel* channel = ibc.second;
         channel->TryUnregisterListener( listener );
     }
 
-    NamedChannelMap::const_iterator inc = m_namedChannels.begin();
-    for ( ; m_namedChannels.end() != inc; ++ inc )
+    for ( const auto& inc : m_namedChannels )
     {
-        ChannelPtr channel = inc->second;
+        ChannelPtr channel = inc.second;
         channel->TryUnregisterListener( listener );
     }
 }
@@ -152,10 +148,8 @@ Bool ChannelImpl::TryUnregisterListener( Listener* listener )
 
 void BuiltinChannel::Write( Level level, const std::string& message )
 {
-    ListenerSet::const_iterator i = m_listeners.begin();
-    for ( ; m_listeners.end() != i; ++ i )
+    for ( Listener* listener : m_listeners )
     {
-        Listener* listener = *i;
         listener->Write( level, message );
     }
 }
