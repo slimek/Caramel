@@ -38,6 +38,10 @@ TEST( FormatIntegerTest )
     CHECK( "Answer -1:42" == Format( "Answer {0}:{1}", -1, 42 ));
     CHECK( "2014/1/1 Happy NY!" == Format( "{0}/{1}/{2} Happy NY!", 2014, 1u, 1u ));
     CHECK( "Version 1.4.16.256" == Format( "Version {3}.{2}.{1}.{0}", 256, 16, 4, 1 ));
+
+    const Int64 bigInt = 123456789012;
+
+    CHECK( "BigInt 123456789012" == Format( "BigInt {0}", bigInt ));
 }
 
 

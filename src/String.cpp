@@ -506,6 +506,15 @@ void Formatter::Feed( Uint index, Uint value )
 }
 
 
+void Formatter::Feed( Uint index, Int64 value )
+{
+    m_impl->Distribute( index, [=] ( const std::string& ) -> std::string
+    {
+        return ToString( value );
+    });
+}
+
+
 void Formatter::Feed( Uint index, const std::string& value )
 {
     m_impl->Distribute( index, [=] ( const std::string& ) -> std::string
