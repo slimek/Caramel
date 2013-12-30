@@ -490,14 +490,28 @@ Formatter::Formatter( const std::string& format )
 
 void Formatter::Feed( Uint index, Int value )
 {
-    for ( Usize i = 0; i < m_impl->m_items.size(); ++ i )
+    m_impl->Distribute( index, [=] ( const std::string& ) -> std::string
     {
-        FormatterImpl::FormatItem& item = m_impl->m_items[i];
+        return ToString( value );
+    });
+}
 
-        if ( index != item.argIndex ) { continue; }
 
-        item.content = ToString( value );
-    }
+void Formatter::Feed( Uint index, Uint value )
+{
+    m_impl->Distribute( index, [=] ( const std::string& ) -> std::string
+    {
+        return ToString( value );
+    });
+}
+
+
+void Formatter::Feed( Uint index, const std::string& value )
+{
+    m_impl->Distribute( index, [=] ( const std::string& ) -> std::string
+    {
+        return value;
+    });
 }
 
 
@@ -545,7 +559,26 @@ FormatterImpl::FormatterImpl( const std::string& format )
         m_items.push_back( item );
     }
 
-    m_tail = buffer;
+    if ( m_items.empty() )
+    {
+        m_tail = format;
+    }
+    else
+    {
+        m_tail = buffer;
+    }
+}
+
+
+void FormatterImpl::Distribute(
+    Uint argIndex, std::function< std::string ( const std::string& ) > formatter )
+{
+    for ( FormatItem& item : m_items )
+    {
+        if ( argIndex != item.argIndex ) { continue; }
+
+        item.content = formatter( "" );  // TODO: Item format may be specified in format string.
+    }
 }
 
 
@@ -553,10 +586,11 @@ std::string FormatterImpl::GetString() const
 {
     std::ostringstream stream;
 
-    for ( Usize i = 0; i < m_items.size(); ++ i )
+    for ( const FormatItem& item : m_items )
     {
-        stream << m_items[i].head << m_items[i].content;
+        stream << item.head << item.content;
     }
+
     stream << m_tail;
 
     return stream.str();

@@ -35,8 +35,25 @@ TEST( FormatTrivialTest )
 TEST( FormatIntegerTest )
 {
     CHECK( "Score 0" == Format( "Score {0}", 0 ));
+    CHECK( "Answer -1:42" == Format( "Answer {0}:{1}", -1, 42 ));
+    CHECK( "2014/1/1 Happy NY!" == Format( "{0}/{1}/{2} Happy NY!", 2014, 1u, 1u ));
+    CHECK( "Version 1.4.16.256" == Format( "Version {3}.{2}.{1}.{0}", 256, 16, 4, 1 ));
+}
 
-    CHECK( "Answer 1:42" == Format( "Answer {0}:{1}", 1, 42 ));
+
+TEST( FormatStringTest )
+{
+    CHECK( "Miko: Reimu" == Format( "Miko: {0}", "Reimu" ));
+    CHECK( "Ah Ha Ha Ha!" == Format( "{1} {0} {0} {0}!", "Ha", "Ah" ));
+}
+
+
+TEST( FormatFailureTest )
+{
+    CHECK( "Score 0" == Format( "Score 0", 42 ));
+    CHECK( "Score {0" == Format( "Score {0", 42 ));
+    CHECK( "Score 0}" == Format( "Score 0}", 42 ));
+    CHECK( "Score {}" == Format( "Score {}", 42 ));
 }
 
 

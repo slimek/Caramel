@@ -6,6 +6,7 @@
 
 #include <Caramel/Caramel.h>
 #include <Caramel/String/Detail/Formatter.h>
+#include <functional>
 #include <vector>
 
 
@@ -28,6 +29,8 @@ public:
 
     explicit FormatterImpl( const std::string& format );
 
+    void Distribute( Uint argIndex, std::function< std::string ( const std::string& ) > formatter );
+    
     std::string GetString() const;
 
 
