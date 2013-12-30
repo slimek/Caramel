@@ -179,9 +179,6 @@
     <ClInclude Include="..\include\Caramel\String\Sprintf.h">
       <Filter>1. Public Packages\String</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\String\CharTraits.h">
-      <Filter>1. Public Packages\String</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Caramel\String\StringConvertible.h">
       <Filter>1. Public Packages\String</Filter>
     </ClInclude>
