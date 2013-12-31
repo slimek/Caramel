@@ -2,6 +2,7 @@
 
 #include "CaramelTestPch.h"
 
+#include <Caramel/Task/Strand.h>
 #include <Caramel/Task/TaskPoller.h>
 #include <Caramel/Thread/ThisThread.h>
 #include <UnitTest++/UnitTest++.h>
@@ -57,13 +58,13 @@ TEST( TaskPollerStrandTest )
     std::vector< Bool > dones( 3 );
 
     Task t0( "Work0", [&] { dones[0] = true; } );
-    t0.Enstrand( strand );
+    t0.Schedule( strand );
 
     Task t1( "Work1", [&] { dones[1] = true; } );
-    t1.Enstrand( strand );
+    t1.Schedule( strand );
 
     Task t2( "Work2", [&] { dones[2] = true; } );
-    t2.Enstrand( strand );
+    t2.Schedule( strand );
 
     poller.Submit( t0 );
     poller.Submit( t1 );

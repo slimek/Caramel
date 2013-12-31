@@ -572,6 +572,15 @@
     <ClInclude Include="..\src\String\FormatterImpl.h">
       <Filter>2. Sources\String</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Task\Strand.h">
+      <Filter>1. Public Packages\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\DateTime\Detail\DateTimeFwd.h">
+      <Filter>1. Public Packages\DateTime\Detail headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Task\StrandImpl.h">
+      <Filter>2. Sources\Task</Filter>
+    </ClInclude>
     <ClInclude Include="..\include\Caramel\Value\PlainTypes.h">
       <Filter>1. Public Packages\Value</Filter>
     </ClInclude>

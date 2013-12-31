@@ -33,7 +33,7 @@ public:
     Task& DelayFor( const Ticks& ticks );
 
 
-    Task& Enstrand( const Strand& strand );
+    Task& Schedule( Strand& strand );
 
 
     /// Properties ///

@@ -2,6 +2,7 @@
 
 #include "CaramelPch.h"
 
+#include "Task/StrandImpl.h"
 #include "Task/TaskImpl.h"
 #include "Task/TaskPollerImpl.h"
 #include <Caramel/Async/TimedBool.h>
@@ -15,6 +16,7 @@ namespace Caramel
 // Contents
 //
 //   Task
+//   Strand
 //   TaskPoller
 //
 
@@ -32,6 +34,12 @@ Task::Task( const std::string& name, TaskFunction&& f )
 Task& Task::DelayFor( const Ticks& duration )
 {
     m_impl->DelayFor( duration );
+    return *this;
+}
+
+
+Task& Task::Schedule( Strand& strand )
+{
     return *this;
 }
 
@@ -60,6 +68,16 @@ void TaskImpl::DelayFor( const Ticks& duration )
 void TaskImpl::Run()
 {
     m_function();
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Strand
+//
+
+void Strand::CancelAll()
+{
 }
 
 

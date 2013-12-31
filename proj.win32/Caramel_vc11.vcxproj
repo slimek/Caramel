@@ -46,6 +46,7 @@
     <ClInclude Include="..\include\Caramel\DateTime\Date.h" />
     <ClInclude Include="..\include\Caramel\DateTime\DateTime.h" />
     <ClInclude Include="..\include\Caramel\DateTime\Days.h" />
+    <ClInclude Include="..\include\Caramel\DateTime\Detail\DateTimeFwd.h" />
     <ClInclude Include="..\include\Caramel\DateTime\TimeOfDay.h" />
     <ClInclude Include="..\include\Caramel\DateTime\TimeSpan.h" />
     <ClInclude Include="..\include\Caramel\Debug\ScopeTiming.h" />
@@ -104,6 +105,7 @@
     <ClInclude Include="..\include\Caramel\String\TextEncoding.h" />
     <ClInclude Include="..\include\Caramel\String\ToString.h" />
     <ClInclude Include="..\include\Caramel\String\Utf8String.h" />
+    <ClInclude Include="..\include\Caramel\Task\Strand.h" />
     <ClInclude Include="..\include\Caramel\Task\Task.h" />
     <ClInclude Include="..\include\Caramel\Task\TaskExecutor.h" />
     <ClInclude Include="..\include\Caramel\Task\TaskFwd.h" />
@@ -154,6 +156,7 @@
     <ClInclude Include="..\src\Statechart\Transition.h" />
     <ClInclude Include="..\src\String\FormatterImpl.h" />
     <ClInclude Include="..\src\String\SprintfManager.h" />
+    <ClInclude Include="..\src\Task\StrandImpl.h" />
     <ClInclude Include="..\src\Task\TaskImpl.h" />
     <ClInclude Include="..\src\Task\TaskPollerImpl.h" />
     <ClInclude Include="..\src\Thread\ThreadIdImpl.h" />
