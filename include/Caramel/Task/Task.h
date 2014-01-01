@@ -60,8 +60,10 @@ public:
     // - This function should only be called by TaskExecutor
     //
 
-    // Push this task into strand queue or TaskExecutor's ready queue.
-    void Enqueue( TaskExecutor& te );
+    void StartDelay( TaskExecutor& te );
+
+    // Push this task into strand queue.
+    void PushToStrand( TaskExecutor& te );
 
     void Run();
 

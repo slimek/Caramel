@@ -39,7 +39,7 @@ public:
 
 private:
 
-    void AddTaskToReady( Task& task ) override;
+    void AddReadyTask( Task& task ) override;
 
     std::shared_ptr< TaskPollerImpl > m_impl;
 };

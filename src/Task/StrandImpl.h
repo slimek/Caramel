@@ -27,7 +27,7 @@ public:
     void PushTask( const TaskPtr& task );
     void PopFront( const TaskPtr& callingTask );
 
-    Bool PeekFrontIsReady( TaskPtr& task );
+    Bool PeekFrontIfReady( TaskPtr& task );
 
 
 private:

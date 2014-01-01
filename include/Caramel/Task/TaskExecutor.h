@@ -32,7 +32,7 @@ public:
 private:
 
     // This function is only called by Task internally.
-    virtual void AddTaskToReady( Task& task ) = 0;
+    virtual void AddReadyTask( Task& task ) = 0;
 
 };
 

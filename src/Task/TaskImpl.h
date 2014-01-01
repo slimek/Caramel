@@ -35,7 +35,7 @@ public:
     void DelayFor( const Ticks& duration );
     void Schedule( const StrandPtr& strand );
 
-    void Enqueue( TaskExecutor* executor );
+    void PushToStrand( TaskExecutor* executor );
     void Run();
 
 

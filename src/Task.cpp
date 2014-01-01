@@ -57,11 +57,20 @@ Task& Task::Schedule( Strand& strand )
 }
 
 
-void Task::Enqueue( TaskExecutor& executor )
+//
+// Internal Functions - Call by TaskExecutor
+//
+
+void Task::StartDelay( TaskExecutor& executor )
+{
+}
+
+
+void Task::PushToStrand( TaskExecutor& executor )
 {
     CARAMEL_CHECK( m_impl->IsValid() );
 
-    m_impl->Enqueue( &executor );
+    m_impl->PushToStrand( &executor );
 }
 
 
@@ -125,25 +134,19 @@ void TaskImpl::Schedule( const StrandPtr& strand )
 }
 
 
-void TaskImpl::Enqueue( TaskExecutor* executor )
+void TaskImpl::PushToStrand( TaskExecutor* executor )
 {
-    CARAMEL_ASSERT( ! m_executor );
+    CARAMEL_ASSERT(( ! m_executor ) || m_executor == executor );
+    CARAMEL_ASSERT( m_strand );
 
     m_executor = executor;
 
-    if ( m_strand )
-    {
-        m_strand->PushTask( this->shared_from_this() );
+    m_strand->PushTask( this->shared_from_this() );
 
-        TaskPtr readyTask;
-        if ( m_strand->PeekFrontIsReady( readyTask ))
-        {
-            m_executor->AddTaskToReady( *readyTask->GetHost() );
-        }
-    }
-    else
+    TaskPtr readyTask;
+    if ( m_strand->PeekFrontIfReady( readyTask ))
     {
-        m_executor->AddTaskToReady( *m_host );
+        readyTask->m_executor->AddReadyTask( *readyTask->GetHost() );
     }
 }
 
@@ -157,9 +160,9 @@ void TaskImpl::Run()
         m_strand->PopFront( this->shared_from_this() );
 
         TaskPtr readyTask;
-        if ( m_strand->PeekFrontIsReady( readyTask ))
+        if ( m_strand->PeekFrontIfReady( readyTask ))
         {
-            m_executor->AddTaskToReady( *readyTask->GetHost() );
+            m_executor->AddReadyTask( *readyTask->GetHost() );
         }
     }
 }
@@ -211,7 +214,7 @@ void StrandImpl::PushTask( const TaskPtr& task )
 }
 
 
-Bool StrandImpl::PeekFrontIsReady( TaskPtr& task )
+Bool StrandImpl::PeekFrontIfReady( TaskPtr& task )
 {
     auto ulock = UniqueLock( m_queueMutex );
 
@@ -256,14 +259,18 @@ void TaskPoller::Submit( Task& task )
         const TickPoint dueTime = TickClock::Now() + task.GetDelayDuration();
         m_impl->m_delayedTasks.Push( dueTime, task );
     }
+    else if ( task.HasStrand() )
+    {
+        task.PushToStrand( *this );
+    }
     else
     {
-        task.Enqueue( *this );
+        this->AddReadyTask( task );
     }
 }
 
 
-void TaskPoller::AddTaskToReady( Task& task )
+void TaskPoller::AddReadyTask( Task& task )
 {
     m_impl->m_readyTasks.Push( task );
 }
@@ -300,9 +307,17 @@ void TaskPollerImpl::PollFor( const Ticks& sliceTicks )
 
         if ( TickClock::Now() < dueTime ) { break; }
 
-        Task readyTask;
-        m_delayedTasks.TryPop( readyTask );
-        readyTask.Enqueue( *m_host );
+        Task task;
+        m_delayedTasks.TryPop( task );
+
+        if ( task.HasStrand() )
+        {
+            task.PushToStrand( *m_host );
+        }
+        else
+        {
+            m_readyTasks.Push( task );
+        }
     }
 
     TimedBool< TickClock > sliceTimeout( sliceTicks );
