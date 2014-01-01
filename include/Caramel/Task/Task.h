@@ -23,30 +23,43 @@ class Task
 {
 public:
 
-    Task();  // Create a "not-a-task". Submit it results in nothing.
+    Task();  // Create a "not-a-task". Submit it results in exception.
 
     Task( const std::string& name, TaskFunction&& f );
 
 
-    /// Delay : Schedule the task after due time. ///
+    //
+    // Setup Task Scheduling
+    //
+    //   Delay    : The task waits due time before scheduling.
+    //   Schedule : The task depends on a strand and would run in order.
+    //
 
     Task& DelayFor( const Ticks& ticks );
-
-
     Task& Schedule( Strand& strand );
+
+
+    //
+    // Run the Task
+    // - This function should only be called by TaskExecutor
+    //
+    void Run();
 
 
     /// Properties ///
 
+    Bool IsValid() const;  // Returns false if "Not a task"
+
     std::string Name() const;
 
-    Bool IsEmpty()     const;  // "Not a task"
     Bool IsCompleted() const;  // "Ran to Completion" or Cancelled
 
+    // Delay
+    Bool  HasDelay()         const;
+    Ticks GetDelayDuration() const;
 
-    /// Internal Accessors ///
-    
-    std::shared_ptr< TaskImpl > GetImpl() const { return m_impl; }
+    // Schedule
+    Bool HasStrand() const;
 
 
 private:

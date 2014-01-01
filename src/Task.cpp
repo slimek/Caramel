@@ -25,6 +25,12 @@ namespace Caramel
 // Task
 //
 
+Task::Task()
+    : m_impl( new TaskImpl )
+{
+}
+
+
 Task::Task( const std::string& name, TaskFunction&& f )
     : m_impl( new TaskImpl( name, std::move( f )))
 {
@@ -33,6 +39,8 @@ Task::Task( const std::string& name, TaskFunction&& f )
 
 Task& Task::DelayFor( const Ticks& duration )
 {
+    CARAMEL_CHECK( m_impl->IsValid() );
+
     m_impl->DelayFor( duration );
     return *this;
 }
@@ -40,28 +48,68 @@ Task& Task::DelayFor( const Ticks& duration )
 
 Task& Task::Schedule( Strand& strand )
 {
+    CARAMEL_CHECK( m_impl->IsValid() );
+
+    m_impl->Schedule( strand.m_impl );
     return *this;
 }
+
+
+void Task::Run()
+{
+    CARAMEL_CHECK( m_impl->IsValid() );
+
+    m_impl->Run();
+}
+
+
+//
+// Properties
+//
+
+Bool Task::IsValid() const { return m_impl->IsValid(); }
+
+std::string Task::Name() const { return m_impl->m_name; }
+
+Bool  Task::HasDelay()         const { return m_impl->m_hasDelay; }
+Ticks Task::GetDelayDuration() const { return m_impl->m_delayDuration; }
+
+Bool Task::HasStrand() const { return m_impl->m_strand; }
 
 
 //
 // Implementation
 //
 
+TaskImpl::TaskImpl()
+    : m_name( "Not-a-task" )
+    , m_hasDelay( false )
+{
+}
+
+
 TaskImpl::TaskImpl( const std::string& name, TaskFunction&& f )
     : m_name( name )
     , m_function( f )
-    , m_delayed( false )
+    , m_hasDelay( false )
 {
 }
 
 
 void TaskImpl::DelayFor( const Ticks& duration )
 {
-    CARAMEL_ASSERT( ! m_delayed );
+    CARAMEL_ASSERT( ! m_hasDelay );
 
     m_delayDuration = duration;
-    m_delayed = true;
+    m_hasDelay = true;
+}
+
+
+void TaskImpl::Schedule( const StrandPtr& strand )
+{
+    CARAMEL_ASSERT( ! m_strand );
+
+    m_strand = strand;
 }
 
 
@@ -92,14 +140,11 @@ TaskPoller::TaskPoller()
 }
 
 
-void TaskPoller::Submit( const Task& inputTask )
+void TaskPoller::Submit( const Task& task )
 {
-    TaskPtr task = inputTask.GetImpl();
-
-    if ( task->IsDelayed() )
+    if ( task.HasDelay() )
     {
-        const TickPoint dueTime = TickClock::Now() + task->GetDelayDuration();
-
+        const TickPoint dueTime = TickClock::Now() + task.GetDelayDuration();
         m_impl->m_delayedTasks.Push( dueTime, task );
     }
     else
@@ -124,18 +169,18 @@ void TaskPoller::PollFor( const Ticks& sliceTicks )
 
         if ( TickClock::Now() < dueTime ) { break; }
 
-        TaskPtr readyTask;
+        Task readyTask;
         m_impl->m_delayedTasks.TryPop( readyTask );
         m_impl->m_readyTasks.Push( readyTask );
     }
 
     TimedBool< TickClock > sliceTimeout( sliceTicks );
 
-    TaskPtr task;
+    Task task;
 
     while ( m_impl->m_readyTasks.TryPop( task ))
     {
-        task->Run();
+        task.Run();
 
         if ( sliceTimeout ) { break; }
     }

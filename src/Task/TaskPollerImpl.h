@@ -25,10 +25,10 @@ class TaskPollerImpl
 
 private:
 
-    typedef Concurrent::PriorityQueue< TickPoint, TaskPtr > DelayedTaskQueue;
+    typedef Concurrent::PriorityQueue< TickPoint, Task > DelayedTaskQueue;
     DelayedTaskQueue m_delayedTasks;
 
-    typedef Concurrent::Queue< TaskPtr > ReadyTaskQueue;
+    typedef Concurrent::Queue< Task > ReadyTaskQueue;
     ReadyTaskQueue m_readyTasks;
 };
 

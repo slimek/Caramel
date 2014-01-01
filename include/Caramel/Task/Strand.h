@@ -21,6 +21,8 @@ class StrandImpl;
 
 class Strand
 {
+    friend class Task;
+
 public:
 
     void CancelAll();

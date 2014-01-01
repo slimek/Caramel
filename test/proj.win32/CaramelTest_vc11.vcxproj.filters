@@ -157,6 +157,9 @@
     <ClCompile Include="..\src\String\FormatTest.cpp">
       <Filter>2. Tests\String</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Task\TaskTest.cpp">
+      <Filter>2. Tests\Task</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\Async\AnyEventQueueTest.cpp">
       <Filter>2. Tests\Async</Filter>
     </ClCompile>

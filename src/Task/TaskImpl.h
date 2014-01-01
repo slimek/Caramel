@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
+#include "Task/StrandImpl.h"
 #include <Caramel/Task/Task.h>
 
 
@@ -18,7 +19,11 @@ namespace Caramel
 
 class TaskImpl
 {
+    friend class Task;
+
 public:
+
+    TaskImpl();  // Not-a-task
 
     TaskImpl( const std::string& name, TaskFunction&& f );
 
@@ -26,15 +31,14 @@ public:
     /// Operations ///
 
     void DelayFor( const Ticks& duration );
+    void Schedule( const StrandPtr& strand );
 
     void Run();
 
 
     /// Properties ///
 
-    Bool IsDelayed() const { return m_delayed; }
-
-    Ticks GetDelayDuration() const { return m_delayDuration; }
+    Bool IsValid() const { return m_function; }
 
 
 private:
@@ -45,8 +49,13 @@ private:
     
     /// Delay ///
 
-    Bool m_delayed;
+    Bool m_hasDelay;
     Ticks m_delayDuration;
+
+
+    /// Strand ///
+
+    StrandPtr m_strand;
 
 };
 
