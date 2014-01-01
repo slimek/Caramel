@@ -36,6 +36,8 @@ Int RunTest::Main()
     
     if ( po_suiteName.Exists() )
     {
+        cout << "Run Suite : " << po_suiteName << endl;
+
     	UnitTest::TestReporterStdout reporter;
 	    UnitTest::TestRunner runner( reporter );
 
