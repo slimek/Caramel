@@ -6,10 +6,14 @@
 
 #include <Caramel/Caramel.h>
 #include <Caramel/Task/Strand.h>
+#include <deque>
 
 
 namespace Caramel
 {
+
+class TaskImpl;
+typedef std::shared_ptr< TaskImpl > TaskPtr;
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -18,6 +22,20 @@ namespace Caramel
 
 class StrandImpl
 {
+public:
+
+    void PushTask( const TaskPtr& task );
+    void PopFront( const TaskPtr& callingTask );
+
+    Bool PeekFrontIsReady( TaskPtr& task );
+
+
+private:
+
+    std::mutex m_queueMutex;
+
+    typedef std::deque< TaskPtr > TaskQueue;
+    TaskQueue m_blockedTasks;
 };
 
 typedef std::shared_ptr< StrandImpl > StrandPtr;

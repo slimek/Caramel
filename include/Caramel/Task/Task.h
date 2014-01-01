@@ -39,13 +39,6 @@ public:
     Task& Schedule( Strand& strand );
 
 
-    //
-    // Run the Task
-    // - This function should only be called by TaskExecutor
-    //
-    void Run();
-
-
     /// Properties ///
 
     Bool IsValid() const;  // Returns false if "Not a task"
@@ -60,6 +53,17 @@ public:
 
     // Schedule
     Bool HasStrand() const;
+
+
+    //
+    // Post-Submit Functions
+    // - This function should only be called by TaskExecutor
+    //
+
+    // Push this task into strand queue or TaskExecutor's ready queue.
+    void Enqueue( TaskExecutor& te );
+
+    void Run();
 
 
 private:

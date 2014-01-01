@@ -26,7 +26,7 @@ public:
 
     TaskPoller();
 
-    void Submit( const Task& task ) override;
+    void Submit( Task& task ) override;
 
     void PollOne();
 
@@ -38,6 +38,8 @@ public:
 
 
 private:
+
+    void AddTaskToReady( Task& task ) override;
 
     std::shared_ptr< TaskPollerImpl > m_impl;
 };

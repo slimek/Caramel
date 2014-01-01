@@ -5,19 +5,21 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
-#include "Task/StrandImpl.h"
 #include <Caramel/Task/Task.h>
 
 
 namespace Caramel
 {
 
+class StrandImpl;
+typedef std::shared_ptr< StrandImpl > StrandPtr;
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Task
 //
 
-class TaskImpl
+class TaskImpl : public std::enable_shared_from_this< TaskImpl >
 {
     friend class Task;
 
@@ -33,12 +35,21 @@ public:
     void DelayFor( const Ticks& duration );
     void Schedule( const StrandPtr& strand );
 
+    void Enqueue( TaskExecutor* executor );
     void Run();
+
+
+    /// State Transition ///
+
+    Bool TransitToDelayed();
+    Bool TransitToBlocked();
+    Bool TransitToReady();
 
 
     /// Properties ///
 
-    Bool IsValid() const { return m_function; }
+    Bool  IsValid() const { return m_function; }
+    Task* GetHost() const { return m_host; }
 
 
 private:
@@ -46,16 +57,19 @@ private:
     std::string  m_name;
     TaskFunction m_function;
 
+    Task* m_host;
+
     
     /// Delay ///
 
-    Bool m_hasDelay;
+    Bool  m_hasDelay;
     Ticks m_delayDuration;
 
 
-    /// Strand ///
+    /// Schedule and Run ///
 
-    StrandPtr m_strand;
+    StrandPtr     m_strand;
+    TaskExecutor* m_executor;
 
 };
 

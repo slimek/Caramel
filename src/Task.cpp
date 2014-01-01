@@ -28,12 +28,14 @@ namespace Caramel
 Task::Task()
     : m_impl( new TaskImpl )
 {
+    m_impl->m_host = this;
 }
 
 
 Task::Task( const std::string& name, TaskFunction&& f )
     : m_impl( new TaskImpl( name, std::move( f )))
 {
+    m_impl->m_host = this;
 }
 
 
@@ -52,6 +54,14 @@ Task& Task::Schedule( Strand& strand )
 
     m_impl->Schedule( strand.m_impl );
     return *this;
+}
+
+
+void Task::Enqueue( TaskExecutor& executor )
+{
+    CARAMEL_CHECK( m_impl->IsValid() );
+
+    m_impl->Enqueue( &executor );
 }
 
 
@@ -84,6 +94,7 @@ Bool Task::HasStrand() const { return m_impl->m_strand; }
 TaskImpl::TaskImpl()
     : m_name( "Not-a-task" )
     , m_hasDelay( false )
+    , m_executor( nullptr )
 {
 }
 
@@ -92,6 +103,7 @@ TaskImpl::TaskImpl( const std::string& name, TaskFunction&& f )
     : m_name( name )
     , m_function( f )
     , m_hasDelay( false )
+    , m_executor( nullptr )
 {
 }
 
@@ -113,9 +125,65 @@ void TaskImpl::Schedule( const StrandPtr& strand )
 }
 
 
+void TaskImpl::Enqueue( TaskExecutor* executor )
+{
+    CARAMEL_ASSERT( ! m_executor );
+
+    m_executor = executor;
+
+    if ( m_strand )
+    {
+        m_strand->PushTask( this->shared_from_this() );
+
+        TaskPtr readyTask;
+        if ( m_strand->PeekFrontIsReady( readyTask ))
+        {
+            m_executor->AddTaskToReady( *readyTask->GetHost() );
+        }
+    }
+    else
+    {
+        m_executor->AddTaskToReady( *m_host );
+    }
+}
+
+
 void TaskImpl::Run()
 {
     m_function();
+
+    if ( m_strand )
+    {
+        m_strand->PopFront( this->shared_from_this() );
+
+        TaskPtr readyTask;
+        if ( m_strand->PeekFrontIsReady( readyTask ))
+        {
+            m_executor->AddTaskToReady( *readyTask->GetHost() );
+        }
+    }
+}
+
+
+//
+// State Transition
+//
+
+Bool TaskImpl::TransitToDelayed()
+{
+    return true;
+}
+
+
+Bool TaskImpl::TransitToBlocked()
+{
+    return true;
+}
+
+
+Bool TaskImpl::TransitToReady()
+{
+    return true;
 }
 
 
@@ -129,18 +197,59 @@ void Strand::CancelAll()
 }
 
 
+//
+// Implementation
+//
+
+void StrandImpl::PushTask( const TaskPtr& task )
+{
+    auto ulock = UniqueLock( m_queueMutex );
+
+    CARAMEL_VERIFY( task->TransitToBlocked() );
+
+    m_blockedTasks.push_back( task );
+}
+
+
+Bool StrandImpl::PeekFrontIsReady( TaskPtr& task )
+{
+    auto ulock = UniqueLock( m_queueMutex );
+
+    if ( m_blockedTasks.empty() ) { return false; }
+
+    TaskPtr frontTask = m_blockedTasks.front();
+
+    if ( frontTask->TransitToReady() )
+    {
+        task = frontTask;
+        return true;
+    }
+
+    return false;
+}
+
+
+void StrandImpl::PopFront( const TaskPtr& callingTask )
+{
+    auto ulock = UniqueLock( m_queueMutex );
+
+    CARAMEL_ASSERT( m_blockedTasks.front() == callingTask );
+    m_blockedTasks.pop_front();
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // TaskPoller
 //
 
 TaskPoller::TaskPoller()
-    : m_impl( new TaskPollerImpl )
 {
+    m_impl = std::make_shared< TaskPollerImpl >( this );
 }
 
 
-void TaskPoller::Submit( const Task& task )
+void TaskPoller::Submit( Task& task )
 {
     if ( task.HasDelay() )
     {
@@ -149,36 +258,58 @@ void TaskPoller::Submit( const Task& task )
     }
     else
     {
-        m_impl->m_readyTasks.Push( task );
+        task.Enqueue( *this );
     }
+}
+
+
+void TaskPoller::AddTaskToReady( Task& task )
+{
+    m_impl->m_readyTasks.Push( task );
 }
 
 
 void TaskPoller::PollOne()
 {
-    this->PollFor( Ticks::Zero() );
+    m_impl->PollFor( Ticks::Zero() );
 }
 
 
 void TaskPoller::PollFor( const Ticks& sliceTicks )
 {
-    while ( ! m_impl->m_delayedTasks.IsEmpty() )
+    m_impl->PollFor( sliceTicks );
+}
+
+
+//
+// Implementation
+//
+
+TaskPollerImpl::TaskPollerImpl( TaskPoller* host )
+    : m_host( host )
+{
+}
+
+
+void TaskPollerImpl::PollFor( const Ticks& sliceTicks )
+{
+    while ( ! m_delayedTasks.IsEmpty() )
     {
         TickPoint dueTime;
-        m_impl->m_delayedTasks.PeekTopKey( dueTime );
+        m_delayedTasks.PeekTopKey( dueTime );
 
         if ( TickClock::Now() < dueTime ) { break; }
 
         Task readyTask;
-        m_impl->m_delayedTasks.TryPop( readyTask );
-        m_impl->m_readyTasks.Push( readyTask );
+        m_delayedTasks.TryPop( readyTask );
+        readyTask.Enqueue( *m_host );
     }
 
     TimedBool< TickClock > sliceTimeout( sliceTicks );
 
     Task task;
 
-    while ( m_impl->m_readyTasks.TryPop( task ))
+    while ( m_readyTasks.TryPop( task ))
     {
         task.Run();
 

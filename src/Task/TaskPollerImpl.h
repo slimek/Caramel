@@ -23,7 +23,26 @@ class TaskPollerImpl
 {
     friend class TaskPoller;
 
+public:
+
+    explicit TaskPollerImpl( TaskPoller* host );
+
+    //
+    // Scheduling - Process in order:
+    // - 1. Delaying tasks
+    //   2. Put tasks into strand queues
+    //   3. Put tasks into the ready queue
+    //
+
+
+    /// Run Tasks ///
+
+    void PollFor( const Ticks& sliceTicks );
+
+
 private:
+
+    TaskPoller* m_host;
 
     typedef Concurrent::PriorityQueue< TickPoint, Task > DelayedTaskQueue;
     DelayedTaskQueue m_delayedTasks;

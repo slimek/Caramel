@@ -20,10 +20,19 @@ namespace Caramel
 
 class TaskExecutor
 {
+    friend class TaskImpl;
+
 public:
+    
     virtual ~TaskExecutor() {}
 
-    virtual void Submit( const Task& task ) = 0;
+    virtual void Submit( Task& task ) = 0;
+
+
+private:
+
+    // This function is only called by Task internally.
+    virtual void AddTaskToReady( Task& task ) = 0;
 
 };
 
