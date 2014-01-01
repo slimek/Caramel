@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
+#include <Caramel/Task/Detail/TaskFwd.h>
 #include <Caramel/Task/Task.h>
 
 

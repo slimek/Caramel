@@ -165,6 +165,9 @@
     <Filter Include="1. Public Packages\DateTime\Detail headers">
       <UniqueIdentifier>{27db88a5-44ef-42b9-a35a-a7140031b244}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\Task\Detail headers">
+      <UniqueIdentifier>{edaca340-f292-4cb7-81e9-e1e9fb1a437b}</UniqueIdentifier>
+    </Filter>
     <Filter Include="4. Non-Win32 Platform\Apple">
       <UniqueIdentifier>{daa7b010-227a-4a43-92a3-d208d54175c3}</UniqueIdentifier>
     </Filter>
@@ -343,9 +346,6 @@
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Document\IniSection.h">
       <Filter>1. Public Packages\Document</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Caramel\Task\TaskFwd.h">
-      <Filter>1. Public Packages\Task</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Chrono\TickClock.h">
       <Filter>1. Public Packages\Chrono</Filter>
@@ -580,6 +580,9 @@
     </ClInclude>
     <ClInclude Include="..\src\Task\StrandImpl.h">
       <Filter>2. Sources\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Task\Detail\TaskFwd.h">
+      <Filter>1. Public Packages\Task\Detail headers</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Value\PlainTypes.h">
       <Filter>1. Public Packages\Value</Filter>

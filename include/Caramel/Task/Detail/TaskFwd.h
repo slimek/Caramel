@@ -1,7 +1,7 @@
-// Caramel C++ Library - Task Facility - Forwards Header
+// Caramel C++ Library - Task Facility - Detail - Forwards Header
 
-#ifndef __CARAMEL_TASK_TASK_FWD_H
-#define __CARAMEL_TASK_TASK_FWD_H
+#ifndef __CARAMEL_TASK_DETAIL_TASK_FWD_H
+#define __CARAMEL_TASK_DETAIL_TASK_FWD_H
 #pragma once
 
 #include <Caramel/Caramel.h>
@@ -34,4 +34,4 @@ class TaskPoller;
 
 } // namespace Caramel
 
-#endif // __CARAMEL_TASK_TASK_FWD_H
+#endif // __CARAMEL_TASK_DETAIL_TASK_FWD_H

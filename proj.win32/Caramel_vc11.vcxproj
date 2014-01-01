@@ -105,10 +105,10 @@
     <ClInclude Include="..\include\Caramel\String\TextEncoding.h" />
     <ClInclude Include="..\include\Caramel\String\ToString.h" />
     <ClInclude Include="..\include\Caramel\String\Utf8String.h" />
+    <ClInclude Include="..\include\Caramel\Task\Detail\TaskFwd.h" />
     <ClInclude Include="..\include\Caramel\Task\Strand.h" />
     <ClInclude Include="..\include\Caramel\Task\Task.h" />
     <ClInclude Include="..\include\Caramel\Task\TaskExecutor.h" />
-    <ClInclude Include="..\include\Caramel\Task\TaskFwd.h" />
     <ClInclude Include="..\include\Caramel\Task\TaskPoller.h" />
     <ClInclude Include="..\include\Caramel\Thread\MutexLocks.h" />
     <ClInclude Include="..\include\Caramel\Thread\SpinMutex.h" />

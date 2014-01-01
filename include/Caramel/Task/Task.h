@@ -6,7 +6,7 @@
 
 #include <Caramel/Caramel.h>
 #include <Caramel/Chrono/TickClock.h>
-#include <Caramel/Task/TaskFwd.h>
+#include <Caramel/Task/Detail/TaskFwd.h>
 
 
 namespace Caramel
