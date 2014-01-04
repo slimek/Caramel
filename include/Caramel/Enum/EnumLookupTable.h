@@ -8,8 +8,7 @@
 #include <Caramel/Lexical/Integer.h>
 #include <Caramel/Numeric/NumberTraits.h>
 #include <Caramel/String/CainLess.h>
-#include <map>
-#include <set>
+#include <boost/bimap/bimap.hpp>
 
 
 namespace Caramel
@@ -33,25 +32,44 @@ public:
 
     /// Building Table ///
 
-    EnumLookupTable( const std::string& name, EnumType value );
-    EnumLookupTable&& operator()( const std::string& name, EnumType value );
+    EnumLookupTable( EnumType value, const std::string& name );
+    EnumLookupTable&& operator()( EnumType value, const std::string& name );
 
-
-    /// Searching ///
 
     //
-    // Find by Text
-    // - The text may be the name or represent the integer value.
+    // Searching
     //
-    Bool Find( const std::string& text, EnumType& value ) const;
+    //   FindEnumByValue : Find the enum of an integer value.
+    //   FindEnumByText  : The text may be the name, or represent the integer value.
+    //
 
-    Bool ContainsValue( Int value ) const;
+    Bool FindEnumByName( const std::string& name, EnumType& value ) const;
+    Bool FindEnumByValue( Int32 intValue, EnumType& enumValue ) const;
+
+    Bool FindEnumByText( const std::string& text, EnumType& value ) const;
+
+    Bool FindName( EnumType value, std::string& name ) const;
+
+    Bool ContainsValue( Int32 value ) const;
     Bool ContainsName( const std::string& name ) const;
 
 
 private:
-    std::map< std::string, EnumType, CainLess > m_nameTable;
-    std::set< Int32 > m_values;
+    
+    //
+    // Boost.Bimap< Enum, String >
+    // - Left  is Enum -> Name
+    //   Right is Name -> Enum
+    //
+    typedef typename boost::bimaps::bimap <
+        boost::bimaps::set_of< EnumType >,
+        boost::bimaps::set_of< std::string, CainLess >
+    > TableType;
+
+    typedef typename TableType::value_type TableValue;
+
+    TableType m_table;
+
 };
 
 
@@ -68,64 +86,87 @@ EnumLookupTable< EnumType > EnumLookupChain( const std::string& name, EnumType v
 //
 
 template< typename EnumType >
-inline EnumLookupTable< EnumType > EnumLookupChain( const std::string& name, EnumType value )
+inline EnumLookupTable< EnumType > EnumLookupChain( EnumType value, const std::string& name )
 {
-    return EnumLookupTable< EnumType >( name, value );
+    return EnumLookupTable< EnumType >( value, name );
 }
 
 
 template< typename EnumType >
-inline EnumLookupTable< EnumType >::EnumLookupTable( const std::string& name, EnumType value )
+inline EnumLookupTable< EnumType >::EnumLookupTable( EnumType value, const std::string& name )
 {
-    m_nameTable.insert( std::make_pair( name, value ));
-    m_values.insert( value );
+    m_table.insert( TableValue( value, name ));
 }
 
 
 template< typename EnumType >
-inline auto EnumLookupTable< EnumType >::operator()( const std::string& name, EnumType value ) -> EnumLookupTable&&
+inline auto EnumLookupTable< EnumType >::operator()( EnumType value, const std::string& name ) -> EnumLookupTable&&
 {
-    m_nameTable.insert( std::make_pair( name, value ));
-    m_values.insert( value );
-
+    m_table.insert( TableValue( value, name ));
     return std::move( *this );
 }
 
 
 template< typename EnumType >
-inline Bool EnumLookupTable< EnumType >::Find( const std::string& text, EnumType& value ) const
+inline Bool EnumLookupTable< EnumType >::FindEnumByName( const std::string& name, EnumType& value ) const
+{
+    const auto iname = m_table.right.find( name );
+    if ( m_table.right.end() == iname ) { return false; }
+
+    value = iname->second;
+    return true;
+}
+
+
+template< typename EnumType >
+inline Bool EnumLookupTable< EnumType >::FindEnumByValue( Int32 intValue, EnumType& enumValue ) const
+{
+    const auto ienum = m_table.left.find( static_cast< EnumType >( intValue ));
+    if ( m_table.left.end() == ienum ) { return false; }
+
+    enumValue = ienum->first;
+    return true;
+}
+
+
+template< typename EnumType >
+inline Bool EnumLookupTable< EnumType >::FindEnumByText( const std::string& text, EnumType& value ) const
 {
     Lexical::Integer< Int32 > ivalue;
 
     if ( ivalue.TryParse( text ))
     {
-        if ( m_values.end() == m_values.find( ivalue )) { return false; }
-
-        value = static_cast< EnumType >( static_cast< Int32 >( ivalue ));
-        return true;
+        return this->FindEnumByValue( ivalue, value );
     }
     else
     {
-        auto iter = m_nameTable.find( text );
-        if ( m_nameTable.end() == iter ) { return false; }
-
-        value = iter->second;
-        return true;
+        return this->FindEnumByName( text, value );
     }
 }
 
 
 template< typename EnumType >
-inline Bool EnumLookupTable< EnumType >::ContainsValue( Int value ) const
+inline Bool EnumLookupTable< EnumType >::FindName( EnumType value, std::string& name ) const
 {
-    return m_values.end() != m_values.find( value );
+    const auto iname = m_table.left.find( value );
+    if ( m_table.left.end() == iname ) { return false; }
+
+    name = iname->second;
+    return true;
 }
 
 
 template< typename EnumType >
 inline Bool EnumLookupTable< EnumType >::ContainsName( const std::string& name ) const
 {
-    return m_nameTable.end() != m_nameTable.find( name );
+    return m_table.right.end() != m_table.right.find( name );
+}
+
+
+template< typename EnumType >
+inline Bool EnumLookupTable< EnumType >::ContainsValue( Int32 value ) const
+{
+    return m_table.left.end() != m_table.left.find( static_cast< EnumType >( value ));
 }
 
 
