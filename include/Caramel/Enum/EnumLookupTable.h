@@ -8,6 +8,7 @@
 #include <Caramel/Lexical/Integer.h>
 #include <Caramel/Numeric/NumberTraits.h>
 #include <Caramel/String/CainLess.h>
+#include <Caramel/Value/PlainTypes.h>
 #include <boost/bimap/bimap.hpp>
 
 
@@ -17,7 +18,8 @@ namespace Caramel
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Enum Lookup Table
-// - The string comparison is always case-insensitive.
+// - A Bi-directional table for enum values and their names.
+//   The string comparison is always case-insensitive.
 //
 
 template< typename EnumType >
@@ -34,6 +36,11 @@ public:
 
     EnumLookupTable( EnumType value, const std::string& name );
     EnumLookupTable&& operator()( EnumType value, const std::string& name );
+
+
+    // Imbue from a pair array, in ( enum, name ) format.
+    template< typename PairType, Uint size >
+    explicit EnumLookupTable( const PairType (& table)[size] );
 
 
     //
@@ -106,6 +113,21 @@ inline auto EnumLookupTable< EnumType >::operator()( EnumType value, const std::
     return std::move( *this );
 }
 
+
+template< typename EnumType >
+template< typename PairType, Uint size >
+inline EnumLookupTable< EnumType >::EnumLookupTable( const PairType (& table)[size] )
+{
+    for ( const auto& valueName : table )
+    {
+        m_table.insert( TableValue( valueName.first, valueName.second ));
+    }
+}
+
+
+//
+// Searching
+//
 
 template< typename EnumType >
 inline Bool EnumLookupTable< EnumType >::FindEnumByName( const std::string& name, EnumType& value ) const

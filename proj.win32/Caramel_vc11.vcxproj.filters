@@ -569,6 +569,9 @@
     <ClInclude Include="..\src\String\FormatterImpl.h">
       <Filter>2. Sources\String</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Value\PlainTypes.h">
+      <Filter>1. Public Packages\Value</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

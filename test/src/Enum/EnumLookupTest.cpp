@@ -137,6 +137,31 @@ TEST( EnumLookupTableInClassTest )
 }
 
 
+static const PlainPair< ImageFormat, const Char* > IMAGE_FORMAT_NAMES[] =
+{
+    { IMAGE_PNG, "png" },
+    { IMAGE_JPG, "jpg" },
+    { IMAGE_GIF, "gif" },
+};
+
+
+TEST( EnumLookupTableFromArrayTest )
+{
+    auto table = EnumLookupTable< ImageFormat >( IMAGE_FORMAT_NAMES );
+
+    std::string name;
+    CHECK( true == table.FindName( IMAGE_GIF, name ));
+    CHECK( "gif" == name );
+
+    ImageFormat format;
+    CHECK( true == table.FindEnumByName( "jpg", format ));
+    CHECK( IMAGE_JPG == format );
+
+    CHECK( true == table.FindEnumByValue( 1, format ));
+    CHECK( IMAGE_PNG == format );
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE EnumLookupSuite

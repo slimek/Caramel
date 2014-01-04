@@ -114,6 +114,7 @@
     <ClInclude Include="..\include\Caramel\Value\Detail\AnyHolders.h" />
     <ClInclude Include="..\include\Caramel\Value\Detail\NamedValueRef.h" />
     <ClInclude Include="..\include\Caramel\Value\NamedValues.h" />
+    <ClInclude Include="..\include\Caramel\Value\PlainTypes.h" />
     <ClInclude Include="..\include\Caramel\Value\SharedArray.h" />
     <ClInclude Include="..\include\Caramel\Windows\CrtDebug.h" />
     <ClInclude Include="..\include\Caramel\Windows\DebuggerTraceAdapter.h" />
