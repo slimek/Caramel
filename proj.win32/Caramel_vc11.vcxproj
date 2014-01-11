@@ -30,6 +30,7 @@
     <ClInclude Include="..\include\Caramel\Chrono\TickClock.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\Detail\BasicMap.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\HashMap.h" />
+    <ClInclude Include="..\include\Caramel\Concurrent\IntervalSet.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\Map.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\PriorityQueue.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\Queue.h" />

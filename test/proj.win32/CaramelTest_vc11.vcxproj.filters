@@ -163,6 +163,9 @@
     <ClCompile Include="..\src\String\FormatTest.cpp">
       <Filter>2. Tests\String</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Concurrent\IntervalSetTest.cpp">
+      <Filter>2. Tests\Concurrent</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">
