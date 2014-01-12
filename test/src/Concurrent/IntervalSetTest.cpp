@@ -22,17 +22,17 @@ TEST( IntervalSetTest )
     Concurrent::IntervalSet< Int > iset;
 
     CHECK( false == iset.Contains( 42 ));
-    iset.Add( 42 );
+    iset.Insert( 42 );
     CHECK( true == iset.Contains( 42 ));
 
-    iset.AddClosed( 21, 28 );
+    iset.InsertClosed( 21, 28 );
     CHECK( false == iset.Contains( 20 ));
     CHECK( true  == iset.Contains( 21 ));
     CHECK( true  == iset.Contains( 25 ));
     CHECK( true  == iset.Contains( 28 ));
     CHECK( false == iset.Contains( 29 ));
 
-    iset.AddRightOpen( 1, 8 );
+    iset.InsertRightOpen( 1, 8 );
     CHECK( false == iset.Contains( 0 ));
     CHECK( true  == iset.Contains( 1 ));
     CHECK( true  == iset.Contains( 5 ));
@@ -41,18 +41,34 @@ TEST( IntervalSetTest )
 
     // Concatenation
 
-    iset.AddRightOpen( 8, 10 );
+    iset.InsertRightOpen( 8, 10 );
     CHECK( true  == iset.Contains( 8 ));
     CHECK( false == iset.Contains( 10 ));
 
-    iset.AddRightOpen( 11, 13 );
+    iset.InsertRightOpen( 11, 13 );
     CHECK( false == iset.Contains( 10 ));
     CHECK( true  == iset.Contains( 11 ));
 
     // Union
 
-    iset.AddRightOpen( 0, 15 );
+    iset.InsertRightOpen( 0, 15 );
     CHECK( true  == iset.Contains( 10 ));
+}
+
+
+TEST( IntervalSetInsertTest )
+{
+    Concurrent::IntervalSet< Int > iset;
+
+    CHECK( true  == iset.InsertClosed( 3, 6 ));
+    CHECK( false == iset.InsertClosed( 4, 8 ));
+    CHECK( true  == iset.ContainsClosed( 3, 8 ));
+
+    CHECK( true  == iset.InsertRightOpen( 1, 3 ));
+    CHECK( true  == iset.ContainsClosed( 1, 8 ));
+    
+    CHECK( true  == iset.InsertRightOpen( 9, 12 ));
+    CHECK( true  == iset.ContainsClosed( 1, 11 ));
 }
 
 
@@ -61,7 +77,7 @@ TEST( IntervalSetContainsTest )
     // The sub-interval must be totally within a valid interval.
 
     Concurrent::IntervalSet< Int > iset;
-    iset.AddClosed( 3, 6 );
+    iset.InsertClosed( 3, 6 );
 
     CHECK( true  == iset.ContainsClosed( 3, 6 ));
     CHECK( true  == iset.ContainsClosed( 4, 5 ));
@@ -76,7 +92,7 @@ TEST( IntervalSetContainsTest )
 TEST( IntervalSetIntersectsTest )
 {
     Concurrent::IntervalSet< Int > iset;
-    iset.AddClosed( 3, 6 );
+    iset.InsertClosed( 3, 6 );
 
     CHECK( true  == iset.IntersectsClosed( 3, 6 ));
     CHECK( true  == iset.IntersectsClosed( 4, 5 ));

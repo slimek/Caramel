@@ -21,6 +21,10 @@ namespace Concurrent
 // Interval Set
 // - Based on Boost.Icl ( Interval Container Library )
 //
+//   Interval Bound Types:
+//     Right Open : [ min, upper )
+//     Closed : [ min, max ]
+//
 
 template< typename Key >
 class IntervalSet : public boost::noncopyable
@@ -29,13 +33,15 @@ public:
 
     /// Operations ///
 
-    void Add( const Key& k );
+    //
+    // Insertion
+    // - Return false if it collides with existing intervals.
+    //
 
-    // Right Open : [ min, upper )
-    void AddRightOpen( const Key& min, const Key& upper );
+    Bool Insert( const Key& k );
 
-    // Closed : [ min, max ]
-    void AddClosed( const Key& min, const Key& max );
+    Bool InsertRightOpen( const Key& min, const Key& upper );
+    Bool InsertClosed   ( const Key& min, const Key& max );
 
 
     /// Accessors ///
@@ -51,6 +57,16 @@ public:
 
 private:
     
+    /// Locked Accessors ///
+
+    Bool LockedContains( const Key& k ) const;
+
+    Bool LockedIntersectsRightOpen( const Key& min, const Key& upper ) const;
+    Bool LockedIntersectsClosed   ( const Key& min, const Key& max )   const;
+
+
+    /// Data Members ///
+
     typedef boost::icl::interval_set< Key > SetType;
     SetType m_set;
 
@@ -70,26 +86,32 @@ private:
 //
 
 template< typename Key >
-inline void IntervalSet< Key >::Add( const Key& k )
+inline Bool IntervalSet< Key >::Insert( const Key& k )
 {
     auto ulock = UniqueLock( m_mutex );
-    m_set.add( k );
+    if ( this->LockedContains( k )) { return false; }
+    m_set.insert( k );
+    return true;
 }
 
 
 template< typename Key >
-inline void IntervalSet< Key >::AddRightOpen( const Key& min, const Key& upper )
+inline Bool IntervalSet< Key >::InsertRightOpen( const Key& min, const Key& upper )
 {
     auto ulock = UniqueLock( m_mutex );
-    m_set.add( SegmentType::right_open( min, upper ));
+    const Bool overlapped = this->LockedIntersectsRightOpen( min, upper );
+    m_set.insert( SegmentType::right_open( min, upper ));
+    return ! overlapped;
 }
 
 
 template< typename Key >
-inline void IntervalSet< Key >::AddClosed( const Key& min, const Key& max )
+inline Bool IntervalSet< Key >::InsertClosed( const Key& min, const Key& max )
 {
     auto ulock = UniqueLock( m_mutex );
-    m_set.add( SegmentType::closed( min, max ));
+    const Bool overlapped = this->LockedIntersectsClosed( min, max );
+    m_set.insert( SegmentType::closed( min, max ));
+    return ! overlapped;
 }
 
 
@@ -133,6 +155,31 @@ template< typename Key >
 inline Bool IntervalSet< Key >::IntersectsClosed( const Key& min, const Key& max ) const
 {
     auto ulock = UniqueLock( m_mutex );
+    return boost::icl::intersects( m_set, SegmentType::closed( min, max ));
+}
+
+
+//
+// Locked Accessors
+//
+
+template< typename Key >
+inline Bool IntervalSet< Key >::LockedContains( const Key& k ) const
+{
+    return boost::icl::contains( m_set, k );
+}
+
+
+template< typename Key >
+inline Bool IntervalSet< Key >::LockedIntersectsRightOpen( const Key& min, const Key& upper ) const
+{
+    return boost::icl::intersects( m_set, SegmentType::right_open( min, upper ));
+}
+
+
+template< typename Key >
+inline Bool IntervalSet< Key >::LockedIntersectsClosed( const Key& min, const Key& max ) const
+{
     return boost::icl::intersects( m_set, SegmentType::closed( min, max ));
 }
 
