@@ -72,6 +72,26 @@ TEST( IntervalSetInsertTest )
 }
 
 
+TEST( IntervalSetEraseTest )
+{
+    Concurrent::IntervalSet< Int > iset;
+    iset.InsertClosed( 3, 10 );
+
+    iset.Erase( 7 );
+    CHECK( false == iset.Contains( 7 ));
+
+    iset.EraseClosed( 8, 10 );
+    CHECK( false == iset.IntersectsClosed( 7, 10 ));
+
+    iset.EraseRightOpen( 1, 3 );  // No collision
+
+    iset.EraseRightOpen( 3, 5 );
+    CHECK( false == iset.IntersectsClosed( 3, 4 ));
+    CHECK( true  == iset.ContainsClosed( 5, 6 ));
+
+}
+
+
 TEST( IntervalSetContainsTest )
 {
     // The sub-interval must be totally within a valid interval.

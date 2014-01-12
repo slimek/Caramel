@@ -23,7 +23,7 @@ namespace Concurrent
 //
 //   Interval Bound Types:
 //     Right Open : [ min, upper )
-//     Closed : [ min, max ]
+//     Closed     : [ min, max ]
 //
 
 template< typename Key >
@@ -42,6 +42,14 @@ public:
 
     Bool InsertRightOpen( const Key& min, const Key& upper );
     Bool InsertClosed   ( const Key& min, const Key& max );
+
+    //
+    // Erasion
+    //
+
+    void Erase( const Key& k );
+    void EraseRightOpen( const Key& min, const Key& upper );
+    void EraseClosed   ( const Key& min, const Key& max );
 
 
     /// Accessors ///
@@ -112,6 +120,30 @@ inline Bool IntervalSet< Key >::InsertClosed( const Key& min, const Key& max )
     const Bool overlapped = this->LockedIntersectsClosed( min, max );
     m_set.insert( SegmentType::closed( min, max ));
     return ! overlapped;
+}
+
+
+template< typename Key >
+inline void IntervalSet< Key >::Erase( const Key& k )
+{
+    auto ulock = UniqueLock( m_mutex );
+    m_set.erase( k );
+}
+
+
+template< typename Key >
+inline void IntervalSet< Key >::EraseRightOpen( const Key& min, const Key& upper )
+{
+    auto ulock = UniqueLock( m_mutex );
+    m_set.erase( SegmentType::right_open( min, upper ));
+}
+
+
+template< typename Key >
+inline void IntervalSet< Key >::EraseClosed( const Key& min, const Key& max )
+{
+    auto ulock = UniqueLock( m_mutex );
+    m_set.erase( SegmentType::closed( min, max ));
 }
 
 
