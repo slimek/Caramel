@@ -42,6 +42,12 @@ public:
 
     Bool Contains( const Key& k ) const;
 
+    Bool ContainsRightOpen( const Key& min, const Key& upper ) const;
+    Bool ContainsClosed   ( const Key& min, const Key& max )   const;
+
+    Bool IntersectsRightOpen( const Key& min, const Key& upper ) const;
+    Bool IntersectsClosed   ( const Key& min, const Key& max )   const;
+
 
 private:
     
@@ -96,6 +102,38 @@ inline Bool IntervalSet< Key >::Contains( const Key& k ) const
 {
     auto ulock = UniqueLock( m_mutex );
     return boost::icl::contains( m_set, k );
+}
+
+
+template< typename Key >
+inline Bool IntervalSet< Key >::ContainsRightOpen( const Key& min, const Key& upper ) const
+{
+    auto ulock = UniqueLock( m_mutex );
+    return boost::icl::contains( m_set, SegmentType::right_open( min, upper ));
+}
+
+
+template< typename Key >
+inline Bool IntervalSet< Key >::ContainsClosed( const Key& min, const Key& max ) const
+{
+    auto ulock = UniqueLock( m_mutex );
+    return boost::icl::contains( m_set, SegmentType::closed( min, max ));
+}
+
+
+template< typename Key >
+inline Bool IntervalSet< Key >::IntersectsRightOpen( const Key& min, const Key& upper ) const
+{
+    auto ulock = UniqueLock( m_mutex );
+    return boost::icl::intersects( m_set, SegmentType::right_open( min, upper ));
+}
+
+
+template< typename Key >
+inline Bool IntervalSet< Key >::IntersectsClosed( const Key& min, const Key& max ) const
+{
+    auto ulock = UniqueLock( m_mutex );
+    return boost::icl::intersects( m_set, SegmentType::closed( min, max ));
 }
 
 
