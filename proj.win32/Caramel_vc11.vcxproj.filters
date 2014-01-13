@@ -584,6 +584,12 @@
     <ClInclude Include="..\include\Caramel\Async\AnyEventDispatcher.h">
       <Filter>1. Public Packages\Async</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Concurrent\Detail\BasicSet.h">
+      <Filter>1. Public Packages\Concurrent\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Concurrent\Set.h">
+      <Filter>1. Public Packages\Concurrent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

@@ -20,6 +20,15 @@ namespace Concurrent
 
 struct ReplicateNothing
 {
+    template< typename Value >
+    class Collection
+    {
+    public:
+        void Add( const Value& ) {}
+        void Remove( const Value& ) {}
+    };
+
+
     template< typename Key, typename Value >
     class Dictionary
     {

@@ -31,6 +31,7 @@
     <ClInclude Include="..\include\Caramel\Chrono\SteadyClock.h" />
     <ClInclude Include="..\include\Caramel\Chrono\TickClock.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\Detail\BasicMap.h" />
+    <ClInclude Include="..\include\Caramel\Concurrent\Detail\BasicSet.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\FlatMap.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\HashMap.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\IntervalSet.h" />
@@ -38,6 +39,7 @@
     <ClInclude Include="..\include\Caramel\Concurrent\PriorityQueue.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\Queue.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\ReplicatePolicies.h" />
+    <ClInclude Include="..\include\Caramel\Concurrent\Set.h" />
     <ClInclude Include="..\include\Caramel\DateTime\Date.h" />
     <ClInclude Include="..\include\Caramel\DateTime\DateTime.h" />
     <ClInclude Include="..\include\Caramel\DateTime\Days.h" />
