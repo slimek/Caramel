@@ -575,6 +575,9 @@
     <ClInclude Include="..\include\Caramel\Concurrent\IntervalSet.h">
       <Filter>1. Public Packages\Concurrent</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Concurrent\FlatMap.h">
+      <Filter>1. Public Packages\Concurrent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">
