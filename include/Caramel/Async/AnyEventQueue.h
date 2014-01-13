@@ -9,7 +9,6 @@
 #include <Caramel/Concurrent/IntervalSet.h>
 #include <Caramel/Concurrent/Queue.h>
 #include <Caramel/Error/Alert.h>
-#include <Caramel/Thread/MutexLocks.h>
 
 
 namespace Caramel
