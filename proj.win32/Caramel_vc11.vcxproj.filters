@@ -578,6 +578,9 @@
     <ClInclude Include="..\include\Caramel\Concurrent\FlatMap.h">
       <Filter>1. Public Packages\Concurrent</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Async\AnyEventQueue.h">
+      <Filter>1. Public Packages\Async</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

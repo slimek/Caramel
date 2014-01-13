@@ -22,6 +22,7 @@
     <ClInclude Include="..\include\Caramel\Android\LogTraceAdapter.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEvent.h" />
     <ClInclude Include="..\include\Caramel\Async\FlowState.h" />
+    <ClInclude Include="..\include\Caramel\Async\AnyEventQueue.h" />
     <ClInclude Include="..\include\Caramel\Async\TimedBool.h" />
     <ClInclude Include="..\include\Caramel\Async\WaitableBool.h" />
     <ClInclude Include="..\include\Caramel\Caramel.h" />

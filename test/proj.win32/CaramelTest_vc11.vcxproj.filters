@@ -166,6 +166,9 @@
     <ClCompile Include="..\src\Concurrent\IntervalSetTest.cpp">
       <Filter>2. Tests\Concurrent</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Async\AnyEventQueueTest.cpp">
+      <Filter>2. Tests\Async</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">
