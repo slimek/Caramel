@@ -22,7 +22,7 @@ namespace Concurrent
 // - Based on Boost.Icl ( Interval Container Library )
 //
 //   Interval Bound Types:
-//     Right Open : [ min, upper )
+//     Right Open : [ lower, upper )
 //     Closed     : [ min, max ]
 //
 
@@ -40,7 +40,7 @@ public:
 
     Bool Insert( const Key& k );
 
-    Bool InsertRightOpen( const Key& min, const Key& upper );
+    Bool InsertRightOpen( const Key& lower, const Key& upper );
     Bool InsertClosed   ( const Key& min, const Key& max );
 
     //
@@ -48,7 +48,7 @@ public:
     //
 
     void Erase( const Key& k );
-    void EraseRightOpen( const Key& min, const Key& upper );
+    void EraseRightOpen( const Key& lower, const Key& upper );
     void EraseClosed   ( const Key& min, const Key& max );
 
 
@@ -56,11 +56,11 @@ public:
 
     Bool Contains( const Key& k ) const;
 
-    Bool ContainsRightOpen( const Key& min, const Key& upper ) const;
-    Bool ContainsClosed   ( const Key& min, const Key& max )   const;
+    Bool ContainsRightOpen( const Key& lower, const Key& upper ) const;
+    Bool ContainsClosed   ( const Key& min, const Key& max )     const;
 
-    Bool IntersectsRightOpen( const Key& min, const Key& upper ) const;
-    Bool IntersectsClosed   ( const Key& min, const Key& max )   const;
+    Bool IntersectsRightOpen( const Key& lower, const Key& upper ) const;
+    Bool IntersectsClosed   ( const Key& min, const Key& max )     const;
 
 
 private:
@@ -69,8 +69,8 @@ private:
 
     Bool LockedContains( const Key& k ) const;
 
-    Bool LockedIntersectsRightOpen( const Key& min, const Key& upper ) const;
-    Bool LockedIntersectsClosed   ( const Key& min, const Key& max )   const;
+    Bool LockedIntersectsRightOpen( const Key& lower, const Key& upper ) const;
+    Bool LockedIntersectsClosed   ( const Key& min, const Key& max )     const;
 
 
     /// Data Members ///
@@ -104,11 +104,11 @@ inline Bool IntervalSet< Key >::Insert( const Key& k )
 
 
 template< typename Key >
-inline Bool IntervalSet< Key >::InsertRightOpen( const Key& min, const Key& upper )
+inline Bool IntervalSet< Key >::InsertRightOpen( const Key& lower, const Key& upper )
 {
     auto ulock = UniqueLock( m_mutex );
-    const Bool overlapped = this->LockedIntersectsRightOpen( min, upper );
-    m_set.insert( SegmentType::right_open( min, upper ));
+    const Bool overlapped = this->LockedIntersectsRightOpen( lower, upper );
+    m_set.insert( SegmentType::right_open( lower, upper ));
     return ! overlapped;
 }
 
@@ -132,10 +132,10 @@ inline void IntervalSet< Key >::Erase( const Key& k )
 
 
 template< typename Key >
-inline void IntervalSet< Key >::EraseRightOpen( const Key& min, const Key& upper )
+inline void IntervalSet< Key >::EraseRightOpen( const Key& lower, const Key& upper )
 {
     auto ulock = UniqueLock( m_mutex );
-    m_set.erase( SegmentType::right_open( min, upper ));
+    m_set.erase( SegmentType::right_open( lower, upper ));
 }
 
 
@@ -160,10 +160,10 @@ inline Bool IntervalSet< Key >::Contains( const Key& k ) const
 
 
 template< typename Key >
-inline Bool IntervalSet< Key >::ContainsRightOpen( const Key& min, const Key& upper ) const
+inline Bool IntervalSet< Key >::ContainsRightOpen( const Key& lower, const Key& upper ) const
 {
     auto ulock = UniqueLock( m_mutex );
-    return boost::icl::contains( m_set, SegmentType::right_open( min, upper ));
+    return boost::icl::contains( m_set, SegmentType::right_open( lower, upper ));
 }
 
 
@@ -176,10 +176,10 @@ inline Bool IntervalSet< Key >::ContainsClosed( const Key& min, const Key& max )
 
 
 template< typename Key >
-inline Bool IntervalSet< Key >::IntersectsRightOpen( const Key& min, const Key& upper ) const
+inline Bool IntervalSet< Key >::IntersectsRightOpen( const Key& lower, const Key& upper ) const
 {
     auto ulock = UniqueLock( m_mutex );
-    return boost::icl::intersects( m_set, SegmentType::right_open( min, upper ));
+    return boost::icl::intersects( m_set, SegmentType::right_open( lower, upper ));
 }
 
 
@@ -203,9 +203,9 @@ inline Bool IntervalSet< Key >::LockedContains( const Key& k ) const
 
 
 template< typename Key >
-inline Bool IntervalSet< Key >::LockedIntersectsRightOpen( const Key& min, const Key& upper ) const
+inline Bool IntervalSet< Key >::LockedIntersectsRightOpen( const Key& lower, const Key& upper ) const
 {
-    return boost::icl::intersects( m_set, SegmentType::right_open( min, upper ));
+    return boost::icl::intersects( m_set, SegmentType::right_open( lower, upper ));
 }
 
 
