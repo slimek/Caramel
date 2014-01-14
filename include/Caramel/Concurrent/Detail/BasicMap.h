@@ -104,7 +104,7 @@ Bool BasicMap< MapT, ReplicateP >::Insert( const Key& k, const Value& v )
 
     if ( inserted )
     {
-        this->Replicator::Insert( k, v );
+        this->Replicator::Add( k, v );
     }
 
     return inserted;

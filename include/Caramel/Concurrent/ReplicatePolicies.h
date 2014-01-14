@@ -33,8 +33,8 @@ struct ReplicateNothing
     class Dictionary
     {
     public:
-        void Insert( const Key&, const Value& ) {}
-        void Erase( const Key& ) {}
+        void Add( const Key&, const Value& ) {}
+        void Remove( const Key& ) {}
     };
 
 };
