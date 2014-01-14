@@ -590,6 +590,9 @@
     <ClInclude Include="..\include\Caramel\Concurrent\Set.h">
       <Filter>1. Public Packages\Concurrent</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Concurrent\Detail\CollectionSnapshot.h">
+      <Filter>1. Public Packages\Concurrent\Detail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

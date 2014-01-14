@@ -1,7 +1,7 @@
-// Caramel C++ Library - Concurrent Amenity - Basic Set Header
+// Caramel C++ Library - Concurrent Amenity - Detail - Basic Set Header
 
-#ifndef __CARAMEL_CONCURRENT_BASIC_SET_H
-#define __CARAMEL_CONCURRENT_BASIC_SET_H
+#ifndef __CARAMEL_CONCURRENT_DETAIL_BASIC_SET_H
+#define __CARAMEL_CONCURRENT_DETAIL_BASIC_SET_H
 #pragma once
 
 #include <Caramel/Caramel.h>
@@ -26,14 +26,24 @@ namespace Detail
 //
 
 template< typename SetType, typename ReplicatePolicy >
-class BasicSet : public ReplicatePolicy::template Collection< typename SetType::key_type >
-               , public boost::noncopyable
+class BasicSet
+    : public ReplicatePolicy::template Collection
+    <
+        BasicSet< SetType, ReplicatePolicy >,
+        typename SetType::key_type
+    >
+    , public boost::noncopyable
 {
 public:
 
     typedef typename SetType::key_type Key, KeyType;
 
-    typedef typename ReplicatePolicy::template Collection< Key > Replicator;
+    typedef typename ReplicatePolicy::template Collection
+    <
+        BasicSet< SetType, ReplicatePolicy >,
+        KeyType
+    >
+    Replicator;
 
 
     /// Properties ///
@@ -50,9 +60,22 @@ public:
     /// Modifiers ///
 
     Bool Insert( const Key& k );
+    Uint Erase( const Key& k );
 
 
 private:
+
+    /// for Replicate Policy ///
+
+    friend typedef Replicator;
+
+    std::mutex& OriginMutex() const { return m_setMutex; }
+
+    typedef typename SetType::const_iterator ConstIterator;
+
+    ConstIterator OriginBegin() const { return m_set.begin(); }
+    ConstIterator OriginEnd()   const { return m_set.end(); }
+
 
     /// Data Members ///
 
@@ -91,10 +114,26 @@ Bool BasicSet< SetT, ReplicateP >::Insert( const Key& k )
 
     if ( inserted )
     {
-        this->Replicator::Add( k );
+        this->Replicator::ReplicaAdd( k );
     }
 
     return inserted;
+}
+
+
+template< typename SetT, typename ReplicateP >
+Uint BasicSet< SetT, ReplicateP >::Erase( const Key& k )
+{
+    auto ulock = UniqueLock( m_setMutex );
+
+    const Uint erased = m_set.erase( k );
+
+    if ( 0 < erased )
+    {
+        this->Replicator::ReplicaRemove( k );
+    }
+
+    return erased;
 }
 
 
@@ -106,4 +145,4 @@ Bool BasicSet< SetT, ReplicateP >::Insert( const Key& k )
 
 } // namespace Caramel
 
-#endif // __CARAMEL_CONCURRENT_BASIC_SET_H
+#endif // __CARAMEL_CONCURRENT_DETAIL_BASIC_SET_H

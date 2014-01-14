@@ -27,6 +27,16 @@ class Set : public Detail::BasicSet< std::set< Key >, ReplicatePolicy >
 };
 
 
+//
+// Convenient Alias
+//
+
+template< typename Key >
+class SetWithSnapshot : public Detail::BasicSet< std::set< Key >, ReplicateSnapshot >
+{
+};
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // namespace Concurrent

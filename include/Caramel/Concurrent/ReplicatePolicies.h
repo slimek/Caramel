@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
+#include <Caramel/Concurrent/Detail/CollectionSnapshot.h>
 
 
 namespace Caramel
@@ -20,12 +21,12 @@ namespace Concurrent
 
 struct ReplicateNothing
 {
-    template< typename Value >
+    template< typename Derived, typename Value >
     class Collection
     {
-    public:
-        void Add( const Value& ) {}
-        void Remove( const Value& ) {}
+    protected:
+        void ReplicaAdd( const Value& ) {}
+        void ReplicaRemove( const Value& ) {}
     };
 
 
@@ -47,6 +48,14 @@ struct ReplicateNothing
 
 struct ReplicateSnapshot
 {
+    // TODO: Replace the derived class with alias templates
+
+    template< typename Derived, typename Value >
+    class Collection : public Detail::CollectionSnapshot< Derived, Value >
+    {
+    };
+
+
     // TODO: Implements DictionarySnapshot and CollectionSnapshot
 };
 

@@ -1,7 +1,7 @@
-// Caramel C++ Library - Concurrent Amenity - Basic Map Header
+// Caramel C++ Library - Concurrent Amenity - Detail - Basic Map Header
 
-#ifndef __CARAMEL_CONCURRENT_BASIC_MAP_H
-#define __CARAMEL_CONCURRENT_BASIC_MAP_H
+#ifndef __CARAMEL_CONCURRENT_DETAIL_BASIC_MAP_H
+#define __CARAMEL_CONCURRENT_DETAIL_BASIC_MAP_H
 #pragma once
 
 #include <Caramel/Caramel.h>
@@ -119,4 +119,4 @@ Bool BasicMap< MapT, ReplicateP >::Insert( const Key& k, const Value& v )
 
 } // namespace Caramel
 
-#endif // __CARAMEL_CONCURRENT_BASIC_MAP_H
+#endif // __CARAMEL_CONCURRENT_DETAIL_BASIC_MAP_H
