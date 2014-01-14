@@ -70,9 +70,6 @@
     <ClCompile Include="..\src\RunTest.cpp">
       <Filter>1. Main Entry</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Concurrent\PriorityQueueTest.cpp">
-      <Filter>2. Tests\Concurrent</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Task\TaskPollerTest.cpp">
       <Filter>2. Tests\Task</Filter>
     </ClCompile>
@@ -93,9 +90,6 @@
     </ClCompile>
     <ClCompile Include="..\src\Statechart\StateMachineTest.cpp">
       <Filter>2. Tests\Statechart</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Concurrent\MapTest.cpp">
-      <Filter>2. Tests\Concurrent</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Trace\TraceTest.cpp">
       <Filter>2. Tests\Trace</Filter>
@@ -163,13 +157,19 @@
     <ClCompile Include="..\src\String\FormatTest.cpp">
       <Filter>2. Tests\String</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Concurrent\IntervalSetTest.cpp">
-      <Filter>2. Tests\Concurrent</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Async\AnyEventQueueTest.cpp">
       <Filter>2. Tests\Async</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Concurrent\SetTest.cpp">
+    <ClCompile Include="..\src\Concurrent\ConcurrentIntervalSetTest.cpp">
+      <Filter>2. Tests\Concurrent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Concurrent\ConcurrentMapTest.cpp">
+      <Filter>2. Tests\Concurrent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Concurrent\ConcurrentPriorityQueueTest.cpp">
+      <Filter>2. Tests\Concurrent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Concurrent\ConcurrentSetTest.cpp">
       <Filter>2. Tests\Concurrent</Filter>
     </ClCompile>
   </ItemGroup>

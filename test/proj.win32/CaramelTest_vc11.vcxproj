@@ -100,10 +100,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\src\Chrono\ClockTest.cpp" />
-    <ClCompile Include="..\src\Concurrent\IntervalSetTest.cpp" />
-    <ClCompile Include="..\src\Concurrent\MapTest.cpp" />
-    <ClCompile Include="..\src\Concurrent\PriorityQueueTest.cpp" />
-    <ClCompile Include="..\src\Concurrent\SetTest.cpp" />
+    <ClCompile Include="..\src\Concurrent\ConcurrentIntervalSetTest.cpp" />
+    <ClCompile Include="..\src\Concurrent\ConcurrentMapTest.cpp" />
+    <ClCompile Include="..\src\Concurrent\ConcurrentPriorityQueueTest.cpp" />
+    <ClCompile Include="..\src\Concurrent\ConcurrentSetTest.cpp" />
     <ClCompile Include="..\src\DateTime\DateTest.cpp" />
     <ClCompile Include="..\src\DateTime\DateTimeBoolTest.cpp" />
     <ClCompile Include="..\src\DateTime\DateTimeTest.cpp" />
