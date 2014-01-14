@@ -20,6 +20,17 @@ SUITE( ConcurrentSetSuite )
 template< typename SetType >
 void TestBasicIntSet( SetType& set )
 {
+    CHECK( true == set.IsEmpty() );
+    CHECK( 0    == set.Size() );
+
+    CHECK( true == set.Insert( 42 ));
+
+    CHECK( false == set.IsEmpty() );
+    CHECK( 1     == set.Size() );
+    CHECK( true  == set.Contains( 42 ));
+    CHECK( false == set.Contains( 19 ));
+
+    CHECK( false == set.Insert( 42 ));  // Already inserted
 }
 
 

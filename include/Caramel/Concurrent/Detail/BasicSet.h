@@ -29,7 +29,73 @@ template< typename SetType, typename ReplicatePolicy >
 class BasicSet : public ReplicatePolicy::template Collection< typename SetType::key_type >
                , public boost::noncopyable
 {
+public:
+
+    typedef typename SetType::key_type Key, KeyType;
+
+    typedef typename ReplicatePolicy::template Collection< Key > Replicator;
+
+
+    /// Properties ///
+
+    Bool IsEmpty() const { return m_set.empty(); }
+    Uint Size()    const { return static_cast< Uint >( m_set.size() ); }
+
+
+    /// Accessors ///
+
+    Bool Contains( const Key& k ) const;
+
+
+    /// Modifiers ///
+
+    Bool Insert( const Key& k );
+
+
+private:
+
+    /// Data Members ///
+
+    SetType m_set;
+    mutable std::mutex m_setMutex;
 };
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Implementation
+//
+
+//
+// Accessors
+//
+
+template< typename SetT, typename ReplicateP >
+Bool BasicSet< SetT, ReplicateP >::Contains( const Key& k ) const
+{
+    auto ulock = UniqueLock( m_setMutex );
+    return m_set.end() != m_set.find( k );
+}
+
+
+//
+// Modifiers
+//
+
+template< typename SetT, typename ReplicateP >
+Bool BasicSet< SetT, ReplicateP >::Insert( const Key& k )
+{
+    auto ulock = UniqueLock( m_setMutex );
+
+    const Bool inserted = m_set.insert( k ).second;
+
+    if ( inserted )
+    {
+        this->Replicator::Add( k );
+    }
+
+    return inserted;
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////
