@@ -2,8 +2,13 @@
 
 #include "CaramelTestPch.h"
 
+#include <Caramel/Async/TimedBool.h>
 #include <Caramel/Concurrent/Set.h>
+#include <Caramel/Random/UniformRandom.h>
+#include <Caramel/Thread/ThisThread.h>
+#include <Caramel/Thread/Thread.h>
 #include <UnitTest++/UnitTest++.h>
+#include <atomic>
 
 
 namespace Caramel
@@ -49,7 +54,6 @@ void TestBasicIntSet( SetType& set )
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
 //
 // Concurrent Set Test
 //
@@ -63,7 +67,7 @@ TEST( ConcurrentSetTest )
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Basic Set Snapshot Test
+// Basic Set with Snapshot Test
 //
 
 template< typename SetType >
@@ -85,7 +89,6 @@ void TestBasicSetWithSnapshot( SetType& set )
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
 //
 // Concurrent Set with Snapshot Test
 //
@@ -94,6 +97,60 @@ TEST( ConcurrentSetWithSnapshotTest )
 {
     Concurrent::SetWithSnapshot< Int > iset;
     TestBasicSetWithSnapshot( iset );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Concurrent Set Snapshot Stress Test
+//
+
+TEST( ConcurrentSetSnapshotStressTest )
+{
+    const Int minInt = -65536;
+    const Int maxInt = 65535;
+
+    Concurrent::SetWithSnapshot< Int > iset;
+
+    TimedBool< TickClock > timeup( 3000 );
+
+    std::atomic_int inserts;
+    std::atomic_int erases;
+    std::atomic_int snapshots;
+
+    Thread t1( "Inserter", [&]
+    {
+        while ( ! timeup )
+        {
+            iset.Insert( GenRandomInt( minInt, maxInt ));
+            ++ inserts;
+        }
+    });
+    
+    Thread t2( "Eraser", [&]
+    {
+        while ( ! timeup )
+        {
+            iset.Erase( GenRandomInt( minInt, maxInt ));
+            ++ erases;
+        }
+    });
+
+    Thread t3( "Snapshot", [&]
+    {
+        while ( ! timeup )
+        {
+            auto snapshot = iset.GetSnapshot();
+            ++ snapshots;
+        }
+    });
+
+    t1.Join();
+    t2.Join();
+    t3.Join();
+
+    CARAMEL_TRACE_INFO( "Inserts: %u Erases: %u, Snapshots: %u",
+                        inserts.load(), erases.load(), snapshots.load() );
 }
 
 
