@@ -26,13 +26,12 @@ namespace Detail
 //
 
 template< typename SetType, typename ReplicatePolicy >
-class BasicSet
-    : public ReplicatePolicy::template Collection
-    <
-        BasicSet< SetType, ReplicatePolicy >,
-        typename SetType::key_type
-    >
-    , public boost::noncopyable
+class BasicSet : public ReplicatePolicy::template Collection
+                 <
+                     BasicSet< SetType, ReplicatePolicy >,
+                     typename SetType::key_type
+                 >
+               , public boost::noncopyable
 {
 public:
 

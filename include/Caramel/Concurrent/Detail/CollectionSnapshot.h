@@ -25,7 +25,6 @@ namespace Detail
 // - 1. When the derived container modified, clear the snapshot.
 //   2. Build snapshot if it is required and doesn't exist. 
 // 
-//
 
 template< typename Derived, typename Value >
 class CollectionSnapshot
