@@ -40,10 +40,12 @@ void TestBasicIntSet( SetType& set )
 
     CHECK( false == set.Contains( 42 ));
 
-    SetType::UniqueLockedSet lockedSet( set );
-    auto ivalue = lockedSet.Begin();
-    CHECK( 24 == *( ivalue ++ ));
-    CHECK( lockedSet.End() == ivalue );
+    {
+        SetType::ConstLockedSet lockedSet( set );
+        auto ivalue = lockedSet.Begin();
+        CHECK( 24 == *( ivalue ++ ));
+        CHECK( lockedSet.End() == ivalue );
+    }
 }
 
 
@@ -67,9 +69,19 @@ TEST( ConcurrentSetTest )
 template< typename SetType >
 void TestBasicSetWithSnapshot( SetType& set )
 {
-    auto snapshot = set.GetSnapshot();
+    auto shot1 = set.GetSnapshot();
 
-    CHECK( snapshot.IsEmpty() );
+    CHECK( true == shot1.IsEmpty() );
+    CHECK( 0 == shot1.Size() );
+
+    set.Insert( 6 );
+    set.Insert( 7 );
+    set.Insert( 8 );
+
+    auto shot2 = set.GetSnapshot();
+
+    CHECK( false == shot2.IsEmpty() );
+    CHECK( 3 == shot2.Size() );
 }
 
 

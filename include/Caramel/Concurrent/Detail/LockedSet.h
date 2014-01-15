@@ -1,7 +1,7 @@
-// Caramel C++ Library - Concurrent Amenity - Detail - Unique Locked Set Header
+// Caramel C++ Library - Concurrent Amenity - Detail - Locked Set Header
 
-#ifndef __CARAMEL_CONCURRENT_DETAIL_UNIQUE_LOCKED_SET_H
-#define __CARAMEL_CONCURRENT_DETAIL_UNIQUE_LOCKED_SET_H
+#ifndef __CARAMEL_CONCURRENT_DETAIL_LOCKED_SET_H
+#define __CARAMEL_CONCURRENT_DETAIL_LOCKED_SET_H
 #pragma once
 
 #include <Caramel/Caramel.h>
@@ -20,21 +20,21 @@ namespace Detail
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Unique Locked Set
+// Const Locked Set
 //
 
 template< typename SetType >
-class UniqueLockedSet : public boost::noncopyable
+class ConstLockedSet : public boost::noncopyable
 {
 public:
-
-    UniqueLockedSet( std::mutex& mutex, SetType& set );
+    
+    ConstLockedSet( std::mutex& mutex, const SetType& set );
 
 
     /// Properties ///
 
-    Bool IsEmpty() const { return m_set.empty(); }
-    Uint Size()    const { return static_cast< Uint >( m_set.size() ); }
+    Bool IsEmpty() const { return m_constSet.empty(); }
+    Uint Size()    const { return static_cast< Uint >( m_constSet.size() ); }
 
 
     /// Accessors ///
@@ -46,24 +46,22 @@ public:
 
     typedef typename SetType::const_iterator ConstIterator;
 
-    ConstIterator Begin() const { return m_set.begin(); }
-    ConstIterator End()   const { return m_set.end(); }
+    ConstIterator Begin() const { return m_constSet.begin(); }
+    ConstIterator End()   const { return m_constSet.end(); }
 
     
     // Compatible with STL/Boost
 
     typedef typename SetType::const_iterator const_iterator;
 
-    const_iterator begin() const { return m_set.begin(); }
-    const_iterator end()   const { return m_set.end(); }
+    const_iterator begin() const { return m_constSet.begin(); }
+    const_iterator end()   const { return m_constSet.end(); }
 
 
 private:
 
-    /// Data Members ///
-
     std::unique_lock< std::mutex > m_lock;
-    SetType& m_set;
+    const SetType& m_constSet;
 };
 
 
@@ -73,9 +71,9 @@ private:
 //
 
 template< typename SetT >
-UniqueLockedSet< SetT >::UniqueLockedSet( std::mutex& mutex, SetT& set )
+ConstLockedSet< SetT >::ConstLockedSet( std::mutex& mutex, const SetT& set )
     : m_lock( mutex )
-    , m_set( set )
+    , m_constSet( set )
 {
 }
 
@@ -88,4 +86,4 @@ UniqueLockedSet< SetT >::UniqueLockedSet( std::mutex& mutex, SetT& set )
 
 } // namespace Caramel
 
-#endif // __CARAMEL_CONCURRENT_DETAIL_UNIQUE_LOCKED_SET_H
+#endif // __CARAMEL_CONCURRENT_DETAIL_LOCKED_SET_H

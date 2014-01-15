@@ -22,8 +22,9 @@ namespace Detail
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Collection Snapshot
-// - 1. When the derived container modified, clear the snapshot.
-//   2. Build snapshot if it is required and doesn't exist. 
+// - When a snapshot is required, build it if :
+//   1. It doesn't exist.
+//   2. The container has been modified.
 // 
 
 template< typename Derived, typename Value >
@@ -81,12 +82,18 @@ inline void CollectionSnapshot< Derived, Value >::ReplicaAdd( const Value& v )
 template< typename Derived, typename Value >
 inline void CollectionSnapshot< Derived, Value >::ReplicaRemove( const Value& v )
 {
+    this->ReplicaClear();
+}
+
+
+template< typename Derived, typename Value >
+inline void CollectionSnapshot< Derived, Value >::ReplicaClear()
+{
     auto ulock = UniqueLock( m_snapshotMutex );
     m_modified = true;
 
     if ( ! m_snapshot.IsEmpty() )
     {
-        // Clear the snapshot
         m_snapshot = SharedArray< Value >();
     }
 }
@@ -107,9 +114,9 @@ inline auto CollectionSnapshot< Derived, Value >::GetSnapshot() const -> Snapsho
 
     const Derived& derived = static_cast< const Derived& >( *this );
 
-    // ATTENTION: Always lock the derived mutex before the snapshot mutex !!
+    // ATTENTION: Always lock the derived before the snapshot mutex !!
 
-    //auto derivedLock = UniqueLock( derived.OriginMutex() );
+    typename Derived::ConstLockedCollection lockedDerived( derived );
     auto snapshotLock = UniqueLock( m_snapshotMutex );
 
     if ( ! m_modified )
@@ -118,8 +125,8 @@ inline auto CollectionSnapshot< Derived, Value >::GetSnapshot() const -> Snapsho
         return m_snapshot;
     }
 
-    SharedArray< Value > newSnapshot( derived.Size() );
-    //std::copy( derived.OriginBegin(), derived.OriginEnd(), newSnapshot.Begin() );
+    SharedArray< Value > newSnapshot( lockedDerived.Size() );
+    std::copy( lockedDerived.Begin(), lockedDerived.End(), newSnapshot.Begin() );
 
     m_snapshot = newSnapshot;
     m_modified = false;

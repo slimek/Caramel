@@ -593,7 +593,7 @@
     <ClInclude Include="..\include\Caramel\Concurrent\Detail\CollectionSnapshot.h">
       <Filter>1. Public Packages\Concurrent\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\Concurrent\Detail\UniqueLockedSet.h">
+    <ClInclude Include="..\include\Caramel\Concurrent\Detail\LockedSet.h">
       <Filter>1. Public Packages\Concurrent\Detail</Filter>
     </ClInclude>
   </ItemGroup>

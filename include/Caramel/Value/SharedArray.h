@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
+#include <Caramel/Error/Assert.h>
 #include <Caramel/Error/Exception.h>
 #include <boost/shared_array.hpp>
 
@@ -154,6 +155,18 @@ template< typename T >
 SharedArray< T >::SharedArray ( Uint size )
     : ConstSharedArray< T >( size )
 {
+}
+
+
+//
+// Accessors
+//
+
+template< typename T >
+const T& ConstSharedArray< T >::operator[]( Uint i ) const
+{
+    CARAMEL_ASSERT( m_size > i );
+    return m_array[i];
 }
 
 
