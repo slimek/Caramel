@@ -132,6 +132,31 @@ TEST( UniformRandomTest )
     }
 }
 
+
+TEST( GenRandomBoolTest )
+{
+    Int trues = 0;
+    const Int total = 1000000;
+
+    SecondClock clock;
+
+    for ( Int i = 0; i < total; ++ i )
+    {
+        if ( GenRandomBool( 0.25 ))
+        {
+            ++ trues;
+        }
+    }
+
+    const Double ratio = static_cast< Double >( trues ) / total;
+
+    CHECK_CLOSE( 0.25, ratio, 0.05 );
+
+    CARAMEL_TRACE_DEBUG( "Test GenRandomBool() count: %u, elapsed: %f, ratio: %f", 
+                         total, clock.Elapsed(), ratio );
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE RandomSuite

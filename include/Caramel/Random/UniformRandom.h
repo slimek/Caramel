@@ -50,6 +50,15 @@ Float  GenRandomFloat ( Float  lowerBound, Float  upperBound );
 Double GenRandomDouble( Double lowerBound, Double upperBound );
 
 
+//
+// Generate Random Boolean
+// - Generate a boolen with a given probability.
+//   1.0 to always true, and 0.0 to always false.
+//
+
+Bool GenRandomBool( Double prob );
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // namespace Caramel

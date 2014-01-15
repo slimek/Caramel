@@ -125,6 +125,12 @@ Double GenRandomDouble( Double lowerBound, Double upperBound )
 }
 
 
+Bool GenRandomBool( Double prob )
+{
+    return RandomManager::Instance()->GenRandomDouble( 0.0, 1.0 ) < prob;
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // namespace Caramel
