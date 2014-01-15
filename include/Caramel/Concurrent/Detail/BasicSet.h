@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
+#include <Caramel/Concurrent/Detail/UniqueLockedSet.h>
 #include <Caramel/Thread/MutexLocks.h>
 #include <boost/noncopyable.hpp>
 #include <mutex>
@@ -62,19 +63,13 @@ public:
     Uint Erase( const Key& k );
 
 
+    /// Locked Iterator Accessor ///
+
+    class UniqueLockedSet;
+    friend class UniqueLockedSet;
+
+
 private:
-
-    /// for Replicate Policy ///
-
-    friend typedef Replicator;
-
-    std::mutex& OriginMutex() const { return m_setMutex; }
-
-    typedef typename SetType::const_iterator ConstIterator;
-
-    ConstIterator OriginBegin() const { return m_set.begin(); }
-    ConstIterator OriginEnd()   const { return m_set.end(); }
-
 
     /// Data Members ///
 
@@ -134,6 +129,29 @@ Uint BasicSet< SetT, ReplicateP >::Erase( const Key& k )
 
     return erased;
 }
+
+
+//
+// Locked Iterator Accessor
+//
+
+template< typename SetT, typename ReplicateP >
+class BasicSet< SetT, ReplicateP >::UniqueLockedSet : public Detail::UniqueLockedSet< SetT >
+{
+public:
+    explicit UniqueLockedSet( BasicSet& host )
+        : Detail::UniqueLockedSet< SetT >( host.m_setMutex, host.m_set )
+        , m_host( host )
+    {}
+
+    ~UniqueLockedSet()
+    {
+        m_host.ReplicaClear();
+    }
+
+private:
+    BasicSet& m_host;
+};
 
 
 ///////////////////////////////////////////////////////////////////////////////

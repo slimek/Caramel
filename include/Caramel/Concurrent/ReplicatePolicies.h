@@ -27,6 +27,7 @@ struct ReplicateNothing
     protected:
         void ReplicaAdd( const Value& ) {}
         void ReplicaRemove( const Value& ) {}
+        void ReplicaClear() {}
     };
 
 

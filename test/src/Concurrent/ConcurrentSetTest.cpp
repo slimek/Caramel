@@ -39,6 +39,11 @@ void TestBasicIntSet( SetType& set )
     CHECK( 1    == set.Erase( 42 ));
 
     CHECK( false == set.Contains( 42 ));
+
+    SetType::UniqueLockedSet lockedSet( set );
+    auto ivalue = lockedSet.Begin();
+    CHECK( 24 == *( ivalue ++ ));
+    CHECK( lockedSet.End() == ivalue );
 }
 
 
