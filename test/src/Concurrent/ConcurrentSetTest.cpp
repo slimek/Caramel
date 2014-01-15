@@ -107,16 +107,16 @@ TEST( ConcurrentSetWithSnapshotTest )
 
 TEST( ConcurrentSetSnapshotStressTest )
 {
-    const Int minInt = -65536;
-    const Int maxInt = 65535;
+    const Int minInt = -256;
+    const Int maxInt = 255;
 
     Concurrent::SetWithSnapshot< Int > iset;
 
     TimedBool< TickClock > timeup( 3000 );
 
-    std::atomic_int inserts;
-    std::atomic_int erases;
-    std::atomic_int snapshots;
+    std::atomic< Int > inserts( 0 );
+    std::atomic< Int > erases( 0 );
+    std::atomic< Int > snapshots( 0 );
 
     Thread t1( "Inserter", [&]
     {
@@ -127,12 +127,20 @@ TEST( ConcurrentSetSnapshotStressTest )
         }
     });
     
-    Thread t2( "Eraser", [&]
+    Thread t2( "EraserOrInsert", [&]
     {
         while ( ! timeup )
         {
-            iset.Erase( GenRandomInt( minInt, maxInt ));
-            ++ erases;
+            if ( GenRandomBool( 0.8 ))
+            {
+                iset.Erase( GenRandomInt( minInt, maxInt ));
+                ++ erases;
+            }
+            else
+            {
+                iset.Insert( GenRandomInt( minInt, maxInt ));
+                ++ inserts;
+            }
         }
     });
 
@@ -140,8 +148,16 @@ TEST( ConcurrentSetSnapshotStressTest )
     {
         while ( ! timeup )
         {
-            auto snapshot = iset.GetSnapshot();
-            ++ snapshots;
+            if ( GenRandomBool( 0.01 ))
+            {
+                auto snapshot = iset.GetSnapshot();
+                ++ snapshots;
+            }
+            else
+            {
+                iset.Insert( GenRandomInt( minInt, maxInt ));
+                ++ inserts;
+            }
         }
     });
 
