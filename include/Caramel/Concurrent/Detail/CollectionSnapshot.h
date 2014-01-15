@@ -97,7 +97,7 @@ inline void CollectionSnapshot< Derived, Value >::ClearSnapshot()
 
     if ( ! m_built ) { return; }
 
-    m_snapshot = SharedArray< T >( 0 );
+    m_snapshot = SharedArray< Value >();
     m_built = false;
 }
 

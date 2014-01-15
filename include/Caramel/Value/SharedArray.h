@@ -5,8 +5,7 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
-#include <Caramel/Error/Assert.h>
-#include <Caramel/Trace/Trace.h>
+#include <Caramel/Error/Exception.h>
 #include <boost/shared_array.hpp>
 
 
@@ -103,6 +102,14 @@ public:
     /// Modifiers ///
 
     void Reset( Uint size );
+
+
+protected:
+
+    /// Data Members ///
+
+    using ConstSharedArray< T >::m_array;
+    using ConstSharedArray< T >::m_size;
 };
 
 
@@ -129,8 +136,7 @@ ConstSharedArray< T >::ConstSharedArray( Uint size )
 {
     if ( 0 == size )
     {
-        CARAMEL_TRACE_FAIL_HERE( "Size can't be 0" );
-        CARAMEL_INVALID_ARGUMENT();
+        CARAMEL_THROW( "Size can't be 0" );
     }
 
     m_array.reset( new T[size] );
