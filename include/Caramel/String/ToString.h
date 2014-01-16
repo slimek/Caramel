@@ -53,7 +53,15 @@ std::string ToString( Double x );
 // Trivial Copy
 //
 
-inline std::string ToString( const std::string& x ) { return x; }
+inline const std::string& ToString( const std::string& x ) { return x; }
+inline std::string&& ToString( std::string&& x ) { return std::move( x ); }
+
+
+//
+// C-style Strings
+//
+
+inline std::string ToString( const Char* sz ) { return std::string( sz ); }
 
 
 ///////////////////////////////////////////////////////////////////////////////

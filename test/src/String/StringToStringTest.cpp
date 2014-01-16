@@ -91,6 +91,27 @@ TEST( StringToStringTest )
 }
 
 
+static Bool IsRvalue( const std::string& s ) { return false; }
+static Bool IsRvalue( std::string&& s )      { return true; }
+
+TEST( StringToStringTrivialTest )
+{
+    const std::string alice( "Alice" );
+    const Char* reimu = "Reimu";
+    const Char marisa[7] = "Marisa";
+
+    CHECK( "Alice"  == ToString( alice ));
+    CHECK( "Pache"  == ToString( "Pache" ));
+    CHECK( "Reimu"  == ToString( reimu ));
+    CHECK( "Marisa" == ToString( marisa ));
+
+    // Rvalue Test
+    CHECK( false == IsRvalue( ToString( alice )));
+    CHECK( true  == IsRvalue( ToString( std::string( "Alice" ))));
+    CHECK( true  == IsRvalue( ToString( "Alice" )));
+}
+
+
 TEST( StringToStringTTest )
 {
     CHECK( "Bool"   == ToStringT< Bool >() );
