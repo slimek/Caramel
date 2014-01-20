@@ -46,7 +46,7 @@ void TestBasicIntSet( SetType& set )
     CHECK( false == set.Contains( 42 ));
 
     {
-        SetType::ConstLockedSet lockedSet( set );
+        typename SetType::ConstLockedSet lockedSet( set );
         auto ivalue = lockedSet.Begin();
         CHECK( 24 == *( ivalue ++ ));
         CHECK( lockedSet.End() == ivalue );
