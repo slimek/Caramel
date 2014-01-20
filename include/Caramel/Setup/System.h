@@ -44,6 +44,8 @@
 
 #if defined( __APPLE__ ) && defined( __MACH__ )
 
+#define CARAMEL_SYSTEM_IS_OF_APPLE
+
 #include <TargetConditionals.h>
 
 #if defined( TARGET_OS_IPHONE ) || defined( TARGET_IPHONE_SIMULATOR )

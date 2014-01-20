@@ -54,6 +54,8 @@
 		6A23F6F71849A1B800FD4293 /* NamedValuesImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A23F6C81849A1B800FD4293 /* NamedValuesImpl.h */; };
 		6A23F6F81849A1B800FD4293 /* Value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A23F6C91849A1B800FD4293 /* Value.cpp */; };
 		6A23F6F91849A1B800FD4293 /* Windows.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A23F6CA1849A1B800FD4293 /* Windows.cpp */; };
+		6AC73137188D661C00188F23 /* Android.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AC73136188D661C00188F23 /* Android.cpp */; };
+		6AC73139188D668700188F23 /* Apple.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AC73138188D668700188F23 /* Apple.mm */; };
 		6ADED42A18521ACD0001909B /* FlowState.h in Headers */ = {isa = PBXBuildFile; fileRef = 6ADED3B518521ACD0001909B /* FlowState.h */; };
 		6ADED42B18521ACD0001909B /* TimedBool.h in Headers */ = {isa = PBXBuildFile; fileRef = 6ADED3B618521ACD0001909B /* TimedBool.h */; };
 		6ADED42C18521ACD0001909B /* Caramel.h in Headers */ = {isa = PBXBuildFile; fileRef = 6ADED3B718521ACD0001909B /* Caramel.h */; };
@@ -191,6 +193,8 @@
 		6A23F6C91849A1B800FD4293 /* Value.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Value.cpp; sourceTree = "<group>"; };
 		6A23F6CA1849A1B800FD4293 /* Windows.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Windows.cpp; sourceTree = "<group>"; };
 		6A9323AF1853223E00065E5C /* Assert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Assert.h; sourceTree = "<group>"; };
+		6AC73136188D661C00188F23 /* Android.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Android.cpp; sourceTree = "<group>"; };
+		6AC73138188D668700188F23 /* Apple.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Apple.mm; sourceTree = "<group>"; };
 		6ADED3B518521ACD0001909B /* FlowState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlowState.h; sourceTree = "<group>"; };
 		6ADED3B618521ACD0001909B /* TimedBool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimedBool.h; sourceTree = "<group>"; };
 		6ADED3B718521ACD0001909B /* Caramel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Caramel.h; sourceTree = "<group>"; };
@@ -309,6 +313,7 @@
 		6A23F68D1849A1B800FD4293 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				6AC73136188D661C00188F23 /* Android.cpp */,
 				6A23F68E1849A1B800FD4293 /* CaramelPch.cpp */,
 				6A23F68F1849A1B800FD4293 /* CaramelPch.h */,
 				6A23F6901849A1B800FD4293 /* Configuration.cpp */,
@@ -344,6 +349,7 @@
 				6A23F6C61849A1B800FD4293 /* Value */,
 				6A23F6C91849A1B800FD4293 /* Value.cpp */,
 				6A23F6CA1849A1B800FD4293 /* Windows.cpp */,
+				6AC73138188D668700188F23 /* Apple.mm */,
 			);
 			name = src;
 			path = ../src;
@@ -1012,9 +1018,11 @@
 				6A23F6F81849A1B800FD4293 /* Value.cpp in Sources */,
 				6A23F6D61849A1B800FD4293 /* Document.cpp in Sources */,
 				6A23F6D91849A1B800FD4293 /* FileSystem.cpp in Sources */,
+				6AC73137188D661C00188F23 /* Android.cpp in Sources */,
 				6A23F6F21849A1B800FD4293 /* Thread.cpp in Sources */,
 				6A23F6ED1849A1B800FD4293 /* String.cpp in Sources */,
 				6A23F6DE1849A1B800FD4293 /* Lexical.cpp in Sources */,
+				6AC73139188D668700188F23 /* Apple.mm in Sources */,
 				6A23F6F91849A1B800FD4293 /* Windows.cpp in Sources */,
 				6A23F6D21849A1B800FD4293 /* Debug.cpp in Sources */,
 				6A23F6D01849A1B800FD4293 /* DateTime.cpp in Sources */,
