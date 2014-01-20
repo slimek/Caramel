@@ -8,6 +8,7 @@
 #include <Caramel/Error/Assert.h>
 #include <Caramel/Error/Exception.h>
 #include <boost/shared_array.hpp>
+#include <algorithm>
 
 
 namespace Caramel
@@ -29,16 +30,23 @@ public:
     explicit ConstSharedArray( Uint size );
 
     
-    /// Accessors ///
+    /// Properties ///
 
     Bool IsEmpty() const { return 0 == m_size; }
     Uint Size()    const { return m_size; }
 
 
+    /// Accessors ///
+
     typedef T ValueType;
 
     const ValueType& operator[]( Uint i ) const;
     
+    // Linear search
+    Bool Contains( const T& value ) const;
+
+
+    /// Iterator Accessors ///
 
     typedef const ValueType* ConstIterator;
 
@@ -163,10 +171,37 @@ SharedArray< T >::SharedArray ( Uint size )
 //
 
 template< typename T >
+Bool ConstSharedArray< T >::Contains( const T& value ) const
+{
+    return this->End() != std::find( this->Begin(), this->End(), value );
+}
+
+
+template< typename T >
 const T& ConstSharedArray< T >::operator[]( Uint i ) const
 {
     CARAMEL_ASSERT( m_size > i );
     return m_array[i];
+}
+
+
+template< typename T >
+T& SharedArray< T >::operator[]( Uint i )
+{
+    CARAMEL_ASSERT( m_size > i );
+    return m_array[i];
+}
+
+
+//
+// Modifiers
+//
+
+template< typename T >
+void SharedArray< T >::Reset( Uint size )
+{
+    m_array.reset( new T[size] );
+    m_size = size;
 }
 
 
