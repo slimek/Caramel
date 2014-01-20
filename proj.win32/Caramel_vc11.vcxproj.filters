@@ -165,6 +165,9 @@
     <Filter Include="1. Public Packages\DateTime\Detail headers">
       <UniqueIdentifier>{27db88a5-44ef-42b9-a35a-a7140031b244}</UniqueIdentifier>
     </Filter>
+    <Filter Include="4. Non-Win32 Platform\Apple">
+      <UniqueIdentifier>{daa7b010-227a-4a43-92a3-d208d54175c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -596,6 +599,9 @@
     <ClInclude Include="..\include\Caramel\Concurrent\Detail\LockedSet.h">
       <Filter>1. Public Packages\Concurrent\Detail</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Apple\LogTraceAdapter.h">
+      <Filter>4. Non-Win32 Platform\Apple</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">
@@ -661,5 +667,10 @@
     <ClCompile Include="..\src\Android.cpp">
       <Filter>4. Non-Win32 Platform</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\src\Apple.mm">
+      <Filter>4. Non-Win32 Platform</Filter>
+    </None>
   </ItemGroup>
 </Project>

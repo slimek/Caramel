@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Android\LogTraceAdapter.h" />
+    <ClInclude Include="..\include\Caramel\Apple\LogTraceAdapter.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEvent.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEventDispatcher.h" />
     <ClInclude Include="..\include\Caramel\Async\FlowState.h" />
@@ -191,6 +192,9 @@
     <ClCompile Include="..\src\Trace.cpp" />
     <ClCompile Include="..\src\Value.cpp" />
     <ClCompile Include="..\src\Windows.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\src\Apple.mm" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{ED63D1E4-3DE9-4273-A22A-8B558E1BD6C0}</ProjectGuid>
