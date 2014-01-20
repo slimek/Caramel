@@ -222,14 +222,19 @@ TEST( DaysTimeSpanTest )
     CHECK( Hours( 24 ) == Days( 1 ));
     CHECK( Hours( -72 ) == Days( -3 ));
 
+
+    /// Overflow ///
+
+    TimeSpan dummy;
+
     const auto dmax = Days::MaxValue();
 
-    CHECK_THROW( static_cast< TimeSpan >( dmax ), Caramel::Exception );
+    CHECK_THROW( dummy = static_cast< TimeSpan >( dmax ), Caramel::Exception );
 
     const Days dupper( INT_MAX / 24 );
 
     CHECK( Hours( ( INT_MAX / 24 ) * 24 ) == dupper );
-    CHECK_THROW( static_cast< TimeSpan >( dupper + Days( 1 )), Caramel::Exception );
+    CHECK_THROW( dummy = static_cast< TimeSpan >( dupper + Days( 1 )), Caramel::Exception );
 }
 
 
