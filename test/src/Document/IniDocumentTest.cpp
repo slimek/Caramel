@@ -19,7 +19,7 @@ SUITE( IniDocumentSuite )
 
 TEST( IniDocumentFundamentalTest )
 {
-    IniDocument iniDoc( "..\\src\\Document\\test1.ini" );
+    IniDocument iniDoc( "../src/Document/test1.ini" );
 
     /// Booleans ///
 
