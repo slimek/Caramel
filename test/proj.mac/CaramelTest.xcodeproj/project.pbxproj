@@ -11,8 +11,6 @@
 		6A706EA61849859D004C9602 /* TimedBoolTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A706E801849859D004C9602 /* TimedBoolTest.cpp */; };
 		6A706EA71849859D004C9602 /* CaramelTestPch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A706E811849859D004C9602 /* CaramelTestPch.cpp */; };
 		6A706EA81849859D004C9602 /* ClockTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A706E841849859D004C9602 /* ClockTest.cpp */; };
-		6A706EA91849859D004C9602 /* MapTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A706E861849859D004C9602 /* MapTest.cpp */; };
-		6A706EAA1849859D004C9602 /* PriorityQueueTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A706E871849859D004C9602 /* PriorityQueueTest.cpp */; };
 		6A706EAB1849859D004C9602 /* DateTimeTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A706E891849859D004C9602 /* DateTimeTest.cpp */; };
 		6A706EAC1849859D004C9602 /* IniDocumentTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A706E8B1849859D004C9602 /* IniDocumentTest.cpp */; };
 		6A706EAD1849859D004C9602 /* EnumLookupTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A706E8F1849859D004C9602 /* EnumLookupTest.cpp */; };
@@ -30,6 +28,19 @@
 		6A706EB91849859D004C9602 /* TraceTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A706EA21849859D004C9602 /* TraceTest.cpp */; };
 		6A706EBA1849859D004C9602 /* NamedValuesTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A706EA41849859D004C9602 /* NamedValuesTest.cpp */; };
 		6AAF38F11849D3B00010FAF1 /* libCaramel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AAF38F01849D3940010FAF1 /* libCaramel.a */; };
+		6AC73117188D587700188F23 /* ConcurrentIntervalSetTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AC73113188D587700188F23 /* ConcurrentIntervalSetTest.cpp */; };
+		6AC73118188D587700188F23 /* ConcurrentMapTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AC73114188D587700188F23 /* ConcurrentMapTest.cpp */; };
+		6AC73119188D587700188F23 /* ConcurrentPriorityQueueTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AC73115188D587700188F23 /* ConcurrentPriorityQueueTest.cpp */; };
+		6AC7311A188D587700188F23 /* ConcurrentSetTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AC73116188D587700188F23 /* ConcurrentSetTest.cpp */; };
+		6AC7311C188D5B8B00188F23 /* WaitableBoolTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AC7311B188D5B8B00188F23 /* WaitableBoolTest.cpp */; };
+		6AC7311F188D5BAA00188F23 /* DateTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AC7311D188D5BAA00188F23 /* DateTest.cpp */; };
+		6AC73120188D5BAA00188F23 /* DateTimeBoolTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AC7311E188D5BAA00188F23 /* DateTimeBoolTest.cpp */; };
+		6AC73129188D5D3300188F23 /* PathTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AC73128188D5D3300188F23 /* PathTest.cpp */; };
+		6AC7312C188D5D4700188F23 /* SharedPtrUtilsTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AC7312B188D5D4700188F23 /* SharedPtrUtilsTest.cpp */; };
+		6AC7312F188D5D8B00188F23 /* NumberTraitsTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AC7312E188D5D8B00188F23 /* NumberTraitsTest.cpp */; };
+		6AC73131188D5D9D00188F23 /* FormatTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AC73130188D5D9D00188F23 /* FormatTest.cpp */; };
+		6AC73133188D5DB300188F23 /* AnyTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AC73132188D5DB300188F23 /* AnyTest.cpp */; };
+		6AC73135188D5DBD00188F23 /* SharedArrayTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AC73134188D5DBD00188F23 /* SharedArrayTest.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,8 +71,6 @@
 		6A706E811849859D004C9602 /* CaramelTestPch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CaramelTestPch.cpp; sourceTree = "<group>"; };
 		6A706E821849859D004C9602 /* CaramelTestPch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaramelTestPch.h; sourceTree = "<group>"; };
 		6A706E841849859D004C9602 /* ClockTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClockTest.cpp; sourceTree = "<group>"; };
-		6A706E861849859D004C9602 /* MapTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MapTest.cpp; sourceTree = "<group>"; };
-		6A706E871849859D004C9602 /* PriorityQueueTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PriorityQueueTest.cpp; sourceTree = "<group>"; };
 		6A706E891849859D004C9602 /* DateTimeTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DateTimeTest.cpp; sourceTree = "<group>"; };
 		6A706E8B1849859D004C9602 /* IniDocumentTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IniDocumentTest.cpp; sourceTree = "<group>"; };
 		6A706E8C1849859D004C9602 /* test1.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test1.ini; sourceTree = "<group>"; };
@@ -82,6 +91,19 @@
 		6A706EA41849859D004C9602 /* NamedValuesTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NamedValuesTest.cpp; sourceTree = "<group>"; };
 		6A706EBB184985D3004C9602 /* CaramelTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CaramelTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AAF38EB1849D3930010FAF1 /* Caramel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Caramel.xcodeproj; path = ../../proj.mac/Caramel.xcodeproj; sourceTree = "<group>"; };
+		6AC73113188D587700188F23 /* ConcurrentIntervalSetTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConcurrentIntervalSetTest.cpp; sourceTree = "<group>"; };
+		6AC73114188D587700188F23 /* ConcurrentMapTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConcurrentMapTest.cpp; sourceTree = "<group>"; };
+		6AC73115188D587700188F23 /* ConcurrentPriorityQueueTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConcurrentPriorityQueueTest.cpp; sourceTree = "<group>"; };
+		6AC73116188D587700188F23 /* ConcurrentSetTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConcurrentSetTest.cpp; sourceTree = "<group>"; };
+		6AC7311B188D5B8B00188F23 /* WaitableBoolTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WaitableBoolTest.cpp; sourceTree = "<group>"; };
+		6AC7311D188D5BAA00188F23 /* DateTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DateTest.cpp; sourceTree = "<group>"; };
+		6AC7311E188D5BAA00188F23 /* DateTimeBoolTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DateTimeBoolTest.cpp; sourceTree = "<group>"; };
+		6AC73128188D5D3300188F23 /* PathTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PathTest.cpp; sourceTree = "<group>"; };
+		6AC7312B188D5D4700188F23 /* SharedPtrUtilsTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SharedPtrUtilsTest.cpp; sourceTree = "<group>"; };
+		6AC7312E188D5D8B00188F23 /* NumberTraitsTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NumberTraitsTest.cpp; sourceTree = "<group>"; };
+		6AC73130188D5D9D00188F23 /* FormatTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FormatTest.cpp; sourceTree = "<group>"; };
+		6AC73132188D5DB300188F23 /* AnyTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnyTest.cpp; sourceTree = "<group>"; };
+		6AC73134188D5DBD00188F23 /* SharedArrayTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SharedArrayTest.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,9 +130,13 @@
 		6A706E7D1849859D004C9602 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				6A706E7E1849859D004C9602 /* Async */,
-				6A706E811849859D004C9602 /* CaramelTestPch.cpp */,
+				6AC7312D188D5D8B00188F23 /* Numeric */,
 				6A706E821849859D004C9602 /* CaramelTestPch.h */,
+				6A706E811849859D004C9602 /* CaramelTestPch.cpp */,
+				6A706E951849859D004C9602 /* RunTest.cpp */,
+				6AC7312A188D5D4700188F23 /* Memory */,
+				6AC73127188D5D3300188F23 /* FileSystem */,
+				6A706E7E1849859D004C9602 /* Async */,
 				6A706E831849859D004C9602 /* Chrono */,
 				6A706E851849859D004C9602 /* Concurrent */,
 				6A706E881849859D004C9602 /* DateTime */,
@@ -118,7 +144,6 @@
 				6A706E8E1849859D004C9602 /* Enum */,
 				6A706E901849859D004C9602 /* Lexical */,
 				6A706E931849859D004C9602 /* Random */,
-				6A706E951849859D004C9602 /* RunTest.cpp */,
 				6A706E961849859D004C9602 /* Statechart */,
 				6A706E981849859D004C9602 /* String */,
 				6A706E9C1849859D004C9602 /* Task */,
@@ -133,6 +158,7 @@
 		6A706E7E1849859D004C9602 /* Async */ = {
 			isa = PBXGroup;
 			children = (
+				6AC7311B188D5B8B00188F23 /* WaitableBoolTest.cpp */,
 				6A706E7F1849859D004C9602 /* FlowStateTest.cpp */,
 				6A706E801849859D004C9602 /* TimedBoolTest.cpp */,
 			);
@@ -150,8 +176,10 @@
 		6A706E851849859D004C9602 /* Concurrent */ = {
 			isa = PBXGroup;
 			children = (
-				6A706E861849859D004C9602 /* MapTest.cpp */,
-				6A706E871849859D004C9602 /* PriorityQueueTest.cpp */,
+				6AC73113188D587700188F23 /* ConcurrentIntervalSetTest.cpp */,
+				6AC73114188D587700188F23 /* ConcurrentMapTest.cpp */,
+				6AC73115188D587700188F23 /* ConcurrentPriorityQueueTest.cpp */,
+				6AC73116188D587700188F23 /* ConcurrentSetTest.cpp */,
 			);
 			path = Concurrent;
 			sourceTree = "<group>";
@@ -159,6 +187,8 @@
 		6A706E881849859D004C9602 /* DateTime */ = {
 			isa = PBXGroup;
 			children = (
+				6AC7311D188D5BAA00188F23 /* DateTest.cpp */,
+				6AC7311E188D5BAA00188F23 /* DateTimeBoolTest.cpp */,
 				6A706E891849859D004C9602 /* DateTimeTest.cpp */,
 			);
 			path = DateTime;
@@ -210,6 +240,7 @@
 		6A706E981849859D004C9602 /* String */ = {
 			isa = PBXGroup;
 			children = (
+				6AC73130188D5D9D00188F23 /* FormatTest.cpp */,
 				6A706E991849859D004C9602 /* SprintfTest.cpp */,
 				6A706E9A1849859D004C9602 /* StringAlgorithmTest.cpp */,
 				6A706E9B1849859D004C9602 /* StringToStringTest.cpp */,
@@ -245,6 +276,8 @@
 		6A706EA31849859D004C9602 /* Value */ = {
 			isa = PBXGroup;
 			children = (
+				6AC73134188D5DBD00188F23 /* SharedArrayTest.cpp */,
+				6AC73132188D5DB300188F23 /* AnyTest.cpp */,
 				6A706EA41849859D004C9602 /* NamedValuesTest.cpp */,
 			);
 			path = Value;
@@ -256,6 +289,30 @@
 				6AAF38F01849D3940010FAF1 /* libCaramel.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		6AC73127188D5D3300188F23 /* FileSystem */ = {
+			isa = PBXGroup;
+			children = (
+				6AC73128188D5D3300188F23 /* PathTest.cpp */,
+			);
+			path = FileSystem;
+			sourceTree = "<group>";
+		};
+		6AC7312A188D5D4700188F23 /* Memory */ = {
+			isa = PBXGroup;
+			children = (
+				6AC7312B188D5D4700188F23 /* SharedPtrUtilsTest.cpp */,
+			);
+			path = Memory;
+			sourceTree = "<group>";
+		};
+		6AC7312D188D5D8B00188F23 /* Numeric */ = {
+			isa = PBXGroup;
+			children = (
+				6AC7312E188D5D8B00188F23 /* NumberTraitsTest.cpp */,
+			);
+			path = Numeric;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -326,27 +383,38 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A706EA51849859D004C9602 /* FlowStateTest.cpp in Sources */,
-				6A706EAA1849859D004C9602 /* PriorityQueueTest.cpp in Sources */,
 				6A706EAD1849859D004C9602 /* EnumLookupTest.cpp in Sources */,
-				6A706EA91849859D004C9602 /* MapTest.cpp in Sources */,
 				6A706EB71849859D004C9602 /* SpinMutexTest.cpp in Sources */,
 				6A706EB31849859D004C9602 /* SprintfTest.cpp in Sources */,
+				6AC73133188D5DB300188F23 /* AnyTest.cpp in Sources */,
 				6A706EAC1849859D004C9602 /* IniDocumentTest.cpp in Sources */,
 				6A706EB41849859D004C9602 /* StringAlgorithmTest.cpp in Sources */,
+				6AC73129188D5D3300188F23 /* PathTest.cpp in Sources */,
+				6AC73135188D5DBD00188F23 /* SharedArrayTest.cpp in Sources */,
 				6A706EA61849859D004C9602 /* TimedBoolTest.cpp in Sources */,
 				6A706EA81849859D004C9602 /* ClockTest.cpp in Sources */,
 				6A706EA71849859D004C9602 /* CaramelTestPch.cpp in Sources */,
+				6AC73119188D587700188F23 /* ConcurrentPriorityQueueTest.cpp in Sources */,
+				6AC73131188D5D9D00188F23 /* FormatTest.cpp in Sources */,
+				6AC73118188D587700188F23 /* ConcurrentMapTest.cpp in Sources */,
 				6A706EB61849859D004C9602 /* TaskPollerTest.cpp in Sources */,
 				6A706EB01849859D004C9602 /* RandomTest.cpp in Sources */,
+				6AC7311A188D587700188F23 /* ConcurrentSetTest.cpp in Sources */,
+				6AC7311C188D5B8B00188F23 /* WaitableBoolTest.cpp in Sources */,
 				6A706EAE1849859D004C9602 /* LexicalFloatingTest.cpp in Sources */,
+				6AC7312F188D5D8B00188F23 /* NumberTraitsTest.cpp in Sources */,
 				6A706EB11849859D004C9602 /* RunTest.cpp in Sources */,
 				6A706EBA1849859D004C9602 /* NamedValuesTest.cpp in Sources */,
 				6A706EB81849859D004C9602 /* ThreadTest.cpp in Sources */,
+				6AC7311F188D5BAA00188F23 /* DateTest.cpp in Sources */,
+				6AC73117188D587700188F23 /* ConcurrentIntervalSetTest.cpp in Sources */,
 				6A706EB21849859D004C9602 /* StateMachineTest.cpp in Sources */,
 				6A706EB51849859D004C9602 /* StringToStringTest.cpp in Sources */,
 				6A706EAF1849859D004C9602 /* LexicalIntegerTest.cpp in Sources */,
 				6A706EAB1849859D004C9602 /* DateTimeTest.cpp in Sources */,
 				6A706EB91849859D004C9602 /* TraceTest.cpp in Sources */,
+				6AC73120188D5BAA00188F23 /* DateTimeBoolTest.cpp in Sources */,
+				6AC7312C188D5D4700188F23 /* SharedPtrUtilsTest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
