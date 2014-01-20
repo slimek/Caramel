@@ -5,6 +5,7 @@
 #include <Caramel/Numeric/NumberTraits.h>
 #include <Caramel/Value/Any.h>
 #include <UnitTest++/UnitTest++.h>
+#include <cfloat>
 #include <vector>
 
 
@@ -69,7 +70,7 @@ TEST( AnyStringTest )
     Any as( std::string( "Alice" ));
     Any asz1( "Cirno" );
 
-    Char* marisa = "Marisa";
+    const Char* marisa = "Marisa";
     Any asz2( marisa );
 
     CHECK( "Alice"  == as.As< std::string >() );
