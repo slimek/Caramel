@@ -6,9 +6,36 @@
 
 #if defined( CARAMEL_SYSTEM_IS_OF_APPLE )
 
+#include <Caramel/Apple/LogTraceAdapter.h>
+#import <Foundation/NSObjCRuntime.h>
+
 
 namespace Caramel
 {
+
+namespace Apple
+{
+
+//
+// Contents
+//
+//   LogTraceAdapter
+//
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Log Trace Adapter
+//
+
+void LogTraceAdapter::Write( Caramel::Trace::Level level, const std::string& message )
+{
+    NSLog( @"%s", message.c_str() );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+
+} // namespace Apple
 
 } // namespace Caramel
 
