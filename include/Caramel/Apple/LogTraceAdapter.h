@@ -7,7 +7,7 @@
 #include <Caramel/Caramel.h>
 
 
-#if defined( CARAMEL_SYSTEM_IS_OF_APPLE )
+#if defined( CARAMEL_SYSTEM_OF_APPLE )
 
 #include <Caramel/Trace/Listeners.h>
 
@@ -39,6 +39,6 @@ public:
 
 } // namespace Caramel
 
-#endif // CARAMEL_SYSTEM_IS_OF_APPLE
+#endif // CARAMEL_SYSTEM_OF_APPLE
 
 #endif // __CARAMEL_APPLE_LOG_TRACE_ADAPTER_H

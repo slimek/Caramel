@@ -44,7 +44,7 @@
 
 #if defined( __APPLE__ ) && defined( __MACH__ )
 
-#define CARAMEL_SYSTEM_IS_OF_APPLE
+#define CARAMEL_SYSTEM_OF_APPLE
 
 #include <TargetConditionals.h>
 

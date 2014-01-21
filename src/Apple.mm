@@ -4,7 +4,7 @@
 #include "CaramelPch.h"
 
 
-#if defined( CARAMEL_SYSTEM_IS_OF_APPLE )
+#if defined( CARAMEL_SYSTEM_OF_APPLE )
 
 #include <Caramel/Apple/LogTraceAdapter.h>
 #import <Foundation/NSObjCRuntime.h>
@@ -39,4 +39,4 @@ void LogTraceAdapter::Write( Caramel::Trace::Level level, const std::string& mes
 
 } // namespace Caramel
 
-#endif // CARAMEL_SYSTEM_IS_OF_APPLE
+#endif // CARAMEL_SYSTEM_OF_APPLE
