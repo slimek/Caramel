@@ -81,7 +81,7 @@ private:
 // Implementation
 //
 
-AnyEventQueue::PushPort AnyEventQueue::Register( const std::string& name, Int minEventId, Int maxEventId )
+inline AnyEventQueue::PushPort AnyEventQueue::Register( const std::string& name, Int minEventId, Int maxEventId )
 {
     if ( ! m_eventIdRanges.InsertClosed( minEventId, maxEventId ))
     {
@@ -92,19 +92,19 @@ AnyEventQueue::PushPort AnyEventQueue::Register( const std::string& name, Int mi
 }
 
 
-void AnyEventQueue::Unregister( Int minEventId, Int maxEventId )
+inline void AnyEventQueue::Unregister( Int minEventId, Int maxEventId )
 {
     m_eventIdRanges.EraseClosed( minEventId, maxEventId );
 }
 
 
-void AnyEventQueue::Push( AnyEvent&& evt )
+inline void AnyEventQueue::Push( AnyEvent&& evt )
 {
     m_events.Push( evt );
 }
 
 
-Bool AnyEventQueue::TryPop( AnyEvent& evt )
+inline Bool AnyEventQueue::TryPop( AnyEvent& evt )
 {
     return m_events.TryPop( evt );
 }
@@ -114,7 +114,7 @@ Bool AnyEventQueue::TryPop( AnyEvent& evt )
 // Push Port
 //
 
-AnyEventQueue::PushPort::PushPort(
+inline AnyEventQueue::PushPort::PushPort(
     AnyEventQueue& host, const std::string& name, Int minEventId, Int maxEventId )
     : m_host( host )
     , m_name( name )
@@ -125,19 +125,19 @@ AnyEventQueue::PushPort::PushPort(
 }
 
 
-void AnyEventQueue::PushPort::PushEvent( Int eventId, const Any& value )
+inline void AnyEventQueue::PushPort::PushEvent( Int eventId, const Any& value )
 {
     m_host.Push( AnyEvent( eventId, value ));
 }
 
 
-void AnyEventQueue::PushPort::PushEvent( Int eventId, Any&& value )
+inline void AnyEventQueue::PushPort::PushEvent( Int eventId, Any&& value )
 {
     m_host.Push( AnyEvent( eventId, value ));
 }
 
 
-void AnyEventQueue::PushPort::Release()
+inline void AnyEventQueue::PushPort::Release()
 {
     m_host.Unregister( m_minEventId, m_maxEventId );
 }
