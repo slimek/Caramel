@@ -33,6 +33,7 @@
 #include <Caramel/Caramel.h>
 #include <Caramel/Error/Assert.h>
 #include <Caramel/Error/Exception.h>
+#include <Caramel/String/Format.h>
 #include <Caramel/String/Sprintf.h>
 #include <Caramel/Trace/Trace.h>
 

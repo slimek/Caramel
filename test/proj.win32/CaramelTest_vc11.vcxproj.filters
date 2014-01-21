@@ -178,6 +178,9 @@
     <ClCompile Include="..\src\Value\SharedArrayTest.cpp">
       <Filter>2. Tests\Value</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Task\WorkerThreadTest.cpp">
+      <Filter>2. Tests\Task</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">

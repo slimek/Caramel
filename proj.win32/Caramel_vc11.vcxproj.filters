@@ -614,6 +614,12 @@
     <ClInclude Include="..\include\Caramel\Apple\LogTraceAdapter.h">
       <Filter>4. Non-Win32 Platform\Apple</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Task\WorkerThread.h">
+      <Filter>1. Public Packages\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Task\WorkerThreadImpl.h">
+      <Filter>2. Sources\Task</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

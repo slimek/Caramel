@@ -5,8 +5,9 @@
 #include "Task/StrandImpl.h"
 #include "Task/TaskImpl.h"
 #include "Task/TaskPollerImpl.h"
+#include "Task/WorkerThreadImpl.h"
 #include <Caramel/Async/TimedBool.h>
-#include <Caramel/Chrono/SteadyClock.h>
+#include <Caramel/Chrono/TickClock.h>
 
 
 namespace Caramel
@@ -18,6 +19,7 @@ namespace Caramel
 //   Task
 //   Strand
 //   TaskPoller
+//   WorkerThread
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -329,6 +331,60 @@ void TaskPollerImpl::PollFor( const Ticks& sliceTicks )
         task.Run();
 
         if ( sliceTimeout ) { break; }
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Worker Thread
+//
+
+WorkerThread::WorkerThread( const std::string& name )
+{
+    m_impl = std::make_shared< WorkerThreadImpl >( name, this );
+}
+
+
+void WorkerThread::Submit( Task& task )
+{
+    if ( task.HasDelay() )
+    {
+    }
+    else if ( task.HasStrand() )
+    {
+        CARAMEL_NOT_IMPLEMENTED();
+    }
+    else
+    {
+        this->AddReadyTask( task );
+    }
+}
+
+
+void WorkerThread::AddReadyTask( Task& task )
+{
+}
+
+
+//
+// Implementation
+//
+
+WorkerThreadImpl::WorkerThreadImpl( const std::string& name, WorkerThread* host )
+    : m_name( name )
+    , m_host( host )
+    , m_stopped( false )
+{
+    m_thread.reset( new Thread( "Worker:" + name, [=] { this->Execute(); } ) );
+}
+
+
+void WorkerThreadImpl::Execute()
+{
+    for ( ;; )
+    {
+
     }
 }
 

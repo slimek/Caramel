@@ -110,6 +110,7 @@
     <ClInclude Include="..\include\Caramel\Task\Task.h" />
     <ClInclude Include="..\include\Caramel\Task\TaskExecutor.h" />
     <ClInclude Include="..\include\Caramel\Task\TaskPoller.h" />
+    <ClInclude Include="..\include\Caramel\Task\WorkerThread.h" />
     <ClInclude Include="..\include\Caramel\Thread\MutexLocks.h" />
     <ClInclude Include="..\include\Caramel\Thread\SpinMutex.h" />
     <ClInclude Include="..\include\Caramel\Thread\ThisThread.h" />
@@ -159,6 +160,7 @@
     <ClInclude Include="..\src\Task\StrandImpl.h" />
     <ClInclude Include="..\src\Task\TaskImpl.h" />
     <ClInclude Include="..\src\Task\TaskPollerImpl.h" />
+    <ClInclude Include="..\src\Task\WorkerThreadImpl.h" />
     <ClInclude Include="..\src\Thread\ThreadIdImpl.h" />
     <ClInclude Include="..\src\Thread\ThreadImpl.h" />
     <ClInclude Include="..\src\Trace\ChannelImpl.h" />
