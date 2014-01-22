@@ -43,7 +43,7 @@
     <ClInclude Include="..\include\Caramel\Concurrent\Queue.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\ReplicatePolicies.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\Set.h" />
-    <ClInclude Include="..\include\Caramel\Concurrent\WaitableQueue.h" />
+    <ClInclude Include="..\include\Caramel\Concurrent\BlockingQueue.h" />
     <ClInclude Include="..\include\Caramel\DateTime\Date.h" />
     <ClInclude Include="..\include\Caramel\DateTime\DateTime.h" />
     <ClInclude Include="..\include\Caramel\DateTime\Days.h" />

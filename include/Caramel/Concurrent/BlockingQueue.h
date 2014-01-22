@@ -1,7 +1,7 @@
-// Caramel C++ Library - Concurrent Amenity - Waitable Queue Header
+// Caramel C++ Library - Concurrent Amenity - Blocking Queue Header
 
-#ifndef __CARAMEL_CONCURRENT_WAITABLE_QUEUE_H
-#define __CARAMEL_CONCURRENT_WAITABLE_QUEUE_H
+#ifndef __CARAMEL_CONCURRENT_BLOCKING_QUEUE_H
+#define __CARAMEL_CONCURRENT_BLOCKING_QUEUE_H
 #pragma once
 
 #include <Caramel/Caramel.h>
@@ -21,11 +21,11 @@ namespace Concurrent
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Waitable Concurrent Queue
+// Concurrent Blocking Queue
 //
 
 template< typename T >
-class WaitableQueue : public boost::noncopyable
+class BlockingQueue : public boost::noncopyable
 {
 public:
 
@@ -36,16 +36,15 @@ public:
 
     /// Operations ///
 
-    void Push( const T& x );
-    void Push( T&& x );
+    void Push( const T& value );
+    void Push( T&& value );
 
-    Bool TryPop( T& x );
+    // true  - Pop an element
+    // false - Timeout, or pulsed by PulseAll()
+    Bool PopOrWait( T& value, const Ticks& ticks );
 
-
-    /// Waiting Available ///
-
-    void WaitFor( const Ticks& ticks );
-    void Awake();
+    // All waiting threads will return from PopOrWait() with false.
+    void PulseAll();
 
 
 private:
@@ -54,7 +53,7 @@ private:
     QueueType m_queue;
 
     std::mutex m_queueMutex;
-    std::condition_varaible m_available;
+    std::condition_variable m_available;
 
 };
 
@@ -69,7 +68,7 @@ private:
 //
 
 template< typename T >
-inline void WaitableQueue< T >::Push( const T& value )
+inline void BlockingQueue< T >::Push( const T& value )
 {
     {
         auto ulock = UniqueLock( m_queueMutex );
@@ -81,7 +80,7 @@ inline void WaitableQueue< T >::Push( const T& value )
 
 
 template< typename T >
-inline void WaitableQueue< T >::Push( T&& value )
+inline void BlockingQueue< T >::Push( T&& value )
 {
     {
         auto ulock = UniqueLock( m_queueMutex );
@@ -93,13 +92,23 @@ inline void WaitableQueue< T >::Push( T&& value )
 
 
 template< typename T >
-inline Bool WaitableQueue< T >::TryPop( T& value )
+inline Bool BlockingQueue< T >::PopOrWait( T& value, const Ticks& ticks )
 {
-    if ( m_queue.empty() ) { return false; }
-
     auto ulock = UniqueLock( m_queueMutex );
+
+    if ( m_queue.empty() )
+    {
+        m_available.wait_for( ulock, ticks );
+
+        if ( m_queue.empty() ) { return false; }
+
+        // When timeout or pulsed,
+        // If by chance the queue has elements, we may pop it.
+    }
+
     value = m_queue.front();
     m_queue.pop_front();
+
     return true;
 }
 
@@ -109,15 +118,7 @@ inline Bool WaitableQueue< T >::TryPop( T& value )
 //
 
 template< typename T >
-inline void WaitableQueue< T >::WaitFor( const Ticks& ticks )
-{
-    auto ulock = UniqueLock( m_queueMutex );
-    m_available.wait_for( ulock, ticks );
-}
-
-
-template< typename T >
-inline void WaitableQueue< T >::Awake()
+inline void BlockingQueue< T >::PulseAll()
 {
     m_available.notify_all();
 }
@@ -129,4 +130,4 @@ inline void WaitableQueue< T >::Awake()
 
 } // namespace Caramel
 
-#endif // __CARAMEL_CONCURRENT_WAITABLE_QUEUE_H
+#endif // __CARAMEL_CONCURRENT_BLOCKING_QUEUE_H

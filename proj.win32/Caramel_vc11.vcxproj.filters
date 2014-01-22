@@ -620,7 +620,7 @@
     <ClInclude Include="..\src\Task\WorkerThreadImpl.h">
       <Filter>2. Sources\Task</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\Concurrent\WaitableQueue.h">
+    <ClInclude Include="..\include\Caramel\Concurrent\BlockingQueue.h">
       <Filter>1. Public Packages\Concurrent</Filter>
     </ClInclude>
   </ItemGroup>
