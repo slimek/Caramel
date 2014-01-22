@@ -24,9 +24,11 @@ class WorkerThread : public TaskExecutor
 public:
 
     explicit WorkerThread( const std::string& name );
+    ~WorkerThread();
 
     void Submit( Task& task ) override;
 
+    // Blocks the calling thread, until the internal thread joined.
     void Stop();
 
 

@@ -7,7 +7,7 @@
 #include <Caramel/Caramel.h>
 #include "Task/TaskImpl.h"
 #include <Caramel/Concurrent/PriorityQueue.h>
-#include <Caramel/Concurrent/Queue.h>
+#include <Caramel/Concurrent/BlockingQueue.h>
 #include <Caramel/Task/WorkerThread.h>
 #include <Caramel/Thread/Thread.h>
 
@@ -22,6 +22,8 @@ namespace Caramel
 
 class WorkerThreadImpl
 {
+    friend class WorkerThread;
+
 public:
 
     WorkerThreadImpl( const std::string& name, WorkerThread* host );
@@ -41,10 +43,8 @@ private:
     std::unique_ptr< Thread > m_thread;
     Bool m_stopped;
 
-    Concurrent::PriorityQueue< TickPoint, Task, std::greater< TickPoint > >
-        m_delayTasks;
-
-    Concurrent::Queue< Task > m_readyTasks;
+    Concurrent::ReversePriorityQueue< TickPoint, Task > m_delayTasks;
+    Concurrent::BlockingQueue< Task > m_readyTasks;
 };
 
 

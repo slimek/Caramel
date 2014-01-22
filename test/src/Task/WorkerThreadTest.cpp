@@ -2,6 +2,7 @@
 
 #include "CaramelTestPch.h"
 
+#include <Caramel/Async/WaitableBool.h>
 #include <Caramel/Task/WorkerThread.h>
 #include <UnitTest++/UnitTest++.h>
 
@@ -17,9 +18,31 @@ SUITE( WorkerThreadSuite )
 // Worker Thread Test
 //
 
-TEST( WorkerThreadTest )
+TEST( WorkerThreadTrivialTest )
 {
-    WorkerThread worker( "Test" );
+    WorkerThread worker( "Trivial" );
+    worker.Stop();
+}
+
+
+TEST( WorkerThreadNormalTest )
+{
+    WorkerThread worker( "Normal" );
+
+    Bool flag1 = false;
+    WaitableBool ready( false );
+
+    worker.Submit( Task( "Flag1", [&]
+    {
+        flag1 = true;
+        ready = true;
+    }));
+
+    ready.Wait();
+
+    CHECK( true == flag1 );
+
+    worker.Stop();
 }
 
 

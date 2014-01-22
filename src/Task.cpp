@@ -346,10 +346,35 @@ WorkerThread::WorkerThread( const std::string& name )
 }
 
 
+WorkerThread::~WorkerThread()
+{
+    if ( !m_impl->m_stopped )
+    {
+        CARAMEL_ALERT( "WorkerThread[%s] not stopped before destroyed", m_impl->m_name );
+        
+        m_impl->m_stopped = true;
+        m_impl->m_readyTasks.PulseAll();
+        m_impl->m_thread->Detach();
+    }
+}
+
+
 void WorkerThread::Submit( Task& task )
 {
     if ( task.HasDelay() )
     {
+        auto lastDueTime = TickPoint::MaxValue();
+        m_impl->m_delayTasks.PeekTopKey( lastDueTime );
+
+        const TickPoint dueTime = TickClock::Now() + task.GetDelayDuration();
+        m_impl->m_delayTasks.Push( dueTime, task );
+
+        if ( dueTime < lastDueTime )
+        {
+            // Force to recalculate the next deley duration.
+            // See WorkerThreadImpl::Execute().
+            m_impl->m_readyTasks.PulseAll();
+        }
     }
     else if ( task.HasStrand() )
     {
@@ -357,13 +382,22 @@ void WorkerThread::Submit( Task& task )
     }
     else
     {
-        this->AddReadyTask( task );
+        m_impl->m_readyTasks.Push( task );
     }
+}
+
+
+void WorkerThread::Stop()
+{
+    m_impl->m_stopped = true;
+    m_impl->m_readyTasks.PulseAll();
+    m_impl->m_thread->Join();
 }
 
 
 void WorkerThread::AddReadyTask( Task& task )
 {
+    m_impl->m_readyTasks.Push( task );
 }
 
 
@@ -384,7 +418,51 @@ void WorkerThreadImpl::Execute()
 {
     for ( ;; )
     {
+        if ( m_stopped ) { return; }
 
+        // Step 1 : Move all expired delay works to strand or ready queue
+
+        const TickPoint now = TickClock::Now();
+        auto nextDelay = Ticks::MaxValue();
+
+        TickPoint dueTime;
+        while ( m_delayTasks.PeekTopKey( dueTime ))
+        {
+            if ( now < dueTime )
+            {
+                nextDelay = dueTime - now;
+                break;
+            }
+
+            Task exTask;  // expired task
+
+            CARAMEL_VERIFY( m_delayTasks.TryPop( exTask ));
+            if ( exTask.HasStrand() )
+            {
+                CARAMEL_NOT_IMPLEMENTED();
+            }
+            else
+            {
+                m_readyTasks.Push( exTask );
+            }
+        }
+
+
+        // Step 2 : Run the task or wait
+
+        Task task;
+        if ( m_readyTasks.PopOrWaitFor( task, nextDelay ))
+        {
+            task.Run();
+        }
+    }
+
+
+    // Check unprocessed tasks before stopping this worker.
+
+    if ( ! m_delayTasks.IsEmpty() && ! m_readyTasks.IsEmpty() )
+    {
+        CARAMEL_TRACE_WARN( "WorkerThread[%s] discards some tasks" );
     }
 }
 
