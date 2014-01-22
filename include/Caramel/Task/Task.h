@@ -85,8 +85,23 @@ inline Task MakeTask( const std::string& name, TaskFunction&& f )
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-
 } // namespace Caramel
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Macros
+//
+
+//
+// Task of Bind
+// - 1. Make the task function of std::bind.
+//   2. Use the function name as the task name.
+//
+
+#define CARAMEL_TASK_OF_BIND( function, ... ) \
+    Caramel::MakeTask( #function, std::bind( &function, ##__VA_ARGS__ ))
+
+
+///////////////////////////////////////////////////////////////////////////////
 
 #endif // __CARAMEL_TASK_TASK_H

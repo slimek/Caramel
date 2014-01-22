@@ -19,7 +19,9 @@ SUITE( TaskSuite )
 // Task Test
 //
 
-void Foo() {}
+static Bool s_calledFoo = false;
+
+void Foo() { s_calledFoo = true; }
 
 static Strand s_strand;
 
@@ -60,7 +62,14 @@ TEST( TaskTrivialTest )
 class Widget
 {
 public:
-    void Bar() {}
+    Widget() : m_ranBar( false ) {}
+
+    void Bar() { m_ranBar = true; }
+
+    Bool IsRanBar() const { return m_ranBar; }
+
+private:
+    Bool m_ranBar;    
 };
 
 
@@ -75,6 +84,35 @@ TEST( TaskMemberFunctionTest )
 
     Task t4( "Widget::Bar", std::bind( &Widget::Bar, pw ));
     Task t5( "Widget::Bar", [=] { pw->Bar(); });
+}
+
+
+TEST( TaskOfBindMacroTest )
+{
+    /// Member Functions ///
+
+    Widget w;
+
+    Task bar = CARAMEL_TASK_OF_BIND( Widget::Bar, &w );
+
+    CHECK( "Widget::Bar" == bar.Name() );
+
+    bar.Run();
+
+    CHECK( true == w.IsRanBar() );
+
+
+    /// Stand-alone Functions ///
+
+    s_calledFoo = false;
+
+    Task foo = CARAMEL_TASK_OF_BIND( Foo );  // No arguments is Ok!
+
+    CHECK( "Foo" == foo.Name() );
+
+    foo.Run();
+
+    CHECK( true == s_calledFoo );
 }
 
 
