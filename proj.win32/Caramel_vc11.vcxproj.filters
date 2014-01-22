@@ -171,6 +171,9 @@
     <Filter Include="4. Non-Win32 Platform\Apple">
       <UniqueIdentifier>{daa7b010-227a-4a43-92a3-d208d54175c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\Chrono\Detail">
+      <UniqueIdentifier>{7e36b374-3603-417f-bc2d-52ea2b9f5668}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Caramel.h">
@@ -622,6 +625,9 @@
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Concurrent\BlockingQueue.h">
       <Filter>1. Public Packages\Concurrent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Chrono\Detail\StdChronoConvert.h">
+      <Filter>1. Public Packages\Chrono\Detail</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

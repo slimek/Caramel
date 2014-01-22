@@ -6,6 +6,7 @@
 
 #include <Caramel/Caramel.h>
 #include <Caramel/Chrono/TickClock.h>
+#include <Caramel/Chrono/Detail/StdChronoConvert.h>
 #include <Caramel/Thread/MutexLocks.h>
 #include <boost/noncopyable.hpp>
 #include <condition_variable>
@@ -41,9 +42,9 @@ public:
 
     // true  - Pop an element
     // false - Timeout, or pulsed by PulseAll()
-    Bool PopOrWait( T& value, const Ticks& ticks );
+    Bool PopOrWaitFor( T& value, const Ticks& ticks );
 
-    // All waiting threads will return from PopOrWait() with false.
+    // All waiting threads will return from PopOrWait().
     void PulseAll();
 
 
@@ -92,13 +93,13 @@ inline void BlockingQueue< T >::Push( T&& value )
 
 
 template< typename T >
-inline Bool BlockingQueue< T >::PopOrWait( T& value, const Ticks& ticks )
+inline Bool BlockingQueue< T >::PopOrWaitFor( T& value, const Ticks& ticks )
 {
     auto ulock = UniqueLock( m_queueMutex );
 
     if ( m_queue.empty() )
     {
-        m_available.wait_for( ulock, ticks );
+        m_available.wait_for( ulock, Detail::StdChronoDuration( ticks ));
 
         if ( m_queue.empty() ) { return false; }
 
