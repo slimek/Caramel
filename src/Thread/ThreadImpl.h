@@ -27,8 +27,6 @@ public:
 
     ThreadImpl( const std::string& name, WorkFunction work );
 
-    void Join();
-
 
 private:
 

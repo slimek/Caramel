@@ -9,6 +9,7 @@
 #include <Caramel/Async/TimedBool.h>
 #include <Caramel/Chrono/TickClock.h>
 #include <Caramel/String/Format.h>
+#include <algorithm>
 
 
 namespace Caramel
@@ -417,21 +418,23 @@ WorkerThreadImpl::WorkerThreadImpl( const std::string& name, WorkerThread* host 
 
 void WorkerThreadImpl::Execute()
 {
+    const auto maxDelay = Ticks( 10000 );  // 10 seconds
+
     for ( ;; )
     {
-        if ( m_stopped ) { return; }
+        if ( m_stopped ) { break; }
 
         // Step 1 : Move all expired delay works to strand or ready queue
 
         const TickPoint now = TickClock::Now();
-        auto nextDelay = Ticks::MaxValue();
+        auto nextDelay = maxDelay;
 
         TickPoint dueTime;
         while ( m_delayTasks.PeekTopKey( dueTime ))
         {
             if ( now < dueTime )
             {
-                nextDelay = dueTime - now;
+                nextDelay = std::min( maxDelay, Ticks( dueTime - now ));
                 break;
             }
 

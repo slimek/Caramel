@@ -103,12 +103,6 @@ void ThreadImpl::RunWork()
 }
 
 
-void ThreadImpl::Join()
-{
-    m_thread->join();
-}
-
-
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Thread ID
