@@ -74,6 +74,17 @@ private:
 };
 
 
+//
+// Make Task
+// - Helper function to make an anonymous task object
+//
+
+inline Task MakeTask( const std::string& name, TaskFunction&& f )
+{
+    return Task( name, std::move( f ));
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // namespace Caramel
