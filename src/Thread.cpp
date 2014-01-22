@@ -60,6 +60,13 @@ void Thread::Join()
 }
 
 
+void Thread::Detach()
+{
+    CARAMEL_ASSERT( m_impl );
+    m_impl->m_thread->detach();
+}
+
+
 //
 // Properties
 //

@@ -36,6 +36,7 @@ public:
     void Start( const std::string& name, WorkFunction work );
 
     void Join();
+    void Detach();
 
 
     /// Properties ///

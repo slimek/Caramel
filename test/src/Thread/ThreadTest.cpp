@@ -43,6 +43,12 @@ TEST( ThreadTest )
     t3.Join();
 
     CHECK_CLOSE( clock.Slice(), Ticks( 110 ), Ticks( 10 ));
+
+    Thread t4( "Execute4", [=] { ThisThread::SleepFor( Ticks( 100 )); } );
+    t4.Detach();
+
+    // Detach returns immediately
+    CHECK_CLOSE( clock.Slice(), Ticks( 10 ), Ticks( 10 ));
 }
 
 
