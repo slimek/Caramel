@@ -8,6 +8,7 @@
 #include "Task/WorkerThreadImpl.h"
 #include <Caramel/Async/TimedBool.h>
 #include <Caramel/Chrono/TickClock.h>
+#include <Caramel/String/Format.h>
 
 
 namespace Caramel
@@ -410,7 +411,7 @@ WorkerThreadImpl::WorkerThreadImpl( const std::string& name, WorkerThread* host 
     , m_host( host )
     , m_stopped( false )
 {
-    m_thread.reset( new Thread( "Worker:" + name, [=] { this->Execute(); } ) );
+    m_thread.reset( new Thread( Format( "Worker[{0}]", name ), [=] { this->Execute(); } ) );
 }
 
 
