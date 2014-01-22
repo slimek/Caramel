@@ -9,6 +9,9 @@
 namespace Caramel
 {
 
+SUITE( ConcurrentPriorityQueueSuite )
+{
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Priority Queue Test
@@ -41,7 +44,7 @@ TEST( PriorityQueueTest )
 
     // Smallest first
     {
-        typedef Concurrent::PriorityQueue< Int, std::string, std::greater< Int > > QueueType;
+        typedef Concurrent::ReversePriorityQueue< Int, std::string > QueueType;
         QueueType queue;
 
         queue.Push( 1, "one" );
@@ -99,5 +102,7 @@ TEST( PriorityQueueTest )
 
 
 ///////////////////////////////////////////////////////////////////////////////
+
+} // SUITE ConcurrentPriorityQueueSuite
 
 } // namespace Caramel

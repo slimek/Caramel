@@ -25,7 +25,8 @@ namespace Concurrent
 //   The default compare is std::less, which results in
 //   the value with the LARGEST key would be popped first.
 //
-//   If you want the SMALLEST key popped first, use std::greater.   
+//   If you want the SMALLEST key popped first, use std::greater in KeyCompare,
+//   or use the type alias ReversePriorityQueue.
 //
 
 template< typename Key, typename Value, typename KeyCompare = std::less< Key > >
@@ -80,6 +81,18 @@ private:
 
     mutable std::mutex m_queueMutex;
 };
+
+
+//
+// Reverse Priority Queue
+// - SMALLEST key would be popped first.
+//
+//   Example: For a timer queue, the smallest due time should be processed first.
+//
+
+template< typename Key, typename Value >
+class ReversePriorityQueue : public PriorityQueue< Key, Value, std::greater< Key > >
+{};
 
 
 ///////////////////////////////////////////////////////////////////////////////
