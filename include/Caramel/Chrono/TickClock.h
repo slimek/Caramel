@@ -7,6 +7,7 @@
 #include <Caramel/Caramel.h>
 #include <Caramel/Chrono/SteadyClock.h>
 #include <Caramel/Numeric/NumberConvertible.h>
+#include <chrono>
 
 
 namespace Caramel
@@ -51,6 +52,9 @@ public:
 
     Int64 ToInt64()  const { return this->count(); }
     Int32 ToInt32()  const { return static_cast< Int32 >( this->count() ); }
+
+    typedef std::chrono::duration< Int64, std::milli > StdDuration;
+    StdDuration ToStdDuration() const { return StdDuration( this->count() ); }
 };
 
 

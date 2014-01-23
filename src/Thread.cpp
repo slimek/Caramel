@@ -207,8 +207,7 @@ ThreadId ThisThread::GetId()
 
 void ThisThread::SleepFor( const Ticks& duration )
 {
-    const std::chrono::milliseconds ms( duration.count() );
-    std::this_thread::sleep_for( ms );
+    std::this_thread::sleep_for( duration.ToStdDuration() );
 }
 
 

@@ -6,7 +6,6 @@
 
 #include <Caramel/Caramel.h>
 #include <Caramel/Chrono/TickClock.h>
-#include <Caramel/Chrono/Detail/StdChronoConvert.h>
 #include <Caramel/Error/Exception.h>
 #include <Caramel/Thread/MutexLocks.h>
 #include <boost/noncopyable.hpp>
@@ -133,7 +132,7 @@ inline Bool BlockingQueue< T >::PopOrWaitFor( T& value, const Ticks& ticks )
     {
         if ( m_completed ) { return false; }
 
-        m_available.wait_for( ulock, Detail::StdChronoDuration( ticks ));
+        m_available.wait_for( ulock, ticks.ToStdDuration() );
 
         if ( m_queue.empty() ) { return false; }
 
