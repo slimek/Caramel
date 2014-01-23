@@ -105,7 +105,7 @@ TEST( WorkerThreadDelayTest )
 
         slowReady.Wait();
 
-        CHECK_CLOSE( clock.Slice(), Ticks( 110 ), Ticks( 10 ));
+        CHECK_CLOSE( Ticks( 110 ), clock.Slice(), Ticks( 10 ));
     }
 
 

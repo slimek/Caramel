@@ -355,7 +355,7 @@ WorkerThread::~WorkerThread()
         CARAMEL_ALERT( "WorkerThread[%s] not stopped before destroyed", m_impl->m_name );
         
         m_impl->m_stopped = true;
-        m_impl->m_readyTasks.PulseAll();
+        m_impl->m_readyTasks.Complete();
         m_impl->m_thread->Detach();
     }
 }
@@ -392,7 +392,7 @@ void WorkerThread::Submit( Task& task )
 void WorkerThread::Stop()
 {
     m_impl->m_stopped = true;
-    m_impl->m_readyTasks.PulseAll();
+    m_impl->m_readyTasks.Complete();
     m_impl->m_thread->Join();
 }
 
