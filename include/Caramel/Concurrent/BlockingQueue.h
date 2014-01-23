@@ -50,12 +50,10 @@ public:
     // Force all waiting threads return from PopOrWaitFor().
     void PulseAll();
 
-    //
-    // Make this queue accepting no more pushes. This has 3 effects:
+    // Make this queue accepting NO MORE pushes. This has 3 effects:
     //   1. All current waiting threads would return from PopOrWaitFor().
-    //   2. Push() after this function would throw exceptions.
-    //   3. PopOrWaitFor() after this function would return immediately with false.
-    //
+    //   2. Later Push() would throw exceptions.
+    //   3. If this queue becomes empty, later PopOrWaitFor() would return false immediately.
     void Complete();
 
 
