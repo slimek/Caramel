@@ -2,6 +2,7 @@
 
 #include "CaramelTestPch.h"
 
+#include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Task/Strand.h>
 #include <Caramel/Task/TaskPoller.h>
 #include <Caramel/Thread/ThisThread.h>
@@ -12,41 +13,75 @@
 namespace Caramel
 {
 
+SUITE( TaskPollerSuite )
+{
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Task Poller Test
 //
 
-SUITE( TaskPollerSuite )
+TEST( TaskPollerNormalTest )
 {
+    TaskPoller poller;
+
+
+    /// Execute One Task ///
+
+    Bool done1 = false;
+
+    poller.Submit( Task( "Normal1", [&] { done1 = true; } ));
+    poller.PollOne();
+
+    CHECK( true == done1 );
+
+
+    /// Execute Many Tasks - Repeat 100 times ///
+
+    for ( Uint rp = 0; rp < 100; ++ rp )
+    {
+        Int counter = 0;
+
+        for ( Uint i = 0; i < 100; ++ i )
+        {
+            poller.Submit( Task( "Counter", [&] { ++ counter; } ));
+        }
+
+        poller.PollFor( Ticks( 50 ));
+
+        CHECK( 100 == counter );
+    }
+}
+
 
 TEST( TaskPollerDelayTest )
 {
     TaskPoller poller;
 
-    Bool work1Done = false;
-    Bool work2Done = false;
+    /// One Delay Tasks ///
 
-    Task t1( "Work1", [&] { work1Done = true; } );
+    {
+        Bool slowDone = false;
+        Bool fastDone = false;
+        
+        Task slowTask( "Slow", [&] { slowDone = true; } );
+        slowTask.DelayFor( Ticks( 100 ));
 
-    poller.Submit( t1 );
-    poller.PollOne();
+        Task fastTask( "Fast", [&] { fastDone = true; } );
 
-    CHECK( true == work1Done );
+        poller.Submit( slowTask );
+        poller.Submit( fastTask );
+        poller.PollOne();
 
-    Task t2( "Work2", [&] { work2Done = true; } );
-    t2.DelayFor( Ticks( 500 ));
+        CHECK( true  == fastDone );
+        CHECK( false == slowDone );
 
-    poller.Submit( t2 );
-    poller.PollOne();
+        ThisThread::SleepFor( Ticks( 100 ));
 
-    CHECK( false == work2Done );
+        poller.PollOne();
 
-    ThisThread::SleepFor( Ticks( 500 ));
-
-    poller.PollOne();
-
-    CHECK( true == work2Done );
+        CHECK( true == slowDone );
+    }
 }
 
 
