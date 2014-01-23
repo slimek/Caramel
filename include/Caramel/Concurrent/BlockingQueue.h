@@ -7,6 +7,7 @@
 #include <Caramel/Caramel.h>
 #include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Chrono/Detail/StdChronoConvert.h>
+#include <Caramel/Error/Exception.h>
 #include <Caramel/Thread/MutexLocks.h>
 #include <boost/noncopyable.hpp>
 #include <condition_variable>
@@ -30,6 +31,9 @@ class BlockingQueue : public boost::noncopyable
 {
 public:
 
+    BlockingQueue();
+
+
     /// Properties ///
 
     Bool IsEmpty() const { return m_queue.empty(); }
@@ -41,11 +45,19 @@ public:
     void Push( T&& value );
 
     // true  - Pop an element
-    // false - Timeout, or pulsed by PulseAll()
+    // false - Timeout, or pulsed by PulseAll() and Complete()
     Bool PopOrWaitFor( T& value, const Ticks& ticks );
 
-    // All waiting threads will return from PopOrWait().
+    // Force all waiting threads return from PopOrWaitFor().
     void PulseAll();
+
+    //
+    // Make this queue accepting no more pushes. This has 3 effects:
+    //   1. All current waiting threads would return from PopOrWaitFor().
+    //   2. Push() after this function would throw exceptions.
+    //   3. PopOrWaitFor() after this function would return immediately with false.
+    //
+    void Complete();
 
 
 private:
@@ -53,9 +65,10 @@ private:
     typedef std::deque< T > QueueType;
     QueueType m_queue;
 
+    Bool m_completed;
+
     std::mutex m_queueMutex;
     std::condition_variable m_available;
-
 };
 
 
@@ -63,6 +76,13 @@ private:
 //
 // Implementation
 //
+
+template< typename T >
+inline BlockingQueue< T >::BlockingQueue()
+    : m_completed( false )
+{
+}
+
 
 //
 // Operations
@@ -73,6 +93,12 @@ inline void BlockingQueue< T >::Push( const T& value )
 {
     {
         auto ulock = UniqueLock( m_queueMutex );
+
+        if ( m_completed )
+        {
+            CARAMEL_THROW( "BlockingQueue has been completed" );
+        }
+
         m_queue.push_back( value );
     }
 
@@ -85,6 +111,12 @@ inline void BlockingQueue< T >::Push( T&& value )
 {
     {
         auto ulock = UniqueLock( m_queueMutex );
+
+        if ( m_completed )
+        {
+            CARAMEL_THROW( "BlockingQueue has been completed" );
+        }
+
         m_queue.push_back( std::move( value ));
     }
 
@@ -99,6 +131,8 @@ inline Bool BlockingQueue< T >::PopOrWaitFor( T& value, const Ticks& ticks )
 
     if ( m_queue.empty() )
     {
+        if ( m_completed ) { return false; }
+
         m_available.wait_for( ulock, Detail::StdChronoDuration( ticks ));
 
         if ( m_queue.empty() ) { return false; }
@@ -114,13 +148,21 @@ inline Bool BlockingQueue< T >::PopOrWaitFor( T& value, const Ticks& ticks )
 }
 
 
-//
-// Waiting Available
-//
-
 template< typename T >
 inline void BlockingQueue< T >::PulseAll()
 {
+    m_available.notify_all();
+}
+
+
+template< typename T >
+inline void BlockingQueue< T >::Complete()
+{
+    {
+        auto ulock = UniqueLock( m_queueMutex );
+        m_completed = true;
+    }
+
     m_available.notify_all();
 }
 

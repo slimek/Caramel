@@ -70,6 +70,23 @@ TEST( BlockingQueueBasicTest )
         CHECK( 125   == value );
 
         CHECK( true == iqueue.IsEmpty() );
+
+
+        // Complete
+
+        std::async( std::launch::async, [&]
+        {
+            ThisThread::SleepFor( Ticks( 100 ));
+            iqueue.Complete();
+        });
+
+        CHECK( false == iqueue.PopOrWaitFor( value, Ticks( 200 )));
+        
+        clock.Reset();
+        CHECK( false == iqueue.PopOrWaitFor( value, Ticks( 100 )));  // should return immediately
+        CHECK_CLOSE( Ticks( 0 ), clock.Slice(), Ticks( 10 ));
+
+        CHECK_THROW( iqueue.Push( 83 ), Caramel::Exception );
     }
 
     
