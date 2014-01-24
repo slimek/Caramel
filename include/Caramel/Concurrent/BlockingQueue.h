@@ -45,7 +45,7 @@ public:
 
     // true  - Pop an element
     // false - Timeout, or pulsed by PulseAll() and Complete()
-    Bool PopOrWaitFor( T& value, const Ticks& ticks );
+    Bool PopOrWaitFor( T& value, const Ticks& relTime );
 
     // Force all waiting threads return from PopOrWaitFor().
     void PulseAll();
@@ -122,7 +122,7 @@ inline void BlockingQueue< T >::Push( T&& value )
 
 
 template< typename T >
-inline Bool BlockingQueue< T >::PopOrWaitFor( T& value, const Ticks& ticks )
+inline Bool BlockingQueue< T >::PopOrWaitFor( T& value, const Ticks& relTime )
 {
     auto ulock = UniqueLock( m_queueMutex );
 
@@ -130,7 +130,7 @@ inline Bool BlockingQueue< T >::PopOrWaitFor( T& value, const Ticks& ticks )
     {
         if ( m_completed ) { return false; }
 
-        m_available.wait_for( ulock, ticks.ToStdDuration() );
+        m_available.wait_for( ulock, relTime.ToStdDuration() );
 
         if ( m_queue.empty() ) { return false; }
 
