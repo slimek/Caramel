@@ -2,6 +2,7 @@
 
 #include "CaramelTestPch.h"
 
+#include <Caramel/Error/Alert.h>
 #include <Caramel/Program/ConsoleApplication.h>
 #include <Caramel/Program/ProgramOptions.h>
 #include <UnitTest++/UnitTest++.h>
@@ -31,6 +32,8 @@ private:
 Int RunTest::Main()
 {
     ProgramOptions::ParseArguments( this->GetArguments() );
+
+    SetAlertHandler( ThrowAlertHandler );
 
     Int result = 0;
     

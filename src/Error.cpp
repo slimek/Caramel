@@ -238,7 +238,7 @@ AlertResult DefaultAlertHandler(
     }
     #else
     {
-        throw Exception( line, file, function, "Assert failed: " + message );
+        ThrowAlertHandler( line, file, function, message );
     }
     #endif
 
@@ -258,6 +258,16 @@ AlertResult TraceAlertHandler(
     );
 
     return ALERT_RESULT_CONTINUE_ALL;
+}
+
+
+AlertResult ThrowAlertHandler(
+    Int line, const std::string& file, const std::string& function,
+    const std::string& message )
+{
+    throw Exception( line, file, function, "Assert failed: " + message );
+
+    // No return value.
 }
 
 

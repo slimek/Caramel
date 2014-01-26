@@ -81,6 +81,13 @@ AlertResult TraceAlertHandler(
 );
 
 
+// Throws a Caramel::Exception
+AlertResult ThrowAlertHandler(
+    Int line, const std::string& file, const std::string& function,
+    const std::string& message
+);
+
+
 } // namespace Caramel
 
 ///////////////////////////////////////////////////////////////////////////////

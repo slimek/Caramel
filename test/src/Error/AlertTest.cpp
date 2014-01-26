@@ -35,13 +35,30 @@ AlertResult LocalAlertHandler(
 
 TEST( AlertTest )
 {
-    SetAlertHandler( LocalAlertHandler );
+    auto oldHandler = SetAlertHandler( LocalAlertHandler );
 
     CARAMEL_ASSERT( 0 == 1 );
 
     CHECK( s_fileBuffer     == __FILE__ );
     CHECK( s_functionBuffer == __FUNCTION__ );
     CHECK( s_messageBuffer  == "0 == 1" );
+
+
+    // Throw Handler
+
+    SetAlertHandler( ThrowAlertHandler );
+
+    try
+    {
+        CARAMEL_ALERT( "Hello Alert!" );
+    }
+    catch ( Exception& x )
+    {
+        CHECK( "Assert failed: Hello Alert!" == x.What() );
+    }
+
+
+    SetAlertHandler( oldHandler );
 }
 
 
