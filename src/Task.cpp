@@ -380,7 +380,7 @@ void WorkerThread::Submit( Task& task )
     }
     else if ( task.HasStrand() )
     {
-        CARAMEL_NOT_IMPLEMENTED();
+        task.PushToStrand( *this );
     }
     else
     {
@@ -443,7 +443,7 @@ void WorkerThreadImpl::Execute()
             CARAMEL_VERIFY( m_delayTasks.TryPop( exTask ));
             if ( exTask.HasStrand() )
             {
-                CARAMEL_NOT_IMPLEMENTED();
+                exTask.PushToStrand( *m_host );
             }
             else
             {
