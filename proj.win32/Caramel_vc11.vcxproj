@@ -54,6 +54,7 @@
     <ClInclude Include="..\include\Caramel\Document\IniDocument.h" />
     <ClInclude Include="..\include\Caramel\Document\IniSection.h" />
     <ClInclude Include="..\include\Caramel\Enum\EnumLookupTable.h" />
+    <ClInclude Include="..\include\Caramel\Enum\Flags.h" />
     <ClInclude Include="..\include\Caramel\Error\Alert.h" />
     <ClInclude Include="..\include\Caramel\Error\Assert.h" />
     <ClInclude Include="..\include\Caramel\Error\Detail\ExceptionCatcherCore.h" />

@@ -184,6 +184,9 @@
     <ClCompile Include="..\src\Concurrent\ConcurrentBlockingQueueTest.cpp">
       <Filter>2. Tests\Concurrent</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Enum\FlagsTest.cpp">
+      <Filter>2. Tests\Enum</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">
