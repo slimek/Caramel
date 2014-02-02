@@ -59,6 +59,21 @@ private:
 
     Task* m_host;
 
+    /// State ///
+
+    enum State
+    {
+        TASK_S_INITIAL          = 0x01,
+        TASK_S_DELAYING         = 0x02,
+        TASK_S_WAITING          = 0x04,
+        TASK_S_READY            = 0x08,
+        TASK_S_RUNNING          = 0x10,
+        TASK_S_RAN_TO_COMPLETE  = 0x20,
+    
+    } m_state;
+
+    std::mutex m_stateMutex;
+
     
     /// Delay ///
 
