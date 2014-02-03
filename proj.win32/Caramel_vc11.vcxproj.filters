@@ -620,6 +620,12 @@
     <ClInclude Include="..\include\Caramel\Enum\Flags.h">
       <Filter>1. Public Packages\Enum</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Task\TaskCore.h">
+      <Filter>1. Public Packages\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Task\Detail\TaskHolders.h">
+      <Filter>1. Public Packages\Task\Detail headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

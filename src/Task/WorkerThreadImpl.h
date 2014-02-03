@@ -43,8 +43,8 @@ private:
     std::unique_ptr< Thread > m_thread;
     Bool m_stopped;
 
-    Concurrent::ReversePriorityQueue< TickPoint, Task > m_delayTasks;
-    Concurrent::BlockingQueue< Task > m_readyTasks;
+    Concurrent::ReversePriorityQueue< TickPoint, TaskCore > m_delayTasks;
+    Concurrent::BlockingQueue< TaskCore > m_readyTasks;
 };
 
 

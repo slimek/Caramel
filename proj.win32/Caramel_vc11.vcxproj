@@ -108,7 +108,9 @@
     <ClInclude Include="..\include\Caramel\String\ToString.h" />
     <ClInclude Include="..\include\Caramel\String\Utf8String.h" />
     <ClInclude Include="..\include\Caramel\Task\Detail\TaskFwd.h" />
+    <ClInclude Include="..\include\Caramel\Task\Detail\TaskHolders.h" />
     <ClInclude Include="..\include\Caramel\Task\Task.h" />
+    <ClInclude Include="..\include\Caramel\Task\TaskCore.h" />
     <ClInclude Include="..\include\Caramel\Task\TaskExecutor.h" />
     <ClInclude Include="..\include\Caramel\Task\TaskPoller.h" />
     <ClInclude Include="..\include\Caramel\Task\WorkerThread.h" />

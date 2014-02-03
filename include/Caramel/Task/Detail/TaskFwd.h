@@ -13,20 +13,27 @@ namespace Caramel
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Typedefs
-//
-
-typedef std::function< void() > TaskFunction;
-
-
-///////////////////////////////////////////////////////////////////////////////
-//
 // Forwards Declaration
 //
 
-class Task;
 class TaskExecutor;
 class TaskPoller;
+class WorkerThread;
+
+class TaskCore;
+
+template< typename Result >
+class Task;
+
+namespace Detail
+{
+
+class TaskHolder;
+
+template< typename Result >
+class BasicTask;
+
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////

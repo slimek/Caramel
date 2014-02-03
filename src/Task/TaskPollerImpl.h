@@ -42,10 +42,10 @@ private:
 
     TaskPoller* m_host;
 
-    typedef Concurrent::PriorityQueue< TickPoint, Task > DelayedTaskQueue;
+    typedef Concurrent::PriorityQueue< TickPoint, TaskCore > DelayedTaskQueue;
     DelayedTaskQueue m_delayedTasks;
 
-    typedef Concurrent::Queue< Task > ReadyTaskQueue;
+    typedef Concurrent::Queue< TaskCore > ReadyTaskQueue;
     ReadyTaskQueue m_readyTasks;
 };
 

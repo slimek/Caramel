@@ -26,13 +26,13 @@ public:
     
     virtual ~TaskExecutor() {}
 
-    virtual void Submit( Task& task ) = 0;
+    virtual void Submit( TaskCore& task ) = 0;
 
 
 private:
 
     // This function is only called by Task internally.
-    virtual void AddReadyTask( Task& task ) = 0;
+    virtual void AddReadyTask( TaskCore& task ) = 0;
 
 };
 

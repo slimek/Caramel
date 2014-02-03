@@ -7,6 +7,8 @@
 #include <Caramel/Caramel.h>
 #include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Task/Detail/TaskFwd.h>
+#include <Caramel/Task/Detail/TaskHolders.h>
+#include <Caramel/Task/TaskCore.h>
 
 
 namespace Caramel
@@ -17,49 +19,53 @@ namespace Caramel
 // Task
 //
 
-class TaskImpl;
-
-class Task
+template< typename Result >
+class Task : public TaskCore
 {
 public:
+    
+    typedef Result ResultType;
+    typedef std::function< Result() > TaskFunction;
 
-    Task();  // Create a "not-a-task". Submit it results in exception.
+
+    /// Creation ///
+
+    Task() {}  // Create a "not-a-task". Submit it results in exception.
 
     Task( const std::string& name, TaskFunction&& f );
 
 
-    /// Setup Task Scheduling ///
+    /// Scheduling ///
 
-    // This task waits due time before scheduling
-    Task& DelayFor( const Ticks& ticks );
+    Task& DelayFor( const Ticks& duration );
 
-
-    /// Properties ///
-
-    Bool IsValid() const;  // Returns false if "Not a task"
-
-    std::string Name() const;
-
-    Bool IsCompleted() const;  // "Ran to Completion" or Cancelled
-
-    // Delay
-    Bool  HasDelay()         const;
-    Ticks GetDelayDuration() const;
+};
 
 
-    //
-    // Post-Submit Functions
-    // - This function should only be called by TaskExecutor
-    //
+//
+// Specialization for void - Tasks return no values
+//
 
-    void StartDelay( TaskExecutor& te );
+template<>
+class Task< void > : public TaskCore
+{
+public:
 
-    void Run();
+    typedef void ResultType;
+    typedef std::function< void() > TaskFunction;
 
 
-private:
+    /// Creation ///
 
-    std::shared_ptr< TaskImpl > m_impl;
+    Task() {}  // Create a "not-a-task". Submit it results in exception.
+
+    Task( const std::string& name, TaskFunction&& f );
+
+
+    /// Scheduling ///
+
+    Task& DelayFor( const Ticks& duration );
+
 };
 
 
@@ -68,15 +74,13 @@ private:
 // - Helper function to make an anonymous task object
 //
 
-inline Task MakeTask( const std::string& name, TaskFunction&& f )
+template< typename Function >
+inline auto MakeTask( const std::string& name, Function&& f ) -> Task< decltype( f() ) >
 {
-    return Task( name, std::move( f ));
+    return Task< decltype( f() ) >( name, std::move( f ));
 }
 
 
-} // namespace Caramel
-
-///////////////////////////////////////////////////////////////////////////////
 //
 // Macros
 //
@@ -92,5 +96,48 @@ inline Task MakeTask( const std::string& name, TaskFunction&& f )
 
 
 ///////////////////////////////////////////////////////////////////////////////
+//
+// Implementation
+//
+
+//
+// Task< Result >
+//
+
+template< typename Result >
+inline Task< Result >::Task( const std::string& name, TaskFunction&& f )
+    : TaskCore( name, new Detail::BasicTask< Result >( std::move( f )))
+{
+}
+
+
+template< typename Result >
+inline Task< Result >& Task< Result >::DelayFor( const Ticks& duration )
+{
+    this->DoDelayFor( duration );
+    return *this;
+}
+
+
+//
+// Task< void >
+//
+
+inline Task< void >::Task( const std::string& name, TaskFunction&& f )
+    : TaskCore( name, new Detail::BasicTask< void >( std::move( f )))
+{
+}
+
+
+inline Task< void >& Task< void >::DelayFor( const Ticks& duration )
+{
+    this->DoDelayFor( duration );
+    return *this;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+
+} // namespace Caramel
 
 #endif // __CARAMEL_TASK_TASK_H

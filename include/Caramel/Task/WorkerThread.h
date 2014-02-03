@@ -26,7 +26,7 @@ public:
     explicit WorkerThread( const std::string& name );
     ~WorkerThread();
 
-    void Submit( Task& task ) override;
+    void Submit( TaskCore& task ) override;
 
     // Blocks the calling thread, until the internal thread joined.
     void Stop();
@@ -34,7 +34,7 @@ public:
 
 private:
 
-    void AddReadyTask( Task& task ) override;
+    void AddReadyTask( TaskCore& task ) override;
 
     std::shared_ptr< WorkerThreadImpl > m_impl;
 };

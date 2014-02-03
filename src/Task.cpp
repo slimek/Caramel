@@ -27,26 +27,29 @@ namespace Caramel
 // Task
 //
 
-Task::Task()
+TaskCore::TaskCore()
     : m_impl( new TaskImpl )
 {
-    m_impl->m_host = this;
 }
 
 
-Task::Task( const std::string& name, TaskFunction&& f )
-    : m_impl( new TaskImpl( name, std::move( f )))
+TaskCore::TaskCore( const std::string& name, TaskHolder* holder )
+    : m_impl( new TaskImpl( name, holder ))
 {
-    m_impl->m_host = this;
 }
 
 
-Task& Task::DelayFor( const Ticks& duration )
+void TaskCore::DoDelayFor( const Ticks& duration )
 {
     CARAMEL_CHECK( m_impl->IsValid() );
-
     m_impl->DelayFor( duration );
-    return *this;
+}
+
+
+void TaskCore::Run()
+{
+    CARAMEL_CHECK( m_impl->IsValid() );
+    m_impl->Run();
 }
 
 
@@ -54,29 +57,21 @@ Task& Task::DelayFor( const Ticks& duration )
 // Internal Functions - Call by TaskExecutor
 //
 
-void Task::StartDelay( TaskExecutor& executor )
-{
-}
-
-
-void Task::Run()
-{
-    CARAMEL_CHECK( m_impl->IsValid() );
-
-    m_impl->Run();
-}
+//void TaskCore::StartDelay( TaskExecutor& executor )
+//{
+//}
 
 
 //
 // Properties
 //
 
-Bool Task::IsValid() const { return m_impl->IsValid(); }
+Bool TaskCore::IsValid() const { return m_impl->IsValid(); }
 
-std::string Task::Name() const { return m_impl->m_name; }
+std::string TaskCore::Name() const { return m_impl->m_name; }
 
-Bool  Task::HasDelay()         const { return m_impl->m_hasDelay; }
-Ticks Task::GetDelayDuration() const { return m_impl->m_delayDuration; }
+Bool  TaskCore::HasDelay()         const { return m_impl->m_hasDelay; }
+Ticks TaskCore::GetDelayDuration() const { return m_impl->m_delayDuration; }
 
 
 //
@@ -91,9 +86,9 @@ TaskImpl::TaskImpl()
 }
 
 
-TaskImpl::TaskImpl( const std::string& name, TaskFunction&& f )
+TaskImpl::TaskImpl( const std::string& name, TaskHolder* holder )
     : m_name( name )
-    , m_function( f )
+    , m_holder( holder )
     , m_hasDelay( false )
     , m_executor( nullptr )
 {
@@ -111,7 +106,7 @@ void TaskImpl::DelayFor( const Ticks& duration )
 
 void TaskImpl::Run()
 {
-    m_function();
+    m_holder->Invoke();
 }
 
 
@@ -148,7 +143,7 @@ TaskPoller::TaskPoller()
 }
 
 
-void TaskPoller::Submit( Task& task )
+void TaskPoller::Submit( TaskCore& task )
 {
     if ( task.HasDelay() )
     {
@@ -162,7 +157,7 @@ void TaskPoller::Submit( Task& task )
 }
 
 
-void TaskPoller::AddReadyTask( Task& task )
+void TaskPoller::AddReadyTask( TaskCore& task )
 {
     m_impl->m_readyTasks.Push( task );
 }
@@ -199,14 +194,14 @@ void TaskPollerImpl::PollFor( const Ticks& sliceTicks )
 
         if ( TickClock::Now() < dueTime ) { break; }
 
-        Task task;
+        TaskCore task;
         m_delayedTasks.TryPop( task );
         m_readyTasks.Push( task );
     }
 
     TimedBool< TickClock > sliceTimeout( sliceTicks );
 
-    Task task;
+    TaskCore task;
 
     while ( m_readyTasks.TryPop( task ))
     {
@@ -241,7 +236,7 @@ WorkerThread::~WorkerThread()
 }
 
 
-void WorkerThread::Submit( Task& task )
+void WorkerThread::Submit( TaskCore& task )
 {
     if ( task.HasDelay() )
     {
@@ -273,7 +268,7 @@ void WorkerThread::Stop()
 }
 
 
-void WorkerThread::AddReadyTask( Task& task )
+void WorkerThread::AddReadyTask( TaskCore& task )
 {
     m_impl->m_readyTasks.Push( task );
 }
@@ -314,7 +309,7 @@ void WorkerThreadImpl::Execute()
                 break;
             }
 
-            Task exTask;  // expired task
+            TaskCore exTask;  // expired task
 
             CARAMEL_VERIFY( m_delayTasks.TryPop( exTask ));
             m_readyTasks.Push( exTask );
@@ -323,7 +318,7 @@ void WorkerThreadImpl::Execute()
 
         // Step 2 : Run the task or wait
 
-        Task task;
+        TaskCore task;
         if ( m_readyTasks.PopOrWaitFor( task, nextDelay ))
         {
             task.Run();
