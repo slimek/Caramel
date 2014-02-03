@@ -29,6 +29,7 @@
 		6DA1099F1856ABA700588AA2 /* Trace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DA109861856ABA700588AA2 /* Trace.cpp */; };
 		6DA109A01856ABA700588AA2 /* Value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DA1098A1856ABA700588AA2 /* Value.cpp */; };
 		6DA109A11856ABA700588AA2 /* Windows.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DA1098B1856ABA700588AA2 /* Windows.cpp */; };
+		6DB1B754189F2E52004D2E91 /* Apple.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DB1B753189F2E52004D2E91 /* Apple.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -180,6 +181,8 @@
 		6DA1098A1856ABA700588AA2 /* Value.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Value.cpp; sourceTree = "<group>"; };
 		6DA1098B1856ABA700588AA2 /* Windows.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Windows.cpp; sourceTree = "<group>"; };
 		6DAFE0ED1815118B00859097 /* libCaramel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCaramel.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DB1B753189F2E52004D2E91 /* Apple.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Apple.mm; sourceTree = "<group>"; };
+		6DB1B756189F2E62004D2E91 /* LogTraceAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogTraceAdapter.h; sourceTree = "<group>"; };
 		6DD0E7A4186C3A6B00414066 /* NumberConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberConverter.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -208,6 +211,7 @@
 		6DA108D11856ABA700588AA2 /* Caramel */ = {
 			isa = PBXGroup;
 			children = (
+				6DB1B755189F2E62004D2E91 /* Apple */,
 				6DA108D21856ABA700588AA2 /* Async */,
 				6DA108D51856ABA700588AA2 /* Caramel.h */,
 				6DA108D61856ABA700588AA2 /* Chrono */,
@@ -558,6 +562,7 @@
 		6DA109481856ABA700588AA2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				6DB1B753189F2E52004D2E91 /* Apple.mm */,
 				6DA109491856ABA700588AA2 /* Caramel */,
 				6DA1094F1856ABA700588AA2 /* CaramelPch.cpp */,
 				6DA109501856ABA700588AA2 /* CaramelPch.h */,
@@ -773,6 +778,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		6DB1B755189F2E62004D2E91 /* Apple */ = {
+			isa = PBXGroup;
+			children = (
+				6DB1B756189F2E62004D2E91 /* LogTraceAdapter.h */,
+			);
+			path = Apple;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -842,6 +855,7 @@
 				6DA1099D1856ABA700588AA2 /* Task.cpp in Sources */,
 				6DA1099A1856ABA700588AA2 /* Random.cpp in Sources */,
 				6DA1099F1856ABA700588AA2 /* Trace.cpp in Sources */,
+				6DB1B754189F2E52004D2E91 /* Apple.mm in Sources */,
 				6DA109951856ABA700588AA2 /* Io.cpp in Sources */,
 				6DA109971856ABA700588AA2 /* Math.cpp in Sources */,
 			);
