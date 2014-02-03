@@ -626,6 +626,9 @@
     <ClInclude Include="..\include\Caramel\Task\Detail\TaskHolders.h">
       <Filter>1. Public Packages\Task\Detail headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Async\ValueChange.h">
+      <Filter>1. Public Packages\Async</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

@@ -26,6 +26,7 @@
     <ClInclude Include="..\include\Caramel\Async\FlowState.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEventQueue.h" />
     <ClInclude Include="..\include\Caramel\Async\TimedBool.h" />
+    <ClInclude Include="..\include\Caramel\Async\ValueChange.h" />
     <ClInclude Include="..\include\Caramel\Async\WaitableBool.h" />
     <ClInclude Include="..\include\Caramel\Caramel.h" />
     <ClInclude Include="..\include\Caramel\Chrono\SecondClock.h" />

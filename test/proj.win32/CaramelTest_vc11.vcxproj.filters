@@ -187,6 +187,9 @@
     <ClCompile Include="..\src\Enum\FlagsTest.cpp">
       <Filter>2. Tests\Enum</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Async\ValueChangeTest.cpp">
+      <Filter>2. Tests\Async</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">
