@@ -45,6 +45,8 @@ public:
 
     void Invoke();
 
+    Result GetResult() const { return m_result; }
+
 
 private:
 

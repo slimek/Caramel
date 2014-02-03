@@ -121,6 +121,20 @@ TEST( TaskOfBindMacroTest )
 }
 
 
+TEST( TaskWithResultTest )
+{
+    auto itask = MakeTask( "IntTask", [] { return 42; } );
+
+    itask.Run();
+    CHECK( 42 == itask.GetResult() );
+
+    auto stask = MakeTask( "StrTask", [] { return std::string( "Alice" ); } );
+
+    stask.Run();
+    CHECK( "Alice" == stask.GetResult() );
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE TaskSuite

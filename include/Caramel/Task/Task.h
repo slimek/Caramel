@@ -39,6 +39,11 @@ public:
 
     Task& DelayFor( const Ticks& duration );
 
+
+    /// Retrieve the Result ///
+
+    Result GetResult() const;
+
 };
 
 
@@ -116,6 +121,13 @@ inline Task< Result >& Task< Result >::DelayFor( const Ticks& duration )
 {
     this->DoDelayFor( duration );
     return *this;
+}
+
+
+template< typename Result >
+inline Result Task< Result >::GetResult() const
+{
+    return static_cast< const Detail::BasicTask< Result >* >( this->GetHolder() )->GetResult();
 }
 
 

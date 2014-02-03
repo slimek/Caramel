@@ -73,6 +73,8 @@ std::string TaskCore::Name() const { return m_impl->m_name; }
 Bool  TaskCore::HasDelay()         const { return m_impl->m_hasDelay; }
 Ticks TaskCore::GetDelayDuration() const { return m_impl->m_delayDuration; }
 
+const TaskHolder* TaskCore::GetHolder() const { return m_impl->m_holder.get(); }
+
 
 //
 // Implementation

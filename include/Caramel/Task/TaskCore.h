@@ -54,8 +54,11 @@ protected:
 
     void DoDelayFor( const Ticks& duration );
 
+    const Detail::TaskHolder* GetHolder() const;
+
 
     std::shared_ptr< TaskImpl > m_impl;
+
 };
 
 
