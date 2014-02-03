@@ -88,7 +88,7 @@ void StateMachine::PostEvent( const AnyEvent& evt )
 {
     CARAMEL_CHECK( m_impl->m_initiated );
 
-    Task task(
+    auto task = MakeTask(
         Sprintf( "Machine[%s].ProcessEvent[%d]", m_impl->m_name, evt.Id() ),
         [=] { m_impl->ProcessEvent( evt ); }
     );

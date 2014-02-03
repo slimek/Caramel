@@ -42,7 +42,7 @@ TEST( WorkerThreadNormalTest )
 
     Bool flag1 = false;
 
-    worker.Submit( Task( "Flag1", [&]
+    worker.Submit( MakeTask( "Flag1", [&]
     {
         flag1 = true;
         ready = true;
@@ -61,14 +61,14 @@ TEST( WorkerThreadNormalTest )
 
         for ( Uint j = 0; j < 100; ++ j )
         {
-            worker.Submit( Task( "Counter", [&]
+            worker.Submit( MakeTask( "Counter", [&]
             {
                 ++ counter;
             }));
         }
 
         ready = false;
-        worker.Submit( Task( "End", [&] { ready = true; } ));
+        worker.Submit( MakeTask( "End", [&] { ready = true; } ));
     
         ready.Wait();
 
@@ -89,10 +89,10 @@ TEST( WorkerThreadDelayTest )
         WaitableBool slowReady( false );
         WaitableBool fastReady( false );
 
-        Task slowTask( "Slow", [&] { slowReady = true; } );
+        auto slowTask = MakeTask( "Slow", [&] { slowReady = true; } );
         slowTask.DelayFor( Ticks( 100 ));
 
-        Task fastTask( "Fast", [&] { fastReady = true; } );
+        auto fastTask = MakeTask( "Fast", [&] { fastReady = true; } );
 
         TickClock clock;
 

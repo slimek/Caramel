@@ -29,7 +29,7 @@ TEST( TaskPollerNormalTest )
 
     Bool done1 = false;
 
-    poller.Submit( Task( "Normal1", [&] { done1 = true; } ));
+    poller.Submit( MakeTask( "Normal1", [&] { done1 = true; } ));
     poller.PollOne();
 
     CHECK( true == done1 );
@@ -43,7 +43,7 @@ TEST( TaskPollerNormalTest )
 
         for ( Uint i = 0; i < 100; ++ i )
         {
-            poller.Submit( Task( "Counter", [&] { ++ counter; } ));
+            poller.Submit( MakeTask( "Counter", [&] { ++ counter; } ));
         }
 
         poller.PollFor( Ticks( 50 ));
@@ -63,10 +63,10 @@ TEST( TaskPollerDelayTest )
         Bool slowDone = false;
         Bool fastDone = false;
         
-        Task slowTask( "Slow", [&] { slowDone = true; } );
+        auto slowTask = MakeTask( "Slow", [&] { slowDone = true; } );
         slowTask.DelayFor( Ticks( 100 ));
 
-        Task fastTask( "Fast", [&] { fastDone = true; } );
+        auto fastTask = MakeTask( "Fast", [&] { fastDone = true; } );
 
         poller.Submit( slowTask );
         poller.Submit( fastTask );

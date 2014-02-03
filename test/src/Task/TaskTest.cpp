@@ -25,7 +25,7 @@ void Foo() { s_calledFoo = true; }
 
 TEST( TaskNotTaskTest )
 {
-    Task t0;
+    Task< void > t0;
 
     CHECK( false        == t0.IsValid() );
     CHECK( "Not-a-task" == t0.Name() );
@@ -34,12 +34,23 @@ TEST( TaskNotTaskTest )
 
     CHECK_THROW( t0.DelayFor( Ticks( 100 )), Caramel::Exception );
     CHECK_THROW( t0.Run(), Caramel::Exception );
+
+
+    Task< Int > t1;
+
+    CHECK( false        == t1.IsValid() );
+    CHECK( "Not-a-task" == t1.Name() );
+    CHECK( false        == t1.HasDelay() );
+    CHECK( Ticks( 0 )   == t1.GetDelayDuration() );
+
+    CHECK_THROW( t1.DelayFor( Ticks( 100 )), Caramel::Exception );
+    CHECK_THROW( t1.Run(), Caramel::Exception );
 }
 
 
 TEST( TaskTrivialTest )
 {
-    Task t1( "Foo", &Foo );
+    auto t1 = MakeTask( "Foo", &Foo );
 
     CHECK( true       == t1.IsValid() );
     CHECK( "Foo"      == t1.Name() );
@@ -71,13 +82,13 @@ TEST( TaskMemberFunctionTest )
 {
     Widget w;
 
-    Task t2( "Widget::Bar", std::bind( &Widget::Bar, &w ));
-    Task t3( "Widget::Bar", [&] { w.Bar(); });
+    auto t2 = MakeTask( "Widget::Bar", std::bind( &Widget::Bar, &w ));
+    auto t3 = MakeTask( "Widget::Bar", [&] { w.Bar(); });
 
     std::shared_ptr< Widget > pw( new Widget );
 
-    Task t4( "Widget::Bar", std::bind( &Widget::Bar, pw ));
-    Task t5( "Widget::Bar", [=] { pw->Bar(); });
+    auto t4 = MakeTask( "Widget::Bar", std::bind( &Widget::Bar, pw ));
+    auto t5 = MakeTask( "Widget::Bar", [=] { pw->Bar(); });
 }
 
 
@@ -87,7 +98,7 @@ TEST( TaskOfBindMacroTest )
 
     Widget w;
 
-    Task bar = CARAMEL_TASK_OF_BIND( Widget::Bar, &w );
+    auto bar = CARAMEL_TASK_OF_BIND( Widget::Bar, &w );
 
     CHECK( "Widget::Bar" == bar.Name() );
 
@@ -100,7 +111,7 @@ TEST( TaskOfBindMacroTest )
 
     s_calledFoo = false;
 
-    Task foo = CARAMEL_TASK_OF_BIND( Foo );  // No arguments is Ok!
+    auto foo = CARAMEL_TASK_OF_BIND( Foo );  // No arguments is Ok!
 
     CHECK( "Foo" == foo.Name() );
 
