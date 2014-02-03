@@ -2,7 +2,6 @@
 
 #include "CaramelTestPch.h"
 
-#include <Caramel/Task/Strand.h>
 #include <Caramel/Task/Task.h>
 #include <UnitTest++/UnitTest++.h>
 #include <functional>
@@ -23,8 +22,6 @@ static Bool s_calledFoo = false;
 
 void Foo() { s_calledFoo = true; }
 
-static Strand s_strand;
-
 
 TEST( TaskNotTaskTest )
 {
@@ -34,10 +31,8 @@ TEST( TaskNotTaskTest )
     CHECK( "Not-a-task" == t0.Name() );
     CHECK( false        == t0.HasDelay() );
     CHECK( Ticks( 0 )   == t0.GetDelayDuration() );
-    CHECK( false        == t0.HasStrand() );
 
     CHECK_THROW( t0.DelayFor( Ticks( 100 )), Caramel::Exception );
-    CHECK_THROW( t0.Schedule( s_strand ), Caramel::Exception );
     CHECK_THROW( t0.Run(), Caramel::Exception );
 }
 
@@ -50,7 +45,6 @@ TEST( TaskTrivialTest )
     CHECK( "Foo"      == t1.Name() );
     CHECK( false      == t1.HasDelay() );
     CHECK( Ticks( 0 ) == t1.GetDelayDuration() );
-    CHECK( false      == t1.HasStrand() );
 
     t1.DelayFor( Ticks( 100 ));
 

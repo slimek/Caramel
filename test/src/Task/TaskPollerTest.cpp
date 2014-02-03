@@ -3,7 +3,6 @@
 #include "CaramelTestPch.h"
 
 #include <Caramel/Chrono/TickClock.h>
-#include <Caramel/Task/Strand.h>
 #include <Caramel/Task/TaskPoller.h>
 #include <Caramel/Thread/ThisThread.h>
 #include <UnitTest++/UnitTest++.h>
@@ -82,37 +81,6 @@ TEST( TaskPollerDelayTest )
 
         CHECK( true == slowDone );
     }
-}
-
-
-TEST( TaskPollerStrandTest )
-{
-    TaskPoller poller;
-    Strand strand;
-
-    std::vector< Bool > dones( 3 );
-
-    Task t0( "Work0", [&] { dones[0] = true; } );
-    t0.Schedule( strand );
-
-    Task t1( "Work1", [&] { dones[1] = true; } );
-    t1.Schedule( strand );
-
-    Task t2( "Work2", [&] { dones[2] = true; } );
-    t2.Schedule( strand );
-
-    poller.Submit( t0 );
-    poller.Submit( t1 );
-    poller.Submit( t2 );
-
-    poller.PollOne();
-
-    strand.CancelAll();
-
-    poller.PollOne();
-
-    CHECK( true  == dones[0] );
-    //CHECK( false == dones[1] );
 }
 
 

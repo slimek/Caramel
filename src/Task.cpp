@@ -2,7 +2,6 @@
 
 #include "CaramelPch.h"
 
-#include "Task/StrandImpl.h"
 #include "Task/TaskImpl.h"
 #include "Task/TaskPollerImpl.h"
 #include "Task/WorkerThreadImpl.h"
@@ -19,7 +18,6 @@ namespace Caramel
 // Contents
 //
 //   Task
-//   Strand
 //   TaskPoller
 //   WorkerThread
 //
@@ -52,29 +50,12 @@ Task& Task::DelayFor( const Ticks& duration )
 }
 
 
-Task& Task::Schedule( Strand& strand )
-{
-    CARAMEL_CHECK( m_impl->IsValid() );
-
-    m_impl->Schedule( strand.m_impl );
-    return *this;
-}
-
-
 //
 // Internal Functions - Call by TaskExecutor
 //
 
 void Task::StartDelay( TaskExecutor& executor )
 {
-}
-
-
-void Task::PushToStrand( TaskExecutor& executor )
-{
-    CARAMEL_CHECK( m_impl->IsValid() );
-
-    m_impl->PushToStrand( &executor );
 }
 
 
@@ -96,8 +77,6 @@ std::string Task::Name() const { return m_impl->m_name; }
 
 Bool  Task::HasDelay()         const { return m_impl->m_hasDelay; }
 Ticks Task::GetDelayDuration() const { return m_impl->m_delayDuration; }
-
-Bool Task::HasStrand() const { return m_impl->m_strand; }
 
 
 //
@@ -130,45 +109,9 @@ void TaskImpl::DelayFor( const Ticks& duration )
 }
 
 
-void TaskImpl::Schedule( const StrandPtr& strand )
-{
-    CARAMEL_ASSERT( ! m_strand );
-
-    m_strand = strand;
-}
-
-
-void TaskImpl::PushToStrand( TaskExecutor* executor )
-{
-    CARAMEL_ASSERT(( ! m_executor ) || m_executor == executor );
-    CARAMEL_ASSERT( m_strand );
-
-    m_executor = executor;
-
-    m_strand->PushTask( this->shared_from_this() );
-
-    TaskPtr readyTask;
-    if ( m_strand->PeekFrontIfReady( readyTask ))
-    {
-        readyTask->m_executor->AddReadyTask( *readyTask->GetHost() );
-    }
-}
-
-
 void TaskImpl::Run()
 {
     m_function();
-
-    if ( m_strand )
-    {
-        m_strand->PopFront( this->shared_from_this() );
-
-        TaskPtr readyTask;
-        if ( m_strand->PeekFrontIfReady( readyTask ))
-        {
-            m_executor->AddReadyTask( *readyTask->GetHost() );
-        }
-    }
 }
 
 
@@ -196,57 +139,6 @@ Bool TaskImpl::TransitToReady()
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Strand
-//
-
-void Strand::CancelAll()
-{
-}
-
-
-//
-// Implementation
-//
-
-void StrandImpl::PushTask( const TaskPtr& task )
-{
-    auto ulock = UniqueLock( m_queueMutex );
-
-    CARAMEL_VERIFY( task->TransitToBlocked() );
-
-    m_blockedTasks.push_back( task );
-}
-
-
-Bool StrandImpl::PeekFrontIfReady( TaskPtr& task )
-{
-    auto ulock = UniqueLock( m_queueMutex );
-
-    if ( m_blockedTasks.empty() ) { return false; }
-
-    TaskPtr frontTask = m_blockedTasks.front();
-
-    if ( frontTask->TransitToReady() )
-    {
-        task = frontTask;
-        return true;
-    }
-
-    return false;
-}
-
-
-void StrandImpl::PopFront( const TaskPtr& callingTask )
-{
-    auto ulock = UniqueLock( m_queueMutex );
-
-    CARAMEL_ASSERT( m_blockedTasks.front() == callingTask );
-    m_blockedTasks.pop_front();
-}
-
-
-///////////////////////////////////////////////////////////////////////////////
-//
 // TaskPoller
 //
 
@@ -262,10 +154,6 @@ void TaskPoller::Submit( Task& task )
     {
         const TickPoint dueTime = TickClock::Now() + task.GetDelayDuration();
         m_impl->m_delayedTasks.Push( dueTime, task );
-    }
-    else if ( task.HasStrand() )
-    {
-        task.PushToStrand( *this );
     }
     else
     {
@@ -313,15 +201,7 @@ void TaskPollerImpl::PollFor( const Ticks& sliceTicks )
 
         Task task;
         m_delayedTasks.TryPop( task );
-
-        if ( task.HasStrand() )
-        {
-            task.PushToStrand( *m_host );
-        }
-        else
-        {
-            m_readyTasks.Push( task );
-        }
+        m_readyTasks.Push( task );
     }
 
     TimedBool< TickClock > sliceTimeout( sliceTicks );
@@ -378,10 +258,6 @@ void WorkerThread::Submit( Task& task )
             m_impl->m_readyTasks.PulseAll();
         }
     }
-    else if ( task.HasStrand() )
-    {
-        task.PushToStrand( *this );
-    }
     else
     {
         m_impl->m_readyTasks.Push( task );
@@ -424,7 +300,7 @@ void WorkerThreadImpl::Execute()
     {
         if ( m_stopped ) { break; }
 
-        // Step 1 : Move all expired delay works to strand or ready queue
+        // Step 1 : Move all expired delay works to ready queue
 
         const TickPoint now = TickClock::Now();
         auto nextDelay = maxDelay;
@@ -441,14 +317,7 @@ void WorkerThreadImpl::Execute()
             Task exTask;  // expired task
 
             CARAMEL_VERIFY( m_delayTasks.TryPop( exTask ));
-            if ( exTask.HasStrand() )
-            {
-                exTask.PushToStrand( *m_host );
-            }
-            else
-            {
-                m_readyTasks.Push( exTask );
-            }
+            m_readyTasks.Push( exTask );
         }
 
 

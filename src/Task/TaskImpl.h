@@ -11,9 +11,6 @@
 namespace Caramel
 {
 
-class StrandImpl;
-typedef std::shared_ptr< StrandImpl > StrandPtr;
-
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Task
@@ -33,9 +30,6 @@ public:
     /// Operations ///
 
     void DelayFor( const Ticks& duration );
-    void Schedule( const StrandPtr& strand );
-
-    void PushToStrand( TaskExecutor* executor );
     void Run();
 
 
@@ -48,8 +42,11 @@ public:
 
     /// Properties ///
 
-    Bool  IsValid() const { return m_function; }
+    Bool  IsValid() const { return static_cast< Bool >( m_function ); }  // *1
     Task* GetHost() const { return m_host; }
+
+    // NOTES:
+    // 1 - In Android NDK (until r9b) std::function can't convert to Bool implicitly.
 
 
 private:
@@ -83,7 +80,6 @@ private:
 
     /// Schedule and Run ///
 
-    StrandPtr     m_strand;
     TaskExecutor* m_executor;
 
 };

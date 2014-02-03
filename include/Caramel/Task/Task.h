@@ -28,15 +28,10 @@ public:
     Task( const std::string& name, TaskFunction&& f );
 
 
-    //
-    // Setup Task Scheduling
-    //
-    //   Delay    : The task waits due time before scheduling.
-    //   Schedule : The task depends on a strand and would run in order.
-    //
+    /// Setup Task Scheduling ///
 
+    // This task waits due time before scheduling
     Task& DelayFor( const Ticks& ticks );
-    Task& Schedule( Strand& strand );
 
 
     /// Properties ///
@@ -51,9 +46,6 @@ public:
     Bool  HasDelay()         const;
     Ticks GetDelayDuration() const;
 
-    // Schedule
-    Bool HasStrand() const;
-
 
     //
     // Post-Submit Functions
@@ -61,9 +53,6 @@ public:
     //
 
     void StartDelay( TaskExecutor& te );
-
-    // Push this task into strand queue.
-    void PushToStrand( TaskExecutor& te );
 
     void Run();
 

@@ -30,10 +30,8 @@ public:
     //
     // Scheduling - Process in order:
     // - 1. Delaying tasks
-    //   2. Put tasks into strand queues
-    //   3. Put tasks into the ready queue
+    //   2. Put tasks into the ready queue
     //
-
 
     /// Run Tasks ///
 

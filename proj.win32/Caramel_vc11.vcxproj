@@ -108,7 +108,6 @@
     <ClInclude Include="..\include\Caramel\String\ToString.h" />
     <ClInclude Include="..\include\Caramel\String\Utf8String.h" />
     <ClInclude Include="..\include\Caramel\Task\Detail\TaskFwd.h" />
-    <ClInclude Include="..\include\Caramel\Task\Strand.h" />
     <ClInclude Include="..\include\Caramel\Task\Task.h" />
     <ClInclude Include="..\include\Caramel\Task\TaskExecutor.h" />
     <ClInclude Include="..\include\Caramel\Task\TaskPoller.h" />
@@ -159,7 +158,6 @@
     <ClInclude Include="..\src\Statechart\Transition.h" />
     <ClInclude Include="..\src\String\FormatterImpl.h" />
     <ClInclude Include="..\src\String\SprintfManager.h" />
-    <ClInclude Include="..\src\Task\StrandImpl.h" />
     <ClInclude Include="..\src\Task\TaskImpl.h" />
     <ClInclude Include="..\src\Task\TaskPollerImpl.h" />
     <ClInclude Include="..\src\Task\WorkerThreadImpl.h" />
