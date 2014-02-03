@@ -32,13 +32,12 @@ public:
     PushPort Register( const std::string& name, Int minEventId, Int maxEventId );
 
     Bool TryPop( AnyEvent& evt );
+    void Push( AnyEvent&& evt );
 
 
 private:
 
     /// Functions for PushPort ///
-
-    void Push( AnyEvent&& evt );
 
     void Unregister( Int minEventId, Int maxEventId );
 
