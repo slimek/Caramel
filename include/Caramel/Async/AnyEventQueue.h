@@ -31,8 +31,13 @@ public:
 
     PushPort Register( const std::string& name, Int minEventId, Int maxEventId );
 
-    Bool TryPop( AnyEvent& evt );
     void Push( AnyEvent&& evt );
+
+    // Make an AnyEvent inside the function.
+    void PushEvent( Int eventId );
+
+    Bool TryPop( AnyEvent& evt );
+    
 
 
 private:
@@ -100,6 +105,12 @@ inline void AnyEventQueue::Unregister( Int minEventId, Int maxEventId )
 inline void AnyEventQueue::Push( AnyEvent&& evt )
 {
     m_events.Push( evt );
+}
+
+
+inline void AnyEventQueue::PushEvent( Int eventId )
+{
+    m_events.Push( AnyEvent( eventId ));
 }
 
 
