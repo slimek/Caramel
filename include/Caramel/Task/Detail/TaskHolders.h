@@ -43,7 +43,7 @@ public:
 
     BasicTask( TaskFunction&& f );
 
-    void Invoke();
+    void Invoke() override;
 
     Result GetResult() const { return m_result; }
 
@@ -69,7 +69,7 @@ public:
 
     BasicTask( TaskFunction&& f );
 
-    void Invoke();
+    void Invoke() override;
 
 
 private:
@@ -116,6 +116,8 @@ inline void BasicTask< void >::Invoke()
     m_function();
 }
 
+
+///////////////////////////////////////////////////////////////////////////////
 
 } // namespace Detail
 
