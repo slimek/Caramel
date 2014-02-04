@@ -8,7 +8,6 @@
 #include <Caramel/Async/AnyEvent.h>
 #include <Caramel/Concurrent/IntervalSet.h>
 #include <Caramel/Concurrent/Queue.h>
-#include <Caramel/Error/Alert.h>
 
 
 namespace Caramel
@@ -22,61 +21,41 @@ namespace Caramel
 class AnyEventQueue
 {
 public:
-    
-    class PushPort;
-    friend class PushPort;
-
 
     /// Operations ///
 
-    PushPort Register( const std::string& name, Int minEventId, Int maxEventId );
-
+    void Push( const AnyEvent& evt );
     void Push( AnyEvent&& evt );
 
     // Make an AnyEvent inside the function.
     void PushEvent( Int eventId );
+    void PushEvent( Int eventId, const Any& any );
+    void PushEvent( Int eventId, Any&& any );
 
     Bool TryPop( AnyEvent& evt );
     
 
+    //
+    // To Prevent Ambiguous IDs
+    // - Only check IDs when registering, not when each pushing.
+    //   Cooperate with AnyEventDispatcher.
+    //
+
+    // Returns false if the ID range overlaps with others.
+    Bool RegisterIdRange( Int minEventId, Int maxEventId );
+
+    void UnregisterIdRange( Int minEventId, Int maxEventId );
+
 
 private:
-
-    /// Functions for PushPort ///
-
-    void Unregister( Int minEventId, Int maxEventId );
-
 
     /// Data Members ///
 
-    typedef Concurrent::IntervalSet< Int > EventIdRangeSet;
-    EventIdRangeSet m_eventIdRanges;
-
     typedef Concurrent::Queue< AnyEvent > EventQueue;
     EventQueue m_events;
-};
 
-
-class AnyEventQueue::PushPort
-{
-public:
-
-    PushPort( AnyEventQueue& host, const std::string& name, Int minEventId, Int maxEventId );
-
-    void PushEvent( Int eventId, const Any& value );
-    void PushEvent( Int eventId, Any&& value );
-
-
-private:
-
-    void Release();
-
-    AnyEventQueue& m_host;
-    std::string m_name;
-    Int m_minEventId;
-    Int m_maxEventId;
-
-    std::shared_ptr< EmptyType > m_releaser;
+    typedef Concurrent::IntervalSet< Int > EventIdRangeSet;
+    EventIdRangeSet m_registeredIdRanges;
 };
 
 
@@ -85,32 +64,33 @@ private:
 // Implementation
 //
 
-inline AnyEventQueue::PushPort AnyEventQueue::Register( const std::string& name, Int minEventId, Int maxEventId )
+inline void AnyEventQueue::Push( const AnyEvent& evt )
 {
-    if ( ! m_eventIdRanges.InsertClosed( minEventId, maxEventId ))
-    {
-        CARAMEL_ALERT( "Event id overlapped, name: %s, min: %d, max: %d", name, minEventId, maxEventId );
-    }
-
-    return PushPort( *this, name, minEventId, maxEventId );
-}
-
-
-inline void AnyEventQueue::Unregister( Int minEventId, Int maxEventId )
-{
-    m_eventIdRanges.EraseClosed( minEventId, maxEventId );
+    m_events.Push( evt );
 }
 
 
 inline void AnyEventQueue::Push( AnyEvent&& evt )
 {
-    m_events.Push( evt );
+    m_events.Push( std::move( evt ));
 }
 
 
 inline void AnyEventQueue::PushEvent( Int eventId )
 {
     m_events.Push( AnyEvent( eventId ));
+}
+
+
+inline void AnyEventQueue::PushEvent( Int eventId, const Any& any )
+{
+    m_events.Push( AnyEvent( eventId, any ));
+}
+
+
+inline void AnyEventQueue::PushEvent( Int eventId, Any&& any )
+{
+    m_events.Push( AnyEvent( eventId, std::move( any )));
 }
 
 
@@ -121,35 +101,18 @@ inline Bool AnyEventQueue::TryPop( AnyEvent& evt )
 
 
 //
-// Push Port
+// To Prevent Ambiguous IDs
 //
 
-inline AnyEventQueue::PushPort::PushPort(
-    AnyEventQueue& host, const std::string& name, Int minEventId, Int maxEventId )
-    : m_host( host )
-    , m_name( name )
-    , m_minEventId( minEventId )
-    , m_maxEventId( maxEventId )
+inline Bool AnyEventQueue::RegisterIdRange( Int minEventId, Int maxEventId )
 {
-    m_releaser.reset( new EmptyType, [=] ( EmptyType* ) { this->Release(); } );
+    return m_registeredIdRanges.InsertClosed( minEventId, maxEventId );
 }
 
 
-inline void AnyEventQueue::PushPort::PushEvent( Int eventId, const Any& value )
+inline void AnyEventQueue::UnregisterIdRange( Int minEventId, Int maxEventId )
 {
-    m_host.Push( AnyEvent( eventId, value ));
-}
-
-
-inline void AnyEventQueue::PushPort::PushEvent( Int eventId, Any&& value )
-{
-    m_host.Push( AnyEvent( eventId, value ));
-}
-
-
-inline void AnyEventQueue::PushPort::Release()
-{
-    m_host.Unregister( m_minEventId, m_maxEventId );
+    m_registeredIdRanges.EraseClosed( minEventId, maxEventId );
 }
 
 

@@ -24,10 +24,10 @@ public:
     AnyEventDispatcher( const std::string& name, Int minEventId, Int maxEventId );
 
 
-    /// Register Queues ///
+    /// Queues to Dispatch ///
 
-    void RegisterQueue( AnyEventQueue& queue );
-    void UnregisterQueue( AnyEventQueue& queue );
+    void AddQueue( AnyEventQueue& queue );
+    void RemoveQueue( AnyEventQueue& queue );
 
 
     /// Dispatch Events to Queues ///
@@ -45,7 +45,6 @@ private:
     std::string m_name;
     Int m_minEventId;
     Int m_maxEventId;
-    
             
 };
 

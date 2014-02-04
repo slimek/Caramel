@@ -49,7 +49,9 @@ private:
 
 //
 // Stand-alone Creators
-// - For polymorphic work-around.
+// - For polymorphic work-around. Example:
+//
+//   auto any = MakeAny< Base >( derived );
 //
 
 template< typename T >

@@ -29,6 +29,7 @@ public:
     /// Operations ///
 
     void Push( const T& x );
+    void Push( T&& x );
 
     Bool TryPop( T& x );
 
@@ -57,6 +58,15 @@ inline void Queue< T >::Push( const T& x )
     auto ulock = UniqueLock( m_queueMutex );
 
     m_queue.push_back( x );
+}
+
+
+template< typename T >
+inline void Queue< T >::Push( T&& x )
+{
+    auto ulock = UniqueLock( m_queueMutex );
+
+    m_queue.push_back( std::move( x ));
 }
 
 
