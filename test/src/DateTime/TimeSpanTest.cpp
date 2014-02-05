@@ -169,26 +169,29 @@ TEST( TimeSpanLimitTest )
     const auto max = TimeSpan::MaxValue();
     const auto min = TimeSpan::MinValue();
 
-    // NOTE: INT_MAX + 414,564,141 = 2,552,047,788 hours is about 292,471 years
+    const double v = max.TotalHours();
 
-    const auto composedMax = Hours( INT32_MAX ) + Hours( 414564141 ) + Seconds( 54 );
-    const auto composedMin = - composedMax;
+    CHECK(  9223372036854.7754 == max.TotalSeconds() );
+    CHECK( -9223372036854.7754 == min.TotalSeconds() );
 
-    CHECK( max == composedMax );
-    CHECK( min == composedMin );
+    CHECK(  153722867280.91293 == max.TotalMinutes() );
+    CHECK( -153722867280.91293 == min.TotalMinutes() );
 
-    CHECK(  9223372036854.0 == max.TotalSeconds() );
-    CHECK( -9223372036854.0 == min.TotalSeconds() );
-
-    CHECK(  153722867280.9 == max.TotalMinutes() );
-    CHECK( -153722867280.9 == min.TotalMinutes() );
-
-    CHECK(  2562047788.015 == max.TotalHours() );
-    CHECK( -2562047788.015 == min.TotalHours() );
+    CHECK_CLOSE(  2562047788.0152, max.TotalHours(), 0.001 );
+    CHECK_CLOSE( -2562047788.0152, min.TotalHours(), 0.001 );
 
     CHECK_CLOSE(  106751991.167, max.TotalDays(), 0.001 );
     CHECK_CLOSE( -106751991.167, min.TotalDays(), 0.001 );
+
     
+    /// Overflow ///
+
+    const auto overMax = max + Seconds( 1 );
+    const auto overMin = min - Seconds( 1 );
+
+    CHECK( min < overMax && overMax < min + Seconds( 1 ) );
+    CHECK( max - Seconds( 1 ) < overMin && overMin < max );
+
 }
 
 
