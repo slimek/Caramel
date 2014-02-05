@@ -448,18 +448,22 @@ TimeSpan::TimeSpan( std::shared_ptr< TimeDuration > impl )
 TimeSpan TimeSpan::MinValue()
 {
     const auto minImpl = boost::posix_time::time_duration::impl_type::min().as_number();
+    const auto roundedMinImpl =
+        minImpl - ( minImpl % boost::posix_time::time_duration::ticks_per_second() );
 
     return TimeSpan( std::make_shared< TimeDuration >(
-        boost::posix_time::time_duration( 0, 0, 0, minImpl )));
+        boost::posix_time::time_duration( 0, 0, 0, roundedMinImpl )));
 }
 
 
 TimeSpan TimeSpan::MaxValue()
 {
     const auto maxImpl = boost::posix_time::time_duration::impl_type::max().as_number();
+    const auto roundedMaxImpl =
+        maxImpl - ( maxImpl % boost::posix_time::time_duration::ticks_per_second() );
 
     return TimeSpan( std::make_shared< TimeDuration >(
-        boost::posix_time::time_duration( 0, 0, 0, maxImpl )));
+        boost::posix_time::time_duration( 0, 0, 0, roundedMaxImpl )));
 }
 
 
@@ -485,7 +489,8 @@ Double TimeSpan::TotalMinutes() const { return this->TotalSeconds() / 60; }
 
 Double TimeSpan::TotalSeconds() const
 {
-    return static_cast< Double >( m_impl->total_seconds() );
+    return static_cast< Double >(
+        m_impl->ticks() / boost::posix_time::time_duration::ticks_per_second() );
 }
 
 

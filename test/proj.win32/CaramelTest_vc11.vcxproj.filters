@@ -190,6 +190,9 @@
     <ClCompile Include="..\src\Async\ValueChangeTest.cpp">
       <Filter>2. Tests\Async</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\DateTime\TimeSpanTest.cpp">
+      <Filter>2. Tests\DateTime</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">

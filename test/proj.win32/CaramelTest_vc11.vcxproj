@@ -109,6 +109,7 @@
     <ClCompile Include="..\src\DateTime\DateTest.cpp" />
     <ClCompile Include="..\src\DateTime\DateTimeBoolTest.cpp" />
     <ClCompile Include="..\src\DateTime\DateTimeTest.cpp" />
+    <ClCompile Include="..\src\DateTime\TimeSpanTest.cpp" />
     <ClCompile Include="..\src\Document\IniDocumentTest.cpp" />
     <ClCompile Include="..\src\Enum\EnumLookupTest.cpp" />
     <ClCompile Include="..\src\Enum\FlagsTest.cpp" />
