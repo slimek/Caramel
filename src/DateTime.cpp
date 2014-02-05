@@ -507,13 +507,13 @@ Bool TimeSpan::operator<( const TimeSpan& rhs ) const
 
 Bool TimeSpan::operator==( const Caramel::Seconds& rhs ) const
 {
-    return this->TotalSeconds() == rhs.ToDouble();
+    return *this == TimeSpan( rhs );
 }
 
 
 Bool TimeSpan::operator<( const Caramel::Seconds& rhs ) const
 {
-    return this->TotalSeconds() < rhs.ToDouble();
+    return *this < TimeSpan( rhs );
 }
 
 
