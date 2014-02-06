@@ -208,6 +208,23 @@ TEST( LargeDateTimeDifferenceTest )
     CHECK(      255670.0 == span.TotalDays() );
     
     CHECK( 255670 == span.Days() );
+    CHECK(      0 == span.Hours() );
+    CHECK(      0 == span.Minutes() );
+    CHECK(      0 == span.Seconds() );
+
+
+    const auto max = DateTime::MaxValue();  // 9999-12-31 23:59:59.999999
+    const TimeSpan span2 = max - min;
+
+    CHECK( 271389744000.0 == span2.TotalSeconds() );
+    CHECK(   4523162400.0 == span2.TotalMinutes() );
+    CHECK(     75386040.0 == span2.TotalHours() );
+    CHECK(      3141085.0 == span2.TotalDays() );
+
+    CHECK( 3141084 == span2.Days() );
+    CHECK(      23 == span2.Hours() );
+    CHECK(      59 == span2.Minutes() );
+    CHECK(      59 == span2.Seconds() );
 }
 
 
