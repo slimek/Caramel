@@ -5,8 +5,8 @@
 #include <Caramel/Async/TimedBool.h>
 #include <Caramel/Chrono/SecondClock.h>
 #include <Caramel/Chrono/TickClock.h>
+#include <Caramel/Thread/ThisThread.h>
 #include <UnitTest++/UnitTest++.h>
-#include <thread>
 
 
 namespace Caramel
@@ -34,23 +34,23 @@ TEST( TickedBoolTest )
     CHECK( false == tb3 );
     CHECK( false == tb4 );
 
-    std::this_thread::sleep_for( std::chrono::milliseconds( 50 ));
+    ThisThread::SleepFor( Ticks( 50 ));
 
     tb2.ExpireNow();
 
     CHECK( true == tb2 );
 
-    std::this_thread::sleep_for( std::chrono::milliseconds( 50 ));
+    ThisThread::SleepFor( Ticks( 50 ));
 
     CHECK( true == tb3 );
     CHECK( true == tb4 );
 
-    std::this_thread::sleep_for( std::chrono::milliseconds( 50 ));
+    ThisThread::SleepFor( Ticks( 50 ));
 
     tb3.Continue();
     tb4.Restart();
 
-    std::this_thread::sleep_for( std::chrono::milliseconds( 50 ));
+    ThisThread::SleepFor( Ticks( 50 ));
     
     CHECK( true  == tb3 );
     CHECK( false == tb4 );
@@ -85,7 +85,7 @@ TEST( TickedBoolTest )
     tb7.Start( Seconds( 0.06 ));
     tb8.Start( Ticks( 60 ));
 
-    std::this_thread::sleep_for( std::chrono::milliseconds( 100 ));
+    ThisThread::SleepFor( Ticks( 100 ));
 
     CHECK( true == tb7 );
     CHECK( true == tb8 );
@@ -93,10 +93,14 @@ TEST( TickedBoolTest )
     tb7.Restart();
     tb8.Continue();
 
-    std::this_thread::sleep_for( std::chrono::milliseconds( 40 ));
+    ThisThread::SleepFor( Ticks( 40 ));
 
     CHECK( false == tb7 );
     CHECK( true == tb8 );
+
+
+    // Yes, a TimeBool with MaxValue duration would never expire
+    CHECK( false == tb6 );
 }
 
 

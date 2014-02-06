@@ -14,7 +14,6 @@ namespace Caramel
 //
 // Timed Bool
 // - Becomes true when expired.
-//   If the duration is negative, it would expired at once.
 //
 //   NOT thread-safe.
 //
