@@ -65,7 +65,9 @@ private:
         TASK_S_WAITING          = 0x04,
         TASK_S_READY            = 0x08,
         TASK_S_RUNNING          = 0x10,
-        TASK_S_RAN_TO_COMPLETE  = 0x20,
+        TASK_S_CANCELED         = 0x20,
+        TASK_S_FAULTED          = 0x40,
+        TASK_S_RAN_TO_COMPLETE  = 0x80,
     
     } m_state;
 

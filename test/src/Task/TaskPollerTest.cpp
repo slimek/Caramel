@@ -84,6 +84,24 @@ TEST( TaskPollerDelayTest )
 }
 
 
+TEST( TaskPollerThenTest )
+{
+    TaskPoller poller;
+
+    Bool done1 = false;
+    Bool done2 = false;
+
+    auto task1 = MakeTask( "Task1", [&] { done1 = true; } );
+    auto task2 = task1.Then( std::string( "Task2" ), [&] ( Task< void > ) { done2 = true; } );
+
+    poller.Submit( task1 );
+    poller.PollFor( Ticks( 100 ));
+
+    CHECK( true == done1 && true == done2 );
+
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE TaskPollerSuite
