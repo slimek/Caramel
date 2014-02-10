@@ -119,7 +119,7 @@ public:
 
     typedef std::function< Result( Task< AnteResult > ) > ThenFunction;
 
-    explicit ThenTask( ThenFunction&& f );
+    ThenTask( ThenFunction&& f, Task< AnteResult > antecedent );
 
     void Invoke() override;
 
@@ -143,7 +143,7 @@ public:
 
     typedef std::function< void( Task< AnteResult > ) > ThenFunction;
 
-    explicit ThenTask( ThenFunction&& f );
+    ThenTask( ThenFunction&& f, Task< AnteResult > antecedent );
 
     void Invoke() override;
 
@@ -204,8 +204,9 @@ inline void RegularTask< void >::Invoke()
 //
 
 template< typename AnteResult >
-inline ThenTask< void, AnteResult >::ThenTask( ThenFunction&& f )
+inline ThenTask< void, AnteResult >::ThenTask( ThenFunction&& f, Task< AnteResult > antecedent )
     : m_thenFunction( std::move( f ))
+    , m_antecedent( antecedent )
 {
 }
 

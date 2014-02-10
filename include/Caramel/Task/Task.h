@@ -191,7 +191,7 @@ Task< void >::Then( const std::string& name, ThenFunction&& f )
 
     // Convert to Detail::TaskHolder explicitly.
     std::shared_ptr< Detail::TaskHolder > thenHolder =
-        std::make_shared< Detail::ThenTask< ResultType, void >>( std::move( f ));
+        std::make_shared< Detail::ThenTask< ResultType, void >>( std::move( f ), *this );
 
     return TaskType( name, std::move( thenHolder ));
 }
