@@ -51,19 +51,17 @@ class BasicTask : public TaskHolder
 public:
 
     typedef Result ResultType;
-    typedef std::function< Result() > TaskFunction;
 
-    BasicTask( TaskFunction&& f, Task< Result >& host );
-
-    void Invoke() override;
+    explicit BasicTask( Task< Result >& host );
 
     Result GetResult() const { return m_result; }
 
 
-private:
+protected:
 
-    TaskFunction m_function;
     Result m_result;
+
+private:
 
     Task< Result >& m_host;
 
@@ -82,22 +80,58 @@ class BasicTask< void > : public TaskHolder
 public:
 
     typedef void ResultType;
-    typedef std::function< void() > TaskFunction;
 
-    BasicTask( TaskFunction&& f, Task< void >& host );
-
-    void Invoke() override;
+    explicit BasicTask( Task< void >& host );
 
 
 private:
-
-    TaskFunction m_function;
 
     Task< void >& m_host;
 
     typedef Concurrent::Queue< ContinuationHolder< void > > ContinuationQueue;
     ContinuationQueue m_continuations;
 
+};
+
+
+//
+// Regular Task
+//
+
+template< typename Result >
+class RegularTask : public BasicTask< Result >
+{
+public:
+
+    typedef std::function< Result() > TaskFunction;
+
+    RegularTask( TaskFunction&& f, Task< Result >& host );
+
+    void Invoke() override;
+
+private:
+    TaskFunction m_function;
+};
+
+
+//
+// Regular Task - No Result
+// - Only the Invoke() function is specialized
+//
+
+template<>
+class RegularTask< void > : public BasicTask< void >
+{
+public:
+    
+    typedef std::function< void() > TaskFunction;
+
+    RegularTask( TaskFunction&& f, Task< void >& host );
+
+    void Invoke() override;
+
+private:
+    TaskFunction m_function;
 };
 
 
@@ -112,14 +146,19 @@ class ThenTask : public BasicTask< Result >
 public:
 
     using BasicTask< Result >::ResultType;
-    using BasicTask< Result >::TaskFunction;
 
     typedef std::function< Result( Task< AnteResult > ) > ThenFunction;
 
     ThenTask( ThenFunction&& f, Task< Result >& host );
 
-    void Continue( Task< AnteResult > antecedent );
+    void Invoke() override;
 
+    void Continue( Task< AnteResult > antecedent ) override;
+
+private:
+
+    ThenFunction m_thenFunction;
+    Task< AnteResult > m_antecedent;
 };
 
 
@@ -134,18 +173,20 @@ class ThenTask< void, AnteResult > : public BasicTask< void >
 public:
 
     using BasicTask< void >::ResultType;
-    using BasicTask< void >::TaskFunction;
 
     typedef std::function< void( Task< AnteResult > ) > ThenFunction;
 
     ThenTask( ThenFunction&& f, Task< void >& host );
 
-    void Continue( Task< AnteResult > antecedent );
+    void Invoke() override;
+
+    void Continue( Task< AnteResult > antecedent ) override;
 
 
 private:
 
-    ThenFunction thenFunction;
+    ThenFunction m_thenFunction;
+    Task< AnteResult > m_antecedent;
 };
 
 
@@ -159,18 +200,9 @@ private:
 //
 
 template< typename Result >
-inline BasicTask< Result >::BasicTask( TaskFunction&& f, Task< Result >& host )
-    : m_function( f )
-    , m_host( host )
+inline BasicTask< Result >::BasicTask( Task< Result >& host )
+    : m_host( host )
 {
-}
-
-
-template< typename Result >
-inline void BasicTask< Result >::Invoke()
-{
-    m_result = m_function();
-
 }
 
 
@@ -178,16 +210,76 @@ inline void BasicTask< Result >::Invoke()
 // BasicTask< void >
 //
 
-inline BasicTask< void >::BasicTask( TaskFunction&& f, Task< void >& host )
-    : m_function( f )
-    , m_host( host )
+inline BasicTask< void >::BasicTask( Task< void >& host )
+    : m_host( host )
 {
 }
 
 
-inline void BasicTask< void >::Invoke()
+//
+// RegularTask
+//
+
+template< typename Result >
+inline RegularTask< Result >::RegularTask( TaskFunction&& f, Task< Result >& host )
+    : BasicTask< Result >( host )
+    , m_function( std::move( f ))
+{
+}
+
+
+template< typename Result >
+inline void RegularTask< Result >::Invoke()
+{
+    m_result = m_function();
+
+}
+
+
+//
+// RegularTask< void >
+//
+
+inline RegularTask< void >::RegularTask( TaskFunction&& f, Task< void >& host )
+    : BasicTask< void >( host )
+    , m_function( std::move( f ))
+{
+}
+
+
+inline void RegularTask< void >::Invoke()
 {
     m_function();
+}
+
+
+//
+// ThenTask< Result >
+//
+
+//
+// ThenTask< void >
+//
+
+template< typename AnteResult >
+inline ThenTask< void, AnteResult >::ThenTask( ThenFunction&& f, Task< void >& host )
+    : BasicTask< void >( host )
+    , m_thenFunction( std::move( f ))
+{
+}
+
+
+template< typename AnteResult >
+inline void ThenTask< void, AnteResult >::Invoke()
+{
+    m_thenFunction( m_antecedent );
+}
+
+
+template< typename AnteResult >
+inline void ThenTask< void, AnteResult >::Continue( Task< AnteResult > antecedent )
+{
+    m_antecedent = antecedent;
 }
 
 

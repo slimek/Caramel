@@ -9,6 +9,7 @@
 #include <Caramel/Meta/Utility.h>
 #include <Caramel/Task/Detail/TaskFwd.h>
 #include <Caramel/Task/Detail/TaskHolders.h>
+#include <Caramel/Task/Detail/TaskTraits.h>
 #include <Caramel/Task/TaskCore.h>
 
 
@@ -48,8 +49,9 @@ public:
 
     /// Continuation ///
 
-    template< typename Function >
-    auto Then( const std::string& name, Function&& f ) -> Task< decltype( f() ) >;
+    template< typename ThenFunction >
+    typename Detail::ThenFunctionTraits< ThenFunction, Result >::TaskType
+    Then( const std::string& name, ThenFunction&& f );
 
     template< typename ThenFunction, typename AnteResult >
     Task( const std::string& name, ThenFunction&& f, TypeT< AnteResult > );
@@ -85,10 +87,8 @@ public:
     /// Continuation ///
 
     template< typename ThenFunction >
-    auto Then( const std::string& name, ThenFunction&& f ) -> Task< decltype( f() ) >;
-
-    //template< typename ThenFunction >
-    //Task< std::result_of< ThenFunction > > Then( const std::string& name, ThenFunction&& f );
+    typename Detail::ThenFunctionTraits< ThenFunction, void >::TaskType
+    Then( const std::string& name, ThenFunction&& f );
 
     template< typename ThenFunction, typename AnteResult >
     Task( const std::string& name, ThenFunction&& f, TypeT< AnteResult > );
@@ -101,16 +101,10 @@ public:
 // - Helper function to make an anonymous task object
 //
 
-//template< typename Function >
-//inline auto MakeTask( const std::string& name, Function&& f ) -> Task< decltype( f() ) >
-//{
-//    return Task< decltype( f() ) >( name, std::move( f ));
-//}
-
 template< typename Function >
-inline Task< std::result_of< Function > > MakeTask( const std::string& name, Function&& f )
+inline auto MakeTask( const std::string& name, Function&& f ) -> Task< decltype( f() ) >
 {
-    return Task< std::result_of< Function > >( name, std::move( f ));
+    return Task< decltype( f() ) >( name, std::move( f ));
 }
 
 
@@ -139,7 +133,7 @@ inline Task< std::result_of< Function > > MakeTask( const std::string& name, Fun
 
 template< typename Result >
 inline Task< Result >::Task( const std::string& name, TaskFunction&& f )
-    : TaskCore( name, new Detail::BasicTask< Result >( std::move( f ), *this ))
+    : TaskCore( name, new Detail::RegularTask< Result >( std::move( f ), *this ))
 {
 }
 
@@ -161,9 +155,11 @@ inline Result Task< Result >::GetResult() const
 
 template< typename Result >
 template< typename ThenFunction >
-inline auto Task< Result >::Then( const std::string& name, ThenFunction&& f ) -> Task< decltype( f() ) >
+inline typename Detail::ThenFunctionTraits< ThenFunction, Result >::TaskType
+Task< Result >::Then( const std::string& name, ThenFunction&& f )
 {
-    return Task< decltype( f() ) >( name, std::move( f ), TypeT< Result >() );
+    typedef typename Detail::ThenFunctionTraits< ThenFunction, Result >::TaskType TaskType;
+    return TaskType( name, std::move( f ), TypeT< Result >() );
 }
 
 
@@ -172,7 +168,7 @@ inline auto Task< Result >::Then( const std::string& name, ThenFunction&& f ) ->
 //
 
 inline Task< void >::Task( const std::string& name, TaskFunction&& f )
-    : TaskCore( name, new Detail::BasicTask< void >( std::move( f ), *this ))
+    : TaskCore( name, new Detail::RegularTask< void >( std::move( f ), *this ))
 {
 }
 
@@ -184,17 +180,13 @@ inline Task< void >& Task< void >::DelayFor( const Ticks& duration )
 }
 
 
-//template< typename ThenFunction >
-//inline auto Task< void >::Then( const std::string& name, ThenFunction&& f ) -> Task< decltype( f() ) >
-//{
-//    return Task< decltype( f() ) >( name, std::move( f ), TypeT< void >() );
-//}
-
-//template< typename ThenFunction >
-//inline Task< std::result_of< ThenFunction > > Task< void >::Then( const std::string& name, ThenFunction&& f )
-//{
-//    return Task< std::result_of< ThenFunction > >( name, std::move( f ), TypeT< void >() );
-//}
+template< typename ThenFunction >
+inline typename Detail::ThenFunctionTraits< ThenFunction, void >::TaskType
+Task< void >::Then( const std::string& name, ThenFunction&& f )
+{
+    typedef typename Detail::ThenFunctionTraits< ThenFunction, void >::TaskType TaskType;
+    return TaskType( name, std::move( f ), TypeT< void >() );
+}
 
 
 template< typename ThenFunction, typename AnteResult >
@@ -202,7 +194,6 @@ inline Task< void >::Task( const std::string& name, ThenFunction&& f, TypeT< Ant
     : TaskCore( name, new Detail::ThenTask< void, AnteResult >( std::move( f ), *this ))
 {
 }
-
 
 
 ///////////////////////////////////////////////////////////////////////////////
