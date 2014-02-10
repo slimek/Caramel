@@ -35,6 +35,7 @@ public:
     Task() {}  // Create a "not-a-task". Submit it results in exception.
 
     Task( const std::string& name, TaskFunction&& f );
+    Task( const std::string& name, std::shared_ptr< Detail::TaskHolder >&& holder );
 
 
     /// Scheduling ///
@@ -52,9 +53,6 @@ public:
     template< typename ThenFunction >
     typename Detail::ThenFunctionTraits< ThenFunction, Result >::TaskType
     Then( const std::string& name, ThenFunction&& f );
-
-    template< typename ThenFunction, typename AnteResult >
-    Task( const std::string& name, ThenFunction&& f, TypeT< AnteResult > );
 
 };
 
@@ -77,6 +75,7 @@ public:
     Task() {}  // Create a "not-a-task". Submit it results in exception.
 
     Task( const std::string& name, TaskFunction&& f );
+    Task( const std::string& name, std::shared_ptr< Detail::TaskHolder >&& holder );
 
 
     /// Scheduling ///
@@ -89,9 +88,6 @@ public:
     template< typename ThenFunction >
     typename Detail::ThenFunctionTraits< ThenFunction, void >::TaskType
     Then( const std::string& name, ThenFunction&& f );
-
-    template< typename ThenFunction, typename AnteResult >
-    Task( const std::string& name, ThenFunction&& f, TypeT< AnteResult > );
 
 };
 
@@ -173,6 +169,12 @@ inline Task< void >::Task( const std::string& name, TaskFunction&& f )
 }
 
 
+inline Task< void >::Task( const std::string& name, std::shared_ptr< Detail::TaskHolder >&& holder )
+    : TaskCore( name, std::move( holder ))
+{
+}
+
+
 inline Task< void >& Task< void >::DelayFor( const Ticks& duration )
 {
     this->DoDelayFor( duration );
@@ -184,15 +186,14 @@ template< typename ThenFunction >
 inline typename Detail::ThenFunctionTraits< ThenFunction, void >::TaskType
 Task< void >::Then( const std::string& name, ThenFunction&& f )
 {
+    typedef typename Detail::ThenFunctionTraits< ThenFunction, void >::ResultType ResultType;
     typedef typename Detail::ThenFunctionTraits< ThenFunction, void >::TaskType TaskType;
-    return TaskType( name, std::move( f ), TypeT< void >() );
-}
 
+    // Convert to Detail::TaskHolder explicitly.
+    std::shared_ptr< Detail::TaskHolder > thenHolder =
+        std::make_shared< Detail::ThenTask< ResultType, void >>( std::move( f ));
 
-template< typename ThenFunction, typename AnteResult >
-inline Task< void >::Task( const std::string& name, ThenFunction&& f, TypeT< AnteResult > )
-    : TaskCore( name, std::make_shared< Detail::ThenTask< void, AnteResult >>( std::move( f )))
-{
+    return TaskType( name, std::move( thenHolder ));
 }
 
 
