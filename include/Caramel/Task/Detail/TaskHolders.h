@@ -70,6 +70,9 @@ class RegularTask : public BasicTask< Result >
 {
 public:
 
+    using BasicTask< Result >::ResultType;
+    using BasicTask< Result >::m_result;
+
     typedef std::function< Result() > TaskFunction;
 
     explicit RegularTask( TaskFunction&& f );
@@ -112,6 +115,7 @@ class ThenTask : public BasicTask< Result >
 public:
 
     using BasicTask< Result >::ResultType;
+    using BasicTask< Result >::m_result;
 
     typedef std::function< Result( Task< AnteResult > ) > ThenFunction;
 
