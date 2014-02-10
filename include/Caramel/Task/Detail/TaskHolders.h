@@ -30,17 +30,6 @@ public:
 };
 
 
-template< typename Result >
-class ContinuationHolder
-{
-public:
-
-    virtual ~ContinuationHolder() {}
-
-    virtual void Continue( Task< Result > antecedent ) = 0;
-};
-
-
 //
 // Basic Task
 //
@@ -52,21 +41,10 @@ public:
 
     typedef Result ResultType;
 
-    explicit BasicTask( Task< Result >& host );
-
     Result GetResult() const { return m_result; }
 
-
 protected:
-
     Result m_result;
-
-private:
-
-    Task< Result >& m_host;
-
-    typedef Concurrent::Queue< ContinuationHolder< Result >* > ContinuationQueue;
-    ContinuationQueue m_continuations;
 };
 
 
@@ -80,17 +58,6 @@ class BasicTask< void > : public TaskHolder
 public:
 
     typedef void ResultType;
-
-    explicit BasicTask( Task< void >& host );
-
-
-private:
-
-    Task< void >& m_host;
-
-    typedef Concurrent::Queue< ContinuationHolder< void > > ContinuationQueue;
-    ContinuationQueue m_continuations;
-
 };
 
 
@@ -105,7 +72,7 @@ public:
 
     typedef std::function< Result() > TaskFunction;
 
-    RegularTask( TaskFunction&& f, Task< Result >& host );
+    explicit RegularTask( TaskFunction&& f );
 
     void Invoke() override;
 
@@ -126,7 +93,7 @@ public:
     
     typedef std::function< void() > TaskFunction;
 
-    RegularTask( TaskFunction&& f, Task< void >& host );
+    explicit RegularTask( TaskFunction&& f );
 
     void Invoke() override;
 
@@ -141,7 +108,6 @@ private:
 
 template< typename Result, typename AnteResult >
 class ThenTask : public BasicTask< Result >
-               , public ContinuationHolder< AnteResult >
 {
 public:
 
@@ -149,11 +115,9 @@ public:
 
     typedef std::function< Result( Task< AnteResult > ) > ThenFunction;
 
-    ThenTask( ThenFunction&& f, Task< Result >& host );
+    explicit ThenTask( ThenFunction&& f );
 
     void Invoke() override;
-
-    void Continue( Task< AnteResult > antecedent ) override;
 
 private:
 
@@ -168,7 +132,6 @@ private:
 
 template< typename AnteResult >
 class ThenTask< void, AnteResult > : public BasicTask< void >
-                                   , public ContinuationHolder< AnteResult >
 {
 public:
 
@@ -176,11 +139,9 @@ public:
 
     typedef std::function< void( Task< AnteResult > ) > ThenFunction;
 
-    ThenTask( ThenFunction&& f, Task< void >& host );
+    explicit ThenTask( ThenFunction&& f );
 
     void Invoke() override;
-
-    void Continue( Task< AnteResult > antecedent ) override;
 
 
 private:
@@ -196,34 +157,12 @@ private:
 //
 
 //
-// BasicTask< Result >
-//
-
-template< typename Result >
-inline BasicTask< Result >::BasicTask( Task< Result >& host )
-    : m_host( host )
-{
-}
-
-
-//
-// BasicTask< void >
-//
-
-inline BasicTask< void >::BasicTask( Task< void >& host )
-    : m_host( host )
-{
-}
-
-
-//
 // RegularTask
 //
 
 template< typename Result >
-inline RegularTask< Result >::RegularTask( TaskFunction&& f, Task< Result >& host )
-    : BasicTask< Result >( host )
-    , m_function( std::move( f ))
+inline RegularTask< Result >::RegularTask( TaskFunction&& f )
+    : m_function( std::move( f ))
 {
 }
 
@@ -240,9 +179,8 @@ inline void RegularTask< Result >::Invoke()
 // RegularTask< void >
 //
 
-inline RegularTask< void >::RegularTask( TaskFunction&& f, Task< void >& host )
-    : BasicTask< void >( host )
-    , m_function( std::move( f ))
+inline RegularTask< void >::RegularTask( TaskFunction&& f )
+    : m_function( std::move( f ))
 {
 }
 
@@ -262,9 +200,8 @@ inline void RegularTask< void >::Invoke()
 //
 
 template< typename AnteResult >
-inline ThenTask< void, AnteResult >::ThenTask( ThenFunction&& f, Task< void >& host )
-    : BasicTask< void >( host )
-    , m_thenFunction( std::move( f ))
+inline ThenTask< void, AnteResult >::ThenTask( ThenFunction&& f )
+    : m_thenFunction( std::move( f ))
 {
 }
 
@@ -273,13 +210,6 @@ template< typename AnteResult >
 inline void ThenTask< void, AnteResult >::Invoke()
 {
     m_thenFunction( m_antecedent );
-}
-
-
-template< typename AnteResult >
-inline void ThenTask< void, AnteResult >::Continue( Task< AnteResult > antecedent )
-{
-    m_antecedent = antecedent;
 }
 
 

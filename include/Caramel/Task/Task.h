@@ -133,7 +133,7 @@ inline auto MakeTask( const std::string& name, Function&& f ) -> Task< decltype(
 
 template< typename Result >
 inline Task< Result >::Task( const std::string& name, TaskFunction&& f )
-    : TaskCore( name, new Detail::RegularTask< Result >( std::move( f ), *this ))
+    : TaskCore( name, new Detail::RegularTask< Result >( std::move( f )))
 {
 }
 
@@ -168,7 +168,7 @@ Task< Result >::Then( const std::string& name, ThenFunction&& f )
 //
 
 inline Task< void >::Task( const std::string& name, TaskFunction&& f )
-    : TaskCore( name, new Detail::RegularTask< void >( std::move( f ), *this ))
+    : TaskCore( name, new Detail::RegularTask< void >( std::move( f )))
 {
 }
 
@@ -191,7 +191,7 @@ Task< void >::Then( const std::string& name, ThenFunction&& f )
 
 template< typename ThenFunction, typename AnteResult >
 inline Task< void >::Task( const std::string& name, ThenFunction&& f, TypeT< AnteResult > )
-    : TaskCore( name, new Detail::ThenTask< void, AnteResult >( std::move( f ), *this ))
+    : TaskCore( name, new Detail::ThenTask< void, AnteResult >( std::move( f )))
 {
 }
 
