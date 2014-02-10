@@ -9,6 +9,11 @@
 #include <UnitTest++/TestReporterStdout.h>
 #include <iostream>
 
+#if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+// You may remove this header if you did not install Visual Leak Detector.
+#include <vld.h>
+#endif
+
 
 using namespace std;
 
