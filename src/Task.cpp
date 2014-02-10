@@ -33,8 +33,8 @@ TaskCore::TaskCore()
 }
 
 
-TaskCore::TaskCore( const std::string& name, TaskHolder* holder )
-    : m_impl( new TaskImpl( name, holder ))
+TaskCore::TaskCore( const std::string& name, TaskHolderPtr&& holder )
+    : m_impl( new TaskImpl( name, std::move( holder )))
 {
 }
 
@@ -73,7 +73,7 @@ std::string TaskCore::Name() const { return m_impl->m_name; }
 Bool  TaskCore::HasDelay()         const { return m_impl->m_hasDelay; }
 Ticks TaskCore::GetDelayDuration() const { return m_impl->m_delayDuration; }
 
-const TaskHolder* TaskCore::GetHolder() const { return m_impl->m_holder.get(); }
+std::shared_ptr< const TaskHolder > TaskCore::GetHolder() const { return m_impl->m_holder; }
 
 
 //
@@ -88,9 +88,9 @@ TaskImpl::TaskImpl()
 }
 
 
-TaskImpl::TaskImpl( const std::string& name, TaskHolder* holder )
+TaskImpl::TaskImpl( const std::string& name, TaskHolderPtr&& holder )
     : m_name( name )
-    , m_holder( holder )
+    , m_holder( std::move( holder ))
     , m_hasDelay( false )
     , m_executor( nullptr )
 {

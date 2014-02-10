@@ -12,6 +12,7 @@ namespace Caramel
 {
 
 typedef Detail::TaskHolder TaskHolder;
+typedef std::shared_ptr< Detail::TaskHolder > TaskHolderPtr;
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -26,7 +27,7 @@ public:
 
     TaskImpl();  // Not-a-task
 
-    TaskImpl( const std::string& name, TaskHolder* holder );
+    TaskImpl( const std::string& name, TaskHolderPtr&& holder );
 
 
     /// Operations ///
@@ -47,13 +48,13 @@ public:
     Bool IsValid() const { return static_cast< Bool >( m_holder ); }  // *1
 
     // NOTES:
-    // 1 - In Android NDK r9b, std::unique_prt can't convert to Bool implicitly.
+    // 1 - In Android NDK r9b, std::shared_prt can't convert to Bool implicitly.
 
 
 private:
 
     std::string m_name;
-    std::unique_ptr< TaskHolder > m_holder;
+    std::shared_ptr< TaskHolder > m_holder;
 
 
     /// State ///
