@@ -12,7 +12,7 @@ namespace Caramel
 {
 
 typedef Detail::TaskHolder TaskHolder;
-typedef std::shared_ptr< Detail::TaskHolder > TaskHolderPtr;
+typedef std::unique_ptr< Detail::TaskHolder > TaskHolderPtr;
 
 ///////////////////////////////////////////////////////////////////////////////
 //

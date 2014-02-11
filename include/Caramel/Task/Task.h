@@ -6,6 +6,7 @@
 
 #include <Caramel/Caramel.h>
 #include <Caramel/Chrono/TickClock.h>
+#include <Caramel/Memory/UniquePtrUtils.h>
 #include <Caramel/Meta/Utility.h>
 #include <Caramel/Task/Detail/TaskFwd.h>
 #include <Caramel/Task/Detail/TaskHolders.h>
@@ -35,7 +36,7 @@ public:
     Task() {}  // Create a "not-a-task". Submit it results in exception.
 
     Task( const std::string& name, TaskFunction&& f );
-    Task( const std::string& name, std::shared_ptr< Detail::TaskHolder >&& holder );
+    Task( const std::string& name, std::unique_ptr< Detail::TaskHolder >&& holder );
 
 
     /// Scheduling ///
@@ -75,7 +76,7 @@ public:
     Task() {}  // Create a "not-a-task". Submit it results in exception.
 
     Task( const std::string& name, TaskFunction&& f );
-    Task( const std::string& name, std::shared_ptr< Detail::TaskHolder >&& holder );
+    Task( const std::string& name, std::unique_ptr< Detail::TaskHolder >&& holder );
 
 
     /// Scheduling ///
@@ -129,7 +130,7 @@ inline auto MakeTask( const std::string& name, Function&& f ) -> Task< decltype(
 
 template< typename Result >
 inline Task< Result >::Task( const std::string& name, TaskFunction&& f )
-    : TaskCore( name, std::make_shared< Detail::RegularTask< Result >>( std::move( f )))
+    : TaskCore( name, MakeUnique< Detail::RegularTask< Result >>( std::move( f )))
 {
 }
 
@@ -145,7 +146,7 @@ inline Task< Result >& Task< Result >::DelayFor( const Ticks& duration )
 template< typename Result >
 inline Result Task< Result >::GetResult() const
 {
-    return std::static_pointer_cast< const Detail::BasicTask< Result >>( this->GetHolder() )->GetResult();
+    return static_cast< const Detail::BasicTask< Result >* >( this->GetHolder() )->GetResult();
 }
 
 
@@ -164,12 +165,12 @@ Task< Result >::Then( const std::string& name, ThenFunction&& f )
 //
 
 inline Task< void >::Task( const std::string& name, TaskFunction&& f )
-    : TaskCore( name, std::make_shared< Detail::RegularTask< void >>( std::move( f )))
+    : TaskCore( name, MakeUnique< Detail::RegularTask< void >>( std::move( f )))
 {
 }
 
 
-inline Task< void >::Task( const std::string& name, std::shared_ptr< Detail::TaskHolder >&& holder )
+inline Task< void >::Task( const std::string& name, std::unique_ptr< Detail::TaskHolder >&& holder )
     : TaskCore( name, std::move( holder ))
 {
 }
@@ -190,8 +191,8 @@ Task< void >::Then( const std::string& name, ThenFunction&& f )
     typedef typename Detail::ThenFunctionTraits< ThenFunction, void >::TaskType TaskType;
 
     // Convert to Detail::TaskHolder explicitly.
-    std::shared_ptr< Detail::TaskHolder > thenHolder =
-        std::make_shared< Detail::ThenTask< ResultType, void >>( std::move( f ), *this );
+    std::unique_ptr< Detail::TaskHolder > thenHolder =
+        MakeUnique< Detail::ThenTask< ResultType, void >>( std::move( f ), *this );
 
     return TaskType( name, std::move( thenHolder ));
 }

@@ -50,11 +50,11 @@ public:
 
 protected:
 
-    TaskCore( const std::string& name, std::shared_ptr< Detail::TaskHolder >&& holder );
+    TaskCore( const std::string& name, std::unique_ptr< Detail::TaskHolder >&& holder );
 
     void DoDelayFor( const Ticks& duration );
 
-    std::shared_ptr< const Detail::TaskHolder > GetHolder() const;
+    const Detail::TaskHolder* GetHolder() const;
 
 
     std::shared_ptr< TaskImpl > m_impl;
