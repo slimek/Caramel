@@ -104,6 +104,7 @@
     <ClCompile Include="..\src\Concurrent\ConcurrentIntervalSetTest.cpp" />
     <ClCompile Include="..\src\Concurrent\ConcurrentMapTest.cpp" />
     <ClCompile Include="..\src\Concurrent\ConcurrentPriorityQueueTest.cpp" />
+    <ClCompile Include="..\src\Concurrent\ConcurrentQueueTest.cpp" />
     <ClCompile Include="..\src\Concurrent\ConcurrentSetTest.cpp" />
     <ClCompile Include="..\src\Concurrent\ConcurrentBlockingQueueTest.cpp" />
     <ClCompile Include="..\src\DateTime\DateTest.cpp" />

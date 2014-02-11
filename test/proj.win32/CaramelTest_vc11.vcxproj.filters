@@ -193,6 +193,9 @@
     <ClCompile Include="..\src\DateTime\TimeSpanTest.cpp">
       <Filter>2. Tests\DateTime</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Concurrent\ConcurrentQueueTest.cpp">
+      <Filter>2. Tests\Concurrent</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">

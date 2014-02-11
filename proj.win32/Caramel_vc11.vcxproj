@@ -35,6 +35,7 @@
     <ClInclude Include="..\include\Caramel\Concurrent\Detail\BasicMap.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\Detail\BasicSet.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\Detail\CollectionSnapshot.h" />
+    <ClInclude Include="..\include\Caramel\Concurrent\Detail\LockedSequence.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\Detail\LockedSet.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\FlatMap.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\HashMap.h" />

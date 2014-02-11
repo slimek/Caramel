@@ -5,6 +5,8 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
+#include <Caramel/Concurrent/ReplicatePolicies.h>
+#include <Caramel/Concurrent/Detail/LockedSequence.h>
 #include <Caramel/Thread/MutexLocks.h>
 #include <boost/noncopyable.hpp>
 #include <deque>
@@ -21,10 +23,29 @@ namespace Concurrent
 // Concurrent Queue
 //
 
-template< typename T >
-class Queue : public boost::noncopyable
+template< typename T, typename ReplicatePolicy = ReplicateNothing >
+class Queue : public ReplicatePolicy::template Collection
+              <
+                  Queue< T, ReplicatePolicy >, T
+              >
+            , public boost::noncopyable
 {
 public:
+
+    typedef T ValueType;
+
+    typedef typename ReplicatePolicy::template Collection
+    <
+        Queue< T, ReplicatePolicy >, T
+    >
+    Replicator;
+
+
+    /// Properties ///
+
+    Bool IsEmpty() const { return m_queue.empty(); }
+    Uint Size()    const { return static_cast< Uint >( m_queue.size() ); }
+
 
     /// Operations ///
 
@@ -33,45 +54,69 @@ public:
 
     Bool TryPop( T& x );
 
+    void Clear();
 
-    /// Not Thread-safe Properties ///
 
-    Bool IsEmpty() const { return m_queue.empty(); }
+    /// Locked Iterator Accessor ///
+
+    class ConstLockedQueue;
+    friend class ConstLockedQueue;
+
+    // For Replicator
+    typedef ConstLockedQueue ConstLockedCollection;
 
 
 private:
 
+    /// Data Members ///
+
     typedef std::deque< T > QueueType;
     QueueType m_queue;
 
-    std::mutex m_queueMutex;
+    mutable std::mutex m_queueMutex;
 };
 
 
 //
-// Implementation
+// Convenient Alias
 //
 
 template< typename T >
-inline void Queue< T >::Push( const T& x )
+class QueueWithSnapshot : public Queue< T, ReplicateSnapshot >
+{
+};
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Implementation
+//
+
+template< typename T, typename ReplicateP >
+inline void Queue< T, ReplicateP >::Push( const T& x )
 {
     auto ulock = UniqueLock( m_queueMutex );
 
     m_queue.push_back( x );
+
+    this->Replicator::ReplicaAdd( x );
 }
 
 
-template< typename T >
-inline void Queue< T >::Push( T&& x )
+template< typename T, typename ReplicateP >
+inline void Queue< T, ReplicateP >::Push( T&& x )
 {
     auto ulock = UniqueLock( m_queueMutex );
 
     m_queue.push_back( std::move( x ));
+
+    this->Replicator::ReplicaAdd( x );
 }
 
 
-template< typename T >
-inline Bool Queue< T >::TryPop( T& x )
+template< typename T, typename ReplicateP >
+inline Bool Queue< T, ReplicateP >::TryPop( T& x )
 {
     if ( m_queue.empty() ) { return false; }
 
@@ -82,8 +127,35 @@ inline Bool Queue< T >::TryPop( T& x )
     x = m_queue.front();
     m_queue.pop_front();
 
+    this->Replicator::ReplicaRemove( x );
+
     return true;
 }
+
+
+template< typename T, typename ReplicateP >
+inline void Queue< T, ReplicateP >::Clear()
+{
+    auto ulock = UniqueLock( m_queueMutex );
+
+    m_queue.clear();
+
+    this->Replicator::ReplicaClear();
+}
+
+
+//
+// Locked Iterator Accessor
+//
+
+template< typename T, typename ReplicateP >
+class Queue< T, ReplicateP >::ConstLockedQueue : public Detail::ConstLockedSequence< QueueType >
+{
+public:
+    explicit ConstLockedQueue( const Queue& host )
+        : Detail::ConstLockedSequence< QueueType >( host.m_queueMutex, host.m_queue )
+    {}
+};
 
 
 ///////////////////////////////////////////////////////////////////////////////

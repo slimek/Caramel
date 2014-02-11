@@ -635,6 +635,9 @@
     <ClInclude Include="..\include\Caramel\Memory\UniquePtrUtils.h">
       <Filter>1. Public Packages\Memory</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Concurrent\Detail\LockedSequence.h">
+      <Filter>1. Public Packages\Concurrent\Detail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">
