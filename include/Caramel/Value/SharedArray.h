@@ -143,12 +143,10 @@ template< typename T >
 ConstSharedArray< T >::ConstSharedArray( Uint size )
     : m_size( size )
 {
-    if ( 0 == size )
-    {
-        CARAMEL_THROW( "Size can't be 0" );
-    }
+    // If size is 0, keep a dummy content in m_array.
+    const Uint implSize = ( 0 < size ) ? size : 1;
 
-    m_array.reset( new T[size] );
+    m_array.reset( new T[implSize] );
 }
 
 

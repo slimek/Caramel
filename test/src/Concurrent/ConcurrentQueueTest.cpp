@@ -93,7 +93,7 @@ TEST( ConcurrentQueueSnapshotTest )
 
     auto sp3 = ique.GetSnapshot();
 
-    //CHECK( true == sp3.IsEmpty() );
+    CHECK( true == sp3.IsEmpty() );
 }
 
 
