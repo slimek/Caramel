@@ -7,6 +7,7 @@
 #include "Task/WorkerThreadImpl.h"
 #include <Caramel/Async/TimedBool.h>
 #include <Caramel/Chrono/TickClock.h>
+#include <Caramel/Error/CatchException.h>
 #include <Caramel/String/Format.h>
 #include <algorithm>
 
@@ -33,9 +34,22 @@ TaskCore::TaskCore()
 }
 
 
-TaskCore::TaskCore( const std::string& name, TaskHolderPtr&& holder )
+TaskCore::TaskCore( const std::string& name, std::unique_ptr< TaskHolder >&& holder )
     : m_impl( new TaskImpl( name, std::move( holder )))
 {
+}
+
+
+TaskCore::TaskCore( const std::shared_ptr< TaskImpl >& impl )
+    : m_impl( impl )
+{
+}
+
+
+void TaskCore::AddContinuation( TaskCore& continuation )
+{
+    CARAMEL_CHECK( m_impl->IsValid() );
+    m_impl->AddContinuation( continuation.m_impl );
 }
 
 
@@ -88,12 +102,35 @@ TaskImpl::TaskImpl()
 }
 
 
-TaskImpl::TaskImpl( const std::string& name, TaskHolderPtr&& holder )
+TaskImpl::TaskImpl( const std::string& name, std::unique_ptr< TaskHolder >&& holder )
     : m_name( name )
     , m_holder( std::move( holder ))
     , m_hasDelay( false )
     , m_executor( nullptr )
 {
+}
+
+
+void TaskImpl::AddContinuation( TaskPtr continuation )
+{
+    Bool canSubmit = false;
+
+    {
+        auto ulock = UniqueLock( m_stateMutex );
+        if ( TASK_S_RAN_TO_COMPLETE == m_state )
+        {
+            canSubmit = true;
+        }
+        else
+        {
+            m_continuations.Push( continuation );
+        }
+    }
+
+    if ( canSubmit )
+    {
+        m_executor->Submit( TaskCore( continuation ));
+    }
 }
 
 
@@ -108,29 +145,55 @@ void TaskImpl::DelayFor( const Ticks& duration )
 
 void TaskImpl::Run()
 {
-    m_holder->Invoke();
+    {
+        auto ulock = UniqueLock( m_stateMutex );
+        m_state = TASK_S_RUNNING;
+    }
+
+    auto xc = CatchException( [=] { m_holder->Invoke(); } );
+
+    m_continuations.Clear();
+
+    //decltype( m_continuations.GetSnapshot() ) continautions;
+
+    //{
+    //    auto ulock = UniqueLock( m_stateMutex );
+    //    if ( xc )
+    //    {
+    //        m_state = TASK_S_FAULTED;
+    //        m_continuations.Clear();
+    //        return;
+    //    }
+    //    else
+    //    {
+    //        m_state = TASK_S_RAN_TO_COMPLETE;
+    //        continuations = m_continuations.GetSnapshot();
+    //    }
+    //}
+
+    //for ( TaskPtr task : continuations )
+    //{
+    //    m_executor->Submit( TaskCore( task ));
+    //}
 }
 
 
 //
 // State Transition
+// - TODO: Not complete yet.
 //
 
-Bool TaskImpl::TransitToDelayed()
+Bool TaskImpl::TransitFromTo( State fromState, State toState )
 {
-    return true;
-}
+    auto ulock = UniqueLock( m_stateMutex );
 
-
-Bool TaskImpl::TransitToBlocked()
-{
-    return true;
-}
-
-
-Bool TaskImpl::TransitToReady()
-{
-    return true;
+    if ( fromState == m_state )
+    {
+        m_state = toState;
+        return true;
+    }
+    else
+        return false;
 }
 
 

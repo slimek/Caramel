@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
+#include <Caramel/Concurrent/Queue.h>
 #include <Caramel/Task/Task.h>
 
 
@@ -12,25 +13,31 @@ namespace Caramel
 {
 
 typedef Detail::TaskHolder TaskHolder;
-typedef std::unique_ptr< Detail::TaskHolder > TaskHolderPtr;
 
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Task
 //
 
+class TaskImpl;
+typedef std::shared_ptr< TaskImpl > TaskPtr;
+
 class TaskImpl
 {
     friend class TaskCore;
 
+    enum State : Int;
+    
 public:
 
     TaskImpl();  // Not-a-task
 
-    TaskImpl( const std::string& name, TaskHolderPtr&& holder );
+    TaskImpl( const std::string& name, std::unique_ptr< TaskHolder >&& holder );
 
 
     /// Operations ///
+
+    void AddContinuation( TaskPtr continuation );
 
     void DelayFor( const Ticks& duration );
     void Run();
@@ -38,9 +45,7 @@ public:
 
     /// State Transition ///
 
-    Bool TransitToDelayed();
-    Bool TransitToBlocked();
-    Bool TransitToReady();
+    Bool TransitFromTo( State fromState, State toState );
 
 
     /// Properties ///
@@ -59,7 +64,7 @@ private:
 
     /// State ///
 
-    enum State
+    enum State : Int
     {
         TASK_S_INITIAL          = 0x01,
         TASK_S_DELAYING         = 0x02,
@@ -85,9 +90,12 @@ private:
 
     TaskExecutor* m_executor;
 
-};
 
-typedef std::shared_ptr< TaskImpl > TaskPtr;
+    /// Continuation ///
+
+    typedef Concurrent::Queue< TaskPtr > TaskQueue;
+    TaskQueue m_continuations;
+};
 
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -194,7 +194,9 @@ Task< void >::Then( const std::string& name, ThenFunction&& f )
     std::unique_ptr< Detail::TaskHolder > thenHolder =
         MakeUnique< Detail::ThenTask< ResultType, void >>( std::move( f ), *this );
 
-    return TaskType( name, std::move( thenHolder ));
+    auto thenTask = TaskType( name, std::move( thenHolder ));
+    this->AddContinuation( thenTask );
+    return thenTask;
 }
 
 

@@ -22,6 +22,8 @@ class TaskImpl;
 
 class TaskCore
 {
+    friend class TaskImpl;
+
 public:
 
     TaskCore();
@@ -39,7 +41,6 @@ public:
     Bool  HasDelay()         const;
     Ticks GetDelayDuration() const;
 
-
     //
     // Post-Submit Functions
     // - These functions should only be called by TaskExecutor
@@ -51,6 +52,9 @@ public:
 protected:
 
     TaskCore( const std::string& name, std::unique_ptr< Detail::TaskHolder >&& holder );
+    TaskCore( const std::shared_ptr< TaskImpl >& impl );
+
+    void AddContinuation( TaskCore& continuation );
 
     void DoDelayFor( const Ticks& duration );
 
