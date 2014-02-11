@@ -111,7 +111,7 @@ inline void Queue< T, ReplicateP >::Push( T&& x )
 
     m_queue.push_back( std::move( x ));
 
-    this->Replicator::ReplicaAdd( x );
+    this->Replicator::ReplicaAdd( m_queue.back() );
 }
 
 
