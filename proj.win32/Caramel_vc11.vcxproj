@@ -76,6 +76,7 @@
     <ClInclude Include="..\include\Caramel\Lexical\IntegerList.h" />
     <ClInclude Include="..\include\Caramel\Math\Floating.h" />
     <ClInclude Include="..\include\Caramel\Memory\SharedPtrUtils.h" />
+    <ClInclude Include="..\include\Caramel\Memory\UniquePtrUtils.h" />
     <ClInclude Include="..\include\Caramel\Meta\IfThenElse.h" />
     <ClInclude Include="..\include\Caramel\Meta\IntegralTypes.h" />
     <ClInclude Include="..\include\Caramel\Meta\IsGeneralString.h" />

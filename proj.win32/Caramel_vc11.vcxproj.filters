@@ -632,6 +632,9 @@
     <ClInclude Include="..\include\Caramel\Task\Detail\TaskTraits.h">
       <Filter>1. Public Packages\Task\Detail headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Memory\UniquePtrUtils.h">
+      <Filter>1. Public Packages\Memory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">
