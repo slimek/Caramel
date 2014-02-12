@@ -5,9 +5,8 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
-#include <Caramel/Async/AnyEvent.h>
-#include <Caramel/Concurrent/IntervalSet.h>
-#include <Caramel/Concurrent/Queue.h>
+#include <Caramel/Async/Detail/AnyEventQueueImpl.h>
+#include <boost/noncopyable.hpp>
 
 
 namespace Caramel
@@ -18,9 +17,13 @@ namespace Caramel
 // Any Event Queue
 //
 
-class AnyEventQueue
+class AnyEventQueue : public boost::noncopyable
 {
 public:
+    
+    AnyEventQueue();
+    ~AnyEventQueue();
+
 
     /// Operations ///
 
@@ -49,13 +52,8 @@ public:
 
 private:
 
-    /// Data Members ///
+    std::shared_ptr< Detail::AnyEventQueueImpl > m_impl;
 
-    typedef Concurrent::Queue< AnyEvent > EventQueue;
-    EventQueue m_events;
-
-    typedef Concurrent::IntervalSet< Int > EventIdRangeSet;
-    EventIdRangeSet m_registeredIdRanges;
 };
 
 
@@ -64,39 +62,54 @@ private:
 // Implementation
 //
 
+inline AnyEventQueue::AnyEventQueue()
+    : m_impl( new Detail::AnyEventQueueImpl )
+{
+}
+
+
+inline AnyEventQueue::~AnyEventQueue()
+{
+}
+
+
+//
+// Operations
+//
+
 inline void AnyEventQueue::Push( const AnyEvent& evt )
 {
-    m_events.Push( evt );
+    m_impl->Push( evt );
 }
 
 
 inline void AnyEventQueue::Push( AnyEvent&& evt )
 {
-    m_events.Push( std::move( evt ));
+    m_impl->Push( std::move( evt ));
 }
 
 
 inline void AnyEventQueue::PushEvent( Int eventId )
 {
-    m_events.Push( AnyEvent( eventId ));
+    m_impl->Push( AnyEvent( eventId ));
 }
 
 
 inline void AnyEventQueue::PushEvent( Int eventId, const Any& any )
 {
-    m_events.Push( AnyEvent( eventId, any ));
+    m_impl->Push( AnyEvent( eventId, any ));
 }
 
 
 inline void AnyEventQueue::PushEvent( Int eventId, Any&& any )
 {
-    m_events.Push( AnyEvent( eventId, std::move( any )));
+    m_impl->Push( AnyEvent( eventId, std::move( any )));
 }
 
 
 inline Bool AnyEventQueue::TryPop( AnyEvent& evt )
 {
-    return m_events.TryPop( evt );
+    return m_impl->TryPop( evt );
 }
 
 
@@ -106,13 +119,13 @@ inline Bool AnyEventQueue::TryPop( AnyEvent& evt )
 
 inline Bool AnyEventQueue::RegisterIdRange( Int minEventId, Int maxEventId )
 {
-    return m_registeredIdRanges.InsertClosed( minEventId, maxEventId );
+    return m_impl->RegisterIdRange( minEventId, maxEventId );
 }
 
 
 inline void AnyEventQueue::UnregisterIdRange( Int minEventId, Int maxEventId )
 {
-    m_registeredIdRanges.EraseClosed( minEventId, maxEventId );
+    m_impl->UnregisterIdRange( minEventId, maxEventId );
 }
 
 

@@ -33,15 +33,6 @@
     <Filter Include="1. Public Packages\Object">
       <UniqueIdentifier>{00a1ce5e-5e58-42f0-9a44-837c5b74db8d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="1. Public Packages\Object\Detail headers">
-      <UniqueIdentifier>{d28a9a7e-028d-4862-ab2a-16e04456458e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="1. Public Packages\String\Inline headers">
-      <UniqueIdentifier>{5e2af97b-94fe-40ea-b155-7171182bd52b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="1. Public Packages\String\Detail headers">
-      <UniqueIdentifier>{371c93a3-2c32-4227-8257-2142070f310b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="1. Public Packages\Lexical">
       <UniqueIdentifier>{7500b9b7-34a6-45c1-88a9-9c008305f73d}</UniqueIdentifier>
     </Filter>
@@ -144,9 +135,6 @@
     <Filter Include="1. Public Packages\Math">
       <UniqueIdentifier>{6909fe9d-0905-4c72-948f-b191ca2fe5a3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="1. Public Packages\Value\Detail headers">
-      <UniqueIdentifier>{dddb83b1-4558-4057-bbbc-d48e3210aabc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="2. Sources\Value">
       <UniqueIdentifier>{c8fcc489-7171-46d6-9cfd-505a7031b032}</UniqueIdentifier>
     </Filter>
@@ -162,14 +150,29 @@
     <Filter Include="1. Public Packages\Memory">
       <UniqueIdentifier>{088d2772-d823-45cb-ad38-5e6b69460f3d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="1. Public Packages\DateTime\Detail headers">
-      <UniqueIdentifier>{27db88a5-44ef-42b9-a35a-a7140031b244}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="1. Public Packages\Task\Detail headers">
-      <UniqueIdentifier>{edaca340-f292-4cb7-81e9-e1e9fb1a437b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="4. Non-Win32 Platform\Apple">
       <UniqueIdentifier>{daa7b010-227a-4a43-92a3-d208d54175c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\DateTime\Detail">
+      <UniqueIdentifier>{27db88a5-44ef-42b9-a35a-a7140031b244}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Object\Detail">
+      <UniqueIdentifier>{d28a9a7e-028d-4862-ab2a-16e04456458e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\String\Detail">
+      <UniqueIdentifier>{371c93a3-2c32-4227-8257-2142070f310b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\String\Inline">
+      <UniqueIdentifier>{5e2af97b-94fe-40ea-b155-7171182bd52b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Task\Detail">
+      <UniqueIdentifier>{edaca340-f292-4cb7-81e9-e1e9fb1a437b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Value\Detail">
+      <UniqueIdentifier>{dddb83b1-4558-4057-bbbc-d48e3210aabc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Async\Detail">
+      <UniqueIdentifier>{61c02db5-a9d8-4dca-aa0f-7d8e6cd10893}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -207,10 +210,10 @@
       <Filter>1. Public Packages\Object</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Object\Detail\LifetimeTracker.h">
-      <Filter>1. Public Packages\Object\Detail headers</Filter>
+      <Filter>1. Public Packages\Object\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\String\Detail\SprintfParameter.h">
-      <Filter>1. Public Packages\String\Detail headers</Filter>
+      <Filter>1. Public Packages\String\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Meta\IfThenElse.h">
       <Filter>1. Public Packages\Meta</Filter>
@@ -240,7 +243,7 @@
       <Filter>1. Public Packages\FileSystem</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\String\Inline\Sprintf_Sprintf.h">
-      <Filter>1. Public Packages\String\Inline headers</Filter>
+      <Filter>1. Public Packages\String\Inline</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Functional\ScopeExit.h">
       <Filter>1. Public Packages\Functional</Filter>
@@ -486,7 +489,7 @@
       <Filter>1. Public Packages\Value</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Value\Detail\NamedValueRef.h">
-      <Filter>1. Public Packages\Value\Detail headers</Filter>
+      <Filter>1. Public Packages\Value\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Value\NamedValuesImpl.h">
       <Filter>2. Sources\Value</Filter>
@@ -516,13 +519,13 @@
       <Filter>1. Public Packages\Value</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Value\Detail\AnyHolders.h">
-      <Filter>1. Public Packages\Value\Detail headers</Filter>
+      <Filter>1. Public Packages\Value\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Meta\IsGeneralString.h">
       <Filter>1. Public Packages\Meta</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Value\Detail\AnyCasters.h">
-      <Filter>1. Public Packages\Value\Detail headers</Filter>
+      <Filter>1. Public Packages\Value\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Async\AnyEvent.h">
       <Filter>1. Public Packages\Async</Filter>
@@ -567,16 +570,16 @@
       <Filter>1. Public Packages\String</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\String\Detail\Formatter.h">
-      <Filter>1. Public Packages\String\Detail headers</Filter>
+      <Filter>1. Public Packages\String\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\src\String\FormatterImpl.h">
       <Filter>2. Sources\String</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\DateTime\Detail\DateTimeFwd.h">
-      <Filter>1. Public Packages\DateTime\Detail headers</Filter>
+      <Filter>1. Public Packages\DateTime\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Task\Detail\TaskFwd.h">
-      <Filter>1. Public Packages\Task\Detail headers</Filter>
+      <Filter>1. Public Packages\Task\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Value\PlainTypes.h">
       <Filter>1. Public Packages\Value</Filter>
@@ -624,19 +627,22 @@
       <Filter>1. Public Packages\Task</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Task\Detail\TaskHolders.h">
-      <Filter>1. Public Packages\Task\Detail headers</Filter>
+      <Filter>1. Public Packages\Task\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Async\ValueChange.h">
       <Filter>1. Public Packages\Async</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Task\Detail\TaskTraits.h">
-      <Filter>1. Public Packages\Task\Detail headers</Filter>
+      <Filter>1. Public Packages\Task\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Memory\UniquePtrUtils.h">
       <Filter>1. Public Packages\Memory</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Concurrent\Detail\LockedSequence.h">
       <Filter>1. Public Packages\Concurrent\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventQueueImpl.h">
+      <Filter>1. Public Packages\Async\Detail</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
