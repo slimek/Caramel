@@ -32,7 +32,7 @@ class CollectionSnapshot
 {
 public:
 
-    typedef ConstSharedArray< Value > SnapshotType;
+    typedef ConstSharedArray< Value > Snapshot, SnapshotType;
 
     CollectionSnapshot();
 
