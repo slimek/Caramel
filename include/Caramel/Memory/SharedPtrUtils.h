@@ -1,4 +1,4 @@
-// Caramel C++ Library - Memory Amenity - Shared Ptr Utilities Header
+// Caramel C++ Library - Memory Amenity - std::shared_ptr Utilities Header
 
 #ifndef __CARAMEL_MEMORY_SHARED_PTR_UTILS_H
 #define __CARAMEL_MEMORY_SHARED_PTR_UTILS_H

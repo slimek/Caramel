@@ -1,4 +1,4 @@
-// Caramel C++ Library - Memory Amenity - Unique Ptr Utilities Header
+// Caramel C++ Library - Memory Amenity - std::unique_ptr Utilities Header
 
 #ifndef __CARAMEL_MEMORY_UNIQUE_PTR_UTILS_H
 #define __CARAMEL_MEMORY_UNIQUE_PTR_UTILS_H
