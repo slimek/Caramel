@@ -31,12 +31,12 @@ public:
     static T* Instance();
 
 private:
-    static void Create();
-    static void Destroy( T* );
+    static void CreateInstance();
+    static void DestroyInstance( T* );
 
     static volatile T* m_instance;
     static SpinMutex m_mutex;
-    static Bool m_destroyed;
+    static Bool m_instanceDestroyed;
 
     // NOTE: m_destroyed has no function in code.
     //       but you may use it to check if a singleton is created more than once
@@ -60,7 +60,7 @@ template< typename T, Uint longevity >
 SpinMutex Singleton< T, longevity >::m_mutex;
 
 template< typename T, Uint longevity >
-Bool Singleton< T, longevity >::m_destroyed = false;
+Bool Singleton< T, longevity >::m_instanceDestroyed = false;
 
 
 //
@@ -77,7 +77,7 @@ inline T* Singleton< T, longevity >::Instance()
 
     if ( ! m_instance )
     {
-        Create();
+        CreateInstance();
     }
 
     return const_cast< T* >( m_instance );
@@ -88,7 +88,7 @@ inline T* Singleton< T, longevity >::Instance()
 // Create - Create the single object and register its destroy handler.
 //
 template< typename T, Uint longevity >
-inline void Singleton< T, longevity >::Create()
+inline void Singleton< T, longevity >::CreateInstance()
 {
     T* instance = new T;
     
@@ -98,7 +98,7 @@ inline void Singleton< T, longevity >::Create()
     m_instance = instance;
 
     Detail::LifetimeTrackerSortedList::Insert(
-        const_cast< T* >( m_instance ), longevity, &Singleton::Destroy );
+        const_cast< T* >( m_instance ), longevity, &Singleton::DestroyInstance );
 }
 
 
@@ -106,9 +106,9 @@ inline void Singleton< T, longevity >::Create()
 // Destroy - Called when the program is to exit.
 //
 template< typename T, Uint longevity >
-inline void Singleton< T, longevity >::Destroy( T* )
+inline void Singleton< T, longevity >::DestroyInstance( T* )
 {
-    m_destroyed = true;
+    m_instanceDestroyed = true;
 
     delete m_instance;
     m_instance = nullptr;
