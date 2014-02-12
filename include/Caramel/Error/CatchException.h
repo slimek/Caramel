@@ -58,7 +58,7 @@ private:
 
 
 //
-// Stand-aline Function
+// Stand-alone Function
 //
 
 template< typename Function >

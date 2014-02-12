@@ -35,7 +35,8 @@ public:
 
     std::string Name() const;
 
-    Bool IsDone() const;  // "Ran to Completion", Faulted or Canceled
+    Bool IsFaulted() const;
+    Bool IsDone()    const;  // "Ran to Completion", Faulted or Canceled
 
 
     /// Operations ///

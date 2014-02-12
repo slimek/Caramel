@@ -88,16 +88,37 @@ TEST( TaskPollerThenTest )
 {
     TaskPoller poller;
 
-    Bool done1 = false;
-    Bool done2 = false;
+    {
+        Bool done1 = false;
+        Bool done2 = false;
 
-    auto task1 = MakeTask( "Task1", [&] { done1 = true; } );
-    auto task2 = task1.Then( std::string( "Task2" ), [&] ( Task< void > ) { done2 = true; } );
+        auto task1 = MakeTask( "Task1", [&] { done1 = true; } );
+        auto task2 = task1.Then( std::string( "Task2" ), [&] ( Task< void > ) { done2 = true; } );
 
-    poller.Submit( task1 );
-    poller.PollFor( Ticks( 100 ));
+        poller.Submit( task1 );
+        poller.PollFor( Ticks( 100 ));
 
-    CHECK( true == done1 && true == done2 );
+        CHECK( true == done1 && true == done2 );
+    }
+
+    /// Task Faulted ///
+    {
+        Bool done4 = false;
+
+        auto task3 = MakeTask( "Task3", [] { CARAMEL_THROW( "Shock" ); } );
+        
+        auto task4 = task3.Then( "Task4",
+        [&] ( Task< void > )
+        {
+            done4 = true;
+        });
+
+        poller.Submit( task3 );
+        poller.PollFor( Ticks( 100 ));
+
+        CHECK( true == done4 && true == task3.IsFaulted() );
+    }
+
 }
 
 

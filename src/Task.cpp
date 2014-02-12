@@ -110,6 +110,8 @@ void TaskCore::Wait()
 Bool TaskCore::IsValid() const { return m_impl->IsValid(); }
 Bool TaskCore::IsDone()  const { return m_impl->IsDone(); }
 
+Bool TaskCore::IsFaulted() const { return TaskImpl::TASK_S_FAULTED == m_impl->m_state; }
+
 std::string TaskCore::Name() const { return m_impl->m_name; }
 
 Bool  TaskCore::HasDelay()         const { return m_impl->m_hasDelay; }
@@ -198,17 +200,14 @@ void TaskImpl::Run()
         if ( xc )
         {
             m_state = TASK_S_FAULTED;
-            m_continuations.Clear();
-            this->NotifyDone();
-            return;
         }
         else
         {
             m_state = TASK_S_RAN_TO_COMP;
-            continuations = m_continuations.GetSnapshot();
-            m_continuations.Clear();
-            this->NotifyDone();
         }
+
+        continuations = m_continuations.GetSnapshot();
+        m_continuations.Clear();
     }
 
     for ( TaskPtr task : continuations )
