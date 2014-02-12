@@ -157,6 +157,58 @@ TEST( WorkerThreadDelayTest )
 }
 
 
+TEST( WorkerThreadThenTest )
+{
+    WorkerThread worker( "Then" );
+
+    /// No result continuation ///
+    {
+        std::vector< Int > order;
+
+        Task< void > t1 = MakeTask( "Then1",
+        [&]
+        {
+            order.push_back( 1 );
+        });
+
+        Task< void > t2 = t1.Then( "Then2",
+        [&] ( Task< void > )
+        {
+            order.push_back( 2 );
+        });
+
+        worker.Submit( t1 );
+
+        t2.Wait();
+        CHECK( 1 == order[0] && 2 == order[1] );
+    }
+
+    /// Continuation with Result ///
+    {
+        std::string name;
+
+        Task< std::string > t1 = MakeTask( "Then1",
+        [&]
+        {
+            return std::string( "Alice" );
+        });
+
+        Task< void > t2 = t1.Then( "Then2",
+        [&] ( Task< std::string > t )
+        {
+            name = t.GetResult();
+        });
+
+        worker.Submit( t1 );
+
+        t2.Wait();
+        CHECK( "Alice" == name );
+    }
+
+    worker.Stop();
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE WorkerThreadSuite

@@ -35,17 +35,29 @@ public:
 
     std::string Name() const;
 
-    Bool IsCompleted() const;  // "Ran to Completion" or Cancelled
+    Bool IsDone() const;  // "Ran to Completion", Faulted or Canceled
+
+
+    /// Operations ///
 
     // Delay
     Bool  HasDelay()         const;
     Ticks GetDelayDuration() const;
 
+    void Wait();  // Wait until done.
+
+    
     //
     // Post-Submit Functions
     // - These functions should only be called by TaskExecutor
     //
 
+    // State transition
+    // - If these functions return false, the executor should discard this task.
+    Bool StartDelay ( TaskExecutor& executor );
+    Bool StartWait  ( TaskExecutor& executor );
+    Bool BecomeReady( TaskExecutor& executor );
+    
     void Run();
 
 

@@ -150,13 +150,21 @@ inline Result Task< Result >::GetResult() const
 }
 
 
-template< typename Result >
+template< typename AnteResult >
 template< typename ThenFunction >
-inline typename Detail::ThenFunctionTraits< ThenFunction, Result >::TaskType
-Task< Result >::Then( const std::string& name, ThenFunction&& f )
+inline typename Detail::ThenFunctionTraits< ThenFunction, AnteResult >::TaskType
+Task< AnteResult >::Then( const std::string& name, ThenFunction&& f )
 {
-    typedef typename Detail::ThenFunctionTraits< ThenFunction, Result >::TaskType TaskType;
-    return TaskType( name, std::move( f ), TypeT< Result >() );
+    typedef typename Detail::ThenFunctionTraits< ThenFunction, AnteResult >::ResultType ResultType;
+    typedef typename Detail::ThenFunctionTraits< ThenFunction, AnteResult >::TaskType TaskType;
+
+    // Convert to Detail::TaskHolder explicitly.
+    std::unique_ptr< Detail::TaskHolder > thenHolder =
+        MakeUnique< Detail::ThenTask< ResultType, AnteResult >>( std::move( f ), *this );
+
+    auto thenTask = TaskType( name, std::move( thenHolder ));
+    this->AddContinuation( thenTask );
+    return thenTask;
 }
 
 

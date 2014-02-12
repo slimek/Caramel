@@ -60,6 +60,35 @@ void TaskCore::DoDelayFor( const Ticks& duration )
 }
 
 
+//
+// Internal Functions - Call by TaskExecutor
+//
+
+
+Bool TaskCore::StartDelay( TaskExecutor& executor )
+{
+    CARAMEL_CHECK( m_impl->IsValid() );
+    m_impl->SetExecutor( executor );
+    return true;
+}
+
+
+Bool TaskCore::StartWait( TaskExecutor& executor )
+{
+    CARAMEL_CHECK( m_impl->IsValid() );
+    m_impl->SetExecutor( executor );
+    return true;
+}
+
+
+Bool TaskCore::BecomeReady( TaskExecutor& executor )
+{
+    CARAMEL_CHECK( m_impl->IsValid() );
+    m_impl->SetExecutor( executor );
+    return true;
+}
+
+
 void TaskCore::Run()
 {
     CARAMEL_CHECK( m_impl->IsValid() );
@@ -67,13 +96,11 @@ void TaskCore::Run()
 }
 
 
-//
-// Internal Functions - Call by TaskExecutor
-//
-
-//void TaskCore::StartDelay( TaskExecutor& executor )
-//{
-//}
+void TaskCore::Wait()
+{
+    CARAMEL_CHECK( m_impl->IsValid() );
+    m_impl->Wait();
+}
 
 
 //
@@ -81,6 +108,7 @@ void TaskCore::Run()
 //
 
 Bool TaskCore::IsValid() const { return m_impl->IsValid(); }
+Bool TaskCore::IsDone()  const { return m_impl->IsDone(); }
 
 std::string TaskCore::Name() const { return m_impl->m_name; }
 
@@ -111,13 +139,24 @@ TaskImpl::TaskImpl( const std::string& name, std::unique_ptr< TaskHolder >&& hol
 }
 
 
+//
+// Operations
+//
+
+void TaskImpl::SetExecutor( TaskExecutor& executor )
+{
+    CARAMEL_ASSERT( nullptr == m_executor || &executor == m_executor );
+    m_executor = &executor;
+}
+
+
 void TaskImpl::AddContinuation( TaskPtr continuation )
 {
     Bool canSubmit = false;
 
     {
         auto ulock = UniqueLock( m_stateMutex );
-        if ( TASK_S_RAN_TO_COMPLETE == m_state )
+        if ( TASK_S_RAN_TO_COMP == m_state )
         {
             canSubmit = true;
         }
@@ -152,29 +191,41 @@ void TaskImpl::Run()
 
     auto xc = CatchException( [=] { m_holder->Invoke(); } );
 
-    m_continuations.Clear();
+    TaskQueue::Snapshot continuations;
 
-    //decltype( m_continuations.GetSnapshot() ) continautions;
+    {
+        auto ulock = UniqueLock( m_stateMutex );
+        if ( xc )
+        {
+            m_state = TASK_S_FAULTED;
+            m_continuations.Clear();
+            this->NotifyDone();
+            return;
+        }
+        else
+        {
+            m_state = TASK_S_RAN_TO_COMP;
+            continuations = m_continuations.GetSnapshot();
+            m_continuations.Clear();
+            this->NotifyDone();
+        }
+    }
 
-    //{
-    //    auto ulock = UniqueLock( m_stateMutex );
-    //    if ( xc )
-    //    {
-    //        m_state = TASK_S_FAULTED;
-    //        m_continuations.Clear();
-    //        return;
-    //    }
-    //    else
-    //    {
-    //        m_state = TASK_S_RAN_TO_COMPLETE;
-    //        continuations = m_continuations.GetSnapshot();
-    //    }
-    //}
+    for ( TaskPtr task : continuations )
+    {
+        m_executor->Submit( TaskCore( task ));
+    }
+}
 
-    //for ( TaskPtr task : continuations )
-    //{
-    //    m_executor->Submit( TaskCore( task ));
-    //}
+
+void TaskImpl::Wait()
+{
+    auto ulock = UniqueLock( m_stateMutex );
+
+    while ( ! this->IsDone() )
+    {
+        m_becomesDone.wait( ulock );
+    }
 }
 
 
@@ -197,6 +248,12 @@ Bool TaskImpl::TransitFromTo( State fromState, State toState )
 }
 
 
+void TaskImpl::NotifyDone()
+{
+    m_becomesDone.notify_all();    
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // TaskPoller
@@ -212,6 +269,8 @@ void TaskPoller::Submit( TaskCore& task )
 {
     if ( task.HasDelay() )
     {
+        task.StartDelay( *this );
+
         const TickPoint dueTime = TickClock::Now() + task.GetDelayDuration();
         m_impl->m_delayedTasks.Push( dueTime, task );
     }
@@ -224,6 +283,7 @@ void TaskPoller::Submit( TaskCore& task )
 
 void TaskPoller::AddReadyTask( TaskCore& task )
 {
+    task.BecomeReady( *this );
     m_impl->m_readyTasks.Push( task );
 }
 
@@ -305,6 +365,8 @@ void WorkerThread::Submit( TaskCore& task )
 {
     if ( task.HasDelay() )
     {
+        task.StartDelay( *this );
+
         auto lastDueTime = TickPoint::MaxValue();
         m_impl->m_delayTasks.PeekTopKey( lastDueTime );
 
@@ -320,7 +382,7 @@ void WorkerThread::Submit( TaskCore& task )
     }
     else
     {
-        m_impl->m_readyTasks.Push( task );
+        this->AddReadyTask( task );
     }
 }
 
@@ -335,6 +397,7 @@ void WorkerThread::Stop()
 
 void WorkerThread::AddReadyTask( TaskCore& task )
 {
+    task.BecomeReady( *this );
     m_impl->m_readyTasks.Push( task );
 }
 

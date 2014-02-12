@@ -7,6 +7,7 @@
 #include <Caramel/Caramel.h>
 #include <Caramel/Concurrent/Queue.h>
 #include <Caramel/Task/Task.h>
+#include <condition_variable>
 
 
 namespace Caramel
@@ -37,10 +38,14 @@ public:
 
     /// Operations ///
 
+    void SetExecutor( TaskExecutor& executor );
+
     void AddContinuation( TaskPtr continuation );
 
     void DelayFor( const Ticks& duration );
     void Run();
+
+    void Wait();
 
 
     /// State Transition ///
@@ -51,12 +56,18 @@ public:
     /// Properties ///
 
     Bool IsValid() const { return static_cast< Bool >( m_holder ); }  // *1
+    Bool IsDone()  const { return TASK_S_RUNNING < m_state; }
 
     // NOTES:
     // 1 - In Android NDK r9b, std::shared_prt can't convert to Bool implicitly.
 
 
 private:
+
+    void NotifyDone();
+
+
+    /// Data Members ///
 
     std::string m_name;
     std::shared_ptr< TaskHolder > m_holder;
@@ -66,18 +77,21 @@ private:
 
     enum State : Int
     {
-        TASK_S_INITIAL          = 0x01,
-        TASK_S_DELAYING         = 0x02,
-        TASK_S_WAITING          = 0x04,
-        TASK_S_READY            = 0x08,
-        TASK_S_RUNNING          = 0x10,
-        TASK_S_CANCELED         = 0x20,
-        TASK_S_FAULTED          = 0x40,
-        TASK_S_RAN_TO_COMPLETE  = 0x80,
+        TASK_S_INITIAL      = 0x01,
+        TASK_S_DELAYING     = 0x02,
+        TASK_S_WAITING      = 0x04,
+        TASK_S_READY        = 0x08,
+        TASK_S_RUNNING      = 0x10,
+
+        // Done states
+        TASK_S_CANCELED     = 0x20,
+        TASK_S_FAULTED      = 0x40,
+        TASK_S_RAN_TO_COMP  = 0x80, // Ran to Completion
     
     } m_state;
 
     std::mutex m_stateMutex;
+    std::condition_variable m_becomesDone;
 
     
     /// Delay ///
@@ -93,7 +107,7 @@ private:
 
     /// Continuation ///
 
-    typedef Concurrent::Queue< TaskPtr > TaskQueue;
+    typedef Concurrent::QueueWithSnapshot< TaskPtr > TaskQueue;
     TaskQueue m_continuations;
 };
 
