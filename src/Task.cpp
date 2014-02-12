@@ -281,6 +281,12 @@ void TaskPoller::Submit( TaskCore& task )
 }
 
 
+void TaskPoller::Submit( TaskCore&& task )
+{
+    this->Submit( task );  // Change rvalue to lvalue.
+}
+
+
 void TaskPoller::AddReadyTask( TaskCore& task )
 {
     task.BecomeReady( *this );
@@ -384,6 +390,12 @@ void WorkerThread::Submit( TaskCore& task )
     {
         this->AddReadyTask( task );
     }
+}
+
+
+void WorkerThread::Submit( TaskCore&& task )
+{
+    this->Submit( task );  // Change rvalue to lvalue.
 }
 
 

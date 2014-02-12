@@ -27,6 +27,7 @@ public:
     virtual ~TaskExecutor() {}
 
     virtual void Submit( TaskCore& task ) = 0;
+    virtual void Submit( TaskCore&& task ) = 0;
 
 
 private:
