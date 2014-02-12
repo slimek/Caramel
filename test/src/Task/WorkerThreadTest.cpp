@@ -150,6 +150,7 @@ TEST( WorkerThreadDelayTest )
 
         ready.Wait();
 
+        CHECK( ilist.size() == answer.size() );
         CHECK( true == std::equal( ilist.begin(), ilist.end(), answer.begin() ));
     }
 

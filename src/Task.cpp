@@ -208,6 +208,8 @@ void TaskImpl::Run()
 
         continuations = m_continuations.GetSnapshot();
         m_continuations.Clear();
+
+        this->NotifyDone();
     }
 
     for ( TaskPtr task : continuations )
