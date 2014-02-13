@@ -70,7 +70,7 @@ class RegularTask : public BasicTask< Result >
 {
 public:
 
-    using BasicTask< Result >::ResultType;
+    using typename BasicTask< Result >::ResultType;
     using BasicTask< Result >::m_result;
 
     typedef std::function< Result() > TaskFunction;
@@ -114,7 +114,7 @@ class ThenTask : public BasicTask< Result >
 {
 public:
 
-    using BasicTask< Result >::ResultType;
+    using typename BasicTask< Result >::ResultType;
     using BasicTask< Result >::m_result;
 
     typedef std::function< Result( Task< AnteResult > ) > ThenFunction;
@@ -138,8 +138,6 @@ template< typename AnteResult >
 class ThenTask< void, AnteResult > : public BasicTask< void >
 {
 public:
-
-    using BasicTask< void >::ResultType;
 
     typedef std::function< void( Task< AnteResult > ) > ThenFunction;
 
