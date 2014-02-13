@@ -183,6 +183,7 @@
 		6DAFE0ED1815118B00859097 /* libCaramel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCaramel.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DB1B753189F2E52004D2E91 /* Apple.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Apple.mm; sourceTree = "<group>"; };
 		6DB1B756189F2E62004D2E91 /* LogTraceAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogTraceAdapter.h; sourceTree = "<group>"; };
+		6DCED82A18AC57000071929B /* WorkerThreadImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkerThreadImpl.h; sourceTree = "<group>"; };
 		6DD0E7A4186C3A6B00414066 /* NumberConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberConverter.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -731,6 +732,7 @@
 			children = (
 				6DA1097D1856ABA700588AA2 /* TaskImpl.h */,
 				6DA1097E1856ABA700588AA2 /* TaskPollerImpl.h */,
+				6DCED82A18AC57000071929B /* WorkerThreadImpl.h */,
 			);
 			path = Task;
 			sourceTree = "<group>";
