@@ -37,12 +37,15 @@ TEST( AlertTest )
 {
     auto oldHandler = SetAlertHandler( LocalAlertHandler );
 
-    CARAMEL_ASSERT( 0 == 1 );
+    #if !defined( NDEBUG )
+    {
+        CARAMEL_ASSERT( 0 == 1 );
 
-    CHECK( s_fileBuffer     == __FILE__ );
-    CHECK( s_functionBuffer == __FUNCTION__ );
-    CHECK( s_messageBuffer  == "0 == 1" );
-
+        CHECK( s_fileBuffer     == __FILE__ );
+        CHECK( s_functionBuffer == __FUNCTION__ );
+        CHECK( s_messageBuffer  == "0 == 1" );
+    }
+    #endif
 
     // Throw Handler
 
