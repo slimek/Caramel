@@ -90,6 +90,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\Async\AnyEventDispatcherTest.cpp" />
     <ClCompile Include="..\src\Async\AnyEventQueueTest.cpp" />
     <ClCompile Include="..\src\Async\AnyEventTest.cpp" />
     <ClCompile Include="..\src\Async\FlowStateTest.cpp" />

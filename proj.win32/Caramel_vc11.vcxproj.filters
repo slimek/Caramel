@@ -644,6 +644,15 @@
     <ClInclude Include="..\include\Caramel\Thread\WaitableBool.h">
       <Filter>1. Public Packages\Thread</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Async\AnyEventTarget.h">
+      <Filter>1. Public Packages\Async</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventTargetImpl.h">
+      <Filter>1. Public Packages\Async\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventDispatcherImpl.h">
+      <Filter>1. Public Packages\Async\Detail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

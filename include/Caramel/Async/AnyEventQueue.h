@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
+#include <Caramel/Async/AnyEventTarget.h>
 #include <Caramel/Async/Detail/AnyEventQueueImpl.h>
 #include <boost/noncopyable.hpp>
 
@@ -17,7 +18,8 @@ namespace Caramel
 // Any Event Queue
 //
 
-class AnyEventQueue : public boost::noncopyable
+class AnyEventQueue : public AnyEventTarget
+                    , public boost::noncopyable
 {
 public:
     
@@ -50,6 +52,11 @@ public:
     void UnregisterIdRange( Int minEventId, Int maxEventId );
 
 
+    /// Implements AnyEventTarget ///
+
+    Detail::AnyEventTargetPtr GetImpl() const override { return m_impl; }
+
+
 private:
 
     std::shared_ptr< Detail::AnyEventQueueImpl > m_impl;
@@ -70,6 +77,7 @@ inline AnyEventQueue::AnyEventQueue()
 
 inline AnyEventQueue::~AnyEventQueue()
 {
+    m_impl->Destroy();
 }
 
 

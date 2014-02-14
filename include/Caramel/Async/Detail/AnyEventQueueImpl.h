@@ -1,11 +1,11 @@
-// Caramel C++ Library - Async Amenity - Any Event Queue Impl Header
+// Caramel C++ Library - Async Amenity - Detail - Any Event Queue Private Header
 
 #ifndef __CARAMEL_ASYNC_DETAIL_ANY_EVENT_QUEUE_IMPL_H
 #define __CARAMEL_ASYNC_DETAIL_ANY_EVENT_QUEUE_IMPL_H
 #pragma once
 
 #include <Caramel/Caramel.h>
-#include <Caramel/Async/AnyEvent.h>
+#include <Caramel/Async/Detail/AnyEventTargetImpl.h>
 #include <Caramel/Concurrent/IntervalSet.h>
 #include <Caramel/Concurrent/Queue.h>
 
@@ -21,17 +21,10 @@ namespace Detail
 // Any Event Queue
 //
 
-class AnyEventQueueImpl
+class AnyEventQueueImpl : public Concurrent::Queue< AnyEvent >
+                        , public AnyEventTargetImpl
 {
 public:
-
-    /// Operations ///
-
-    void Push( const AnyEvent& evt );
-    void Push( AnyEvent&& evt );
-
-    Bool TryPop( AnyEvent& evt );
-
 
     //
     // To Prevent Ambiguous IDs
@@ -45,12 +38,14 @@ public:
     void UnregisterIdRange( Int minEventId, Int maxEventId );
 
 
+    /// Implements AnyEventTargetImpl ///
+
+    void Send( const AnyEvent& evt ) override { this->Push( evt ); }
+
+
 private:
 
     /// Data Members ///
-
-    typedef Concurrent::Queue< AnyEvent > EventQueue;
-    EventQueue m_events;
 
     typedef Concurrent::IntervalSet< Int > EventIdRangeSet;
     EventIdRangeSet m_registeredIdRanges;
@@ -62,24 +57,6 @@ private:
 //
 // Implementation
 //
-
-inline void AnyEventQueueImpl::Push( const AnyEvent& evt )
-{
-    m_events.Push( evt );
-}
-
-
-inline void AnyEventQueueImpl::Push( AnyEvent&& evt )
-{
-    m_events.Push( std::move( evt ));
-}
-
-
-inline Bool AnyEventQueueImpl::TryPop( AnyEvent& evt )
-{
-    return m_events.TryPop( evt );
-}
-
 
 //
 // To Prevent Ambiguous IDs

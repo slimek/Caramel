@@ -5,8 +5,9 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
-#include <Caramel/Async/AnyEvent.h>
-#include <Caramel/Async/AnyEventQueue.h>
+#include <Caramel/Async/AnyEventTarget.h>
+#include <Caramel/Async/Detail/AnyEventDispatcherImpl.h>
+#include <boost/noncopyable.hpp>
 
 
 namespace Caramel
@@ -17,35 +18,40 @@ namespace Caramel
 // Any Event Dispatcher
 //
 
-class AnyEventDispatcher
+class AnyEventDispatcher : public AnyEventTarget
+                         , public boost::noncopyable
 {
 public:
 
-    AnyEventDispatcher( const std::string& name, Int minEventId, Int maxEventId );
+    AnyEventDispatcher( Int minEventId, Int maxEventId );
+    ~AnyEventDispatcher();
 
 
-    /// Queues to Dispatch ///
+    /// Targets Management ///
 
-    void AddQueue( AnyEventQueue& queue );
-    void RemoveQueue( AnyEventQueue& queue );
+    void LinkTarget( AnyEventTarget& target );
+    void UnlinkTarget( AnyEventTarget& target );
 
 
-    /// Dispatch Events to Queues ///
+    /// Dispatch Events to Targets ///
 
+    void Dispatch( const AnyEvent& evt );
+
+    void DispatchEvent( Int eventId );
     void DispatchEvent( Int eventId, const Any& value );
     void DispatchEvent( Int eventId, Any&& value );
 
-    void DispatchEvent( const AnyEvent& evt );
+
+    /// Implements AnyEventTarget ///
+
+    Detail::AnyEventTargetPtr GetImpl() const override { return m_impl; }
 
 
 private:
 
     /// Data Members ///
 
-    std::string m_name;
-    Int m_minEventId;
-    Int m_maxEventId;
-            
+    std::shared_ptr< Detail::AnyEventDispatcherImpl > m_impl;          
 };
 
 
@@ -54,21 +60,59 @@ private:
 // Implementation
 //
 
-void AnyEventDispatcher::DispatchEvent( Int eventId, const Any& value )
+inline AnyEventDispatcher::AnyEventDispatcher( Int minEventId, Int maxEventId )
+    : m_impl( new Detail::AnyEventDispatcherImpl( minEventId, maxEventId ))
 {
-    this->DispatchEvent( AnyEvent( eventId, value ));
 }
 
 
-void AnyEventDispatcher::DispatchEvent( Int eventId, Any&& value )
+inline AnyEventDispatcher::~AnyEventDispatcher()
 {
-    this->DispatchEvent( AnyEvent( eventId, value ));
+    m_impl->Destroy();
 }
 
 
-void AnyEventDispatcher::DispatchEvent( const AnyEvent& evt )
+//
+// Targets Management
+//
+
+inline void AnyEventDispatcher::LinkTarget( AnyEventTarget& target )
 {
-    ; // TODO ...
+    m_impl->LinkTarget( target.GetImpl() );
+}
+
+
+inline void AnyEventDispatcher::UnlinkTarget( AnyEventTarget& target )
+{
+    m_impl->UnlinkTarget( target.GetImpl() );
+}
+
+
+//
+// Operations
+//
+
+inline void AnyEventDispatcher::DispatchEvent( Int eventId )
+{
+    m_impl->Dispatch( AnyEvent( eventId ));
+}
+
+
+inline void AnyEventDispatcher::DispatchEvent( Int eventId, const Any& value )
+{
+    m_impl->Dispatch( AnyEvent( eventId, value ));
+}
+
+
+inline void AnyEventDispatcher::DispatchEvent( Int eventId, Any&& value )
+{
+    m_impl->Dispatch( AnyEvent( eventId, std::move( value )));
+}
+
+
+inline void AnyEventDispatcher::Dispatch( const AnyEvent& evt )
+{
+    m_impl->Dispatch( evt );
 }
 
 

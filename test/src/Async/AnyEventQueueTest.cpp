@@ -2,7 +2,6 @@
 
 #include "CaramelTestPch.h"
 
-#include <Caramel/Async/AnyEventDispatcher.h>
 #include <Caramel/Async/AnyEventQueue.h>
 #include <UnitTest++/UnitTest++.h>
 
