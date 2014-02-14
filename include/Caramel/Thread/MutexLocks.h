@@ -13,14 +13,24 @@ namespace Caramel
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Lock Functions
+// Lock Classes
 //
 
-template< typename MutexType >
-std::unique_lock< MutexType > UniqueLock( MutexType& mutex )
-{
-    return std::unique_lock< MutexType >( mutex );
-}
+//
+// Lock Guard
+// - The default lock. Use it as possible.
+//
+typedef std::lock_guard< std::mutex > LockGuard;
+
+
+//
+// Unique Lock
+// - More flexible. It can be deferred, try to lock with timeout, etc.
+//   It also can cooperate with std::condition_variable.
+//
+//   But DO NOT use it unless it is neccesary.
+//
+typedef std::unique_lock< std::mutex > UniqueLock;
 
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -74,7 +74,7 @@ inline WaitableBool& WaitableBool::operator=( Bool value )
     Bool oldValue = false;
 
     {
-        auto ulock = UniqueLock( m_mutex );
+        LockGuard lock( m_mutex );
         oldValue = m_value;
         m_value = value;
     }
@@ -93,7 +93,7 @@ inline WaitableBool& WaitableBool::operator=( Bool value )
 
 inline void WaitableBool::Wait()
 {
-    auto ulock = UniqueLock( m_mutex );
+    UniqueLock ulock( m_mutex );
 
     while ( ! m_value )
     {

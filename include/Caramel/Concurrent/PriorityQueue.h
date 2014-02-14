@@ -103,8 +103,7 @@ class ReversePriorityQueue : public PriorityQueue< Key, Value, std::greater< Key
 template< typename Key, typename Value, typename KeyCompare >
 inline void PriorityQueue< Key, Value, KeyCompare >::Push( const Key& k, const Value& v )
 {
-    auto ulock = UniqueLock( m_queueMutex );
-
+    LockGuard lock( m_queueMutex );
     m_queue.push( Entry( k, v ));
 }
 
@@ -114,7 +113,7 @@ inline Bool PriorityQueue< Key, Value, KeyCompare >::TryPop( Value& value )
 {
     if ( m_queue.empty() ) { return false; }
 
-    auto ulock = UniqueLock( m_queueMutex );
+    LockGuard lock( m_queueMutex );
 
     if ( m_queue.empty() ) { return false; }
 
@@ -130,7 +129,7 @@ inline Bool PriorityQueue< Key, Value, KeyCompare >::PeekTopKey( Key& key ) cons
 {
     if ( m_queue.empty() ) { return false; }
 
-    auto ulock = UniqueLock( m_queueMutex );
+    LockGuard lock( m_queueMutex );
 
     if ( m_queue.empty() ) { return false; }
 

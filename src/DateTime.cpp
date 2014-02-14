@@ -681,7 +681,7 @@ DateTimeManager::DateTimeManager()
 std::string DateTimeManager::FormatDate(
     const boost::gregorian::date& date, const std::string& format )
 {
-    auto ulock = UniqueLock( m_mutex );
+    LockGuard lock( m_mutex );
 
     m_dateFacet->format( format.c_str() );
     m_dateStream.str( "" );
@@ -693,7 +693,7 @@ std::string DateTimeManager::FormatDate(
 std::string DateTimeManager::FormatDateTime(
     const boost::posix_time::ptime& dateTime, const std::string& format )
 {
-    auto ulock = UniqueLock( m_mutex );
+    LockGuard lock( m_mutex );
 
     m_timeFacet->format( format.c_str() );
     m_timeStream.str( "" );

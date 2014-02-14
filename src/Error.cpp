@@ -40,8 +40,7 @@ ErrorManager::ErrorManager()
 
 AlertHandler ErrorManager::SetAlertHandler( AlertHandler newHandler )
 {
-    auto ulock = UniqueLock( m_mutex );
-    
+    LockGuard lock( m_mutex );
     const AlertHandler oldHandler = m_alertHandler;
     m_alertHandler = newHandler;    
     return oldHandler;
@@ -50,8 +49,7 @@ AlertHandler ErrorManager::SetAlertHandler( AlertHandler newHandler )
 
 AlertHandler ErrorManager::GetAlertHandler() const
 {
-    auto ulock = UniqueLock( m_mutex );
-
+    LockGuard lock( m_mutex );
     return m_alertHandler;
 }
 

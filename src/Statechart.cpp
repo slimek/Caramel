@@ -139,7 +139,7 @@ StateMachineImpl::StateMachineImpl( const std::string& name )
 
 void StateMachineImpl::ProcessEvent( const AnyEvent& evt )
 {
-    auto ulock = UniqueLock( m_mutex );
+    LockGuard lock( m_mutex );
 
     m_actionThreadId = ThisThread::GetId();
     auto tidGuard = ScopeExit( [=] { m_actionThreadId = ThreadId(); } );

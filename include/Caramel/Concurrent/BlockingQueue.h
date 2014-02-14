@@ -89,7 +89,7 @@ template< typename T >
 inline void BlockingQueue< T >::Push( const T& value )
 {
     {
-        auto ulock = UniqueLock( m_queueMutex );
+        LockGuard lock( m_queueMutex );
 
         if ( m_completed )
         {
@@ -107,7 +107,7 @@ template< typename T >
 inline void BlockingQueue< T >::Push( T&& value )
 {
     {
-        auto ulock = UniqueLock( m_queueMutex );
+        LockGuard lock( m_queueMutex );
 
         if ( m_completed )
         {
@@ -124,7 +124,7 @@ inline void BlockingQueue< T >::Push( T&& value )
 template< typename T >
 inline Bool BlockingQueue< T >::PopOrWaitFor( T& value, const Ticks& relTime )
 {
-    auto ulock = UniqueLock( m_queueMutex );
+    UniqueLock ulock( m_queueMutex );
 
     if ( m_queue.empty() )
     {
@@ -156,7 +156,7 @@ template< typename T >
 inline void BlockingQueue< T >::Complete()
 {
     {
-        auto ulock = UniqueLock( m_queueMutex );
+        LockGuard lock( m_queueMutex );
         m_completed = true;
     }
 

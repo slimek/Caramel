@@ -96,7 +96,7 @@ class QueueWithSnapshot : public Queue< T, ReplicateSnapshot >
 template< typename T, typename ReplicateP >
 inline void Queue< T, ReplicateP >::Push( const T& x )
 {
-    auto ulock = UniqueLock( m_queueMutex );
+    LockGuard lock( m_queueMutex );
 
     m_queue.push_back( x );
 
@@ -107,7 +107,7 @@ inline void Queue< T, ReplicateP >::Push( const T& x )
 template< typename T, typename ReplicateP >
 inline void Queue< T, ReplicateP >::Push( T&& x )
 {
-    auto ulock = UniqueLock( m_queueMutex );
+    LockGuard lock( m_queueMutex );
 
     m_queue.push_back( std::move( x ));
 
@@ -120,7 +120,7 @@ inline Bool Queue< T, ReplicateP >::TryPop( T& x )
 {
     if ( m_queue.empty() ) { return false; }
 
-    auto ulock = UniqueLock( m_queueMutex );
+    LockGuard lock( m_queueMutex );
 
     if ( m_queue.empty() ) { return false; }
 
@@ -136,7 +136,7 @@ inline Bool Queue< T, ReplicateP >::TryPop( T& x )
 template< typename T, typename ReplicateP >
 inline void Queue< T, ReplicateP >::Clear()
 {
-    auto ulock = UniqueLock( m_queueMutex );
+    LockGuard lock( m_queueMutex );
 
     m_queue.clear();
 

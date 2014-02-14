@@ -34,7 +34,7 @@ Int32 RandomManager::GenRandomInt32( Int32 minValue, Int32 maxValue )
 {
     std::uniform_int_distribution< Int32 > dist( minValue, maxValue );
 
-    auto ulock = UniqueLock( m_mutex );
+    LockGuard lock( m_mutex );
 
     return dist( m_random.GetRef() );
 }
@@ -44,7 +44,7 @@ Uint32 RandomManager::GenRandomUint32( Uint32 minValue, Uint32 maxValue )
 {
     std::uniform_int_distribution< Uint32 > dist( minValue, maxValue );
 
-    auto ulock = UniqueLock( m_mutex );
+    LockGuard lock( m_mutex );
 
     return dist( m_random.GetRef() );
 }
@@ -54,7 +54,7 @@ Float RandomManager::GenRandomFloat( Float lowerBound, Float upperBound )
 {
     std::uniform_real_distribution< Float > dist( lowerBound, upperBound );
 
-    auto ulock = UniqueLock( m_mutex );
+    LockGuard lock( m_mutex );
 
     return dist( m_random.GetRef() );
 }
@@ -64,7 +64,7 @@ Double RandomManager::GenRandomDouble( Double lowerBound, Double upperBound )
 {
     std::uniform_real_distribution< Double > dist( lowerBound, upperBound );
 
-    auto ulock = UniqueLock( m_mutex );
+    LockGuard lock( m_mutex );
 
     return dist( m_random.GetRef() );
 }

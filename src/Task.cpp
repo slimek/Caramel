@@ -157,7 +157,8 @@ void TaskImpl::AddContinuation( TaskPtr continuation )
     Bool canSubmit = false;
 
     {
-        auto ulock = UniqueLock( m_stateMutex );
+        LockGuard lock( m_stateMutex );
+
         if ( TASK_S_RAN_TO_COMP == m_state )
         {
             canSubmit = true;
@@ -187,7 +188,7 @@ void TaskImpl::DelayFor( const Ticks& duration )
 void TaskImpl::Run()
 {
     {
-        auto ulock = UniqueLock( m_stateMutex );
+        LockGuard lock( m_stateMutex );
         m_state = TASK_S_RUNNING;
     }
 
@@ -196,7 +197,8 @@ void TaskImpl::Run()
     TaskQueue::Snapshot continuations;
 
     {
-        auto ulock = UniqueLock( m_stateMutex );
+        LockGuard lock( m_stateMutex );
+
         if ( xc )
         {
             m_state = TASK_S_FAULTED;
@@ -221,7 +223,7 @@ void TaskImpl::Run()
 
 void TaskImpl::Wait()
 {
-    auto ulock = UniqueLock( m_stateMutex );
+    UniqueLock ulock( m_stateMutex );
 
     while ( ! this->IsDone() )
     {
@@ -237,7 +239,7 @@ void TaskImpl::Wait()
 
 Bool TaskImpl::TransitFromTo( State fromState, State toState )
 {
-    auto ulock = UniqueLock( m_stateMutex );
+    LockGuard lock( m_stateMutex );
 
     if ( fromState == m_state )
     {

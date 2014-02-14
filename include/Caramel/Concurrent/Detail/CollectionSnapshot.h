@@ -74,7 +74,7 @@ inline CollectionSnapshot< Derived, Value >::CollectionSnapshot()
 template< typename Derived, typename Value >
 inline void CollectionSnapshot< Derived, Value >::ReplicaAdd( const Value& v )
 {
-    auto ulock = UniqueLock( m_snapshotMutex );
+    LockGuard lock( m_snapshotMutex );
     m_modified = true;
 }
 
@@ -89,7 +89,7 @@ inline void CollectionSnapshot< Derived, Value >::ReplicaRemove( const Value& v 
 template< typename Derived, typename Value >
 inline void CollectionSnapshot< Derived, Value >::ReplicaClear()
 {
-    auto ulock = UniqueLock( m_snapshotMutex );
+    LockGuard lock( m_snapshotMutex );
     m_modified = true;
 
     if ( ! m_snapshot.IsEmpty() )
@@ -103,7 +103,7 @@ template< typename Derived, typename Value >
 inline auto CollectionSnapshot< Derived, Value >::GetSnapshot() const -> SnapshotType
 {
     {
-        auto snapshotLock = UniqueLock( m_snapshotMutex );
+        LockGuard lock( m_snapshotMutex );
         if ( ! m_modified )
         {
             return m_snapshot;
@@ -117,7 +117,7 @@ inline auto CollectionSnapshot< Derived, Value >::GetSnapshot() const -> Snapsho
     // ATTENTION: Always lock the derived before the snapshot mutex !!
 
     typename Derived::ConstLockedCollection lockedDerived( derived );
-    auto snapshotLock = UniqueLock( m_snapshotMutex );
+    LockGuard lock( m_snapshotMutex );
 
     if ( ! m_modified )
     {

@@ -96,7 +96,7 @@ private:
 template< typename Key >
 inline Bool IntervalSet< Key >::Insert( const Key& k )
 {
-    auto ulock = UniqueLock( m_mutex );
+    LockGuard lock( m_mutex );
     if ( this->LockedContains( k )) { return false; }
     m_set.insert( k );
     return true;
@@ -106,7 +106,7 @@ inline Bool IntervalSet< Key >::Insert( const Key& k )
 template< typename Key >
 inline Bool IntervalSet< Key >::InsertRightOpen( const Key& lower, const Key& upper )
 {
-    auto ulock = UniqueLock( m_mutex );
+    LockGuard lock( m_mutex );
     const Bool overlapped = this->LockedIntersectsRightOpen( lower, upper );
     m_set.insert( SegmentType::right_open( lower, upper ));
     return ! overlapped;
@@ -116,7 +116,7 @@ inline Bool IntervalSet< Key >::InsertRightOpen( const Key& lower, const Key& up
 template< typename Key >
 inline Bool IntervalSet< Key >::InsertClosed( const Key& min, const Key& max )
 {
-    auto ulock = UniqueLock( m_mutex );
+    LockGuard lock( m_mutex );
     const Bool overlapped = this->LockedIntersectsClosed( min, max );
     m_set.insert( SegmentType::closed( min, max ));
     return ! overlapped;
@@ -126,7 +126,7 @@ inline Bool IntervalSet< Key >::InsertClosed( const Key& min, const Key& max )
 template< typename Key >
 inline void IntervalSet< Key >::Erase( const Key& k )
 {
-    auto ulock = UniqueLock( m_mutex );
+    LockGuard lock( m_mutex );
     m_set.erase( k );
 }
 
@@ -134,7 +134,7 @@ inline void IntervalSet< Key >::Erase( const Key& k )
 template< typename Key >
 inline void IntervalSet< Key >::EraseRightOpen( const Key& lower, const Key& upper )
 {
-    auto ulock = UniqueLock( m_mutex );
+    LockGuard lock( m_mutex );
     m_set.erase( SegmentType::right_open( lower, upper ));
 }
 
@@ -142,7 +142,7 @@ inline void IntervalSet< Key >::EraseRightOpen( const Key& lower, const Key& upp
 template< typename Key >
 inline void IntervalSet< Key >::EraseClosed( const Key& min, const Key& max )
 {
-    auto ulock = UniqueLock( m_mutex );
+    LockGuard lock( m_mutex );
     m_set.erase( SegmentType::closed( min, max ));
 }
 
@@ -154,7 +154,7 @@ inline void IntervalSet< Key >::EraseClosed( const Key& min, const Key& max )
 template< typename Key >
 inline Bool IntervalSet< Key >::Contains( const Key& k ) const
 {
-    auto ulock = UniqueLock( m_mutex );
+    LockGuard lock( m_mutex );
     return boost::icl::contains( m_set, k );
 }
 
@@ -162,7 +162,7 @@ inline Bool IntervalSet< Key >::Contains( const Key& k ) const
 template< typename Key >
 inline Bool IntervalSet< Key >::ContainsRightOpen( const Key& lower, const Key& upper ) const
 {
-    auto ulock = UniqueLock( m_mutex );
+    LockGuard lock( m_mutex );
     return boost::icl::contains( m_set, SegmentType::right_open( lower, upper ));
 }
 
@@ -170,7 +170,7 @@ inline Bool IntervalSet< Key >::ContainsRightOpen( const Key& lower, const Key& 
 template< typename Key >
 inline Bool IntervalSet< Key >::ContainsClosed( const Key& min, const Key& max ) const
 {
-    auto ulock = UniqueLock( m_mutex );
+    LockGuard lock( m_mutex );
     return boost::icl::contains( m_set, SegmentType::closed( min, max ));
 }
 
@@ -178,7 +178,7 @@ inline Bool IntervalSet< Key >::ContainsClosed( const Key& min, const Key& max )
 template< typename Key >
 inline Bool IntervalSet< Key >::IntersectsRightOpen( const Key& lower, const Key& upper ) const
 {
-    auto ulock = UniqueLock( m_mutex );
+    LockGuard lock( m_mutex );
     return boost::icl::intersects( m_set, SegmentType::right_open( lower, upper ));
 }
 
@@ -186,7 +186,7 @@ inline Bool IntervalSet< Key >::IntersectsRightOpen( const Key& lower, const Key
 template< typename Key >
 inline Bool IntervalSet< Key >::IntersectsClosed( const Key& min, const Key& max ) const
 {
-    auto ulock = UniqueLock( m_mutex );
+    LockGuard lock( m_mutex );
     return boost::icl::intersects( m_set, SegmentType::closed( min, max ));
 }
 

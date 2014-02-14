@@ -74,7 +74,7 @@ private:
 template< typename MapT, typename ReplicateP >
 Bool BasicMap< MapT, ReplicateP >::Contains( const Key& k ) const
 {
-    auto ulock = UniqueLock( m_mapMutex );
+    LockGuard lock( m_mapMutex );
     return m_map.end() != m_map.find( k );
 }
 
@@ -82,7 +82,7 @@ Bool BasicMap< MapT, ReplicateP >::Contains( const Key& k ) const
 template< typename MapT, typename ReplicateP >
 Bool BasicMap< MapT, ReplicateP >::Find( const Key& k, Value& v ) const
 {
-    auto ulock = UniqueLock( m_mapMutex );
+    LockGuard lock( m_mapMutex );
 
     auto iter = m_map.find( k );
     if ( m_map.end() == iter ) { return false; }
@@ -98,7 +98,7 @@ Bool BasicMap< MapT, ReplicateP >::Find( const Key& k, Value& v ) const
 template< typename MapT, typename ReplicateP >
 Bool BasicMap< MapT, ReplicateP >::Insert( const Key& k, const Value& v )
 {
-    auto ulock = UniqueLock( m_mapMutex );
+    LockGuard lock( m_mapMutex );
 
     const Bool inserted = m_map.insert( std::make_pair( k, v )).second;
 
