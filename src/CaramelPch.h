@@ -4,8 +4,13 @@
 #define __CARAMEL_CARAMEL_PCH_H
 #pragma once
 
-#include <Caramel/Setup/Compiler.h>
-#include <Caramel/Setup/System.h>
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Defines
+//
+
+#include <Caramel/Setup/PchDefines.h>
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -30,12 +35,8 @@
 #endif
 
 // Caramel Headers
-#include <Caramel/Caramel.h>
-#include <Caramel/Error/Assert.h>
-#include <Caramel/Error/Exception.h>
-#include <Caramel/String/Format.h>
-#include <Caramel/String/Sprintf.h>
-#include <Caramel/Trace/Trace.h>
+
+#include <Caramel/Setup/PchHeaders.h>
 
 
 ///////////////////////////////////////////////////////////////////////////////
