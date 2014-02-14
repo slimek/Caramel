@@ -19,6 +19,21 @@
 #define CARAMEL_SYSTEM_NAME "Windows"
 
 
+// Exclude min/max macros in <windef.h> of Windows Platform SDK
+
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
+
+#ifdef min
+#undef min
+#endif
+
+#ifdef max
+#undef max
+#endif
+
+
 #endif  // Windows
 
 
