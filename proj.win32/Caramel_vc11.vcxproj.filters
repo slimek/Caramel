@@ -509,9 +509,6 @@
     <ClInclude Include="..\src\Thread\ThreadIdImpl.h">
       <Filter>2. Sources\Thread</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\Async\WaitableBool.h">
-      <Filter>1. Public Packages\Async</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\Document\IniLine.h">
       <Filter>2. Sources\Document</Filter>
     </ClInclude>
@@ -643,6 +640,9 @@
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventQueueImpl.h">
       <Filter>1. Public Packages\Async\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Thread\WaitableBool.h">
+      <Filter>1. Public Packages\Thread</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

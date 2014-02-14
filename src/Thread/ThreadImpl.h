@@ -6,8 +6,8 @@
 
 #include <Caramel/Caramel.h>
 #include "Thread/ThreadIdImpl.h"
-#include <Caramel/Async/WaitableBool.h>
 #include <Caramel/Thread/Thread.h>
+#include <Caramel/Thread/WaitableBool.h>
 #include <thread>
 
 

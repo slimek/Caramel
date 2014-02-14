@@ -28,7 +28,6 @@
     <ClInclude Include="..\include\Caramel\Async\AnyEventQueue.h" />
     <ClInclude Include="..\include\Caramel\Async\TimedBool.h" />
     <ClInclude Include="..\include\Caramel\Async\ValueChange.h" />
-    <ClInclude Include="..\include\Caramel\Async\WaitableBool.h" />
     <ClInclude Include="..\include\Caramel\Caramel.h" />
     <ClInclude Include="..\include\Caramel\Chrono\SecondClock.h" />
     <ClInclude Include="..\include\Caramel\Chrono\SteadyClock.h" />
@@ -125,6 +124,7 @@
     <ClInclude Include="..\include\Caramel\Thread\Thread.h" />
     <ClInclude Include="..\include\Caramel\Thread\ThreadId.h" />
     <ClInclude Include="..\include\Caramel\Thread\ThreadTypes.h" />
+    <ClInclude Include="..\include\Caramel\Thread\WaitableBool.h" />
     <ClInclude Include="..\include\Caramel\Trace\Channel.h" />
     <ClInclude Include="..\include\Caramel\Trace\Listeners.h" />
     <ClInclude Include="..\include\Caramel\Trace\Trace.h" />

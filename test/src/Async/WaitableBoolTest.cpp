@@ -2,9 +2,9 @@
 
 #include "CaramelTestPch.h"
 
-#include <Caramel/Async/WaitableBool.h>
 #include <Caramel/Thread/Thread.h>
 #include <Caramel/Thread/ThisThread.h>
+#include <Caramel/Thread/WaitableBool.h>
 #include <UnitTest++/UnitTest++.h>
 
 

@@ -1,7 +1,7 @@
-// Caramel C++ Library - Async Amenity - Waitable Bool Header
+// Caramel C++ Library - Thread Facility - Waitable Bool Header
 
-#ifndef __CARAMEL_ASYNC_WAITABLE_BOOL_H
-#define __CARAMEL_ASYNC_WAITABLE_BOOL_H
+#ifndef __CARAMEL_THREAD_WAITABLE_BOOL_H
+#define __CARAMEL_THREAD_WAITABLE_BOOL_H
 #pragma once
 
 #include <Caramel/Caramel.h>
@@ -106,4 +106,4 @@ inline void WaitableBool::Wait()
 
 } // namespace Caramel
 
-#endif // __CARAMEL_ASYNC_WAITABLE_BOOL_H
+#endif // __CARAMEL_THREAD_WAITABLE_BOOL_H
