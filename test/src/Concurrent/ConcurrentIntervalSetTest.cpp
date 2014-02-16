@@ -106,6 +106,14 @@ TEST( IntervalSetContainsTest )
     CHECK( false == iset.ContainsClosed( 5, 7 ));
 
     CHECK( true  == iset.ContainsRightOpen( 3, 7 ));
+
+    iset.InsertClosed( 9, 12 );
+
+    //
+    // Contains must be in a continuous interval
+    // [3, 6]-[9, 12] doesn't contain [3-12]
+    //
+    CHECK( false == iset.ContainsClosed( 3, 12 ));
 }
 
 
@@ -192,13 +200,46 @@ TEST( IntervalSetSnapshotTest )
     CHECK( false == shot2.IsEmpty() );
     CHECK( 2     == shot2.Size() );
 
-    {
-        auto itv0 = shot2[0];
+    auto itv0 = shot2[0];
 
-        CHECK( 1 == itv0.lower() );
-        CHECK( 3 == itv0.upper() );
-        CHECK( boost::icl::interval_bounds::closed() == itv0.bounds() );
-    }
+    CHECK( 1 == itv0.lower() );
+    CHECK( 3 == itv0.upper() );
+    CHECK( boost::icl::interval_bounds::closed() == itv0.bounds() );
+
+    auto itv1 = shot2[1];
+
+    CHECK( 5 == itv1.lower() );
+    CHECK( 7 == itv1.upper() );
+    CHECK( boost::icl::interval_bounds::closed() == itv1.bounds() );
+
+    Concurrent::IntervalSet< Int > iset2;
+
+    CHECK( true == iset2.Insert( shot2[0] ));
+
+    iset2.InsertClosed( 6, 9 );
+
+    CHECK( false == iset2.Insert( shot2[1] ));
+    
+    CHECK( true == iset2.ContainsClosed( 1, 3 ));
+    CHECK( true == iset2.ContainsClosed( 5, 9 ));
+
+
+    /// With Right Open Interval ///
+
+    Concurrent::IntervalSet< Int > iset3;
+
+    iset3.InsertRightOpen( 1, 3 );
+    iset3.InsertRightOpen( 4, 6 );
+    iset3.InsertClosed( 7, 9 );
+    iset3.InsertRightOpen( 10, 12 );
+
+    auto shot3 = iset3.GetSnapshot();
+
+    CHECK( 3 == shot3.Size() );
+
+    CHECK( boost::icl::interval_bounds::right_open() == shot3[0].bounds() );
+    CHECK( boost::icl::interval_bounds::right_open() == shot3[1].bounds() );
+    CHECK( boost::icl::interval_bounds::right_open() == shot3[2].bounds() );
 }
 
 

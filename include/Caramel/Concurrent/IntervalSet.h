@@ -52,15 +52,19 @@ public:
     //
 
     Bool Insert( const Key& k );
+    Bool Insert( const IntervalType& interval );
 
     Bool InsertRightOpen( const Key& lower, const Key& upper );
     Bool InsertClosed   ( const Key& min, const Key& max );
+    
+
 
     //
     // Erasion
     //
 
     void Erase( const Key& k );
+    
     void EraseRightOpen( const Key& lower, const Key& upper );
     void EraseClosed   ( const Key& min, const Key& max );
 
@@ -93,10 +97,12 @@ private:
 
     Bool LockedContains( const Key& k ) const;
 
+    Bool LockedIntersects( const IntervalType& interval ) const;
+
     Bool LockedIntersectsRightOpen( const Key& lower, const Key& upper ) const;
     Bool LockedIntersectsClosed   ( const Key& min, const Key& max )     const;
 
-
+    
     /// Data Members ///
 
     SetType m_set;
@@ -126,6 +132,17 @@ inline Bool IntervalSet< Key >::Insert( const Key& k )
     m_set.insert( k );
     this->ReplicaClear();
     return true;
+}
+
+
+template< typename Key >
+inline Bool IntervalSet< Key >::Insert( const IntervalType& interval )
+{
+    LockGuard lock( m_mutex );
+    const Bool overlapped = this->LockedIntersects( interval );
+    m_set.insert( interval );
+    this->ReplicaClear();
+    return ! overlapped;
 }
 
 
@@ -230,6 +247,13 @@ template< typename Key >
 inline Bool IntervalSet< Key >::LockedContains( const Key& k ) const
 {
     return boost::icl::contains( m_set, k );
+}
+
+
+template< typename Key >
+inline Bool IntervalSet< Key >::LockedIntersects( const IntervalType& interval ) const
+{
+    return boost::icl::intersects( m_set, interval );
 }
 
 
