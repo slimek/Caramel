@@ -55,7 +55,7 @@ public:
 
 private:
 
-    std::unique_lock< std::mutex > m_lock;
+    std::lock_guard< std::mutex > m_lock;
     const SequenceType& m_constSequence;
 };
 
