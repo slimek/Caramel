@@ -132,6 +132,76 @@ TEST( IntervalSetIntersectsTest )
 }
 
 
+TEST( IntervalSetLockedSetTest )
+{
+    /// Discrete Interval ///
+
+    typedef Concurrent::IntervalSet< Int > IntSet;
+    IntSet iset;
+
+    iset.InsertClosed( 1, 5 );
+
+    {
+        IntSet::ConstLockedSet kset( iset );
+        auto first = kset.Begin();
+
+        typedef IntSet::IntervalType Interval;
+
+        CHECK( Interval::closed( 1, 5 ) == *first );
+    }
+     
+    
+    /// Continuous Interval ///
+
+    typedef Concurrent::IntervalSet< Double > DoubleSet;
+    DoubleSet dset;
+
+    dset.InsertClosed( 4, 13 );
+
+    {
+        DoubleSet::ConstLockedSet kset( dset );
+        auto first = kset.Begin();
+
+        typedef DoubleSet::IntervalType Interval;
+
+        CHECK( Interval::closed( 4, 13 ) == *first );
+    }    
+}
+
+
+TEST( IntervalSetSnapshotTest )
+{
+    Concurrent::IntervalSet< Int > iset;
+
+    /// Empty ///
+
+    auto shot1 = iset.GetSnapshot();
+
+    CHECK( true == shot1.IsEmpty() );
+    CHECK( 0    == shot1.Size() );
+
+    /// With Closed Interval ///
+
+    iset.InsertClosed( 1, 3 );
+    iset.InsertClosed( 5, 7 );
+
+    auto shot2 = iset.GetSnapshot();
+
+    cout << "Size: " << shot2.Size() << endl;
+
+    CHECK( false == shot2.IsEmpty() );
+    CHECK( 2     == shot2.Size() );
+
+    {
+        auto itv0 = shot2[0];
+
+        CHECK( 1 == itv0.lower() );
+        CHECK( 3 == itv0.upper() );
+        CHECK( boost::icl::interval_bounds::closed() == itv0.bounds() );
+    }
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE IntervalSetSuite

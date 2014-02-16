@@ -5,6 +5,8 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
+#include <Caramel/Concurrent/Detail/CollectionSnapshot.h>
+#include <Caramel/Concurrent/Detail/LockedIntervalSet.h>
 #include <Caramel/Thread/MutexLocks.h>
 #include <boost/icl/interval_set.hpp>
 #include <boost/noncopyable.hpp>
@@ -25,11 +27,22 @@ namespace Concurrent
 //     Right Open : [ lower, upper )
 //     Closed     : [ min, max ]
 //
+//   Only supports one replicate policy : ReplicateShapshot.
+//
 
 template< typename Key >
-class IntervalSet : public boost::noncopyable
+class IntervalSet : public Detail::CollectionSnapshot
+                    <
+                        IntervalSet< Key >,
+                        typename boost::icl::interval_set< Key >::interval_type
+                    >
+                  , public boost::noncopyable
 {
+    typedef boost::icl::interval_set< Key > SetType;
+
 public:
+
+    typedef typename SetType::interval_type IntervalType;
 
     /// Operations ///
 
@@ -59,8 +72,19 @@ public:
     Bool ContainsRightOpen( const Key& lower, const Key& upper ) const;
     Bool ContainsClosed   ( const Key& min, const Key& max )     const;
 
+
+    /// Modifiers ///
+
     Bool IntersectsRightOpen( const Key& lower, const Key& upper ) const;
     Bool IntersectsClosed   ( const Key& min, const Key& max )     const;
+
+
+    /// Locked Iterator Accessors ///
+
+    class ConstLockedSet;
+    friend class ConstLockedSet;
+
+    typedef ConstLockedSet ConstLockedCollection;
 
 
 private:
@@ -75,7 +99,6 @@ private:
 
     /// Data Members ///
 
-    typedef boost::icl::interval_set< Key > SetType;
     SetType m_set;
 
     mutable std::mutex m_mutex;
@@ -97,8 +120,11 @@ template< typename Key >
 inline Bool IntervalSet< Key >::Insert( const Key& k )
 {
     LockGuard lock( m_mutex );
+    
     if ( this->LockedContains( k )) { return false; }
+
     m_set.insert( k );
+    this->ReplicaClear();
     return true;
 }
 
@@ -109,6 +135,7 @@ inline Bool IntervalSet< Key >::InsertRightOpen( const Key& lower, const Key& up
     LockGuard lock( m_mutex );
     const Bool overlapped = this->LockedIntersectsRightOpen( lower, upper );
     m_set.insert( SegmentType::right_open( lower, upper ));
+    this->ReplicaClear();
     return ! overlapped;
 }
 
@@ -119,6 +146,7 @@ inline Bool IntervalSet< Key >::InsertClosed( const Key& min, const Key& max )
     LockGuard lock( m_mutex );
     const Bool overlapped = this->LockedIntersectsClosed( min, max );
     m_set.insert( SegmentType::closed( min, max ));
+    this->ReplicaClear();
     return ! overlapped;
 }
 
@@ -128,6 +156,7 @@ inline void IntervalSet< Key >::Erase( const Key& k )
 {
     LockGuard lock( m_mutex );
     m_set.erase( k );
+    this->ReplicaClear();
 }
 
 
@@ -136,6 +165,7 @@ inline void IntervalSet< Key >::EraseRightOpen( const Key& lower, const Key& upp
 {
     LockGuard lock( m_mutex );
     m_set.erase( SegmentType::right_open( lower, upper ));
+    this->ReplicaClear();
 }
 
 
@@ -144,6 +174,7 @@ inline void IntervalSet< Key >::EraseClosed( const Key& min, const Key& max )
 {
     LockGuard lock( m_mutex );
     m_set.erase( SegmentType::closed( min, max ));
+    this->ReplicaClear();
 }
 
 
@@ -214,6 +245,21 @@ inline Bool IntervalSet< Key >::LockedIntersectsClosed( const Key& min, const Ke
 {
     return boost::icl::intersects( m_set, SegmentType::closed( min, max ));
 }
+
+
+//
+// Locked Iterator Accessors
+//
+
+template< typename Key >
+class IntervalSet< Key >::ConstLockedSet
+    : public Detail::ConstLockedIntervalSet< Key >
+{
+public:
+    explicit ConstLockedSet( const IntervalSet& host )
+        : Detail::ConstLockedIntervalSet< Key >( host.m_mutex, host.m_set )
+    {}
+};
 
 
 ///////////////////////////////////////////////////////////////////////////////
