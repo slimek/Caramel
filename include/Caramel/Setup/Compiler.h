@@ -22,10 +22,20 @@
 
 // Compiler settings
 
-#define CARAMEL_STDCALL      __stdcall
-#define CARAMEL_CDECL        __cdecl
-#define CARAMEL_DEPRECATED   __declspec( deprecated )
+#define CARAMEL_DEPRECATED __declspec( deprecated )
 
+#if ( 1800 <= _MSC_VER )
+
+#define CARAMEL_NOEXCEPT noexcept
+
+#elif ( 1700 <= _MSC_VER )
+
+// Visual C++ 2012 limitations:
+// - doesn't support noexcept
+
+#define CARAMEL_NOEXCEPT 
+
+#endif
 
 #endif // Visual C++
 
@@ -48,9 +58,8 @@
 
 // Compiler settings
 
-#define CARAMEL_STDCALL    __attribute__(( stdcall ))
-#define CARAMEL_CDECL      __attribute__(( cdecl ))
 #define CARAMEL_DEPRECATED
+#define CARAMEL_NOEXCEPT noexcept
 
 // For INT32_MIN and other limit defines
 #define __STDC_LIMIT_MACROS
@@ -77,9 +86,8 @@
 
 // Compiler settings
 
-#define CARAMEL_STDCALL
-#define CARAMEL_CDECL
 #define CARAMEL_DEPRECATED
+#define CARAMEL_NOEXCEPT noexcept
 
 
 #endif // Clang
