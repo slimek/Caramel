@@ -37,6 +37,12 @@ public:
     std::string Function() const { return m_function; }
     std::string What()     const { return m_what; }
 
+
+    /// Implements std::exception ///
+
+    const Char* what() const override { return m_what.c_str(); }
+
+
 private:
     Uint m_line;
     std::string m_file;
@@ -53,7 +59,10 @@ private:
 //
 
 #define CARAMEL_THROW( ... ) \
-    throw Exception( __LINE__, __FILE__, __FUNCTION__, Sprintf( __VA_ARGS__ ))
+    throw CARAMEL_MAKE_EXCEPTION( __VA_ARGS__ )
+
+#define CARAMEL_MAKE_EXCEPTION( ... ) \
+    Caramel::Exception( __LINE__, __FILE__, __FUNCTION__, Caramel::Sprintf( __VA_ARGS__ ))
 
 
 //
@@ -62,7 +71,7 @@ private:
 //
 
 #define CARAMEL_THROW1( msg ) \
-    throw Exception( __LINE__, __FILE__, __FUNCTION__, msg )
+    throw Caramel::Exception( __LINE__, __FILE__, __FUNCTION__, msg )
 
 #define CARAMEL_INVALID_ARGUMENT() \
     CARAMEL_THROW1( "Invalid Argument" )
