@@ -199,6 +199,9 @@
     <ClCompile Include="..\src\Async\AnyEventDispatcherTest.cpp">
       <Filter>2. Tests\Async</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Task\StdAsyncTest.cpp">
+      <Filter>2. Tests\Task</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">
