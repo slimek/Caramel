@@ -16,15 +16,12 @@ namespace Caramel
 //
 // Std Async
 // - A task executor based on std::async()
+//   This Executor doesn't support Delay of tasks.
 //
-
-class StdAsyncImpl;
 
 class StdAsync : public TaskExecutor
 {
 public:
-
-    StdAsync();
 
     void Submit( TaskCore& task ) override;
     void Submit( TaskCore&& task ) override;
@@ -33,8 +30,6 @@ public:
 private:
 
     void AddReadyTask( TaskCore& task ) override;
-
-    std::shared_ptr< StdAsyncImpl > m_impl;
 };
 
 

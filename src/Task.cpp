@@ -9,7 +9,9 @@
 #include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Error/CatchException.h>
 #include <Caramel/String/Format.h>
+#include <Caramel/Task/StdAsync.h>
 #include <algorithm>
+#include <future>
 
 
 namespace Caramel
@@ -21,6 +23,7 @@ namespace Caramel
 //   Task
 //   TaskPoller
 //   WorkerThread
+//   StdAsync
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -475,6 +478,42 @@ void WorkerThreadImpl::Execute()
     {
         CARAMEL_TRACE_WARN( "WorkerThread[%s] discards some tasks" );
     }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Std Async
+//
+
+void StdAsync::Submit( TaskCore& task )
+{
+    if ( task.HasDelay() )
+    {
+        CARAMEL_THROW( "StdAsync doesn't support delay, task: %s", task.Name() );
+    }
+    else
+    {
+        this->AddReadyTask( task );
+    }
+}
+
+
+void StdAsync::Submit( TaskCore&& task )
+{
+    this->Submit( task );  // Change rvalue to lvalue.
+}
+
+
+void StdAsync::AddReadyTask( TaskCore& task )
+{
+    std::async( std::launch::async,
+    [task]
+    {
+        // task is a const variable and can't call Run().
+        TaskCore copy = task;
+        copy.Run();
+    });
 }
 
 
