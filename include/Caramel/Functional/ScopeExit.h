@@ -73,6 +73,7 @@ inline ScopeGuard< Function >::ScopeGuard( ScopeGuard&& rhs )
     : m_function( std::move( rhs.m_function ))
     , m_active( rhs.m_active )
 {
+    rhs.m_active = false;
 }
 
 
