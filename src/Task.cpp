@@ -486,6 +486,8 @@ void WorkerThreadImpl::Execute()
 // Std Async
 //
 
+#if !defined( CARAMEL_SYSTEM_IS_ANDROID )
+
 void StdAsync::Submit( TaskCore& task )
 {
     if ( task.HasDelay() )
@@ -515,6 +517,27 @@ void StdAsync::AddReadyTask( TaskCore& task )
         copy.Run();
     });
 }
+
+#else
+
+void StdAsync::Submit( TaskCore& task )
+{
+    CARAMEL_NOT_IMPLEMENTED();
+}
+
+
+void StdAsync::Submit( TaskCore&& task )
+{
+    CARAMEL_NOT_IMPLEMENTED();
+}
+
+
+void StdAsync::AddReadyTask( TaskCore& task )
+{
+    CARAMEL_NOT_IMPLEMENTED();
+}
+
+#endif // !CARAMEL_SYSTEM_IS_ANDROID
 
 
 ///////////////////////////////////////////////////////////////////////////////
