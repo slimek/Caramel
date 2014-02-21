@@ -287,12 +287,6 @@ void TaskPoller::Submit( TaskCore& task )
 }
 
 
-void TaskPoller::Submit( TaskCore&& task )
-{
-    this->Submit( task );  // Change rvalue to lvalue.
-}
-
-
 void TaskPoller::AddReadyTask( TaskCore& task )
 {
     task.BecomeReady( *this );
@@ -399,12 +393,6 @@ void WorkerThread::Submit( TaskCore& task )
 }
 
 
-void WorkerThread::Submit( TaskCore&& task )
-{
-    this->Submit( task );  // Change rvalue to lvalue.
-}
-
-
 void WorkerThread::Stop()
 {
     m_impl->m_stopped = true;
@@ -501,12 +489,6 @@ void StdAsync::Submit( TaskCore& task )
 }
 
 
-void StdAsync::Submit( TaskCore&& task )
-{
-    this->Submit( task );  // Change rvalue to lvalue.
-}
-
-
 void StdAsync::AddReadyTask( TaskCore& task )
 {
     std::async( std::launch::async,
@@ -520,13 +502,9 @@ void StdAsync::AddReadyTask( TaskCore& task )
 
 #else
 
+// NOTES: Until Android NDK r9b, std::future and std::async are not supported.
+
 void StdAsync::Submit( TaskCore& task )
-{
-    CARAMEL_NOT_IMPLEMENTED();
-}
-
-
-void StdAsync::Submit( TaskCore&& task )
 {
     CARAMEL_NOT_IMPLEMENTED();
 }

@@ -27,7 +27,6 @@ public:
     ~WorkerThread();
 
     void Submit( TaskCore& task ) override;
-    void Submit( TaskCore&& task ) override;
 
     // Blocks the calling thread, until the internal thread joined.
     void Stop();

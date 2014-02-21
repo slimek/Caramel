@@ -27,7 +27,16 @@ public:
     virtual ~TaskExecutor() {}
 
     virtual void Submit( TaskCore& task ) = 0;
-    virtual void Submit( TaskCore&& task ) = 0;
+
+
+    /// Compiler Workaround ///
+
+    // Some compiler doesn't allow to convert a rvalue to non-const lvalue implicity.
+    // This function may change a rvalue to a lvalue.
+    void Submit( TaskCore&& task )
+    {
+        this->Submit( task );
+    }
 
 
 private:

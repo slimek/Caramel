@@ -24,7 +24,6 @@ class StdAsync : public TaskExecutor
 public:
 
     void Submit( TaskCore& task ) override;
-    void Submit( TaskCore&& task ) override;
 
 
 private:

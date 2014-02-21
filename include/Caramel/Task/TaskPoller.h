@@ -27,7 +27,6 @@ public:
     TaskPoller();
 
     void Submit( TaskCore& task ) override;
-    void Submit( TaskCore&& task ) override;
 
     void PollOne();
 
