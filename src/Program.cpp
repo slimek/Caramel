@@ -214,9 +214,10 @@ void ProgramOptionsManager::ParseCommandLine()
 
     const std::vector< std::wstring > wargs = po::split_winmain( ::GetCommandLineW() );
         
-    for ( const std::wstring& warg : wargs )
+    // Omit the first argument.
+    for ( Uint i = 1; i < wargs.size(); ++ i )
     {
-        arguments.push_back( Utf8String( warg ).ToString() );
+        arguments.push_back( Utf8String( wargs[i] ).ToString() );
     }
 
     this->ParseArguments( arguments );
