@@ -49,6 +49,10 @@ TaskCore::TaskCore( const std::shared_ptr< TaskImpl >& impl )
 }
 
 
+//
+// Setup the Task
+//
+
 void TaskCore::AddContinuation( TaskCore& continuation )
 {
     CARAMEL_CHECK( m_impl->IsValid() );
@@ -60,6 +64,24 @@ void TaskCore::DoDelayFor( const Ticks& duration )
 {
     CARAMEL_CHECK( m_impl->IsValid() );
     m_impl->DelayFor( duration );
+}
+
+
+//
+// Wait for Task to Complete
+//
+
+void TaskCore::Wait()
+{
+    CARAMEL_CHECK( m_impl->IsValid() );
+    m_impl->Wait();
+}
+
+
+void TaskCore::ThrowIfFaulted() const
+{
+    CARAMEL_CHECK( m_impl->IsValid() );
+    m_impl->ThrowIfFaulted();
 }
 
 
@@ -99,13 +121,6 @@ void TaskCore::Run()
 }
 
 
-void TaskCore::Wait()
-{
-    CARAMEL_CHECK( m_impl->IsValid() );
-    m_impl->Wait();
-}
-
-
 //
 // Properties
 //
@@ -131,6 +146,7 @@ TaskImpl::TaskImpl()
     : m_name( "Not-a-task" )
     , m_hasDelay( false )
     , m_executor( nullptr )
+    , m_exceptionRethrown( false )
 {
 }
 
@@ -140,7 +156,28 @@ TaskImpl::TaskImpl( const std::string& name, std::unique_ptr< TaskHolder >&& hol
     , m_holder( std::move( holder ))
     , m_hasDelay( false )
     , m_executor( nullptr )
+    , m_exceptionRethrown( false )
 {
+}
+
+
+TaskImpl::~TaskImpl()
+{
+    if ( m_exception && ! m_exceptionRethrown )
+    {
+        try
+        {
+            std::rethrow_exception( m_exception );
+        }
+        catch ( const std::exception& x )
+        {
+            CARAMEL_ALERT( "Task[%s] faulted with std::exception : %s", m_name, x.what() );
+        }
+        catch ( ... )
+        {
+            CARAMEL_ALERT( "Task[%s] faulted with unknown exception", m_name );
+        }
+    }
 }
 
 
@@ -195,14 +232,21 @@ void TaskImpl::Run()
         m_state = TASK_S_RUNNING;
     }
 
-    auto xc = CatchException( [=] { m_holder->Invoke(); } );
+    try
+    {
+        m_holder->Invoke();
+    }
+    catch ( ... )
+    {
+        m_exception = std::current_exception();
+    }
 
     TaskQueue::Snapshot continuations;
 
     {
         LockGuard lock( m_stateMutex );
 
-        if ( xc )
+        if ( m_exception )
         {
             m_state = TASK_S_FAULTED;
         }
@@ -226,11 +270,25 @@ void TaskImpl::Run()
 
 void TaskImpl::Wait()
 {
-    UniqueLock ulock( m_stateMutex );
-
-    while ( ! this->IsDone() )
     {
-        m_becomesDone.wait( ulock );
+        UniqueLock ulock( m_stateMutex );
+
+        while ( ! this->IsDone() )
+        {
+            m_becomesDone.wait( ulock );
+        }
+    }
+
+    this->ThrowIfFaulted();
+}
+
+
+void TaskImpl::ThrowIfFaulted() const
+{
+    if ( m_exception )
+    {
+        m_exceptionRethrown = true;
+        std::rethrow_exception( m_exception );
     }
 }
 

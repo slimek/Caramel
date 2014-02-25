@@ -2,6 +2,8 @@
 
 #include "CaramelTestPch.h"
 
+#include <Caramel/Error/CatchException.h>
+#include <Caramel/Task/StdAsync.h>
 #include <Caramel/Task/Task.h>
 #include <UnitTest++/UnitTest++.h>
 #include <functional>
@@ -132,6 +134,47 @@ TEST( TaskWithResultTest )
 
     stask.Run();
     CHECK( "Alice" == stask.GetResult() );
+}
+
+
+TEST( TaskWithExceptionTest )
+{
+    StdAsync async;
+    std::string what;
+
+
+    /// Exception in Wait() ///
+
+    auto task1 = MakeTask( "BadTask1", [] { throw std::exception( "bad1" ); } );
+    async.Submit( task1 );
+
+    try
+    {
+        task1.Wait();
+    }
+    catch ( std::exception& x )
+    {
+        what = x.what();
+    }
+
+    CHECK( "bad1" == what );
+
+
+    /// Exception in GetResult() ///
+
+    Task< Int > task2 = MakeTask( "BadTask2", [] { throw std::exception( "bad2" ); return 42; } );
+    async.Submit( task2 );
+
+    try
+    {
+        task2.GetResult();
+    }
+    catch ( std::exception& x )
+    {
+        what = x.what();
+    }
+
+    CHECK( "bad2" == what );
 }
 
 

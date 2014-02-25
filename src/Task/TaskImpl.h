@@ -35,6 +35,8 @@ public:
 
     TaskImpl( const std::string& name, std::unique_ptr< TaskHolder >&& holder );
 
+    ~TaskImpl();
+
 
     /// Operations ///
 
@@ -46,6 +48,8 @@ public:
     void Run();
 
     void Wait();
+
+    void ThrowIfFaulted() const;
 
 
     /// State Transition ///
@@ -77,6 +81,8 @@ private:
 
     enum State : Int
     {
+        TASK_S_UNDEF        = 0,
+
         TASK_S_INITIAL      = 0x01,
         TASK_S_DELAYING     = 0x02,
         TASK_S_WAITING      = 0x04,
@@ -109,6 +115,9 @@ private:
 
     typedef Concurrent::QueueWithSnapshot< TaskPtr > TaskQueue;
     TaskQueue m_continuations;
+
+    std::exception_ptr m_exception;
+    mutable Bool m_exceptionRethrown;
 };
 
 

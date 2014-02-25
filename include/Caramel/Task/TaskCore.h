@@ -73,6 +73,8 @@ protected:
 
     const Detail::TaskHolder* GetHolder() const;
 
+    void ThrowIfFaulted() const;
+
 
     std::shared_ptr< TaskImpl > m_impl;
 
