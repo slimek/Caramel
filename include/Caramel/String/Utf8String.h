@@ -43,16 +43,17 @@ public:
     Utf8String( const std::string& text, TextEncoding encoding );
 
 
-    //
-    // Operators
-    //
+    /// Properties ///
+
+    Uint Length() const { return static_cast< Uint >( m_s.length() ); }
+
+
+    /// Operators ///
 
     Utf8String& operator+=( const Utf8String& rhs );
 
 
-    //
-    // Conversions
-    //
+    /// Conversions ///
 
     //
     // Tests if the input string is UTF-8 encoded    
