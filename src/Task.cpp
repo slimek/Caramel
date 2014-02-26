@@ -71,17 +71,10 @@ void TaskCore::DoDelayFor( const Ticks& duration )
 // Wait for Task to Complete
 //
 
-void TaskCore::Wait()
+void TaskCore::Wait() const
 {
     CARAMEL_CHECK( m_impl->IsValid() );
     m_impl->Wait();
-}
-
-
-void TaskCore::ThrowIfFaulted() const
-{
-    CARAMEL_CHECK( m_impl->IsValid() );
-    m_impl->ThrowIfFaulted();
 }
 
 
@@ -268,7 +261,7 @@ void TaskImpl::Run()
 }
 
 
-void TaskImpl::Wait()
+void TaskImpl::Wait() const
 {
     {
         UniqueLock ulock( m_stateMutex );
@@ -279,12 +272,6 @@ void TaskImpl::Wait()
         }
     }
 
-    this->ThrowIfFaulted();
-}
-
-
-void TaskImpl::ThrowIfFaulted() const
-{
     if ( m_exception )
     {
         m_exceptionRethrown = true;

@@ -146,7 +146,7 @@ inline Task< Result >& Task< Result >::DelayFor( const Ticks& duration )
 template< typename Result >
 inline Result Task< Result >::GetResult() const
 {
-    this->ThrowIfFaulted();
+    this->Wait();
 
     return static_cast< const Detail::BasicTask< Result >* >( this->GetHolder() )->GetResult();
 }

@@ -47,9 +47,7 @@ public:
     void DelayFor( const Ticks& duration );
     void Run();
 
-    void Wait();
-
-    void ThrowIfFaulted() const;
+    void Wait() const;
 
 
     /// State Transition ///
@@ -96,8 +94,8 @@ private:
     
     } m_state;
 
-    std::mutex m_stateMutex;
-    std::condition_variable m_becomesDone;
+    mutable std::mutex m_stateMutex;
+    mutable std::condition_variable m_becomesDone;
 
     
     /// Delay ///

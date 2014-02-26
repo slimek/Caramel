@@ -45,7 +45,7 @@ public:
     Bool  HasDelay()         const;
     Ticks GetDelayDuration() const;
 
-    void Wait();  // Wait until done.
+    void Wait() const;  // Wait until done.
 
     
     //
@@ -72,8 +72,6 @@ protected:
     void DoDelayFor( const Ticks& duration );
 
     const Detail::TaskHolder* GetHolder() const;
-
-    void ThrowIfFaulted() const;
 
 
     std::shared_ptr< TaskImpl > m_impl;
