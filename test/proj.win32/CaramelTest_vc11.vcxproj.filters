@@ -65,6 +65,9 @@
     <Filter Include="2. Tests\Memory">
       <UniqueIdentifier>{95602195-845d-44e2-ae23-1bccc8622c1d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\Io">
+      <UniqueIdentifier>{b23e8bfd-4e50-471f-9692-56dbae3bb27c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\RunTest.cpp">
@@ -201,6 +204,9 @@
     </ClCompile>
     <ClCompile Include="..\src\Task\StdAsyncTest.cpp">
       <Filter>2. Tests\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Io\TextStreamWriterTest.cpp">
+      <Filter>2. Tests\Io</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

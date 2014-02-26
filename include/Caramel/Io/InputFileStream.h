@@ -7,7 +7,6 @@
 #include <Caramel/Caramel.h>
 #include <Caramel/Io/FileStream.h>
 #include <Caramel/Io/InputStream.h>
-#include <Caramel/FileSystem/Path.h>
 #include <Caramel/String/Utf8String.h>
 
 

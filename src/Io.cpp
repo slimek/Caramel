@@ -5,9 +5,12 @@
 #include "Io/MbcsStreamReader.h"
 #include "Io/Utf16LeStreamReader.h"
 #include "Io/Utf8StreamReader.h"
+#include "Io/Utf8StreamWriter.h"
 #include <Caramel/Io/FileStream.h>
 #include <Caramel/Io/InputFileStream.h>
+#include <Caramel/Io/OutputFileStream.h>
 #include <Caramel/Io/TextStreamReader.h>
+#include <Caramel/Io/TextStreamWriter.h>
 #include <cerrno>
 
 
@@ -19,18 +22,22 @@ namespace Caramel
 //
 // < Constants >
 //   ByteOrderMark
+//   Newline
 //
 // < Streams >
 //   FileStream
 //   InputFileStream
+//   OutputFileStream
 //
 // < Readers >
 //   TextStreamReader
 //   MbcsStreamReader
 //   Utf8StreamReader
+//   TextStreamWriter
+//   Utf8StreamWriter
 //
 
-/////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 //
 // Byte Order Mark (BOM)
 // - Placed at the beginning of a Unicode text file.
@@ -41,6 +48,22 @@ struct ByteOrderMark
 {
     static std::string UTF16_LE() { return std::string( "\xFF\xFE" ); }
     static std::string UTF8()     { return std::string( "\xEF\xBB\xBF" ); }
+};
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Newline
+// - Windows and Unix-like systems have different new line rule.
+//
+
+struct Newline
+{
+    #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+    static std::string UTF8() { return std::string( "\x0D\x0A" ); }
+    #else
+    static std::string UTF8() { return std::string( "\x0A" ); }
+    #endif
 };
 
 
@@ -194,6 +217,46 @@ Bool InputFileStream::IsEof() const
     if ( ! m_file ) { return true; }
 
     return 0 != feof( m_file );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Output File Stream
+//
+
+OutputFileStream::OutputFileStream()
+    : FileStream( "wb" )
+{
+}
+
+
+OutputFileStream::OutputFileStream( const std::string& fileName )
+    : FileStream( "wb" )
+{
+    CARAMEL_CHECK_UTF8_ARGUMENT( u8FileName, fileName );
+
+    this->Open( u8FileName );
+}
+
+
+OutputFileStream::OutputFileStream( const Utf8String& fileName )
+    : FileStream( "wb" )
+{
+    this->Open( fileName );
+}
+
+
+void OutputFileStream::Write( const Void* buffer, Uint size )
+{
+    CARAMEL_ASSERT( m_file );
+
+    Usize written = fwrite( buffer, 1, size, m_file );
+
+    if ( written != size )
+    {
+        CARAMEL_THROW( "Write file %s failed, errno: %u", m_fileName, errno );
+    }
 }
 
 
@@ -470,6 +533,90 @@ void Utf16LeStreamReader::TrySkipBom()
 
     // No BOM, move the read position back
     m_stream.Seek( - static_cast< Int >( count ));
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Text Stream Writer
+//
+
+TextStreamWriter::TextStreamWriter( OutputStream& stream )
+    : m_stream( stream )
+    , m_writer( new Utf8StreamWriter( stream ))
+{
+}
+
+
+void TextStreamWriter::Write( const std::string& text )
+{
+    CARAMEL_CHECK_UTF8_ARGUMENT( u8Text, text );
+
+    this->Write( u8Text );
+}
+
+
+void TextStreamWriter::Write( const Utf8String& text )
+{
+    m_writer->Write( text );
+}
+
+
+void TextStreamWriter::WriteLine( const std::string& text )
+{
+    CARAMEL_CHECK_UTF8_ARGUMENT( u8Text, text );
+
+    this->WriteLine( u8Text );
+}
+
+
+void TextStreamWriter::WriteLine( const Utf8String& text )
+{
+    m_writer->WriteLine( text );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// UTF-8 Stream Writer
+//
+
+Utf8StreamWriter::Utf8StreamWriter( OutputStream& stream )
+    : m_stream( stream )
+{
+    const std::string bom = ByteOrderMark::UTF8();
+    m_stream.Write( bom.c_str(), bom.length() );
+}
+
+
+void Utf8StreamWriter::Write( const std::string& text )
+{
+    CARAMEL_CHECK_UTF8_ARGUMENT( u8Text, text );
+
+    this->Write( u8Text );
+}
+
+
+void Utf8StreamWriter::Write( const Utf8String& text )
+{
+    m_stream.Write( text.ToCstr(), text.Length() );
+}
+
+
+void Utf8StreamWriter::WriteLine( const std::string& text )
+{
+    CARAMEL_CHECK_UTF8_ARGUMENT( u8Text, text );
+
+    this->Write( u8Text );
+}
+
+
+void Utf8StreamWriter::WriteLine( const Utf8String& text )
+{
+    m_stream.Write( text.ToCstr(), text.Length() );
+
+    const std::string newline = Newline::UTF8();
+    m_stream.Write( newline.c_str(), newline.length() );
 }
 
 

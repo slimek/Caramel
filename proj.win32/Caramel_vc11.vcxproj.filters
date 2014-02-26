@@ -659,6 +659,21 @@
     <ClInclude Include="..\include\Caramel\Task\StdAsync.h">
       <Filter>1. Public Packages\Task</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Io\OutputFileStream.h">
+      <Filter>1. Public Packages\Io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Io\OutputStream.h">
+      <Filter>1. Public Packages\Io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Io\TextWriter.h">
+      <Filter>1. Public Packages\Io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Io\TextStreamWriter.h">
+      <Filter>1. Public Packages\Io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Io\Utf8StreamWriter.h">
+      <Filter>2. Sources\Io</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

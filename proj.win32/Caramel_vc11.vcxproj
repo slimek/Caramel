@@ -73,8 +73,12 @@
     <ClInclude Include="..\include\Caramel\Io\FileStream.h" />
     <ClInclude Include="..\include\Caramel\Io\InputFileStream.h" />
     <ClInclude Include="..\include\Caramel\Io\InputStream.h" />
+    <ClInclude Include="..\include\Caramel\Io\OutputFileStream.h" />
+    <ClInclude Include="..\include\Caramel\Io\OutputStream.h" />
     <ClInclude Include="..\include\Caramel\Io\TextReader.h" />
     <ClInclude Include="..\include\Caramel\Io\TextStreamReader.h" />
+    <ClInclude Include="..\include\Caramel\Io\TextStreamWriter.h" />
+    <ClInclude Include="..\include\Caramel\Io\TextWriter.h" />
     <ClInclude Include="..\include\Caramel\Lexical\Boolean.h" />
     <ClInclude Include="..\include\Caramel\Lexical\Floating.h" />
     <ClInclude Include="..\include\Caramel\Lexical\Integer.h" />
@@ -160,6 +164,7 @@
     <ClInclude Include="..\src\Io\MbcsStreamReader.h" />
     <ClInclude Include="..\src\Io\Utf16LeStreamReader.h" />
     <ClInclude Include="..\src\Io\Utf8StreamReader.h" />
+    <ClInclude Include="..\src\Io\Utf8StreamWriter.h" />
     <ClInclude Include="..\src\Object\FacilityLongevity.h" />
     <ClInclude Include="..\src\Program\ConsoleApplicationImpl.h" />
     <ClInclude Include="..\src\Program\ProgramOptionsManager.h" />

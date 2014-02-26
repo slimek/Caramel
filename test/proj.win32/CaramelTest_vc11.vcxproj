@@ -117,6 +117,7 @@
     <ClCompile Include="..\src\Enum\FlagsTest.cpp" />
     <ClCompile Include="..\src\Error\AlertTest.cpp" />
     <ClCompile Include="..\src\FileSystem\PathTest.cpp" />
+    <ClCompile Include="..\src\Io\TextStreamWriterTest.cpp" />
     <ClCompile Include="..\src\Lexical\LexicalFloatingTest.cpp" />
     <ClCompile Include="..\src\Lexical\LexicalIntegerTest.cpp" />
     <ClCompile Include="..\src\Memory\SharedPtrUtilsTest.cpp" />
