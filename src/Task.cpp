@@ -139,7 +139,6 @@ TaskImpl::TaskImpl()
     : m_name( "Not-a-task" )
     , m_hasDelay( false )
     , m_executor( nullptr )
-    , m_exceptionRethrown( false )
 {
 }
 
@@ -149,28 +148,12 @@ TaskImpl::TaskImpl( const std::string& name, std::unique_ptr< TaskHolder >&& hol
     , m_holder( std::move( holder ))
     , m_hasDelay( false )
     , m_executor( nullptr )
-    , m_exceptionRethrown( false )
 {
 }
 
 
 TaskImpl::~TaskImpl()
 {
-    if ( m_exception && ! m_exceptionRethrown )
-    {
-        try
-        {
-            std::rethrow_exception( m_exception );
-        }
-        catch ( const std::exception& x )
-        {
-            CARAMEL_ALERT( "Task[%s] faulted with std::exception : %s", m_name, x.what() );
-        }
-        catch ( ... )
-        {
-            CARAMEL_ALERT( "Task[%s] faulted with unknown exception", m_name );
-        }
-    }
 }
 
 
@@ -225,23 +208,18 @@ void TaskImpl::Run()
         m_state = TASK_S_RUNNING;
     }
 
-    try
-    {
-        m_holder->Invoke();
-    }
-    catch ( ... )
-    {
-        m_exception = std::current_exception();
-    }
+    auto xc = CatchException( [=] { m_holder->Invoke(); } );
 
     TaskQueue::Snapshot continuations;
 
     {
         LockGuard lock( m_stateMutex );
 
-        if ( m_exception )
+        if ( xc )
         {
             m_state = TASK_S_FAULTED;
+
+            CARAMEL_TRACE_WARN( "Task %s throws", m_name );
         }
         else
         {
@@ -270,12 +248,6 @@ void TaskImpl::Wait() const
         {
             m_becomesDone.wait( ulock );
         }
-    }
-
-    if ( m_exception )
-    {
-        m_exceptionRethrown = true;
-        std::rethrow_exception( m_exception );
     }
 }
 

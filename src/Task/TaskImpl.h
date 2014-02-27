@@ -113,9 +113,6 @@ private:
 
     typedef Concurrent::QueueWithSnapshot< TaskPtr > TaskQueue;
     TaskQueue m_continuations;
-
-    std::exception_ptr m_exception;
-    mutable Bool m_exceptionRethrown;
 };
 
 
