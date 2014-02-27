@@ -86,7 +86,7 @@ inline AnyEvent::AnyEvent( Int id, const Any& value )
 inline AnyEvent::AnyEvent( Int id, Any&& value )
     : m_valid( true )
     , m_id( id )
-    , m_value( value )
+    , m_value( std::move( value ))
 {
 }
 
