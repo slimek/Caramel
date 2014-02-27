@@ -24,6 +24,7 @@ namespace Detail
 
 //
 // Any Boolean Caster
+// - Accept casting from AnyBoolean.
 //
 
 struct AnyBooleanCaster
@@ -46,7 +47,7 @@ struct AnyBooleanCaster
 
 //
 // Any Integer Caster
-// - Accept casting from AnyNumber and AnyEnum
+// - Accept casting from AnyInteger and AnyEnum
 //   NOTES: If holder is an AnyEnum, 64-bits value is not supported.
 //
 
@@ -73,7 +74,7 @@ struct AnyIntegerCaster
             return value;
         }
 
-        CARAMEL_THROW( "Not an AnyNumber or AnyEnum type" );
+        CARAMEL_THROW( "Not an AnyInteger or AnyEnum type" );
     }
 };
 
@@ -141,7 +142,7 @@ struct AnyEnumCaster
 
 //
 // Any String Caster
-// - Accept casting from AnyString
+// - Accept casting from AnyString, which may come from std::string or Char*.
 //
 
 struct AnyStringCaster

@@ -15,6 +15,20 @@ namespace Caramel
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Any
+// - This class allow you to transfer "any" type of data.
+//
+//   The input and output types may be different for some numeric types.
+//   Convertion may throw exception if the output type can't represent
+//   the input value exactly.
+//
+//     Output   |   Input Categories   |  Input Types
+//   ------------------------------------------------------
+//     Boolean  <=  Boolean            |  Bool 
+//     Integer  <=  Integer / Enum     |  Int/Uint, any enums
+//     Floating <=  Floating / Integer |  Float/Double, Int/Uint
+//     String   <=  String             |  std::string, Char*
+//     Enum     <=  Enum               |  enum
+//     Object   <=  Object             |  other types
 //
 
 class Any
