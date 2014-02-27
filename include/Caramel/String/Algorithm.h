@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
+#include <vector>
 
 
 namespace Caramel
@@ -53,6 +54,14 @@ std::string AfterFirst( const std::string& s, Char c );
 //
 
 void Trim( std::string& s );
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// String Concatenation
+//
+
+std::string Join( const std::vector< std::string >& sequence, const std::string& separator );
 
 
 ///////////////////////////////////////////////////////////////////////////////

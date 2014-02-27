@@ -11,6 +11,7 @@
 #include <Caramel/String/Sprintf.h>
 #include <Caramel/String/ToString.h>
 #include <Caramel/String/Utf8String.h>
+#include <boost/algorithm/string/join.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/range/irange.hpp>
@@ -401,6 +402,16 @@ std::string AfterFirst( const std::string& s, Char c )
 void Trim( std::string& s )
 {
     boost::algorithm::trim( s );
+}
+
+
+//
+// Concatenation
+//
+
+std::string Join( const std::vector< std::string >& sequence, const std::string& separator )
+{
+    return boost::algorithm::join( sequence, separator );
 }
 
 

@@ -8,9 +8,6 @@
     <Filter Include="2. Tests">
       <UniqueIdentifier>{c34d4fba-1a27-475f-bec4-6eec171c9eb0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="3. Precompiled Header">
-      <UniqueIdentifier>{5bf651e5-940d-421f-bfc0-e548e50759fa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="2. Tests\Concurrent">
       <UniqueIdentifier>{751a0151-c028-45dd-994c-22a136a657eb}</UniqueIdentifier>
     </Filter>
@@ -68,6 +65,12 @@
     <Filter Include="2. Tests\Io">
       <UniqueIdentifier>{b23e8bfd-4e50-471f-9692-56dbae3bb27c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="4. Precompiled Header">
+      <UniqueIdentifier>{5bf651e5-940d-421f-bfc0-e548e50759fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Utils for Testing">
+      <UniqueIdentifier>{fbe46388-e545-41a5-95c2-68c7f29afae6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\RunTest.cpp">
@@ -110,7 +113,7 @@
       <Filter>2. Tests\String</Filter>
     </ClCompile>
     <ClCompile Include="..\src\CaramelTestPch.cpp">
-      <Filter>3. Precompiled Header</Filter>
+      <Filter>4. Precompiled Header</Filter>
     </ClCompile>
     <ClCompile Include="..\src\DateTime\DateTimeTest.cpp">
       <Filter>2. Tests\DateTime</Filter>
@@ -214,7 +217,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">
-      <Filter>3. Precompiled Header</Filter>
+      <Filter>4. Precompiled Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Utils\StdVectorUtils.h">
+      <Filter>3. Utils for Testing</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

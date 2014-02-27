@@ -143,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h" />
+    <ClInclude Include="..\src\Utils\StdVectorUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\Document\test1.ini" />

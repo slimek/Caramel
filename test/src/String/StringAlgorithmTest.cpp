@@ -4,6 +4,7 @@
 
 #include <Caramel/String/Algorithm.h>
 #include <UnitTest++/UnitTest++.h>
+#include "Utils/StdVectorUtils.h"
 
 
 namespace Caramel
@@ -88,6 +89,13 @@ TEST( StringExtractorTest )
     CHECK( ""      == AfterFirst( "Alice", 'e' ));
     CHECK( ""      == AfterFirst( "Alice", 'f' ));  // Returns empty string if not found.
     CHECK( ""      == AfterFirst( "",      'f' ));
+}
+
+
+TEST( StringJoinTest )
+{
+    CHECK( "reimu,marisa,alice" == Join( MakeVector< std::string >( "reimu", "marisa", "alice" ), "," ));
+    CHECK( "" == Join( MakeVector< std::string >(), "," ));
 }
 
 
