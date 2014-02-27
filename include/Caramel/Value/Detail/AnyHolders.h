@@ -31,6 +31,27 @@ public:
 
 
 //
+// Any Boolean
+// - We forbit the any conversion between boolean and other integers.
+//
+
+class AnyBoolean : public AnyHolder
+{
+public:
+
+    explicit AnyBoolean( Bool value );
+  
+    /// Retreive Value ///
+
+    Bool Get() const { return m_value; }
+
+private:
+
+    Bool m_value;
+};
+
+
+//
 // Any Integer
 //
 
@@ -187,8 +208,9 @@ private:
 template< typename T >
 struct AnyHolderSelect
 {
-    typedef typename IfThenElse4T
+    typedef typename IfThenElse5T
     <
+        std::is_same< T, Bool >::value,     AnyBoolean,
         std::is_integral< T >::value,       AnyInteger,
         std::is_floating_point< T >::value, AnyFloating,
         IsGeneralString< T >::VALUE,        AnyString,

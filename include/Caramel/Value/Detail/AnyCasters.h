@@ -23,6 +23,28 @@ namespace Detail
 //
 
 //
+// Any Boolean Caster
+//
+
+struct AnyBooleanCaster
+{
+    template< typename T >
+    static T CastTo( const AnyHolder* holder )
+    {
+        static_assert( std::is_same< T, Bool >::value, "T must be Bool" );
+
+        auto abool = dynamic_cast< const AnyBoolean* >( holder );
+        if ( ! abool )
+        {
+            CARAMEL_THROW( "Not an AnyBoolean type" );
+        }
+
+        return abool->Get();
+    }
+};
+
+
+//
 // Any Integer Caster
 // - Accept casting from AnyNumber and AnyEnum
 //   NOTES: If holder is an AnyEnum, 64-bits value is not supported.
@@ -168,7 +190,9 @@ struct AnyObjectCaster
 template< typename T >
 struct AnyCasterSelect
 {
-    typedef typename IfThenElse4T<
+    typedef typename IfThenElse5T
+    <
+        std::is_same< T, Bool >::value,        AnyBooleanCaster,
         std::is_integral< T >::value,          AnyIntegerCaster,
         std::is_floating_point< T >::value,    AnyFloatingCaster,
         std::is_enum< T >::value,              AnyEnumCaster,

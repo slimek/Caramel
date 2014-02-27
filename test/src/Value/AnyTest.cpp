@@ -65,6 +65,16 @@ TEST( AnyIntegerTest )
 }
 
 
+TEST( AnyBoolTest )
+{
+    Any atrue( true );
+    CHECK( true == atrue.As< Bool >() );
+
+    Any afalse( false );
+    CHECK( false == afalse.As< Bool >() );
+}
+
+
 TEST( AnyStringTest )
 {
     Any as( std::string( "Alice" ));
