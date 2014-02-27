@@ -2,7 +2,7 @@
 
 #include "CaramelTestPch.h"
 
-#include <Caramel/Async/TimedBool.h>
+#include <Caramel/Chrono/TimedBool.h>
 #include <Caramel/Concurrent/Set.h>
 #include <Caramel/Random/UniformRandom.h>
 #include <Caramel/Thread/ThisThread.h>

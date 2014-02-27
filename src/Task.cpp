@@ -5,8 +5,8 @@
 #include "Task/TaskImpl.h"
 #include "Task/TaskPollerImpl.h"
 #include "Task/WorkerThreadImpl.h"
-#include <Caramel/Async/TimedBool.h>
 #include <Caramel/Chrono/TickClock.h>
+#include <Caramel/Chrono/TimedBool.h>
 #include <Caramel/Error/CatchException.h>
 #include <Caramel/String/Format.h>
 #include <Caramel/Task/StdAsync.h>

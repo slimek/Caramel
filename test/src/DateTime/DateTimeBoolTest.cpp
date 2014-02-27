@@ -2,7 +2,7 @@
 
 #include "CaramelTestPch.h"
 
-#include <Caramel/Async/TimedBool.h>
+#include <Caramel/Chrono/TimedBool.h>
 #include <Caramel/DateTime/DateTime.h>
 #include <Caramel/Thread/ThisThread.h>
 #include <UnitTest++/UnitTest++.h>

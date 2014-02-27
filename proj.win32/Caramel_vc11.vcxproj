@@ -29,12 +29,12 @@
     <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventTargetImpl.h" />
     <ClInclude Include="..\include\Caramel\Async\FlowState.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEventQueue.h" />
-    <ClInclude Include="..\include\Caramel\Async\TimedBool.h" />
     <ClInclude Include="..\include\Caramel\Async\ValueChange.h" />
     <ClInclude Include="..\include\Caramel\Caramel.h" />
     <ClInclude Include="..\include\Caramel\Chrono\SecondClock.h" />
     <ClInclude Include="..\include\Caramel\Chrono\SteadyClock.h" />
     <ClInclude Include="..\include\Caramel\Chrono\TickClock.h" />
+    <ClInclude Include="..\include\Caramel\Chrono\TimedBool.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\Detail\BasicMap.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\Detail\BasicSet.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\Detail\CollectionSnapshot.h" />

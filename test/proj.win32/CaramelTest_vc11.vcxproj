@@ -94,14 +94,13 @@
     <ClCompile Include="..\src\Async\AnyEventQueueTest.cpp" />
     <ClCompile Include="..\src\Async\AnyEventTest.cpp" />
     <ClCompile Include="..\src\Async\FlowStateTest.cpp" />
-    <ClCompile Include="..\src\Async\TimedBoolTest.cpp" />
     <ClCompile Include="..\src\Async\ValueChangeTest.cpp" />
-    <ClCompile Include="..\src\Async\WaitableBoolTest.cpp" />
     <ClCompile Include="..\src\CaramelTestPch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\src\Chrono\ClockTest.cpp" />
+    <ClCompile Include="..\src\Chrono\TimedBoolTest.cpp" />
     <ClCompile Include="..\src\Concurrent\ConcurrentIntervalSetTest.cpp" />
     <ClCompile Include="..\src\Concurrent\ConcurrentMapTest.cpp" />
     <ClCompile Include="..\src\Concurrent\ConcurrentPriorityQueueTest.cpp" />
@@ -136,6 +135,7 @@
     <ClCompile Include="..\src\Task\WorkerThreadTest.cpp" />
     <ClCompile Include="..\src\Thread\SpinMutexTest.cpp" />
     <ClCompile Include="..\src\Thread\ThreadTest.cpp" />
+    <ClCompile Include="..\src\Thread\WaitableBoolTest.cpp" />
     <ClCompile Include="..\src\Trace\TraceTest.cpp" />
     <ClCompile Include="..\src\Value\AnyTest.cpp" />
     <ClCompile Include="..\src\Value\NamedValuesTest.cpp" />

@@ -1,7 +1,7 @@
-// Caramel C++ Library - Async Amenity - Timed Bool Header
+// Caramel C++ Library - Chrono Amenity - Timed Bool Header
 
-#ifndef __CARAMEL_ASYNC_TIMED_BOOL_H
-#define __CARAMEL_ASYNC_TIMED_BOOL_H
+#ifndef __CARAMEL_CHRONO_TIMED_BOOL_H
+#define __CARAMEL_CHRONO_TIMED_BOOL_H
 #pragma once
 
 #include <Caramel/Caramel.h>
@@ -208,4 +208,4 @@ inline Bool TimedBool< ClockT >::IsExpired() const
 
 } // namespace Caramel
 
-#endif // __CARAMEL_ASYNC_TIMED_BOOL_H
+#endif // __CARAMEL_CHRONO_TIMED_BOOL_H

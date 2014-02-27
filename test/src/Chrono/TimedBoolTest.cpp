@@ -1,8 +1,8 @@
-// Caramel C++ Library Test - Async - Timed Boolean Test
+// Caramel C++ Library Test - Chrono - Timed Boolean Test
 
 #include "CaramelTestPch.h"
 
-#include <Caramel/Async/TimedBool.h>
+#include <Caramel/Chrono/TimedBool.h>
 #include <Caramel/Chrono/SecondClock.h>
 #include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Thread/ThisThread.h>

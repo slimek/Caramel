@@ -82,9 +82,6 @@
     <ClCompile Include="..\src\Chrono\ClockTest.cpp">
       <Filter>2. Tests\Chrono</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Async\TimedBoolTest.cpp">
-      <Filter>2. Tests\Async</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Async\FlowStateTest.cpp">
       <Filter>2. Tests\Async</Filter>
     </ClCompile>
@@ -132,9 +129,6 @@
     </ClCompile>
     <ClCompile Include="..\src\String\StringToStringTest.cpp">
       <Filter>2. Tests\String</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Async\WaitableBoolTest.cpp">
-      <Filter>2. Tests\Async</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Value\AnyTest.cpp">
       <Filter>2. Tests\Value</Filter>
@@ -213,6 +207,12 @@
     </ClCompile>
     <ClCompile Include="..\src\FileSystem\DirectoryInfoTest.cpp">
       <Filter>2. Tests\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Chrono\TimedBoolTest.cpp">
+      <Filter>2. Tests\Chrono</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Thread\WaitableBoolTest.cpp">
+      <Filter>2. Tests\Thread</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

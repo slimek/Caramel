@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Async - Waitable Boolean Test
+// Caramel C++ Library Test - Thread - Waitable Boolean Test
 
 #include "CaramelTestPch.h"
 

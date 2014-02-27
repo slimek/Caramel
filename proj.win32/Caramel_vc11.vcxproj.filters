@@ -281,9 +281,6 @@
     <ClInclude Include="..\include\Caramel\Numeric\NumberTraits.h">
       <Filter>1. Public Packages\Numeric</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\Async\TimedBool.h">
-      <Filter>1. Public Packages\Async</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Caramel\Lexical\Boolean.h">
       <Filter>1. Public Packages\Lexical</Filter>
     </ClInclude>
@@ -673,6 +670,9 @@
     </ClInclude>
     <ClInclude Include="..\src\Io\Utf8StreamWriter.h">
       <Filter>2. Sources\Io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Chrono\TimedBool.h">
+      <Filter>1. Public Packages\Chrono</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

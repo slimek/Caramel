@@ -195,8 +195,6 @@ TEST( IntervalSetSnapshotTest )
 
     auto shot2 = iset.GetSnapshot();
 
-    cout << "Size: " << shot2.Size() << endl;
-
     CHECK( false == shot2.IsEmpty() );
     CHECK( 2     == shot2.Size() );
 
