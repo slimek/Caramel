@@ -108,6 +108,33 @@ std::vector< FileInfo > DirectoryInfo::GetFilesRecursively() const
 }
 
 
+//
+// Operations
+//
+
+void DirectoryInfo::Create()
+{
+    // Do nothing if the directory already exists.
+    if ( this->Exists() ) { return; }
+
+    const Bool ok = boost::filesystem::create_directory( *m_path );
+    if ( ! ok )
+    {
+        CARAMEL_THROW( "Create directory \"%s\" failed", m_path->ToString() );
+    }
+}
+
+
+void DirectoryInfo::Delete()
+{
+    const Bool ok = boost::filesystem::remove( *m_path );
+    if ( ! ok )
+    {
+        CARAMEL_THROW( "Delete directory \"%s\" failed", m_path->ToString() );
+    }
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // File Info
@@ -303,10 +330,10 @@ void Path::InsertStemSuffix( const std::string& suffix )
 // Conversions
 //
 
-Utf8String Path::ToUtf8String() const { return Utf8String( m_impl->native() ); }
+Utf8String Path::ToUtf8String() const { return m_impl->ToUtf8String(); }
 
-Path::operator std::string() const { return this->ToUtf8String().ToString(); }
-std::string Path::ToString() const { return this->ToUtf8String().ToString(); }
+Path::operator std::string() const { return m_impl->ToString(); }
+std::string Path::ToString() const { return m_impl->ToString(); }
 
 
 //
@@ -334,6 +361,17 @@ PathImpl::PathImpl( const Utf8String& path )
 {
 }
 
+
+Utf8String PathImpl::ToUtf8String() const
+{
+    return Utf8String( this->native() );
+}
+
+
+std::string PathImpl::ToString() const
+{
+    return this->ToUtf8String().ToString();
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////

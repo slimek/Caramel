@@ -51,6 +51,19 @@ public:
     std::vector< FileInfo > GetFilesRecursively() const;
 
 
+    /// Operations ///
+
+    // If the directory already exists, this method do nothing.
+    // Throws if the directory cannot be created.
+    void Create();
+
+    // Throws if the directory cannot be deleted. This includes:
+    // - It is not found.
+    //   It is not empty.
+    //   You don't have the permission.
+    void Delete();
+
+
 private:
 
     explicit DirectoryInfo( std::shared_ptr< PathImpl > path );

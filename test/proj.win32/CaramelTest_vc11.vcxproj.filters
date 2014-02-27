@@ -208,6 +208,9 @@
     <ClCompile Include="..\src\Io\TextStreamWriterTest.cpp">
       <Filter>2. Tests\Io</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\FileSystem\DirectoryInfoTest.cpp">
+      <Filter>2. Tests\FileSystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">

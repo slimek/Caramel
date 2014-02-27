@@ -116,6 +116,7 @@
     <ClCompile Include="..\src\Enum\EnumLookupTest.cpp" />
     <ClCompile Include="..\src\Enum\FlagsTest.cpp" />
     <ClCompile Include="..\src\Error\AlertTest.cpp" />
+    <ClCompile Include="..\src\FileSystem\DirectoryInfoTest.cpp" />
     <ClCompile Include="..\src\FileSystem\PathTest.cpp" />
     <ClCompile Include="..\src\Io\TextStreamWriterTest.cpp" />
     <ClCompile Include="..\src\Lexical\LexicalFloatingTest.cpp" />

@@ -25,6 +25,10 @@ public:
     explicit PathImpl( boost::filesystem::path&& path );
     explicit PathImpl( const Utf8String& path );
     
+    // Returns a UTF-8 string
+    Utf8String  ToUtf8String() const;
+    std::string ToString()     const;
+
 };
 
 typedef std::shared_ptr< PathImpl > PathPtr;
