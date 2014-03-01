@@ -22,6 +22,7 @@
 #include <algorithm>
 #include <chrono>
 #include <cstdio>
+#include <exception>
 #include <list>
 #include <memory>
 #include <mutex>
@@ -37,6 +38,7 @@
 // Caramel Headers
 
 #include <Caramel/Setup/PchHeaders.h>
+#include <Caramel/String/Format.h>
 
 
 ///////////////////////////////////////////////////////////////////////////////

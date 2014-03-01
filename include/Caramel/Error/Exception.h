@@ -38,7 +38,7 @@ public:
     std::string What()     const { return m_what; }
 
 
-    /// Implements std::exception ///
+    /// Overrides std::exception ///
 
     const Char* what() const CARAMEL_NOEXCEPT override { return m_what.c_str(); }
 

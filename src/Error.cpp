@@ -5,6 +5,7 @@
 #include "Error/ErrorManager.h"
 #include <Caramel/Error/Detail/ExceptionCatcherCore.h>
 #include <Caramel/Error/Exception.h>
+#include <Caramel/Error/Failure.h>
 #include <Caramel/String/Utf8String.h>
 #include <Caramel/Thread/MutexLocks.h>
 #include <cassert>
@@ -23,6 +24,7 @@ namespace Caramel
 //
 //   ErrorManager
 //   Exception
+//   Failure
 //   Detail::ExceptionCatcherCore
 //   Alert
 //
@@ -67,6 +69,32 @@ Exception::Exception(
     , m_function( function )
     , m_what( what )
 {}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Failure
+//
+
+Failure::Failure( Int code )
+    : m_code( code )
+    , m_what( Format( "code: {0}", code ))
+{
+}
+
+
+Failure::Failure( Int code, const std::string& what )
+    : m_code( code )
+    , m_what( what )
+{
+}
+
+
+Failure::Failure( Int code, std::string&& what )
+    : m_code( code )
+    , m_what( std::move( what ))
+{
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -674,6 +674,9 @@
     <ClInclude Include="..\include\Caramel\Chrono\TimedBool.h">
       <Filter>1. Public Packages\Chrono</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Error\Failure.h">
+      <Filter>1. Public Packages\Error</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

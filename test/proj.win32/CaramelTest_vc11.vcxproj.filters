@@ -214,6 +214,9 @@
     <ClCompile Include="..\src\Thread\WaitableBoolTest.cpp">
       <Filter>2. Tests\Thread</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Error\FailureTest.cpp">
+      <Filter>2. Tests\Error</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">
