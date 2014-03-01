@@ -677,6 +677,12 @@
     <ClInclude Include="..\include\Caramel\Error\Failure.h">
       <Filter>1. Public Packages\Error</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Error\StdExceptionPtr.h">
+      <Filter>1. Public Packages\Error</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Error\Detail\StdExceptionHolder.h">
+      <Filter>1. Public Packages\Error\Detail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

@@ -64,9 +64,11 @@
     <ClInclude Include="..\include\Caramel\Error\Alert.h" />
     <ClInclude Include="..\include\Caramel\Error\Assert.h" />
     <ClInclude Include="..\include\Caramel\Error\Detail\ExceptionCatcherCore.h" />
+    <ClInclude Include="..\include\Caramel\Error\Detail\StdExceptionHolder.h" />
     <ClInclude Include="..\include\Caramel\Error\Exception.h" />
     <ClInclude Include="..\include\Caramel\Error\CatchException.h" />
     <ClInclude Include="..\include\Caramel\Error\Failure.h" />
+    <ClInclude Include="..\include\Caramel\Error\StdExceptionPtr.h" />
     <ClInclude Include="..\include\Caramel\FileSystem\DirectoryInfo.h" />
     <ClInclude Include="..\include\Caramel\FileSystem\FileInfo.h" />
     <ClInclude Include="..\include\Caramel\FileSystem\Path.h" />

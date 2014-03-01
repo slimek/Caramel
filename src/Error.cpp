@@ -6,6 +6,7 @@
 #include <Caramel/Error/Detail/ExceptionCatcherCore.h>
 #include <Caramel/Error/Exception.h>
 #include <Caramel/Error/Failure.h>
+#include <Caramel/Error/StdExceptionPtr.h>
 #include <Caramel/String/Utf8String.h>
 #include <Caramel/Thread/MutexLocks.h>
 #include <cassert>
@@ -27,6 +28,7 @@ namespace Caramel
 //   Failure
 //   Detail::ExceptionCatcherCore
 //   Alert
+//   StdExceptionPtr
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -116,6 +118,14 @@ void ExceptionCatcherCore::OnCatchCaramelException( const Exception& e )
     m_caught = true;
 
     CARAMEL_TRACE_ERROR( "Caramel::Exception caught, what: %s", e.What() );
+}
+
+
+void ExceptionCatcherCore::OnCatchCaramelFailure( const Failure& e )
+{
+    m_caught = true;
+
+    CARAMEL_TRACE_ERROR( "Caramel::Failure caught, code: %d, what: %s", e.Code(), e.What() );
 }
 
 
@@ -295,6 +305,52 @@ AlertResult ThrowAlertHandler(
 
     // No return value.
 }
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Std Exception Ptr
+//
+
+StdExceptionPtr CurrentStdException()
+{
+    try
+    {
+        throw;
+    }
+    catch ( const Failure& fx )
+    {
+        return StdExceptionPtr( fx );
+    }
+    catch ( const Exception& ex )
+    {
+        return StdExceptionPtr( ex );
+    }
+    catch ( const std::exception& x )
+    {
+        return StdExceptionPtr( x );
+    }
+    catch ( ... )
+    {
+        return StdExceptionPtr::Unknown();
+    }
+}
+
+
+//
+// Unknown Holder
+//
+
+namespace Detail
+{
+
+void UnknownExceptionHolder::Rethrow()
+{
+    throw std::runtime_error( "Unknown exception (can't be determined by Caramel)" );
+}
+
+
+} // namespace Detail
 
 
 ///////////////////////////////////////////////////////////////////////////////
