@@ -6,9 +6,10 @@
 
 #include <Caramel/Caramel.h>
 #include <Caramel/Error/Exception.h>
+#include <Caramel/Error/Failure.h>
 #include <exception>
 
-#if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+#if defined( CARAMEL_COMPILER_IS_MSVC )
 #include <Windows.h>
 #endif
 
@@ -41,10 +42,11 @@ protected:
     /// Handler Functions ///
 
     void OnCatchCaramelException( const Caramel::Exception& e );
+    void OnCatchCaramelFailure( const Caramel::Failure& e );
     void OnCatchStdException( const std::exception& e );
     void OnCatchUnknown();
 
-    #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+    #if defined( CARAMEL_COMPILER_IS_MSVC )
     LONG ExceptionFilter( EXCEPTION_POINTERS* exception, DWORD exceptionCode );
     #endif
     

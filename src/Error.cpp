@@ -139,7 +139,7 @@ void ExceptionCatcherCore::OnCatchUnknown()
 // Windows Structured Exception Handling (SEH)
 //
 
-#if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+#if defined( CARAMEL_COMPILER_IS_MSVC )
 
 LONG ExceptionCatcherCore::ExceptionFilter( EXCEPTION_POINTERS* exception, DWORD exceptionCode )
 {
