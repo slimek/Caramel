@@ -115,7 +115,7 @@
     <ClCompile Include="..\src\Enum\EnumLookupTest.cpp" />
     <ClCompile Include="..\src\Enum\FlagsTest.cpp" />
     <ClCompile Include="..\src\Error\AlertTest.cpp" />
-    <ClCompile Include="..\src\Error\FailureTest.cpp" />
+    <ClCompile Include="..\src\Error\AnyFailureTest.cpp" />
     <ClCompile Include="..\src\Error\StdExceptionPtrTest.cpp" />
     <ClCompile Include="..\src\FileSystem\DirectoryInfoTest.cpp" />
     <ClCompile Include="..\src\FileSystem\PathTest.cpp" />

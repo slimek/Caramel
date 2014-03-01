@@ -1,42 +1,43 @@
-// Caramel C++ Library Test - Error - Failure Test
+// Caramel C++ Library Test - Error - Any Failure Test
 
 #include "CaramelTestPch.h"
 
-#include <Caramel/Error/Failure.h>
+#include <Caramel/Error/AnyFailure.h>
 #include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel
 {
 
-SUITE( FailureSuite )
+SUITE( AnyFailureSuite )
 {
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Failure Test
+// Any Failure Test
 //
 
-TEST( FailureTest )
+TEST( AnyFailureTest )
 {
     try
     {
-        throw Failure( 42 );
+        throw AnyFailure( 42 );
     }
     catch ( const std::exception& x )
     {
-        CHECK( 0 == std::strcmp( "code: 42", x.what() ));
+        CHECK( 0 == std::strcmp( "AnyFailure[id:42]", x.what() ));
     }
 
 
     try
     {
-        throw Failure( 42, "The Answer" );
+        throw AnyFailure( 42, "The Answer" );
     }
-    catch ( const Failure& fx )
+    catch ( const AnyFailure& fx )
     {
-        CHECK( 42 == fx.Code() );
-        CHECK( "The Answer" == fx.What() );
+        CHECK( 42 == fx.Id() );
+        CHECK( "The Answer" == fx.Value< std::string >() );
+        CHECK( false == fx.HasCustomWhat() );
     }
     catch ( const std::exception& )
     {
@@ -48,7 +49,7 @@ TEST( FailureTest )
 
     try
     {
-        throw Failure( 216, "Triple Six" );
+        throw AnyFailure( 216 ).What( "Triple Six" );
     }
     catch ( ... )
     {
@@ -59,16 +60,17 @@ TEST( FailureTest )
     {
         std::rethrow_exception( px );
     }
-    catch ( const Failure& fx )
+    catch ( const AnyFailure& fx )
     {
-        CHECK( 216 == fx.Code() );
+        CHECK( 216 == fx.Id() );
         CHECK( "Triple Six" == fx.What() );
+        CHECK( true == fx.HasCustomWhat() );
     }
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////
 
-} // SUITE FailureSuite
+} // SUITE AnyFailureSuite
 
 } // namespace Caramel

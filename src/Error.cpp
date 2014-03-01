@@ -4,8 +4,8 @@
 
 #include "Error/ErrorManager.h"
 #include <Caramel/Error/Detail/ExceptionCatcherCore.h>
+#include <Caramel/Error/AnyFailure.h>
 #include <Caramel/Error/Exception.h>
-#include <Caramel/Error/Failure.h>
 #include <Caramel/Error/StdExceptionPtr.h>
 #include <Caramel/String/Utf8String.h>
 #include <Caramel/Thread/MutexLocks.h>
@@ -75,27 +75,58 @@ Exception::Exception(
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Failure
+// Any Failure
 //
 
-Failure::Failure( Int code )
-    : m_code( code )
-    , m_what( Format( "code: {0}", code ))
+AnyFailure::AnyFailure( Int id )
+    : m_id( id )
+    , m_customWhat( false )
 {
+    this->Init();
 }
 
 
-Failure::Failure( Int code, const std::string& what )
-    : m_code( code )
-    , m_what( what )
+AnyFailure::AnyFailure( Int id, const Any& value )
+    : m_id( id )
+    , m_value( value )
+    , m_customWhat( false )
 {
+    this->Init();
 }
 
 
-Failure::Failure( Int code, std::string&& what )
-    : m_code( code )
-    , m_what( std::move( what ))
+AnyFailure::AnyFailure( Int id, Any&& value )
+    : m_id( id )
+    , m_value( std::move( value ))
+    , m_customWhat( false )
 {
+    this->Init();
+}
+
+
+void AnyFailure::Init()
+{
+    m_what = Format( "AnyFailure[id:{0}]", m_id );
+}
+
+
+//
+// Add What Message
+//
+
+AnyFailure& AnyFailure::What( const std::string& what )
+{
+    m_what = what;
+    m_customWhat = true;
+    return *this;
+}
+
+
+AnyFailure& AnyFailure::What( std::string&& what )
+{
+    m_what = std::move( what );
+    m_customWhat = true;
+    return *this;
 }
 
 
@@ -121,11 +152,11 @@ void ExceptionCatcherCore::OnCatchCaramelException( const Exception& e )
 }
 
 
-void ExceptionCatcherCore::OnCatchCaramelFailure( const Failure& e )
+void ExceptionCatcherCore::OnCatchCaramelAnyFailure( const AnyFailure& e )
 {
     m_caught = true;
 
-    CARAMEL_TRACE_ERROR( "Caramel::Failure caught, code: %d, what: %s", e.Code(), e.What() );
+    CARAMEL_TRACE_ERROR( "Caramel::AnyFailure caught, id: %d, what: %s", e.Id(), e.What() );
 }
 
 
@@ -318,7 +349,7 @@ StdExceptionPtr CurrentStdException()
     {
         throw;
     }
-    catch ( const Failure& fx )
+    catch ( const AnyFailure& fx )
     {
         return StdExceptionPtr( fx );
     }

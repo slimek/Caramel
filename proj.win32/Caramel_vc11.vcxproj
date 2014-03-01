@@ -62,12 +62,12 @@
     <ClInclude Include="..\include\Caramel\Enum\EnumLookupTable.h" />
     <ClInclude Include="..\include\Caramel\Enum\Flags.h" />
     <ClInclude Include="..\include\Caramel\Error\Alert.h" />
+    <ClInclude Include="..\include\Caramel\Error\AnyFailure.h" />
     <ClInclude Include="..\include\Caramel\Error\Assert.h" />
     <ClInclude Include="..\include\Caramel\Error\Detail\ExceptionCatcherCore.h" />
     <ClInclude Include="..\include\Caramel\Error\Detail\StdExceptionHolder.h" />
     <ClInclude Include="..\include\Caramel\Error\Exception.h" />
     <ClInclude Include="..\include\Caramel\Error\CatchException.h" />
-    <ClInclude Include="..\include\Caramel\Error\Failure.h" />
     <ClInclude Include="..\include\Caramel\Error\StdExceptionPtr.h" />
     <ClInclude Include="..\include\Caramel\FileSystem\DirectoryInfo.h" />
     <ClInclude Include="..\include\Caramel\FileSystem\FileInfo.h" />

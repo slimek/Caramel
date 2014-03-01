@@ -5,8 +5,8 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
+#include <Caramel/Error/AnyFailure.h>
 #include <Caramel/Error/Exception.h>
-#include <Caramel/Error/Failure.h>
 #include <exception>
 
 #if defined( CARAMEL_COMPILER_IS_MSVC )
@@ -42,7 +42,7 @@ protected:
     /// Handler Functions ///
 
     void OnCatchCaramelException( const Caramel::Exception& e );
-    void OnCatchCaramelFailure( const Caramel::Failure& e );
+    void OnCatchCaramelAnyFailure( const Caramel::AnyFailure& e );
     void OnCatchStdException( const std::exception& e );
     void OnCatchUnknown();
 

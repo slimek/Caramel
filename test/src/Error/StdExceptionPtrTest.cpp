@@ -2,7 +2,7 @@
 
 #include "CaramelTestPch.h"
 
-#include <Caramel/Error/Failure.h>
+#include <Caramel/Error/AnyFailure.h>
 #include <Caramel/Error/StdExceptionPtr.h>
 #include <UnitTest++/UnitTest++.h>
 #include <iostream>
@@ -44,13 +44,13 @@ TEST( StdExceptionPtrTest )
     }
 
 
-    /// Failure ///
+    /// AnyFailure ///
 
     StdExceptionPtr px2;
 
     try
     {
-        throw Failure( 42, "The Big Answer" );
+        throw AnyFailure( 42 ).What( "The Big Answer" );
     }
     catch ( ... )
     {
@@ -61,9 +61,9 @@ TEST( StdExceptionPtrTest )
     {
         px2.Rethrow();
     }
-    catch ( const Failure& fx )
+    catch ( const AnyFailure& fx )
     {
-        CHECK( 42 == fx.Code() );
+        CHECK( 42 == fx.Id() );
         CHECK( "The Big Answer" == fx.What() );
     }
     catch ( ... )
