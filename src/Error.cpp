@@ -139,7 +139,7 @@ AnyFailure& AnyFailure::What( std::string&& what )
 namespace Detail
 {
 
-void ExceptionCatcherCore::OnCatchCaramelException( const Exception& e )
+void ExceptionCatcherCore::OnCatchCaramelException( const Caramel::Exception& e )
 {
     m_exception = ExceptionPtr::Clone( e );
 
@@ -147,7 +147,7 @@ void ExceptionCatcherCore::OnCatchCaramelException( const Exception& e )
 }
 
 
-void ExceptionCatcherCore::OnCatchCaramelAnyFailure( const AnyFailure& e )
+void ExceptionCatcherCore::OnCatchCaramelAnyFailure( const Caramel::AnyFailure& e )
 {
     m_exception = ExceptionPtr::Clone( e );
 
@@ -206,7 +206,7 @@ LONG ExceptionCatcherCore::ExceptionFilter( EXCEPTION_POINTERS* exception, DWORD
 
 ExceptionPtr CurrentException()
 {
-    return CatchException( [] { throw; } ).GetException();
+    return CatchException( [] { throw; } ).Exception();
 }
 
 

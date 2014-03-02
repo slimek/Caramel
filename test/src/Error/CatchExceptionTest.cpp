@@ -25,7 +25,7 @@ TEST( CatchExceptionTest )
 
         CHECK( false == x );
 
-        ExceptionPtr px = x.GetException();
+        ExceptionPtr px = x.Exception();
     
         CHECK( false == px );
     }
@@ -37,7 +37,7 @@ TEST( CatchExceptionTest )
 
         CHECK ( true == x );
 
-        ExceptionPtr px = x.GetException();
+        ExceptionPtr px = x.Exception();
 
         try
         {
@@ -59,7 +59,7 @@ TEST( CatchExceptionTest )
 
         CHECK( true == x );
 
-        ExceptionPtr px = x.GetException();
+        ExceptionPtr px = x.Exception();
 
         try
         {
@@ -87,7 +87,7 @@ TEST( CatchExceptionTest )
 
         CHECK( true == x );
 
-        ExceptionPtr px = x.GetException();
+        ExceptionPtr px = x.Exception();
 
         try
         {
@@ -116,7 +116,7 @@ TEST( CatchExceptionWithResultTest )
 
         try
         {
-            xc.GetException().Rethrow();
+            xc.Exception().Rethrow();
         }
         catch ( const Exception& x )
         {
@@ -137,7 +137,7 @@ TEST( CatchExceptionWithResultTest )
 
         try
         {
-            xc.GetException().Rethrow();
+            xc.Exception().Rethrow();
         }
         catch ( const AnyFailure& fx )
         {
@@ -165,7 +165,7 @@ TEST( CatchExceptionWithResultTest )
 
         try
         {
-            xc.GetException().Rethrow();
+            xc.Exception().Rethrow();
         }
         catch ( const std::exception& e )
         {

@@ -33,7 +33,7 @@ public:
     operator Bool() const { return m_exception; }
     Bool IsCaught() const { return m_exception; }
 
-    ExceptionPtr GetException() const { return m_exception; }
+    ExceptionPtr Exception() const { return m_exception; }
 
 
 protected: 
