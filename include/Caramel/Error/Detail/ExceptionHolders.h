@@ -1,7 +1,7 @@
-// Caramel C++ Library - Error Facility - Detail - std::exception Holder Header
+// Caramel C++ Library - Error Facility - Detail - Exception Holders Header
 
-#ifndef __CARAMEL_ERROR_DETAIL_STD_EXCEPTION_HOLDER_H
-#define __CARAMEL_ERROR_DETAIL_STD_EXCEPTION_HOLDER_H
+#ifndef __CARAMEL_ERROR_DETAIL_EXCEPTION_HOLDERS_H
+#define __CARAMEL_ERROR_DETAIL_EXCEPTION_HOLDERS_H
 #pragma once
 
 #include <Caramel/Caramel.h>
@@ -15,14 +15,14 @@ namespace Detail
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Std Exception Holder
+// Exception Holder
 //
 
-class StdExceptionHolder
+class ExceptionHolder
 {
 public:
     
-    virtual ~StdExceptionHolder() {}
+    virtual ~ExceptionHolder() {}
 
     virtual void Rethrow() = 0;
 };
@@ -33,13 +33,13 @@ public:
 //
 
 template< typename E >
-class StdExceptionHolderConcrete : public StdExceptionHolder
+class ExceptionHolderConcrete : public ExceptionHolder
 {
 public:
 
     typedef E ExceptionType;
 
-    explicit StdExceptionHolderConcrete( const E& e )
+    explicit ExceptionHolderConcrete( const E& e )
         : m_exception( e )
     {}
     
@@ -56,7 +56,7 @@ private:
 // Unknown Holder
 //
 
-class UnknownExceptionHolder : public StdExceptionHolder
+class UnknownExceptionHolder : public ExceptionHolder
 {
 public:
 
@@ -70,4 +70,4 @@ public:
 
 } // namespace Caramel
 
-#endif // __CARAMEL_ERROR_DETAIL_STD_EXCEPTION_HOLDER_H
+#endif // __CARAMEL_ERROR_DETAIL_EXCEPTION_HOLDERS_H

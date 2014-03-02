@@ -6,7 +6,7 @@
 #include <Caramel/Error/Detail/ExceptionCatcherCore.h>
 #include <Caramel/Error/AnyFailure.h>
 #include <Caramel/Error/Exception.h>
-#include <Caramel/Error/StdExceptionPtr.h>
+#include <Caramel/Error/ExceptionPtr.h>
 #include <Caramel/String/Utf8String.h>
 #include <Caramel/Thread/MutexLocks.h>
 #include <cassert>
@@ -28,7 +28,7 @@ namespace Caramel
 //   Failure
 //   Detail::ExceptionCatcherCore
 //   Alert
-//   StdExceptionPtr
+//   ExceptionPtr
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -340,10 +340,10 @@ AlertResult ThrowAlertHandler(
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Std Exception Ptr
+// Exception Ptr
 //
 
-StdExceptionPtr CurrentStdException()
+ExceptionPtr CurrentException()
 {
     try
     {
@@ -351,19 +351,19 @@ StdExceptionPtr CurrentStdException()
     }
     catch ( const AnyFailure& fx )
     {
-        return StdExceptionPtr( fx );
+        return ExceptionPtr( fx );
     }
     catch ( const Exception& ex )
     {
-        return StdExceptionPtr( ex );
+        return ExceptionPtr( ex );
     }
     catch ( const std::exception& x )
     {
-        return StdExceptionPtr( x );
+        return ExceptionPtr( x );
     }
     catch ( ... )
     {
-        return StdExceptionPtr::Unknown();
+        return ExceptionPtr::Unknown();
     }
 }
 

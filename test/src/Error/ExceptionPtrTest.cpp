@@ -1,9 +1,9 @@
-// Caramel C++ Library Test - Error - Std Exception Ptr Test
+// Caramel C++ Library Test - Error - Exception Ptr Test
 
 #include "CaramelTestPch.h"
 
 #include <Caramel/Error/AnyFailure.h>
-#include <Caramel/Error/StdExceptionPtr.h>
+#include <Caramel/Error/ExceptionPtr.h>
 #include <UnitTest++/UnitTest++.h>
 #include <iostream>
 
@@ -11,19 +11,19 @@
 namespace Caramel
 {
 
-SUITE( StdExceptionPtrSuite )
+SUITE( ExceptionPtrSuite )
 {
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Std Exception Ptr Test
+// Exception Ptr Test
 //
 
-TEST( StdExceptionPtrTest )
+TEST( ExceptionPtrTest )
 {
     /// std::exception ///
 
-    StdExceptionPtr px1;
+    ExceptionPtr px1;
 
     try
     {
@@ -31,7 +31,7 @@ TEST( StdExceptionPtrTest )
     }
     catch ( ... )
     {
-        px1 = CurrentStdException();
+        px1 = CurrentException();
     }
 
     try
@@ -46,7 +46,7 @@ TEST( StdExceptionPtrTest )
 
     /// AnyFailure ///
 
-    StdExceptionPtr px2;
+    ExceptionPtr px2;
 
     try
     {
@@ -54,7 +54,7 @@ TEST( StdExceptionPtrTest )
     }
     catch ( ... )
     {
-        px2 = CurrentStdException();
+        px2 = CurrentException();
     }
 
     try
@@ -74,7 +74,7 @@ TEST( StdExceptionPtrTest )
 
     /// Exception ///
 
-    StdExceptionPtr px3;
+    ExceptionPtr px3;
 
     try
     {
@@ -82,7 +82,7 @@ TEST( StdExceptionPtrTest )
     }
     catch ( ... )
     {
-        px3 = CurrentStdException();
+        px3 = CurrentException();
     }
 
     try
@@ -102,6 +102,6 @@ TEST( StdExceptionPtrTest )
 
 ///////////////////////////////////////////////////////////////////////////////
 
-} // SUITE StdExceptionPtrSuite
+} // SUITE ExceptionPtrSuite
 
 } // namespace Caramel

@@ -214,10 +214,10 @@
     <ClCompile Include="..\src\Thread\WaitableBoolTest.cpp">
       <Filter>2. Tests\Thread</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Error\StdExceptionPtrTest.cpp">
+    <ClCompile Include="..\src\Error\AnyFailureTest.cpp">
       <Filter>2. Tests\Error</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Error\AnyFailureTest.cpp">
+    <ClCompile Include="..\src\Error\ExceptionPtrTest.cpp">
       <Filter>2. Tests\Error</Filter>
     </ClCompile>
   </ItemGroup>
