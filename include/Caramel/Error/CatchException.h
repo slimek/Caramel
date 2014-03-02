@@ -6,7 +6,7 @@
 
 #include <Caramel/Caramel.h>
 #include <Caramel/Error/Detail/ExceptionCatcherCore.h>
-#include <Caramel/Error/Exception.h>
+#include <Caramel/Error/ExceptionPtr.h>
 #include <type_traits>
 
 
@@ -85,6 +85,10 @@ inline ExceptionCatcher< ResultT >::ExceptionCatcher( const Function& f )
     {
         this->OnCatchCaramelException( e );
     }
+    catch ( const Caramel::AnyFailure& e )
+    {
+        this->OnCatchCaramelAnyFailure( e );
+    }
     catch ( const std::exception& e )
     {
         this->OnCatchStdException( e );
@@ -106,6 +110,10 @@ inline ExceptionCatcher< void >::ExceptionCatcher( const Function& f )
     catch ( const Caramel::Exception& e )
     {
         this->OnCatchCaramelException( e );
+    }
+    catch ( const Caramel::AnyFailure& e )
+    {
+        this->OnCatchCaramelAnyFailure( e );
     }
     catch ( const std::exception& e )
     {
@@ -134,7 +142,7 @@ inline void ExceptionCatcher< ResultT >::Invoke( const Function& f )
     }
     __except ( this->ExceptionFilter( GetExceptionInformation(), GetExceptionCode() ))
     {
-        m_caught = true;
+        ;  // Do nothing
     }
 }
 
@@ -148,7 +156,7 @@ inline void ExceptionCatcher< void >::Invoke( const Function& f )
     }
     __except ( this->ExceptionFilter( GetExceptionInformation(), GetExceptionCode() ))
     {
-        m_caught = true;
+        ;  // Do nothing
     }
 }
 

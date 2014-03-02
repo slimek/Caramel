@@ -5,6 +5,7 @@
 #include "Error/ErrorManager.h"
 #include <Caramel/Error/Detail/ExceptionCatcherCore.h>
 #include <Caramel/Error/AnyFailure.h>
+#include <Caramel/Error/CatchException.h>
 #include <Caramel/Error/Exception.h>
 #include <Caramel/Error/ExceptionPtr.h>
 #include <Caramel/String/Utf8String.h>
@@ -27,8 +28,8 @@ namespace Caramel
 //   Exception
 //   Failure
 //   Detail::ExceptionCatcherCore
-//   Alert
 //   ExceptionPtr
+//   Alert
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -138,15 +139,9 @@ AnyFailure& AnyFailure::What( std::string&& what )
 namespace Detail
 {
 
-ExceptionCatcherCore::ExceptionCatcherCore()
-    : m_caught( false )
-{
-}
-
-
 void ExceptionCatcherCore::OnCatchCaramelException( const Exception& e )
 {
-    m_caught = true;
+    m_exception = ExceptionPtr::Clone( e );
 
     CARAMEL_TRACE_ERROR( "Caramel::Exception caught, what: %s", e.What() );
 }
@@ -154,7 +149,7 @@ void ExceptionCatcherCore::OnCatchCaramelException( const Exception& e )
 
 void ExceptionCatcherCore::OnCatchCaramelAnyFailure( const AnyFailure& e )
 {
-    m_caught = true;
+    m_exception = ExceptionPtr::Clone( e );
 
     CARAMEL_TRACE_ERROR( "Caramel::AnyFailure caught, id: %d, what: %s", e.Id(), e.What() );
 }
@@ -162,7 +157,7 @@ void ExceptionCatcherCore::OnCatchCaramelAnyFailure( const AnyFailure& e )
 
 void ExceptionCatcherCore::OnCatchStdException( const std::exception& e )
 {
-    m_caught = true;
+    m_exception = ExceptionPtr::Clone( e );
 
     CARAMEL_TRACE_ERROR( "std::exception caught, what: %s", e.what() );
 }
@@ -170,7 +165,7 @@ void ExceptionCatcherCore::OnCatchStdException( const std::exception& e )
 
 void ExceptionCatcherCore::OnCatchUnknown()
 {
-    m_caught = true;
+    m_exception = ExceptionPtr::Unknown();
 
     CARAMEL_TRACE_ERROR( "Unknown exception caught" );
 }
@@ -191,26 +186,64 @@ LONG ExceptionCatcherCore::ExceptionFilter( EXCEPTION_POINTERS* exception, DWORD
         return EXCEPTION_CONTINUE_SEARCH;
     }
 
-    switch ( exceptionCode )
-    {
-    case EXCEPTION_ACCESS_VIOLATION:
-        // TODO: trace access violation and stack walker
-        return EXCEPTION_EXECUTE_HANDLER;
+    // TODO: Add stack walker to Windows Exception Holder ?
 
-    case EXCEPTION_STACK_OVERFLOW:
-        // TODO: trace stack overflow
-        return EXCEPTION_EXECUTE_HANDLER;
+    m_exception = ExceptionPtr( new Detail::WindowsExceptionHolder( exceptionCode ));
 
-    default:
-        // TODO: trace exception code
-        ;
-    }
-
-    return EXCEPTION_CONTINUE_SEARCH;
+    return EXCEPTION_EXECUTE_HANDLER;
 }
 
 
 #endif // CARAMEL_SYSTEM_IS_WINDOWS
+
+} // namespace Detail
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Exception Ptr
+//
+
+ExceptionPtr CurrentException()
+{
+    return CatchException( [] { throw; } ).GetException();
+}
+
+
+//
+// Unknown Holder
+//
+
+namespace Detail
+{
+
+void UnknownExceptionHolder::Rethrow()
+{
+    throw std::runtime_error( "Unknown exception (can't be determined by Caramel)" );
+}
+
+
+#if defined( CARAMEL_COMPILER_IS_MSVC )
+
+void WindowsExceptionHolder::Rethrow()
+{
+    throw std::runtime_error( this->MakeDescription() );
+}
+
+
+std::string WindowsExceptionHolder::MakeDescription() const
+{
+    switch ( m_code )
+    {
+    case EXCEPTION_ACCESS_VIOLATION: return "Access Violation";
+    case EXCEPTION_STACK_OVERFLOW:   return "Stack Overflow";
+    default: return "Undetermined Windows Exception";
+    }    
+}
+
+
+#endif  // CARAMEL_COMPILER_IS_MSVC
+
 
 } // namespace Detail
 
@@ -336,52 +369,6 @@ AlertResult ThrowAlertHandler(
 
     // No return value.
 }
-
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Exception Ptr
-//
-
-ExceptionPtr CurrentException()
-{
-    try
-    {
-        throw;
-    }
-    catch ( const AnyFailure& fx )
-    {
-        return ExceptionPtr( fx );
-    }
-    catch ( const Exception& ex )
-    {
-        return ExceptionPtr( ex );
-    }
-    catch ( const std::exception& x )
-    {
-        return ExceptionPtr( x );
-    }
-    catch ( ... )
-    {
-        return ExceptionPtr::Unknown();
-    }
-}
-
-
-//
-// Unknown Holder
-//
-
-namespace Detail
-{
-
-void UnknownExceptionHolder::Rethrow()
-{
-    throw std::runtime_error( "Unknown exception (can't be determined by Caramel)" );
-}
-
-
-} // namespace Detail
 
 
 ///////////////////////////////////////////////////////////////////////////////

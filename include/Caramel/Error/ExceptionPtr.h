@@ -28,19 +28,25 @@ class ExceptionPtr
 public:
 
     ExceptionPtr();
+    explicit ExceptionPtr( Detail::ExceptionHolder* holder );
 
     template< typename E >
-    ExceptionPtr( const E& clonee );
+    static ExceptionPtr Clone( const E& exception );
 
     static ExceptionPtr Unknown();
 
+
+    /// Predicates ///
+
+    operator Bool() const { return static_cast< Bool >( m_holder ); }
+
+
+    /// Operations ///
 
     void Rethrow();
 
 
 private:
-
-    explicit ExceptionPtr( Detail::ExceptionHolder* holder );
 
     std::shared_ptr< Detail::ExceptionHolder > m_holder;
 };
@@ -64,16 +70,16 @@ inline ExceptionPtr::ExceptionPtr()
 }
 
 
-template< typename E >
-inline ExceptionPtr::ExceptionPtr( const E& clonee )
-    : m_holder( new Detail::ExceptionHolderConcrete< E >( clonee ))
+inline ExceptionPtr::ExceptionPtr( Detail::ExceptionHolder* holder )
+    : m_holder( holder )
 {
 }
 
 
-inline ExceptionPtr::ExceptionPtr( Detail::ExceptionHolder* holder )
-    : m_holder( holder )
+template< typename E >
+inline ExceptionPtr ExceptionPtr::Clone( const E& clonee )
 {
+    return ExceptionPtr( new Detail::ExceptionHolderConcrete< E >( clonee ));
 }
 
 

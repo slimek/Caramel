@@ -64,6 +64,34 @@ public:
 };
 
 
+#if defined( CARAMEL_COMPILER_IS_MSVC )
+
+//
+// Windows Exceptoin Holder
+// - The SEH exceptions, including Access Violation, Stack Overflow, etc.
+//
+
+class WindowsExceptionHolder : public ExceptionHolder
+{
+public:
+
+    WindowsExceptionHolder( Uint32 exceptionCode )
+        : m_code( exceptionCode )
+    {}
+
+    void Rethrow() override;
+
+
+private:
+
+    std::string MakeDescription() const;
+
+    Uint32 m_code; // Windows exception code
+};
+
+#endif
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // namespace Detail

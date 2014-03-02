@@ -7,6 +7,7 @@
 #include <Caramel/Caramel.h>
 #include <Caramel/Error/AnyFailure.h>
 #include <Caramel/Error/Exception.h>
+#include <Caramel/Error/ExceptionPtr.h>
 #include <exception>
 
 #if defined( CARAMEL_COMPILER_IS_MSVC )
@@ -29,15 +30,13 @@ class ExceptionCatcherCore
 {
 public:
 
-    operator Bool() const { return m_caught; }
-    
-    Bool IsCaught() const { return m_caught; }
+    operator Bool() const { return m_exception; }
+    Bool IsCaught() const { return m_exception; }
+
+    ExceptionPtr GetException() const { return m_exception; }
 
 
 protected: 
-    
-    ExceptionCatcherCore();
-
     
     /// Handler Functions ///
 
@@ -53,7 +52,7 @@ protected:
 
     /// Data Members ///
 
-    Bool m_caught;
+    ExceptionPtr m_exception;
 };
 
 
