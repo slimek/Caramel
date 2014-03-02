@@ -12,6 +12,9 @@
 namespace Caramel
 {
 
+// Forwards declaration
+class AnyEvent;
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Any Failure
@@ -46,6 +49,11 @@ public:
     std::string What() const { return m_what; }
 
     Bool HasCustomWhat() const { return m_customWhat; }
+
+
+    /// Conversions ///
+
+    AnyEvent ToAnyEvent() const;
 
 
     /// Overrides std::exception ///

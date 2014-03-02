@@ -2,6 +2,8 @@
 
 #include "CaramelTestPch.h"
 
+#include <Caramel/Async/AnyEvent.h>
+#include <Caramel/Async/AnyEventQueue.h>
 #include <Caramel/Error/AnyFailure.h>
 #include <UnitTest++/UnitTest++.h>
 
@@ -66,6 +68,33 @@ TEST( AnyFailureTest )
         CHECK( "Triple Six" == fx.What() );
         CHECK( true == fx.HasCustomWhat() );
     }
+}
+
+
+TEST( AnyFailureToEventTest )
+{
+    AnyEventQueue queue;
+
+    try
+    {
+        throw AnyFailure( 42, "The Answer" );
+    }
+    catch ( const AnyFailure& fx )
+    {
+        AnyEvent evt = fx.ToAnyEvent();
+        queue.Push( evt );
+    }
+    catch ( ... )
+    {
+        CHECK( ! "Not reached" );
+    }
+
+    AnyEvent evt;
+    CHECK( true == queue.TryPop( evt ));
+
+    CHECK( 42 == evt.Id() );
+    CHECK( "The Answer" == evt.Value< std::string >() );
+
 }
 
 

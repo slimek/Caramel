@@ -3,6 +3,7 @@
 #include "CaramelPch.h"
 
 #include "Error/ErrorManager.h"
+#include <Caramel/Async/AnyEvent.h>
 #include <Caramel/Error/Detail/ExceptionCatcherCore.h>
 #include <Caramel/Error/AnyFailure.h>
 #include <Caramel/Error/CatchException.h>
@@ -26,7 +27,7 @@ namespace Caramel
 //
 //   ErrorManager
 //   Exception
-//   Failure
+//   AnyFailure
 //   Detail::ExceptionCatcherCore
 //   ExceptionPtr
 //   Alert
@@ -128,6 +129,16 @@ AnyFailure& AnyFailure::What( std::string&& what )
     m_what = std::move( what );
     m_customWhat = true;
     return *this;
+}
+
+
+//
+// Conversions
+//
+
+AnyEvent AnyFailure::ToAnyEvent() const
+{
+    return AnyEvent( m_id, m_value );
 }
 
 
