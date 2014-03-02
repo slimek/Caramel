@@ -36,6 +36,14 @@ private:
     template< typename Function >
     void Invoke( const Function& f );
 
+    #if defined( CARAMEL_COMPILER_IS_MSVC )
+
+    template< typename Function >
+    void DoInvoke( const Function& f );
+
+    #endif
+
+
     ResultType m_result;
 };
 
@@ -128,9 +136,10 @@ inline ExceptionCatcher< void >::ExceptionCatcher( const Function& f )
 
 //
 // Windows Structured Exception Handling (SEH)
+// - Only Visual C++ supports this syntax.
 //
 
-#if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+#if defined( CARAMEL_COMPILER_IS_MSVC )
 
 template< typename ResultT >
 template< typename Function >
@@ -138,12 +147,20 @@ inline void ExceptionCatcher< ResultT >::Invoke( const Function& f )
 {
     __try
     {
-        m_result = f();
+        this->DoInvoke( f );
     }
     __except ( this->ExceptionFilter( GetExceptionInformation(), GetExceptionCode() ))
     {
         ;  // Do nothing
     }
+}
+
+
+template< typename ResultT >
+template< typename Function >
+inline void ExceptionCatcher< ResultT >::DoInvoke( const Function& f )
+{
+    m_result = f();
 }
 
 
@@ -177,7 +194,7 @@ inline void ExceptionCatcher< void >::Invoke( const Function& f )
     f();
 }
     
-#endif // CARAMEL_SYSTEM_IS_WINDOWS
+#endif // CARAMEL_COMPILER_IS_MSVC
 
 ///////////////////////////////////////////////////////////////////////////////
 

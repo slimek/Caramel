@@ -105,6 +105,80 @@ TEST( CatchExceptionTest )
 }
 
 
+TEST( CatchExceptionWithResultTest )
+{
+    /// Exception ///
+    {
+        auto xc = CatchException( [] { CARAMEL_THROW( "Alice in Shanghai" ); return false; } );
+
+        CHECK( true == xc );
+        CHECK(( true == std::is_same< Bool, decltype( xc.Result() ) >::value ));
+
+        try
+        {
+            xc.GetException().Rethrow();
+        }
+        catch ( const Exception& x )
+        {
+            CHECK( "Alice in Shanghai" == x.What() );
+        }
+        catch ( ... )
+        {
+            CHECK( ! "Not reached" );
+        }
+    }
+
+    /// Any Exception ///
+    {
+        auto xc = CatchException( [] { throw AnyFailure( 42, "The Answer" ); return 126; } );
+
+        CHECK( true == xc );
+        CHECK(( true == std::is_same< Int, decltype( xc.Result() ) >::value ));
+
+        try
+        {
+            xc.GetException().Rethrow();
+        }
+        catch ( const AnyFailure& fx )
+        {
+            CHECK( 42 == fx.Id() );
+            CHECK( "The Answer" == fx.Value< std::string >() );
+        }
+        catch ( ... )
+        {
+            CHECK( ! "Not reached" );
+        }
+    }
+
+    /// Access Violation ///
+    {
+        auto xc = CatchException(
+        []
+        {
+            Int* pi = nullptr;
+            ++ *pi;
+            return std::string( "Marisa" );
+        });
+
+        CHECK( true == xc );
+        CHECK(( true == std::is_same< std::string, decltype( xc.Result() ) >::value ));
+
+        try
+        {
+            xc.GetException().Rethrow();
+        }
+        catch ( const std::exception& e )
+        {
+            CHECK( 0 == strcmp( "Access Violation", e.what() ));
+        }
+        catch ( ... )
+        {
+            CHECK( ! "Not reached" );
+        }
+    }
+}
+
+
 } // SUITE CatchExceptionSuite
 
 } // namespace Caramel
