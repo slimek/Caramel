@@ -27,7 +27,7 @@ public:
     
     virtual ~ExceptionHolder() {}
 
-    virtual void Rethrow() = 0;
+    virtual void Rethrow() const = 0;
 
     // Message to be output to Trace.
     virtual std::string TracingMessage() const = 0;
@@ -46,7 +46,7 @@ public:
         : m_exception( e )
     {}
 
-    void Rethrow() override { throw m_exception; }
+    void Rethrow() const override { throw m_exception; }
 
     std::string TracingMessage() const override;
 
@@ -64,7 +64,7 @@ public:
         : m_exception( exception )
     {}
 
-    void Rethrow() override { throw m_exception; }
+    void Rethrow() const override { throw m_exception; }
 
     std::string TracingMessage() const override;
 
@@ -88,7 +88,7 @@ public:
         : m_exception( exception )
     {}
 
-    void Rethrow() override { throw m_exception; }
+    void Rethrow() const override { throw m_exception; }
 
     std::string TracingMessage() const override
     {
@@ -109,7 +109,7 @@ class UnknownExceptionHolder : public ExceptionHolder
 {
 public:
 
-    void Rethrow() override;
+    void Rethrow() const override;
 
     std::string TracingMessage() const override;
 };
@@ -130,7 +130,7 @@ public:
         : m_code( exceptionCode )
     {}
 
-    void Rethrow() override;
+    void Rethrow() const override;
 
     std::string TracingMessage() const override;
 

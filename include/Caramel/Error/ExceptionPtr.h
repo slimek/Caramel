@@ -47,7 +47,7 @@ public:
 
     /// Operations ///
 
-    void Rethrow();
+    void Rethrow() const;
 
     std::string TracingMessage() const;
 
@@ -95,7 +95,7 @@ inline ExceptionPtr ExceptionPtr::Unknown()
 }
 
 
-inline void ExceptionPtr::Rethrow()
+inline void ExceptionPtr::Rethrow() const
 {
     m_holder->Rethrow();
 }

@@ -279,7 +279,7 @@ std::string GetStdExceptionTracingMessage( const std::exception& e )
 // Unknown Exceptoin
 //
 
-void UnknownExceptionHolder::Rethrow()
+void UnknownExceptionHolder::Rethrow() const
 {
     throw std::runtime_error( "Unknown exception (can't be determined by Caramel)" );
 }
@@ -297,7 +297,7 @@ std::string UnknownExceptionHolder::TracingMessage() const
 
 #if defined( CARAMEL_COMPILER_IS_MSVC )
 
-void WindowsExceptionHolder::Rethrow()
+void WindowsExceptionHolder::Rethrow() const
 {
     throw std::runtime_error( this->What() );
 }
