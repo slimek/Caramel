@@ -6,6 +6,7 @@
 
 #include <Caramel/Caramel.h>
 #include <Caramel/Concurrent/Queue.h>
+#include <Caramel/Error/ExceptionPtr.h>
 #include <Caramel/Task/Task.h>
 #include <condition_variable>
 
@@ -113,6 +114,10 @@ private:
 
     typedef Concurrent::QueueWithSnapshot< TaskPtr > TaskQueue;
     TaskQueue m_continuations;
+
+    ExceptionPtr m_exception;
+    mutable Bool m_exceptionRethrown;
+    
 };
 
 

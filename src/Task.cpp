@@ -139,6 +139,7 @@ TaskImpl::TaskImpl()
     : m_name( "Not-a-task" )
     , m_hasDelay( false )
     , m_executor( nullptr )
+    , m_exceptionRethrown( false )
 {
 }
 
@@ -148,12 +149,19 @@ TaskImpl::TaskImpl( const std::string& name, std::unique_ptr< TaskHolder >&& hol
     , m_holder( std::move( holder ))
     , m_hasDelay( false )
     , m_executor( nullptr )
+    , m_exceptionRethrown( false )
 {
 }
 
 
 TaskImpl::~TaskImpl()
 {
+    // Trace the exception if it isn't rethrown.
+
+    if ( m_exception && ! m_exceptionRethrown )
+    {
+        CARAMEL_TRACE_WARN( "Task %s throws:\n%s", m_name, m_exception.TracingMessage() );
+    }
 }
 
 
@@ -217,9 +225,8 @@ void TaskImpl::Run()
 
         if ( xc )
         {
+            m_exception = xc.Exception();
             m_state = TASK_S_FAULTED;
-
-            CARAMEL_TRACE_WARN( "Task %s throws", m_name );
         }
         else
         {
@@ -248,6 +255,12 @@ void TaskImpl::Wait() const
         {
             m_becomesDone.wait( ulock );
         }
+    }
+
+    if ( m_exception )
+    {
+        m_exceptionRethrown = true;
+        m_exception.Rethrow();
     }
 }
 
