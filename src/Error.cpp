@@ -30,6 +30,7 @@ namespace Caramel
 //   AnyFailure
 //   Detail::ExceptionCatcherCore
 //   ExceptionPtr
+//     Exception holders
 //   Alert
 //
 
@@ -152,25 +153,19 @@ namespace Detail
 
 void ExceptionCatcherCore::OnCatchCaramelException( const Caramel::Exception& e )
 {
-    m_exception = ExceptionPtr::Clone( e );
-
-    CARAMEL_TRACE_ERROR( "Caramel::Exception caught, what: %s", e.What() );
+    m_exception = ExceptionPtr( e );
 }
 
 
 void ExceptionCatcherCore::OnCatchCaramelAnyFailure( const Caramel::AnyFailure& e )
 {
-    m_exception = ExceptionPtr::Clone( e );
-
-    CARAMEL_TRACE_ERROR( "Caramel::AnyFailure caught, id: %d, what: %s", e.Id(), e.What() );
+    m_exception = ExceptionPtr( e );
 }
 
 
 void ExceptionCatcherCore::OnCatchStdException( const std::exception& e )
 {
     m_exception = ExceptionPtr::Clone( e );
-
-    CARAMEL_TRACE_ERROR( "std::exception caught, what: %s", e.what() );
 }
 
 
@@ -215,18 +210,74 @@ LONG ExceptionCatcherCore::ExceptionFilter( EXCEPTION_POINTERS* exception, DWORD
 // Exception Ptr
 //
 
+ExceptionPtr::ExceptionPtr( const Caramel::Exception& e )
+    : m_holder( new Detail::CaramelExceptionHolder( e ))
+{
+}
+
+
+ExceptionPtr::ExceptionPtr( const Caramel::AnyFailure& e )
+    : m_holder( new Detail::CaramelAnyFailureHolder( e ))
+{
+}
+
+
+std::string ExceptionPtr::TracingMessage() const
+{
+    return m_holder->TracingMessage();
+}
+
+
 ExceptionPtr CurrentException()
 {
     return CatchException( [] { throw; } ).Exception();
 }
 
 
-//
-// Unknown Holder
-//
-
 namespace Detail
 {
+
+//
+// Caramel::Exceptoin
+//
+
+std::string CaramelExceptionHolder::TracingMessage() const
+{
+    return Format( "Caramel::Exception caught, what: {0}", m_exception.What() );
+}
+
+
+//
+// Caramel::AnyException
+//
+
+std::string CaramelAnyFailureHolder::TracingMessage() const
+{
+    if ( m_exception.HasCustomWhat() )
+    {
+        return Format( "Caramel::AnyFailure caught, id: {0}, what: {1}",
+                       m_exception.Id(), m_exception.What() );
+    }
+    else
+    {
+        return Format( "Caramel::AnyFailure caught, id: {0}", m_exception.Id() );
+    }
+}
+
+
+//
+// std::exception
+//
+
+std::string GetStdExceptionTracingMessage( const std::exception& e )
+{
+    return Format( "std::exception caught, what: {0}", e.what() );
+}
+
+
+//
+// Unknown Exceptoin
+//
 
 void UnknownExceptionHolder::Rethrow()
 {
@@ -234,21 +285,37 @@ void UnknownExceptionHolder::Rethrow()
 }
 
 
+std::string UnknownExceptionHolder::TracingMessage() const
+{
+    return "Unknown exception caught";
+}
+
+
+//
+// Windows Exception
+//
+
 #if defined( CARAMEL_COMPILER_IS_MSVC )
 
 void WindowsExceptionHolder::Rethrow()
 {
-    throw std::runtime_error( this->MakeDescription() );
+    throw std::runtime_error( this->What() );
 }
 
 
-std::string WindowsExceptionHolder::MakeDescription() const
+std::string WindowsExceptionHolder::TracingMessage() const
+{
+    return Format( "Windows exception caught: {0}", this->What() );
+}
+
+
+std::string WindowsExceptionHolder::What() const
 {
     switch ( m_code )
     {
     case EXCEPTION_ACCESS_VIOLATION: return "Access Violation";
     case EXCEPTION_STACK_OVERFLOW:   return "Stack Overflow";
-    default: return "Undetermined Windows Exception";
+    default: return "Undetermined";
     }    
 }
 

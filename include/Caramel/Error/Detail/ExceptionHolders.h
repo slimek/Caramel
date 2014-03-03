@@ -5,6 +5,9 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
+#include <Caramel/Error/AnyFailure.h>
+#include <Caramel/Error/Exception.h>
+#include <exception>
 
 
 namespace Caramel
@@ -25,26 +28,72 @@ public:
     virtual ~ExceptionHolder() {}
 
     virtual void Rethrow() = 0;
+
+    // Message to be output to Trace.
+    virtual std::string TracingMessage() const = 0;
 };
 
 
 //
-// Concrete Holder
+// Concrete Holders
 //
 
+class CaramelExceptionHolder : public ExceptionHolder
+{
+public:
+    
+    explicit CaramelExceptionHolder( const Caramel::Exception& e )
+        : m_exception( e )
+    {}
+
+    void Rethrow() override { throw m_exception; }
+
+    std::string TracingMessage() const override;
+
+private:
+
+    Caramel::Exception m_exception;
+};
+
+
+class CaramelAnyFailureHolder : public ExceptionHolder
+{
+public:
+
+    explicit CaramelAnyFailureHolder( const Caramel::AnyFailure& exception )
+        : m_exception( exception )
+    {}
+
+    void Rethrow() override { throw m_exception; }
+
+    std::string TracingMessage() const override;
+
+private:
+
+    Caramel::AnyFailure m_exception;
+};
+
+
+
+std::string GetStdExceptionTracingMessage( const std::exception& e );
+
 template< typename E >
-class ExceptionHolderConcrete : public ExceptionHolder
+class StdExceptionHolder : public ExceptionHolder
 {
 public:
 
     typedef E ExceptionType;
 
-    explicit ExceptionHolderConcrete( const E& e )
-        : m_exception( e )
+    explicit StdExceptionHolder( const E& exception )
+        : m_exception( exception )
     {}
-    
+
     void Rethrow() override { throw m_exception; }
 
+    std::string TracingMessage() const override
+    {
+        return GetStdExceptionTracingMessage( m_exception );
+    }
 
 private:
 
@@ -61,6 +110,8 @@ class UnknownExceptionHolder : public ExceptionHolder
 public:
 
     void Rethrow() override;
+
+    std::string TracingMessage() const override;
 };
 
 
@@ -81,10 +132,11 @@ public:
 
     void Rethrow() override;
 
+    std::string TracingMessage() const override;
+
+    std::string What() const;
 
 private:
-
-    std::string MakeDescription() const;
 
     Uint32 m_code; // Windows exception code
 };

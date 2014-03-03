@@ -56,6 +56,8 @@ Int ConsoleApplication::Run()
     auto xc = CatchException( [ this ] { return this->Main(); } );
     if ( xc )
     {
+        CARAMEL_TRACE_ERROR( xc.TracingMessage() );
+
         std::cout << std::endl
                   << "Program caught an exception and exit abnormally." << std::endl;
         std::cin.get();

@@ -35,6 +35,8 @@ public:
 
     ExceptionPtr Exception() const { return m_exception; }
 
+    std::string TracingMessage() const { return m_exception.TracingMessage(); }
+
 
 protected: 
     

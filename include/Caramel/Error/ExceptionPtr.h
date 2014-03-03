@@ -28,6 +28,10 @@ class ExceptionPtr
 public:
 
     ExceptionPtr();
+
+    explicit ExceptionPtr( const Caramel::Exception& e );
+    explicit ExceptionPtr( const Caramel::AnyFailure& e );
+
     explicit ExceptionPtr( Detail::ExceptionHolder* holder );
 
     template< typename E >
@@ -44,6 +48,8 @@ public:
     /// Operations ///
 
     void Rethrow();
+
+    std::string TracingMessage() const;
 
 
 private:
@@ -79,7 +85,7 @@ inline ExceptionPtr::ExceptionPtr( Detail::ExceptionHolder* holder )
 template< typename E >
 inline ExceptionPtr ExceptionPtr::Clone( const E& clonee )
 {
-    return ExceptionPtr( new Detail::ExceptionHolderConcrete< E >( clonee ));
+    return ExceptionPtr( new Detail::StdExceptionHolder< E >( clonee ));
 }
 
 

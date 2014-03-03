@@ -98,7 +98,7 @@ void ThreadImpl::RunWork()
     auto xc = CatchException( m_workFunction );
     if ( xc )
     {
-        CARAMEL_TRACE_WARN( "Exception caugut, thread name: %s", m_name );
+        CARAMEL_TRACE_WARN( "Thread[%s] caugut exception:\n%s", m_name, xc.TracingMessage() );
     }
 }
 

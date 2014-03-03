@@ -199,7 +199,8 @@ void StateMachineImpl::EnterState()
         auto xc = CatchException( [=] { m_currentState->m_enterAction(); } );
         if ( xc )
         {
-            CARAMEL_TRACE_WARN( "%s enter action throws", m_currentState->GetName() );
+            CARAMEL_TRACE_WARN( "%s enter action throws:\n%s",
+                                m_currentState->GetName(), xc.TracingMessage() );
         }
     }
 
@@ -219,7 +220,8 @@ void StateMachineImpl::ExitState()
         auto xc = CatchException( [=] { m_currentState->m_exitAction(); } );
         if ( xc )
         {
-            CARAMEL_TRACE_WARN( "%s exit action throws", m_currentState->GetName() );
+            CARAMEL_TRACE_WARN( "%s exit action throws:\n%s",
+                                m_currentState->GetName(), xc.TracingMessage() );
         }
     }
 }
