@@ -20,7 +20,7 @@ namespace Caramel
 //
 
 template< typename T >
-struct IsGeneralString
+struct IsGeneralStringT
     : public BoolType
         <
             std::is_same< Char*,       typename std::decay< T >::type >::value
@@ -30,7 +30,7 @@ struct IsGeneralString
 
 
 template<>
-struct IsGeneralString< std::string > : public TrueType
+struct IsGeneralStringT< std::string > : public TrueType
 {};
 
 

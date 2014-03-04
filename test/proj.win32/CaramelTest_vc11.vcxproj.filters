@@ -71,6 +71,9 @@
     <Filter Include="3. Utils for Testing">
       <UniqueIdentifier>{fbe46388-e545-41a5-95c2-68c7f29afae6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\Meta">
+      <UniqueIdentifier>{57f14968-8822-4d4f-acc5-91086e5e0aec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\RunTest.cpp">
@@ -222,6 +225,9 @@
     </ClCompile>
     <ClCompile Include="..\src\Error\CatchExceptionTest.cpp">
       <Filter>2. Tests\Error</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Meta\IsGeneralStringTest.cpp">
+      <Filter>2. Tests\Meta</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

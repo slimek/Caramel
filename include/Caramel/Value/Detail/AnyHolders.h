@@ -213,7 +213,7 @@ struct AnyHolderSelect
         std::is_same< T, Bool >::value,     AnyBoolean,
         std::is_integral< T >::value,       AnyInteger,
         std::is_floating_point< T >::value, AnyFloating,
-        IsGeneralString< T >::VALUE,        AnyString,
+        IsGeneralStringT< T >::VALUE,       AnyString,
         std::is_enum< T >::value,           AnyEnumConcrete< T >,
                                             AnyObjectConcrete< T >
     >::Type Type;
