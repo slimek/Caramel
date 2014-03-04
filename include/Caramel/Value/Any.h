@@ -104,6 +104,24 @@ inline T Any::As() const
 
 
 ///////////////////////////////////////////////////////////////////////////////
+//
+// Appendix : Rationale
+//
+//   Why we don't use boost::any ?
+//   Because boost::any can't do this:
+//
+//     boost::any anyInt( 1 );
+//     ...
+//     Uint value = boost::get< Uint >( anyInt ); // Throws ! '1' is not an Uint.
+//                                                // You must use '1u' above.
+//
+//   And it can't do this, neither:
+//
+//     boost::any anyText( "Alice" );  // Compiler error !
+//                                     // boost::any doesn't accept array.
+// 
+
+///////////////////////////////////////////////////////////////////////////////
 
 } // namespace Caramel
 
