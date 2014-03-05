@@ -22,7 +22,7 @@ SUITE( ClockSuite )
 TEST( TickClockTest )
 {
     const TickPoint now1 = TickClock::Now();
-    TickClock clock;
+    TickWatch watch;
 
     std::this_thread::sleep_for( std::chrono::seconds( 1 ));
 
@@ -31,9 +31,9 @@ TEST( TickClockTest )
     
     CHECK_CLOSE( 1000, delta.ToNumber(), 50 );
 
-    const Ticks elapsed = clock.Elapsed();
-    const Ticks slice   = clock.Slice();
-    const Ticks reseted = clock.Elapsed();
+    const Ticks elapsed = watch.Elapsed();
+    const Ticks slice   = watch.Slice();
+    const Ticks reseted = watch.Elapsed();
 
     CHECK_CLOSE( Ticks( 1000 ), elapsed, Ticks( 50 ));
     CHECK_CLOSE( Ticks( 1000 ), slice,   Ticks( 50 ));
@@ -57,7 +57,7 @@ TEST( TickClockTest )
 TEST( SecondClockTest )
 {
     const SecondPoint now1 = SecondClock::Now();
-    SecondClock clock;
+    SecondWatch watch;
 
     std::this_thread::sleep_for( std::chrono::seconds( 1 ));
 
@@ -66,9 +66,9 @@ TEST( SecondClockTest )
     
     CHECK_CLOSE( 1.0, delta.ToNumber(), 0.05 );
 
-    const Seconds elapsed = clock.Elapsed();
-    const Seconds slice   = clock.Slice();
-    const Seconds reseted = clock.Elapsed();
+    const Seconds elapsed = watch.Elapsed();
+    const Seconds slice   = watch.Slice();
+    const Seconds reseted = watch.Elapsed();
 
     CHECK_CLOSE( Seconds( 1 ), elapsed, Seconds( 0.05 ));
     CHECK_CLOSE( Seconds( 1 ), slice,   Seconds( 0.05 ));

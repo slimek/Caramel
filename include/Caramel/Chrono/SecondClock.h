@@ -6,6 +6,7 @@
 
 #include <Caramel/Caramel.h>
 #include <Caramel/Chrono/SteadyClock.h>
+#include <Caramel/Chrono/Stopwatch.h>
 #include <Caramel/Math/Floating.h>
 #include <Caramel/Numeric/NumberConvertible.h>
 
@@ -101,11 +102,24 @@ public:
 
     /// Inherited Functions: ///
 
+    // static SecondPoint Now();
+    // static Seconds SinceEpoch();
+};
+
+
+//
+// Second Stopwatch
+//
+
+class SecondWatch : public Stopwatch< SecondClock >
+{
+public:
+
+    /// Inherited Functions: ///
+
     // void Reset();
     // Seconds Elasped() const;
     // Seconds Slice();
-    // static SecondPoint Now();
-    // static Seconds SinceEpoch();
 };
 
 

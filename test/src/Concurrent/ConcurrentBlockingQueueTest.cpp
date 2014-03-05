@@ -38,10 +38,10 @@ TEST( BlockingQueueBasicTest )
         CHECK( true  == iqueue.PopOrWaitFor( value, Ticks( 0 )));
         CHECK( 42    == value );
 
-        TickClock clock;
+        TickWatch watch;
     
         CHECK( false == iqueue.PopOrWaitFor( value, Ticks( 100 )));
-        CHECK( Ticks( 80 ) <= clock.Slice() );
+        CHECK( Ticks( 80 ) <= watch.Slice() );
 
         
         // Pulse All
@@ -54,7 +54,7 @@ TEST( BlockingQueueBasicTest )
 
         iqueue.PopOrWaitFor( value, Ticks( 500 ));
 
-        CHECK( Ticks( 200 ) > clock.Slice() );
+        CHECK( Ticks( 200 ) > watch.Slice() );
 
 
         // Wait and Available
@@ -82,9 +82,9 @@ TEST( BlockingQueueBasicTest )
 
         CHECK( false == iqueue.PopOrWaitFor( value, Ticks( 200 )));
         
-        clock.Reset();
+        watch.Reset();
         CHECK( false == iqueue.PopOrWaitFor( value, Ticks( 100 )));  // should return immediately
-        CHECK_CLOSE( Ticks( 0 ), clock.Slice(), Ticks( 10 ));
+        CHECK_CLOSE( Ticks( 0 ), watch.Slice(), Ticks( 10 ));
 
         CHECK_THROW( iqueue.Push( 83 ), Caramel::Exception );
     }

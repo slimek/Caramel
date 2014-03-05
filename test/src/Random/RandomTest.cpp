@@ -29,7 +29,7 @@ TEST( UniformRandomTest )
         Bool metMin = false;
         Bool metMax = false;
 
-        SecondClock clock;
+        SecondWatch watch;
         Uint count = 0;
 
         for ( ;; )
@@ -43,7 +43,7 @@ TEST( UniformRandomTest )
             if ( metMin && metMax ) { break; }
         }
 
-        CARAMEL_TRACE_DEBUG( "Test GenRandomInt() count: %u, elapsed: %f", count, clock.Elapsed() );
+        CARAMEL_TRACE_DEBUG( "Test GenRandomInt() count: %u, elapsed: %f", count, watch.Elapsed() );
     }
 
     /// Uint ///
@@ -54,7 +54,7 @@ TEST( UniformRandomTest )
         Bool metMin = false;
         Bool metMax = false;
 
-        SecondClock clock;
+        SecondWatch watch;
         Uint count = 0;
 
         for ( ;; )
@@ -68,7 +68,7 @@ TEST( UniformRandomTest )
             if ( metMin && metMax ) { break; }
         }
 
-        CARAMEL_TRACE_DEBUG( "Test GenRandomUint() count: %u, elapsed: %f", count, clock.Elapsed() );
+        CARAMEL_TRACE_DEBUG( "Test GenRandomUint() count: %u, elapsed: %f", count, watch.Elapsed() );
     }
 
     /// Float ///
@@ -84,7 +84,7 @@ TEST( UniformRandomTest )
         Bool metLower = false;
         Bool metUpper = false;
 
-        SecondClock clock;
+        SecondWatch watch;
         Uint count = 0;
 
         for ( ;; )
@@ -98,7 +98,7 @@ TEST( UniformRandomTest )
             if ( metLower && metUpper ) { break; }
         }
 
-        CARAMEL_TRACE_DEBUG( "Test GenRandomFloat() count: %u, elapsed: %f", count, clock.Elapsed() );
+        CARAMEL_TRACE_DEBUG( "Test GenRandomFloat() count: %u, elapsed: %f", count, watch.Elapsed() );
     }
 
     /// Double ///
@@ -114,7 +114,7 @@ TEST( UniformRandomTest )
         Bool metLower = false;
         Bool metUpper = false;
 
-        SecondClock clock;
+        SecondWatch watch;
         Uint count = 0;
 
         for ( ;; )
@@ -128,7 +128,7 @@ TEST( UniformRandomTest )
             if ( metLower && metUpper ) { break; }
         }
 
-        CARAMEL_TRACE_DEBUG( "Test GenRandomDouble() count: %u, elapsed: %f", count, clock.Elapsed() );
+        CARAMEL_TRACE_DEBUG( "Test GenRandomDouble() count: %u, elapsed: %f", count, watch.Elapsed() );
     }
 }
 
@@ -138,7 +138,7 @@ TEST( GenRandomBoolTest )
     Int trues = 0;
     const Int total = 1000000;
 
-    SecondClock clock;
+    SecondWatch watch;
 
     for ( Int i = 0; i < total; ++ i )
     {
@@ -153,7 +153,7 @@ TEST( GenRandomBoolTest )
     CHECK_CLOSE( 0.25, ratio, 0.05 );
 
     CARAMEL_TRACE_DEBUG( "Test GenRandomBool() count: %u, elapsed: %f, ratio: %f", 
-                         total, clock.Elapsed(), ratio );
+                         total, watch.Elapsed(), ratio );
 }
 
 

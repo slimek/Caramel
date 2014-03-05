@@ -6,6 +6,7 @@
 
 #include <Caramel/Caramel.h>
 #include <Caramel/Chrono/SteadyClock.h>
+#include <Caramel/Chrono/Stopwatch.h>
 #include <Caramel/Numeric/NumberConvertible.h>
 #include <chrono>
 
@@ -97,11 +98,24 @@ public:
 
     /// Inherited Functions: ///
 
+    // static TickPoint Now();
+    // static Ticks SinceEpoch();
+};
+
+
+//
+// Tick Stopwatch
+//
+
+class TickWatch : public Stopwatch< TickClock >
+{
+public:
+
+    /// Inherited Functions: ///
+
     // void Reset();
     // Ticks Elasped() const;
     // Ticks Slice();
-    // static TickPoint Now();
-    // static Ticks SinceEpoch();
 };
 
 

@@ -94,7 +94,7 @@ TEST( WorkerThreadDelayTest )
 
         auto fastTask = MakeTask( "Fast", [&] { fastReady = true; } );
 
-        TickClock clock;
+        TickWatch watch;
 
         worker.Submit( slowTask );
         worker.Submit( fastTask );
@@ -105,7 +105,7 @@ TEST( WorkerThreadDelayTest )
 
         slowReady.Wait();
 
-        CHECK_CLOSE( Ticks( 110 ), clock.Slice(), Ticks( 10 ));
+        CHECK_CLOSE( Ticks( 110 ), watch.Slice(), Ticks( 10 ));
     }
 
 

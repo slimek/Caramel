@@ -33,6 +33,7 @@
     <ClInclude Include="..\include\Caramel\Caramel.h" />
     <ClInclude Include="..\include\Caramel\Chrono\SecondClock.h" />
     <ClInclude Include="..\include\Caramel\Chrono\SteadyClock.h" />
+    <ClInclude Include="..\include\Caramel\Chrono\Stopwatch.h" />
     <ClInclude Include="..\include\Caramel\Chrono\TickClock.h" />
     <ClInclude Include="..\include\Caramel\Chrono\TimedBool.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\Detail\BasicMap.h" />

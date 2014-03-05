@@ -32,23 +32,23 @@ TEST( ThreadTest )
     Thread t1( "Execute1", [=] {} );
     t1.Join();
 
-    TickClock clock;
+    TickWatch watch;
 
     Thread t2( "Execute2", [=] { ThisThread::SleepFor( Ticks( 100 )); } );
     t2.Join();
 
-    CHECK_CLOSE( clock.Slice(), Ticks( 110 ), Ticks( 10 ));
+    CHECK_CLOSE( watch.Slice(), Ticks( 110 ), Ticks( 10 ));
 
     Thread t3( "Execute3", [=] { ThisThread::SleepFor( Seconds( 0.1 )); } );
     t3.Join();
 
-    CHECK_CLOSE( clock.Slice(), Ticks( 110 ), Ticks( 10 ));
+    CHECK_CLOSE( watch.Slice(), Ticks( 110 ), Ticks( 10 ));
 
     Thread t4( "Execute4", [=] { ThisThread::SleepFor( Ticks( 100 )); } );
     t4.Detach();
 
     // Detach returns immediately
-    CHECK_CLOSE( clock.Slice(), Ticks( 10 ), Ticks( 10 ));
+    CHECK_CLOSE( watch.Slice(), Ticks( 10 ), Ticks( 10 ));
 }
 
 
