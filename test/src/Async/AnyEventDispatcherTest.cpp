@@ -42,6 +42,8 @@ TEST( AnyEventDispatcherToQueueTest )
     disp.LinkTarget( dq1 );
     disp.LinkTarget( dq2 );
 
+    CHECK( 2 == disp.GetNumTargets() );
+
     CHECK( false == dq1.TryPop( value ));
     CHECK( false == dq2.TryPop( value ));
 
@@ -53,6 +55,8 @@ TEST( AnyEventDispatcherToQueueTest )
     CHECK( 42 == value.Id() );
 
     disp.UnlinkTarget( dq1 );
+
+    CHECK( 1 == disp.GetNumTargets() );
 
     disp.DispatchEvent( 51 );
 
@@ -80,7 +84,12 @@ TEST( AnyEventDispatcherToQueueTest )
         CHECK( false == dq3.TryPop( value ));
     }
 
+    // After dq3 destroyed, the target reference in Dispatcher is marked "destroyed",
+    // but not removed yet. Wait until DispatchEvent() to update its target list.
+
     disp.DispatchEvent( 81 );
+
+    CHECK( 1 == disp.GetNumTargets() );
 
     CHECK( false == dq3impl->TryPop( value ));
 

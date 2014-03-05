@@ -32,6 +32,8 @@ public:
     void LinkTarget( AnyEventTarget& target );
     void UnlinkTarget( AnyEventTarget& target );
 
+    Uint GetNumTargets() const;
+
 
     /// Dispatch Events to Targets ///
 
@@ -85,6 +87,12 @@ inline void AnyEventDispatcher::LinkTarget( AnyEventTarget& target )
 inline void AnyEventDispatcher::UnlinkTarget( AnyEventTarget& target )
 {
     m_impl->UnlinkTarget( target.GetImpl() );
+}
+
+
+inline Uint AnyEventDispatcher::GetNumTargets() const
+{
+    return m_impl->GetNumTargets();
 }
 
 

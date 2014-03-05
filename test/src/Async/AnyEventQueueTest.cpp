@@ -2,6 +2,7 @@
 
 #include "CaramelTestPch.h"
 
+#include <Caramel/Async/AnyEventDispatcher.h>
 #include <Caramel/Async/AnyEventQueue.h>
 #include <UnitTest++/UnitTest++.h>
 
@@ -81,6 +82,35 @@ TEST( AnyEventQueueRegisterIdRangeTest )
     equeue.UnregisterIdRange( 12, 16 );
 
     CHECK( true == equeue.RegisterIdRange( 12, 16 ));
+}
+
+
+TEST( AnyEventQueueResetTest )
+{
+    AnyEventDispatcher edisp( 0, 100 );
+    AnyEventQueue equeue;
+    AnyEvent event;
+
+    edisp.LinkTarget( equeue );
+
+    CHECK( 1 == edisp.GetNumTargets() );
+
+    edisp.DispatchEvent( 42 );
+
+    CHECK( true == equeue.TryPop( event ));
+    CHECK( 42 == event.Id() );
+
+    equeue.Reset();
+
+    // After Reset(), the target reference in Dispatcher is marked "destroyed",
+    // but not removed yet, until DispatchEvent() to update its target list.
+
+    edisp.DispatchEvent( 51 );
+
+    CHECK( 0 == edisp.GetNumTargets() );
+
+    CHECK( false == equeue.TryPop( event ));
+
 }
 
 
