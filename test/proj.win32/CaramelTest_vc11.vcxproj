@@ -121,6 +121,7 @@
     <ClCompile Include="..\src\FileSystem\DirectoryInfoTest.cpp" />
     <ClCompile Include="..\src\FileSystem\PathTest.cpp" />
     <ClCompile Include="..\src\Io\TextStreamWriterTest.cpp" />
+    <ClCompile Include="..\src\Lexical\LexicalBooleanTest.cpp" />
     <ClCompile Include="..\src\Lexical\LexicalFloatingTest.cpp" />
     <ClCompile Include="..\src\Lexical\LexicalIntegerTest.cpp" />
     <ClCompile Include="..\src\Memory\SharedPtrUtilsTest.cpp" />

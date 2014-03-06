@@ -193,6 +193,24 @@ Bool Integer< Uint64 >::TryParse( const std::string& input )
 }
 
 
+//
+// Parse Hexidecimal Number
+//
+
+template<>
+Bool Integer< Uint32 >::TryParseHex( const std::string& input )
+{
+    if ( input.empty() ) { return false; }
+
+    if ( CainStartsWith( input, "0x" )) { return false; }
+
+    Char* stop = nullptr;
+    m_value = static_cast< Uint32 >( ::strtoul( input.c_str(), &stop, 16 ));
+    
+    return stop == ( input.data() + input.length() );
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // namespace Lexical

@@ -232,6 +232,9 @@
     <ClCompile Include="..\src\Numeric\UnionBitsTest.cpp">
       <Filter>2. Tests\Numeric</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Lexical\LexicalBooleanTest.cpp">
+      <Filter>2. Tests\Lexical</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">

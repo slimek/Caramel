@@ -2,7 +2,6 @@
 
 #include "CaramelTestPch.h"
 
-#include <Caramel/Lexical/Boolean.h>
 #include <Caramel/Lexical/Integer.h>
 #include <UnitTest++/UnitTest++.h>
 
@@ -117,61 +116,29 @@ TEST( LexicalIntegerTest )
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-//
-// Lexical Boolean Test
-//
-
-TEST( LexicalBooleanTest )
+TEST( LexicalIntegerHexTest )
 {
-    Lexical::Boolean lexBool;
+    /// Uint32 ///
+    {
+        Lexical::Integer< Uint32 > lexu;
+        
+        CHECK( true == lexu.TryParseHex( "0" ));
+        CHECK( 0 == lexu );
 
-    /// Text ///
+        CHECK( true == lexu.TryParseHex( "1" ));
+        CHECK( 1 == lexu );
+        
+        CHECK( true == lexu.TryParseHex( "FF" ));
+        CHECK( 255 == lexu );
+        
+        CHECK( true == lexu.TryParseHex( "7f" ));
+        CHECK( 127 == lexu );        
 
-    CHECK( true == lexBool.TryParse( "true" ));
-    CHECK( true == lexBool );
+        CHECK( true == lexu.TryParseHex( "000000CD" ));
+        CHECK( 205 == lexu );
 
-    CHECK( true == lexBool.TryParse( "True" ));
-    CHECK( true == lexBool );
-
-    CHECK( true == lexBool.TryParse( "TRUE" ));
-    CHECK( true == lexBool );
-
-    CHECK( true == lexBool.TryParse( "false" ));
-    CHECK( false == lexBool );
-
-    CHECK( true == lexBool.TryParse( "False" ));
-    CHECK( false == lexBool );
-
-    CHECK( true == lexBool.TryParse( "FALSE" ));
-    CHECK( false == lexBool );
-
-    CHECK( false == lexBool.TryParse( "Alice" ));
-    CHECK( false == lexBool.TryParse( "" ));
-
-    
-    /// Integers ///
-
-    CHECK( true == lexBool.TryParse( "0" ));
-    CHECK( false == lexBool );
-
-    CHECK( true == lexBool.TryParse( "1" ));
-    CHECK( true == lexBool );
-
-    CHECK( true == lexBool.TryParse( "125" ));
-    CHECK( true == lexBool );
-
-    CHECK( true == lexBool.TryParse( "-1" ));
-    CHECK( true == lexBool );
-
-    CHECK( true == lexBool.TryParse( "0x0" ));
-    CHECK( false == lexBool );
-
-    CHECK( true == lexBool.TryParse( "0x1" ));
-    CHECK( true == lexBool );
-
-    CHECK( true == lexBool.TryParse( "0xFF" ));
-    CHECK( true == lexBool );
+        CHECK( false == lexu.TryParseHex( "0x1234" ));
+    }
 }
 
 

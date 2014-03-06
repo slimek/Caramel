@@ -19,7 +19,7 @@ namespace Lexical
 //
 // Integer
 // - Convert numeral strings to integral values.
-//   String must be decimal number.
+//   String must be a decimal or hexidecimal number.
 //
 
 template< typename ValueT >
@@ -44,10 +44,19 @@ public:
 
     //
     // Try Parse
-    // - returns false if input is not valid numeral string,
+    // - Returns false if input is not valid numeral string,
     //   or it is out of range.
     //
+    //   Format      | Pattern           | Example
+    //  ---------------------------------------------
+    //   Decimal     | [+-]?[0-9]+       | 42, -2014
+    //   Hexidecimal | 0[Xx][0-9a-fA-F]+ | 0x3F80
+    //
     Bool TryParse( const std::string& input );
+
+    // Try parse a hexidecimal integer.
+    // - In this case, 'input' can't start with "0x".
+    Bool TryParseHex( const std::string& input );
 
 
 private:
@@ -84,7 +93,9 @@ inline Integer< ValueT >::Integer( ValueT defaultValue )
 
 #define CARAMEL_LEXICAL_INTEGER_DECLARE( type ) \
     template<> \
-    Bool Integer< type >::TryParse( const std::string& );
+    Bool Integer< type >::TryParse( const std::string& ); \
+    template<> \
+    Bool Integer< type >::TryParseHex( const std::string& );
 
 CARAMEL_META_INTEGRAL_TYPES_ALL( CARAMEL_LEXICAL_INTEGER_DECLARE )
 
