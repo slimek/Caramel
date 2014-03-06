@@ -686,6 +686,9 @@
     <ClInclude Include="..\include\Caramel\Chrono\Stopwatch.h">
       <Filter>1. Public Packages\Chrono</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Numeric\UnionBits.h">
+      <Filter>1. Public Packages\Numeric</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

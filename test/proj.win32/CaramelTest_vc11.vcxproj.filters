@@ -229,6 +229,9 @@
     <ClCompile Include="..\src\Meta\IsGeneralStringTest.cpp">
       <Filter>2. Tests\Meta</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Numeric\UnionBitsTest.cpp">
+      <Filter>2. Tests\Numeric</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">
