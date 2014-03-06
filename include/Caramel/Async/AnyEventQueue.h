@@ -93,46 +93,47 @@ inline AnyEventQueue::~AnyEventQueue()
 
 inline void AnyEventQueue::Push( const AnyEvent& evt )
 {
-    std::atomic_load( &m_impl )->Push( evt );
+    m_impl->Push( evt );
 }
 
 
 inline void AnyEventQueue::Push( AnyEvent&& evt )
 {
-    std::atomic_load( &m_impl )->Push( std::move( evt ));
+    m_impl->Push( std::move( evt ));
 }
 
 
 inline void AnyEventQueue::PushEvent( Int eventId )
 {
-    std::atomic_load( &m_impl )->Push( AnyEvent( eventId ));
+    m_impl->Push( AnyEvent( eventId ));
 }
 
 
 inline void AnyEventQueue::PushEvent( Int eventId, const Any& any )
 {
-    std::atomic_load( &m_impl )->Push( AnyEvent( eventId, any ));
+    m_impl->Push( AnyEvent( eventId, any ));
 }
 
 
 inline void AnyEventQueue::PushEvent( Int eventId, Any&& any )
 {
-    std::atomic_load( &m_impl )->Push( AnyEvent( eventId, std::move( any )));
+    m_impl->Push( AnyEvent( eventId, std::move( any )));
 }
 
 
 inline Bool AnyEventQueue::TryPop( AnyEvent& evt )
 {
-    return std::atomic_load( &m_impl )->TryPop( evt );
+    return m_impl->TryPop( evt );
 }
 
 
 inline void AnyEventQueue::Reset()
 {
-    // Create a new impl first to prevent the address is the same with the former.
+    // Create a new impl before destroy the old impl,
+    // to prevent the address is the same with the former.
 
-    auto newImpl = std::make_shared< Detail::AnyEventQueueImpl >();
-    auto oldImpl = std::atomic_exchange( &m_impl, newImpl );
+    auto oldImpl = m_impl;
+    m_impl = std::make_shared< Detail::AnyEventQueueImpl >();
     oldImpl->Destroy();
 }
 
@@ -143,13 +144,13 @@ inline void AnyEventQueue::Reset()
 
 inline Bool AnyEventQueue::RegisterIdRange( Int minEventId, Int maxEventId )
 {
-    return std::atomic_load( &m_impl )->RegisterIdRange( minEventId, maxEventId );
+    return m_impl->RegisterIdRange( minEventId, maxEventId );
 }
 
 
 inline void AnyEventQueue::UnregisterIdRange( Int minEventId, Int maxEventId )
 {
-    std::atomic_load( &m_impl )->UnregisterIdRange( minEventId, maxEventId );
+    m_impl->UnregisterIdRange( minEventId, maxEventId );
 }
 
 
