@@ -193,6 +193,7 @@
 		6DB1B756189F2E62004D2E91 /* LogTraceAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogTraceAdapter.h; sourceTree = "<group>"; };
 		6DCED82A18AC57000071929B /* WorkerThreadImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkerThreadImpl.h; sourceTree = "<group>"; };
 		6DD0E7A4186C3A6B00414066 /* NumberConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberConverter.h; sourceTree = "<group>"; };
+		6DD2B6FB18C4200600FBF69B /* TimedBool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimedBool.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,6 +284,7 @@
 				6DA108D71856ABA700588AA2 /* SecondClock.h */,
 				6DA108D81856ABA700588AA2 /* SteadyClock.h */,
 				6DA108D91856ABA700588AA2 /* TickClock.h */,
+				6DD2B6FB18C4200600FBF69B /* TimedBool.h */,
 			);
 			path = Chrono;
 			sourceTree = "<group>";
