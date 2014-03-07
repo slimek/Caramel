@@ -2,6 +2,7 @@
 
 #include "CaramelTestPch.h"
 
+#include <Caramel/Async/AnyEventDispatcher.h>
 #include <Caramel/Statechart/StateMachine.h>
 #include <UnitTest++/UnitTest++.h>
 
@@ -172,6 +173,29 @@ TEST( StateMachineRunFailedTest )
 
     // Initiate twice
     CHECK_THROW( machine.Initiate( S_INITIAL ), Caramel::Exception );
+}
+
+
+TEST( StateMachineAsAnyEventTargetTest )
+{
+    AnyEventDispatcher disp( E_START, E_STRING );
+    Statechart::StateMachine machine( "AnyEventTarget" );
+
+    machine.AddState( S_INITIAL )
+           .Transition( E_START, S_WAITING );
+
+    machine.AddState( S_WAITING );
+
+    disp.LinkTarget( machine );
+
+    machine.Initiate( S_INITIAL );
+
+    disp.DispatchEvent( E_START );
+    machine.Process();
+
+    CHECK( S_WAITING == machine.GetCurrentStateId() );
+
+    
 }
 
 

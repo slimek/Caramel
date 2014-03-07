@@ -7,6 +7,7 @@
 #include <Caramel/Caramel.h>
 #include "Statechart/StateImpl.h"
 #include "Statechart/Transition.h"
+#include <Caramel/Async/Detail/AnyEventTargetImpl.h>
 #include <Caramel/Concurrent/HashMap.h>
 #include <Caramel/Statechart/StateMachine.h>
 #include <Caramel/Task/TaskPoller.h>
@@ -25,7 +26,7 @@ namespace Statechart
 // State Machine
 //
 
-class StateMachineImpl
+class StateMachineImpl : public Detail::AnyEventTargetImpl
 {
     friend class StateMachine;
 
@@ -33,7 +34,9 @@ public:
 
     explicit StateMachineImpl( const std::string& name );
 
-    void ProcessEvent( const AnyEvent& evt );
+    void PostEvent( const AnyEvent& event );
+
+    void ProcessEvent( const AnyEvent& event );
 
     void DoTransit( TransitionPtr transition, StatePtr targetState );
 
@@ -46,6 +49,11 @@ public:
     //
     void StartTimer( const Ticks& ticks );
     void CancelTimer();
+
+
+    /// Implements AnyEventTargetImpl ///
+
+    void Send( const AnyEvent& event ) override;
 
 
 private:

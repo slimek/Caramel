@@ -37,6 +37,8 @@ StateMachine::StateMachine( const std::string& name )
 
 StateMachine::~StateMachine()
 {
+    // Notify all linked dispatchers to unlink this.
+    m_impl->Destroy();
 }
 
 
@@ -86,14 +88,7 @@ void StateMachine::PostEvent( Int eventId, const Any& value )
 
 void StateMachine::PostEvent( const AnyEvent& evt )
 {
-    CARAMEL_CHECK( m_impl->m_initiated );
-
-    auto task = MakeTask(
-        Sprintf( "Machine[%s].ProcessEvent[%d]", m_impl->m_name, evt.Id() ),
-        [=] { m_impl->ProcessEvent( evt ); }
-    );
-
-    m_impl->m_taskExecutor->Submit( task );
+    m_impl->PostEvent( evt );
 }
 
 
@@ -134,6 +129,19 @@ StateMachineImpl::StateMachineImpl( const std::string& name )
     , m_transitNumber( 0 )
 {
     m_taskExecutor = m_builtinTaskPoller.get();
+}
+
+
+void StateMachineImpl::PostEvent( const AnyEvent& evt )
+{
+    CARAMEL_CHECK( m_initiated );
+
+    auto task = MakeTask(
+        Sprintf( "Machine[%s].ProcessEvent[%d]", m_name, evt.Id() ),
+        [=] { this->ProcessEvent( evt ); }
+    );
+
+    this->m_taskExecutor->Submit( task );
 }
 
 
@@ -224,6 +232,22 @@ void StateMachineImpl::ExitState()
                                 m_currentState->GetName(), xc.TracingMessage() );
         }
     }
+}
+
+
+//
+// Implements AnyEventTarget
+//
+
+Detail::AnyEventTargetPtr StateMachine::GetImpl() const
+{
+    return m_impl;
+}
+
+
+void StateMachineImpl::Send( const AnyEvent& event )
+{
+    this->PostEvent( event );
 }
 
 

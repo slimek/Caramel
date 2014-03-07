@@ -5,9 +5,10 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
-#include <Caramel/Async/AnyEvent.h>
+#include <Caramel/Async/AnyEventTarget.h>
 #include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Statechart/State.h>
+#include <boost/noncopyable.hpp>
 
 
 namespace Caramel
@@ -23,7 +24,8 @@ namespace Statechart
 
 class StateMachineImpl;
 
-class StateMachine
+class StateMachine : public AnyEventTarget
+                   , public boost::noncopyable
 {
 public:
 
@@ -63,9 +65,14 @@ public:
     AnyEvent GetActiveEvent() const;
 
 
+    /// Implements AnyEventTarget ///
+
+    Detail::AnyEventTargetPtr GetImpl() const override;
+
+
 private:
 
-    std::unique_ptr< StateMachineImpl > m_impl;
+    std::shared_ptr< StateMachineImpl > m_impl;
 };
 
 
