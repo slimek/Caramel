@@ -53,10 +53,15 @@ TEST( StateMachineTest )
     CHECK( false == initialExited );
     CHECK( false == waitingEntered );
 
+    machine.Process();  // process the initiate task
+
+    CHECK( true  == initialEntered );
+    CHECK( false == initialExited );
+    CHECK( false == waitingEntered );
+
     machine.PostEvent( E_START );
     machine.Process();
 
-    CHECK( false == initialEntered );
     CHECK( true  == initialExited );
     CHECK( true  == waitingEntered );
 }
@@ -79,6 +84,8 @@ TEST( StateMachineStateVariableTest )
     waiting.EnterAction( [&] { waitingEntered = true; } );
 
     machine.Initiate( S_INITIAL );
+    machine.Process();
+
     machine.PostEvent( E_START );
     machine.Process();
 
@@ -106,12 +113,16 @@ TEST( StateMachineEventTest )
            .ExitAction( [&] { ++ exitCount; } );
 
     machine.Initiate( S_WAITING );
+    machine.Process();
+
+    CHECK( 1 == enterCount );
+    CHECK( 0 == exitCount );
     
     machine.PostEvent( E_STRING, "Alice" );
     machine.Process();
 
     CHECK( "Alice" == buffer );
-    CHECK( 1 == enterCount );
+    CHECK( 2 == enterCount );
     CHECK( 1 == exitCount );
 }
 
@@ -193,13 +204,12 @@ TEST( StateMachineAsAnyEventTargetTest )
     disp.LinkTarget( machine );
 
     machine.Initiate( S_INITIAL );
+    machine.Process();
 
     disp.DispatchEvent( E_START );
     machine.Process();
 
     CHECK( S_WAITING == machine.GetCurrentStateId() );
-
-    
 }
 
 

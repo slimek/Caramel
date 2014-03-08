@@ -74,7 +74,8 @@ void StateMachine::Initiate( Int stateId )
     // Throws if verify failed.
     m_impl->VerifyStatesAndTransitions();
 
-    m_impl->m_currentState = initialState;
+    m_impl->PostInitiate( initialState );
+
     m_impl->m_initiated = true;
 }
 
@@ -167,6 +168,32 @@ void StateMachineImpl::VerifyStatesAndTransitions()
 //
 // Events and Transitions
 //
+
+void StateMachineImpl::PostInitiate( StatePtr initialState )
+{
+    auto task = MakeTask(
+        Sprintf( "Machine[%s].ProcessInitiate", m_name ),
+        [=] { this->ProcessInitiate( initialState ); }
+    );
+
+    this->m_taskExecutor->Submit( task );
+}
+
+
+void StateMachineImpl::ProcessInitiate( StatePtr initialState )
+{
+    // Initate a machine would trigger the enter action of the initial state.
+
+    LockGuard lock( m_mutex );
+
+    m_actionThreadId = ThisThread::GetId();
+    auto tidGuard = ScopeExit( [=] { m_actionThreadId = ThreadId(); } );
+
+    m_currentState = initialState;
+
+    this->EnterState();
+}
+
 
 void StateMachineImpl::PostEvent( const AnyEvent& evt )
 {

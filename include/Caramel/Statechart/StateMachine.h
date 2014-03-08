@@ -38,7 +38,10 @@ public:
 
     
     // Start this state machine, enter the initial state.
+    // - This function submit a task. In the task the enter action
+    //   of the initial state would be triggered.
     void Initiate( Int stateId );
+
 
     // Enqueue an event for later processing.
     void PostEvent( Int eventId );

@@ -42,8 +42,10 @@ public:
 
     /// Events and Transitions ///
 
-    void PostEvent( const AnyEvent& event );
+    void PostInitiate( StatePtr initialState );
+    void ProcessInitiate( StatePtr initialState );
 
+    void PostEvent( const AnyEvent& event );
     void ProcessEvent( const AnyEvent& event );
 
     void DoTransit( TransitionPtr transition, StatePtr targetState );
