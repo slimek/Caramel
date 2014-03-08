@@ -66,8 +66,13 @@ void StateMachine::Initiate( Int stateId )
     StatePtr initialState;
     if ( ! m_impl->m_states.Find( stateId, initialState ))
     {
-        CARAMEL_THROW( "State not found, machine: %s, stateId: %d", m_impl->m_name, stateId );
+        CARAMEL_THROW( "Initial state not found, machine: %s, stateId: %d",
+                       m_impl->m_name, stateId );
     }
+
+    // All target states of transitions must exist.
+    // Throws if verify failed.
+    m_impl->VerifyStatesAndTransitions();
 
     m_impl->m_currentState = initialState;
     m_impl->m_initiated = true;
@@ -131,6 +136,37 @@ StateMachineImpl::StateMachineImpl( const std::string& name )
     m_taskExecutor = m_builtinTaskPoller.get();
 }
 
+
+//
+// Building
+//
+
+void StateMachineImpl::VerifyStatesAndTransitions()
+{
+    // Verification:
+    //   All target states of transitions must exist in this machine.
+
+    const auto states = m_states.GetValuesSnapshot();
+
+    for ( StatePtr state : states )
+    {
+        const auto transitions = state->m_transitions.GetValuesSnapshot();
+
+        for ( TransitionPtr transition : transitions )
+        {
+            if ( ! m_states.Contains( transition->targetStateId ))
+            {
+                CARAMEL_THROW( "Transition target state not found, machine: %s, stateId: %d",
+                               m_name, transition->targetStateId );
+            }
+        }
+    }
+}
+
+
+//
+// Events and Transitions
+//
 
 void StateMachineImpl::PostEvent( const AnyEvent& evt )
 {

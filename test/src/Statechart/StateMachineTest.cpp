@@ -169,6 +169,10 @@ TEST( StateMachineRunFailedTest )
     // Initiate at an unknown state
     CHECK_THROW( machine.Initiate( S_FINAL ), Caramel::Exception );
 
+    // Initiate failed because a target state 'S_WAITING' doesn't exist.
+    CHECK_THROW( machine.Initiate( S_INITIAL ), Caramel::Exception );
+
+    machine.AddState( S_WAITING );
     machine.Initiate( S_INITIAL );
 
     // Initiate twice

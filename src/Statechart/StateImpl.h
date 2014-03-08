@@ -45,7 +45,7 @@ private:
     Action m_enterAction;
     Action m_exitAction;
 
-    typedef Concurrent::HashMap< Int, TransitionPtr > TransitionMap;
+    typedef Concurrent::HashMapWithSnapshot< Int, TransitionPtr > TransitionMap;
     TransitionMap m_transitions;
 
     Ticks m_autoTimerDuration;   // Zero means not enabled

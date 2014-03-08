@@ -34,6 +34,14 @@ public:
 
     explicit StateMachineImpl( const std::string& name );
 
+
+    /// Building Machine ///
+
+    void VerifyStatesAndTransitions();
+
+
+    /// Events and Transitions ///
+
     void PostEvent( const AnyEvent& event );
 
     void ProcessEvent( const AnyEvent& event );
@@ -71,7 +79,7 @@ private:
     TaskExecutor* m_taskExecutor;
     std::unique_ptr< TaskPoller > m_builtinTaskPoller;
 
-    typedef Concurrent::HashMap< Int, StatePtr > StateMap;
+    typedef Concurrent::HashMapWithSnapshot< Int, StatePtr > StateMap;
     StateMap m_states;
 
     Bool     m_initiated;
