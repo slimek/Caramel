@@ -70,7 +70,8 @@ TEST( AnyEventDispatcherToQueueTest )
 
     {
         AnyEventQueue dq3;
-        dq3impl = std::static_pointer_cast< Detail::AnyEventQueueImpl >( dq3.GetImpl() );
+        dq3impl = std::static_pointer_cast< Detail::AnyEventQueueImpl >(
+            static_cast< AnyEventTarget& >( dq3 ).GetTargetImpl() );
 
         disp.LinkTarget( dq3 );
 

@@ -65,12 +65,12 @@ public:
     AnyEvent GetActiveEvent() const;
 
 
+private:
+
     /// Implements AnyEventTarget ///
 
-    Detail::AnyEventTargetPtr GetImpl() const override;
+    Detail::AnyEventTargetPtr GetTargetImpl() const override;
 
-
-private:
 
     std::shared_ptr< StateMachineImpl > m_impl;
 };

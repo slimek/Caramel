@@ -239,7 +239,7 @@ void StateMachineImpl::ExitState()
 // Implements AnyEventTarget
 //
 
-Detail::AnyEventTargetPtr StateMachine::GetImpl() const
+Detail::AnyEventTargetPtr StateMachine::GetTargetImpl() const
 {
     return m_impl;
 }

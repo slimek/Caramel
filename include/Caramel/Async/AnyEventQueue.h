@@ -58,12 +58,12 @@ public:
     void UnregisterIdRange( Int minEventId, Int maxEventId );
 
 
+private:
+
     /// Implements AnyEventTarget ///
 
-    Detail::AnyEventTargetPtr GetImpl() const override { return m_impl; }
+    Detail::AnyEventTargetPtr GetTargetImpl() const override { return m_impl; }
 
-
-private:
 
     std::shared_ptr< Detail::AnyEventQueueImpl > m_impl;
 

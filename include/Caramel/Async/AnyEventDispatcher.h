@@ -44,12 +44,12 @@ public:
     void DispatchEvent( Int eventId, Any&& value );
 
 
+private:
+
     /// Implements AnyEventTarget ///
 
-    Detail::AnyEventTargetPtr GetImpl() const override { return m_impl; }
+    Detail::AnyEventTargetPtr GetTargetImpl() const override { return m_impl; }
 
-
-private:
 
     /// Data Members ///
 
@@ -80,13 +80,13 @@ inline AnyEventDispatcher::~AnyEventDispatcher()
 
 inline void AnyEventDispatcher::LinkTarget( AnyEventTarget& target )
 {
-    m_impl->LinkTarget( target.GetImpl() );
+    m_impl->LinkTarget( target.GetTargetImpl() );
 }
 
 
 inline void AnyEventDispatcher::UnlinkTarget( AnyEventTarget& target )
 {
-    m_impl->UnlinkTarget( target.GetImpl() );
+    m_impl->UnlinkTarget( target.GetTargetImpl() );
 }
 
 

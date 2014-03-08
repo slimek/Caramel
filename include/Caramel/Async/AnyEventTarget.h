@@ -20,7 +20,7 @@ struct AnyEventTarget
 {
     virtual ~AnyEventTarget() {}
   
-    virtual Detail::AnyEventTargetPtr GetImpl() const = 0;
+    virtual Detail::AnyEventTargetPtr GetTargetImpl() const = 0;
 };
 
 
