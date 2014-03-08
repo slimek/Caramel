@@ -243,6 +243,9 @@
     <ClInclude Include="..\src\Utils\StdVectorUtils.h">
       <Filter>3. Utils for Testing</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Utils\SharedArrayUtils.h">
+      <Filter>3. Utils for Testing</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\Document\test1.ini">

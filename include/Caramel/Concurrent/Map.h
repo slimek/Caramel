@@ -30,6 +30,16 @@ class Map : public Detail::BasicMap< std::map< Key, Value >, ReplicatePolicy >
 };
 
 
+//
+// Convenient Alias
+//
+
+template< typename Key, typename Value >
+class MapWithSnapshot : public Detail::BasicMap< std::map< Key, Value >, ReplicateSnapshot >
+{
+};
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // namespace Concurrent

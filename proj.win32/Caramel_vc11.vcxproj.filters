@@ -689,6 +689,12 @@
     <ClInclude Include="..\include\Caramel\Numeric\UnionBits.h">
       <Filter>1. Public Packages\Numeric</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Concurrent\Detail\DictionarySnapshot.h">
+      <Filter>1. Public Packages\Concurrent\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Concurrent\Detail\LockedMap.h">
+      <Filter>1. Public Packages\Concurrent\Detail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

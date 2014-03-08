@@ -2,6 +2,7 @@
 
 #include "CaramelTestPch.h"
 
+#include "Utils/SharedArrayUtils.h"
 #include <Caramel/Concurrent/FlatMap.h>
 #include <Caramel/Concurrent/HashMap.h>
 #include <Caramel/Concurrent/Map.h>
@@ -81,6 +82,46 @@ TEST( ConcurrentFlatMapTest )
     MapType map;
 
     TestBasicMap( map );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Basic Map with Snapshot Test
+//
+
+template< typename MapType >
+void TestBasicMapWithSnapshot( MapType& map )
+{
+    auto shot1 = map.GetValuesSnapshot();
+
+    CHECK( true == shot1.IsEmpty() );
+    CHECK( 0 == shot1.Size() );
+
+    map.Insert( 6, "Marisa" );
+    map.Insert( 7, "Alice" );
+    map.Insert( 8, "Patchou" );
+
+    auto shot2 = map.GetValuesSnapshot();
+
+    CHECK( false == shot2.IsEmpty() );
+    CHECK( 3 == shot2.Size() );
+
+    CHECK( shot2 == MakeConstSharedArray< std::string >( "Marisa", "Alice", "Patchou" ));
+}
+
+
+TEST( ConcurrentMapWithSnapshotTest )
+{
+    Concurrent::MapWithSnapshot< Int, std::string > imap;
+    TestBasicMapWithSnapshot( imap );
+}
+
+
+TEST( ConcurrentHashMapWithSnapshotTest )
+{
+    Concurrent::HashMapWithSnapshot< Int, std::string > imap;
+    TestBasicMapWithSnapshot( imap );
 }
 
 

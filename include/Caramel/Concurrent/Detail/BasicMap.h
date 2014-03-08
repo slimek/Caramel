@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Caramel.h>
+#include <Caramel/Concurrent/Detail/LockedMap.h>
 #include <Caramel/Thread/MutexLocks.h>
 #include <boost/noncopyable.hpp>
 #include <mutex>
@@ -26,7 +27,11 @@ namespace Detail
 //
 
 template< typename MapType, typename ReplicatePolicy >
-class BasicMap : public ReplicatePolicy::template Dictionary< typename MapType::key_type, typename MapType::mapped_type >
+class BasicMap : public ReplicatePolicy::template Dictionary
+                 <
+                     BasicMap< MapType, ReplicatePolicy >,
+                     typename MapType::key_type, typename MapType::mapped_type
+                 >
                , public boost::noncopyable
 {
 public:
@@ -34,7 +39,12 @@ public:
     typedef typename MapType::key_type    Key,   KeyType;
     typedef typename MapType::mapped_type Value, ValueType;
 
-    typedef typename ReplicatePolicy::template Dictionary< Key, Value > Replicator;
+    typedef typename ReplicatePolicy::template Dictionary
+    <
+        BasicMap< MapType, ReplicatePolicy >,
+        Key, Value
+    >
+    Replicator;
 
 
     /// Properties ///
@@ -52,6 +62,15 @@ public:
     /// Modifiers ///
     
     Bool Insert( const Key& k, const Value& v );
+
+
+    /// Locked Iterator Accessor ///
+
+    class ConstLockedMap;
+    friend class ConstLockedMap;
+
+    // For Replicator
+    typedef ConstLockedMap ConstLockedDictionary;
 
 
 private:
@@ -104,11 +123,25 @@ Bool BasicMap< MapT, ReplicateP >::Insert( const Key& k, const Value& v )
 
     if ( inserted )
     {
-        this->Replicator::Add( k, v );
+        this->Replicator::ReplicaAdd( k, v );
     }
 
     return inserted;
 }
+
+
+//
+// Locked Iterator Accessor
+//
+
+template< typename MapT, typename ReplicateP >
+class BasicMap< MapT, ReplicateP >::ConstLockedMap : public Detail::ConstLockedMap< MapT >
+{
+public:
+    explicit ConstLockedMap( const BasicMap& host )
+        : Detail::ConstLockedMap< MapT >( host.m_mapMutex, host.m_map )
+    {}
+};
 
 
 ///////////////////////////////////////////////////////////////////////////////

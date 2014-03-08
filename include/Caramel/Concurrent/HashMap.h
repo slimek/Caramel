@@ -30,6 +30,17 @@ class HashMap : public Detail::BasicMap< std::unordered_map< Key, Value >, Repli
 };
 
 
+//
+// Convenient Alias
+//
+
+template< typename Key, typename Value >
+class HashMapWithSnapshot
+    : public Detail::BasicMap< std::unordered_map< Key, Value >, ReplicateSnapshot >
+{
+};
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // namespace Concurrent

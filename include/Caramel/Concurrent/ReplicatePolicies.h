@@ -6,6 +6,7 @@
 
 #include <Caramel/Caramel.h>
 #include <Caramel/Concurrent/Detail/CollectionSnapshot.h>
+#include <Caramel/Concurrent/Detail/DictionarySnapshot.h>
 
 
 namespace Caramel
@@ -31,12 +32,13 @@ struct ReplicateNothing
     };
 
 
-    template< typename Key, typename Value >
+    template< typename Derived, typename Key, typename Value >
     class Dictionary
     {
     public:
-        void Add( const Key&, const Value& ) {}
-        void Remove( const Key& ) {}
+        void ReplicaAdd( const Key&, const Value& ) {}
+        void ReplicaRemove( const Key& ) {}
+        void ReplicaClear() {}
     };
 
 };
@@ -49,7 +51,7 @@ struct ReplicateNothing
 
 struct ReplicateSnapshot
 {
-    // TODO: Replace the derived class with alias templates
+    // TODO: Replace the derived class with C++11 alias templates
 
     template< typename Derived, typename Value >
     class Collection : public Detail::CollectionSnapshot< Derived, Value >
@@ -57,7 +59,10 @@ struct ReplicateSnapshot
     };
 
 
-    // TODO: Implements DictionarySnapshot and CollectionSnapshot
+    template< typename Derived, typename Key, typename Value >
+    class Dictionary : public Detail::DictionarySnapshot< Derived, Key, Value >
+    {
+    };
 };
 
 
