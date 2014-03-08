@@ -62,6 +62,8 @@ public:
     Bool Insert( const Key& k );
     Uint Erase( const Key& k );
 
+    void Clear();
+
 
     /// Locked Iterator Accessor ///
 
@@ -123,14 +125,27 @@ Uint BasicSet< SetT, ReplicateP >::Erase( const Key& k )
 {
     LockGuard lock( m_setMutex );
 
-    const Uint erased = m_set.erase( k );
+    const Usize erased = m_set.erase( k );
 
     if ( 0 < erased )
     {
         this->Replicator::ReplicaRemove( k );
     }
 
-    return erased;
+    return static_cast< Uint >( erased );
+}
+
+
+template< typename SetT, typename ReplicateP >
+void BasicSet< SetT, ReplicateP >::Clear()
+{
+    LockGuard lock( m_setMutex );
+
+    if ( ! m_set.empty() )
+    {
+        m_set.clear();
+        this->Replicator::ReplicaClear();
+    }
 }
 
 

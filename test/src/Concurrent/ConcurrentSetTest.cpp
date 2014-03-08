@@ -2,6 +2,7 @@
 
 #include "CaramelTestPch.h"
 
+#include "Utils/SharedArrayUtils.h"
 #include <Caramel/Chrono/TimedBool.h>
 #include <Caramel/Concurrent/Set.h>
 #include <Caramel/Random/UniformRandom.h>
@@ -51,6 +52,10 @@ void TestBasicIntSet( SetType& set )
         CHECK( 24 == *( ivalue ++ ));
         CHECK( lockedSet.End() == ivalue );
     }
+
+    set.Clear();
+
+    CHECK( true == set.IsEmpty() );
 }
 
 
@@ -86,6 +91,20 @@ void TestBasicSetWithSnapshot( SetType& set )
 
     CHECK( false == shot2.IsEmpty() );
     CHECK( 3 == shot2.Size() );
+    CHECK( shot2 == MakeConstSharedArray( 6, 7, 8 ));
+
+    set.Erase( 7 );
+
+    auto shot3 = set.GetSnapshot();
+
+    CHECK( 2 == shot3.Size() );
+    CHECK( shot3 == MakeConstSharedArray( 6, 8 ));
+
+    set.Clear();
+
+    auto shot4 = set.GetSnapshot();
+
+    CHECK( true == shot4.IsEmpty() );
 }
 
 
