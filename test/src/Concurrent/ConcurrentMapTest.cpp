@@ -40,6 +40,17 @@ void TestBasicMap( MapType& map )
     CHECK( "Reimu" == temp );
 
     CHECK( false == map.Find( 4, temp ));
+
+    map.Erase( 2 );
+
+    CHECK( false == map.Contains( 2 ));
+    CHECK( 2 == map.Size() );
+
+    map.Clear();
+
+    CHECK( true == map.IsEmpty() );
+    CHECK( 0 == map.Size() );
+    CHECK( false == map.Contains( 1 ));
 }
 
 
@@ -106,8 +117,20 @@ void TestBasicMapWithSnapshot( MapType& map )
 
     CHECK( false == shot2.IsEmpty() );
     CHECK( 3 == shot2.Size() );
-
     CHECK( shot2 == MakeConstSharedArray< std::string >( "Marisa", "Alice", "Patchou" ));
+
+    map.Erase( 8 );
+
+    auto shot3 = map.GetValuesSnapshot();
+
+    CHECK( 2 == shot3.Size() );
+    CHECK( shot3 == MakeConstSharedArray< std::string >( "Marisa", "Alice" ));
+
+    map.Clear();
+
+    auto shot4 = map.GetValuesSnapshot();
+
+    CHECK( true == shot4.IsEmpty() );
 }
 
 

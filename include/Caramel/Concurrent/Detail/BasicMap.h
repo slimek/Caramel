@@ -62,6 +62,9 @@ public:
     /// Modifiers ///
     
     Bool Insert( const Key& k, const Value& v );
+    Uint Erase( const Key& k );
+
+    void Clear();
 
 
     /// Locked Iterator Accessor ///
@@ -127,6 +130,35 @@ Bool BasicMap< MapT, ReplicateP >::Insert( const Key& k, const Value& v )
     }
 
     return inserted;
+}
+
+
+template< typename MapT, typename ReplicateP >
+Uint BasicMap< MapT, ReplicateP >::Erase( const Key& k )
+{
+    LockGuard lock( m_mapMutex );
+
+    const Usize erased = m_map.erase( k );
+
+    if ( 0 < erased )
+    {
+        this->Replicator::ReplicaRemove( k );
+    }
+
+    return static_cast< Uint >( erased );
+}
+
+
+template< typename MapT, typename ReplicateP >
+void BasicMap< MapT, ReplicateP >::Clear()
+{
+    LockGuard lock( m_mapMutex );
+
+    if ( ! m_map.empty() )
+    {
+        m_map.clear();
+        this->Replicator::ReplicaClear();
+    }
 }
 
 
