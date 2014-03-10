@@ -4,7 +4,6 @@
 
 #include "Random/RandomImpl.h"
 #include "Random/RandomManager.h"
-#include <ctime>
 #include <random>
 
 
@@ -25,7 +24,7 @@ namespace Caramel
 //
 
 RandomManager::RandomManager()
-    : m_random( static_cast< Uint32 >( std::time( nullptr )))
+    : m_random( std::random_device()() )
 {
 }
 
