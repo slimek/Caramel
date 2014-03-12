@@ -19,6 +19,11 @@ namespace Caramel
 //
 // Date Time
 //
+//   This class supports two string formats:
+//
+//     Normal   : YYYY-MM-DD hh:mm[:ss]
+//     ISO 8601 : YYYY-MM-DDThh:mm[:ss] -> Compatible with Json.NET
+//
 
 class DateTimeImpl;
 
@@ -42,6 +47,10 @@ public:
     // Accepted formats:
     //   YYYY-MM-DD hh:mm[:ss]
     static DateTime FromString( const std::string& s );
+
+    // Accepted formats:
+    //   YYYY-MM-DDThh:mm[:ss]
+    static DateTime FromIsoString( const std::string& s );
 
 
     /// Properties ///
@@ -88,6 +97,7 @@ public:
     std::string Format( const std::string& format ) const;
 
     Bool TryParse( const std::string& s );
+    Bool TryParseIso( const std::string& s );
 
 
     /// Typedefs as a Clock type - Supports TimedBool ///

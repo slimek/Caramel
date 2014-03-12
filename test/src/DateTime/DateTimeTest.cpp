@@ -63,6 +63,33 @@ TEST( DateTimeStringTest )
     const auto time4 = time2 - TimeSpan::FromString( "15:47:36" );
 
     CHECK( "2013-04-04 08:12:24" == time4.ToString() );
+
+
+    /// Try Parse ///
+
+    DateTime dt;
+
+    CHECK( false == dt.TryParse( "" ));  // empty string
+    CHECK( false == dt.TryParse( "12" ));
+    CHECK( false == dt.TryParse( "20140315" ));
+
+    CHECK( true  == dt.TryParse( "2014-03-15 08:23:14" ));
+    CHECK( dt == Date( 2014, 3, 15 ) + TimeOfDay( 8, 23, 14 ));
+}
+
+
+TEST( DateTimeIsoStringTest )
+{
+    const auto dt1 = DateTime::FromIsoString( "2013-04-05T18:09:30" );
+    CHECK( dt1 == Date( 2013, 4, 5 ) + TimeOfDay( 18, 9, 30 ));
+
+    DateTime dt2;
+
+    CHECK( false == dt2.TryParseIso( "" ));
+    CHECK( false == dt2.TryParseIso( "2014-03-15 08:23:14" ));
+
+    CHECK( true == dt2.TryParseIso( "2014-03-15T08:23:14" ));
+    CHECK( dt2 == Date( 2014, 3, 15 ) + TimeOfDay( 8, 23, 14 ));
 }
 
 
