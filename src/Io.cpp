@@ -247,6 +247,14 @@ OutputFileStream::OutputFileStream( const Utf8String& fileName )
 }
 
 
+void OutputFileStream::Flush()
+{
+    CARAMEL_ASSERT( m_file );
+
+    CARAMEL_VERIFY( 0 == fflush( m_file ));
+}
+
+
 void OutputFileStream::Write( const Void* buffer, Uint size )
 {
     CARAMEL_ASSERT( m_file );

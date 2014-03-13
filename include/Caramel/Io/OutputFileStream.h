@@ -28,6 +28,13 @@ public:
     explicit OutputFileStream( const std::string& fileName );
     explicit OutputFileStream( const Utf8String&  fileName );
 
+    
+    //
+    // Opertions
+    //
+
+    void Flush();
+
 
     //
     // Implements OutputStream
