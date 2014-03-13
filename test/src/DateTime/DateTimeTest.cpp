@@ -75,20 +75,16 @@ TEST( DateTimeStringTest )
 
     CHECK( true  == dt.TryParse( "2014-03-15 08:23:14" ));
     CHECK( dt == Date( 2014, 3, 15 ) + TimeOfDay( 8, 23, 14 ));
-}
 
+    
+    /// From ISO String ///
 
-TEST( DateTimeIsoStringTest )
-{
-    const auto dt1 = DateTime::FromIsoString( "2013-04-05T18:09:30" );
+    const auto dt1 = DateTime::FromString( "2013-04-05T18:09:30" );
     CHECK( dt1 == Date( 2013, 4, 5 ) + TimeOfDay( 18, 9, 30 ));
 
     DateTime dt2;
 
-    CHECK( false == dt2.TryParseIso( "" ));
-    CHECK( false == dt2.TryParseIso( "2014-03-15 08:23:14" ));
-
-    CHECK( true == dt2.TryParseIso( "2014-03-15T08:23:14" ));
+    CHECK( true == dt2.TryParse( "2014-03-15T08:23:14" ));
     CHECK( dt2 == Date( 2014, 3, 15 ) + TimeOfDay( 8, 23, 14 ));
 }
 

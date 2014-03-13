@@ -46,11 +46,8 @@ public:
 
     // Accepted formats:
     //   YYYY-MM-DD hh:mm[:ss]
+    //   YYYY-MM_DDThh:mm[:ss]
     static DateTime FromString( const std::string& s );
-
-    // Accepted formats:
-    //   YYYY-MM-DDThh:mm[:ss]
-    static DateTime FromIsoString( const std::string& s );
 
 
     /// Properties ///
@@ -97,7 +94,6 @@ public:
     std::string Format( const std::string& format ) const;
 
     Bool TryParse( const std::string& s );
-    Bool TryParseIso( const std::string& s );
 
 
     /// Typedefs as a Clock type - Supports TimedBool ///

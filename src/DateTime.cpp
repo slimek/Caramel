@@ -10,7 +10,7 @@
 #include <Caramel/DateTime/TimeOfDay.h>
 #include <Caramel/DateTime/TimeSpan.h>
 #include <Caramel/Memory/SharedPtrUtils.h>
-#include <Caramel/String/Algorithm.h>
+#include <Caramel/String/Split.h>
 #include <Caramel/Thread/MutexLocks.h>
 #include <boost/xpressive/xpressive_dynamic.hpp>
 
@@ -293,20 +293,24 @@ DateTime DateTime::MaxValue()
 
 DateTime DateTime::FromString( const std::string& s )
 {
-    return DateTime( std::make_shared< DateTimeImpl >( boost::posix_time::time_from_string( s )));
-}
+    SplitterFirst split( s, 'T' );
 
+    if ( split )
+    {
+        //
+        // Assume it is an ISO format datetime.
+        //
+        // NOTES:
+        //   boost::posix_time::from_iso_string() accetps formats as YYYYMMDDThh:mm:ss
+        //   But we want to be compatible with Json.NET format YYYY-MM-DDThh:mm:ss
+        //
 
-DateTime DateTime::FromIsoString( const std::string& s )
-{
-    // NOTES:
-    //   boost::posix_time::from_iso_string() accetps formats as YYYYMMDDThh:mm:ss
-    //   But we want to be compatible with Json.NET format YYYY-MM-DDThh:mm:ss
-
-    const std::string date = BeforeFirst( s, 'T' );
-    const std::string time = AfterFirst( s, 'T' );
-
-    return Date::FromString( date ) + TimeOfDay::FromString( time );
+        return Date::FromString( split.before ) + TimeOfDay::FromString( split.after );
+    }
+    else
+    {
+        return DateTime( std::make_shared< DateTimeImpl >( boost::posix_time::time_from_string( s )));
+    }
 }
 
 
@@ -407,22 +411,6 @@ Bool DateTime::TryParse( const std::string& input )
     {
         return false;
     }
-}
-
-
-Bool DateTime::TryParseIso( const std::string& input )
-{
-    if ( input.empty() ) { return false; }
-
-    try
-    {
-        *this = DateTime::FromIsoString( input );
-        return true;
-    }
-    catch ( ... )
-    {
-        return false;
-    }    
 }
 
 
