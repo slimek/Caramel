@@ -695,6 +695,9 @@
     <ClInclude Include="..\include\Caramel\Concurrent\Detail\LockedMap.h">
       <Filter>1. Public Packages\Concurrent\Detail</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\String\Split.h">
+      <Filter>1. Public Packages\String</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

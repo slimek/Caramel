@@ -120,6 +120,7 @@
     <ClInclude Include="..\include\Caramel\String\Detail\SprintfParameter.h" />
     <ClInclude Include="..\include\Caramel\String\Format.h" />
     <ClInclude Include="..\include\Caramel\String\Inline\Sprintf_Sprintf.h" />
+    <ClInclude Include="..\include\Caramel\String\Split.h" />
     <ClInclude Include="..\include\Caramel\String\Sprintf.h" />
     <ClInclude Include="..\include\Caramel\String\StringConvertible.h" />
     <ClInclude Include="..\include\Caramel\String\TextEncoding.h" />
