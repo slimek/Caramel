@@ -4,7 +4,7 @@
 #define __CARAMEL_ENUM_LOOKUP_TABLE_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Lexical/Integer.h>
 #include <Caramel/Numeric/NumberTraits.h>
 #include <Caramel/String/CainLess.h>

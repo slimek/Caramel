@@ -4,7 +4,7 @@
 #define __CARAMEL_ERROR_ANY_FAILURE_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Value/Any.h>
 #include <exception>
 

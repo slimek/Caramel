@@ -4,7 +4,7 @@
 #define __CARAMEL_DEBUG_SCOPE_TIMING_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Chrono/TickClock.h>
 
 

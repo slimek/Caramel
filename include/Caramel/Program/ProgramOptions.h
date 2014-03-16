@@ -4,7 +4,7 @@
 #define __CARAMEL_PROGRAM_PROGRAM_OPTIONS_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/String/StringConvertible.h>
 
 

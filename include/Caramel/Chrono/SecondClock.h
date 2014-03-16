@@ -4,7 +4,7 @@
 #define __CARAMEL_CHRONO_SECOND_CLOCK_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Chrono/SteadyClock.h>
 #include <Caramel/Chrono/Stopwatch.h>
 #include <Caramel/Math/Floating.h>

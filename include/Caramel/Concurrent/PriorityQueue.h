@@ -4,7 +4,7 @@
 #define __CARAMEL_CONTURRENT_PRIORITY_QUEUE_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Thread/MutexLocks.h>
 #include <boost/heap/priority_queue.hpp>
 #include <boost/noncopyable.hpp>

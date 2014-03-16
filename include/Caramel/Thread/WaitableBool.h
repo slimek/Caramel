@@ -4,7 +4,7 @@
 #define __CARAMEL_THREAD_WAITABLE_BOOL_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Thread/MutexLocks.h>
 #include <condition_variable>
 #include <mutex>

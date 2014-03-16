@@ -4,7 +4,7 @@
 #define __CARAMEL_STRING_UTF8_STRING_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Error/Exception.h>
 #include <Caramel/String/StringConvertible.h>
 #include <Caramel/String/TextEncoding.h>

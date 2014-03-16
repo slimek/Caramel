@@ -4,7 +4,7 @@
 #define __CARAMEL_TRACE_CHANNEL_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Trace/TraceTypes.h>
 
 

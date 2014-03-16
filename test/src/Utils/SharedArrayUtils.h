@@ -4,7 +4,7 @@
 #define __CARAMEL_TEST_UTILS_SHARED_ARRAY_UTILS_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Value/SharedArray.h>
 
 

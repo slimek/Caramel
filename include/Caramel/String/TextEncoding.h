@@ -4,7 +4,7 @@
 #define __CARAMEL_STRING_TEXT_ENCODING_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 
 
 namespace Caramel

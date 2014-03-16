@@ -4,7 +4,7 @@
 #define __CARAMEL_NUMERIC_NUMBER_TRAITS_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Meta/IfThenElse.h>
 #include <type_traits>
 

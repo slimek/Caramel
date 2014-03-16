@@ -4,7 +4,7 @@
 #define __CARAMEL_ERROR_ERROR_MANAGER_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include "Object/FacilityLongevity.h"
 #include <Caramel/Error/Alert.h>
 #include <Caramel/Object/Singleton.h>

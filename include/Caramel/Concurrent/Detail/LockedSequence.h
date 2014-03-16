@@ -4,7 +4,7 @@
 #define __CARAMEL_CONCURRENT_DETAIL_LOCKED_SEQUENCE_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <boost/noncopyable.hpp>
 #include <mutex>
 

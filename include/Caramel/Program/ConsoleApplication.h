@@ -4,7 +4,7 @@
 #define __CARAMEL_PROGRAM_CONSOLE_APPLICATION_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <vector>
 
 

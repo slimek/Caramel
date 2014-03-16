@@ -4,7 +4,7 @@
 #define __CARAMEL_CONCURRENT_SET_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Concurrent/Detail/BasicSet.h>
 #include <Caramel/Concurrent/ReplicatePolicies.h>
 #include <set>

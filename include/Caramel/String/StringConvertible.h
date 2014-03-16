@@ -4,7 +4,7 @@
 #define __CARAMEL_STRING_STRING_CONVERTIBLE_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Meta/Utility.h>
 #include <iosfwd>
 #include <type_traits>

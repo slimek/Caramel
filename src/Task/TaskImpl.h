@@ -4,7 +4,7 @@
 #define __CARAMEL_TASK_TASK_IMPL_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Concurrent/Queue.h>
 #include <Caramel/Error/ExceptionPtr.h>
 #include <Caramel/Task/Task.h>

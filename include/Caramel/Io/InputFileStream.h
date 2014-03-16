@@ -4,7 +4,7 @@
 #define __CARAMEL_IO_INPUT_FILE_STREAM_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Io/FileStream.h>
 #include <Caramel/Io/InputStream.h>
 #include <Caramel/String/Utf8String.h>

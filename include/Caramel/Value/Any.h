@@ -4,7 +4,7 @@
 #define __CARAMEL_VALUE_ANY_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Value/Detail/AnyCasters.h>
 #include <Caramel/Value/Detail/AnyHolders.h>
 

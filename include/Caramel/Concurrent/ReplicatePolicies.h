@@ -4,7 +4,7 @@
 #define __CARAMEL_CONCURRENT_REPLICATE_POLICIES_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Concurrent/Detail/CollectionSnapshot.h>
 #include <Caramel/Concurrent/Detail/DictionarySnapshot.h>
 

@@ -4,7 +4,7 @@
 #define __CARAMEL_TEST_UTILS_STD_VECTOR_UTILS_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <vector>
 
 

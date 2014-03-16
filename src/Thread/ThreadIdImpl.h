@@ -4,7 +4,7 @@
 #define __CARAMEL_THREAD_THREAD_ID_IMPL_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Thread/ThreadId.h>
 #include <boost/optional.hpp>
 #include <thread>

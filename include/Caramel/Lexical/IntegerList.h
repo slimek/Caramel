@@ -4,7 +4,7 @@
 #define __CARAMEL_LEXICAL_INTEGER_LIST_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Lexical/Integer.h>
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/split.hpp>

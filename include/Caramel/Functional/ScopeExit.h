@@ -4,7 +4,7 @@
 #define __CARAMEL_FUNCTIONAL_SCOPE_EXIT_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <boost/noncopyable.hpp>
 #include <functional>
 

@@ -176,9 +176,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\Caramel\Caramel.h">
-      <Filter>1. Public Packages</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Caramel\Setup\Compiler.h">
       <Filter>1. Public Packages\Setup</Filter>
     </ClInclude>
@@ -697,6 +694,9 @@
     </ClInclude>
     <ClInclude Include="..\include\Caramel\String\Split.h">
       <Filter>1. Public Packages\String</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Setup\CaramelDefs.h">
+      <Filter>1. Public Packages\Setup</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

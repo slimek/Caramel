@@ -4,7 +4,7 @@
 #define __CARAMEL_IO_TEXT_WRITER_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/String/Utf8String.h>
 
 

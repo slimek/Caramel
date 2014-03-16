@@ -4,7 +4,7 @@
 #define __CARAMEL_DATE_TIME_DATE_TIME_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/DateTime/Detail/DateTimeFwd.h>
 #include <Caramel/DateTime/Date.h>
 #include <Caramel/DateTime/TimeOfDay.h>

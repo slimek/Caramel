@@ -4,7 +4,7 @@
 #define __CARAMEL_TRACE_TRACE_MANAGER_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include "Object/FacilityLongevity.h"
 #include "Trace/ChannelImpl.h"
 #include <Caramel/Object/Singleton.h>

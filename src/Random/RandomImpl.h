@@ -4,7 +4,7 @@
 #define __CARAMEL_RANDOM_RANDOM_IMPL_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <random>
 
 

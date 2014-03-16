@@ -4,7 +4,7 @@
 #define __CARAMEL_ASYNC_FLOW_STATE_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Chrono/SecondClock.h>
 #include <Caramel/Numeric/NumberConvertible.h>
 #include <Caramel/Numeric/NumberTraits.h>

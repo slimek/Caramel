@@ -4,7 +4,7 @@
 #define __CARAMEL_STATECHART_STATE_MACHINE_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Async/AnyEventTarget.h>
 #include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Statechart/State.h>

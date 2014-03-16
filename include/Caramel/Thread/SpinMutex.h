@@ -4,7 +4,7 @@
 #define __CARAMEL_THREAD_SPIN_MUTEX_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <boost/noncopyable.hpp>
 #include <boost/smart_ptr/detail/spinlock_pool.hpp>
 

@@ -4,7 +4,7 @@
 #define __CARAMEL_LEXICAL_INTEGER_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Meta/IntegralTypes.h>
 #include <type_traits>
 

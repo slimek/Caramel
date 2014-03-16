@@ -4,7 +4,7 @@
 #define __CARAMEL_VALUE_NAMED_VALUES_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Value/Detail/NamedValueRef.h>
 #include <map>
 

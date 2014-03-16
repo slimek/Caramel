@@ -4,7 +4,7 @@
 #define __CARAMEL_CONCURRENT_FLAT_MAP_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Concurrent/Detail/BasicMap.h>
 #include <Caramel/Concurrent/ReplicatePolicies.h>
 #include <boost/container/flat_map.hpp>

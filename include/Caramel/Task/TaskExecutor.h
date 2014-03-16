@@ -4,7 +4,7 @@
 #define __CARAMEL_TASK_TASK_EXECUTOR_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Task/Detail/TaskFwd.h>
 #include <Caramel/Task/Task.h>
 

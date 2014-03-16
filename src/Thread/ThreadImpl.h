@@ -4,7 +4,7 @@
 #define __CARAMEL_THREAD_THREAD_IMPL_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include "Thread/ThreadIdImpl.h"
 #include <Caramel/Thread/Thread.h>
 #include <Caramel/Thread/WaitableBool.h>

@@ -4,7 +4,7 @@
 #define __CARAMEL_META_IF_THEN_ELSE_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Meta/Select.h>
 
 

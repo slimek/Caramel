@@ -4,7 +4,7 @@
 #define __CARAMEL_IO_TEXT_STREAM_WRITER_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Io/OutputStream.h>
 #include <Caramel/Io/TextWriter.h>
 

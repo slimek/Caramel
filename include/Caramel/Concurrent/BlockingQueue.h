@@ -4,7 +4,7 @@
 #define __CARAMEL_CONCURRENT_BLOCKING_QUEUE_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Error/Exception.h>
 #include <Caramel/Thread/MutexLocks.h>

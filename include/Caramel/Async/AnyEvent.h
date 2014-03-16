@@ -4,7 +4,7 @@
 #define __CARAMEL_ASYNC_ANY_EVENT_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Error/Exception.h>
 #include <Caramel/Value/Any.h>
 #include <type_traits>

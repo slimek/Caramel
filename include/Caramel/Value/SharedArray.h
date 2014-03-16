@@ -4,7 +4,7 @@
 #define __CARAMEL_VALUE_SHARED_ARRAY_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Error/Assert.h>
 #include <Caramel/Error/Exception.h>
 #include <boost/shared_array.hpp>

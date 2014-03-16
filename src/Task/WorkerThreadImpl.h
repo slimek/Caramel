@@ -4,7 +4,7 @@
 #define __CARAMEL_TASK_WORKER_THREAD_IMPL_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include "Task/TaskImpl.h"
 #include <Caramel/Concurrent/PriorityQueue.h>
 #include <Caramel/Concurrent/BlockingQueue.h>

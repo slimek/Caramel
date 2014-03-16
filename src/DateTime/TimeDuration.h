@@ -4,7 +4,7 @@
 #define __CARAMEL_DATE_TIME_TIME_DURATION_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <boost/date_time/posix_time/posix_time.hpp>
 
 

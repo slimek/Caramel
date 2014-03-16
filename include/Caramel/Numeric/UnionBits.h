@@ -4,7 +4,7 @@
 #define __CARAMEL_NUMERIC_UNION_BITS_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 
 
 namespace Caramel

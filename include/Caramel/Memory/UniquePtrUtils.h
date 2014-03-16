@@ -4,7 +4,7 @@
 #define __CARAMEL_MEMORY_UNIQUE_PTR_UTILS_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 
 
 namespace Caramel

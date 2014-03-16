@@ -4,7 +4,7 @@
 #define __CARAMEL_CONCURRENT_QUEUE_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Concurrent/ReplicatePolicies.h>
 #include <Caramel/Concurrent/Detail/LockedSequence.h>
 #include <Caramel/Thread/MutexLocks.h>

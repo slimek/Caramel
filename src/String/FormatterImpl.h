@@ -4,7 +4,7 @@
 #define __CARAMEL_STRING_FORMATTER_IMPL_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/String/Detail/Formatter.h>
 #include <functional>
 #include <vector>

@@ -4,7 +4,7 @@
 #define __CARAMEL_STATECHART_STATE_IMPL_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include "Statechart/Transition.h"
 #include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Concurrent/HashMap.h>

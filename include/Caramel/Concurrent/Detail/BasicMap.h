@@ -4,7 +4,7 @@
 #define __CARAMEL_CONCURRENT_DETAIL_BASIC_MAP_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Concurrent/Detail/LockedMap.h>
 #include <Caramel/Thread/MutexLocks.h>
 #include <boost/noncopyable.hpp>

@@ -4,7 +4,7 @@
 #define __CARAMEL_STRING_DETAIL_SPRINTF_PARAMETER_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Meta/IfThenElse.h>
 #include <Caramel/Numeric/NumberConvertible.h>
 #include <Caramel/String/StringConvertible.h>

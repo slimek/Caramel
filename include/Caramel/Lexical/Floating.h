@@ -4,7 +4,7 @@
 #define __CARAMEL_LEXICAL_FLOATING_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <type_traits>
 
 

@@ -4,7 +4,7 @@
 #define __CARAMEL_DATE_TIME_DETAIL_DATE_TIME_FWD_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 
 
 namespace Caramel

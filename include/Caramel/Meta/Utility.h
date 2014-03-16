@@ -4,7 +4,7 @@
 #define __CARAMEL_META_UTILITY_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <type_traits>
 
 

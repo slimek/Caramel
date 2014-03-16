@@ -4,7 +4,7 @@
 #define __CARAMEL_OBJECT_SINGLETON_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Object/Detail/LifetimeTracker.h>
 #include <Caramel/Thread/SpinMutex.h>
 #include <boost/noncopyable.hpp>

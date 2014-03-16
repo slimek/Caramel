@@ -4,7 +4,7 @@
 #define __CARAMEL_TRACE_LISTENERS_IMPL_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Concurrent/Queue.h>
 #include <Caramel/Trace/Listeners.h>
 

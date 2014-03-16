@@ -4,7 +4,7 @@
 #define __CARAMEL_PROGRAM_PROGRAM_OPTIONS_MANAGER_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include "Object/FacilityLongevity.h"
 #include <Caramel/Object/Singleton.h>
 #include <Caramel/Program/ProgramOptions.h>

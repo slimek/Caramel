@@ -4,7 +4,7 @@
 #define __CARAMEL_OBJECT_FACILITY_LONGEVITY_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 
 
 namespace Caramel

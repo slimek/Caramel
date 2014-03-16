@@ -4,7 +4,7 @@
 #define __CARAMEL_ERROR_ALERT_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/String/Sprintf.h>
 
 

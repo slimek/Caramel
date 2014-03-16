@@ -4,7 +4,7 @@
 #define __CARAMEL_WINDOWS_FILE_INFO_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 
 
 #if defined( CARAMEL_SYSTEM_IS_WINDOWS )

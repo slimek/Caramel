@@ -4,7 +4,7 @@
 #define __CARAMEL_META_IS_GENERAL_STRING_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Meta/Utility.h>
 
 

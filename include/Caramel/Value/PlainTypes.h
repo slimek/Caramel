@@ -4,7 +4,7 @@
 #define __CARAMEL_VALUE_PLAIN_TYPES_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 
 
 namespace Caramel

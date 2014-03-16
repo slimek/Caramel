@@ -4,7 +4,7 @@
 #define __CARAMEL_CONCURRENT_DETAIL_DICTIONARY_SNAPSHOT_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Thread/MutexLocks.h>
 #include <Caramel/Value/SharedArray.h>
 #include <mutex>

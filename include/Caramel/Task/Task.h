@@ -4,7 +4,7 @@
 #define __CARAMEL_TASK_TASK_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Memory/UniquePtrUtils.h>
 #include <Caramel/Meta/Utility.h>

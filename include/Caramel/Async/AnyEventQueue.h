@@ -4,7 +4,7 @@
 #define __CARAMEL_ASYNC_ANY_EVENT_QUEUE_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Async/AnyEventTarget.h>
 #include <Caramel/Async/Detail/AnyEventQueueImpl.h>
 #include <boost/noncopyable.hpp>

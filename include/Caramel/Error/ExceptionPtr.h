@@ -4,7 +4,7 @@
 #define __CARAMEL_ERROR_EXCEPTION_PTR_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Error/Detail/ExceptionHolders.h>
 #include <exception>
 

@@ -4,7 +4,7 @@
 #define __CARAMEL_DOCUMENT_INI_DOCUMENT_IMPL_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include "Document/IniSectionImpl.h"
 #include <Caramel/Document/IniDocument.h>
 #include <Caramel/String/CainLess.h>

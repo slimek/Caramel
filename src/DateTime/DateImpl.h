@@ -4,7 +4,6 @@
 #define __CARAMEL_DATE_TIME_DATE_IMPL_H
 #pragma once
 
-#include <Caramel/Caramel.h>
 #include <Caramel/DateTime/Date.h>
 #include <boost/date_time/gregorian/greg_date.hpp>
 

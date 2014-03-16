@@ -4,7 +4,7 @@
 #define __CARAMEL_CHRONO_TIMED_BOOL_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 
 
 namespace Caramel

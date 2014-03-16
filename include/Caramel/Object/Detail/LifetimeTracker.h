@@ -4,7 +4,7 @@
 #define __CARAMEL_OBJECT_DETAIL_LIFETIME_TRACKER_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 
 
 namespace Caramel

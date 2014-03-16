@@ -4,7 +4,7 @@
 #define __CARAMEL_THREAD_THREAD_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Thread/ThreadTypes.h>
 #include <boost/noncopyable.hpp>

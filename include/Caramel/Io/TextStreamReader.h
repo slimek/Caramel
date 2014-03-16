@@ -4,7 +4,7 @@
 #define __CARAMEL_IO_TEXT_STREAM_READER_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Io/InputStream.h>
 #include <Caramel/Io/TextReader.h>
 #include <Caramel/String/TextEncoding.h>

@@ -4,7 +4,7 @@
 #define __CARAMEL_PROGRAM_CONSOLE_APPLICATION_IMPL_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Program/ConsoleApplication.h>
 #include <Caramel/Trace/Listeners.h>
 

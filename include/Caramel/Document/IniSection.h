@@ -4,7 +4,7 @@
 #define __CARAMEL_FILE_VIEW_INI_SECTION_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <vector>
 
 

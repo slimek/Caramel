@@ -4,7 +4,7 @@
 #define __CARAMEL_NUMERIC_NUMBER_CONVERTER_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Numeric/NumberTraits.h>
 #include <cfloat>
 

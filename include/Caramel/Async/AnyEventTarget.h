@@ -4,7 +4,7 @@
 #define __CARAMEL_ASYNC_ANY_EVENT_TARGET_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Async/Detail/AnyEventTargetImpl.h>
 
 

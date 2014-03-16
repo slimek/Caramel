@@ -4,7 +4,7 @@
 #define __CARAMEL_FILE_SYSTEM_PATH_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/String/StringConvertible.h>
 #include <Caramel/String/Utf8String.h>
 #include <boost/operators.hpp>

@@ -4,7 +4,7 @@
 #define __CARAMEL_DEBUG_DEBUG_MANAGER_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include "Object/FacilityLongevity.h"
 #include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Object/Singleton.h>

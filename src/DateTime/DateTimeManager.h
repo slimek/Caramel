@@ -4,7 +4,6 @@
 #define __CARAMEL_DATE_TIME_DATE_TIME_MANAGER_H
 #pragma once
 
-#include <Caramel/Caramel.h>
 #include "Object/FacilityLongevity.h"
 #include <Caramel/Object/Singleton.h>
 #include <boost/date_time/posix_time/posix_time_io.hpp>

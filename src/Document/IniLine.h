@@ -4,7 +4,7 @@
 #define __CARAMEL_DOCUMENT_INI_LINE_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Io/TextReader.h>
 #include <vector>
 

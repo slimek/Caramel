@@ -4,7 +4,7 @@
 #define __CARAMEL_STATECHART_STATE_MACHINE_IMPL_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include "Statechart/StateImpl.h"
 #include "Statechart/Transition.h"
 #include <Caramel/Async/Detail/AnyEventTargetImpl.h>

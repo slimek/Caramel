@@ -4,7 +4,7 @@
 #define __CARAMEL_ERROR_ASSERT_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Error/Alert.h>
 #include <Caramel/Error/Exception.h>
 

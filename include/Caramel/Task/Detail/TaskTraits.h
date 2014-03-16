@@ -4,7 +4,7 @@
 #define __CARAMEL_TASK_DETAIL_TASK_TRAITS_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Task/Detail/TaskFwd.h>
 
 

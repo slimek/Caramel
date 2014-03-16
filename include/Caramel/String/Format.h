@@ -4,7 +4,7 @@
 #define __CARAMEL_STRING_FORMAT_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/String/Detail/Formatter.h>
 #include <Caramel/String/Detail/SprintfParameter.h>
 

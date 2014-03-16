@@ -4,7 +4,7 @@
 #define __CARAMEL_MEMORY_SHARED_PTR_UTILS_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 
 
 namespace Caramel

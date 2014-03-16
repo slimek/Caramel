@@ -4,7 +4,7 @@
 #define __CARAMEL_IO_OUTPUT_FILE_STREAM_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Io/FileStream.h>
 #include <Caramel/Io/OutputStream.h>
 #include <Caramel/String/Utf8String.h>

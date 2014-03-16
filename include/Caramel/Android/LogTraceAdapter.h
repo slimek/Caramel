@@ -4,7 +4,7 @@
 #define __CARAMEL_ANDROID_LOG_TRACE_ADAPTER_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 
 
 #if defined( CARAMEL_SYSTEM_IS_ANDROID )

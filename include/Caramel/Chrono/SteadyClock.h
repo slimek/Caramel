@@ -4,7 +4,7 @@
 #define __CARAMEL_CHRONO_STEADY_CLOCK_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <boost/chrono.hpp>
 
 

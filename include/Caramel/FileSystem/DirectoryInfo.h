@@ -4,7 +4,7 @@
 #define __CARAMEL_FILE_SYSTEM_DIRECTORY_INFO_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/FileSystem/Path.h>
 #include <vector>
 

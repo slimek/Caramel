@@ -4,7 +4,7 @@
 #define __CARAMEL_STRING_SPRINTF_MANAGER_H
 #pragma once
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 #include "Object/FacilityLongevity.h"
 #include <Caramel/Concurrent/Queue.h>
 #include <Caramel/Object/Singleton.h>
