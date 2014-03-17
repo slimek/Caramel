@@ -57,6 +57,7 @@ public:
     /// Splits ///
 
     Path Directory() const;
+    Path Filename()  const;  // Stem + Extension
     Path Stem()      const;
     Path Extension() const;  // Returns with "." prefix
 

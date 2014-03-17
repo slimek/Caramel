@@ -17,48 +17,60 @@ SUITE( PathSuite )
 // Path Test
 //
 
-TEST( PathTest )
+TEST( PathDecompositionTest )
 {
-    const Path p0( "" );
-    const Path p1( "file" );
-    const Path p2( "file.ext" );
-    const Path p3( "file.note.ext" );
-    const Path p4( "dir/file" );
-    const Path p5( "dir/file.ext" );
-    const Path p6( "dir.sub/file" );
-    const Path p7( "dir.sub/file.ext" );
-
-    
-    /// Splits ///
-
     const Path nil( "" );
     const Path file( "file" );
     const Path ext( ".ext" );
+    const Path fext( "file.ext" );
     const Path dir( "dir" );
     const Path dsub( "dir.sub" );
 
+    const Path p0( "" );
     CHECK( nil  == p0.Directory() );
+    CHECK( nil  == p0.Filename() );
     CHECK( nil  == p0.Stem() );
     CHECK( nil  == p0.Extension() );
+
+    const Path p1( "file" );
     CHECK( nil  == p1.Directory() );
+    CHECK( file == p1.Filename() );
     CHECK( file == p1.Stem() );
     CHECK( nil  == p1.Extension() );
+
+    const Path p2( "file.ext" );
     CHECK( nil  == p2.Directory() );
+    CHECK( fext == p2.Filename() );
     CHECK( file == p2.Stem() );
     CHECK( ext  == p2.Extension() );
+
+    const Path p3( "file.note.ext" );
     CHECK( nil  == p3.Directory() );
+    CHECK( p3   == p3.Filename() );
     CHECK( Path( "file.note" ) == p3.Stem() );
     CHECK( ext  == p3.Extension() );
+
+    const Path p4( "dir/file" );
     CHECK( dir  == p4.Directory() );
+    CHECK( file == p4.Filename() );
     CHECK( file == p4.Stem() );
     CHECK( nil  == p4.Extension() );
+
+    const Path p5( "dir/file.ext" );
     CHECK( dir  == p5.Directory() );
+    CHECK( fext == p5.Filename() );
     CHECK( file == p5.Stem() );
     CHECK( ext  == p5.Extension() );
+
+    const Path p6( "dir.sub/file" );
     CHECK( dsub == p6.Directory() );
+    CHECK( file == p6.Filename() );
     CHECK( file == p6.Stem() );
     CHECK( nil  == p6.Extension() );
+
+    const Path p7( "dir.sub/file.ext" );
     CHECK( dsub == p7.Directory() );
+    CHECK( fext == p7.Filename() );
     CHECK( file == p7.Stem() );
     CHECK( ext  == p7.Extension() );
     
@@ -73,6 +85,14 @@ TEST( PathTest )
     CHECK( true  == p5.HasExtension() );
     CHECK( false == p6.HasExtension() );
     CHECK( true  == p7.HasExtension() );
+
+
+    /// Combination - How to get the direct parent directory ///
+
+    const Path p8( "root/dir1/dir2/file" );
+
+    CHECK( Path( "dir2" ) == p8.Directory().Stem() );
+    CHECK( Path( "dir1" ) == p8.Directory().Directory().Stem() );
 }
 
 

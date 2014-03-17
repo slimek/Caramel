@@ -254,6 +254,7 @@ std::wstring Path::ToWstring() const
 //
 
 Path Path::Directory() const { return Path( std::make_shared< PathImpl >( m_impl->parent_path() )); }
+Path Path::Filename()  const { return Path( std::make_shared< PathImpl >( m_impl->filename() )); }
 Path Path::Stem()      const { return Path( std::make_shared< PathImpl >( m_impl->stem() )); }
 Path Path::Extension() const { return Path( std::make_shared< PathImpl >( m_impl->extension() )); }
 
