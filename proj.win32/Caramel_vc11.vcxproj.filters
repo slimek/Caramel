@@ -171,7 +171,7 @@
     <Filter Include="1. Public Packages\Async\Detail">
       <UniqueIdentifier>{61c02db5-a9d8-4dca-aa0f-7d8e6cd10893}</UniqueIdentifier>
     </Filter>
-    <Filter Include="1. Public Packages\Error\FileSystem">
+    <Filter Include="1. Public Packages\FileSystem">
       <UniqueIdentifier>{c9f622dd-a423-4a8d-b682-bb4368bc6a29}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -234,10 +234,10 @@
       <Filter>1. Public Packages\Chrono</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\FileSystem\FileInfo.h">
-      <Filter>1. Public Packages\Error\FileSystem</Filter>
+      <Filter>1. Public Packages\FileSystem</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\FileSystem\Path.h">
-      <Filter>1. Public Packages\Error\FileSystem</Filter>
+      <Filter>1. Public Packages\FileSystem</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\String\Inline\Sprintf_Sprintf.h">
       <Filter>1. Public Packages\String\Inline</Filter>
@@ -294,7 +294,7 @@
       <Filter>1. Public Packages\String</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\FileSystem\DirectoryInfo.h">
-      <Filter>1. Public Packages\Error\FileSystem</Filter>
+      <Filter>1. Public Packages\FileSystem</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Trace\TraceTypes.h">
       <Filter>1. Public Packages\Trace</Filter>
