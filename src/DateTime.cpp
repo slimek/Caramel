@@ -684,6 +684,12 @@ std::string TimeOfDay::ToString() const
 }
 
 
+std::string TimeOfDay::Format( const std::string& format ) const
+{
+    return DateTimeManager::Instance()->FormatTimeDuration( *m_impl, format );
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // DateTime Manager
@@ -718,6 +724,18 @@ std::string DateTimeManager::FormatDateTime(
     m_timeFacet->format( format.c_str() );
     m_timeStream.str( "" );
     m_timeStream << dateTime;
+    return m_timeStream.str();
+}
+
+
+std::string DateTimeManager::FormatTimeDuration(
+    const boost::posix_time::time_duration& duration, const std::string& format )
+{
+    LockGuard lock( m_mutex );
+
+    m_timeFacet->time_duration_format( format.c_str() );
+    m_timeStream.str( "" );
+    m_timeStream << duration;
     return m_timeStream.str();
 }
 

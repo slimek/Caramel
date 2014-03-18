@@ -56,6 +56,7 @@ public:
     /// Conversions ///
 
     std::string ToString() const;
+    std::string Format( const std::string& format ) const;
 
 
 private:
