@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
+#include <Caramel/Meta/Tags.h>
 #include <Caramel/Value/Detail/AnyCasters.h>
 #include <Caramel/Value/Detail/AnyHolders.h>
 
@@ -39,6 +40,9 @@ public:
 
     template< typename T >
     Any( const T& value );
+
+    template< typename T >
+    Any( T&& value, MoveTag );
 
     template< typename T >
     Any& operator=( const T& value );
@@ -83,6 +87,13 @@ inline Any MakeAny( const T& value )
 template< typename T >
 inline Any::Any( const T& value )
     : m_holder( new typename Detail::AnyHolderSelect< T >::Type( value ))
+{
+}
+
+
+template< typename T >
+inline Any::Any( T&& value, MoveTag )
+    : m_holder( new typename Detail::AnyHolderSelect< T >::Type( std::move( value )))
 {
 }
 

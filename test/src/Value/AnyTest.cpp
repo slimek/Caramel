@@ -271,6 +271,43 @@ TEST( AnyAssignTest )
 }
 
 
+TEST( AnyMoveTest )
+{
+    std::shared_ptr< Int > pi( new Int( 42 ));
+    CHECK( 1 == pi.use_count() );
+
+    auto pj = pi;
+    CHECK( 2 == pi.use_count() );
+
+    Any a1( pj );
+    CHECK( 3 == pi.use_count() );
+
+    Any a2( std::move( pj ), MoveTag() );
+    CHECK( 3 == pi.use_count() );
+
+    Any a3( pi );
+    CHECK( 4 == pi.use_count() );
+
+    CHECK( 42 == *( a1.As< std::shared_ptr< Int >>() ));
+}
+
+
+TEST( AnyAnyTest )
+{
+    Any a1( 42 );
+    Any a2( a1 ); 
+
+    Any a3;
+    a3 = a1;
+
+    // Correct : Any< Int >, a copy of a1.
+    // Wrong   : Any< Any< Int >>
+
+    CHECK( 42 == a2.As< Int >() );
+    CHECK( 42 == a3.As< Int >() );
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE AnySuite

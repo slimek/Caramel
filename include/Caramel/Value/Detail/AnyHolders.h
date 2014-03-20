@@ -191,6 +191,10 @@ public:
         : m_value( value )
     {}
 
+    explicit AnyObjectConcrete( T&& value )
+        : m_value( std::move( value ))
+    {}
+
     const Void* GetValue() const override { return &m_value; }
 
     const std::type_info& GetType() const override { return typeid( T ); }
