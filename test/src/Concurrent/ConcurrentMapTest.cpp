@@ -104,33 +104,45 @@ TEST( ConcurrentFlatMapTest )
 template< typename MapType >
 void TestBasicMapWithSnapshot( MapType& map )
 {
-    auto shot1 = map.GetValuesSnapshot();
+    auto vshot1 = map.GetValuesSnapshot();
+    auto pshot1 = map.GetPairsSnapshot();
 
-    CHECK( true == shot1.IsEmpty() );
-    CHECK( 0 == shot1.Size() );
+    CHECK( true == vshot1.IsEmpty() );
+    CHECK( 0 == vshot1.Size() );
+    CHECK( true == pshot1.IsEmpty() );
+    CHECK( 0 == pshot1.Size() );
 
     map.Insert( 6, "Marisa" );
     map.Insert( 7, "Alice" );
     map.Insert( 8, "Patchou" );
 
-    auto shot2 = map.GetValuesSnapshot();
+    auto vshot2 = map.GetValuesSnapshot();
+    auto pshot2 = map.GetPairsSnapshot();
 
-    CHECK( false == shot2.IsEmpty() );
-    CHECK( 3 == shot2.Size() );
-    CHECK( shot2 == MakeConstSharedArray< std::string >( "Marisa", "Alice", "Patchou" ));
+    CHECK( false == vshot2.IsEmpty() );
+    CHECK( 3 == vshot2.Size() );
+    CHECK( vshot2 == MakeConstSharedArray< std::string >( "Marisa", "Alice", "Patchou" ));
+    CHECK( false == pshot2.IsEmpty() );
+    CHECK( 3 == pshot2.Size() );
+    CHECK( 8 == pshot2[2].first && "Patchou" == pshot2[2].second );
 
     map.Erase( 8 );
 
-    auto shot3 = map.GetValuesSnapshot();
+    auto vshot3 = map.GetValuesSnapshot();
+    auto pshot3 = map.GetPairsSnapshot();
 
-    CHECK( 2 == shot3.Size() );
-    CHECK( shot3 == MakeConstSharedArray< std::string >( "Marisa", "Alice" ));
+    CHECK( 2 == vshot3.Size() );
+    CHECK( vshot3 == MakeConstSharedArray< std::string >( "Marisa", "Alice" ));
+    CHECK( 2 == pshot3.Size() );
+    CHECK( 7 == pshot3[1].first && "Alice" == pshot3[1].second );
 
     map.Clear();
 
-    auto shot4 = map.GetValuesSnapshot();
+    auto vshot4 = map.GetValuesSnapshot();
+    auto pshot4 = map.GetPairsSnapshot();
 
-    CHECK( true == shot4.IsEmpty() );
+    CHECK( true == vshot4.IsEmpty() );
+    CHECK( true == pshot4.IsEmpty() );
 }
 
 

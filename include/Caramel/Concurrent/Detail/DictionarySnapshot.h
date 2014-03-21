@@ -34,11 +34,15 @@ public:
 
     typedef ConstSharedArray< Value > ValuesSnapshot;
 
+    typedef std::pair< Key, Value > PairType;
+    typedef ConstSharedArray< PairType > PairsSnapshot;
+
     DictionarySnapshot();
 
     /// Accessors ///
 
     ValuesSnapshot GetValuesSnapshot() const;
+    PairsSnapshot  GetPairsSnapshot()  const;
 
 
 protected:
@@ -52,8 +56,11 @@ protected:
 
 private:
 
-    mutable Bool m_modified;
+    mutable Bool m_valuesModified;
     mutable ValuesSnapshot m_valuesSnapshot;
+
+    mutable Bool m_pairsModified;
+    mutable PairsSnapshot m_pairsSnapshot;
 
     mutable std::mutex m_snapshotMutex;
 };
@@ -66,7 +73,8 @@ private:
 
 template< typename Derived, typename Key, typename Value >
 inline DictionarySnapshot< Derived, Key, Value >::DictionarySnapshot()
-    : m_modified( false )
+    : m_valuesModified( false )
+    , m_pairsModified( false )
 {
 }
 
@@ -75,7 +83,8 @@ template< typename Derived, typename Key, typename Value >
 inline void DictionarySnapshot< Derived, Key, Value >::ReplicaAdd( const Key&, const Value& )
 {
     LockGuard lock( m_snapshotMutex );
-    m_modified = true;
+    m_valuesModified = true;
+    m_pairsModified  = true;
 }
 
 
@@ -90,11 +99,17 @@ template< typename Derived, typename Key, typename Value >
 inline void DictionarySnapshot< Derived, Key, Value >::ReplicaClear()
 {
     LockGuard lock( m_snapshotMutex );
-    m_modified = true;
+    m_valuesModified = true;
+    m_pairsModified  = true;
 
     if ( ! m_valuesSnapshot.IsEmpty() )
     {
         m_valuesSnapshot = SharedArray< Value >();
+    }
+
+    if ( ! m_pairsSnapshot.IsEmpty() )
+    {
+        m_pairsSnapshot = SharedArray< PairType >();
     }
 }
 
@@ -104,7 +119,7 @@ inline auto DictionarySnapshot< Derived, Key, Value >::GetValuesSnapshot() const
 {
     {
         LockGuard lock( m_snapshotMutex );
-        if ( ! m_modified )
+        if ( ! m_valuesModified )
         {
             return m_valuesSnapshot;
         }
@@ -119,7 +134,7 @@ inline auto DictionarySnapshot< Derived, Key, Value >::GetValuesSnapshot() const
     typename Derived::ConstLockedDictionary lockedDerived( derived );
     LockGuard lock( m_snapshotMutex );
 
-    if ( ! m_modified )
+    if ( ! m_valuesModified )
     {
         // The snapshot has been rebuilt by another thread.
         return m_valuesSnapshot;
@@ -134,9 +149,50 @@ inline auto DictionarySnapshot< Derived, Key, Value >::GetValuesSnapshot() const
     }
 
     m_valuesSnapshot = newValues;
-    m_modified = false;
+    m_valuesModified = false;
 
     return m_valuesSnapshot;
+}
+
+
+template< typename Derived, typename Key, typename Value >
+inline auto DictionarySnapshot< Derived, Key, Value >::GetPairsSnapshot() const -> PairsSnapshot
+{
+    {
+        LockGuard lock( m_snapshotMutex );
+        if ( ! m_pairsModified )
+        {
+            return m_pairsSnapshot;
+        }
+    }
+
+    /// Rebuild the snapshot ///
+
+    const Derived& derived = static_cast< const Derived& >( *this );
+
+    // ATTENTION: Always lock the derived before the snapshot mutex !!
+
+    typename Derived::ConstLockedDictionary lockedDerived( derived );
+    LockGuard lock( m_snapshotMutex );
+
+    if ( ! m_pairsModified )
+    {
+        // The snapshot has been rebuilt by another thread.
+        return m_pairsSnapshot;
+    }
+
+    SharedArray< PairType > newPairs( lockedDerived.Size() );
+    Uint index = 0;
+    for ( auto pair : lockedDerived )
+    {
+        newPairs[index] = pair;
+        ++ index;
+    }
+
+    m_pairsSnapshot = newPairs;
+    m_pairsModified = false;
+
+    return m_pairsSnapshot;
 }
 
 
