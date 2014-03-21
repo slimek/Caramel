@@ -17,6 +17,20 @@ SUITE( NamedValuesSuite )
 // Named Values Test
 //
 
+TEST( NamedValuesTrivialTest )
+{
+    NamedValues nv;
+
+    CHECK( true == nv.IsEmpty() );
+    CHECK( 0    == nv.Size() );
+
+    auto values = nv.GetValueMap();
+
+    CHECK( true == values.empty() );
+    CHECK( 0    == values.size() );
+}
+
+
 TEST( NamedValuesTest )
 {
     NamedValues nv;
@@ -129,7 +143,8 @@ TEST( NameValuesValueMapTest )
     nv[ "Reimu" ]  = "miko";
     nv[ "Marisa" ] = "witch";
 
-    CHECK( 3 == nv.Size() );
+    CHECK( false == nv.IsEmpty() );
+    CHECK( 3     == nv.Size() );
 
     const auto values = nv.GetValueMap();
 

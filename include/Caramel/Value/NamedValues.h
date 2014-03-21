@@ -66,7 +66,8 @@ public:
 
     /// Properties ///
 
-    Uint Size() const;
+    Bool IsEmpty() const;
+    Uint Size()    const;
 
 
     /// Access a Value ///

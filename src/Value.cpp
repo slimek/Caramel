@@ -217,6 +217,12 @@ void NamedValues::Init()
 // Properties
 //
 
+Bool NamedValues::IsEmpty() const
+{
+    return m_impl->m_valueEntries.empty();
+}
+
+
 Uint NamedValues::Size() const
 {
     return static_cast< Uint >( m_impl->m_valueEntries.size() );
