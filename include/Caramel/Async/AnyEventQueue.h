@@ -43,7 +43,7 @@ public:
     // This function has two effects:
     // 1. Unlink from all linked dispatchers.
     // 2. Discard all unprocessed events.
-    void Reset();
+    void UnlinkAll();
 
 
     //
@@ -127,14 +127,13 @@ inline Bool AnyEventQueue::TryPop( AnyEvent& evt )
 }
 
 
-inline void AnyEventQueue::Reset()
+inline void AnyEventQueue::UnlinkAll()
 {
     // Create a new impl before destroy the old impl,
     // to prevent the address is the same with the former.
 
-    auto oldImpl = m_impl;
-    m_impl = std::make_shared< Detail::AnyEventQueueImpl >();
-    oldImpl->Destroy();
+    m_impl->IncrementAge();
+    m_impl->Clear();
 }
 
 

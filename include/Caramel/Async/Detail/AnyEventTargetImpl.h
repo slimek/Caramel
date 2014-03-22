@@ -37,9 +37,17 @@ public:
     Bool IsDestroyed() const { return m_destroyed; }
 
 
+    /// Reference Aging ///
+
+    void IncrementAge();
+
+    Uint GetAge() const { return m_age; }
+
+
 private:
 
     Bool m_destroyed;
+    Uint m_age;
 };
 
 typedef std::shared_ptr< AnyEventTargetImpl > AnyEventTargetPtr;
@@ -52,6 +60,7 @@ typedef std::shared_ptr< AnyEventTargetImpl > AnyEventTargetPtr;
 
 inline AnyEventTargetImpl::AnyEventTargetImpl()
     : m_destroyed( false )
+    , m_age( 0 )
 {
 }
 
@@ -60,6 +69,12 @@ inline void AnyEventTargetImpl::Destroy()
 {
     CARAMEL_ASSERT( ! m_destroyed );
     m_destroyed = true;
+}
+
+
+inline void AnyEventTargetImpl::IncrementAge()
+{
+    ++ m_age;
 }
 
 

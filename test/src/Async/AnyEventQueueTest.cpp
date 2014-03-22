@@ -100,9 +100,9 @@ TEST( AnyEventQueueResetTest )
     CHECK( true == equeue.TryPop( event ));
     CHECK( 42 == event.Id() );
 
-    equeue.Reset();
+    equeue.UnlinkAll();
 
-    // After Reset(), the target reference in Dispatcher is marked "destroyed",
+    // After UnlinkAll(), the target reference in Dispatcher is marked "over-aged",
     // but not removed yet, until DispatchEvent() to update its target list.
 
     edisp.DispatchEvent( 51 );

@@ -7,7 +7,7 @@
 #include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Async/AnyEvent.h>
 #include <Caramel/Async/Detail/AnyEventTargetImpl.h>
-#include <Caramel/Concurrent/Set.h>
+#include <Caramel/Concurrent/HashMap.h>
 
 
 namespace Caramel
@@ -51,8 +51,8 @@ private:
     Int m_minEventId;
     Int m_maxEventId;
 
-    typedef Concurrent::SetWithSnapshot< AnyEventTargetPtr > TargetSet;
-    TargetSet m_targets;
+    typedef Concurrent::HashMapWithSnapshot< AnyEventTargetPtr, Uint > TargetMap;
+    TargetMap m_targets;
 };
 
 
@@ -74,7 +74,7 @@ inline AnyEventDispatcherImpl::AnyEventDispatcherImpl( Int minEventId, Int maxEv
 
 inline void AnyEventDispatcherImpl::LinkTarget( AnyEventTargetPtr&& target )
 {
-    m_targets.Insert( std::move( target ));
+    m_targets.Insert( std::move( target ), target->GetAge() );
 }
 
 
@@ -90,11 +90,13 @@ inline void AnyEventDispatcherImpl::UnlinkTarget( const AnyEventTargetPtr& targe
 
 inline void AnyEventDispatcherImpl::Dispatch( const AnyEvent& evt )
 {
-    auto targets = m_targets.GetSnapshot();
+    auto targets = m_targets.GetPairsSnapshot();
 
-    for ( auto target : targets )
+    for ( auto pair : targets )
     {
-        if ( target->IsDestroyed() )
+        auto target = pair.first;
+
+        if ( target->IsDestroyed() || target->GetAge() > pair.second )
         {
             m_targets.Erase( target );
             continue;
