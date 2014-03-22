@@ -5,9 +5,10 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
-#include <Caramel/Meta/Tags.h>
 #include <Caramel/Value/Detail/AnyCasters.h>
 #include <Caramel/Value/Detail/AnyHolders.h>
+#include <boost/utility/enable_if.hpp>
+#include <type_traits>
 
 
 namespace Caramel
@@ -38,14 +39,22 @@ public:
 
     Any() {}
 
+    Any( const Any& rhs );
+    Any( Any&& rhs );
+
     template< typename T >
     Any( const T& value );
 
-    template< typename T >
-    Any( T&& value, MoveTag );
 
+    //
+    // Construct by r-value
+    // - Use SFINAE to prevent ambiguous with move constructor.
+    //
     template< typename T >
-    Any& operator=( const T& value );
+    Any(
+        T&& value,
+        typename boost::disable_if< std::is_same< Any&, T > >::type* = nullptr
+    );
 
     
     /// Retrieve Value ///
@@ -84,6 +93,18 @@ inline Any MakeAny( const T& value )
 // Implementation
 //
 
+inline Any::Any( const Any& rhs )
+    : m_holder( rhs.m_holder )
+{
+}
+
+
+inline Any::Any( Any&& rhs )
+    : m_holder( std::move( rhs.m_holder ))
+{
+}
+
+
 template< typename T >
 inline Any::Any( const T& value )
     : m_holder( new typename Detail::AnyHolderSelect< T >::Type( value ))
@@ -92,19 +113,19 @@ inline Any::Any( const T& value )
 
 
 template< typename T >
-inline Any::Any( T&& value, MoveTag )
-    : m_holder( new typename Detail::AnyHolderSelect< T >::Type( std::move( value )))
+inline Any::Any(
+    T&& value,
+    typename boost::disable_if< std::is_same< Any&, T > >::type*
+)
+    : m_holder( new typename Detail::AnyHolderSelect<
+        std::remove_reference< T >::type >::Type( static_cast< T&& >( value )))
 {
 }
 
 
-template< typename T >
-inline Any& Any::operator=( const T& value )
-{
-    m_holder.reset( new typename Detail::AnyHolderSelect< T >::Type( value ));
-    return *this;
-}
-
+//
+// Retrieve Value
+//
 
 template< typename T >
 inline T Any::As() const

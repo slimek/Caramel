@@ -271,24 +271,38 @@ TEST( AnyAssignTest )
 }
 
 
+static Int s_copyCount = 0;
+static Int s_moveCount = 0;
+
+struct AnyItem
+{
+    AnyItem( Int value ) : value( value ) {}
+    AnyItem( const AnyItem& rhs ) : value( rhs.value ) { ++ s_copyCount; }
+    AnyItem( AnyItem&& rhs )      : value( rhs.value ) { ++ s_moveCount; rhs.value = 0; }
+
+    Int value;
+};
+
+
 TEST( AnyMoveTest )
 {
-    std::shared_ptr< Int > pi( new Int( 42 ));
-    CHECK( 1 == pi.use_count() );
+    AnyItem i1( 42 );
+    
+    CHECK( 0 == s_copyCount );
+    CHECK( 0 == s_moveCount );
 
-    auto pj = pi;
-    CHECK( 2 == pi.use_count() );
+    // Copy
+    Any a1( i1 );
+    CHECK( 1 == s_copyCount );
+    CHECK( 0 == s_moveCount );
 
-    Any a1( pj );
-    CHECK( 3 == pi.use_count() );
+    // Move
+    Any a2( AnyItem( 51 ));
+    CHECK( 1 == s_copyCount );
+    CHECK( 1 == s_moveCount );    
 
-    Any a2( std::move( pj ), MoveTag() );
-    CHECK( 3 == pi.use_count() );
-
-    Any a3( pi );
-    CHECK( 4 == pi.use_count() );
-
-    CHECK( 42 == *( a1.As< std::shared_ptr< Int >>() ));
+    CHECK( 42 == a1.As< AnyItem >().value );
+    CHECK( 51 == a2.As< AnyItem >().value );
 }
 
 

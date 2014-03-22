@@ -698,9 +698,6 @@
     <ClInclude Include="..\include\Caramel\Setup\CaramelDefs.h">
       <Filter>1. Public Packages\Setup</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\Meta\Tags.h">
-      <Filter>1. Public Packages\Meta</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">
