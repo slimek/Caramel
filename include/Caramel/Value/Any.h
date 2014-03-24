@@ -57,6 +57,18 @@ public:
     );
 
     
+    //
+    // Assignment
+    // - Use copy-and-swap idiom.
+    //   NOTES: C++11 requires an explicit assignment when you declare a move constructor.
+    //          But Visual C++ ingores this rule.
+    //
+
+    Any& operator=( Any rhs );
+    
+    friend void swap( Any& x, Any& y );
+
+
     /// Retrieve Value ///
 
     template< typename T >
@@ -85,6 +97,17 @@ template< typename T >
 inline Any MakeAny( const T& value )
 {
     return Any( value );
+}
+
+
+//
+// Swap
+// - Compatible with std::swap().
+//
+
+inline void swap( Any& x, Any& y )
+{
+    x.m_holder.swap( y.m_holder );
 }
 
 
@@ -118,9 +141,21 @@ inline Any::Any(
     typename boost::disable_if< std::is_same< Any&, T > >::type*
 )
     : m_holder( new typename Detail::AnyHolderSelect<
-        std::remove_reference< T >::type >::Type( static_cast< T&& >( value )))
+        typename std::remove_reference< T >::type >::Type( static_cast< T&& >( value )))
 {
 }
+
+
+//
+// Assignment
+//
+
+inline Any& Any::operator=( Any rhs )
+{
+    swap( *this, rhs );
+    return *this;
+}
+
 
 
 //
