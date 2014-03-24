@@ -86,10 +86,13 @@ public:
 
     /// Continuation ///
 
-    template< typename ThenFunction >
-    typename Detail::ThenFunctionTraits< ThenFunction, void >::TaskType
-    Then( const std::string& name, ThenFunction&& f );
+    //template< typename ThenFunction >
+    //typename Detail::ThenFunctionTraits< ThenFunction, void >::TaskType
+    //Then( const std::string& name, ThenFunction&& f );
 
+    template< typename ThenFunction >
+    typename Detail::ContinuationTraits< ThenFunction, void >::TaskType
+    Then( const std::string& name, ThenFunction&& f );
 };
 
 
@@ -194,20 +197,36 @@ inline Task< void >& Task< void >::DelayFor( const Ticks& duration )
 
 
 template< typename ThenFunction >
-inline typename Detail::ThenFunctionTraits< ThenFunction, void >::TaskType
+inline typename Detail::ContinuationTraits< ThenFunction, void >::TaskType
 Task< void >::Then( const std::string& name, ThenFunction&& f )
 {
-    typedef typename Detail::ThenFunctionTraits< ThenFunction, void >::ResultType ResultType;
-    typedef typename Detail::ThenFunctionTraits< ThenFunction, void >::TaskType TaskType;
+    typedef typename Detail::ContinuationTraits< ThenFunction, void >::HolderType HolderType;
+    typedef typename Detail::ContinuationTraits< ThenFunction, void >::TaskType TaskType;
 
     // Convert to Detail::TaskHolder explicitly.
     std::unique_ptr< Detail::TaskHolder > thenHolder =
-        MakeUnique< Detail::ThenWithTaskTask< ResultType, void >>( std::move( f ), *this );
+        MakeUnique< HolderType >( std::move( f ), *this );
 
     auto thenTask = TaskType( name, std::move( thenHolder ));
     this->AddContinuation( thenTask );
     return thenTask;
 }
+
+//template< typename ThenFunction >
+//inline typename Detail::ThenFunctionTraits< ThenFunction, void >::TaskType
+//Task< void >::Then( const std::string& name, ThenFunction&& f )
+//{
+//    typedef typename Detail::ThenFunctionTraits< ThenFunction, void >::ResultType ResultType;
+//    typedef typename Detail::ThenFunctionTraits< ThenFunction, void >::TaskType TaskType;
+//
+//    // Convert to Detail::TaskHolder explicitly.
+//    std::unique_ptr< Detail::TaskHolder > thenHolder =
+//        MakeUnique< Detail::ThenWithTaskTask< ResultType, void >>( std::move( f ), *this );
+//
+//    auto thenTask = TaskType( name, std::move( thenHolder ));
+//    this->AddContinuation( thenTask );
+//    return thenTask;
+//}
 
 
 ///////////////////////////////////////////////////////////////////////////////
