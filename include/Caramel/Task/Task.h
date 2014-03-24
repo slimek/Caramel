@@ -162,7 +162,7 @@ Task< AnteResult >::Then( const std::string& name, ThenFunction&& f )
 
     // Convert to Detail::TaskHolder explicitly.
     std::unique_ptr< Detail::TaskHolder > thenHolder =
-        MakeUnique< Detail::ThenTask< ResultType, AnteResult >>( std::move( f ), *this );
+        MakeUnique< Detail::ThenWithTaskTask< ResultType, AnteResult >>( std::move( f ), *this );
 
     auto thenTask = TaskType( name, std::move( thenHolder ));
     this->AddContinuation( thenTask );
@@ -202,7 +202,7 @@ Task< void >::Then( const std::string& name, ThenFunction&& f )
 
     // Convert to Detail::TaskHolder explicitly.
     std::unique_ptr< Detail::TaskHolder > thenHolder =
-        MakeUnique< Detail::ThenTask< ResultType, void >>( std::move( f ), *this );
+        MakeUnique< Detail::ThenWithTaskTask< ResultType, void >>( std::move( f ), *this );
 
     auto thenTask = TaskType( name, std::move( thenHolder ));
     this->AddContinuation( thenTask );

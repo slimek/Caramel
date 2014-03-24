@@ -106,11 +106,11 @@ private:
 
 
 //
-// Then Task
+// "Then with Task" Task
 //
 
 template< typename Result, typename AnteResult >
-class ThenTask : public BasicTask< Result >
+class ThenWithTaskTask : public BasicTask< Result >
 {
 public:
 
@@ -119,7 +119,7 @@ public:
 
     typedef std::function< Result( Task< AnteResult > ) > ThenFunction;
 
-    ThenTask( ThenFunction&& f, Task< AnteResult > antecedent );
+    ThenWithTaskTask( ThenFunction&& f, Task< AnteResult > antecedent );
 
     void Invoke() override;
 
@@ -131,17 +131,17 @@ private:
 
 
 //
-// Then Task - No result
+// "Then with Task" Task - No result
 //
 
 template< typename AnteResult >
-class ThenTask< void, AnteResult > : public BasicTask< void >
+class ThenWithTaskTask< void, AnteResult > : public BasicTask< void >
 {
 public:
 
     typedef std::function< void( Task< AnteResult > ) > ThenFunction;
 
-    ThenTask( ThenFunction&& f, Task< AnteResult > antecedent );
+    ThenWithTaskTask( ThenFunction&& f, Task< AnteResult > antecedent );
 
     void Invoke() override;
 
@@ -194,15 +194,15 @@ inline void RegularTask< void >::Invoke()
 
 
 //
-// ThenTask< Result >
+// ThenWithTaskTask< Result >
 //
 
 //
-// ThenTask< void >
+// ThenWithTaskTask< void >
 //
 
 template< typename AnteResult >
-inline ThenTask< void, AnteResult >::ThenTask( ThenFunction&& f, Task< AnteResult > antecedent )
+inline ThenWithTaskTask< void, AnteResult >::ThenWithTaskTask( ThenFunction&& f, Task< AnteResult > antecedent )
     : m_thenFunction( std::move( f ))
     , m_antecedent( antecedent )
 {
@@ -210,7 +210,7 @@ inline ThenTask< void, AnteResult >::ThenTask( ThenFunction&& f, Task< AnteResul
 
 
 template< typename AnteResult >
-inline void ThenTask< void, AnteResult >::Invoke()
+inline void ThenWithTaskTask< void, AnteResult >::Invoke()
 {
     m_thenFunction( m_antecedent );
 }
