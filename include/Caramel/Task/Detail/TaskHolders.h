@@ -153,6 +153,51 @@ private:
 };
 
 
+//
+// "Then with Void" Task 
+//
+
+template< typename Result >
+class ThenWithVoidTask : public BasicTask< Result >
+{
+public:
+
+    using typename BasicTask< Result >::ResultType;
+    using BasicTask< Result >::m_result;
+
+    typedef std::function< Result() > ThenFunction;
+
+    ThenWithVoidTask( ThenFunction&& f, const TaskCore& );
+
+    void Invoke() override;
+
+private:
+
+    ThenFunction m_thenFunction;
+};
+
+
+//
+// "Then with Void" Task - No Result
+//
+
+template<>
+class ThenWithVoidTask< void > : public BasicTask< void >
+{
+public:
+
+    typedef std::function< void() > ThenFunction;
+
+    ThenWithVoidTask( ThenFunction&& f, const TaskCore& );
+
+    void Invoke() override;
+
+private:
+
+    ThenFunction m_thenFunction;
+};
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Implementation
@@ -197,6 +242,21 @@ inline void RegularTask< void >::Invoke()
 // ThenWithTaskTask< Result >
 //
 
+template< typename Result, typename AnteResult >
+inline ThenWithTaskTask< Result, AnteResult >::ThenWithTaskTask( ThenFunction&& f, Task< AnteResult > antecedent )
+    : m_thenFunction( std::move( f ))
+    , m_antecedent( antecedent )
+{
+}
+
+
+template< typename Result, typename AnteResult >
+inline void ThenWithTaskTask< Result, AnteResult >::Invoke()
+{
+    m_result = m_thenFunction( m_antecedent );
+}
+
+
 //
 // ThenWithTaskTask< void >
 //
@@ -213,6 +273,22 @@ template< typename AnteResult >
 inline void ThenWithTaskTask< void, AnteResult >::Invoke()
 {
     m_thenFunction( m_antecedent );
+}
+
+
+//
+// ThenWithVoidTask< void >
+//
+
+inline ThenWithVoidTask< void >::ThenWithVoidTask( ThenFunction&& f, const TaskCore& )
+    : m_thenFunction( std::move( f ))
+{
+}
+
+
+inline void ThenWithVoidTask< void >::Invoke()
+{
+    m_thenFunction();
 }
 
 

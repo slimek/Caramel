@@ -119,6 +119,25 @@ TEST( TaskPollerThenTest )
         CHECK( true == done4 && true == task3.IsFaulted() );
     }
 
+    /// Then with Void ///
+    {
+        Bool done5 = false;
+        Bool done6 = false;
+
+        auto task5 = MakeTask( "Task5", [&] { done5 = true; } );
+
+        auto task6 = task5.Then( "Task6",
+        [&] ()
+        {
+            done6 = true;
+        });
+
+        poller.Submit( task5 );
+        poller.PollFor( Ticks( 100 ));
+
+        CHECK( true == done5 && true == done6 );
+    }
+
 }
 
 

@@ -241,6 +241,9 @@
     <ClCompile Include="..\src\DateTime\TimeOfDayTest.cpp">
       <Filter>2. Tests\DateTime</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Task\ContinuationTraitsTest.cpp">
+      <Filter>2. Tests\Task</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">
