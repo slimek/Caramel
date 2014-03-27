@@ -40,7 +40,7 @@ public:
 
     /// Implements AnyEventTargetImpl ///
 
-    void Send( const AnyEvent& evt ) override { this->Push( evt ); }
+    void Send( const AnyEvent& evt, Uint age ) override;
 
 
 private:
@@ -57,6 +57,16 @@ private:
 //
 // Implementation
 //
+
+inline void AnyEventQueueImpl::Send( const AnyEvent& evt, Uint age )
+{
+    UniqueLock ulock = this->CompareAge( age );
+    if ( ulock )
+    {
+        this->Push( evt );
+    }
+}
+
 
 //
 // To Prevent Ambiguous IDs

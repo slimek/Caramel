@@ -85,7 +85,7 @@ TEST( AnyEventQueueRegisterIdRangeTest )
 }
 
 
-TEST( AnyEventQueueResetTest )
+TEST( AnyEventQueueUnlinkTest )
 {
     AnyEventDispatcher edisp( 0, 100 );
     AnyEventQueue equeue;
@@ -111,6 +111,25 @@ TEST( AnyEventQueueResetTest )
 
     CHECK( false == equeue.TryPop( event ));
 
+    
+    // Attach to another Dispatcher
+
+    AnyEventDispatcher edisp2( 101, 200 );
+
+    edisp2.LinkTarget( equeue );
+    edisp2.DispatchEvent( 125 );
+
+    CHECK( true == equeue.TryPop( event ));
+    CHECK( 125  == event.Id() );
+
+
+    // Attach to the first Dispatcher again
+
+    edisp.LinkTarget( equeue );
+    edisp.DispatchEvent( 19 );
+
+    CHECK( true == equeue.TryPop( event ));
+    CHECK( 19   == event.Id() );
 }
 
 

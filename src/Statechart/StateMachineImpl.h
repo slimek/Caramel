@@ -63,7 +63,7 @@ public:
 
     /// Implements AnyEventTargetImpl ///
 
-    void Send( const AnyEvent& event ) override;
+    void Send( const AnyEvent& event, Uint age ) override;
 
 
 private:

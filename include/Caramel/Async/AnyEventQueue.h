@@ -129,9 +129,6 @@ inline Bool AnyEventQueue::TryPop( AnyEvent& evt )
 
 inline void AnyEventQueue::UnlinkAll()
 {
-    // Create a new impl before destroy the old impl,
-    // to prevent the address is the same with the former.
-
     m_impl->IncrementAge();
     m_impl->Clear();
 }

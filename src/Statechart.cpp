@@ -308,9 +308,13 @@ Detail::AnyEventTargetPtr StateMachine::GetTargetImpl() const
 }
 
 
-void StateMachineImpl::Send( const AnyEvent& event )
+void StateMachineImpl::Send( const AnyEvent& event, Uint age )
 {
-    this->PostEvent( event );
+    UniqueLock ulock = this->CompareAge( age );
+    if ( ulock )
+    {
+        this->PostEvent( event );
+    }
 }
 
 

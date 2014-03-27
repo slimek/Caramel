@@ -43,7 +43,7 @@ public:
 
     /// Implements AnyEventTargetImpl ///
 
-    void Send( const AnyEvent& evt ) override { this->Dispatch( evt ); }
+    void Send( const AnyEvent& evt, Uint age ) override;
 
 
 private:
@@ -88,25 +88,34 @@ inline void AnyEventDispatcherImpl::UnlinkTarget( const AnyEventTargetPtr& targe
 // Operations
 //
 
-inline void AnyEventDispatcherImpl::Dispatch( const AnyEvent& evt )
+inline void AnyEventDispatcherImpl::Dispatch( const AnyEvent& event )
 {
     auto targets = m_targets.GetPairsSnapshot();
 
     for ( auto pair : targets )
     {
         auto target = pair.first;
+        const Uint age = pair.second;
 
-        if ( target->IsDestroyed() || target->GetAge() > pair.second )
+        if ( target->IsDestroyed() || target->GetAge() > age )
         {
             m_targets.Erase( target );
             continue;
         }
 
-        target->Send( evt );
+        target->Send( event, age );
     }
 }
 
 
+inline void AnyEventDispatcherImpl::Send( const AnyEvent& event, Uint age )
+{
+    UniqueLock ulock = this->CompareAge( age );
+    if ( ulock )
+    {
+        this->Dispatch( event );
+    }
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////
