@@ -185,7 +185,7 @@ void TaskImpl::AddContinuation( TaskPtr continuation )
     {
         LockGuard lock( m_stateMutex );
 
-        if ( TASK_S_RAN_TO_COMP == m_state )
+        if ( this->IsDone() )
         {
             canSubmit = true;
         }
