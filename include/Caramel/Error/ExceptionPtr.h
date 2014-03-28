@@ -54,6 +54,14 @@ public:
 
 private:
 
+    friend class AnyFailurePtr;
+
+    explicit ExceptionPtr(
+        const std::shared_ptr< Detail::ExceptionHolder >& holder );
+
+    
+    /// Data Members ///
+
     std::shared_ptr< Detail::ExceptionHolder > m_holder;
 };
 
@@ -61,8 +69,35 @@ private:
 //
 // Auxiliary Functions
 //
-
+ 
+// You may call this function in catch {} scope.
 ExceptionPtr CurrentException();
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Any Failure Pointer
+//
+//   Specialized ExceptionPtr, to provide AnyFailure operations.
+//
+//
+
+class AnyFailurePtr : public ExceptionPtr
+{
+public:
+
+    AnyFailurePtr();
+
+    // Return a null pointer if e is not an AnyFailure.
+    static AnyFailurePtr CastFrom( const ExceptionPtr& e );
+
+    const AnyFailure* operator->() const;
+
+private:
+
+    explicit AnyFailurePtr(
+        const std::shared_ptr< Detail::CaramelAnyFailureHolder >& holder );
+};
 
 
 ///////////////////////////////////////////////////////////////////////////////

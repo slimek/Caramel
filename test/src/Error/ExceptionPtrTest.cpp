@@ -99,6 +99,67 @@ TEST( ExceptionPtrTest )
 }
 
 
+TEST( AnyFailurePtrTest )
+{
+    /// std::exception ///
+
+    ExceptionPtr px1;
+
+    try
+    {
+        throw std::logic_error( "Alice in Shanghai" );
+    }
+    catch ( ... )
+    {
+        px1 = CurrentException();
+    }
+
+    AnyFailurePtr pf1 = AnyFailurePtr::CastFrom( px1 );
+
+    CHECK( ! pf1 );
+    CHECK( nullptr == pf1.operator->() );
+
+
+    /// AnyFailure ///
+
+    ExceptionPtr px2;
+
+    try
+    {
+        throw AnyFailure( 42 ).What( "The Big Answer" );
+    }
+    catch ( ... )
+    {
+        px2 = CurrentException();
+    }
+
+    AnyFailurePtr pf2 = AnyFailurePtr::CastFrom( px2 );
+
+    CHECK( pf2 );
+    CHECK( 42 == pf2->Id() );
+    CHECK( "The Big Answer" == pf2->What() );
+
+
+    /// Exception ///
+
+    ExceptionPtr px3;
+
+    try
+    {
+        CARAMEL_THROW( "Spell Break!" );
+    }
+    catch ( ... )
+    {
+        px3 = CurrentException();
+    }
+
+    AnyFailurePtr pf3 = AnyFailurePtr::CastFrom( px3 );
+
+    CHECK( ! pf3 );
+    CHECK( nullptr == pf3.operator->() );
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE ExceptionPtrSuite

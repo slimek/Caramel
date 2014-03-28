@@ -31,6 +31,7 @@ namespace Caramel
 //   Detail::ExceptionCatcherCore
 //   ExceptionPtr
 //     Exception holders
+//   AnyFailurePtr
 //   Alert
 //
 
@@ -222,6 +223,12 @@ ExceptionPtr::ExceptionPtr( const Caramel::AnyFailure& e )
 }
 
 
+ExceptionPtr::ExceptionPtr( const std::shared_ptr< Detail::ExceptionHolder >& holder )
+    : m_holder( holder )
+{
+}
+
+
 std::string ExceptionPtr::TracingMessage() const
 {
     return m_holder->TracingMessage();
@@ -324,6 +331,41 @@ std::string WindowsExceptionHolder::What() const
 
 
 } // namespace Detail
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Any Failure Pointer
+//
+
+AnyFailurePtr::AnyFailurePtr()
+{
+}
+
+
+AnyFailurePtr::AnyFailurePtr( const std::shared_ptr< Detail::CaramelAnyFailureHolder >& holder )
+    : ExceptionPtr( holder )
+{
+}
+
+
+AnyFailurePtr AnyFailurePtr::CastFrom( const ExceptionPtr& e )
+{
+    const auto anyFailure =
+        std::dynamic_pointer_cast< Detail::CaramelAnyFailureHolder >( e.m_holder );
+
+    // Returns null if e.m_holder is not an AnyFailure.           
+    return AnyFailurePtr( anyFailure );
+}
+
+
+const AnyFailure* AnyFailurePtr::operator->() const
+{
+    const auto failure = std::dynamic_pointer_cast< Detail::CaramelAnyFailureHolder >( m_holder );
+
+    return failure ? failure->GetPointer()
+                   : nullptr;
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////

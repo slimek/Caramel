@@ -68,6 +68,9 @@ public:
 
     std::string TracingMessage() const override;
 
+    const Caramel::AnyFailure* GetPointer() const { return &m_exception; }
+
+
 private:
 
     Caramel::AnyFailure m_exception;
