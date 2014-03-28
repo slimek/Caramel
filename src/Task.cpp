@@ -121,7 +121,7 @@ void TaskCore::Run()
 Bool TaskCore::IsValid() const { return m_impl->IsValid(); }
 Bool TaskCore::IsDone()  const { return m_impl->IsDone(); }
 
-Bool TaskCore::IsFaulted() const { return TaskImpl::TASK_S_FAULTED == m_impl->m_state; }
+Bool TaskCore::IsFaulted() const { return TASK_STATE_FAULTED == m_impl->m_state; }
 
 std::string TaskCore::Name() const { return m_impl->m_name; }
 
@@ -137,7 +137,7 @@ const TaskHolder* TaskCore::GetHolder() const { return m_impl->m_holder.get(); }
 
 TaskImpl::TaskImpl()
     : m_name( "Not-a-task" )
-    , m_state( TASK_S_INITIAL )
+    , m_state( TASK_STATE_INITIAL )
     , m_hasDelay( false )
     , m_executor( nullptr )
     , m_exceptionRethrown( false )
@@ -148,7 +148,7 @@ TaskImpl::TaskImpl()
 TaskImpl::TaskImpl( const std::string& name, std::unique_ptr< TaskHolder >&& holder )
     : m_name( name )
     , m_holder( std::move( holder ))
-    , m_state( TASK_S_INITIAL )
+    , m_state( TASK_STATE_INITIAL )
     , m_hasDelay( false )
     , m_executor( nullptr )
     , m_exceptionRethrown( false )
@@ -215,7 +215,7 @@ void TaskImpl::Run()
 {
     {
         LockGuard lock( m_stateMutex );
-        m_state = TASK_S_RUNNING;
+        m_state = TASK_STATE_RUNNING;
     }
 
     auto xc = CatchException( [=] { m_holder->Invoke(); } );
@@ -228,11 +228,11 @@ void TaskImpl::Run()
         if ( xc )
         {
             m_exception = xc.Exception();
-            m_state = TASK_S_FAULTED;
+            m_state = TASK_STATE_FAULTED;
         }
         else
         {
-            m_state = TASK_S_RAN_TO_COMP;
+            m_state = TASK_STATE_RAN_TO_COMP;
         }
 
         continuations = m_continuations.GetSnapshot();
@@ -272,7 +272,7 @@ void TaskImpl::Wait() const
 // - TODO: Not complete yet.
 //
 
-Bool TaskImpl::TransitFromTo( State fromState, State toState )
+Bool TaskImpl::TransitFromTo( TaskState fromState, TaskState toState )
 {
     LockGuard lock( m_stateMutex );
 

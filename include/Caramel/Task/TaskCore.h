@@ -19,6 +19,7 @@ namespace Caramel
 //
 
 class TaskImpl;
+enum TaskState : Int;
 
 class TaskCore
 {
@@ -76,6 +77,27 @@ protected:
 
     std::shared_ptr< TaskImpl > m_impl;
 
+};
+
+
+//
+// Task State
+//
+
+enum TaskState : Int
+{
+    TASK_STATE_UNDEF        = 0,
+
+    TASK_STATE_INITIAL      = 0x01,
+    TASK_STATE_DELAYING     = 0x02,
+    TASK_STATE_STRANDING    = 0x04,
+    TASK_STATE_READY        = 0x08,
+    TASK_STATE_RUNNING      = 0x10,
+
+    // Done states
+    TASK_STATE_CANCELED     = 0x20,
+    TASK_STATE_FAULTED      = 0x40,
+    TASK_STATE_RAN_TO_COMP  = 0x80,  // Ran to Completion
 };
 
 

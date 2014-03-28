@@ -28,8 +28,6 @@ class TaskImpl
 {
     friend class TaskCore;
 
-    enum State : Int;
-    
 public:
 
     TaskImpl();  // Not-a-task
@@ -53,13 +51,13 @@ public:
 
     /// State Transition ///
 
-    Bool TransitFromTo( State fromState, State toState );
+    Bool TransitFromTo( TaskState fromState, TaskState toState );
 
 
     /// Properties ///
 
     Bool IsValid() const { return static_cast< Bool >( m_holder ); }  // *1
-    Bool IsDone()  const { return TASK_S_RUNNING < m_state; }
+    Bool IsDone()  const { return TASK_STATE_RUNNING < m_state; }
 
     // NOTES:
     // 1 - In Android NDK r9b, std::shared_prt can't convert to Bool implicitly.
@@ -78,22 +76,7 @@ private:
 
     /// State ///
 
-    enum State : Int
-    {
-        TASK_S_UNDEF        = 0,
-
-        TASK_S_INITIAL      = 0x01,
-        TASK_S_DELAYING     = 0x02,
-        TASK_S_WAITING      = 0x04,
-        TASK_S_READY        = 0x08,
-        TASK_S_RUNNING      = 0x10,
-
-        // Done states
-        TASK_S_CANCELED     = 0x20,
-        TASK_S_FAULTED      = 0x40,
-        TASK_S_RAN_TO_COMP  = 0x80, // Ran to Completion
-    
-    } m_state;
+    TaskState m_state;
 
     mutable std::mutex m_stateMutex;
     mutable std::condition_variable m_becomesDone;
