@@ -178,6 +178,54 @@ TEST( TaskWithExceptionTest )
 }
 
 
+TEST( TaskWaitOrCatchTest )
+{
+    StdAsync async;
+    std::string what;
+
+    auto task1 = MakeTask( "Task1", [] {} );
+    async.Submit( task1 );
+
+
+    /// Ran to Completing ///
+
+    const auto result1 = task1.WaitOrCatch();
+
+    CHECK( TASK_STATE_RAN_TO_COMP == result1.doneState );
+    CHECK( ! result1.anyFailure );
+    CHECK( ! result1.exception );
+
+
+    /// Fault with std::exception ///
+
+    auto task2 = MakeTask( "Task2", [] { throw std::exception( "bad" ); } );
+    async.Submit( task2 );
+
+    const auto result2 = task2.WaitOrCatch();
+
+    CHECK( TASK_STATE_FAULTED == result2.doneState );
+    CHECK( ! result2.anyFailure );
+    CHECK( result2.exception );
+
+    CHECK( nullptr == result2.anyFailure.operator->() );
+
+
+    /// Fault with AnyFailure ///
+
+    auto task3 = MakeTask( "Task3", [] { throw AnyFailure( 42, "Cirno" ); } );
+    async.Submit( task3 );
+
+    const auto result3 = task3.WaitOrCatch();
+
+    CHECK( TASK_STATE_FAULTED == result3.doneState );
+    CHECK( result3.anyFailure );
+    CHECK( result3.exception );
+
+    CHECK( 42      == result3.anyFailure->Id() );
+    CHECK( "Cirno" == result3.anyFailure->Value< std::string >() );
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE TaskSuite

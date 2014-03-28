@@ -47,6 +47,8 @@ public:
     void Run();
 
     void Wait() const;
+    
+    TaskCore::WaitOrCatchResult WaitOrCatch() const;
 
 
     /// State Transition ///
@@ -66,6 +68,8 @@ public:
 private:
 
     void NotifyDone();
+
+    void DoWait() const;
 
 
     /// Data Members ///
@@ -99,7 +103,7 @@ private:
     TaskQueue m_continuations;
 
     ExceptionPtr m_exception;
-    mutable Bool m_exceptionRethrown;
+    mutable Bool m_exceptionHandled;
     
 };
 

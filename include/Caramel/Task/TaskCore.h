@@ -6,6 +6,7 @@
 
 #include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Chrono/TickClock.h>
+#include <Caramel/Error/ExceptionPtr.h>
 #include <Caramel/Task/Detail/TaskFwd.h>
 #include <Caramel/Task/Detail/TaskHolders.h>
 
@@ -47,6 +48,10 @@ public:
     Ticks GetDelayDuration() const;
 
     void Wait() const;  // Wait until done.
+
+    struct WaitOrCatchResult;
+
+    WaitOrCatchResult WaitOrCatch() const;
 
     
     //
@@ -98,6 +103,23 @@ enum TaskState : Int
     TASK_STATE_CANCELED     = 0x20,
     TASK_STATE_FAULTED      = 0x40,
     TASK_STATE_RAN_TO_COMP  = 0x80,  // Ran to Completion
+};
+
+
+//
+// Task Wait or Catch Result
+//
+
+struct TaskCore::WaitOrCatchResult
+{
+    WaitOrCatchResult()
+        : doneState( TASK_STATE_UNDEF )
+    {}
+
+    TaskState doneState;
+
+    AnyFailurePtr anyFailure;
+    ExceptionPtr  exception;
 };
 
 

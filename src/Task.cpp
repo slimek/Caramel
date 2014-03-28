@@ -78,6 +78,14 @@ void TaskCore::Wait() const
 }
 
 
+TaskCore::WaitOrCatchResult TaskCore::WaitOrCatch() const
+{
+    CARAMEL_CHECK( m_impl->IsValid() );
+    return m_impl->WaitOrCatch();
+}
+
+
+
 //
 // Internal Functions - Call by TaskExecutor
 //
@@ -140,7 +148,7 @@ TaskImpl::TaskImpl()
     , m_state( TASK_STATE_INITIAL )
     , m_hasDelay( false )
     , m_executor( nullptr )
-    , m_exceptionRethrown( false )
+    , m_exceptionHandled( false )
 {
 }
 
@@ -151,7 +159,7 @@ TaskImpl::TaskImpl( const std::string& name, std::unique_ptr< TaskHolder >&& hol
     , m_state( TASK_STATE_INITIAL )
     , m_hasDelay( false )
     , m_executor( nullptr )
-    , m_exceptionRethrown( false )
+    , m_exceptionHandled( false )
 {
 }
 
@@ -160,7 +168,7 @@ TaskImpl::~TaskImpl()
 {
     // Trace the exception if it isn't rethrown.
 
-    if ( m_exception && ! m_exceptionRethrown )
+    if ( m_exception && ! m_exceptionHandled )
     {
         CARAMEL_TRACE_WARN( "Task %s throws:\n%s", m_name, m_exception.TracingMessage() );
     }
@@ -250,19 +258,44 @@ void TaskImpl::Run()
 
 void TaskImpl::Wait() const
 {
-    {
-        UniqueLock ulock( m_stateMutex );
-
-        while ( ! this->IsDone() )
-        {
-            m_becomesDone.wait( ulock );
-        }
-    }
+    this->DoWait();
 
     if ( m_exception )
     {
-        m_exceptionRethrown = true;
+        m_exceptionHandled = true;
         m_exception.Rethrow();
+    }
+}
+
+
+TaskCore::WaitOrCatchResult TaskImpl::WaitOrCatch() const
+{
+    this->DoWait();
+
+    TaskCore::WaitOrCatchResult result;
+    result.doneState = m_state;
+
+    if ( m_exception )
+    {
+        result.exception = m_exception;
+
+        // Results in a null if m_exception is not an AnyFailure.
+        result.anyFailure = AnyFailurePtr::CastFrom( m_exception );
+
+        m_exceptionHandled = true;
+    }
+
+    return result;
+}
+
+
+void TaskImpl::DoWait() const
+{
+    UniqueLock ulock( m_stateMutex );
+
+    while ( ! this->IsDone() )
+    {
+        m_becomesDone.wait( ulock );
     }
 }
 
