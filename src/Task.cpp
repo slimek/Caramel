@@ -78,10 +78,10 @@ void TaskCore::Wait() const
 }
 
 
-TaskCore::WaitOrCatchResult TaskCore::WaitOrCatch() const
+TaskCore::CatchResult TaskCore::Catch() const
 {
     CARAMEL_CHECK( m_impl->IsValid() );
-    return m_impl->WaitOrCatch();
+    return m_impl->Catch();
 }
 
 
@@ -268,11 +268,11 @@ void TaskImpl::Wait() const
 }
 
 
-TaskCore::WaitOrCatchResult TaskImpl::WaitOrCatch() const
+TaskCore::CatchResult TaskImpl::Catch() const
 {
     this->DoWait();
 
-    TaskCore::WaitOrCatchResult result;
+    TaskCore::CatchResult result;
     result.doneState = m_state;
 
     if ( m_exception )

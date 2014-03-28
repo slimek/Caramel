@@ -47,11 +47,12 @@ public:
     Bool  HasDelay()         const;
     Ticks GetDelayDuration() const;
 
-    void Wait() const;  // Wait until done.
+    // Wait until done. Throws exception if faulted.
+    void Wait() const;
 
-    struct WaitOrCatchResult;
-
-    WaitOrCatchResult WaitOrCatch() const;
+    // Wait until done. If faulted, you can examine the exception in its result.
+    struct CatchResult;
+    CatchResult Catch() const;
 
     
     //
@@ -107,12 +108,12 @@ enum TaskState : Int
 
 
 //
-// Task Wait or Catch Result
+// Task Catch Result
 //
 
-struct TaskCore::WaitOrCatchResult
+struct TaskCore::CatchResult
 {
-    WaitOrCatchResult()
+    CatchResult()
         : doneState( TASK_STATE_UNDEF )
     {}
 

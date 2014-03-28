@@ -48,7 +48,7 @@ public:
 
     void Wait() const;
     
-    TaskCore::WaitOrCatchResult WaitOrCatch() const;
+    TaskCore::CatchResult Catch() const;
 
 
     /// State Transition ///

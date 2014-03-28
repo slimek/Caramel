@@ -189,7 +189,7 @@ TEST( TaskWaitOrCatchTest )
 
     /// Ran to Completing ///
 
-    const auto result1 = task1.WaitOrCatch();
+    const auto result1 = task1.Catch();
 
     CHECK( TASK_STATE_RAN_TO_COMP == result1.doneState );
     CHECK( ! result1.anyFailure );
@@ -201,7 +201,7 @@ TEST( TaskWaitOrCatchTest )
     auto task2 = MakeTask( "Task2", [] { throw std::exception( "bad" ); } );
     async.Submit( task2 );
 
-    const auto result2 = task2.WaitOrCatch();
+    const auto result2 = task2.Catch();
 
     CHECK( TASK_STATE_FAULTED == result2.doneState );
     CHECK( ! result2.anyFailure );
@@ -215,7 +215,7 @@ TEST( TaskWaitOrCatchTest )
     auto task3 = MakeTask( "Task3", [] { throw AnyFailure( 42, "Cirno" ); } );
     async.Submit( task3 );
 
-    const auto result3 = task3.WaitOrCatch();
+    const auto result3 = task3.Catch();
 
     CHECK( TASK_STATE_FAULTED == result3.doneState );
     CHECK( result3.anyFailure );
