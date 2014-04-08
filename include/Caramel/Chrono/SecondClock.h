@@ -60,6 +60,10 @@ public:
     // Removing the fraction part, results in an integral value.
     void Trunc();
     static Seconds TruncFrom( const Seconds& s );
+
+    // Results in quotient and remainder.
+    struct DivideResult;
+    DivideResult DivideBy( const Seconds& divisor ) const;
 };
 
 
@@ -166,6 +170,28 @@ inline void Seconds::Trunc()
 inline Seconds Seconds::TruncFrom( const Seconds& s )
 {
     return Seconds( Math::Trunc( s.ToDouble() ));
+}
+
+
+struct Seconds::DivideResult
+{
+    DivideResult() : quotient( 0 ) {}
+
+    Int64   quotient;
+    Seconds remainder;
+};
+
+
+inline Seconds::DivideResult Seconds::DivideBy( const Seconds& divisor ) const
+{
+    const Double q = Math::Trunc( this->count() / divisor.count() );
+
+    DivideResult result;
+
+    result.quotient  = static_cast< Int64 >( q );
+    result.remainder = Seconds( this->count() - ( divisor.count() * q ));
+    
+    return result;
 }
 
 
