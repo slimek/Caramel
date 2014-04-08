@@ -16,6 +16,9 @@ namespace Math
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Truncation Functions
+// - Round to zero. For example:
+//     3.7  ->  3
+//    -4.6  ->  4
 //
 
 Float  Trunc( Float  value );
