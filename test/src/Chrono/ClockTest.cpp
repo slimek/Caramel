@@ -84,31 +84,58 @@ TEST( SecondClockTest )
 
 TEST( SecondsDivideTest )
 {
-    const Seconds n1( 8.5 );
-    const Seconds d1( 2.0 );
+    /// Operators ///
+    {
+        const Seconds n1( 8.5 );
+        const Seconds d1( 2.0 );
 
-    const auto r1 = n1.DivideBy( d1 );
-
-    CHECK( 4 == r1.quotient );
-    CHECK( Seconds( 0.5 ) == r1.remainder );
-
-
-    const Seconds n2( 4218 );
-    const Seconds d2( 60 );
-
-    const auto r2 = n2.DivideBy( d2 );
-
-    CHECK( 70 == r2.quotient );
-    CHECK( Seconds( 18 ) == r2.remainder );
+        CHECK( 4.25            == n1 / d1 );
+        CHECK( Seconds( 4.25 ) == n1 / 2 );
+        CHECK( Seconds( 0.5 )  == n1 % d1 );
 
 
-    const Seconds n3( 9313 );
-    const Seconds d3( 67 );
+        const Seconds n2( 4218 );
+        const Seconds d2( 60 );
 
-    const auto r3 = n3.DivideBy( d3 );
+        CHECK( 70.3          == n2 / d2 );
+        CHECK( Seconds( 18 ) == n2 % d2 );
 
-    CHECK( 139 == r3.quotient );
-    CHECK( Seconds::Zero() == r3.remainder );
+
+        const Seconds n3( 9313 );
+        const Seconds d3( 67 );
+
+        CHECK( 139             == n3 / d3 );
+        CHECK( Seconds::Zero() == n3 % d3 );
+    }
+
+    /// Divide By ///
+    {
+        const Seconds n1( 8.5 );
+        const Seconds d1( 2.0 );
+
+        const auto r1 = n1.DivideBy( d1 );
+
+        CHECK( 4 == r1.quotient );
+        CHECK( Seconds( 0.5 ) == r1.remainder );
+
+
+        const Seconds n2( 4218 );
+        const Seconds d2( 60 );
+
+        const auto r2 = n2.DivideBy( d2 );
+
+        CHECK( 70 == r2.quotient );
+        CHECK( Seconds( 18 ) == r2.remainder );
+
+
+        const Seconds n3( 9313 );
+        const Seconds d3( 67 );
+
+        const auto r3 = n3.DivideBy( d3 );
+
+        CHECK( 139 == r3.quotient );
+        CHECK( Seconds::Zero() == r3.remainder );
+    }
 }
 
 

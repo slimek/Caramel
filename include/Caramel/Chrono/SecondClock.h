@@ -9,6 +9,7 @@
 #include <Caramel/Chrono/Stopwatch.h>
 #include <Caramel/Math/Floating.h>
 #include <Caramel/Numeric/NumberConvertible.h>
+#include <cmath>
 
 
 namespace Caramel
@@ -56,6 +57,17 @@ public:
 
 
     /// Operators ///
+
+    friend Double operator/( const Seconds& lhs, const Seconds& rhs );
+
+    // T souble be converible to Double
+    template< typename T >
+    friend Seconds operator/( const Seconds& dur, const T& scalar );
+
+    friend Seconds operator%( const Seconds& dur, const Seconds& period );
+
+
+    /// Operations ///
 
     // Removing the fraction part, results in an integral value.
     void Trunc();
@@ -161,6 +173,35 @@ inline Seconds::Seconds( Double seconds )
 }
 
 
+//
+// Seconds - Operators
+//
+
+inline Double operator/( const Seconds& lhs, const Seconds& rhs )
+{
+    return static_cast< const Seconds::Inherited& >( lhs )
+         / static_cast< const Seconds::Inherited& >( rhs );
+}
+
+
+template< typename T >
+inline Seconds operator/( const Seconds& dur, const T& scalar )
+{
+    return static_cast< const Seconds::Inherited& >( dur )
+         / static_cast< Double >( scalar );
+}
+
+
+inline Seconds operator%( const Seconds& dur, const Seconds& period )
+{
+    return Seconds( std::fmod( dur.count(), period.count() ));
+}
+
+
+//
+// Seconds - Operations
+//
+
 inline void Seconds::Trunc()
 {
     *this = TruncFrom( *this );
@@ -184,13 +225,18 @@ struct Seconds::DivideResult
 
 inline Seconds::DivideResult Seconds::DivideBy( const Seconds& divisor ) const
 {
-    const Double q = Math::Trunc( this->count() / divisor.count() );
-
     DivideResult result;
 
-    result.quotient  = static_cast< Int64 >( q );
-    result.remainder = Seconds( this->count() - ( divisor.count() * q ));
+    result.quotient  = static_cast< Int64 >( Caramel::operator/( *this, divisor ));
+    result.remainder = Caramel::operator%( *this, divisor );
     
+    //
+    // TODO: In VC++ 2012, the below code doesn't compile. I don't know why...
+    //
+    // result.quotient  = static_cast< Int64 >( *this / divisor );
+    // result.remainder = *this % divisor;
+    //
+
     return result;
 }
 
@@ -211,8 +257,24 @@ inline SecondPoint::SecondPoint( Inherited&& tpoint )
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-
 } // namespace Caramel
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Traits helper for Seconds' division.
+//
+
+namespace boost { namespace chrono { namespace detail
+{
+
+template<>
+struct is_duration< ::Caramel::Seconds > : boost::true_type {};
+
+
+} } } // namespace boost::chrono::detail
+
+
+///////////////////////////////////////////////////////////////////////////////
 
 #endif // __CARAMEL_CHRONO_SECOND_CLOCK_H
