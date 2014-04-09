@@ -45,6 +45,16 @@ TEST( FormatIntegerTest )
 }
 
 
+TEST( FormatFloatingTest )
+{
+    CHECK( "Score 0" == Format( "Score {0}", 0.0 ));
+    CHECK( "Score 0" == Format( "Score {0}", 0.0f ));
+
+    CHECK( "Answer 51.42" == Format( "Answer {0}", 51.42 ));
+    CHECK( "65535 Years" == Format( "{0} Years", 65535.f ));
+}
+
+
 TEST( FormatStringTest )
 {
     CHECK( "Miko: Reimu" == Format( "Miko: {0}", "Reimu" ));

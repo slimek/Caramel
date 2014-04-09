@@ -26,9 +26,11 @@ public:
 
     explicit Formatter( const std::string& format );
 
-    void Feed( Uint index, Int   value );
-    void Feed( Uint index, Uint  value );
-    void Feed( Uint index, Int64 value );
+    void Feed( Uint index, Int    value );
+    void Feed( Uint index, Uint   value );
+    void Feed( Uint index, Int64  value );
+    void Feed( Uint index, Float  value );
+    void Feed( Uint index, Double value );
 
     void Feed( Uint index, const std::string& value );
 
