@@ -143,7 +143,7 @@ inline Seconds::Seconds( const Inherited& duration )
 
 
 inline Seconds::Seconds( Inherited&& duration )
-    : Inherited( duration )
+    : Inherited( std::move( duration ))
 {
 }
 

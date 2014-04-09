@@ -135,7 +135,7 @@ inline Ticks::Ticks( const Inherited& duration )
 
 
 inline Ticks::Ticks( Inherited&& duration )
-    : Inherited( duration )
+    : Inherited( std::move( duration ))
 {
 }
 
