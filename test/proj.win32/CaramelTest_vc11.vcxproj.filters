@@ -74,6 +74,9 @@
     <Filter Include="2. Tests\Meta">
       <UniqueIdentifier>{57f14968-8822-4d4f-acc5-91086e5e0aec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\Arithmetic">
+      <UniqueIdentifier>{e0e54bec-192a-4155-8969-a1f6f05630ab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\RunTest.cpp">
@@ -243,6 +246,9 @@
     </ClCompile>
     <ClCompile Include="..\src\Task\ContinuationTraitsTest.cpp">
       <Filter>2. Tests\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Arithmetic\PowerOfTwoTest.cpp">
+      <Filter>2. Tests\Arithmetic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
