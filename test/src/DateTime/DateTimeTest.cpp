@@ -76,7 +76,10 @@ TEST( DateTimeStringTest )
     CHECK( true  == dt.TryParse( "2014-03-15 08:23:14" ));
     CHECK( dt == Date( 2014, 3, 15 ) + TimeOfDay( 8, 23, 14 ));
 
-    
+    CHECK( true  == dt.TryParse( "1984/05/06 17:28:39" ));
+    CHECK( dt == Date( 1984, 5, 6 ) + TimeOfDay( 17, 28, 39 ));
+
+
     /// From ISO String ///
 
     const auto dt1 = DateTime::FromString( "2013-04-05T18:09:30" );
