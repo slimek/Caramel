@@ -39,7 +39,8 @@ public:
 
     /// Creators ///
 
-    static DateTime Now();
+    static DateTime Now();     // System local timezone
+    static DateTime UtcNow();
 
     static DateTime MinValue();
     static DateTime MaxValue();
@@ -97,7 +98,7 @@ public:
     Bool TryParse( const std::string& s );
 
     
-    // Convert from UTC to Local Timezone
+    // Convert from UTC to system local timezone
     static DateTime UtcToLocal( const DateTime& utcTime );
 
 

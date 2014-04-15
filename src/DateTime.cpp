@@ -278,6 +278,13 @@ DateTime DateTime::Now()
 }
 
 
+DateTime DateTime::UtcNow()
+{
+    return DateTime( std::make_shared< DateTimeImpl >(
+        boost::posix_time::second_clock::universal_time() ));
+}
+
+
 DateTime DateTime::MinValue()
 {
     return DateTime( std::make_shared< DateTimeImpl >(

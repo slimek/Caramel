@@ -4,7 +4,6 @@
 
 #include <Caramel/DateTime/DateTime.h>
 #include <UnitTest++/UnitTest++.h>
-#include <Windows.h>
 
 
 namespace Caramel
@@ -158,15 +157,14 @@ TEST( DateTimeOpDaysTest )
 }
 
 
-TEST( DateTimeUtcToLocalTest )
+TEST( DateTimeUtcTest )
 {
-    const auto utcTime = DateTime::FromString( "2013/04/05 0:00" );
-    const auto localTime = DateTime::UtcToLocal( utcTime );
+    const auto now = DateTime::Now();
+    const auto utcNow = DateTime::UtcNow();
 
-    ::TIME_ZONE_INFORMATION timeZone = { 0 };
-    ::GetTimeZoneInformation( &timeZone );
+    const auto localNow = DateTime::UtcToLocal( utcNow );
 
-    CHECK( timeZone.Bias == ( utcTime - localTime ).TotalMinutes() );
+    CHECK_CLOSE( 0, ( localNow - now ).TotalSeconds(), 1 );
 }
 
 
