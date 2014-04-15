@@ -12,6 +12,7 @@
 #include <Caramel/Memory/SharedPtrUtils.h>
 #include <Caramel/String/Split.h>
 #include <Caramel/Thread/MutexLocks.h>
+#include <boost/date_time/c_local_time_adjustor.hpp>
 #include <boost/xpressive/xpressive_dynamic.hpp>
 
 
@@ -411,6 +412,15 @@ Bool DateTime::TryParse( const std::string& input )
     {
         return false;
     }
+}
+
+
+DateTime DateTime::UtcToLocal( const DateTime& utcTime )
+{
+    typedef boost::date_time::c_local_adjustor< boost::posix_time::ptime > Adjustor;
+
+    return DateTime(
+        std::make_shared< DateTimeImpl >( Adjustor::utc_to_local( *( utcTime.m_impl ))));
 }
 
 

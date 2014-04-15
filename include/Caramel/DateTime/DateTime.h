@@ -46,7 +46,8 @@ public:
 
     // Accepted formats:
     //   YYYY-MM-DD hh:mm[:ss]
-    //   YYYY-MM_DDThh:mm[:ss]
+    //   YYYY/MM/DD hh:mm[:ss]
+    //   YYYY-MM-DDThh:mm[:ss]
     static DateTime FromString( const std::string& s );
 
 
@@ -90,10 +91,14 @@ public:
     std::string ToString() const;     // YYYY-MM-DD hh:mm:ss
     std::string ToIsoString() const;  // YYYY-MM-DDThh:mm:ss
 
-    // According to strftime() format.
+    // According to the ANSI C strftime() format.
     std::string Format( const std::string& format ) const;
 
     Bool TryParse( const std::string& s );
+
+    
+    // Convert from UTC to Local Timezone
+    static DateTime UtcToLocal( const DateTime& utcTime );
 
 
     /// Typedefs as a Clock type - Supports TimedBool ///
