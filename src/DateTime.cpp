@@ -165,7 +165,7 @@ DateImpl::DateImpl()
 
 
 DateImpl::DateImpl( boost::gregorian::date&& date )
-    : boost::gregorian::date( date )
+    : boost::gregorian::date( std::move( date ))
 {
 }
 
@@ -434,7 +434,7 @@ DateTimeImpl::DateTimeImpl()
 
 
 DateTimeImpl::DateTimeImpl( boost::posix_time::ptime&& pt )
-    : boost::posix_time::ptime( pt )
+    : boost::posix_time::ptime( std::move( pt ))
 {
 }
 
