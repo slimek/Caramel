@@ -55,7 +55,7 @@ public:
 
     //
     // Advance the deadline with the duration until it is later than now.
-    // This produces stable intervals.
+    // This produces stable intervals (fixed-rate).
     //
     void Continue();
 
