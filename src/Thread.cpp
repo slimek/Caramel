@@ -211,6 +211,12 @@ void ThisThread::SleepFor( const Ticks& duration )
 }
 
 
+void ThisThread::Yield()
+{
+    std::this_thread::yield();
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // namespace Caramel

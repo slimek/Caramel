@@ -8,6 +8,11 @@
 #include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Thread/ThreadId.h>
 
+#if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+// Remove the evil define in WinBase.h !
+#undef Yield
+#endif
+
 
 namespace Caramel
 {
@@ -24,6 +29,9 @@ public:
     static ThreadId GetId();
 
     static void SleepFor( const Ticks& duration );
+
+    // Hint to reschedule threads, to allow other threads run.
+    static void Yield();
 };
 
 
