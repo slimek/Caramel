@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
+#include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Thread/MutexLocks.h>
 #include <condition_variable>
 #include <mutex>
@@ -40,6 +41,11 @@ public:
     /// Manipulators ///
 
     void Wait();
+
+    // Return:
+    // - true if the value becomes true,
+    //   false if it timeouts.    
+    Bool WaitFor( const Ticks& timeout );
 
 
 private:
@@ -99,6 +105,19 @@ inline void WaitableBool::Wait()
     {
         m_becomesTrue.wait( ulock );
     }
+}
+
+
+inline Bool WaitableBool::WaitFor( const Ticks& timeout )
+{
+    UniqueLock ulock( m_mutex );
+
+    if ( ! m_value )
+    {
+        m_becomesTrue.wait_for( ulock, timeout.ToStdDuration() );
+    }
+
+    return m_value;
 }
 
 
