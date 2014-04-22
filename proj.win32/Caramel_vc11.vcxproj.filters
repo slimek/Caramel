@@ -704,6 +704,9 @@
     <ClInclude Include="..\include\Caramel\Arithmetic\PowerOfTwo.h">
       <Filter>1. Public Packages\Arithmetic</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Random\WeightedRandomMap.h">
+      <Filter>1. Public Packages\Random</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

@@ -131,6 +131,7 @@
     <ClCompile Include="..\src\Numeric\NumberTraitsTest.cpp" />
     <ClCompile Include="..\src\Numeric\UnionBitsTest.cpp" />
     <ClCompile Include="..\src\Random\RandomTest.cpp" />
+    <ClCompile Include="..\src\Random\WeightedRandomMapTest.cpp" />
     <ClCompile Include="..\src\RunTest.cpp" />
     <ClCompile Include="..\src\Statechart\StateMachineTest.cpp" />
     <ClCompile Include="..\src\String\FormatTest.cpp" />

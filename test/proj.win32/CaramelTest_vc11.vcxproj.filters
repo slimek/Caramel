@@ -250,6 +250,9 @@
     <ClCompile Include="..\src\Arithmetic\PowerOfTwoTest.cpp">
       <Filter>2. Tests\Arithmetic</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Random\WeightedRandomMapTest.cpp">
+      <Filter>2. Tests\Random</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">
