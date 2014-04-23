@@ -144,6 +144,7 @@
     <ClCompile Include="..\src\Task\TaskPollerTest.cpp" />
     <ClCompile Include="..\src\Task\TaskTest.cpp" />
     <ClCompile Include="..\src\Task\WorkerThreadTest.cpp" />
+    <ClCompile Include="..\src\Thread\LoopThreadGroupTest.cpp" />
     <ClCompile Include="..\src\Thread\SpinMutexTest.cpp" />
     <ClCompile Include="..\src\Thread\ThreadTest.cpp" />
     <ClCompile Include="..\src\Thread\WaitableBoolTest.cpp" />

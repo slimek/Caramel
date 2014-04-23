@@ -2,9 +2,11 @@
 
 #include "CaramelPch.h"
 
+#include "Thread/LoopThreadGroupImpl.h"
 #include "Thread/ThreadIdImpl.h"
 #include "Thread/ThreadImpl.h"
 #include <Caramel/Error/CatchException.h>
+#include <Caramel/Memory/UniquePtrUtils.h>
 #include <Caramel/Thread/ThisThread.h>
 #include <sstream>
 
@@ -24,6 +26,8 @@ namespace Caramel
 //   Thread
 //   ThreadId
 //   ThisThread
+//   LoopThread
+//   LoopThreadGroup
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -214,6 +218,115 @@ void ThisThread::SleepFor( const Ticks& duration )
 void ThisThread::Yield()
 {
     std::this_thread::yield();
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Loop Thread
+//
+
+LoopThread::LoopThread( const std::string& name, WorkFunction&& work, const Ticks& interval )
+    : m_workFunction( std::move( work ))
+    , m_interval( interval )
+{
+    m_thread.reset( new ThreadImpl( name, [this] { this->RepeatWork(); } ));
+}
+
+
+void LoopThread::RepeatWork()
+{
+    while ( ! m_stopped )
+    {
+        auto xc = CatchException( m_workFunction );
+
+        if ( xc )
+        {
+            CARAMEL_ALERT( "Thread[%s] throws exception: %s", m_thread->m_name, xc.TracingMessage() );
+        }
+
+        /// Sleep for Interval ///
+
+        if ( Ticks::Zero() == m_interval )
+        {
+            ThisThread::Yield();
+        }
+        else
+        {
+            m_stopped.WaitFor( m_interval );
+        }
+    }
+}
+
+
+void LoopThread::Stop()
+{
+    m_stopped = true;
+}
+
+
+void LoopThread::Join()
+{
+    m_thread->m_thread->join();
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Loop Thread Group
+//
+
+LoopThreadGroup::LoopThreadGroup()
+    : m_impl( new LoopThreadGroupImpl )
+{
+}
+
+
+LoopThreadGroup::~LoopThreadGroup()
+{
+}
+
+
+void LoopThreadGroup::Start(
+    const std::string& name, WorkFunction&& work, const Ticks& interval )
+{
+    m_impl->Add( std::make_shared< LoopThread >( name, std::move( work ), interval ));
+}
+
+
+void LoopThreadGroup::StopAll()
+{
+    m_impl->StopAll();
+}
+
+
+//
+// Implementation
+//
+
+void LoopThreadGroupImpl::Add( LoopThreadPtr&& thread )
+{
+    LockGuard lock( m_mutex );
+
+    m_threads.insert( std::move( thread ));
+}
+
+
+void LoopThreadGroupImpl::StopAll()
+{
+    LockGuard lock( m_mutex );
+
+    for ( auto thread : m_threads )
+    {
+        thread->Stop();
+    }
+
+    for ( auto thread : m_threads )
+    {
+        thread->Join();
+    }
+
+    m_threads.clear();
 }
 
 

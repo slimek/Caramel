@@ -17,19 +17,6 @@ namespace Caramel
 //
 
 typedef std::function< void() > WorkFunction;
-typedef std::function< Int()  > ExecuteFunction;
-
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Enumerations
-//
-
-enum ExecuteResult
-{
-    EXECUTE_CONTINUE = 0,
-    EXECUTE_EXIT     = 1,
-};
 
 
 ///////////////////////////////////////////////////////////////////////////////

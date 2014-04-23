@@ -707,6 +707,12 @@
     <ClInclude Include="..\include\Caramel\Random\WeightedRandomMap.h">
       <Filter>1. Public Packages\Random</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Thread\LoopThreadGroup.h">
+      <Filter>1. Public Packages\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Thread\LoopThreadGroupImpl.h">
+      <Filter>2. Sources\Thread</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

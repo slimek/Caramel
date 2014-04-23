@@ -22,6 +22,7 @@ namespace Caramel
 class ThreadImpl
 {
     friend class Thread;
+    friend class LoopThread;
 
 public:
 

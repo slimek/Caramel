@@ -253,6 +253,9 @@
     <ClCompile Include="..\src\Random\WeightedRandomMapTest.cpp">
       <Filter>2. Tests\Random</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Thread\LoopThreadGroupTest.cpp">
+      <Filter>2. Tests\Thread</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">
