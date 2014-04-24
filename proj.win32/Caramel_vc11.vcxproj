@@ -76,6 +76,7 @@
     <ClInclude Include="..\include\Caramel\FileSystem\FileInfo.h" />
     <ClInclude Include="..\include\Caramel\FileSystem\Path.h" />
     <ClInclude Include="..\include\Caramel\Functional\ScopeExit.h" />
+    <ClInclude Include="..\include\Caramel\Io\Base64.h" />
     <ClInclude Include="..\include\Caramel\Io\FileStream.h" />
     <ClInclude Include="..\include\Caramel\Io\InputFileStream.h" />
     <ClInclude Include="..\include\Caramel\Io\InputStream.h" />

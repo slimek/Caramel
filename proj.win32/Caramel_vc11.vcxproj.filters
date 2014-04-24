@@ -713,6 +713,9 @@
     <ClInclude Include="..\src\Thread\LoopThreadGroupImpl.h">
       <Filter>2. Sources\Thread</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Io\Base64.h">
+      <Filter>1. Public Packages\Io</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

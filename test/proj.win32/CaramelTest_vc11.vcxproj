@@ -122,6 +122,7 @@
     <ClCompile Include="..\src\Error\ExceptionPtrTest.cpp" />
     <ClCompile Include="..\src\FileSystem\DirectoryInfoTest.cpp" />
     <ClCompile Include="..\src\FileSystem\PathTest.cpp" />
+    <ClCompile Include="..\src\Io\Base64Test.cpp" />
     <ClCompile Include="..\src\Io\TextStreamWriterTest.cpp" />
     <ClCompile Include="..\src\Lexical\LexicalBooleanTest.cpp" />
     <ClCompile Include="..\src\Lexical\LexicalFloatingTest.cpp" />

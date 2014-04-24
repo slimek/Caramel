@@ -256,6 +256,9 @@
     <ClCompile Include="..\src\Thread\LoopThreadGroupTest.cpp">
       <Filter>2. Tests\Thread</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Io\Base64Test.cpp">
+      <Filter>2. Tests\Io</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">

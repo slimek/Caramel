@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
+#include <Caramel/Random/UniformRandom.h>
 #include <vector>
 
 
@@ -61,6 +62,24 @@ inline std::vector< T > MakeVector( const T& v0, const T& v1, const T& v2, const
     vec[1] = v1;
     vec[2] = v2;
     vec[3] = v3;
+    return vec;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Make a random std::vector< Int >
+//
+
+inline std::vector< Int > MakeRandomVector( Uint size, Int minValue, Int maxValue )
+{
+    std::vector< Int > vec( size );
+
+    for ( Uint i = 0; i < size; ++ i )
+    {
+        vec[i] = GenRandomInt( minValue, maxValue );
+    }
+
     return vec;
 }
 
