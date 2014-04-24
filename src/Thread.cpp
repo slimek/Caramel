@@ -238,13 +238,6 @@ void LoopThread::RepeatWork()
 {
     while ( ! m_stopped )
     {
-        auto xc = CatchException( m_workFunction );
-
-        if ( xc )
-        {
-            CARAMEL_ALERT( "Thread[%s] throws exception: %s", m_thread->m_name, xc.TracingMessage() );
-        }
-
         /// Sleep for Interval ///
 
         if ( Ticks::Zero() == m_interval )
@@ -255,6 +248,19 @@ void LoopThread::RepeatWork()
         {
             m_stopped.WaitFor( m_interval );
         }
+
+        if ( m_stopped ) { break; }
+
+
+        /// Execute the Work ///
+
+        auto xc = CatchException( m_workFunction );
+
+        if ( xc )
+        {
+            CARAMEL_ALERT( "Thread[%s] throws exception: %s", m_thread->m_name, xc.TracingMessage() );
+        }
+
     }
 }
 
