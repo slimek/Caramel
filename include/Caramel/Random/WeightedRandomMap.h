@@ -26,6 +26,14 @@ public:
 
     WeightedRandomMap();
 
+
+    /// Properties ///
+
+    Bool IsEmpty() const { return m_map.empty(); }
+
+
+    /// Operations ///
+
     void Add( Weight w, const Value& v );
 
     // Retrieve a value from map, the probability is according to its weight.

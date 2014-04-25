@@ -17,6 +17,16 @@ SUITE( WeightedRandomMapSuite )
 // Weighted Random Map Test
 //
 
+TEST( WeightedRandomMapTrivialTest )
+{
+    WeightedRandomMap< Int, std::string > map;
+    CHECK( true == map.IsEmpty() );
+    
+    map.Add( 1, "Alice" );
+    CHECK( false == map.IsEmpty() );    
+}
+
+
 TEST( WeightedRandomMapTest )
 {
     // Weight is Int
