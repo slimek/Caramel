@@ -179,6 +179,21 @@ TEST( NamedValuesChainTest )
 }
 
 
+TEST( NamedValuesFromMapTest )
+{
+    std::map< std::string, std::string > smap;
+    smap[ "Alice"  ] = "doll master";
+    smap[ "Marisa" ] = "witch";
+    smap[ "Reimu"  ] = "miko";
+
+    const NamedValues nv( smap );
+
+    CHECK( "doll master" == nv[ "Alice" ].AsString() );
+    CHECK( "witch"       == nv[ "Marisa" ].AsString() );
+    CHECK( "miko"        == nv[ "Reimu" ].AsString() );
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE NamedValuesSuite

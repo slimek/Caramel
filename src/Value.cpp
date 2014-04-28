@@ -207,6 +207,16 @@ NamedValues::NamedValues()
 }
 
 
+NamedValues::NamedValues( const std::map< std::string, std::string >& pairs )
+    : m_impl( new NamedValuesImpl )
+{
+    for ( const auto& pair : pairs )
+    {
+        this->operator[]( pair.first ) = pair.second;
+    }
+}
+
+
 void NamedValues::Init()
 {
     m_impl.reset( new NamedValuesImpl );

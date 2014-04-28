@@ -53,6 +53,7 @@ class NamedValues
 public:
 
     NamedValues();
+    explicit NamedValues( const std::map< std::string, std::string >& pairs );
     
 
     /// Insert Values by Chaining ///
