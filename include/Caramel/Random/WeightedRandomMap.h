@@ -107,7 +107,7 @@ struct WeightRandom< Double >
 template< typename Weight, typename Value >
 inline void WeightedRandomMap< Weight, Value >::Add( Weight weight, const Value& value )
 {
-    // Weight can't be less than 
+    // Weight can't be less than 0.
     CARAMEL_ASSERT( 0 <= weight );
 
     // NOTES: If the weight is 0 or too small (when Weight is a floating-point),
