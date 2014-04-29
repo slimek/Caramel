@@ -280,7 +280,14 @@ void StateMachineImpl::DoTransit( StatePtr targetState, const Action& transition
 
     if ( transitionAction )
     {
-        transitionAction();
+        auto xc = CatchException( [&] { transitionAction(); } );
+        if ( xc )
+        {
+            CARAMEL_TRACE_WARN(
+                "%s transition action throws, target stateId: %d\n%s",
+                m_currentState->GetName(), targetState->GetId(), xc.TracingMessage()
+            );
+        }
     }
 
     m_currentState = targetState;
