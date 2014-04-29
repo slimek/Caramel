@@ -49,6 +49,13 @@ public:
     void PostEvent( const AnyEvent& anyEvent );
 
 
+    // Plan to Transit to another state.
+    // - This function call only be called in an in-state reaction.
+    //   It doesn't transit immediately, but will start to transit
+    //   after the reaction returns.
+    void PlanToTransit( Int stateId );
+
+
     //
     // Process enqueued events.
     // - Call this function ONLY when you using the built-in TaskPoller.

@@ -28,6 +28,7 @@ enum StateId
 enum EventId
 {
     E_START,
+    E_NEXT,
     E_STRING,
 };
 
@@ -202,7 +203,7 @@ TEST( StateMachineAsAnyEventTargetTest )
     machine.AddState( S_WAITING );
 
     disp.LinkTarget( machine );
-
+    
     machine.Initiate( S_INITIAL );
     machine.Process();
 
@@ -211,6 +212,90 @@ TEST( StateMachineAsAnyEventTargetTest )
 
     CHECK( S_WAITING == machine.GetCurrentStateId() );
 }
+
+
+TEST( StateMachineReactionTest )
+{
+    Statechart::StateMachine machine( "Reaction" );
+
+    Bool flag = false;
+
+    machine.AddState( S_INITIAL )
+        .Reaction( E_START, [&]
+        {
+            machine.PlanToTransit( S_WAITING );
+        });
+
+    machine.AddState( S_WAITING )
+        .Reaction( E_START, [&]
+        {
+            if ( flag )
+            {
+                machine.PlanToTransit( S_FINAL );
+            }
+        });
+
+    machine.AddState( S_FINAL );
+
+    machine.Initiate( S_INITIAL );
+    machine.Process();
+
+    machine.PostEvent( E_START );
+    machine.Process();
+
+    CHECK( S_WAITING == machine.GetCurrentStateId() );
+
+    machine.PostEvent( E_START );
+    machine.Process();
+
+    CHECK( S_WAITING == machine.GetCurrentStateId() );
+
+    flag = true;
+    machine.PostEvent( E_START );
+    machine.Process();
+
+    CHECK( S_FINAL == machine.GetCurrentStateId() );
+}
+
+
+TEST( StateMachineReactionFailedTest )
+{
+    Statechart::StateMachine machine( "ReactionFailed" );
+    
+    Statechart::State initial = machine.AddState( S_INITIAL );
+    initial.Transition( E_START, S_WAITING );
+
+    // Reaction conflicts with a transition.
+    CHECK_THROW( initial.Reaction( E_START, [] {} ), Caramel::Exception );
+
+    Statechart::State waiting = machine.AddState( S_WAITING );
+
+    waiting.Reaction( E_START, [] {} );
+
+    waiting.Transition( E_NEXT, S_FINAL, [&]
+    {
+        // Call PlanToTransit() out of a reaction (even if it is in an action ).
+        CHECK_THROW( machine.PlanToTransit( S_FINAL ), Caramel::Exception );
+    });
+
+    // Transition conflicts with a reaction
+    CHECK_THROW( waiting.Transition( E_START, S_FINAL ), Caramel::Exception );
+
+    machine.AddState( S_FINAL );
+
+    machine.Initiate( S_INITIAL );
+    machine.Process();
+
+    // Call PlanToTransit() out of a reaction.
+    CHECK_THROW( machine.PlanToTransit( S_FINAL ), Caramel::Exception );
+
+    machine.PostEvent( E_START );  // Transit to WAITING
+    machine.Process();
+
+    machine.PostEvent( E_NEXT );
+    machine.Process();
+}
+
 
 
 ///////////////////////////////////////////////////////////////////////////////

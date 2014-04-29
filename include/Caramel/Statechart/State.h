@@ -43,9 +43,9 @@ public:
 
     //
     // When the event triggered, call this action.
-    // You may transit to other states by condition.
+    // You may transit to other states by conditions.
     //
-    State& InStateReaction( Int eventId, const Action& action );
+    State& Reaction( Int eventId, const Action& action );
 
 
 private:

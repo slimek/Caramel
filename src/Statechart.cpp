@@ -98,6 +98,12 @@ void StateMachine::PostEvent( const AnyEvent& evt )
 }
 
 
+void StateMachine::PlanToTransit( Int stateId )
+{
+    m_impl->PlanToTransit( stateId );
+}
+
+
 void StateMachine::Process( const Ticks& sliceTicks )
 {
     CARAMEL_CHECK( m_impl->m_builtinTaskPoller );
@@ -133,7 +139,7 @@ StateMachineImpl::StateMachineImpl( const std::string& name )
     , m_builtinTaskPoller( new TaskPoller )
     , m_initiated( false )
     , m_transitNumber( 0 )
-    , m_inStateReacting( false )
+    , m_reacting( false )
 {
     m_taskExecutor = m_builtinTaskPoller.get();
 }
@@ -219,28 +225,46 @@ void StateMachineImpl::ProcessEvent( const AnyEvent& evt )
     m_activeEvent = evt;
     auto evtGuard = ScopeExit( [=] { m_activeEvent = AnyEvent(); } );
 
+
+    /// Transition ///
+
     TransitionPtr transition;
     if ( m_currentState->m_transitions.Find( evt.Id(), transition ))
     {
         StatePtr targetState;
         CARAMEL_VERIFY( m_states.Find( transition->targetStateId, targetState ));
 
-        this->DoTransit( transition, targetState );
+        this->DoTransit( targetState, transition->action );
         return;
     }
 
+
+    /// Reaction ///
+
     Action reaction;
-    if ( m_currentState->m_inStateReactions.Find( evt.Id(), reaction ))
+    if ( m_currentState->m_reactions.Find( evt.Id(), reaction ))
     {
         this->DoInStateReact( evt.Id(), reaction );
 
-        if ( m_inStateTransit )
+        if ( m_transitionPlan )
         {
-            Int stateId = m_inStateTransit.get();
-            m_inStateTransit = boost::none;
+            const Int stateId = m_transitionPlan.get();
+            m_transitionPlan = boost::none;
 
-            // TODO: In-State Transit
+            StatePtr targetState;
+            if ( ! m_states.Find( stateId, targetState ))
+            {
+                CARAMEL_THROW(
+                    "%s reaction plan to transit, but target state not found, "
+                    "eventId: %d, target stateId: %d",
+                    m_currentState->GetName(), evt.Id(), stateId
+                );
+            }
+
+            this->DoTransit( targetState, Action() );
         }
+
+        return;
     }
 
     // Otherwise, discard this event
@@ -248,15 +272,15 @@ void StateMachineImpl::ProcessEvent( const AnyEvent& evt )
 }
 
 
-void StateMachineImpl::DoTransit( TransitionPtr transition, StatePtr targetState )
+void StateMachineImpl::DoTransit( StatePtr targetState, const Action& transitionAction )
 {
     // REMARKS: At this point, the m_mutex should have been locked.
 
     this->ExitState();
 
-    if ( transition->action )
+    if ( transitionAction )
     {
-        transition->action();
+        transitionAction();
     }
 
     m_currentState = targetState;
@@ -315,15 +339,33 @@ void StateMachineImpl::ExitState()
 
 void StateMachineImpl::DoInStateReact( Int eventId, const Action& action )
 {
-    m_inStateReacting = true;
-    auto guard = ScopeExit( [=] { m_inStateReacting = false; } );
+    m_reacting = true;
+    auto guard = ScopeExit( [=] { m_reacting = false; } );
+
+    m_transitionPlan = boost::none;
 
     auto xc = CatchException( [=] { action(); } );
     if ( xc )
     {
-        CARAMEL_TRACE_WARN( "%s in-state reaction to event %d throws:\n%s",
+        CARAMEL_TRACE_WARN( "%s reaction to event %d throws:\n%s",
                             m_currentState->GetName(), eventId, xc.TracingMessage() );
     }
+}
+
+
+void StateMachineImpl::PlanToTransit( Int stateId )
+{
+    if ( ! m_reacting || m_actionThreadId != ThisThread::GetId() )
+    {
+        CARAMEL_THROW( "PlanToTransit() can only be called in a reaction" );
+    }
+
+    if ( m_transitionPlan )
+    {
+        CARAMEL_THROW( "You have already set to transit in this reaction" );
+    }
+
+    m_transitionPlan = stateId;
 }
 
 
@@ -379,10 +421,10 @@ State& State::ExitAction( const Action& action )
 State& State::Transition( Int eventId, Int targetStateId, const Action& action )
 {
     // Check the Event ID
-    if ( m_impl->m_inStateReactions.Contains( eventId ))
+    if ( m_impl->m_reactions.Contains( eventId ))
     {
         CARAMEL_THROW(
-            "%s transition conflicts with in-state reaction, eventId: %d, targetStateId: %d",
+            "%s transition conflicts with reactions, eventId: %d, targetStateId: %d",
             m_impl->GetName(), eventId, targetStateId 
         );
     }
@@ -399,19 +441,19 @@ State& State::Transition( Int eventId, Int targetStateId, const Action& action )
 }
 
 
-State& State::InStateReaction( Int eventId, const Action& action )
+State& State::Reaction( Int eventId, const Action& action )
 {
     // Check the Event ID
     if ( m_impl->m_transitions.Contains( eventId ))
     {
-        CARAMEL_THROW( "%s in-state reaction conflicts with transition, eventId: %d",
+        CARAMEL_THROW( "%s reaction conflicts with transitions, eventId: %d",
                        m_impl->GetName(), eventId );
     }
 
-    // Insert the In-State Reaction
-    if ( ! m_impl->m_inStateReactions.Insert( eventId, action ))
+    // Insert Reaction
+    if ( ! m_impl->m_reactions.Insert( eventId, action ))
     {
-        CARAMEL_THROW( "%s in-state reaction duplicate, eventId: %d",
+        CARAMEL_THROW( "%s reaction duplicate, eventId: %d",
                        m_impl->GetName(), eventId );
     }
 

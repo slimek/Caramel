@@ -49,8 +49,10 @@ public:
     void PostEvent( const AnyEvent& event );
     void ProcessEvent( const AnyEvent& event );
 
-    void DoTransit( TransitionPtr transition, StatePtr targetState );
+    void DoTransit( StatePtr targetState, const Action& transitionAction );
     void DoInStateReact( Int eventId, const Action& action );
+
+    void PlanToTransit( Int stateId );
 
 
     //
@@ -95,11 +97,11 @@ private:
     ThreadId m_actionThreadId;
     AnyEvent m_activeEvent;
 
-    Bool     m_inStateReacting;
+    Bool     m_reacting;  // Executing a reaction.
 
-    // In-State Transition
-    // - This can only be set in a in-state reaction.
-    boost::optional< Int > m_inStateTransit;
+    // This is set by PlanToTransit(), 
+    // which can only be called in a reaction.
+    boost::optional< Int > m_transitionPlan;
 
     std::mutex m_mutex;
 };

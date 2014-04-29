@@ -49,7 +49,7 @@ private:
     TransitionMap m_transitions;
 
     typedef Concurrent::HashMap< Int, Action > ActionMap;
-    ActionMap m_inStateReactions;
+    ActionMap m_reactions;
 
     Ticks m_autoTimerDuration;   // Zero means not enabled
     Action m_timerAction;
