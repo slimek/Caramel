@@ -41,6 +41,13 @@ public:
     State& Transition( Int eventId, Int targetStateId, const Action& action = Action() );
 
 
+    //
+    // When the event triggered, call this action.
+    // You may transit to other states by condition.
+    //
+    State& InStateReaction( Int eventId, const Action& action );
+
+
 private:
 
     explicit State( std::shared_ptr< StateImpl > impl );

@@ -12,6 +12,7 @@
 #include <Caramel/Statechart/StateMachine.h>
 #include <Caramel/Task/TaskPoller.h>
 #include <Caramel/Thread/ThreadId.h>
+#include <boost/optional.hpp>
 #include <mutex>
 
 
@@ -49,6 +50,7 @@ public:
     void ProcessEvent( const AnyEvent& event );
 
     void DoTransit( TransitionPtr transition, StatePtr targetState );
+    void DoInStateReact( Int eventId, const Action& action );
 
 
     //
@@ -92,6 +94,12 @@ private:
 
     ThreadId m_actionThreadId;
     AnyEvent m_activeEvent;
+
+    Bool     m_inStateReacting;
+
+    // In-State Transition
+    // - This can only be set in a in-state reaction.
+    boost::optional< Int > m_inStateTransit;
 
     std::mutex m_mutex;
 };
