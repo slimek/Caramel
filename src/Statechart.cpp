@@ -329,7 +329,7 @@ State::State( StatePtr impl )
 }
 
 
-State& State::EnterAction( Action action )
+State& State::EnterAction( const Action& action )
 {
     CARAMEL_CHECK( ! m_impl->m_enterAction );
 
@@ -338,7 +338,7 @@ State& State::EnterAction( Action action )
 }
 
 
-State& State::ExitAction( Action action )
+State& State::ExitAction( const Action& action )
 {
     CARAMEL_CHECK( ! m_impl->m_exitAction );
 
@@ -347,7 +347,7 @@ State& State::ExitAction( Action action )
 }
 
 
-State& State::Transition( Int eventId, Int targetStateId, Action action )
+State& State::Transition( Int eventId, Int targetStateId, const Action& action )
 {
     auto transition = std::make_shared< Statechart::Transition >( targetStateId, action );
     if ( ! m_impl->m_transitions.Insert( eventId, transition ))

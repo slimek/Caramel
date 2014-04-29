@@ -31,14 +31,14 @@ public:
     //
     // Called when entering or exiting this state.
     //
-    State& EnterAction( Action action );
-    State& ExitAction ( Action action );
+    State& EnterAction( const Action& action );
+    State& ExitAction ( const Action& action );
 
 
     //
     // When the event triggered, transit to the target state.
     //
-    State& Transition( Int eventId, Int targetStateId, Action action = Action() );
+    State& Transition( Int eventId, Int targetStateId, const Action& action = Action() );
 
 
 private:
