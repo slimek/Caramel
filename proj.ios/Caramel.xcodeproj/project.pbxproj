@@ -1104,6 +1104,7 @@
 		6DAFE1111815118B00859097 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CONFIGURATION_BUILD_DIR = "$(inherited)";
 				DSTROOT = /tmp/Caramel.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1126,6 +1127,7 @@
 		6DAFE1121815118B00859097 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CONFIGURATION_BUILD_DIR = "$(inherited)";
 				DSTROOT = /tmp/Caramel.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
