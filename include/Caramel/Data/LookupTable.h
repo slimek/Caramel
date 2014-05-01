@@ -41,7 +41,16 @@ public:
     /// Building Table ///
 
     LookupTable( ValueType value, const std::string& name );
+    LookupTable( ValueType value, const std::string& name, const std::string& alias );
+    LookupTable(
+        ValueType value, const std::string& name,
+        const std::string& alias1, const std::string& alias2 );
+
     LookupTable&& operator()( ValueType value, const std::string& name );
+    LookupTable&& operator()( ValueType value, const std::string& name, const std::string& alias );
+    LookupTable&& operator()(
+        ValueType value, const std::string& name,
+        const std::string& alias1, const std::string& alias2 );
 
 
     // Imbue from a pair array, in ( enum, name ) format.
@@ -75,8 +84,8 @@ private:
     //   Right is Name -> Enum
     //
     typedef typename boost::bimaps::bimap <
-        boost::bimaps::set_of< ValueType >,
-        boost::bimaps::multiset_of< std::string, CainLess >
+        boost::bimaps::multiset_of< ValueType >,
+        boost::bimaps::set_of< std::string, CainLess >
     > TableType;
 
     typedef typename TableType::value_type TableValue;
@@ -116,9 +125,52 @@ inline LookupTable< ValueType >::LookupTable( ValueType value, const std::string
 
 
 template< typename ValueType >
-inline auto LookupTable< ValueType >::operator()( ValueType value, const std::string& name ) -> LookupTable&&
+inline LookupTable< ValueType >::LookupTable(
+    ValueType value, const std::string& name, const std::string& alias )
 {
     m_table.insert( TableValue( value, name ));
+    m_table.insert( TableValue( value, alias ));
+}
+
+
+template< typename ValueType >
+inline LookupTable< ValueType >::LookupTable(
+    ValueType value, const std::string& name,
+    const std::string& alias1, const std::string& alias2 )
+{
+    m_table.insert( TableValue( value, name ));
+    m_table.insert( TableValue( value, alias1 ));
+    m_table.insert( TableValue( value, alias2 ));
+}
+
+
+template< typename ValueType >
+inline LookupTable< ValueType >&& LookupTable< ValueType >::operator()(
+    ValueType value, const std::string& name )
+{
+    m_table.insert( TableValue( value, name ));
+    return std::move( *this );
+}
+
+
+template< typename ValueType >
+inline LookupTable< ValueType >&& LookupTable< ValueType >::operator()(
+    ValueType value, const std::string& name, const std::string& alias )
+{
+    m_table.insert( TableValue( value, name ));
+    m_table.insert( TableValue( value, alias ));
+    return std::move( *this );
+}
+
+
+template< typename ValueType >
+inline LookupTable< ValueType >&& LookupTable< ValueType >::operator()(
+    ValueType value, const std::string& name,
+    const std::string& alias1, const std::string& alias2 )
+{
+    m_table.insert( TableValue( value, name ));
+    m_table.insert( TableValue( value, alias1 ));
+    m_table.insert( TableValue( value, alias2 ));
     return std::move( *this );
 }
 

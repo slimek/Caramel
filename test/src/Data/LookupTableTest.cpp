@@ -162,10 +162,86 @@ TEST( EnumLookupTableFromArrayTest )
 }
 
 
+///////////////////////////////////////////////////////////////////////////////
+//
+// Int Lookup Table Test.
+// - the ValueType is Int
+//
+
 TEST( IntLookupTableTest )
 {
     auto itable = LookupTable< Int >
-        ( 1, "one" );
+        ( 1, "one" )
+        ( 2, "two" )
+        ( 3, "three" );
+
+    Int value = 0;
+
+    CHECK( true == itable.FindValueByName( "One", value ));
+    CHECK( 1 == value );
+
+    CHECK( true == itable.FindValueByText( "2", value ));
+    CHECK( 2 == value );
+
+    CHECK( true == itable.FindValueByInt( 3, value ));
+    CHECK( 3 == value );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Lookup Table Alias Test
+//
+
+TEST( LookupTableAliasTest )
+{
+    auto table = LookupTable< ImageFormat >
+        ( IMAGE_PNG, "png", "apng" )
+        ( IMAGE_JPG, "jpg", "jpeg", "jpe" )
+        ( IMAGE_GIF, "gif" );
+
+    ImageFormat image = IMAGE_UNDEF;
+    std::string name;
+
+    
+    /// Find Value ///
+
+    CHECK( true == table.FindValueByName( "apng", image ));
+    CHECK( IMAGE_PNG == image );
+
+    CHECK( true == table.FindValueByName( "jpeg", image ));
+    CHECK( IMAGE_JPG == image );
+
+    CHECK( true == table.FindValueByText( "png", image ));
+    CHECK( IMAGE_PNG == image );
+
+    CHECK( true == table.FindValueByText( "jpe", image ));
+    CHECK( IMAGE_JPG == image );
+
+    CHECK( false == table.FindValueByText( "bmp", image ));
+
+    
+    /// Find Name - Always the first name ///
+
+    CHECK( true == table.FindName( IMAGE_PNG, name ));
+    CHECK( "png" == name );
+
+    CHECK( true == table.FindName( IMAGE_JPG, name ));
+    CHECK( "jpg" == name );
+
+    
+    /// Compare : The first name is always to be found ///
+
+    auto rtable = LookupTable< ImageFormat >
+        ( IMAGE_PNG, "apng", "png" )
+        ( IMAGE_JPG, "jpe", "jpg", "jpeg" )
+        ( IMAGE_GIF, "gif" );
+
+    CHECK( true == rtable.FindName( IMAGE_PNG, name ));
+    CHECK( "apng" == name );
+
+    CHECK( true == rtable.FindName( IMAGE_JPG, name ));
+    CHECK( "jpe" == name );
 }
 
 
