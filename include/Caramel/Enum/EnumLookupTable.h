@@ -83,14 +83,6 @@ private:
 //
 // Making Function
 //
-template< typename EnumType >
-EnumLookupTable< EnumType > EnumLookupChain( const std::string& name, EnumType value );
-
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Implementation
-//
 
 template< typename EnumType >
 inline EnumLookupTable< EnumType > EnumLookupChain( EnumType value, const std::string& name )
@@ -98,6 +90,11 @@ inline EnumLookupTable< EnumType > EnumLookupChain( EnumType value, const std::s
     return EnumLookupTable< EnumType >( value, name );
 }
 
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Implementation
+//
 
 template< typename EnumType >
 inline EnumLookupTable< EnumType >::EnumLookupTable( EnumType value, const std::string& name )
