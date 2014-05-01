@@ -110,13 +110,13 @@
     <ClCompile Include="..\src\Concurrent\ConcurrentSetTest.cpp" />
     <ClCompile Include="..\src\Concurrent\ConcurrentBlockingQueueTest.cpp" />
     <ClCompile Include="..\src\Data\Base64Test.cpp" />
+    <ClCompile Include="..\src\Data\EnumLookupTest.cpp" />
     <ClCompile Include="..\src\DateTime\DateTest.cpp" />
     <ClCompile Include="..\src\DateTime\DateTimeBoolTest.cpp" />
     <ClCompile Include="..\src\DateTime\DateTimeTest.cpp" />
     <ClCompile Include="..\src\DateTime\TimeOfDayTest.cpp" />
     <ClCompile Include="..\src\DateTime\TimeSpanTest.cpp" />
     <ClCompile Include="..\src\Document\IniDocumentTest.cpp" />
-    <ClCompile Include="..\src\Enum\EnumLookupTest.cpp" />
     <ClCompile Include="..\src\Error\AlertTest.cpp" />
     <ClCompile Include="..\src\Error\AnyFailureTest.cpp" />
     <ClCompile Include="..\src\Error\CatchExceptionTest.cpp" />

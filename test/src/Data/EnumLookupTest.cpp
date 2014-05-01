@@ -2,7 +2,7 @@
 
 #include "CaramelTestPch.h"
 
-#include <Caramel/Enum/EnumLookupTable.h>
+#include <Caramel/Data/EnumLookupTable.h>
 #include <UnitTest++/UnitTest++.h>
 
 

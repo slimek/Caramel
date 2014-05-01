@@ -35,9 +35,6 @@
     <Filter Include="2. Tests\Lexical">
       <UniqueIdentifier>{ca981491-234d-4efa-aa34-73aafdc529ac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2. Tests\Enum">
-      <UniqueIdentifier>{e0c62408-017b-4300-beca-9579f6e614a4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="2. Tests\String">
       <UniqueIdentifier>{232ab07f-a2cb-4b1a-88de-2456efc629a1}</UniqueIdentifier>
     </Filter>
@@ -108,9 +105,6 @@
     </ClCompile>
     <ClCompile Include="..\src\Lexical\LexicalIntegerTest.cpp">
       <Filter>2. Tests\Lexical</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Enum\EnumLookupTest.cpp">
-      <Filter>2. Tests\Enum</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Thread\SpinMutexTest.cpp">
       <Filter>2. Tests\Thread</Filter>
@@ -261,6 +255,9 @@
     </ClCompile>
     <ClCompile Include="..\src\Arithmetic\FlagsTest.cpp">
       <Filter>2. Tests\Arithmetic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Data\EnumLookupTest.cpp">
+      <Filter>2. Tests\Data</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

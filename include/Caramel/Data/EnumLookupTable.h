@@ -1,7 +1,7 @@
-// Caramel C++ Library - Enum Amenity - Enum Lookup Table Header
+// Caramel C++ Library - Data Facility - Enum Lookup Table Header
 
-#ifndef __CARAMEL_ENUM_LOOKUP_TABLE_H
-#define __CARAMEL_ENUM_LOOKUP_TABLE_H
+#ifndef __CARAMEL_DATA_ENUM_LOOKUP_TABLE_H
+#define __CARAMEL_DATA_ENUM_LOOKUP_TABLE_H
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
@@ -193,4 +193,4 @@ inline Bool EnumLookupTable< EnumType >::ContainsValue( Int32 value ) const
 
 } // namespace Caramel
 
-#endif // __CARAMEL_ENUM_LOOKUP_TABLE_H
+#endif // __CARAMEL_DATA_ENUM_LOOKUP_TABLE_H

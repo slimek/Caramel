@@ -55,6 +55,7 @@
     <ClInclude Include="..\include\Caramel\Concurrent\Set.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\BlockingQueue.h" />
     <ClInclude Include="..\include\Caramel\Data\Base64.h" />
+    <ClInclude Include="..\include\Caramel\Data\EnumLookupTable.h" />
     <ClInclude Include="..\include\Caramel\Data\PlainTypes.h" />
     <ClInclude Include="..\include\Caramel\DateTime\Date.h" />
     <ClInclude Include="..\include\Caramel\DateTime\DateTime.h" />
@@ -65,7 +66,6 @@
     <ClInclude Include="..\include\Caramel\Debug\ScopeTiming.h" />
     <ClInclude Include="..\include\Caramel\Document\IniDocument.h" />
     <ClInclude Include="..\include\Caramel\Document\IniSection.h" />
-    <ClInclude Include="..\include\Caramel\Enum\EnumLookupTable.h" />
     <ClInclude Include="..\include\Caramel\Error\Alert.h" />
     <ClInclude Include="..\include\Caramel\Error\AnyFailure.h" />
     <ClInclude Include="..\include\Caramel\Error\Assert.h" />
