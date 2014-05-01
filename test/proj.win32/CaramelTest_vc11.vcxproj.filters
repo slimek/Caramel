@@ -193,9 +193,6 @@
     <ClCompile Include="..\src\Concurrent\ConcurrentBlockingQueueTest.cpp">
       <Filter>2. Tests\Concurrent</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Enum\FlagsTest.cpp">
-      <Filter>2. Tests\Enum</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Async\ValueChangeTest.cpp">
       <Filter>2. Tests\Async</Filter>
     </ClCompile>
@@ -261,6 +258,9 @@
     </ClCompile>
     <ClCompile Include="..\src\Data\Base64Test.cpp">
       <Filter>2. Tests\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Arithmetic\FlagsTest.cpp">
+      <Filter>2. Tests\Arithmetic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

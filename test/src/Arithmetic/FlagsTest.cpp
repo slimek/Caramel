@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Enum - Flags Test
+// Caramel C++ Library Test - Arithmetic - Flags Test
 
 #include "CaramelTestPch.h"
 
