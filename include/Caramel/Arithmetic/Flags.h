@@ -1,7 +1,7 @@
-// Caramel C++ Library - Enum Amenity - Flags Header
+// Caramel C++ Library - Arithmetic Amenity - Flags Header
 
-#ifndef __CARAMEL_ENUM_FLAGS_H
-#define __CARAMEL_ENUM_FLAGS_H
+#ifndef __CARAMEL_ARITHMETIC_FLAGS_H
+#define __CARAMEL_ARITHMETIC_FLAGS_H
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
@@ -31,4 +31,4 @@ struct Flags
 
 } // namespace Caramel
 
-#endif // __CARAMEL_ENUM_FLAGS_H
+#endif // __CARAMEL_ARITHMETIC_FLAGS_H

@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Android\LogTraceAdapter.h" />
     <ClInclude Include="..\include\Caramel\Apple\LogTraceAdapter.h" />
+    <ClInclude Include="..\include\Caramel\Arithmetic\Flags.h" />
     <ClInclude Include="..\include\Caramel\Arithmetic\PowerOfTwo.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEvent.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEventDispatcher.h" />
@@ -63,7 +64,6 @@
     <ClInclude Include="..\include\Caramel\Document\IniDocument.h" />
     <ClInclude Include="..\include\Caramel\Document\IniSection.h" />
     <ClInclude Include="..\include\Caramel\Enum\EnumLookupTable.h" />
-    <ClInclude Include="..\include\Caramel\Enum\Flags.h" />
     <ClInclude Include="..\include\Caramel\Error\Alert.h" />
     <ClInclude Include="..\include\Caramel\Error\AnyFailure.h" />
     <ClInclude Include="..\include\Caramel\Error\Assert.h" />

@@ -614,9 +614,6 @@
     <ClInclude Include="..\include\Caramel\Concurrent\BlockingQueue.h">
       <Filter>1. Public Packages\Concurrent</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\Enum\Flags.h">
-      <Filter>1. Public Packages\Enum</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Caramel\Task\TaskCore.h">
       <Filter>1. Public Packages\Task</Filter>
     </ClInclude>
@@ -715,6 +712,9 @@
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Io\Base64.h">
       <Filter>1. Public Packages\Io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Arithmetic\Flags.h">
+      <Filter>1. Public Packages\Arithmetic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
