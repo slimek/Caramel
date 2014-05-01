@@ -5,10 +5,10 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
+#include <Caramel/Data/PlainTypes.h>
 #include <Caramel/Lexical/Integer.h>
 #include <Caramel/Numeric/NumberTraits.h>
 #include <Caramel/String/CainLess.h>
-#include <Caramel/Value/PlainTypes.h>
 #include <boost/bimap/bimap.hpp>
 
 

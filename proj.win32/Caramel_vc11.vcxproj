@@ -54,6 +54,8 @@
     <ClInclude Include="..\include\Caramel\Concurrent\ReplicatePolicies.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\Set.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\BlockingQueue.h" />
+    <ClInclude Include="..\include\Caramel\Data\Base64.h" />
+    <ClInclude Include="..\include\Caramel\Data\PlainTypes.h" />
     <ClInclude Include="..\include\Caramel\DateTime\Date.h" />
     <ClInclude Include="..\include\Caramel\DateTime\DateTime.h" />
     <ClInclude Include="..\include\Caramel\DateTime\Days.h" />
@@ -76,7 +78,6 @@
     <ClInclude Include="..\include\Caramel\FileSystem\FileInfo.h" />
     <ClInclude Include="..\include\Caramel\FileSystem\Path.h" />
     <ClInclude Include="..\include\Caramel\Functional\ScopeExit.h" />
-    <ClInclude Include="..\include\Caramel\Io\Base64.h" />
     <ClInclude Include="..\include\Caramel\Io\FileStream.h" />
     <ClInclude Include="..\include\Caramel\Io\InputFileStream.h" />
     <ClInclude Include="..\include\Caramel\Io\InputStream.h" />
@@ -155,7 +156,6 @@
     <ClInclude Include="..\include\Caramel\Value\Detail\AnyHolders.h" />
     <ClInclude Include="..\include\Caramel\Value\Detail\NamedValueRef.h" />
     <ClInclude Include="..\include\Caramel\Value\NamedValues.h" />
-    <ClInclude Include="..\include\Caramel\Value\PlainTypes.h" />
     <ClInclude Include="..\include\Caramel\Value\SharedArray.h" />
     <ClInclude Include="..\include\Caramel\Windows\CrtDebug.h" />
     <ClInclude Include="..\include\Caramel\Windows\DebuggerTraceAdapter.h" />
@@ -209,6 +209,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\src\Configuration.cpp" />
+    <ClCompile Include="..\src\Data.cpp" />
     <ClCompile Include="..\src\DateTime.cpp" />
     <ClCompile Include="..\src\Debug.cpp" />
     <ClCompile Include="..\src\Document.cpp" />

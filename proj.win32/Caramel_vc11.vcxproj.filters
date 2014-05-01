@@ -177,6 +177,9 @@
     <Filter Include="1. Public Packages\Arithmetic">
       <UniqueIdentifier>{93fabb9f-6000-479a-b2b0-758f0eed3036}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\Data">
+      <UniqueIdentifier>{53b55934-888b-41e0-9099-c88c96e5f035}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Setup\Compiler.h">
@@ -575,9 +578,6 @@
     <ClInclude Include="..\include\Caramel\Task\Detail\TaskFwd.h">
       <Filter>1. Public Packages\Task\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\Value\PlainTypes.h">
-      <Filter>1. Public Packages\Value</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Caramel\Concurrent\IntervalSet.h">
       <Filter>1. Public Packages\Concurrent</Filter>
     </ClInclude>
@@ -710,11 +710,14 @@
     <ClInclude Include="..\src\Thread\LoopThreadGroupImpl.h">
       <Filter>2. Sources\Thread</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\Io\Base64.h">
-      <Filter>1. Public Packages\Io</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Caramel\Arithmetic\Flags.h">
       <Filter>1. Public Packages\Arithmetic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Data\Base64.h">
+      <Filter>1. Public Packages\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Data\PlainTypes.h">
+      <Filter>1. Public Packages\Data</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -780,6 +783,9 @@
     </ClCompile>
     <ClCompile Include="..\src\Android.cpp">
       <Filter>4. Non-Win32 Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Data.cpp">
+      <Filter>2. Sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

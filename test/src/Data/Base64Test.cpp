@@ -1,9 +1,9 @@
-// Caramel C++ Library Test - I/O - Base64 Test
+// Caramel C++ Library Test - Data - Base64 Test
 
 #include "CaramelTestPch.h"
 
 #include "Utils/StdVectorUtils.h"
-#include <Caramel/Io/Base64.h>
+#include <Caramel/Data/Base64.h>
 #include <UnitTest++/UnitTest++.h>
 
 

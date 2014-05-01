@@ -77,6 +77,9 @@
     <Filter Include="2. Tests\Arithmetic">
       <UniqueIdentifier>{e0e54bec-192a-4155-8969-a1f6f05630ab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\Data">
+      <UniqueIdentifier>{ddec937b-a096-4878-8b27-b71b70476466}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\RunTest.cpp">
@@ -256,8 +259,8 @@
     <ClCompile Include="..\src\Thread\LoopThreadGroupTest.cpp">
       <Filter>2. Tests\Thread</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Io\Base64Test.cpp">
-      <Filter>2. Tests\Io</Filter>
+    <ClCompile Include="..\src\Data\Base64Test.cpp">
+      <Filter>2. Tests\Data</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

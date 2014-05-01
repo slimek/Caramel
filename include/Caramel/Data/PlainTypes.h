@@ -1,7 +1,7 @@
-// Caramel C++ Library - Value Facility - Plain Types Header
+// Caramel C++ Library - Data Facility - Plain Types Header
 
-#ifndef __CARAMEL_VALUE_PLAIN_TYPES_H
-#define __CARAMEL_VALUE_PLAIN_TYPES_H
+#ifndef __CARAMEL_DATA_PLAIN_TYPES_H
+#define __CARAMEL_DATA_PLAIN_TYPES_H
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
@@ -27,4 +27,4 @@ struct PlainPair
 
 } // namespace Caramel
 
-#endif // __CARAMEL_VALUE_PLAIN_TYPES_H
+#endif // __CARAMEL_DATA_PLAIN_TYPES_H
