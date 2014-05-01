@@ -110,7 +110,7 @@
     <ClCompile Include="..\src\Concurrent\ConcurrentSetTest.cpp" />
     <ClCompile Include="..\src\Concurrent\ConcurrentBlockingQueueTest.cpp" />
     <ClCompile Include="..\src\Data\Base64Test.cpp" />
-    <ClCompile Include="..\src\Data\EnumLookupTest.cpp" />
+    <ClCompile Include="..\src\Data\LookupTableTest.cpp" />
     <ClCompile Include="..\src\DateTime\DateTest.cpp" />
     <ClCompile Include="..\src\DateTime\DateTimeBoolTest.cpp" />
     <ClCompile Include="..\src\DateTime\DateTimeTest.cpp" />

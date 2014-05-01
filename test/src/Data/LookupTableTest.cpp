@@ -2,19 +2,19 @@
 
 #include "CaramelTestPch.h"
 
-#include <Caramel/Data/EnumLookupTable.h>
+#include <Caramel/Data/LookupTable.h>
 #include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel
 {
 
-SUITE( EnumLookupSuite )
+SUITE( LookupTableSuite )
 {
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Enum Lookup Test
+// Enum Lookup Table Test
 //
 
 enum ImageFormat
@@ -26,9 +26,9 @@ enum ImageFormat
 };
 
 
-TEST( EnumLookupTest )
+TEST( EnumLookupTableTest )
 {
-    auto table = EnumLookupTable< ImageFormat >
+    auto table = LookupTable< ImageFormat >
         ( IMAGE_PNG, "png" )
         ( IMAGE_JPG, "jpg" )
         ( IMAGE_GIF, "gif" );
@@ -38,31 +38,31 @@ TEST( EnumLookupTest )
     
     /// Find Enum by Text ///
 
-    CHECK( true == table.FindEnumByText( "PNG", temp ));
+    CHECK( true == table.FindValueByText( "PNG", temp ));
     CHECK( IMAGE_PNG == temp );
 
-    CHECK( true == table.FindEnumByText( "2", temp ));
+    CHECK( true == table.FindValueByText( "2", temp ));
     CHECK( IMAGE_JPG == temp );
 
-    CHECK( false == table.FindEnumByText( "BMP", temp ));
+    CHECK( false == table.FindValueByText( "BMP", temp ));
 
 
     /// Find Enum by Name ///
 
-    CHECK( true == table.FindEnumByName( "Jpg", temp ));
+    CHECK( true == table.FindValueByName( "Jpg", temp ));
     CHECK( IMAGE_JPG == temp );
 
-    CHECK( false == table.FindEnumByName( "3", temp ));
-    CHECK( false == table.FindEnumByName( "tga", temp ));
+    CHECK( false == table.FindValueByName( "3", temp ));
+    CHECK( false == table.FindValueByName( "tga", temp ));
 
 
     /// Find Enum by Value ///
 
-    CHECK( true == table.FindEnumByValue( 1, temp ));
+    CHECK( true == table.FindValueByInt( 1, temp ));
     CHECK( IMAGE_PNG == temp );
 
-    CHECK( false == table.FindEnumByValue( 0, temp ));
-    CHECK( false == table.FindEnumByValue( 4, temp ));
+    CHECK( false == table.FindValueByInt( 0, temp ));
+    CHECK( false == table.FindValueByInt( 4, temp ));
 
 
     /// Find Name ///
@@ -103,13 +103,13 @@ public:
 
     void Test();
 
-    typedef EnumLookupTable< ImageFormat > FormatTable;
+    typedef LookupTable< ImageFormat > FormatTable;
     FormatTable m_formatTable;
 };
 
 
 EnumLookupHost::EnumLookupHost()
-    : m_formatTable( EnumLookupChain
+    : m_formatTable( MakeLookupTable
         ( IMAGE_PNG, "png" )
         ( IMAGE_JPG, "jpg" )
         ( IMAGE_GIF, "gif" )
@@ -125,7 +125,7 @@ void EnumLookupHost::Test()
     CHECK( "png" == name );
 
     ImageFormat format;
-    CHECK( true == m_formatTable.FindEnumByName( "gif", format ));
+    CHECK( true == m_formatTable.FindValueByName( "gif", format ));
     CHECK( IMAGE_GIF == format );
 }
 
@@ -147,23 +147,30 @@ static const PlainPair< ImageFormat, const Char* > IMAGE_FORMAT_NAMES[] =
 
 TEST( EnumLookupTableFromArrayTest )
 {
-    auto table = EnumLookupTable< ImageFormat >( IMAGE_FORMAT_NAMES );
+    auto table = LookupTable< ImageFormat >( IMAGE_FORMAT_NAMES );
 
     std::string name;
     CHECK( true == table.FindName( IMAGE_GIF, name ));
     CHECK( "gif" == name );
 
     ImageFormat format;
-    CHECK( true == table.FindEnumByName( "jpg", format ));
+    CHECK( true == table.FindValueByName( "jpg", format ));
     CHECK( IMAGE_JPG == format );
 
-    CHECK( true == table.FindEnumByValue( 1, format ));
+    CHECK( true == table.FindValueByInt( 1, format ));
     CHECK( IMAGE_PNG == format );
+}
+
+
+TEST( IntLookupTableTest )
+{
+    auto itable = LookupTable< Int >
+        ( 1, "one" );
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////
 
-} // SUITE EnumLookupSuite
+} // SUITE LookupTableSuite
 
 } // namespace Caramel

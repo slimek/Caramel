@@ -713,7 +713,7 @@
     <ClInclude Include="..\include\Caramel\Data\PlainTypes.h">
       <Filter>1. Public Packages\Data</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\Data\EnumLookupTable.h">
+    <ClInclude Include="..\include\Caramel\Data\LookupTable.h">
       <Filter>1. Public Packages\Data</Filter>
     </ClInclude>
   </ItemGroup>

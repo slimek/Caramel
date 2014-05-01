@@ -55,7 +55,7 @@
     <ClInclude Include="..\include\Caramel\Concurrent\Set.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\BlockingQueue.h" />
     <ClInclude Include="..\include\Caramel\Data\Base64.h" />
-    <ClInclude Include="..\include\Caramel\Data\EnumLookupTable.h" />
+    <ClInclude Include="..\include\Caramel\Data\LookupTable.h" />
     <ClInclude Include="..\include\Caramel\Data\PlainTypes.h" />
     <ClInclude Include="..\include\Caramel\DateTime\Date.h" />
     <ClInclude Include="..\include\Caramel\DateTime\DateTime.h" />

@@ -256,7 +256,7 @@
     <ClCompile Include="..\src\Arithmetic\FlagsTest.cpp">
       <Filter>2. Tests\Arithmetic</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Data\EnumLookupTest.cpp">
+    <ClCompile Include="..\src\Data\LookupTableTest.cpp">
       <Filter>2. Tests\Data</Filter>
     </ClCompile>
   </ItemGroup>
