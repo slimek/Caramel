@@ -112,6 +112,23 @@ inline LookupTable< ValueType > MakeLookupTable( ValueType value, const std::str
 }
 
 
+template< typename ValueType >
+inline LookupTable< ValueType > MakeLookupTable(
+    ValueType value, const std::string& name, const std::string& alias )
+{
+    return LookupTable< ValueType >( value, name, alias );
+}
+
+
+template< typename ValueType >
+inline LookupTable< ValueType > MakeLookupTable(
+    ValueType value, const std::string& name,
+    const std::string& alias1, const std::string& alias2 )
+{
+    return LookupTable< ValueType >( value, name, alias1, alias2 );
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Implementation

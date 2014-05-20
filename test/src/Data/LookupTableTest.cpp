@@ -242,6 +242,17 @@ TEST( LookupTableAliasTest )
 
     CHECK( true == rtable.FindName( IMAGE_JPG, name ));
     CHECK( "jpe" == name );
+
+
+    /// MakeLookupTable() with Aliases - just test compiling ///
+
+    auto table2 = MakeLookupTable
+        ( IMAGE_JPG, "jpg", "jpeg", "jpe" )
+        ( IMAGE_PNG, "png", "apng" )
+        ( IMAGE_GIF, "gif" );
+
+    CHECK( true == table2.FindName( IMAGE_JPG, name ));
+    CHECK( "jpg" == name );
 }
 
 
