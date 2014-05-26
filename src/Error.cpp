@@ -250,7 +250,8 @@ namespace Detail
 
 std::string CaramelExceptionHolder::TracingMessage() const
 {
-    return Format( "Caramel::Exception caught, what: {0}", m_exception.What() );
+    return Format( "Caramel::Exception caught\nfunction: {0}\nwhat: {1}\nin file: {2}, line: {3}",
+                   m_exception.Function(), m_exception.What(), m_exception.File(), m_exception.Line() );
 }
 
 
