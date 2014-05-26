@@ -62,7 +62,7 @@ private:
     throw CARAMEL_MAKE_EXCEPTION( __VA_ARGS__ )
 
 #define CARAMEL_MAKE_EXCEPTION( ... ) \
-    Caramel::Exception( __LINE__, __FILE__, __FUNCTION__, Caramel::Sprintf( __VA_ARGS__ ))
+    Caramel::Exception( __LINE__, __FILE__, CARAMEL_CURRENT_FUNCTION, Caramel::Sprintf( __VA_ARGS__ ))
 
 
 //
@@ -71,7 +71,7 @@ private:
 //
 
 #define CARAMEL_THROW1( msg ) \
-    throw Caramel::Exception( __LINE__, __FILE__, __FUNCTION__, msg )
+    throw Caramel::Exception( __LINE__, __FILE__, CARAMEL_CURRENT_FUNCTION, msg )
 
 #define CARAMEL_INVALID_ARGUMENT() \
     CARAMEL_THROW1( "Invalid Argument" )

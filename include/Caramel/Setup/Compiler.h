@@ -22,6 +22,7 @@
 
 // Compiler settings
 
+#define CARAMEL_CURRENT_FUNCTION __FUNCTION__
 #define CARAMEL_DEPRECATED __declspec( deprecated )
 
 #if ( 1800 <= _MSC_VER )
@@ -58,6 +59,7 @@
 
 // Compiler settings
 
+#define CARAMEL_CURRENT_FUNCTION __PRETTY_FUNCTION__
 #define CARAMEL_DEPRECATED
 #define CARAMEL_NOEXCEPT noexcept
 
@@ -86,6 +88,7 @@
 
 // Compiler settings
 
+#define CARAMEL_CURRENT_FUNCTION __PRETTY_FUNCTION__
 #define CARAMEL_DEPRECATED
 #define CARAMEL_NOEXCEPT noexcept
 
