@@ -6,6 +6,8 @@
 
 #include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Async/Detail/AnyEventTargetImpl.h>
+#include <Caramel/String/Format.h>
+#include <Caramel/Task/TaskExecutor.h>
 
 
 namespace Caramel
@@ -20,12 +22,13 @@ namespace Detail
 //
 
 class AnyEventHandlerImpl : public AnyEventTargetImpl
+                          , public std::enable_shared_from_this< AnyEventHandlerImpl >
 {
 public:
 
     typedef std::function< void( const AnyEvent& event ) > EventHandler;
 
-    explicit AnyEventHandlerImpl( EventHandler&& handler );
+    AnyEventHandlerImpl( TaskExecutor& executor, EventHandler&& handler );
 
 
     /// Implements AnyEventTargetImpl ///
@@ -37,7 +40,8 @@ private:
 
     /// Data Members ///
 
-    EventHandler m_handler;
+    TaskExecutor& m_executor;
+    EventHandler  m_handler;
 };
 
 
@@ -46,14 +50,28 @@ private:
 // Implementation
 //
 
-inline AnyEventHandlerImpl::AnyEventHandlerImpl( EventHandler&& handler )
-    : m_handler( std::move( handler ))
+inline AnyEventHandlerImpl::AnyEventHandlerImpl( TaskExecutor& executor, EventHandler&& handler )
+    : m_executor( executor )
+    , m_handler( std::move( handler ))
 {
 }
 
 
 inline void AnyEventHandlerImpl::Send( const AnyEvent& event, Uint age )
 {
+    UniqueLock ulock = this->CompareAge( age );
+    if ( ulock )
+    {
+        auto thiz = this->shared_from_this();
+
+        Task< void > task( Format( "Event %d", event.Id() ),
+        [thiz,event]
+        {
+            thiz->m_handler( event );
+        });
+
+        m_executor.Submit( task );
+    }
 }
 
 

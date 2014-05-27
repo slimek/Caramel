@@ -16,7 +16,7 @@ namespace Caramel
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Any Event Handler
-// - Send an event to this target would result in an immediately function call.
+// - Send an event to this target would be passed to the executor.
 //
 
 class AnyEventHandler : public AnyEventTarget
@@ -25,14 +25,15 @@ public:
     
     typedef std::function< void( const AnyEvent& event ) > EventHandler;
     
-    explicit AnyEventHandler( EventHandler handler );
+    AnyEventHandler( TaskExecutor& executor, EventHandler handler );
 
 
 private:
 
     /// Implements AnyEventTarget ///
 
-    Detail::AnyEventTargetPtr GetTargetImpl() const override;
+    Detail::AnyEventTargetPtr GetTargetImpl() const override { return m_impl; }
+
 
     std::shared_ptr< Detail::AnyEventHandlerImpl > m_impl;
 };
@@ -43,8 +44,8 @@ private:
 // Implementation
 //
 
-inline AnyEventHandler::AnyEventHandler( EventHandler handler )
-    : m_impl( new Detail::AnyEventHandlerImpl( std::move( handler )))
+inline AnyEventHandler::AnyEventHandler( TaskExecutor& executor, EventHandler handler )
+    : m_impl( new Detail::AnyEventHandlerImpl( executor, std::move( handler )))
 {
 }
 
