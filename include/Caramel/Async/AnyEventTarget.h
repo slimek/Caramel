@@ -1,11 +1,11 @@
-// Caramel C++ Library - Async Amenity - Any Event Target Header
+// Caramel C++ Library - Async Facility - Any Event Target Header
 
 #ifndef __CARAMEL_ASYNC_ANY_EVENT_TARGET_H
 #define __CARAMEL_ASYNC_ANY_EVENT_TARGET_H
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
-#include <Caramel/Async/Detail/AnyEventTargetImpl.h>
+#include <Caramel/Async/AnyEvent.h>
 
 
 namespace Caramel
@@ -16,11 +16,14 @@ namespace Caramel
 // Any Event Target
 //
 
+class AnyEventTargetImpl;
+typedef std::shared_ptr< AnyEventTargetImpl > AnyEventTargetPtr;
+
 struct AnyEventTarget
 {
     virtual ~AnyEventTarget() {}
   
-    virtual Detail::AnyEventTargetPtr GetTargetImpl() const = 0;
+    virtual AnyEventTargetPtr GetTargetImpl() const = 0;
 };
 
 

@@ -1,20 +1,16 @@
-// Caramel C++ Library - Async Amenity - Detail - Any Event Target Private Header
+// Caramel C++ Library - Async Facility - Any Event Target Private Header
 
-#ifndef __CARAMEL_ASYNC_DETAIL_ANY_EVENT_TARGET_IMPL_H
-#define __CARAMEL_ASYNC_DETAIL_ANY_EVENT_TARGET_IMPL_H
+#ifndef __CARAMEL_ASYNC_ANY_EVENT_TARGET_IMPL_H
+#define __CARAMEL_ASYNC_ANY_EVENT_TARGET_IMPL_H
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Async/AnyEvent.h>
-#include <Caramel/Error/Assert.h>
 #include <Caramel/Thread/MutexLocks.h>
 #include <mutex>
 
 
 namespace Caramel
-{
-
-namespace Detail
 {
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -61,50 +57,7 @@ typedef std::shared_ptr< AnyEventTargetImpl > AnyEventTargetPtr;
 
 
 ///////////////////////////////////////////////////////////////////////////////
-//
-// Implementation
-//
-
-inline AnyEventTargetImpl::AnyEventTargetImpl()
-    : m_destroyed( false )
-    , m_age( 0 )
-{
-}
-
-
-inline void AnyEventTargetImpl::Destroy()
-{
-    CARAMEL_ASSERT( ! m_destroyed );
-    m_destroyed = true;
-}
-
-
-//
-// Reference Aging
-//
-
-inline void AnyEventTargetImpl::IncrementAge()
-{
-    UniqueLock ulock( m_ageMutex );
-    ++ m_age;
-}
-
-
-inline UniqueLock AnyEventTargetImpl::CompareAge( Uint age ) const
-{
-    UniqueLock ulock( m_ageMutex );
-    if ( m_age != age )
-    {
-        ulock.unlock();
-    }
-    return std::move( ulock );
-}
-
-
-///////////////////////////////////////////////////////////////////////////////
-
-} // namespace Detail
 
 } // namespace Caramel
 
-#endif // __CARAMEL_ASYNC_DETAIL_ANY_EVENT_TARGET_IMPL_H
+#endif // __CARAMEL_ASYNC_ANY_EVENT_TARGET_IMPL_H

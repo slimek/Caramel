@@ -165,9 +165,6 @@
     <Filter Include="1. Public Packages\Value\Detail">
       <UniqueIdentifier>{dddb83b1-4558-4057-bbbc-d48e3210aabc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="1. Public Packages\Async\Detail">
-      <UniqueIdentifier>{61c02db5-a9d8-4dca-aa0f-7d8e6cd10893}</UniqueIdentifier>
-    </Filter>
     <Filter Include="1. Public Packages\FileSystem">
       <UniqueIdentifier>{c9f622dd-a423-4a8d-b682-bb4368bc6a29}</UniqueIdentifier>
     </Filter>
@@ -176,6 +173,9 @@
     </Filter>
     <Filter Include="1. Public Packages\Data">
       <UniqueIdentifier>{53b55934-888b-41e0-9099-c88c96e5f035}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\Async">
+      <UniqueIdentifier>{1ba18528-73bc-4f83-9eb0-568e602e0138}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -626,20 +626,11 @@
     <ClInclude Include="..\include\Caramel\Concurrent\Detail\LockedSequence.h">
       <Filter>1. Public Packages\Concurrent\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventQueueImpl.h">
-      <Filter>1. Public Packages\Async\Detail</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Caramel\Thread\WaitableBool.h">
       <Filter>1. Public Packages\Thread</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Async\AnyEventTarget.h">
       <Filter>1. Public Packages\Async</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventTargetImpl.h">
-      <Filter>1. Public Packages\Async\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventDispatcherImpl.h">
-      <Filter>1. Public Packages\Async\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Concurrent\Detail\LockedIntervalSet.h">
       <Filter>1. Public Packages\Concurrent\Detail</Filter>
@@ -719,8 +710,17 @@
     <ClInclude Include="..\include\Caramel\Async\AnyEventHandler.h">
       <Filter>1. Public Packages\Async</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventHandlerImpl.h">
-      <Filter>1. Public Packages\Async\Detail</Filter>
+    <ClInclude Include="..\src\Async\AnyEventTargetImpl.h">
+      <Filter>2. Sources\Async</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Async\AnyEventQueueImpl.h">
+      <Filter>2. Sources\Async</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Async\AnyEventHandlerImpl.h">
+      <Filter>2. Sources\Async</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Async\AnyEventDispatcherImpl.h">
+      <Filter>2. Sources\Async</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -788,6 +788,9 @@
       <Filter>4. Non-Win32 Platform</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Data.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Async.cpp">
       <Filter>2. Sources</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,4 +1,4 @@
-// Caramel C++ Library - Async Amenity - Any Event Header
+// Caramel C++ Library - Async Facility - Any Event Header
 
 #ifndef __CARAMEL_ASYNC_ANY_EVENT_H
 #define __CARAMEL_ASYNC_ANY_EVENT_H
@@ -57,6 +57,7 @@ private:
 };
 
 
+///////////////////////////////////////////////////////////////////////////////
 //
 // Implementation
 //

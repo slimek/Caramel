@@ -5,9 +5,9 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
+#include "Async/AnyEventTargetImpl.h"
 #include "Statechart/StateImpl.h"
 #include "Statechart/Transition.h"
-#include <Caramel/Async/Detail/AnyEventTargetImpl.h>
 #include <Caramel/Concurrent/HashMap.h>
 #include <Caramel/Statechart/StateMachine.h>
 #include <Caramel/Task/TaskPoller.h>
@@ -27,7 +27,7 @@ namespace Statechart
 // State Machine
 //
 
-class StateMachineImpl : public Detail::AnyEventTargetImpl
+class StateMachineImpl : public AnyEventTargetImpl
 {
     friend class StateMachine;
 

@@ -1,12 +1,12 @@
-// Caramel C++ Library - Async Amenity - Any Event Handler Header
+// Caramel C++ Library - Async Facility - Any Event Handler Header
 
 #ifndef __CARAMEL_ASYNC_ANY_EVENT_HANDLER_H
 #define __CARAMEL_ASYNC_ANY_EVENT_HANDLER_H
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
-#include <Caramel/Async/Detail/AnyEventHandlerImpl.h>
 #include <Caramel/Async/AnyEventTarget.h>
+#include <Caramel/Task/Detail/TaskFwd.h>
 #include <functional>
 
 
@@ -18,6 +18,8 @@ namespace Caramel
 // Any Event Handler
 // - Send an event to this target would be passed to the executor.
 //
+
+class AnyEventHandlerImpl;
 
 class AnyEventHandler : public AnyEventTarget
 {
@@ -32,22 +34,13 @@ private:
 
     /// Implements AnyEventTarget ///
 
-    Detail::AnyEventTargetPtr GetTargetImpl() const override { return m_impl; }
+    AnyEventTargetPtr GetTargetImpl() const override;
 
 
-    std::shared_ptr< Detail::AnyEventHandlerImpl > m_impl;
+    /// Data Members ///
+
+    std::shared_ptr< AnyEventHandlerImpl > m_impl;
 };
-
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Implementation
-//
-
-inline AnyEventHandler::AnyEventHandler( TaskExecutor& executor, EventHandler handler )
-    : m_impl( new Detail::AnyEventHandlerImpl( executor, std::move( handler )))
-{
-}
 
 
 ///////////////////////////////////////////////////////////////////////////////

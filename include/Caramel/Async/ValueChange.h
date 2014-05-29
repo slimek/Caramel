@@ -1,4 +1,4 @@
-// Caramel C++ Library - Async Amenity - Value Change Header
+// Caramel C++ Library - Async Facility - Value Change Header
 
 #ifndef __CARAMEL_ASYNC_VALUE_CHANGE_H
 #define __CARAMEL_ASYNC_VALUE_CHANGE_H

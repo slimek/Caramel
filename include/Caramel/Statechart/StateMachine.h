@@ -79,7 +79,7 @@ private:
 
     /// Implements AnyEventTarget ///
 
-    Detail::AnyEventTargetPtr GetTargetImpl() const override;
+    AnyEventTargetPtr GetTargetImpl() const override;
 
 
     std::shared_ptr< StateMachineImpl > m_impl;

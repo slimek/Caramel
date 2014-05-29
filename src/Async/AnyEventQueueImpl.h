@@ -1,19 +1,17 @@
-// Caramel C++ Library - Async Amenity - Detail - Any Event Queue Private Header
+// Caramel C++ Library - Async Facility - Any Event Queue Private Header
 
-#ifndef __CARAMEL_ASYNC_DETAIL_ANY_EVENT_QUEUE_IMPL_H
-#define __CARAMEL_ASYNC_DETAIL_ANY_EVENT_QUEUE_IMPL_H
+#ifndef __CARAMEL_ASYNC_ANY_EVENT_QUEUE_IMPL_H
+#define __CARAMEL_ASYNC_ANY_EVENT_QUEUE_IMPL_H
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
-#include <Caramel/Async/Detail/AnyEventTargetImpl.h>
+#include "Async/AnyEventTargetImpl.h"
+#include <Caramel/Async/AnyEventQueue.h>
 #include <Caramel/Concurrent/IntervalSet.h>
 #include <Caramel/Concurrent/Queue.h>
 
 
 namespace Caramel
-{
-
-namespace Detail
 {
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -54,40 +52,7 @@ private:
 
 
 ///////////////////////////////////////////////////////////////////////////////
-//
-// Implementation
-//
-
-inline void AnyEventQueueImpl::Send( const AnyEvent& evt, Uint age )
-{
-    UniqueLock ulock = this->CompareAge( age );
-    if ( ulock )
-    {
-        this->Push( evt );
-    }
-}
-
-
-//
-// To Prevent Ambiguous IDs
-//
-
-inline Bool AnyEventQueueImpl::RegisterIdRange( Int minEventId, Int maxEventId )
-{
-    return m_registeredIdRanges.InsertClosed( minEventId, maxEventId );
-}
-
-
-inline void AnyEventQueueImpl::UnregisterIdRange( Int minEventId, Int maxEventId )
-{
-    m_registeredIdRanges.EraseClosed( minEventId, maxEventId );
-}
-
-
-///////////////////////////////////////////////////////////////////////////////
-
-} // namespace Detail
 
 } // namespace Caramel
 
-#endif // __CARAMEL_ASYNC_DETAIL_ANY_EVENT_QUEUE_IMPL_H
+#endif // __CARAMEL_ASYNC_ANY_EVENT_QUEUE_IMPL_H

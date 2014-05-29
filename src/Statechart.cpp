@@ -380,7 +380,7 @@ void StateMachineImpl::PlanToTransit( Int stateId )
 // Implements AnyEventTarget
 //
 
-Detail::AnyEventTargetPtr StateMachine::GetTargetImpl() const
+AnyEventTargetPtr StateMachine::GetTargetImpl() const
 {
     return m_impl;
 }

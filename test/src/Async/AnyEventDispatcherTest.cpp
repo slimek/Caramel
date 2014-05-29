@@ -66,12 +66,8 @@ TEST( AnyEventDispatcherToQueueTest )
 
     /// Automatically remove target ///
 
-    std::shared_ptr< Detail::AnyEventQueueImpl > dq3impl;
-
     {
         AnyEventQueue dq3;
-        dq3impl = std::static_pointer_cast< Detail::AnyEventQueueImpl >(
-            static_cast< AnyEventTarget& >( dq3 ).GetTargetImpl() );
 
         disp.LinkTarget( dq3 );
 
@@ -91,8 +87,6 @@ TEST( AnyEventDispatcherToQueueTest )
     disp.DispatchEvent( 81 );
 
     CHECK( 1 == disp.GetNumTargets() );
-
-    CHECK( false == dq3impl->TryPop( value ));
 
     CHECK( true == dq2.TryPop( value ));
     CHECK( 81 == value.Id() );

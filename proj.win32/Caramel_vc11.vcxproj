@@ -27,10 +27,6 @@
     <ClInclude Include="..\include\Caramel\Async\AnyEventDispatcher.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEventHandler.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEventTarget.h" />
-    <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventDispatcherImpl.h" />
-    <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventHandlerImpl.h" />
-    <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventQueueImpl.h" />
-    <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventTargetImpl.h" />
     <ClInclude Include="..\include\Caramel\Async\FlowState.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEventQueue.h" />
     <ClInclude Include="..\include\Caramel\Async\ValueChange.h" />
@@ -163,6 +159,10 @@
     <ClInclude Include="..\include\Caramel\Windows\DebuggerTraceAdapter.h" />
     <ClInclude Include="..\include\Caramel\Windows\FileInfo.h" />
     <ClInclude Include="..\include\Caramel\Windows\WideString.h" />
+    <ClInclude Include="..\src\Async\AnyEventDispatcherImpl.h" />
+    <ClInclude Include="..\src\Async\AnyEventHandlerImpl.h" />
+    <ClInclude Include="..\src\Async\AnyEventQueueImpl.h" />
+    <ClInclude Include="..\src\Async\AnyEventTargetImpl.h" />
     <ClInclude Include="..\src\CaramelPch.h" />
     <ClInclude Include="..\src\DateTime\DateImpl.h" />
     <ClInclude Include="..\src\DateTime\DateTimeImpl.h" />
@@ -206,6 +206,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\src\Async.cpp" />
     <ClCompile Include="..\src\CaramelPch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

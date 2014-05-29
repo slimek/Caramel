@@ -1,4 +1,4 @@
-// Caramel C++ Library - Async Amenity - Flow State Header
+// Caramel C++ Library - Async Facility - Flow State Header
 
 #ifndef __CARAMEL_ASYNC_FLOW_STATE_H
 #define __CARAMEL_ASYNC_FLOW_STATE_H
