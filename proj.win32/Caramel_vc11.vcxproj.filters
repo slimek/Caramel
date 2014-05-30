@@ -722,6 +722,12 @@
     <ClInclude Include="..\src\Async\AnyEventDispatcherImpl.h">
       <Filter>2. Sources\Async</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Async\AnyEventSlot.h">
+      <Filter>1. Public Packages\Async</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Async\AnyEventSlotImpl.h">
+      <Filter>2. Sources\Async</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

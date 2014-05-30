@@ -95,6 +95,7 @@
     <ClCompile Include="..\src\Async\AnyEventDispatcherTest.cpp" />
     <ClCompile Include="..\src\Async\AnyEventHandlerTest.cpp" />
     <ClCompile Include="..\src\Async\AnyEventQueueTest.cpp" />
+    <ClCompile Include="..\src\Async\AnyEventSlotTest.cpp" />
     <ClCompile Include="..\src\Async\AnyEventTest.cpp" />
     <ClCompile Include="..\src\Async\FlowStateTest.cpp" />
     <ClCompile Include="..\src\Async\ValueChangeTest.cpp" />

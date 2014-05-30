@@ -26,6 +26,7 @@
     <ClInclude Include="..\include\Caramel\Async\AnyEvent.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEventDispatcher.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEventHandler.h" />
+    <ClInclude Include="..\include\Caramel\Async\AnyEventSlot.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEventTarget.h" />
     <ClInclude Include="..\include\Caramel\Async\FlowState.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEventQueue.h" />
@@ -162,6 +163,7 @@
     <ClInclude Include="..\src\Async\AnyEventDispatcherImpl.h" />
     <ClInclude Include="..\src\Async\AnyEventHandlerImpl.h" />
     <ClInclude Include="..\src\Async\AnyEventQueueImpl.h" />
+    <ClInclude Include="..\src\Async\AnyEventSlotImpl.h" />
     <ClInclude Include="..\src\Async\AnyEventTargetImpl.h" />
     <ClInclude Include="..\src\CaramelPch.h" />
     <ClInclude Include="..\src\DateTime\DateImpl.h" />

@@ -5,6 +5,7 @@
 #include "Async/AnyEventDispatcherImpl.h"
 #include "Async/AnyEventHandlerImpl.h"
 #include "Async/AnyEventQueueImpl.h"
+#include "Async/AnyEventSlotImpl.h"
 #include "Async/AnyEventTargetImpl.h"
 
 
@@ -16,6 +17,7 @@ namespace Caramel
 //
 //   AnyEventTarget
 //   AnyEventQueue
+//   AnyEventSlot
 //   AnyEventHandler
 //   AnyEventDispatcher
 //
@@ -174,6 +176,91 @@ Bool AnyEventQueueImpl::RegisterIdRange( Int minEventId, Int maxEventId )
 void AnyEventQueueImpl::UnregisterIdRange( Int minEventId, Int maxEventId )
 {
     m_registeredIdRanges.EraseClosed( minEventId, maxEventId );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Any Event Slot
+//
+
+AnyEventSlot::AnyEventSlot()
+    : m_impl( new AnyEventSlotImpl )
+{
+}
+
+
+AnyEventSlot::~AnyEventSlot()
+{
+    m_impl->Destroy();
+}
+
+
+AnyEventTargetPtr AnyEventSlot::GetTargetImpl() const
+{
+    return m_impl;
+}
+
+
+Bool AnyEventSlot::IsValid() const
+{
+    return m_impl->GetEvent().IsValid();
+}
+
+
+AnyEvent AnyEventSlot::GetEvent() const
+{
+    const AnyEvent event = m_impl->GetEvent();
+    if ( ! event.IsValid() )
+    {
+        CARAMEL_THROW( "AnyEventSlot is empty" );
+    }
+    return event;
+}
+
+
+void AnyEventSlot::UnlinkAll()
+{
+    m_impl->IncrementAge();
+    m_impl->Clear();
+}
+
+
+//
+// Implementation
+//
+
+AnyEvent AnyEventSlotImpl::GetEvent() const
+{
+    LockGuard lock( m_eventMutex );
+    return m_event;
+}
+
+
+void AnyEventSlotImpl::Send( const AnyEvent& event, Uint age )
+{
+    UniqueLock ulock = this->CompareAge( age );
+    if ( ulock )
+    {
+        {
+            LockGuard eventLock( m_eventMutex );
+            if ( ! m_event.HasValue() )
+            {
+                m_event = event;
+                return;
+            }
+        }
+
+        // Not returns ? The event has already existed, discard the new event.
+        CARAMEL_TRACE_DEBUG( "AnyEventSlot discard an event, id: %d", event.Id() );
+    }
+}
+
+
+void AnyEventSlotImpl::Clear()
+{
+    LockGuard lock( m_eventMutex );
+    m_event = AnyEvent();
 }
 
 
