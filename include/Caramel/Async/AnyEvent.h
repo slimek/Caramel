@@ -47,13 +47,11 @@ public:
     T Value() const;
 
 
-
 private:
 
     Bool m_valid;
     Int  m_id;
     Any  m_value;
-
 };
 
 

@@ -707,16 +707,10 @@
     <ClInclude Include="..\include\Caramel\Data\LookupTable.h">
       <Filter>1. Public Packages\Data</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\Async\AnyEventHandler.h">
-      <Filter>1. Public Packages\Async</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\Async\AnyEventTargetImpl.h">
       <Filter>2. Sources\Async</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Async\AnyEventQueueImpl.h">
-      <Filter>2. Sources\Async</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Async\AnyEventHandlerImpl.h">
       <Filter>2. Sources\Async</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Async\AnyEventDispatcherImpl.h">

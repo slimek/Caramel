@@ -3,7 +3,6 @@
 #include "CaramelPch.h"
 
 #include "Async/AnyEventDispatcherImpl.h"
-#include "Async/AnyEventHandlerImpl.h"
 #include "Async/AnyEventQueueImpl.h"
 #include "Async/AnyEventSlotImpl.h"
 #include "Async/AnyEventTargetImpl.h"
@@ -18,7 +17,6 @@ namespace Caramel
 //   AnyEventTarget
 //   AnyEventQueue
 //   AnyEventSlot
-//   AnyEventHandler
 //   AnyEventDispatcher
 //
 
@@ -261,52 +259,6 @@ void AnyEventSlotImpl::Clear()
 {
     LockGuard lock( m_eventMutex );
     m_event = AnyEvent();
-}
-
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Any Event Handler
-//
-
-AnyEventHandler::AnyEventHandler( TaskExecutor& executor, EventHandler handler )
-    : m_impl( new AnyEventHandlerImpl( executor, std::move( handler )))
-{
-}
-
-
-AnyEventTargetPtr AnyEventHandler::GetTargetImpl() const
-{
-    return m_impl;
-}
-
-
-//
-// Implementation
-//
-
-AnyEventHandlerImpl::AnyEventHandlerImpl( TaskExecutor& executor, EventHandler&& handler )
-    : m_executor( executor )
-    , m_handler( std::move( handler ))
-{
-}
-
-
-void AnyEventHandlerImpl::Send( const AnyEvent& event, Uint age )
-{
-    UniqueLock ulock = this->CompareAge( age );
-    if ( ulock )
-    {
-        auto thiz = this->shared_from_this();
-
-        Task< void > task( Format( "Event %d", event.Id() ),
-        [thiz,event]
-        {
-            thiz->m_handler( event );
-        });
-
-        m_executor.Submit( task );
-    }
 }
 
 
