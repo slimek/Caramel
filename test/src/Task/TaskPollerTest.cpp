@@ -116,7 +116,13 @@ TEST( TaskPollerThenTest )
         poller.Submit( task3 );
         poller.PollFor( Ticks( 100 ));
 
-        CHECK( true == done4 && true == task3.IsFaulted() );
+        CHECK( true == task3.IsFaulted() );
+
+        // No matter task3 succeeded or failed, always execute task4.
+        CHECK( true == done4 );
+        
+        // Catch the exception to prevent it from outputting a tracing message in unit test.
+        const auto result = task3.Catch();
     }
 
     /// Then with Void ///
