@@ -50,9 +50,9 @@ TEST( AnyEventSlotTest )
     disp.DispatchEvent( 4, 51 );
     CHECK( 2 == slot.Id() );
 
-    // Unlink the slot
+    // Reset the slot
 
-    slot.UnlinkAll();
+    slot.Reset();
     CHECK( false == slot );
 
     disp.DispatchEvent( 5, "Reimu" );

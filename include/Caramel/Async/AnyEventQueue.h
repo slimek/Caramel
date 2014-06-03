@@ -44,7 +44,7 @@ public:
     // This function has two effects:
     // 1. Unlink from all linked dispatchers.
     // 2. Discard all unprocessed events.
-    void UnlinkAll();
+    void Reset();
 
 
     //

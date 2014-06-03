@@ -124,7 +124,7 @@ Bool AnyEventQueue::TryPop( AnyEvent& evt )
 }
 
 
-void AnyEventQueue::UnlinkAll()
+void AnyEventQueue::Reset()
 {
     m_impl->IncrementAge();
     m_impl->Clear();
@@ -217,7 +217,7 @@ AnyEvent AnyEventSlot::GetEvent() const
 }
 
 
-void AnyEventSlot::UnlinkAll()
+void AnyEventSlot::Reset()
 {
     m_impl->IncrementAge();
     m_impl->Clear();

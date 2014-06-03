@@ -51,7 +51,7 @@ public:
     // This function has two effects:
     // 1. Unlink from all linked dispatchers.
     // 2. Discard the event if have received one.
-    void UnlinkAll();
+    void Reset();
 
 
 private:
