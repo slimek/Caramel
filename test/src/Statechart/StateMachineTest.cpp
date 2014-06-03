@@ -194,7 +194,7 @@ TEST( StateMachineRunFailedTest )
 
 TEST( StateMachineAsAnyEventTargetTest )
 {
-    AnyEventDispatcher disp( E_START, E_STRING );
+    AnyEventDispatcher disp;
     Statechart::StateMachine machine( "AnyEventTarget" );
 
     machine.AddState( S_INITIAL )

@@ -69,25 +69,9 @@ TEST( AnyEventQueueTest )
 }
 
 
-TEST( AnyEventQueueRegisterIdRangeTest )
-{
-    AnyEventQueue equeue;
-
-    CHECK( true == equeue.RegisterIdRange( 10, 15 ));
-    CHECK( true == equeue.RegisterIdRange( 20, 25 ));
-
-    CHECK( false == equeue.RegisterIdRange( 15, 16 ));  // conflicts on 15
-    CHECK( false == equeue.RegisterIdRange( 18, 20 ));  // confiicts on 20
-
-    equeue.UnregisterIdRange( 12, 16 );
-
-    CHECK( true == equeue.RegisterIdRange( 12, 16 ));
-}
-
-
 TEST( AnyEventQueueUnlinkTest )
 {
-    AnyEventDispatcher edisp( 0, 100 );
+    AnyEventDispatcher edisp;
     AnyEventQueue equeue;
     AnyEvent event;
 
@@ -114,7 +98,7 @@ TEST( AnyEventQueueUnlinkTest )
     
     // Attach to another Dispatcher
 
-    AnyEventDispatcher edisp2( 101, 200 );
+    AnyEventDispatcher edisp2;
 
     edisp2.LinkTarget( equeue );
     edisp2.DispatchEvent( 125 );

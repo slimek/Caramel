@@ -132,22 +132,6 @@ void AnyEventQueue::Reset()
 
 
 //
-// To Prevent Ambiguous IDs
-//
-
-Bool AnyEventQueue::RegisterIdRange( Int minEventId, Int maxEventId )
-{
-    return m_impl->RegisterIdRange( minEventId, maxEventId );
-}
-
-
-void AnyEventQueue::UnregisterIdRange( Int minEventId, Int maxEventId )
-{
-    m_impl->UnregisterIdRange( minEventId, maxEventId );
-}
-
-
-//
 // Implementation
 //
 
@@ -158,22 +142,6 @@ void AnyEventQueueImpl::Send( const AnyEvent& evt, Uint age )
     {
         this->Push( evt );
     }
-}
-
-
-//
-// To Prevent Ambiguous IDs
-//
-
-Bool AnyEventQueueImpl::RegisterIdRange( Int minEventId, Int maxEventId )
-{
-    return m_registeredIdRanges.InsertClosed( minEventId, maxEventId );
-}
-
-
-void AnyEventQueueImpl::UnregisterIdRange( Int minEventId, Int maxEventId )
-{
-    m_registeredIdRanges.EraseClosed( minEventId, maxEventId );
 }
 
 
@@ -289,8 +257,8 @@ void AnyEventSlotImpl::Clear()
 // Any Event Dispatcher
 //
 
-AnyEventDispatcher::AnyEventDispatcher( Int minEventId, Int maxEventId )
-    : m_impl( new AnyEventDispatcherImpl( minEventId, maxEventId ))
+AnyEventDispatcher::AnyEventDispatcher()
+    : m_impl( new AnyEventDispatcherImpl )
 {
 }
 
@@ -361,9 +329,7 @@ void AnyEventDispatcher::Dispatch( const AnyEvent& evt )
 // Implementation
 //
 
-AnyEventDispatcherImpl::AnyEventDispatcherImpl( Int minEventId, Int maxEventId )
-    : m_minEventId( minEventId )
-    , m_maxEventId( maxEventId )
+AnyEventDispatcherImpl::AnyEventDispatcherImpl()
 {
 }
 

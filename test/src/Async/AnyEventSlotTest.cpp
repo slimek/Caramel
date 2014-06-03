@@ -33,7 +33,7 @@ TEST( AnyEventSlotTrivialTest )
 
 TEST( AnyEventSlotTest )
 {
-    AnyEventDispatcher disp( 1, 10 );
+    AnyEventDispatcher disp;
     AnyEventSlot slot;
 
     disp.LinkTarget( slot );

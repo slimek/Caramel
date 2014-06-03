@@ -47,18 +47,6 @@ public:
     void Reset();
 
 
-    //
-    // To Prevent Ambiguous IDs
-    // - Only check IDs when registering, not when each pushing.
-    //   Cooperate with AnyEventDispatcher.
-    //
-
-    // Returns false if the ID range overlaps with others.
-    Bool RegisterIdRange( Int minEventId, Int maxEventId );
-
-    void UnregisterIdRange( Int minEventId, Int maxEventId );
-
-
 private:
 
     /// Implements AnyEventTarget ///

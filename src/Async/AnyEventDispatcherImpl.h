@@ -22,7 +22,7 @@ class AnyEventDispatcherImpl : public AnyEventTargetImpl
 {
 public:
 
-    AnyEventDispatcherImpl( Int minEventId, Int maxEventId );
+    AnyEventDispatcherImpl();
 
     
     /// Targets Management ///
@@ -44,9 +44,6 @@ public:
 
 
 private:
-
-    Int m_minEventId;
-    Int m_maxEventId;
 
     typedef Concurrent::HashMapWithSnapshot< AnyEventTargetPtr, Uint > TargetMap;
     TargetMap m_targets;

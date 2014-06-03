@@ -24,7 +24,7 @@ class AnyEventDispatcher : public AnyEventTarget
 {
 public:
 
-    AnyEventDispatcher( Int minEventId, Int maxEventId );
+    AnyEventDispatcher();
     ~AnyEventDispatcher();
 
 

@@ -20,7 +20,7 @@ SUITE( AnyEventDispatcherSuite )
 
 TEST( AnyEventDispatcherTrivialTest )
 {
-    AnyEventDispatcher disp( 1, 4 );
+    AnyEventDispatcher disp;
 
     // Nothing happen
     disp.Dispatch( AnyEvent( 1 ));
@@ -32,7 +32,7 @@ TEST( AnyEventDispatcherTrivialTest )
 
 TEST( AnyEventDispatcherToQueueTest )
 {
-    AnyEventDispatcher disp( 1, 100 );
+    AnyEventDispatcher disp;
 
     AnyEventQueue dq1;
     AnyEventQueue dq2;
@@ -95,8 +95,8 @@ TEST( AnyEventDispatcherToQueueTest )
 
 TEST( AnyEventDispatcherToDispatcherTest )
 {
-    AnyEventDispatcher disp1( 1, 100 );
-    AnyEventDispatcher disp2( 101, 200 );
+    AnyEventDispatcher disp1;
+    AnyEventDispatcher disp2;
     AnyEventQueue dq1;
     AnyEventQueue dq3;
 
@@ -116,7 +116,7 @@ TEST( AnyEventDispatcherToDispatcherTest )
     /// Automatically remove target ///
 
     {
-        AnyEventDispatcher disp3( 201, 300 );
+        AnyEventDispatcher disp3;
 
         disp1.LinkTarget( disp3 );
         disp3.LinkTarget( dq3 );

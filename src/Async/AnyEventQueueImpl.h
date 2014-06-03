@@ -7,7 +7,6 @@
 #include <Caramel/Setup/CaramelDefs.h>
 #include "Async/AnyEventTargetImpl.h"
 #include <Caramel/Async/AnyEventQueue.h>
-#include <Caramel/Concurrent/IntervalSet.h>
 #include <Caramel/Concurrent/Queue.h>
 
 
@@ -24,29 +23,9 @@ class AnyEventQueueImpl : public Concurrent::Queue< AnyEvent >
 {
 public:
 
-    //
-    // To Prevent Ambiguous IDs
-    // - Only check IDs when registering, not when each pushing.
-    //   Cooperate with AnyEventDispatcher.
-    //
-
-    // Returns false if the ID range overlaps with others.
-    Bool RegisterIdRange( Int minEventId, Int maxEventId );
-
-    void UnregisterIdRange( Int minEventId, Int maxEventId );
-
-
     /// Implements AnyEventTargetImpl ///
 
     void Send( const AnyEvent& evt, Uint age ) override;
-
-
-private:
-
-    /// Data Members ///
-
-    typedef Concurrent::IntervalSet< Int > EventIdRangeSet;
-    EventIdRangeSet m_registeredIdRanges;
 
 };
 
