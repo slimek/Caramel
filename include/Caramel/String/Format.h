@@ -93,6 +93,20 @@ inline std::string Format(
     return formatter.GetString();
 }
 
+template< typename T0, typename T1, typename T2, typename T3, typename T4, typename T5 >
+inline std::string Format(
+    const std::string& format, const T0& a0, const T1& a1, const T2& a2, const T3& a3, const T4& a4, const T5& a5 )
+{
+    Detail::Formatter formatter( format );
+    formatter.Feed( 0, Detail::SprintfParameter< T0 >()( a0 ));
+    formatter.Feed( 1, Detail::SprintfParameter< T1 >()( a1 ));
+    formatter.Feed( 2, Detail::SprintfParameter< T2 >()( a2 ));
+    formatter.Feed( 3, Detail::SprintfParameter< T3 >()( a3 ));
+    formatter.Feed( 4, Detail::SprintfParameter< T4 >()( a4 ));
+	formatter.Feed( 5, Detail::SprintfParameter< T5 >()( a5 ));
+    return formatter.GetString();
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 
