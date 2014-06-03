@@ -206,6 +206,17 @@ Bool AnyEventSlot::IsValid() const
 }
 
 
+AnyEvent AnyEventSlot::Take()
+{
+    AnyEvent event;
+    if ( ! m_impl->TryTake( event ))
+    {
+        CARAMEL_THROW( "AnyEventSlot is empty" );
+    }
+    return std::move( event );
+}
+
+
 AnyEvent AnyEventSlot::GetEvent() const
 {
     const AnyEvent event = m_impl->GetEvent();
@@ -232,6 +243,17 @@ AnyEvent AnyEventSlotImpl::GetEvent() const
 {
     LockGuard lock( m_eventMutex );
     return m_event;
+}
+
+
+Bool AnyEventSlotImpl::TryTake( AnyEvent& event )
+{
+    LockGuard lock( m_eventMutex );
+    if ( ! m_event.HasValue() ) { return false; }
+
+    event = AnyEvent();
+    std::swap( event, m_event );
+    return true;
 }
 
 

@@ -23,6 +23,7 @@ class AnyEventSlotImpl : public AnyEventTargetImpl
 public:
 
     AnyEvent GetEvent() const;
+    Bool TryTake( AnyEvent& event );
 
     void Clear();
 

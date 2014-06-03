@@ -66,6 +66,15 @@ TEST( AnyEventSlotTest )
     CHECK( true    == slot );
     CHECK( 7       == slot.Id() );
     CHECK( "Alice" == slot.Value< std::string >() );
+
+
+    // Take the Event from the Slot
+
+    auto event = slot.Take();
+
+    CHECK( false   == slot );
+    CHECK( 7       == event.Id() );
+    CHECK( "Alice" == event.Value< std::string >() );
 }
 
 

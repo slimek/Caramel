@@ -38,7 +38,12 @@ public:
     Bool IsValid() const;
 
 
-    /// Accessors ///
+    //
+    // Accessors
+    // - These functions throw if this slot is empty.
+    //
+
+    AnyEvent Take();
 
     Int Id() const;
 
