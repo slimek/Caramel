@@ -29,8 +29,14 @@ namespace Statechart
 // State Machine
 //
 
-StateMachine::StateMachine( const std::string& name )
-    : m_impl( new StateMachineImpl( name ))
+StateMachine::StateMachine( std::string name )
+    : m_impl( new StateMachineImpl( std::move( name )))
+{
+}
+
+
+StateMachine::StateMachine( std::string name, TaskExecutor& executor )
+    : m_impl( new StateMachineImpl( std::move( name ), executor ))
 {
 }
 
@@ -133,8 +139,8 @@ AnyEvent StateMachine::GetActiveEvent() const
 // Implementation
 //
 
-StateMachineImpl::StateMachineImpl( const std::string& name )
-    : m_name( name )
+StateMachineImpl::StateMachineImpl( std::string name )
+    : m_name( std::move( name ))
     , m_taskExecutor( nullptr )
     , m_builtinTaskPoller( new TaskPoller )
     , m_initiated( false )
@@ -142,6 +148,16 @@ StateMachineImpl::StateMachineImpl( const std::string& name )
     , m_reacting( false )
 {
     m_taskExecutor = m_builtinTaskPoller.get();
+}
+
+
+StateMachineImpl::StateMachineImpl( std::string name, TaskExecutor& executor )
+    : m_name( std::move( name ))
+    , m_taskExecutor( &executor )
+    , m_initiated( false )
+    , m_transitNumber( 0 )
+    , m_reacting( false )
+{
 }
 
 

@@ -8,6 +8,7 @@
 #include <Caramel/Async/AnyEventTarget.h>
 #include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Statechart/State.h>
+#include <Caramel/Task/TaskExecutor.h>
 #include <boost/noncopyable.hpp>
 
 
@@ -29,7 +30,8 @@ class StateMachine : public AnyEventTarget
 {
 public:
 
-    explicit StateMachine( const std::string& name );
+    explicit StateMachine( std::string name );
+    StateMachine( std::string name, TaskExecutor& executor );
     ~StateMachine();
 
     // Build this state machine.

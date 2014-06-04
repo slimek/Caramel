@@ -33,7 +33,8 @@ class StateMachineImpl : public AnyEventTargetImpl
 
 public:
 
-    explicit StateMachineImpl( const std::string& name );
+    explicit StateMachineImpl( std::string name );
+    StateMachineImpl( std::string name, TaskExecutor& executor );
 
 
     /// Building Machine ///
