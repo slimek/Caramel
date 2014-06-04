@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6DA51D66193EB82B00050A24 /* Async.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DA51D65193EB82B00050A24 /* Async.cpp */; };
 		6DAC96D3191B5D760007BF91 /* Android.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAC9682191B5D760007BF91 /* Android.cpp */; };
 		6DAC96D4191B5D760007BF91 /* Apple.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DAC9683191B5D760007BF91 /* Apple.mm */; };
 		6DAC96D5191B5D760007BF91 /* libCaramel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DAC9687191B5D760007BF91 /* libCaramel.a */; };
@@ -47,6 +48,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6DA51D61193EB82B00050A24 /* AnyEventDispatcherImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyEventDispatcherImpl.h; sourceTree = "<group>"; };
+		6DA51D62193EB82B00050A24 /* AnyEventQueueImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyEventQueueImpl.h; sourceTree = "<group>"; };
+		6DA51D63193EB82B00050A24 /* AnyEventSlotImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyEventSlotImpl.h; sourceTree = "<group>"; };
+		6DA51D64193EB82B00050A24 /* AnyEventTargetImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyEventTargetImpl.h; sourceTree = "<group>"; };
+		6DA51D65193EB82B00050A24 /* Async.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Async.cpp; sourceTree = "<group>"; };
+		6DA51D67193EB84000050A24 /* AnyEventSlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyEventSlot.h; sourceTree = "<group>"; };
 		6DAC95CD191B5D680007BF91 /* LogTraceAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogTraceAdapter.h; sourceTree = "<group>"; };
 		6DAC95CF191B5D680007BF91 /* LogTraceAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogTraceAdapter.h; sourceTree = "<group>"; };
 		6DAC95D1191B5D680007BF91 /* Flags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flags.h; sourceTree = "<group>"; };
@@ -55,9 +62,6 @@
 		6DAC95D5191B5D680007BF91 /* AnyEventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyEventDispatcher.h; sourceTree = "<group>"; };
 		6DAC95D6191B5D680007BF91 /* AnyEventQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyEventQueue.h; sourceTree = "<group>"; };
 		6DAC95D7191B5D680007BF91 /* AnyEventTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyEventTarget.h; sourceTree = "<group>"; };
-		6DAC95D9191B5D680007BF91 /* AnyEventDispatcherImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyEventDispatcherImpl.h; sourceTree = "<group>"; };
-		6DAC95DA191B5D680007BF91 /* AnyEventQueueImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyEventQueueImpl.h; sourceTree = "<group>"; };
-		6DAC95DB191B5D680007BF91 /* AnyEventTargetImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyEventTargetImpl.h; sourceTree = "<group>"; };
 		6DAC95DC191B5D680007BF91 /* FlowState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlowState.h; sourceTree = "<group>"; };
 		6DAC95DD191B5D680007BF91 /* ValueChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValueChange.h; sourceTree = "<group>"; };
 		6DAC95DF191B5D680007BF91 /* SecondClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondClock.h; sourceTree = "<group>"; };
@@ -267,6 +271,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6DA51D60193EB82B00050A24 /* Async */ = {
+			isa = PBXGroup;
+			children = (
+				6DA51D61193EB82B00050A24 /* AnyEventDispatcherImpl.h */,
+				6DA51D62193EB82B00050A24 /* AnyEventQueueImpl.h */,
+				6DA51D63193EB82B00050A24 /* AnyEventSlotImpl.h */,
+				6DA51D64193EB82B00050A24 /* AnyEventTargetImpl.h */,
+			);
+			path = Async;
+			sourceTree = "<group>";
+		};
 		6DAC95CA191B5D680007BF91 /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -344,22 +359,12 @@
 				6DAC95D4191B5D680007BF91 /* AnyEvent.h */,
 				6DAC95D5191B5D680007BF91 /* AnyEventDispatcher.h */,
 				6DAC95D6191B5D680007BF91 /* AnyEventQueue.h */,
+				6DA51D67193EB84000050A24 /* AnyEventSlot.h */,
 				6DAC95D7191B5D680007BF91 /* AnyEventTarget.h */,
-				6DAC95D8191B5D680007BF91 /* Detail */,
 				6DAC95DC191B5D680007BF91 /* FlowState.h */,
 				6DAC95DD191B5D680007BF91 /* ValueChange.h */,
 			);
 			path = Async;
-			sourceTree = "<group>";
-		};
-		6DAC95D8191B5D680007BF91 /* Detail */ = {
-			isa = PBXGroup;
-			children = (
-				6DAC95D9191B5D680007BF91 /* AnyEventDispatcherImpl.h */,
-				6DAC95DA191B5D680007BF91 /* AnyEventQueueImpl.h */,
-				6DAC95DB191B5D680007BF91 /* AnyEventTargetImpl.h */,
-			);
-			path = Detail;
 			sourceTree = "<group>";
 		};
 		6DAC95DE191B5D680007BF91 /* Chrono */ = {
@@ -742,6 +747,8 @@
 			children = (
 				6DAC9682191B5D760007BF91 /* Android.cpp */,
 				6DAC9683191B5D760007BF91 /* Apple.mm */,
+				6DA51D60193EB82B00050A24 /* Async */,
+				6DA51D65193EB82B00050A24 /* Async.cpp */,
 				6DAC9684191B5D760007BF91 /* Caramel */,
 				6DAC968A191B5D760007BF91 /* CaramelPch.cpp */,
 				6DAC968B191B5D760007BF91 /* CaramelPch.h */,
@@ -1035,6 +1042,7 @@
 				6DAC96DF191B5D760007BF91 /* Io.cpp in Sources */,
 				6DAC96E2191B5D760007BF91 /* Object.cpp in Sources */,
 				6DAC96E1191B5D760007BF91 /* Math.cpp in Sources */,
+				6DA51D66193EB82B00050A24 /* Async.cpp in Sources */,
 				6DAC96DD191B5D760007BF91 /* Error.cpp in Sources */,
 				6DAC96EA191B5D760007BF91 /* Value.cpp in Sources */,
 				6DAC96D8191B5D760007BF91 /* Configuration.cpp in Sources */,
