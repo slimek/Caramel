@@ -722,6 +722,9 @@
     <ClInclude Include="..\include\Caramel\Task\TaskFwd.h">
       <Filter>1. Public Packages\Task</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Functional\Bind.h">
+      <Filter>1. Public Packages\Functional</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

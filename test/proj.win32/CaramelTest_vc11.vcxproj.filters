@@ -77,6 +77,9 @@
     <Filter Include="2. Tests\Data">
       <UniqueIdentifier>{ddec937b-a096-4878-8b27-b71b70476466}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\Functional">
+      <UniqueIdentifier>{f2787f9d-1e7a-4156-bb7b-5a8de135b96a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\RunTest.cpp">
@@ -261,6 +264,9 @@
     </ClCompile>
     <ClCompile Include="..\src\Async\AnyEventSlotTest.cpp">
       <Filter>2. Tests\Async</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Functional\BindTest.cpp">
+      <Filter>2. Tests\Functional</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
