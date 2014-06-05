@@ -4,6 +4,9 @@
 
 #include <Caramel/Async/AnyEventDispatcher.h>
 #include <Caramel/Statechart/StateMachine.h>
+#include <Caramel/Task/TaskPoller.h>
+#include <Caramel/Task/WorkerThread.h>
+#include <Caramel/Thread/WaitableBool.h>
 #include <UnitTest++/UnitTest++.h>
 
 
@@ -296,6 +299,56 @@ TEST( StateMachineReactionFailedTest )
     machine.Process();
 }
 
+
+TEST( StateMachineExternalTaskPollerTest )
+{
+    TaskPoller poller;
+    Statechart::StateMachine machine( "ExternalTaskPoller", poller );
+    Bool flag = false;
+
+    machine.AddState( S_INITIAL )
+           .Transition( E_NEXT, S_WAITING );
+
+    machine.AddState( S_WAITING )
+           .EnterAction( [&] { flag = true; } );
+
+    machine.Initiate( S_INITIAL );
+
+    machine.PostEvent( E_NEXT );
+    poller.PollFor( Ticks( 10 ));
+
+    CHECK( S_WAITING == machine.GetCurrentStateId() );
+    CHECK( true == flag );
+
+    CHECK_THROW( machine.Process(), Caramel::Exception );
+}
+
+
+TEST( StateMachineExternalWorkerThreadTest )
+{
+    WorkerThread worker( "StateMachine" );
+    Statechart::StateMachine machine( "ExternalWorkerThread", worker );
+    WaitableBool flag;
+
+    machine.AddState( S_INITIAL )
+           .Transition( E_NEXT, S_WAITING );
+
+    machine.AddState( S_WAITING )
+           .EnterAction( [&] { flag = true; } );
+
+    machine.Initiate( S_INITIAL );
+
+    machine.PostEvent( E_NEXT );
+
+    flag.Wait();
+
+    CHECK( S_WAITING == machine.GetCurrentStateId() );
+    CHECK( true == flag );
+
+    CHECK_THROW( machine.Process(), Caramel::Exception );
+
+    worker.Stop();
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////
