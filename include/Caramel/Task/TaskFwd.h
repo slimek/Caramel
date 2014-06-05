@@ -1,11 +1,10 @@
-// Caramel C++ Library - Task Facility - Detail - Forwards Header
+// Caramel C++ Library - Task Facility - Forwards Header
 
-#ifndef __CARAMEL_TASK_DETAIL_TASK_FWD_H
-#define __CARAMEL_TASK_DETAIL_TASK_FWD_H
+#ifndef __CARAMEL_TASK_TASK_FWD_H
+#define __CARAMEL_TASK_TASK_FWD_H
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
-#include <functional>
 
 
 namespace Caramel
@@ -30,9 +29,6 @@ namespace Detail
 
 class TaskHolder;
 
-template< typename Result >
-class BasicTask;
-
 }
 
 
@@ -40,4 +36,4 @@ class BasicTask;
 
 } // namespace Caramel
 
-#endif // __CARAMEL_TASK_DETAIL_TASK_FWD_H
+#endif // __CARAMEL_TASK_TASK_FWD_H

@@ -8,7 +8,7 @@
 #include <Caramel/Async/AnyEventTarget.h>
 #include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Statechart/State.h>
-#include <Caramel/Task/TaskExecutor.h>
+#include <Caramel/Task/TaskFwd.h>
 #include <boost/noncopyable.hpp>
 
 

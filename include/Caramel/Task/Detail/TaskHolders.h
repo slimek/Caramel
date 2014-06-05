@@ -6,7 +6,7 @@
 
 #include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Concurrent/Queue.h>
-#include <Caramel/Task/Detail/TaskFwd.h>
+#include <Caramel/Task/TaskFwd.h>
 
 
 namespace Caramel

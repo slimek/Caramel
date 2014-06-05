@@ -6,7 +6,6 @@
 
 #include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Chrono/TickClock.h>
-#include <Caramel/Task/Detail/TaskFwd.h>
 #include <Caramel/Task/TaskExecutor.h>
 
 

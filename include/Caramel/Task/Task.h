@@ -8,7 +8,6 @@
 #include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Memory/UniquePtrUtils.h>
 #include <Caramel/Meta/Utility.h>
-#include <Caramel/Task/Detail/TaskFwd.h>
 #include <Caramel/Task/Detail/TaskHolders.h>
 #include <Caramel/Task/Detail/TaskTraits.h>
 #include <Caramel/Task/TaskCore.h>
