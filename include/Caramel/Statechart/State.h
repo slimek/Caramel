@@ -43,7 +43,7 @@ public:
 
     //
     // When the event triggered, call this action.
-    // You may transit to other states by conditions.
+    // You may call StateMachine::PlanToTransit() to transit to other states by conditions.
     //
     State& Reaction( Int eventId, const Action& action );
 
