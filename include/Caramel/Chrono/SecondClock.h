@@ -119,7 +119,6 @@ public:
     /// Inherited Functions: ///
 
     // static SecondPoint Now();
-    // static Seconds SinceEpoch();
 };
 
 

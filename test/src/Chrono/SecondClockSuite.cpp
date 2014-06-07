@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Chrono - Clock Suite
+// Caramel C++ Library Test - Chrono - Second Clock Suite
 
 #include "CaramelTestPch.h"
 
@@ -11,46 +11,8 @@
 namespace Caramel
 {
 
-SUITE( ClockSuite )
+SUITE( SecondClockSuite )
 {
-
-//
-// Tick Clock Test
-//
-
-TEST( TickClockTest )
-{
-    const TickPoint now1 = TickClock::Now();
-    TickWatch watch;
-
-    std::this_thread::sleep_for( std::chrono::seconds( 1 ));
-
-    const TickPoint now2 = TickClock::Now();
-    const Ticks delta = now2 - now1;
-    
-    CHECK_CLOSE( 1000, delta.ToNumber(), 50 );
-
-    const Ticks elapsed = watch.Elapsed();
-    const Ticks slice   = watch.Slice();
-    const Ticks reseted = watch.Elapsed();
-
-    CHECK_CLOSE( Ticks( 1000 ), elapsed, Ticks( 50 ));
-    CHECK_CLOSE( Ticks( 1000 ), slice,   Ticks( 50 ));
-    CHECK_CLOSE( Ticks( 0 ),    reseted, Ticks( 50 ));
-    
-    CARAMEL_TRACE_DEBUG( "Duration: %d", delta.ToInt32() );
-
-
-    /// Default Values of Ticks ///
-
-    const Ticks dur0;
-    CHECK( 0 == dur0.ToInt64() );
-}
-
-
-//
-// Second Clock Test
-//
 
 TEST( SecondClockTest )
 {
@@ -177,6 +139,7 @@ TEST( DurationConvertTest )
 
     CHECK( Seconds( 125 ) == Seconds::TruncFrom( s3 ));
 }
+
 
 } // SUITE ClockSuite
 

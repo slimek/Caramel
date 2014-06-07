@@ -262,10 +262,13 @@
     <ClCompile Include="..\src\Async\ValueChangeSuite.cpp">
       <Filter>2. Tests\Async</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Chrono\ClockSuite.cpp">
+    <ClCompile Include="..\src\Chrono\TimedBoolSuite.cpp">
       <Filter>2. Tests\Chrono</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Chrono\TimedBoolSuite.cpp">
+    <ClCompile Include="..\src\Chrono\SecondClockSuite.cpp">
+      <Filter>2. Tests\Chrono</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Chrono\TickClockSuite.cpp">
       <Filter>2. Tests\Chrono</Filter>
     </ClCompile>
   </ItemGroup>
