@@ -12,18 +12,18 @@ namespace Caramel
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Flags - A Helper class for flags operation
+// Flags - A Helper class for matching integer flags.
 //
 
 template< Uint32 flags >
 struct Flags
 {
-    static_assert( 0 < flags, "Flags can't be zero" );
+    static_assert( flags != 0, "Flags can't be zero" );
 
     static const Uint32 VALUE = flags;
 
-    static Bool MatchAny( Uint32 testee ) { return 0     != ( VALUE & testee ); }
-    static Bool MatchAll( Uint32 testee ) { return VALUE == ( VALUE & testee ); }
+    static Bool MatchAny( Uint32 testee ) { return ( VALUE & testee ) != 0; }
+    static Bool MatchAll( Uint32 testee ) { return ( VALUE & testee ) == VALUE; }
 };
 
 

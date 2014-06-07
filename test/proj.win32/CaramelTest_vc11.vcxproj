@@ -90,8 +90,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\Arithmetic\FlagsTest.cpp" />
-    <ClCompile Include="..\src\Arithmetic\PowerOfTwoTest.cpp" />
+    <ClCompile Include="..\src\Arithmetic\FlagsSuite.cpp" />
+    <ClCompile Include="..\src\Arithmetic\PowerOfTwoSuite.cpp" />
     <ClCompile Include="..\src\Async\AnyEventDispatcherTest.cpp" />
     <ClCompile Include="..\src\Async\AnyEventQueueTest.cpp" />
     <ClCompile Include="..\src\Async\AnyEventSlotTest.cpp" />

@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Arithmetic - Power of Two Test
+// Caramel C++ Library Test - Arithmetic - Power of Two Suite
 
 #include "CaramelTestPch.h"
 
@@ -11,11 +11,6 @@ namespace Caramel
 
 SUITE( PowerOfTwoSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Is Power of Two Test
-//
 
 TEST( IsPowerOfTwoTest )
 {
@@ -49,8 +44,6 @@ TEST( IsPowerOfTwoTest )
     CHECK( false == IsPowerOfTwo( -1 ));
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE PowerOfTwoSuite
 

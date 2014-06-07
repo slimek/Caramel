@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Arithmetic - Flags Test
+// Caramel C++ Library Test - Arithmetic - Flags Suite
 
 #include "CaramelTestPch.h"
 
@@ -12,11 +12,6 @@ namespace Caramel
 SUITE( FlagsSuite )
 {
 
-///////////////////////////////////////////////////////////////////////////////
-//
-// Flags Test
-//
-
 enum Flag
 {
     F_0 = 0x01,  // bit 0
@@ -26,6 +21,8 @@ enum Flag
 
 TEST( FlagsMatchTest )
 {
+    /// Match one bit ///
+
     typedef Flags< F_1 > Fx01;
 
     CHECK( false == Fx01::MatchAny( 0 ));
@@ -38,6 +35,8 @@ TEST( FlagsMatchTest )
     CHECK( true  == Fx01::MatchAll( 7 ));
     CHECK( false == Fx01::MatchAll( 8 ));
 
+
+    /// Match combination bits ///
 
     typedef Flags< F_0 | F_1 > Fx02;
 
@@ -52,8 +51,6 @@ TEST( FlagsMatchTest )
     CHECK( false == Fx02::MatchAll( 4 ));
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE FlagsSuite
 
