@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Async - Any Event Dispatcher Test
+// Caramel C++ Library Test - Async - Any Event Dispatcher Suite
 
 #include "CaramelTestPch.h"
 
@@ -12,11 +12,6 @@ namespace Caramel
 
 SUITE( AnyEventDispatcherSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Any Event Dispatcher Test
-//
 
 TEST( AnyEventDispatcherTrivialTest )
 {
@@ -139,8 +134,6 @@ TEST( AnyEventDispatcherToDispatcherTest )
     CHECK( 81 == value.Id() );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE AnyEventDispatcherSuite
 

@@ -92,12 +92,12 @@
   <ItemGroup>
     <ClCompile Include="..\src\Arithmetic\FlagsSuite.cpp" />
     <ClCompile Include="..\src\Arithmetic\PowerOfTwoSuite.cpp" />
-    <ClCompile Include="..\src\Async\AnyEventDispatcherTest.cpp" />
-    <ClCompile Include="..\src\Async\AnyEventQueueTest.cpp" />
-    <ClCompile Include="..\src\Async\AnyEventSlotTest.cpp" />
-    <ClCompile Include="..\src\Async\AnyEventTest.cpp" />
-    <ClCompile Include="..\src\Async\FlowStateTest.cpp" />
-    <ClCompile Include="..\src\Async\ValueChangeTest.cpp" />
+    <ClCompile Include="..\src\Async\AnyEventDispatcherSuite.cpp" />
+    <ClCompile Include="..\src\Async\AnyEventQueueSuite.cpp" />
+    <ClCompile Include="..\src\Async\AnyEventSlotSuite.cpp" />
+    <ClCompile Include="..\src\Async\AnyEventSuite.cpp" />
+    <ClCompile Include="..\src\Async\FlowStateSuite.cpp" />
+    <ClCompile Include="..\src\Async\ValueChangeSuite.cpp" />
     <ClCompile Include="..\src\CaramelTestPch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

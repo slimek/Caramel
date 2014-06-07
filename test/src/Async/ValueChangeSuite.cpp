@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Async - Value Change Test
+// Caramel C++ Library Test - Async - Value Change Suite
 
 #include "CaramelTestPch.h"
 
@@ -11,11 +11,6 @@ namespace Caramel
 
 SUITE( ValueChangeSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Value Change Test
-//
 
 TEST( IntValueChangeTest )
 {
@@ -45,8 +40,6 @@ TEST( IntValueChangeTest )
     CHECK( false == ichange.Exits< 1 >() );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE ValueChangeSuite
 

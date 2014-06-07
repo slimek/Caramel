@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Async - Any Event Slot Test
+// Caramel C++ Library Test - Async - Any Event Slot Suite
 
 #include "CaramelTestPch.h"
 
@@ -12,11 +12,6 @@ namespace Caramel
 
 SUITE( AnyEventSlotSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Any Event Slot Test
-//
 
 TEST( AnyEventSlotTrivialTest )
 {
@@ -77,8 +72,6 @@ TEST( AnyEventSlotTest )
     CHECK( "Alice" == event.Value< std::string >() );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE AnyEventSlotSuite
 

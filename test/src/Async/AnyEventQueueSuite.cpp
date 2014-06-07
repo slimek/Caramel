@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Async - Any Event Queue Test
+// Caramel C++ Library Test - Async - Any Event Queue Suite
 
 #include "CaramelTestPch.h"
 
@@ -12,11 +12,6 @@ namespace Caramel
 
 SUITE( AnyEventQueueSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Any Event Queue Test
-//
 
 TEST( AnyEventQueueTest )
 {
@@ -116,8 +111,6 @@ TEST( AnyEventQueueUnlinkTest )
     CHECK( 19   == event.Id() );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE AnyEventQueueSuite
 

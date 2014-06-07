@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Async - Flow State Test
+// Caramel C++ Library Test - Async - Flow State Suite
 
 #include "CaramelTestPch.h"
 
@@ -6,10 +6,8 @@
 #include <UnitTest++/UnitTest++.h>
 
 
-///////////////////////////////////////////////////////////////////////////////
-//
-// Flow State Test
-//
+namespace Caramel
+{
 
 SUITE( FlowStateSuite )
 {
@@ -34,6 +32,6 @@ TEST( FlowStateTest )
     CHECK( false == state.IsEntering() );
 }
 
-}  // FlowStateSuite
+} // SUITE FlowStateSuite
 
-///////////////////////////////////////////////////////////////////////////////
+} // namespace Caramel

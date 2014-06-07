@@ -91,9 +91,6 @@
     <ClCompile Include="..\src\Chrono\ClockTest.cpp">
       <Filter>2. Tests\Chrono</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Async\FlowStateTest.cpp">
-      <Filter>2. Tests\Async</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Thread\ThreadTest.cpp">
       <Filter>2. Tests\Thread</Filter>
     </ClCompile>
@@ -142,9 +139,6 @@
     <ClCompile Include="..\src\Numeric\NumberTraitsTest.cpp">
       <Filter>2. Tests\Numeric</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Async\AnyEventTest.cpp">
-      <Filter>2. Tests\Async</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\DateTime\DateTest.cpp">
       <Filter>2. Tests\DateTime</Filter>
     </ClCompile>
@@ -165,9 +159,6 @@
     </ClCompile>
     <ClCompile Include="..\src\Task\TaskTest.cpp">
       <Filter>2. Tests\Task</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Async\AnyEventQueueTest.cpp">
-      <Filter>2. Tests\Async</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Concurrent\ConcurrentIntervalSetTest.cpp">
       <Filter>2. Tests\Concurrent</Filter>
@@ -190,17 +181,11 @@
     <ClCompile Include="..\src\Concurrent\ConcurrentBlockingQueueTest.cpp">
       <Filter>2. Tests\Concurrent</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Async\ValueChangeTest.cpp">
-      <Filter>2. Tests\Async</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\DateTime\TimeSpanTest.cpp">
       <Filter>2. Tests\DateTime</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Concurrent\ConcurrentQueueTest.cpp">
       <Filter>2. Tests\Concurrent</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Async\AnyEventDispatcherTest.cpp">
-      <Filter>2. Tests\Async</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Task\StdAsyncTest.cpp">
       <Filter>2. Tests\Task</Filter>
@@ -256,9 +241,6 @@
     <ClCompile Include="..\src\Data\LookupTableTest.cpp">
       <Filter>2. Tests\Data</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Async\AnyEventSlotTest.cpp">
-      <Filter>2. Tests\Async</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Functional\BindTest.cpp">
       <Filter>2. Tests\Functional</Filter>
     </ClCompile>
@@ -267,6 +249,24 @@
     </ClCompile>
     <ClCompile Include="..\src\Arithmetic\PowerOfTwoSuite.cpp">
       <Filter>2. Tests\Arithmetic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Async\AnyEventDispatcherSuite.cpp">
+      <Filter>2. Tests\Async</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Async\AnyEventQueueSuite.cpp">
+      <Filter>2. Tests\Async</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Async\AnyEventSlotSuite.cpp">
+      <Filter>2. Tests\Async</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Async\AnyEventSuite.cpp">
+      <Filter>2. Tests\Async</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Async\FlowStateSuite.cpp">
+      <Filter>2. Tests\Async</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Async\ValueChangeSuite.cpp">
+      <Filter>2. Tests\Async</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
