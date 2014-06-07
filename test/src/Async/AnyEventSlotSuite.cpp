@@ -45,7 +45,9 @@ TEST( AnyEventSlotTest )
     disp.DispatchEvent( 4, 51 );
     CHECK( 2 == slot.Id() );
 
+    
     // Reset the slot
+    // - It would unlink from all sources automatically.
 
     slot.Reset();
     CHECK( false == slot );
@@ -53,6 +55,7 @@ TEST( AnyEventSlotTest )
     disp.DispatchEvent( 5, "Reimu" );
     CHECK( false == slot );
 
+    
     // Link again
 
     disp.LinkTarget( slot );

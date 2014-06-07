@@ -88,15 +88,9 @@ AnyEventTargetPtr AnyEventQueue::GetTargetImpl() const
 // Operations
 //
 
-void AnyEventQueue::Push( const AnyEvent& evt )
+void AnyEventQueue::Push( AnyEvent event )
 {
-    m_impl->Push( evt );
-}
-
-
-void AnyEventQueue::Push( AnyEvent&& evt )
-{
-    m_impl->Push( std::move( evt ));
+    m_impl->Push( std::move( event ));
 }
 
 
@@ -106,21 +100,15 @@ void AnyEventQueue::PushEvent( Int eventId )
 }
 
 
-void AnyEventQueue::PushEvent( Int eventId, const Any& any )
-{
-    m_impl->Push( AnyEvent( eventId, any ));
-}
-
-
-void AnyEventQueue::PushEvent( Int eventId, Any&& any )
+void AnyEventQueue::PushEvent( Int eventId, Any any )
 {
     m_impl->Push( AnyEvent( eventId, std::move( any )));
 }
 
 
-Bool AnyEventQueue::TryPop( AnyEvent& evt )
+Bool AnyEventQueue::TryPop( AnyEvent& event )
 {
-    return m_impl->TryPop( evt );
+    return m_impl->TryPop( event );
 }
 
 
@@ -135,12 +123,12 @@ void AnyEventQueue::Reset()
 // Implementation
 //
 
-void AnyEventQueueImpl::Send( const AnyEvent& evt, Uint age )
+void AnyEventQueueImpl::Send( const AnyEvent& event, Uint age )
 {
     UniqueLock ulock = this->CompareAge( age );
     if ( ulock )
     {
-        this->Push( evt );
+        this->Push( event );
     }
 }
 
@@ -307,32 +295,21 @@ void AnyEventDispatcher::DispatchEvent( Int eventId )
 }
 
 
-void AnyEventDispatcher::DispatchEvent( Int eventId, const Any& value )
-{
-    m_impl->Dispatch( AnyEvent( eventId, value ));
-}
-
-
-void AnyEventDispatcher::DispatchEvent( Int eventId, Any&& value )
+void AnyEventDispatcher::DispatchEvent( Int eventId, Any value )
 {
     m_impl->Dispatch( AnyEvent( eventId, std::move( value )));
 }
 
 
-void AnyEventDispatcher::Dispatch( const AnyEvent& evt )
+void AnyEventDispatcher::Dispatch( const AnyEvent& event )
 {
-    m_impl->Dispatch( evt );
+    m_impl->Dispatch( event );
 }
 
 
 //
 // Implementation
 //
-
-AnyEventDispatcherImpl::AnyEventDispatcherImpl()
-{
-}
-
 
 //
 // Targets Management

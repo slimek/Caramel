@@ -56,6 +56,11 @@ TEST( AnyEventTest )
 }
 
 
+//
+// AnyEvent in Queue
+// - A container of AnyEvent is heterogeneous.
+//
+
 enum EventId
 {
     EVENT_NONE   = 0,
@@ -72,7 +77,7 @@ struct Widget
     std::string name;
 };
 
-TEST( AnyEventQueueTest )
+TEST( AnyEventInQueueTest )
 {
     Concurrent::Queue< AnyEvent > equeue;
 
@@ -85,6 +90,7 @@ TEST( AnyEventQueueTest )
     equeue.Push( AnyEvent( EVENT_NONE ));
     equeue.Push( AnyEvent( EVENT_WIDGET, w ));
     equeue.Push( AnyEvent( EVENT_INT, 42 ));
+    equeue.Push( AnyEvent( EVENT_PAIR, std::make_pair( 21, "Reimu" )));
 
     AnyEvent evt;
     while ( equeue.TryPop( evt ))
@@ -115,10 +121,39 @@ TEST( AnyEventQueueTest )
             break;
         }
 
+        case EVENT_PAIR:
+        {
+            const auto pair = evt.Value< std::pair< Int, const Char* >>();
+            CHECK( 21 == pair.first );
+            CHECK( "Reimu" == pair.second );
+            break;
+        }
+
         default:
             CARAMEL_NOT_REACHED();
         }
     }
+}
+
+
+//
+// AnyEvent supports move semantics
+//
+
+TEST( AnyEventMoveTest )
+{
+    AnyEvent e1( 7, "Alice" );
+
+    CHECK( true == e1.IsValid() );
+    CHECK( 7 == e1.Id() );
+
+    AnyEvent e2( std::move( e1 ));
+
+    CHECK( true == e2.IsValid() );
+    CHECK( 7 == e2.Id() );
+
+    CHECK( false == e1.IsValid() );
+    CHECK_THROW( e1.Id(), Caramel::Exception );
 }
 
 

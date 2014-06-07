@@ -22,9 +22,6 @@ class AnyEventDispatcherImpl : public AnyEventTargetImpl
 {
 public:
 
-    AnyEventDispatcherImpl();
-
-    
     /// Targets Management ///
 
     void LinkTarget( AnyEventTargetPtr&& target );
@@ -35,12 +32,12 @@ public:
 
     /// Operations ///
 
-    void Dispatch( const AnyEvent& evt );
+    void Dispatch( const AnyEvent& event );
 
 
     /// Implements AnyEventTargetImpl ///
 
-    void Send( const AnyEvent& evt, Uint age ) override;
+    void Send( const AnyEvent& event, Uint age ) override;
 
 
 private:

@@ -25,12 +25,14 @@ public:
     // Not an event
     AnyEvent();
 
+    // Move
+    AnyEvent( AnyEvent&& other );
+
     // Make an Event without value
     explicit AnyEvent( Int id );
 
     // Make an Event with any value
-    AnyEvent( Int id, const Any& value );
-    AnyEvent( Int id, Any&& value );
+    AnyEvent( Int id, Any value );
 
 
     /// Properties ///
@@ -67,6 +69,16 @@ inline AnyEvent::AnyEvent()
 }
 
 
+inline AnyEvent::AnyEvent( AnyEvent&& other )
+    : m_valid( other.m_valid )
+    , m_id( other.m_id )
+    , m_value( std::move( other.m_value ))
+{
+    other.m_valid = false;
+    other.m_id = 0;
+}
+
+
 inline AnyEvent::AnyEvent( Int id )
     : m_valid( true )
     , m_id( id )
@@ -74,15 +86,7 @@ inline AnyEvent::AnyEvent( Int id )
 }
 
 
-inline AnyEvent::AnyEvent( Int id, const Any& value )
-    : m_valid( true )
-    , m_id( id )
-    , m_value( value )
-{
-}
-
-
-inline AnyEvent::AnyEvent( Int id, Any&& value )
+inline AnyEvent::AnyEvent( Int id, Any value )
     : m_valid( true )
     , m_id( id )
     , m_value( std::move( value ))
