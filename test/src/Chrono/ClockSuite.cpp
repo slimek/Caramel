@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Chrono - Clock Test
+// Caramel C++ Library Test - Chrono - Clock Suite
 
 #include "CaramelTestPch.h"
 
@@ -14,7 +14,6 @@ namespace Caramel
 SUITE( ClockSuite )
 {
 
-///////////////////////////////////////////////////////////////////////////////
 //
 // Tick Clock Test
 //
@@ -49,7 +48,6 @@ TEST( TickClockTest )
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
 //
 // Second Clock Test
 //
@@ -75,10 +73,6 @@ TEST( SecondClockTest )
     CHECK_CLOSE( Seconds( 0 ), reseted, Seconds( 0.05 ));
     
     CARAMEL_TRACE_DEBUG( "Duration: %f", delta );
-
-    const Seconds sinceEpoch = SecondClock::SinceEpoch();
-
-    CARAMEL_TRACE_DEBUG( "Since Epoch seconds: %f", sinceEpoch );
 }
 
 
@@ -139,7 +133,6 @@ TEST( SecondsDivideTest )
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
 //
 // Duration Conversion
 //
@@ -184,8 +177,6 @@ TEST( DurationConvertTest )
 
     CHECK( Seconds( 125 ) == Seconds::TruncFrom( s3 ));
 }
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE ClockSuite
 

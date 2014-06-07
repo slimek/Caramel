@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Chrono - Timed Boolean Test
+// Caramel C++ Library Test - Chrono - Timed Boolean Suite
 
 #include "CaramelTestPch.h"
 
@@ -14,11 +14,6 @@ namespace Caramel
 
 SUITE( TimedBoolSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Timed Boolean Test
-//
 
 TEST( TickedBoolTest )
 {
@@ -103,8 +98,6 @@ TEST( TickedBoolTest )
     CHECK( false == tb6 );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE TimedBoolSuite
 

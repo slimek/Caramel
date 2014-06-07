@@ -88,9 +88,6 @@
     <ClCompile Include="..\src\Task\TaskPollerTest.cpp">
       <Filter>2. Tests\Task</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Chrono\ClockTest.cpp">
-      <Filter>2. Tests\Chrono</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Thread\ThreadTest.cpp">
       <Filter>2. Tests\Thread</Filter>
     </ClCompile>
@@ -196,9 +193,6 @@
     <ClCompile Include="..\src\FileSystem\DirectoryInfoTest.cpp">
       <Filter>2. Tests\FileSystem</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Chrono\TimedBoolTest.cpp">
-      <Filter>2. Tests\Chrono</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Thread\WaitableBoolTest.cpp">
       <Filter>2. Tests\Thread</Filter>
     </ClCompile>
@@ -267,6 +261,12 @@
     </ClCompile>
     <ClCompile Include="..\src\Async\ValueChangeSuite.cpp">
       <Filter>2. Tests\Async</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Chrono\ClockSuite.cpp">
+      <Filter>2. Tests\Chrono</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Chrono\TimedBoolSuite.cpp">
+      <Filter>2. Tests\Chrono</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
