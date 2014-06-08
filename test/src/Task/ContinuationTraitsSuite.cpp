@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Task - Continuation Traits Test
+// Caramel C++ Library Test - Task - Continuation Traits Suite
 
 #include "CaramelTestPch.h"
 
@@ -12,9 +12,8 @@ namespace Caramel
 SUITE( ContinuationTraitsSuite )
 {
 
-///////////////////////////////////////////////////////////////////////////////
 //
-// Continuation Traits from Result Test
+// Continuation Traits from Result
 //
 
 template< typename Result >
@@ -101,9 +100,8 @@ TEST( ContinuationFromIntTraitsTest )
 } 
 
 
-///////////////////////////////////////////////////////////////////////////////
 //
-// Continuation Traits from Void Test
+// Continuation Traits from Void
 //
 
 template<>
@@ -181,8 +179,6 @@ TEST( ContinuationFromVoidTraitsTest )
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE ContinuationTraitsSuite
 

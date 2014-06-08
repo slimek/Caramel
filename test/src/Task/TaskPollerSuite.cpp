@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Task - Task Poller Test
+// Caramel C++ Library Test - Task - Task Poller Suite
 
 #include "CaramelTestPch.h"
 
@@ -14,11 +14,6 @@ namespace Caramel
 
 SUITE( TaskPollerSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Task Poller Test
-//
 
 TEST( TaskPollerNormalTest )
 {
@@ -146,8 +141,6 @@ TEST( TaskPollerThenTest )
 
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE TaskPollerSuite
 

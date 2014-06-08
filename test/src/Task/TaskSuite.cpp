@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Task - Task Test
+// Caramel C++ Library Test - Task - Task Suite
 
 #include "CaramelTestPch.h"
 
@@ -14,11 +14,6 @@ namespace Caramel
 
 SUITE( TaskSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Task Test
-//
 
 static Bool s_calledFoo = false;
 
@@ -225,8 +220,6 @@ TEST( TaskWaitOrCatchTest )
     CHECK( "Cirno" == result3.anyFailure->Value< std::string >() );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE TaskSuite
 

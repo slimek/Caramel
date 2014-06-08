@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Task - Std Async Test
+// Caramel C++ Library Test - Task - Std Async Suite
 
 #include "CaramelTestPch.h"
 
@@ -14,11 +14,6 @@ namespace Caramel
 
 SUITE( StdAsyncSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Std Async Test
-//
 
 TEST( StdAsyncTest )
 {
@@ -36,8 +31,6 @@ TEST( StdAsyncTest )
     CHECK( 42 == t2.GetResult() );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE StdAsyncSuite
 

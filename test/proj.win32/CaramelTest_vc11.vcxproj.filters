@@ -85,9 +85,6 @@
     <ClCompile Include="..\src\RunTest.cpp">
       <Filter>1. Main Entry</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Task\TaskPollerTest.cpp">
-      <Filter>2. Tests\Task</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Thread\ThreadTest.cpp">
       <Filter>2. Tests\Thread</Filter>
     </ClCompile>
@@ -154,9 +151,6 @@
     <ClCompile Include="..\src\String\FormatTest.cpp">
       <Filter>2. Tests\String</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Task\TaskTest.cpp">
-      <Filter>2. Tests\Task</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Concurrent\ConcurrentIntervalSetTest.cpp">
       <Filter>2. Tests\Concurrent</Filter>
     </ClCompile>
@@ -172,9 +166,6 @@
     <ClCompile Include="..\src\Value\SharedArrayTest.cpp">
       <Filter>2. Tests\Value</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Task\WorkerThreadTest.cpp">
-      <Filter>2. Tests\Task</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Concurrent\ConcurrentBlockingQueueTest.cpp">
       <Filter>2. Tests\Concurrent</Filter>
     </ClCompile>
@@ -183,9 +174,6 @@
     </ClCompile>
     <ClCompile Include="..\src\Concurrent\ConcurrentQueueTest.cpp">
       <Filter>2. Tests\Concurrent</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Task\StdAsyncTest.cpp">
-      <Filter>2. Tests\Task</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Io\TextStreamWriterTest.cpp">
       <Filter>2. Tests\Io</Filter>
@@ -219,9 +207,6 @@
     </ClCompile>
     <ClCompile Include="..\src\DateTime\TimeOfDayTest.cpp">
       <Filter>2. Tests\DateTime</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Task\ContinuationTraitsTest.cpp">
-      <Filter>2. Tests\Task</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Random\WeightedRandomMapTest.cpp">
       <Filter>2. Tests\Random</Filter>
@@ -270,6 +255,21 @@
     </ClCompile>
     <ClCompile Include="..\src\Chrono\TickClockSuite.cpp">
       <Filter>2. Tests\Chrono</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Task\ContinuationTraitsSuite.cpp">
+      <Filter>2. Tests\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Task\StdAsyncSuite.cpp">
+      <Filter>2. Tests\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Task\TaskPollerSuite.cpp">
+      <Filter>2. Tests\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Task\TaskSuite.cpp">
+      <Filter>2. Tests\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Task\WorkerThreadSuite.cpp">
+      <Filter>2. Tests\Task</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

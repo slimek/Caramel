@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Task - Worker Thread Test
+// Caramel C++ Library Test - Task - Worker Thread Suite
 
 #include "CaramelTestPch.h"
 
@@ -18,11 +18,6 @@ namespace Caramel
 
 SUITE( WorkerThreadSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Worker Thread Test
-//
 
 TEST( WorkerThreadTrivialTest )
 {
@@ -209,8 +204,6 @@ TEST( WorkerThreadThenTest )
     worker.Stop();
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE WorkerThreadSuite
 

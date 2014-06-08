@@ -143,11 +143,11 @@
     <ClCompile Include="..\src\String\SprintfTest.cpp" />
     <ClCompile Include="..\src\String\StringAlgorithmTest.cpp" />
     <ClCompile Include="..\src\String\StringToStringTest.cpp" />
-    <ClCompile Include="..\src\Task\ContinuationTraitsTest.cpp" />
-    <ClCompile Include="..\src\Task\StdAsyncTest.cpp" />
-    <ClCompile Include="..\src\Task\TaskPollerTest.cpp" />
-    <ClCompile Include="..\src\Task\TaskTest.cpp" />
-    <ClCompile Include="..\src\Task\WorkerThreadTest.cpp" />
+    <ClCompile Include="..\src\Task\ContinuationTraitsSuite.cpp" />
+    <ClCompile Include="..\src\Task\StdAsyncSuite.cpp" />
+    <ClCompile Include="..\src\Task\TaskPollerSuite.cpp" />
+    <ClCompile Include="..\src\Task\TaskSuite.cpp" />
+    <ClCompile Include="..\src\Task\WorkerThreadSuite.cpp" />
     <ClCompile Include="..\src\Thread\LoopThreadGroupTest.cpp" />
     <ClCompile Include="..\src\Thread\SpinMutexTest.cpp" />
     <ClCompile Include="..\src\Thread\ThreadTest.cpp" />
