@@ -30,11 +30,13 @@ public:
 
     /// Operations ///
 
-    void Push( AnyEvent event );
+    void Push( const AnyEvent& event );
+    void Push( AnyEvent&& event );
 
     // Make an AnyEvent inside the function.
     void PushEvent( Int eventId );
-    void PushEvent( Int eventId, Any any );
+    void PushEvent( Int eventId, const Any& any );
+    void PushEvent( Int eventId, Any&& any );
 
     Bool TryPop( AnyEvent& event );
     

@@ -41,7 +41,8 @@ public:
     void Dispatch( const AnyEvent& event );
 
     void DispatchEvent( Int eventId );
-    void DispatchEvent( Int eventId, Any value );
+    void DispatchEvent( Int eventId, const Any& value );
+    void DispatchEvent( Int eventId, Any&& value );
 
 
 private:

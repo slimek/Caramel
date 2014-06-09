@@ -88,7 +88,12 @@ AnyEventTargetPtr AnyEventQueue::GetTargetImpl() const
 // Operations
 //
 
-void AnyEventQueue::Push( AnyEvent event )
+void AnyEventQueue::Push( const AnyEvent& event )
+{
+    m_impl->Push( event );
+}
+
+void AnyEventQueue::Push( AnyEvent&& event )
 {
     m_impl->Push( std::move( event ));
 }
@@ -100,7 +105,13 @@ void AnyEventQueue::PushEvent( Int eventId )
 }
 
 
-void AnyEventQueue::PushEvent( Int eventId, Any any )
+void AnyEventQueue::PushEvent( Int eventId, const Any& any )
+{
+    m_impl->Push( AnyEvent( eventId, any ));
+}
+
+
+void AnyEventQueue::PushEvent( Int eventId, Any&& any )
 {
     m_impl->Push( AnyEvent( eventId, std::move( any )));
 }
@@ -289,21 +300,27 @@ Uint AnyEventDispatcher::GetNumTargets() const
 // Operations
 //
 
+void AnyEventDispatcher::Dispatch( const AnyEvent& event )
+{
+    m_impl->Dispatch( event );
+}
+
+
 void AnyEventDispatcher::DispatchEvent( Int eventId )
 {
     m_impl->Dispatch( AnyEvent( eventId ));
 }
 
 
-void AnyEventDispatcher::DispatchEvent( Int eventId, Any value )
+void AnyEventDispatcher::DispatchEvent( Int eventId, const Any& value )
 {
-    m_impl->Dispatch( AnyEvent( eventId, std::move( value )));
+    m_impl->Dispatch( AnyEvent( eventId, value ));
 }
 
 
-void AnyEventDispatcher::Dispatch( const AnyEvent& event )
+void AnyEventDispatcher::DispatchEvent( Int eventId, Any&& value )
 {
-    m_impl->Dispatch( event );
+    m_impl->Dispatch( AnyEvent( eventId, std::move( value )));
 }
 
 
