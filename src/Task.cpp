@@ -331,8 +331,14 @@ void TaskImpl::NotifyDone()
 //
 
 TaskPoller::TaskPoller()
+    : m_impl( new TaskPollerImpl( this, MakeClockProxy< TickClock >() ))
 {
-    m_impl = std::make_shared< TaskPollerImpl >( this );
+}
+
+
+TaskPoller::TaskPoller( const ClockProxy& clock )
+    : m_impl( new TaskPollerImpl( this, clock ))
+{
 }
 
 
@@ -341,9 +347,7 @@ void TaskPoller::Submit( TaskCore& task )
     if ( task.HasDelay() )
     {
         task.StartDelay( *this );
-
-        const TickPoint dueTime = TickClock::Now() + task.GetDelayDuration();
-        m_impl->m_delayedTasks.Push( dueTime, task );
+        m_impl->AddDelayTask( task );
     }
     else
     {
@@ -375,9 +379,17 @@ void TaskPoller::PollFor( const Ticks& sliceTicks )
 // Implementation
 //
 
-TaskPollerImpl::TaskPollerImpl( TaskPoller* host )
+TaskPollerImpl::TaskPollerImpl( TaskPoller* host, const ClockProxy& clock )
     : m_host( host )
+    , m_clock( clock )
 {
+}
+
+
+void TaskPollerImpl::AddDelayTask( const TaskCore& task )
+{
+    const Ticks dueTime = m_clock.SinceEpoch() + task.GetDelayDuration();
+    m_delayedTasks.Push( dueTime, task );
 }
 
 
@@ -385,10 +397,10 @@ void TaskPollerImpl::PollFor( const Ticks& sliceTicks )
 {
     while ( ! m_delayedTasks.IsEmpty() )
     {
-        TickPoint dueTime;
+        Ticks dueTime;
         m_delayedTasks.PeekTopKey( dueTime );
 
-        if ( TickClock::Now() < dueTime ) { break; }
+        if ( m_clock.SinceEpoch() < dueTime ) { break; }
 
         TaskCore task;
         m_delayedTasks.TryPop( task );

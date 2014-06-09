@@ -25,16 +25,16 @@ class TaskPollerImpl
 
 public:
 
-    explicit TaskPollerImpl( TaskPoller* host );
+    TaskPollerImpl( TaskPoller* host, const ClockProxy& clock );
+
+    void AddDelayTask( const TaskCore& task );
+
 
     //
     // Scheduling - Process in order:
     // - 1. Delaying tasks
     //   2. Put tasks into the ready queue
     //
-
-    /// Run Tasks ///
-
     void PollFor( const Ticks& sliceTicks );
 
 
@@ -42,7 +42,9 @@ private:
 
     TaskPoller* m_host;
 
-    typedef Concurrent::PriorityQueue< TickPoint, TaskCore > DelayedTaskQueue;
+    ClockProxy m_clock;
+
+    typedef Concurrent::PriorityQueue< Ticks, TaskCore > DelayedTaskQueue;
     DelayedTaskQueue m_delayedTasks;
 
     typedef Concurrent::Queue< TaskCore > ReadyTaskQueue;

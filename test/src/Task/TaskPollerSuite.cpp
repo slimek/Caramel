@@ -53,7 +53,6 @@ TEST( TaskPollerDelayTest )
     TaskPoller poller;
 
     /// One Delay Tasks ///
-
     {
         Bool slowDone = false;
         Bool fastDone = false;
@@ -76,6 +75,55 @@ TEST( TaskPollerDelayTest )
 
         CHECK( true == slowDone );
     }
+}
+
+
+//
+// Task Poller with a Custom Clock
+// - A custom clock affects the delay behavior.
+//
+
+class CustomClock
+{
+public:
+
+    static TickPoint Now() { return m_now; }
+
+    static void Reset() { m_now = TickClock::Now(); }
+    static void Advance( Ticks s ) { m_now += s; }
+
+private:
+    static TickPoint m_now;
+};
+
+TickPoint CustomClock::m_now;
+
+
+TEST( TaskPollerWithCustomClockTest )
+{
+    TaskPoller poller( MakeClockProxy< CustomClock >() );
+
+    Bool done = false;
+
+    auto task = MakeTask( "Delay", [&] { done = true; } );
+    task.DelayFor( Ticks( 50 ));
+    poller.Submit( task );
+
+    ThisThread::SleepFor( Ticks( 100 ));
+
+    poller.PollOne();
+
+    CHECK( false == done );  // Not executed yet.
+
+    CustomClock::Advance( Ticks( 25 ));
+    poller.PollOne();
+
+    CHECK( false == done );
+
+    CustomClock::Advance( Ticks( 35 ));  // The sum is 60
+    poller.PollOne();
+
+    CHECK( true == done );
 }
 
 

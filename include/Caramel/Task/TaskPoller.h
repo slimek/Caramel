@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
+#include <Caramel/Chrono/ClockProxy.h>
 #include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Task/TaskExecutor.h>
 
@@ -24,6 +25,7 @@ class TaskPoller : public TaskExecutor
 public:
 
     TaskPoller();
+    explicit TaskPoller( const ClockProxy& clock );
 
     void Submit( TaskCore& task ) override;
 
