@@ -137,11 +137,11 @@ TEST( WorkerThreadDelayTest )
                     Format( "Delay{0}", i ),
                     [i,value,&ilist] { ilist.push_back( i ); }
                 )
-                .DelayFor( Ticks( 10 * value ))
+                .DelayFor( Ticks( 20 * value ))
             );
         }
 
-        worker.Submit( MakeTask( "End", [&] { ready = true; } ).DelayFor( Ticks( 120 )));        
+        worker.Submit( MakeTask( "End", [&] { ready = true; } ).DelayFor( Ticks( 250 )));
 
         ready.Wait();
 
