@@ -271,6 +271,9 @@
     <ClCompile Include="..\src\Task\WorkerThreadSuite.cpp">
       <Filter>2. Tests\Task</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Chrono\ClockProxySuite.cpp">
+      <Filter>2. Tests\Chrono</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">

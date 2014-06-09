@@ -177,6 +177,9 @@
     <Filter Include="2. Sources\Async">
       <UniqueIdentifier>{1ba18528-73bc-4f83-9eb0-568e602e0138}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\Chrono\Detail">
+      <UniqueIdentifier>{75860549-e1e3-4d66-bdb3-5fdced9fb75e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Setup\Compiler.h">
@@ -724,6 +727,12 @@
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Functional\Bind.h">
       <Filter>1. Public Packages\Functional</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Chrono\ClockProxy.h">
+      <Filter>1. Public Packages\Chrono</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Chrono\Detail\ClockProxyHolder.h">
+      <Filter>1. Public Packages\Chrono\Detail</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
