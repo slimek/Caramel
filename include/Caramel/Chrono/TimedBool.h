@@ -48,21 +48,20 @@ public:
     void Start( const AnyDuration& duration );
 
 
-    //
     // Start this timer with previous duration.
-    //
     void Restart();
 
-    //
     // Advance the deadline with the duration until it is later than now.
     // This produces stable intervals (fixed-rate).
-    //
     void Continue();
 
-    //
     // Immediate expire this timer.
-    //
     void ExpireNow();
+
+    // Take combo functions
+    // - If expires, returns true and restart/continue the next duration.
+    Bool TakeAndRestart();
+    Bool TakeAndContinue();
 
 
     /// Boolean Conversions ///
@@ -175,6 +174,26 @@ template< typename ClockT >
 inline void TimedBool< ClockT >::ExpireNow()
 {
     m_deadline = ClockType::Now();
+}
+
+
+template< typename ClockT >
+inline Bool TimedBool< ClockT >::TakeAndRestart()
+{
+    if ( ! this->ToBool() ) { return false; }
+
+    this->Restart();
+    return true;
+}
+
+
+template< typename ClockT >
+inline Bool TimedBool< ClockT >::TakeAndContinue()
+{
+    if ( ! this->ToBool() ) { return false; }
+
+    this->Continue();
+    return true;
 }
 
 

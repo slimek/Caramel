@@ -59,8 +59,8 @@ TEST( TickedBoolTest )
 
     /// Never Expires ///
 
-    TickedBool tb6( Ticks::MaxValue() );
-    CHECK( false == tb6 );
+    TickedBool tbMax( Ticks::MaxValue() );
+    CHECK( false == tbMax );
 
 
     /// Boolean Conversions ///
@@ -68,8 +68,8 @@ TEST( TickedBoolTest )
     CHECK( true == tb5.ToBool() );
     CHECK( true == tb5.IsExpired() );
 
-    CHECK( false == tb6.ToBool() );
-    CHECK( false == tb6.IsExpired() );
+    CHECK( false == tbMax.ToBool() );
+    CHECK( false == tbMax.IsExpired() );
 
 
     /// Start and Continue ///
@@ -94,8 +94,48 @@ TEST( TickedBoolTest )
     CHECK( true == tb8 );
 
 
+    /// Take functions ///
+
+    TickedBool tb9( Ticks( 40 ));
+
+    ThisThread::SleepFor( Ticks( 50 ));
+
+    CHECK( true  == tb9.TakeAndRestart() );
+    CHECK( false == tb9 );
+
+    ThisThread::SleepFor( Ticks( 50 ));
+
+    CHECK( true  == tb9.TakeAndContinue() );
+    CHECK( false == tb9 );
+
+    ThisThread::SleepFor( Ticks( 30 ));
+
+    CHECK( true == tb9 );
+
+
     // Yes, a TimeBool with MaxValue duration would never expire
-    CHECK( false == tb6 );
+    CHECK( false == tbMax );
+}
+
+
+TEST( SecondedBoolTest )
+{
+    typedef TimedBool< SecondClock > SecondedBool;
+
+    SecondedBool sb1( 0.5 );
+    SecondedBool sb2( 10 );
+
+    CHECK( false == sb1 );
+    CHECK( false == sb2 );
+
+    ThisThread::SleepFor( Seconds( 0.6 ));
+
+    CHECK( true  == sb1 );
+    CHECK( false == sb2 );
+
+    sb2.ExpireNow();
+
+    CHECK( true == sb2 );
 }
 
 
