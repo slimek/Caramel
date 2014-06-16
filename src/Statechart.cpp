@@ -29,14 +29,14 @@ namespace Statechart
 // State Machine
 //
 
-StateMachine::StateMachine( std::string name )
-    : m_impl( new StateMachineImpl( std::move( name )))
+StateMachine::StateMachine( const std::string& name )
+    : m_impl( new StateMachineImpl( name ))
 {
 }
 
 
-StateMachine::StateMachine( std::string name, TaskExecutor& executor )
-    : m_impl( new StateMachineImpl( std::move( name ), executor ))
+StateMachine::StateMachine( const std::string& name, TaskExecutor& executor )
+    : m_impl( new StateMachineImpl( name, executor ))
 {
 }
 
@@ -98,6 +98,12 @@ void StateMachine::PostEvent( Int eventId, const Any& value )
 }
 
 
+void StateMachine::PostEvent( Int eventId, Any&& value )
+{
+    this->PostEvent( AnyEvent( eventId, std::move( value )));
+}
+
+
 void StateMachine::PostEvent( const AnyEvent& evt )
 {
     m_impl->PostEvent( evt );
@@ -139,8 +145,8 @@ AnyEvent StateMachine::GetActiveEvent() const
 // Implementation
 //
 
-StateMachineImpl::StateMachineImpl( std::string name )
-    : m_name( std::move( name ))
+StateMachineImpl::StateMachineImpl( const std::string& name )
+    : m_name( name )
     , m_taskExecutor( nullptr )
     , m_builtinTaskPoller( new TaskPoller )
     , m_initiated( false )
@@ -151,8 +157,8 @@ StateMachineImpl::StateMachineImpl( std::string name )
 }
 
 
-StateMachineImpl::StateMachineImpl( std::string name, TaskExecutor& executor )
-    : m_name( std::move( name ))
+StateMachineImpl::StateMachineImpl( const std::string& name, TaskExecutor& executor )
+    : m_name( name )
     , m_taskExecutor( &executor )
     , m_initiated( false )
     , m_transitNumber( 0 )
@@ -337,7 +343,7 @@ void StateMachineImpl::EnterState()
         }
     }
 
-    if ( Ticks::Zero() < m_currentState->m_autoTimerDuration )
+    if ( m_currentState->m_autoTimerDuration > Ticks::Zero() )
     {
         this->StartTimer( m_currentState->m_autoTimerDuration );
     }
@@ -423,25 +429,25 @@ State::State( StatePtr impl )
 }
 
 
-State& State::EnterAction( const Action& action )
+State& State::EnterAction( Action action )
 {
     CARAMEL_CHECK( ! m_impl->m_enterAction );
 
-    m_impl->m_enterAction = action;
+    m_impl->m_enterAction = std::move( action );
     return *this;
 }
 
 
-State& State::ExitAction( const Action& action )
+State& State::ExitAction( Action action )
 {
     CARAMEL_CHECK( ! m_impl->m_exitAction );
 
-    m_impl->m_exitAction = action;
+    m_impl->m_exitAction = std::move( action );
     return *this;
 }
 
 
-State& State::Transition( Int eventId, Int targetStateId, const Action& action )
+State& State::Transition( Int eventId, Int targetStateId, Action action )
 {
     // Check the Event ID
     if ( m_impl->m_reactions.Contains( eventId ))
@@ -453,7 +459,7 @@ State& State::Transition( Int eventId, Int targetStateId, const Action& action )
     }
 
     // Insert the Transition
-    auto transition = std::make_shared< Statechart::Transition >( targetStateId, action );
+    auto transition = std::make_shared< Statechart::Transition >( targetStateId, std::move( action ));
     if ( ! m_impl->m_transitions.Insert( eventId, transition ))
     {
         CARAMEL_THROW( "%s transition duplicate, eventId: %d, targetStateId: %d",
@@ -464,7 +470,7 @@ State& State::Transition( Int eventId, Int targetStateId, const Action& action )
 }
 
 
-State& State::Reaction( Int eventId, const Action& action )
+State& State::Reaction( Int eventId, Action action )
 {
     // Check the Event ID
     if ( m_impl->m_transitions.Contains( eventId ))
@@ -474,7 +480,7 @@ State& State::Reaction( Int eventId, const Action& action )
     }
 
     // Insert Reaction
-    if ( ! m_impl->m_reactions.Insert( eventId, action ))
+    if ( ! m_impl->m_reactions.Insert( eventId, std::move( action )))
     {
         CARAMEL_THROW( "%s reaction duplicate, eventId: %d",
                        m_impl->GetName(), eventId );

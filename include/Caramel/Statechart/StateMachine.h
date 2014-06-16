@@ -30,9 +30,10 @@ class StateMachine : public AnyEventTarget
 {
 public:
 
-    explicit StateMachine( std::string name );
-    StateMachine( std::string name, TaskExecutor& executor );
+    explicit StateMachine( const std::string& name );
+    StateMachine( const std::string& name, TaskExecutor& executor );
     ~StateMachine();
+
 
     // Build this state machine.
     // - This function can only be used before calling Initiate().
@@ -48,23 +49,22 @@ public:
     // Enqueue an event for later processing.
     void PostEvent( Int eventId );
     void PostEvent( Int eventId, const Any& value );
+    void PostEvent( Int eventId, Any&& value );
     void PostEvent( const AnyEvent& anyEvent );
 
 
     // Plan to Transit to another state.
-    // - This function call only be called in an in-state reaction.
+    // - This function should only be called in an in-state reaction.
     //   It doesn't transit immediately, but will start to transit
     //   after the reaction returns.
     void PlanToTransit( Int stateId );
 
 
-    //
     // Process enqueued events.
     // - Call this function ONLY when you using the built-in TaskPoller.
     // - If no event exists, it returns immediately.
     //   If some events exist, process at least one event,
     //   then process the rest events until empty, or until slice ticks spent.
-    //
     void Process( const Ticks& sliceTicks = Ticks::Zero() );
 
 

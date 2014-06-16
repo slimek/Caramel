@@ -28,24 +28,18 @@ class State
 
 public:
 
-    //
+    /// Build this State ///
+
     // Called when entering or exiting this state.
-    //
-    State& EnterAction( const Action& action );
-    State& ExitAction ( const Action& action );
+    State& EnterAction( Action action );
+    State& ExitAction ( Action action );
 
-
-    //
     // When the event triggered, transit to the target state.
-    //
-    State& Transition( Int eventId, Int targetStateId, const Action& action = Action() );
+    State& Transition( Int eventId, Int targetStateId, Action action = nullptr );
 
-
-    //
-    // When the event triggered, call this action.
+    // When the event triggered, call this action - an "in-state reaction".
     // You may call StateMachine::PlanToTransit() to transit to other states by conditions.
-    //
-    State& Reaction( Int eventId, const Action& action );
+    State& Reaction( Int eventId, Action action );
 
 
 private:

@@ -25,9 +25,9 @@ struct Transition
         : targetStateId( 0 )
     {}
 
-    Transition( Int targetStateId, Action action )
+    Transition( Int targetStateId, Action&& action )
         : targetStateId( targetStateId )
-        , action( action )
+        , action( std::move( action ))
     {}
 
     Int    targetStateId;
