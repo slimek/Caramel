@@ -5,6 +5,7 @@
 #include <Caramel/Async/AnyEventDispatcher.h>
 #include <Caramel/Async/AnyEventSlot.h>
 #include <UnitTest++/UnitTest++.h>
+#include <functional>
 
 
 namespace Caramel
@@ -73,6 +74,24 @@ TEST( AnyEventSlotTest )
     CHECK( false   == slot );
     CHECK( 7       == event.Id() );
     CHECK( "Alice" == event.Value< std::string >() );
+}
+
+
+TEST( AnyEventSlotAsHandlerTest )
+{
+    AnyEventSlot slot;
+
+    typedef std::function< void( const AnyEvent& ) > EventHandler;
+
+    EventHandler handler = slot.AsHandler();
+
+    CHECK( false == slot );
+
+    handler( AnyEvent( 2, 42 ));
+
+    CHECK( true == slot );
+    CHECK( 2    == slot.Id() );
+    CHECK( 42   == slot.Value< Int >() );
 }
 
 

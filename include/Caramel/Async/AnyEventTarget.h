@@ -6,6 +6,7 @@
 
 #include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Async/AnyEvent.h>
+#include <functional>
 
 
 namespace Caramel
@@ -24,6 +25,9 @@ struct AnyEventTarget
     virtual ~AnyEventTarget() {}
   
     virtual AnyEventTargetPtr GetTargetImpl() const = 0;
+
+    // This function depends on GetTargetImpl().
+    std::function< void( const AnyEvent& ) > AsHandler() const;
 };
 
 

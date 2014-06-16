@@ -25,6 +25,23 @@ namespace Caramel
 // Any Event Target
 //
 
+typedef std::function< void (const AnyEvent& ) > EventHandler;
+
+EventHandler AnyEventTarget::AsHandler() const
+{
+    auto target = this->GetTargetImpl();
+
+    return std::bind(
+        &AnyEventTargetImpl::Send,
+        target, std::placeholders::_1, target->GetAge()
+    );
+}
+
+
+//
+// Implementation
+//
+
 AnyEventTargetImpl::AnyEventTargetImpl()
     : m_destroyed( false )
     , m_age( 0 )

@@ -112,6 +112,27 @@ TEST( AnyEventQueueUnlinkTest )
 }
 
 
+TEST( AnyEventQueueAsHandlerSuite )
+{
+    AnyEventQueue equeue;
+
+    typedef std::function< void( const AnyEvent& ) > EventHandler;
+    EventHandler handler = equeue.AsHandler();
+
+    AnyEvent event;
+
+    CHECK( false == equeue.TryPop( event ));
+    
+    handler( AnyEvent( 2, 42 ));
+    
+    CHECK( true == equeue.TryPop( event ));
+    CHECK( 2  == event.Id() );
+    CHECK( 42 == event.Value< Int >() );
+
+    CHECK( false == equeue.TryPop( event ));
+}
+
+
 } // SUITE AnyEventQueueSuite
 
 } // namespace Caramel
