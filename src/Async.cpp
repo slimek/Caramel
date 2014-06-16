@@ -6,6 +6,7 @@
 #include "Async/AnyEventQueueImpl.h"
 #include "Async/AnyEventSlotImpl.h"
 #include "Async/AnyEventTargetImpl.h"
+#include <Caramel/Async/AnyEventHandler.h>
 
 
 namespace Caramel
@@ -18,28 +19,12 @@ namespace Caramel
 //   AnyEventQueue
 //   AnyEventSlot
 //   AnyEventDispatcher
+//   AnyEventHandler
 //
 
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Any Event Target
-//
-
-typedef std::function< void (const AnyEvent& ) > EventHandler;
-
-EventHandler AnyEventTarget::AsHandler() const
-{
-    auto target = this->GetTargetImpl();
-
-    return std::bind(
-        &AnyEventTargetImpl::Send,
-        target, std::placeholders::_1, target->GetAge()
-    );
-}
-
-
-//
-// Implementation
 //
 
 AnyEventTargetImpl::AnyEventTargetImpl()
@@ -392,6 +377,39 @@ void AnyEventDispatcherImpl::Send( const AnyEvent& event, Uint age )
     {
         this->Dispatch( event );
     }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Any Event Handler
+//
+
+AnyEventHandler::AnyEventHandler( std::function< void( const AnyEvent& ) > handler )
+    : m_handler( std::move( handler ))
+{
+}
+
+
+AnyEventHandler::AnyEventHandler( AnyEventTarget& target )
+{
+    this->InitFromTarget( target.GetTargetImpl() );
+}
+
+
+void AnyEventHandler::InitFromTarget( AnyEventTargetPtr target )
+{
+    m_handler =
+    [target] ( const AnyEvent& event )
+    {
+        target->Send( event, target->GetAge() );
+    };
+}
+
+
+void AnyEventHandler::operator()( const AnyEvent& event ) const
+{
+    m_handler( event );
 }
 
 

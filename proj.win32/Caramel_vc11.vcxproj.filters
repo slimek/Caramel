@@ -734,6 +734,9 @@
     <ClInclude Include="..\include\Caramel\Chrono\Detail\ClockProxyHolder.h">
       <Filter>1. Public Packages\Chrono\Detail</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Async\AnyEventHandler.h">
+      <Filter>1. Public Packages\Async</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

@@ -25,9 +25,6 @@ struct AnyEventTarget
     virtual ~AnyEventTarget() {}
   
     virtual AnyEventTargetPtr GetTargetImpl() const = 0;
-
-    // This function depends on GetTargetImpl().
-    std::function< void( const AnyEvent& ) > AsHandler() const;
 };
 
 

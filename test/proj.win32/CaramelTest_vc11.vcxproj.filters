@@ -274,6 +274,9 @@
     <ClCompile Include="..\src\Statechart\StateMachineSuite.cpp">
       <Filter>2. Tests\Statechart</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Async\AnyEventHandlerSuite.cpp">
+      <Filter>2. Tests\Async</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">

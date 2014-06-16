@@ -25,6 +25,7 @@
     <ClInclude Include="..\include\Caramel\Arithmetic\PowerOfTwo.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEvent.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEventDispatcher.h" />
+    <ClInclude Include="..\include\Caramel\Async\AnyEventHandler.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEventSlot.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEventTarget.h" />
     <ClInclude Include="..\include\Caramel\Async\FlowState.h" />

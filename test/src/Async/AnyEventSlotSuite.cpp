@@ -77,24 +77,6 @@ TEST( AnyEventSlotTest )
 }
 
 
-TEST( AnyEventSlotAsHandlerTest )
-{
-    AnyEventSlot slot;
-
-    typedef std::function< void( const AnyEvent& ) > EventHandler;
-
-    EventHandler handler = slot.AsHandler();
-
-    CHECK( false == slot );
-
-    handler( AnyEvent( 2, 42 ));
-
-    CHECK( true == slot );
-    CHECK( 2    == slot.Id() );
-    CHECK( 42   == slot.Value< Int >() );
-}
-
-
 } // SUITE AnyEventSlotSuite
 
 } // namespace Caramel
