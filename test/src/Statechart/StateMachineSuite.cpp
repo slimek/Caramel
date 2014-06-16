@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Statechart - State Machine Test
+// Caramel C++ Library Test - Statechart - State Machine Suite
 
 #include "CaramelTestPch.h"
 
@@ -16,11 +16,6 @@ namespace Caramel
 SUITE( StateMachineSuite )
 {
 
-///////////////////////////////////////////////////////////////////////////////
-//
-// State Machine Test
-//
-
 enum StateId
 {
     S_INITIAL,
@@ -34,6 +29,7 @@ enum EventId
     E_NEXT,
     E_STRING,
 };
+
 
 TEST( StateMachineTest )
 {
@@ -350,8 +346,6 @@ TEST( StateMachineExternalWorkerThreadTest )
     worker.Stop();
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE StateMachineSuite
 

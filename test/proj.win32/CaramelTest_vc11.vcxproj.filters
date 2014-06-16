@@ -91,9 +91,6 @@
     <ClCompile Include="..\src\Document\IniDocumentTest.cpp">
       <Filter>2. Tests\Document</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Statechart\StateMachineTest.cpp">
-      <Filter>2. Tests\Statechart</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Trace\TraceTest.cpp">
       <Filter>2. Tests\Trace</Filter>
     </ClCompile>
@@ -273,6 +270,9 @@
     </ClCompile>
     <ClCompile Include="..\src\Chrono\ClockProxySuite.cpp">
       <Filter>2. Tests\Chrono</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Statechart\StateMachineSuite.cpp">
+      <Filter>2. Tests\Statechart</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
