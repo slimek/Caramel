@@ -399,10 +399,12 @@ AnyEventHandler::AnyEventHandler( AnyEventTarget& target )
 
 void AnyEventHandler::InitFromTarget( AnyEventTargetPtr target )
 {
+    const Uint age = target->GetAge();
+
     m_handler =
-    [target] ( const AnyEvent& event )
+    [target,age] ( const AnyEvent& event )
     {
-        target->Send( event, target->GetAge() );
+        target->Send( event, age );
     };
 }
 

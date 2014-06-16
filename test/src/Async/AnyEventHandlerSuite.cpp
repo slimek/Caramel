@@ -40,6 +40,15 @@ TEST( AnyEventHandlerFromSlotTest )
     CHECK( true == slot );
     CHECK( 2  == slot.Id() );
     CHECK( 42 == slot.Value< Int >() );
+
+
+    // Reset the slot should break the linking
+
+    slot.Reset();
+
+    handler( AnyEvent( 7, "Alice" ));
+
+    CHECK( false == slot );
 }
 
 
@@ -58,6 +67,15 @@ TEST( AnyEventHandlerFromQueueTest )
     CHECK( 7 == event.Id() );
     CHECK( "Alice" == event.Value< std::string >() );
     
+    CHECK( false == equeue.TryPop( event ));
+
+
+    // Reset the queue should break the linking
+
+    equeue.Reset();
+
+    handler( AnyEvent( 2, 42 ));
+
     CHECK( false == equeue.TryPop( event ));
 }
 
