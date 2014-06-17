@@ -103,7 +103,7 @@ TEST( TickedBoolTest )
     CHECK( true  == tb9.TakeAndRestart() );
     CHECK( false == tb9 );
 
-    ThisThread::SleepFor( Ticks( 50 ));
+    ThisThread::SleepFor( Ticks( 60 ));
 
     CHECK( true  == tb9.TakeAndContinue() );
     CHECK( false == tb9 );
