@@ -14,6 +14,22 @@ namespace Caramel
 SUITE( AnyEventHandlerSuite )
 {
 
+TEST( AnyEventHandlerTrivalTest )
+{
+    AnyEventSlot slot;
+
+    AnyEventHandler empty;
+    AnyEventHandler null( nullptr );
+    AnyEventHandler func( [] ( const AnyEvent& e ) {} );
+    AnyEventHandler signal( slot );
+
+    CHECK( false == empty );
+    CHECK( false == null );
+    CHECK( true  == func );
+    CHECK( true  == signal );
+}
+
+
 TEST( AnyEventHandlerFromLambdaTest )
 {
     AnyEvent event;
@@ -77,6 +93,39 @@ TEST( AnyEventHandlerFromQueueTest )
     handler( AnyEvent( 2, 42 ));
 
     CHECK( false == equeue.TryPop( event ));
+}
+
+
+AnyEventHandler WrapHandler( AnyEventHandler handler )
+{
+    return handler;
+}
+
+
+TEST( AnyEventHandlerConversionTest )
+{
+    AnyEvent event;
+
+    auto handler1 = WrapHandler(
+    [&] ( const AnyEvent& e )
+    {
+        event = e;
+    });
+
+    handler1( AnyEvent( 2, 42 ));
+
+    CHECK( 2  == event.Id() );
+    CHECK( 42 == event.Value< Int >() );
+
+    AnyEventQueue equeue;
+
+    auto handler2 = WrapHandler( equeue );
+
+    handler2( AnyEvent( 7, "Alice" ));
+
+    CHECK( true == equeue.TryPop( event ));
+    CHECK( 7       == event.Id() );
+    CHECK( "Alice" == event.Value< std::string >() );
 }
 
 

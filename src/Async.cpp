@@ -27,6 +27,22 @@ namespace Caramel
 // Any Event Target
 //
 
+std::function< void( const AnyEvent& ) > AnyEventTarget::AsHandler() const
+{
+    auto target = this->GetTargetImpl();
+    const Uint age = target->GetAge();
+
+    return std::bind(
+        &AnyEventTargetImpl::Send,
+        target, std::placeholders::_1, age
+    );
+}
+
+
+//
+// Implementation
+//
+
 AnyEventTargetImpl::AnyEventTargetImpl()
     : m_destroyed( false )
     , m_age( 0 )
@@ -385,27 +401,33 @@ void AnyEventDispatcherImpl::Send( const AnyEvent& event, Uint age )
 // Any Event Handler
 //
 
-AnyEventHandler::AnyEventHandler( std::function< void( const AnyEvent& ) > handler )
-    : m_handler( std::move( handler ))
+AnyEventHandler::AnyEventHandler()
+    : m_handler( nullptr )
 {
 }
 
 
-AnyEventHandler::AnyEventHandler( AnyEventTarget& target )
+AnyEventHandler::AnyEventHandler( std::nullptr_t )
+    : m_handler( nullptr )
 {
-    this->InitFromTarget( target.GetTargetImpl() );
 }
 
 
-void AnyEventHandler::InitFromTarget( AnyEventTargetPtr target )
+AnyEventHandler::AnyEventHandler( const AnyEventHandler& other )
+    : m_handler( other.m_handler )
 {
-    const Uint age = target->GetAge();
+}
 
-    m_handler =
-    [target,age] ( const AnyEvent& event )
-    {
-        target->Send( event, age );
-    };
+
+AnyEventHandler::AnyEventHandler( AnyEventHandler&& other )
+    : m_handler( std::move( other.m_handler ))
+{
+}
+
+
+void AnyEventHandler::InitFromTarget( AnyEventTarget& target )
+{
+    m_handler = target.AsHandler();
 }
 
 
