@@ -85,6 +85,16 @@ TaskCore::CatchResult TaskCore::Catch() const
 }
 
 
+//
+// Cancel the Task
+//
+
+Bool TaskCore::Cancel()
+{
+    CARAMEL_CHECK( m_impl->IsValid() );
+    return m_impl->Cancel();
+}
+
 
 //
 // Internal Functions - Call by TaskExecutor
@@ -129,7 +139,8 @@ void TaskCore::Run()
 Bool TaskCore::IsValid() const { return m_impl->IsValid(); }
 Bool TaskCore::IsDone()  const { return m_impl->IsDone(); }
 
-Bool TaskCore::IsFaulted() const { return TASK_STATE_FAULTED == m_impl->m_state; }
+Bool TaskCore::IsFaulted()  const { return m_impl->m_state == TASK_STATE_FAULTED; }
+Bool TaskCore::IsCanceled() const { return m_impl->m_state == TASK_STATE_CANCELED; }
 
 std::string TaskCore::Name() const { return m_impl->m_name; }
 
@@ -223,6 +234,12 @@ void TaskImpl::Run()
 {
     {
         LockGuard lock( m_stateMutex );
+
+        if ( m_state == TASK_STATE_CANCELED )
+        {
+            return;
+        }
+
         m_state = TASK_STATE_RUNNING;
     }
 
@@ -297,6 +314,20 @@ void TaskImpl::DoWait() const
     {
         m_becomesDone.wait( ulock );
     }
+}
+
+
+Bool TaskImpl::Cancel()
+{
+    LockGuard lock( m_stateMutex );
+
+    if ( m_state < TASK_STATE_RUNNING )
+    {
+        m_state = TASK_STATE_CANCELED;
+        return true;
+    }
+
+    return false;
 }
 
 

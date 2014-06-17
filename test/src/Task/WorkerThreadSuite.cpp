@@ -4,6 +4,7 @@
 
 #include <Caramel/String/Format.h>
 #include <Caramel/Task/WorkerThread.h>
+#include <Caramel/Thread/ThisThread.h>
 #include <Caramel/Thread/WaitableBool.h>
 #include <UnitTest++/UnitTest++.h>
 #include <algorithm>
@@ -200,6 +201,32 @@ TEST( WorkerThreadThenTest )
         t2.Wait();
         CHECK( "Alice" == name );
     }
+
+    worker.Stop();
+}
+
+
+TEST( WorkerThreadCancelTest )
+{
+    WorkerThread worker( "Cancel" );
+    Bool done1 = false;
+    
+    auto task1 = MakeTask( "Task1", [&] { done1 = true; } )
+               . DelayFor( Ticks( 20 ));
+    auto task2 = MakeTask( "Task2", [] {} );
+
+    worker.Submit( task1 );
+    worker.Submit( task2 );
+
+    CHECK( true == task1.Cancel() );
+    
+    ThisThread::SleepFor( Ticks( 40 ));
+    task2.Wait();
+
+    CHECK( false == done1 );
+    CHECK( true  == task1.IsCanceled() );
+
+    CHECK( false == task2.Cancel() );  // Task 2 is already ran to completion.
 
     worker.Stop();
 }

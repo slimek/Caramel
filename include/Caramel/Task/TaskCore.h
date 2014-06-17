@@ -37,8 +37,9 @@ public:
 
     std::string Name() const;
 
-    Bool IsFaulted() const;
-    Bool IsDone()    const;  // "Ran to Completion", Faulted or Canceled
+    Bool IsFaulted()  const;
+    Bool IsCanceled() const;
+    Bool IsDone()     const;  // "Ran to Completion", Faulted or Canceled
 
 
     /// Operations ///
@@ -54,7 +55,13 @@ public:
     struct CatchResult;
     CatchResult Catch() const;
 
-    
+    // Cancel
+    // - True if canceled successfully.
+    //   False if this task has started running, already canceled, done, or other
+    //   conditions in which the task can't change to canceled state.
+    Bool Cancel();
+
+
     //
     // Post-Submit Functions
     // - These functions should only be called by TaskExecutor

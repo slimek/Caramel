@@ -50,6 +50,8 @@ public:
     
     TaskCore::CatchResult Catch() const;
 
+    Bool Cancel();
+
 
     /// State Transition ///
 

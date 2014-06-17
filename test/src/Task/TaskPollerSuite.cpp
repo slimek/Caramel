@@ -180,13 +180,48 @@ TEST( TaskPollerThenTest )
         {
             done6 = true;
         });
-
+        
         poller.Submit( task5 );
         poller.PollFor( Ticks( 100 ));
 
         CHECK( true == done5 && true == done6 );
     }
 
+}
+
+
+TEST( TaskPollerCancelTest )
+{
+    TaskPoller poller;
+    Bool done1 = false;
+    Bool done2 = false;
+
+    auto task1 = MakeTask( "Task1", [&] { done1 = true; } );
+
+    poller.Submit( task1 );
+    
+    CHECK( true == task1.Cancel() );
+    
+    poller.PollOne();
+
+    CHECK( false == done1 );
+    CHECK( true  == task1.IsCanceled() );
+
+    auto task2 = MakeTask( "Task2", [&] { done2 = true; } )
+               . DelayFor( Ticks( 20 ));
+
+    poller.Submit( task2 );
+    poller.PollOne();
+
+    CHECK( false == done2 );
+
+    CHECK( true == task2.Cancel() );
+
+    ThisThread::SleepFor( Ticks( 40 ));
+    poller.PollOne();
+
+    CHECK( false == done2 );
+    CHECK( true  == task2.IsCanceled() );
 }
 
 
