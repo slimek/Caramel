@@ -50,9 +50,6 @@ private:
 
     typedef Concurrent::HashMap< Int, Action > ActionMap;
     ActionMap m_reactions;
-
-    Ticks m_autoTimerDuration;   // Zero means not enabled
-    Action m_timerAction;
 };
 
 typedef std::shared_ptr< StateImpl > StatePtr;

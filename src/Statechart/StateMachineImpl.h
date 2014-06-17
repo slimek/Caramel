@@ -55,15 +55,7 @@ public:
 
     void PlanToTransit( Int stateId );
 
-
-    //
-    // Timer
-    // - StartTimer() starts a timer of current state.
-    //   This timer would be cancelled when exiting the current state.
-    // - CancelTimer() would cancel the current timer, if exists.
-    //
-    void StartTimer( const Ticks& ticks );
-    void CancelTimer();
+    void StartTimer( const Ticks& ticks, Int eventId );
 
 
     /// Implements AnyEventTargetImpl ///
@@ -103,6 +95,8 @@ private:
     // This is set by PlanToTransit(), 
     // which can only be called in a reaction.
     boost::optional< Int > m_transitionPlan;
+
+    Task< void > m_timerTask;
 
     std::mutex m_mutex;
 };

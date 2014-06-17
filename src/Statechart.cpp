@@ -116,6 +116,12 @@ void StateMachine::PlanToTransit( Int stateId )
 }
 
 
+void StateMachine::StartTimer( const Ticks& ticks, Int eventId )
+{
+    m_impl->StartTimer( ticks, eventId );
+}
+
+
 void StateMachine::Process( const Ticks& sliceTicks )
 {
     CARAMEL_CHECK( m_impl->m_builtinTaskPoller );
@@ -318,12 +324,6 @@ void StateMachineImpl::DoTransit( StatePtr targetState, const Action& transition
 }
 
 
-void StateMachineImpl::StartTimer( const Ticks& ticks )
-{
-    CARAMEL_NOT_IMPLEMENTED();
-}
-
-
 //
 // State Actions
 //
@@ -342,17 +342,16 @@ void StateMachineImpl::EnterState()
                                 m_currentState->GetName(), xc.TracingMessage() );
         }
     }
-
-    if ( m_currentState->m_autoTimerDuration > Ticks::Zero() )
-    {
-        this->StartTimer( m_currentState->m_autoTimerDuration );
-    }
 }
 
 
 void StateMachineImpl::ExitState()
 {
-    // TODO: Cancel the timer.
+    if ( m_timerTask.IsValid() )
+    {
+        m_timerTask.Cancel();
+        m_timerTask = Task< void >();  // Clear the timer.
+    }
 
     if ( m_currentState->m_exitAction )
     {
@@ -395,6 +394,28 @@ void StateMachineImpl::PlanToTransit( Int stateId )
     }
 
     m_transitionPlan = stateId;
+}
+
+
+void StateMachineImpl::StartTimer( const Ticks& ticks, Int eventId )
+{
+    if ( m_actionThreadId != ThisThread::GetId() )
+    {
+        CARAMEL_THROW( "StartTimer() can only be called in an action" );
+    }
+
+    if ( m_timerTask.IsValid() )
+    {
+        CARAMEL_THROW( "You have already set a timer in this state" );
+    }
+
+    m_timerTask = MakeTask(
+        Sprintf( "%s.TimerEvent[%d]", m_currentState->GetName(), eventId ),
+        [=] { this->ProcessEvent( AnyEvent( eventId )); }
+    );
+    m_timerTask.DelayFor( ticks );
+
+    this->m_taskExecutor->Submit( m_timerTask );
 }
 
 

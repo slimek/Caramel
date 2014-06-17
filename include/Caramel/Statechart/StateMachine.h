@@ -60,6 +60,13 @@ public:
     void PlanToTransit( Int stateId );
 
 
+    // Timer
+    // - StartTimer() starts a timer of current state.
+    //   When the timer expires, it posts an event to this machine.
+    //   The timer would be canceled when exiting the current state.
+    void StartTimer( const Ticks& ticks, Int eventId );
+
+
     // Process enqueued events.
     // - Call this function ONLY when you using the built-in TaskPoller.
     // - If no event exists, it returns immediately.

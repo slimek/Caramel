@@ -6,6 +6,7 @@
 #include <Caramel/Statechart/StateMachine.h>
 #include <Caramel/Task/TaskPoller.h>
 #include <Caramel/Task/WorkerThread.h>
+#include <Caramel/Thread/ThisThread.h>
 #include <Caramel/Thread/WaitableBool.h>
 #include <UnitTest++/UnitTest++.h>
 
@@ -28,6 +29,7 @@ enum EventId
     E_START,
     E_NEXT,
     E_STRING,
+    E_TIMER,
 };
 
 
@@ -344,6 +346,55 @@ TEST( StateMachineExternalWorkerThreadTest )
     CHECK_THROW( machine.Process(), Caramel::Exception );
 
     worker.Stop();
+}
+
+
+TEST( StateMachinePollerTimerTest )
+{
+    TaskPoller poller;
+    Statechart::StateMachine machine( "Timer", poller ); 
+    Bool flag = false;
+
+    machine.AddState( S_INITIAL )
+           .EnterAction( [&] { machine.StartTimer( Ticks( 50 ), E_TIMER ); } )
+           .Transition( E_TIMER, S_WAITING )
+           .Transition( E_NEXT, S_FINAL );
+
+    machine.AddState( S_WAITING )
+           .EnterAction( [&] { flag = true; } )
+           .Transition( E_NEXT, S_INITIAL );
+
+    machine.AddState( S_FINAL )
+           .Transition( E_TIMER, S_WAITING );  // If the timer in S_INITIAL expires here...
+
+    machine.Initiate( S_INITIAL );
+    
+    poller.PollOne();
+    
+    CHECK( false == flag );
+
+    ThisThread::SleepFor( Ticks( 60 ));
+
+    poller.PollOne();
+
+    CHECK( true == flag );
+    CHECK( S_WAITING == machine.GetCurrentStateId() );
+
+
+    // Cancel the timer when exit the state
+
+    machine.PostEvent( E_NEXT );
+    poller.PollOne();  // transit to S_INITIAL, timer starts.
+    
+    machine.PostEvent( E_NEXT );
+    poller.PollOne();
+
+    CHECK( S_FINAL == machine.GetCurrentStateId() );
+
+    ThisThread::SleepFor( Ticks( 60 ));
+    poller.PollOne();
+
+    CHECK( S_FINAL == machine.GetCurrentStateId() );  // Failed if the timer in S_INITIAL not canceled.
 }
 
 
