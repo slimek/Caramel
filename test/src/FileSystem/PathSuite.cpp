@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - File System - Path Test
+// Caramel C++ Library Test - File System - Path Suite
 
 #include "CaramelTestPch.h"
 
@@ -11,11 +11,6 @@ namespace Caramel
 
 SUITE( PathSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Path Test
-//
 
 TEST( PathDecompositionTest )
 {
@@ -156,8 +151,6 @@ TEST( PathInsertStemSuffixTest )
     CHECK( Path( "file.ini_en.bak" ) == p3 );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE PathSuite
 

@@ -133,9 +133,6 @@
     <ClCompile Include="..\src\DateTime\DateTest.cpp">
       <Filter>2. Tests\DateTime</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\FileSystem\PathTest.cpp">
-      <Filter>2. Tests\FileSystem</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Error\AlertTest.cpp">
       <Filter>2. Tests\Error</Filter>
     </ClCompile>
@@ -174,9 +171,6 @@
     </ClCompile>
     <ClCompile Include="..\src\Io\TextStreamWriterTest.cpp">
       <Filter>2. Tests\Io</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\FileSystem\DirectoryInfoTest.cpp">
-      <Filter>2. Tests\FileSystem</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Thread\WaitableBoolTest.cpp">
       <Filter>2. Tests\Thread</Filter>
@@ -276,6 +270,12 @@
     </ClCompile>
     <ClCompile Include="..\src\Async\AnyEventHandlerSuite.cpp">
       <Filter>2. Tests\Async</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\FileSystem\DirectoryInfoSuite.cpp">
+      <Filter>2. Tests\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\FileSystem\PathSuite.cpp">
+      <Filter>2. Tests\FileSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

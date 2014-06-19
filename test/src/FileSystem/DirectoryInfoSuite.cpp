@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - File System - Directory Info Test
+// Caramel C++ Library Test - File System - Directory Info Suite
 
 #include "CaramelTestPch.h"
 
@@ -11,11 +11,6 @@ namespace Caramel
 
 SUITE( DirectoryInfoSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Directory Info Test
-//
 
 TEST( DirectoryInfoTest )
 {
@@ -36,8 +31,6 @@ TEST( DirectoryInfoTest )
     CHECK( false == dir.Exists() );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE DirectoryInfoSuite
 

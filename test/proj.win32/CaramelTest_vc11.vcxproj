@@ -125,8 +125,8 @@
     <ClCompile Include="..\src\Error\AnyFailureTest.cpp" />
     <ClCompile Include="..\src\Error\CatchExceptionTest.cpp" />
     <ClCompile Include="..\src\Error\ExceptionPtrTest.cpp" />
-    <ClCompile Include="..\src\FileSystem\DirectoryInfoTest.cpp" />
-    <ClCompile Include="..\src\FileSystem\PathTest.cpp" />
+    <ClCompile Include="..\src\FileSystem\DirectoryInfoSuite.cpp" />
+    <ClCompile Include="..\src\FileSystem\PathSuite.cpp" />
     <ClCompile Include="..\src\Functional\BindTest.cpp" />
     <ClCompile Include="..\src\Io\TextStreamWriterTest.cpp" />
     <ClCompile Include="..\src\Lexical\LexicalBooleanTest.cpp" />
