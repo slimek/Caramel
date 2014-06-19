@@ -51,6 +51,15 @@ void TestBasicMap( MapType& map )
     CHECK( true == map.IsEmpty() );
     CHECK( 0 == map.Size() );
     CHECK( false == map.Contains( 1 ));
+
+    /// Combo Manipulators ///
+
+    temp = "Utsuho";
+    CHECK( false == map.FindOrInsert( 9, temp ));  // Not found, inserted
+
+    temp = "Cirno";
+    CHECK( true == map.FindOrInsert( 9, temp ));   // Found, not inserted
+    CHECK( "Utsuho" == temp );
 }
 
 

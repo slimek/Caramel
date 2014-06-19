@@ -67,6 +67,13 @@ public:
     void Clear();
 
 
+    /// Combo Manipulators ///
+
+    // true  : Find the value and put it on 'v'.
+    // false : Insert 'v'.
+    Bool FindOrInsert( const Key& k, Value& v );
+
+
     /// Locked Iterator Accessor ///
 
     class ConstLockedMap;
@@ -159,6 +166,26 @@ void BasicMap< MapT, ReplicateP >::Clear()
         m_map.clear();
         this->Replicator::ReplicaClear();
     }
+}
+
+
+//
+// Combo Manipulators
+//
+
+template< typename MapT, typename ReplicateP >
+Bool BasicMap< MapT, ReplicateP >::FindOrInsert( const Key& k, Value& v )
+{
+    LockGuard lock( m_mapMutex );
+
+    auto iter = m_map.find( k );
+    if ( m_map.end() == iter )
+    {
+        m_map.insert( std::make_pair( k, v ));
+        return false;
+    }
+    v = iter->second;
+    return true;
 }
 
 
