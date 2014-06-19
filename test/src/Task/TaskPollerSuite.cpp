@@ -69,7 +69,7 @@ TEST( TaskPollerDelayTest )
         CHECK( true  == fastDone );
         CHECK( false == slowDone );
 
-        ThisThread::SleepFor( Ticks( 100 ));
+        ThisThread::SleepFor( Ticks( 120 ));
 
         poller.PollOne();
 
