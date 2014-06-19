@@ -34,6 +34,7 @@ class PathImpl;
 class Path : public StringConvertible< Path >
            , public boost::totally_ordered< Path >
            , public boost::dividable< Path >
+           , public boost::modable< Path, std::string >
 {
     friend class DirectoryInfo;
     friend class FileInfo;
@@ -91,6 +92,9 @@ public:
     //   ReadMe + txt  => ReadMe.txt
     //
     void AppendExtension( const std::string& extension );
+
+    Path& operator%=( const std::string& extension );
+
 
     //
     // Insert a suffix after the stem, that is, before the last '.' character.

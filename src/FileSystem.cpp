@@ -311,6 +311,13 @@ void Path::AppendExtension( const std::string& extension )
 }
 
 
+Path& Path::operator%=( const std::string& extension )
+{
+    this->AppendExtension( extension );
+    return *this;
+}
+
+
 void Path::InsertStemSuffix( const std::string& suffix )
 {
     if ( suffix.empty() ) { return; }

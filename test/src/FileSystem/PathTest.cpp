@@ -130,6 +130,14 @@ TEST( PathAppendExtensionTest )
     Path p22 = p2;
     p22.AppendExtension( ".bak" );
     CHECK( Path( "file.ini.bak" ) == p22 );
+
+    
+    /// Opertors ///
+
+    CHECK( Path( "file.bak" ) == p1 % "bak" );
+    CHECK( Path( "file.bak" ) == p1 % ".bak" );
+    CHECK( Path( "file.ini.bak" ) == p2 % "bak" );
+    CHECK( Path( "file.ini.bak" ) == p2 % ".bak" );
 }
 
 
