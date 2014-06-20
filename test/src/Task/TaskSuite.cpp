@@ -86,6 +86,10 @@ TEST( TaskMemberFunctionTest )
 
     auto t4 = MakeTask( "Widget::Bar", std::bind( &Widget::Bar, pw ));
     auto t5 = MakeTask( "Widget::Bar", [=] { pw->Bar(); });
+
+    auto memFn = std::bind( &Widget::Bar, &w );
+
+    auto t6 = MakeTask( "Widget::Bar", memFn );  // l-value function is Ok.
 }
 
 
