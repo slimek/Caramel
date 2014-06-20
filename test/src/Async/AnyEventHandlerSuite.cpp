@@ -18,15 +18,23 @@ TEST( AnyEventHandlerTrivalTest )
 {
     AnyEventSlot slot;
 
-    AnyEventHandler empty;
+    AnyEventHandler def;
     AnyEventHandler null( nullptr );
+    AnyEventHandler empty = AnyEventHandler::Empty();
     AnyEventHandler func( [] ( const AnyEvent& e ) {} );
     AnyEventHandler signal( slot );
 
-    CHECK( false == empty );
+    CHECK( false == def );
     CHECK( false == null );
+    CHECK( true  == empty );
     CHECK( true  == func );
     CHECK( true  == signal );
+
+    AnyEvent event;
+
+    CHECK_THROW( null( event ), std::bad_function_call );
+    
+    empty( event );  // An empty handler just do nothing.
 }
 
 

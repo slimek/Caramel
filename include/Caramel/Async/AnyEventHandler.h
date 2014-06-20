@@ -47,7 +47,7 @@ class AnyEventHandler
 {
 public:
 
-    // "Not a function"
+    // "Not a handler", a null handler
     AnyEventHandler();
     AnyEventHandler( std::nullptr_t );
 
@@ -62,6 +62,11 @@ public:
         typename boost::disable_if< std::is_same< AnyEventHandler&, HandlerT > >::type* = nullptr
     );
 
+    // Create an empty handler.
+    // - Call a handler with "null results in segment fault, but an empty handler just do nothing.
+    static AnyEventHandler Empty();
+
+    // Invoke the function.
     void operator()( const AnyEvent& event ) const;
 
     // Check if a valid function exists.

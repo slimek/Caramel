@@ -425,6 +425,12 @@ AnyEventHandler::AnyEventHandler( AnyEventHandler&& other )
 }
 
 
+AnyEventHandler AnyEventHandler::Empty()
+{
+    return AnyEventHandler( [] ( const AnyEvent& ) {} );  // Returns an empty handler.
+}
+
+
 void AnyEventHandler::InitFromTarget( AnyEventTarget& target )
 {
     m_handler = target.AsHandler();
