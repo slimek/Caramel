@@ -277,6 +277,24 @@ inline void ThenWithTaskTask< void, AnteResult >::Invoke()
 
 
 //
+// ThenWithVoidTask< Result >
+//
+
+template< typename Result >
+inline ThenWithVoidTask< Result >::ThenWithVoidTask( ThenFunction&& f, const TaskCore& )
+    : m_thenFunction( std::move( f ))
+{
+}
+
+
+template< typename Result >
+inline void ThenWithVoidTask< Result >::Invoke()
+{
+    m_result = m_thenFunction();
+}
+
+
+//
 // ThenWithVoidTask< void >
 //
 

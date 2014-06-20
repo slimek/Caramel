@@ -254,6 +254,21 @@ TEST( TaskThenSuite )
     task2c.Wait();
 
     CHECK( 2 == count2 );
+
+
+    /// Continuatioin Task with return values ///
+
+    auto task3 = MakeTask( "Task3", [] {} );
+    auto task3c = task3.Then( [] { return 42; } );
+    auto task3d = task3c.Then( [] { return std::string( "Cirno" ); } );
+
+    CHECK( "Task3-Then-Then" == task3d.Name() );
+
+    async.Submit( task3 );
+    task3d.Wait();
+
+    CHECK( 42 == task3c.GetResult() );
+    CHECK( "Cirno" == task3d.GetResult() );
 }
 
 

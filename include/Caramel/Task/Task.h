@@ -143,6 +143,13 @@ inline Task< Result >::Task( const std::string& name, TaskFunction f )
 
 
 template< typename Result >
+inline Task< Result >::Task( const std::string& name, std::unique_ptr< Detail::TaskHolder >&& holder )
+    : TaskCore( name, std::move( holder ))
+{
+}
+
+
+template< typename Result >
 inline Task< Result >& Task< Result >::DelayFor( const Ticks& duration )
 {
     this->DoDelayFor( duration );
