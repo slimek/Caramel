@@ -53,6 +53,11 @@ public:
     template< typename ThenFunction >
     typename Detail::ContinuationTraits< ThenFunction, Result >::TaskType
     Then( const std::string& name, ThenFunction f );
+
+    // Then task name = "TaskName" + "-Then"
+    template< typename ThenFunction >
+    typename Detail::ContinuationTraits< ThenFunction, Result >::TaskType
+    Then( ThenFunction f );
 };
 
 
@@ -87,6 +92,11 @@ public:
     template< typename ThenFunction >
     typename Detail::ContinuationTraits< ThenFunction, void >::TaskType
     Then( const std::string& name, ThenFunction f );
+
+    // Then task name = "TaskName" + "-Then"
+    template< typename ThenFunction >
+    typename Detail::ContinuationTraits< ThenFunction, void >::TaskType
+    Then( ThenFunction f );
 };
 
 
@@ -167,6 +177,15 @@ Task< AnteResult >::Then( const std::string& name, ThenFunction f )
 }
 
 
+template< typename AnteResult >
+template< typename ThenFunction >
+inline typename Detail::ContinuationTraits< ThenFunction, AnteResult >::TaskType
+Task< AnteResult >::Then( ThenFunction f )
+{
+    return this->Then( this->Name() + "-Then", std::move( f ));
+}
+
+
 //
 // Task< void >
 //
@@ -204,6 +223,14 @@ Task< void >::Then( const std::string& name, ThenFunction f )
     auto thenTask = TaskType( name, std::move( thenHolder ));
     this->AddContinuation( thenTask );
     return thenTask;
+}
+
+
+template< typename ThenFunction >
+inline typename Detail::ContinuationTraits< ThenFunction, void >::TaskType
+Task< void >::Then( ThenFunction f )
+{
+    return this->Then( this->Name() + "-Then", std::move( f ));
 }
 
 

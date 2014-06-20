@@ -225,6 +225,38 @@ TEST( TaskWaitOrCatchTest )
 }
 
 
+TEST( TaskThenSuite )
+{
+    StdAsync async;
+    Int count1 = 0;
+
+    auto task1 = MakeTask( "Task1", [&] { ++ count1; } );
+    auto task1c = task1.Then( "Task1+Continue", [&] { ++ count1; } );
+
+    CHECK( "Task1+Continue" == task1c.Name() );
+
+    async.Submit( task1 );
+    task1c.Wait();
+
+    CHECK( 2 == count1 );
+    
+
+    /// Continuation Task uses a default name ///
+
+    Int count2 = 0;
+
+    auto task2 = MakeTask( "Task2", [&] { ++ count2; } );
+    auto task2c = task2.Then( [&] { ++ count2; } );
+
+    CHECK( "Task2-Then" == task2c.Name() );
+
+    async.Submit( task2 );
+    task2c.Wait();
+
+    CHECK( 2 == count2 );
+}
+
+
 } // SUITE TaskSuite
 
 } // namespace Caramel
