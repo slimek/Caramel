@@ -42,6 +42,10 @@ namespace Caramel
 //      AnyEventQueue queue;
 //      auto response = MyResponse( queue );
 //
+//   If you want to ignore this event, you may use Empty().
+//
+//      auto response = MyResponse( AnyEventHandler::Empty() );
+// 
 
 class AnyEventHandler
 {
@@ -63,7 +67,7 @@ public:
     );
 
     // Create an empty handler.
-    // - Call a handler with "null results in segment fault, but an empty handler just do nothing.
+    // - Invoke a null handler results in segment fault, but an empty handler just do nothing.
     static AnyEventHandler Empty();
 
     // Invoke the function.
