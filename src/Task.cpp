@@ -599,6 +599,8 @@ void StdAsync::Submit( TaskCore& task )
 
 void StdAsync::AddReadyTask( TaskCore& task )
 {
+    task.BecomeReady( *this );
+
     std::async( std::launch::async,
     [task]
     {
