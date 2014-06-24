@@ -167,6 +167,15 @@ Path FileInfo::GetPath() const
 }
 
 
+void FileInfo::Delete() 
+{
+	const Bool ok = boost::filesystem::remove( *m_path );
+    if ( ! ok )
+    {
+        CARAMEL_THROW( "Delete file \"%s\" failed", m_path->ToString() );
+    }
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Path

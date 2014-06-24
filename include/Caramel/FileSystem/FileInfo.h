@@ -35,6 +35,8 @@ public:
 
     Path GetPath() const;
 
+	void Delete();
+
 protected:
 
     explicit FileInfo( std::shared_ptr< PathImpl > path );
