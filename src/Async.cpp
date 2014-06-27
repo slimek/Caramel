@@ -234,7 +234,7 @@ AnyEvent AnyEventSlotImpl::GetEvent() const
 Bool AnyEventSlotImpl::TryTake( AnyEvent& event )
 {
     LockGuard lock( m_eventMutex );
-    if ( ! m_event.HasValue() ) { return false; }
+    if ( ! m_event.IsValid() ) { return false; }
 
     event = AnyEvent();
     std::swap( event, m_event );

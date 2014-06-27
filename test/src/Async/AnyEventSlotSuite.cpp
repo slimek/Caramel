@@ -74,6 +74,20 @@ TEST( AnyEventSlotTest )
     CHECK( false   == slot );
     CHECK( 7       == event.Id() );
     CHECK( "Alice" == event.Value< std::string >() );
+
+
+    // Events without value
+
+    disp.DispatchEvent( 42 );
+
+    CHECK( true   == slot );
+    CHECK( 42     == slot.Id() );
+    CHECK_THROW( slot.Value< Int >(), Caramel::Exception );
+
+    auto event2 = slot.Take();
+
+    CHECK( false == slot );
+    CHECK( 42    == event2.Id() );
 }
 
 
