@@ -2,8 +2,10 @@
 
 #include "CaramelPch.h"
 
+#include "Task/PooledThread.h"
 #include "Task/TaskImpl.h"
 #include "Task/TaskPollerImpl.h"
+#include "Task/ThreadPoolImpl.h"
 #include "Task/WorkerThreadImpl.h"
 #include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Chrono/TimedBool.h>
@@ -23,6 +25,8 @@ namespace Caramel
 //   Task
 //   TaskPoller
 //   WorkerThread
+//   PooledThread
+//   ThreadPool
 //   StdAsync
 //
 
@@ -574,6 +578,48 @@ void WorkerThreadImpl::Execute()
     {
         CARAMEL_TRACE_WARN( "WorkerThread[%s] discards some tasks" );
     }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Thread Pool
+//
+
+ThreadPool::ThreadPool( const std::string& name, Uint numThreads )
+    : m_impl( new ThreadPoolImpl( name, numThreads, this ))
+{
+}
+
+
+ThreadPool::~ThreadPool()
+{
+}
+
+
+void ThreadPool::Submit( TaskCore& task )
+{
+}
+
+
+void ThreadPool::AddReadyTask( TaskCore& task )
+{
+}
+
+
+void ThreadPool::Shutdown()
+{
+}
+
+
+//
+// Implementation
+//
+
+ThreadPoolImpl::ThreadPoolImpl( const std::string& name, Uint numThreads, ThreadPool* host )
+    : m_name( name )
+    , m_host( host )
+{
 }
 
 

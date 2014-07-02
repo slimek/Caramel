@@ -737,6 +737,15 @@
     <ClInclude Include="..\include\Caramel\Async\AnyEventHandler.h">
       <Filter>1. Public Packages\Async</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Task\ThreadPool.h">
+      <Filter>1. Public Packages\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Task\ThreadPoolImpl.h">
+      <Filter>2. Sources\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Task\PooledThread.h">
+      <Filter>2. Sources\Task</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

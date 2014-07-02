@@ -140,6 +140,7 @@
     <ClInclude Include="..\include\Caramel\Task\TaskExecutor.h" />
     <ClInclude Include="..\include\Caramel\Task\TaskFwd.h" />
     <ClInclude Include="..\include\Caramel\Task\TaskPoller.h" />
+    <ClInclude Include="..\include\Caramel\Task\ThreadPool.h" />
     <ClInclude Include="..\include\Caramel\Task\WorkerThread.h" />
     <ClInclude Include="..\include\Caramel\Thread\LoopThreadGroup.h" />
     <ClInclude Include="..\include\Caramel\Thread\MutexLocks.h" />
@@ -193,8 +194,10 @@
     <ClInclude Include="..\src\Statechart\Transition.h" />
     <ClInclude Include="..\src\String\FormatterImpl.h" />
     <ClInclude Include="..\src\String\SprintfManager.h" />
+    <ClInclude Include="..\src\Task\PooledThread.h" />
     <ClInclude Include="..\src\Task\TaskImpl.h" />
     <ClInclude Include="..\src\Task\TaskPollerImpl.h" />
+    <ClInclude Include="..\src\Task\ThreadPoolImpl.h" />
     <ClInclude Include="..\src\Task\WorkerThreadImpl.h" />
     <ClInclude Include="..\src\Thread\LoopThreadGroupImpl.h" />
     <ClInclude Include="..\src\Thread\ThreadIdImpl.h" />
