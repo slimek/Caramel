@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Concurrent - Set Test
+// Caramel C++ Library Test - Concurrent - Set Suite
 
 #include "CaramelTestPch.h"
 
@@ -17,11 +17,6 @@ namespace Caramel
 
 SUITE( ConcurrentSetSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Basic Set Test
-//
 
 template< typename SetType >
 void TestBasicIntSet( SetType& set )
@@ -189,9 +184,6 @@ TEST( ConcurrentSetSnapshotStressTest )
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-
 } // SUITE ConcurrentSetSuite
 
 } // namespace Caramel
-

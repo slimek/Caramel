@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Concurrent - Blocking Queue Test
+// Caramel C++ Library Test - Concurrent - Blocking Queue Suite
 
 #include "CaramelTestPch.h"
 
@@ -14,11 +14,6 @@ namespace Caramel
 
 SUITE( ConcurrentBlockingQueueSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Concurrent Blocking Queue Test
-//
 
 TEST( BlockingQueueBasicTest )
 {
@@ -109,8 +104,6 @@ TEST( BlockingQueueBasicTest )
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE ConcurrentBlockingQueueSuite
 

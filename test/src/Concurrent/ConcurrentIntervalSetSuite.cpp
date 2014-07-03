@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Concurrent - Interval Set Test
+// Caramel C++ Library Test - Concurrent - Interval Set Suite
 
 #include "CaramelTestPch.h"
 
@@ -11,11 +11,6 @@ namespace Caramel
 
 SUITE( IntervalSetSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Interval Set
-//
 
 TEST( IntervalSetTest )
 {
@@ -240,8 +235,6 @@ TEST( IntervalSetSnapshotTest )
     CHECK( boost::icl::interval_bounds::right_open() == shot3[2].bounds() );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE IntervalSetSuite
 

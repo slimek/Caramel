@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Concurrent - Map Test
+// Caramel C++ Library Test - Concurrent - Map Suite
 
 #include "CaramelTestPch.h"
 
@@ -14,11 +14,6 @@ namespace Caramel
 
 SUITE( ConcurrentMapSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Basic Map Test
-//
 
 template< typename MapType >
 void TestBasicMap( MapType& map )
@@ -168,8 +163,6 @@ TEST( ConcurrentHashMapWithSnapshotTest )
     TestBasicMapWithSnapshot( imap );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE ConcurrentMapSuite
 

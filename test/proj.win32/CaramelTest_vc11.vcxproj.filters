@@ -145,29 +145,11 @@
     <ClCompile Include="..\src\String\FormatTest.cpp">
       <Filter>2. Tests\String</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Concurrent\ConcurrentIntervalSetTest.cpp">
-      <Filter>2. Tests\Concurrent</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Concurrent\ConcurrentMapTest.cpp">
-      <Filter>2. Tests\Concurrent</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Concurrent\ConcurrentPriorityQueueTest.cpp">
-      <Filter>2. Tests\Concurrent</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Concurrent\ConcurrentSetTest.cpp">
-      <Filter>2. Tests\Concurrent</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Value\SharedArrayTest.cpp">
       <Filter>2. Tests\Value</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Concurrent\ConcurrentBlockingQueueTest.cpp">
-      <Filter>2. Tests\Concurrent</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\DateTime\TimeSpanTest.cpp">
       <Filter>2. Tests\DateTime</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Concurrent\ConcurrentQueueTest.cpp">
-      <Filter>2. Tests\Concurrent</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Io\TextStreamWriterTest.cpp">
       <Filter>2. Tests\Io</Filter>
@@ -276,6 +258,24 @@
     </ClCompile>
     <ClCompile Include="..\src\FileSystem\PathSuite.cpp">
       <Filter>2. Tests\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Concurrent\ConcurrentBlockingQueueSuite.cpp">
+      <Filter>2. Tests\Concurrent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Concurrent\ConcurrentIntervalSetSuite.cpp">
+      <Filter>2. Tests\Concurrent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Concurrent\ConcurrentMapSuite.cpp">
+      <Filter>2. Tests\Concurrent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Concurrent\ConcurrentPriorityQueueSuite.cpp">
+      <Filter>2. Tests\Concurrent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Concurrent\ConcurrentQueueSuite.cpp">
+      <Filter>2. Tests\Concurrent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Concurrent\ConcurrentSetSuite.cpp">
+      <Filter>2. Tests\Concurrent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

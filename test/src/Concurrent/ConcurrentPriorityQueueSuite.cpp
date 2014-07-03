@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Concurrent - Priority Queue Test
+// Caramel C++ Library Test - Concurrent - Priority Queue Suite
 
 #include "CaramelTestPch.h"
 
@@ -11,11 +11,6 @@ namespace Caramel
 
 SUITE( ConcurrentPriorityQueueSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Priority Queue Test
-//
 
 TEST( PriorityQueueTest )
 {
@@ -100,8 +95,6 @@ TEST( PriorityQueueTest )
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE ConcurrentPriorityQueueSuite
 

@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Concurrent - Queue Test
+// Caramel C++ Library Test - Concurrent - Queue Suite
 
 #include "CaramelTestPch.h"
 
@@ -11,11 +11,6 @@ namespace Caramel
 
 SUITE( ConcurrentQueueSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Concurrent Queue Test
-//
 
 TEST( ConcurrentQueueTrivialTest )
 {
@@ -96,8 +91,6 @@ TEST( ConcurrentQueueSnapshotTest )
     CHECK( true == sp3.IsEmpty() );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE( ConcurrentQueueSuite )
 
