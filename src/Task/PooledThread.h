@@ -6,6 +6,9 @@
 
 #include <Caramel/Setup/CaramelDefs.h>
 #include "Task/TaskImpl.h"
+#include <Caramel/Thread/Thread.h>
+#include <condition_variable>
+#include <mutex>
 
 
 namespace Caramel
@@ -24,12 +27,30 @@ public:
 
     PooledThread( ThreadPoolImpl* threadPool, Uint index );
 
-    void Wake( const TaskCore& task );
-    void Stop();
+
+    /// Operations ///
+
+    void Wake( TaskCore& task );
+    void StopAndJoin();
+
 
 private:
 
-    
+    void Execute();
+
+
+    /// Data Members ///
+
+    ThreadPoolImpl* m_threadPool;
+    std::string     m_name;
+
+    std::shared_ptr< Thread > m_thread;
+    Bool m_stopped;
+
+    TaskCore m_runningTask;
+
+    mutable std::mutex m_mutex;
+    std::condition_variable m_waken;
 };
 
 

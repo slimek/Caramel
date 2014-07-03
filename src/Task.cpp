@@ -12,6 +12,7 @@
 #include <Caramel/Error/CatchException.h>
 #include <Caramel/String/Format.h>
 #include <Caramel/Task/StdAsync.h>
+#include <Caramel/Thread/ThisThread.h>
 #include <algorithm>
 #include <future>
 
@@ -583,6 +584,69 @@ void WorkerThreadImpl::Execute()
 
 ///////////////////////////////////////////////////////////////////////////////
 //
+// Pooled Thread
+//
+
+PooledThread::PooledThread( ThreadPoolImpl* threadPool, Uint index )
+    : m_threadPool( threadPool )
+    , m_stopped( false )
+{
+    m_name = Format( "{0}[{1}]", threadPool->GetName(), index );
+
+    m_thread.reset( new Thread( m_name, [=] { this->Execute(); } ));
+}
+
+
+void PooledThread::Wake( TaskCore& task )
+{
+    LockGuard lock( m_mutex );
+
+    CARAMEL_ASSERT( ! m_runningTask.IsValid() );
+
+    m_runningTask = task;
+    m_waken.notify_one();
+}
+
+
+void PooledThread::StopAndJoin()
+{
+    CARAMEL_ASSERT( ! m_stopped );
+
+    m_stopped = true;
+    m_waken.notify_one();
+    m_thread->Join();
+}
+
+
+void PooledThread::Execute()
+{
+    for ( ;; )
+    {
+        if ( m_stopped ) { break; }
+
+        UniqueLock ulock( m_mutex );
+
+        if ( m_runningTask.IsValid() )
+        {
+            TaskCore task;
+            std::swap( task, m_runningTask );
+
+            task.Run();
+
+            ulock.unlock();
+
+            m_threadPool->AddReadyThread( this );
+        }
+        else
+        {
+            m_waken.wait( ulock );
+        }
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
 // Thread Pool
 //
 
@@ -599,16 +663,27 @@ ThreadPool::~ThreadPool()
 
 void ThreadPool::Submit( TaskCore& task )
 {
+    if ( task.HasDelay() )
+    {
+        CARAMEL_THROW( "ThreadPool doesn't support delay yet, task: %s", task.Name() );
+    }
+    else
+    {
+        m_impl->AddReadyTask( task );
+    }
 }
 
 
 void ThreadPool::AddReadyTask( TaskCore& task )
 {
+    task.BecomeReady( *this );
+    m_impl->AddReadyTask( task );
 }
 
 
 void ThreadPool::Shutdown()
 {
+    m_impl->Shutdown();
 }
 
 
@@ -619,7 +694,105 @@ void ThreadPool::Shutdown()
 ThreadPoolImpl::ThreadPoolImpl( const std::string& name, Uint numThreads, ThreadPool* host )
     : m_name( name )
     , m_host( host )
+    , m_shutdown( false )
 {
+    m_threads.reserve( numThreads );
+
+    for ( Uint i = 0; i < numThreads; ++ i )
+    {
+        m_threads.push_back( new PooledThread( this, i ));
+        m_readyThreads.Push( &m_threads[i] );
+    }
+}
+
+
+ThreadPoolImpl::~ThreadPoolImpl()
+{
+    if ( ! m_shutdown )
+    {
+        CARAMEL_TRACE_WARN_HERE( "Destroy the thread pool %s before shutdown it", m_name );
+
+        // REMARKS: Do not rely on the destructor to shutdown a thread pool.
+        //          Here is only a remedy.
+
+        this->Shutdown();
+    }
+}
+
+
+void ThreadPoolImpl::Shutdown()
+{
+    CARAMEL_ASSERT( ! m_shutdown );
+
+    m_shutdown = true;
+
+    while ( m_readyThreads.Size() != m_threads.size() || ! m_readyTasks.IsEmpty() )
+    {
+        ThisThread::SleepFor( Ticks( 100 ));
+    }
+
+    for ( Uint i = 0; i < m_threads.size(); ++ i )
+    {
+        m_threads[i].StopAndJoin();
+    }
+}
+
+
+void ThreadPoolImpl::AddReadyTask( TaskCore& task )
+{
+    if ( m_readyTasks.IsEmpty() )
+    {
+        PooledThread* thread = nullptr;
+        if ( m_readyThreads.TryPop( thread ))
+        {
+            thread->Wake( task );
+            return;
+        }
+    }
+
+    m_readyTasks.Push( task );
+
+    if ( ! m_readyThreads.IsEmpty() )
+    {
+        this->TryDispatchOneTask();
+    }
+}
+
+
+void ThreadPoolImpl::AddReadyThread( PooledThread* thread )
+{
+    TaskCore task;
+    if ( m_readyTasks.TryPop( task ))
+    {
+        thread->Wake( task );
+        return;
+    }
+
+    m_readyThreads.Push( thread );
+
+    if ( ! m_readyTasks.IsEmpty() )
+    {
+        this->TryDispatchOneTask();
+    }
+}
+
+
+void ThreadPoolImpl::TryDispatchOneTask()
+{
+    PooledThread* thread = nullptr;
+    if ( m_readyThreads.TryPop( thread ))
+    {
+        TaskCore task;
+        if ( m_readyTasks.TryPop( task ))
+        {
+            thread->Wake( task );
+            return;
+        }
+        else
+        {
+            m_readyThreads.Push( thread );
+        }
+    }
 }
 
 
