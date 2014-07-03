@@ -63,6 +63,8 @@ public:
     //   You don't have the permission.
     void Delete();
 
+	// Delete the directory
+    boost::uintmax_t DeleteAll();
 
 private:
 

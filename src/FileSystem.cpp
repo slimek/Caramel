@@ -134,6 +134,10 @@ void DirectoryInfo::Delete()
     }
 }
 
+boost::uintmax_t DirectoryInfo::DeleteAll()
+{
+	return boost::filesystem::remove_all( *m_path );
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //
