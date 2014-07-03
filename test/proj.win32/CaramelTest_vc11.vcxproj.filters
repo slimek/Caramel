@@ -277,6 +277,9 @@
     <ClCompile Include="..\src\Concurrent\ConcurrentSetSuite.cpp">
       <Filter>2. Tests\Concurrent</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Concurrent\ConcurrentStackSuite.cpp">
+      <Filter>2. Tests\Concurrent</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">

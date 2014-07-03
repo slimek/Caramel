@@ -113,6 +113,7 @@
     <ClCompile Include="..\src\Concurrent\ConcurrentPriorityQueueSuite.cpp" />
     <ClCompile Include="..\src\Concurrent\ConcurrentQueueSuite.cpp" />
     <ClCompile Include="..\src\Concurrent\ConcurrentSetSuite.cpp" />
+    <ClCompile Include="..\src\Concurrent\ConcurrentStackSuite.cpp" />
     <ClCompile Include="..\src\Data\Base64Test.cpp" />
     <ClCompile Include="..\src\Data\LookupTableTest.cpp" />
     <ClCompile Include="..\src\DateTime\DateTest.cpp" />

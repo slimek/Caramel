@@ -55,6 +55,7 @@
     <ClInclude Include="..\include\Caramel\Concurrent\ReplicatePolicies.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\Set.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\BlockingQueue.h" />
+    <ClInclude Include="..\include\Caramel\Concurrent\Stack.h" />
     <ClInclude Include="..\include\Caramel\Data\Base64.h" />
     <ClInclude Include="..\include\Caramel\Data\LookupTable.h" />
     <ClInclude Include="..\include\Caramel\Data\PlainTypes.h" />
