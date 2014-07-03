@@ -57,11 +57,18 @@ public:
     // Throws if the directory cannot be created.
     void Create();
 
-    // Throws if the directory cannot be deleted. This includes:
-    // - It is not found.
-    //   It is not empty.
-    //   You don't have the permission.
+    // Delete this directory
+    // - Throws if the directory cannot be deleted. This includes:
+    //     You don't have the permission.  -> boost::filesystem::filesystem_error
+    //     It is not empty.                -> boost::filesystem::filesystem_error
+    //     It is not found.                -> Caramel::Exception
     void Delete();
+
+	// Delete this directory, recursively
+    // - Throws if the directory cannot be deleted. This includes:
+    //     You don't have the permission.  -> boost::filesystem::filesystem_error
+    //     It is not found.                -> Caramel::Exception
+    void DeleteAll();
 
 
 private:

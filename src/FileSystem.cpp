@@ -130,10 +130,18 @@ void DirectoryInfo::Delete()
     const Bool ok = boost::filesystem::remove( *m_path );
     if ( ! ok )
     {
-        CARAMEL_THROW( "Delete directory \"%s\" failed", m_path->ToString() );
+        CARAMEL_THROW( "Delete directory \"%s\" but not found", m_path->ToString() );
     }
 }
 
+void DirectoryInfo::DeleteAll()
+{
+    const auto removes = boost::filesystem::remove_all( *m_path );
+    if ( removes == 0 )
+    {
+        CARAMEL_THROW( "Delete directory \"%s\" but not found", m_path->ToString() );
+    }
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //
