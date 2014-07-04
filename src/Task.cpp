@@ -676,7 +676,6 @@ void ThreadPool::Submit( TaskCore& task )
 
 void ThreadPool::AddReadyTask( TaskCore& task )
 {
-    task.BecomeReady( *this );
     m_impl->AddReadyTask( task );
 }
 
@@ -740,6 +739,8 @@ void ThreadPoolImpl::Shutdown()
 
 void ThreadPoolImpl::AddReadyTask( TaskCore& task )
 {
+    task.BecomeReady( *m_host );
+
     if ( m_readyTasks.IsEmpty() )
     {
         PooledThread* thread = nullptr;
