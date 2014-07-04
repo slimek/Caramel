@@ -271,9 +271,24 @@ void TaskImpl::Run()
         this->NotifyDone();
     }
 
-    for ( TaskPtr task : continuations )
+    if ( ! continuations.IsEmpty() )
     {
-        m_executor->Submit( TaskCore( task ));
+        TaskCore firstContinue;
+
+        for ( TaskPtr task : continuations )
+        {
+            if ( ! firstContinue.IsValid() )
+            {
+                firstContinue = TaskCore( task );
+            }
+            else
+            {
+                m_executor->Submit( TaskCore( task ));
+            }
+        }
+
+        // The first continuation should run immediately.
+        firstContinue.Run();
     }
 }
 

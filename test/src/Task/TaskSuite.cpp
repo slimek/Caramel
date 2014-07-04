@@ -2,10 +2,14 @@
 
 #include "CaramelTestPch.h"
 
+#include "Utils/StdVectorUtils.h"
 #include <Caramel/Error/CatchException.h>
 #include <Caramel/Task/StdAsync.h>
 #include <Caramel/Task/Task.h>
+#include <Caramel/Task/WorkerThread.h>
+#include <Caramel/Thread/ThisThread.h>
 #include <UnitTest++/UnitTest++.h>
+#include <vector>
 #include <functional>
 
 
@@ -269,6 +273,39 @@ TEST( TaskThenSuite )
 
     CHECK( 42 == task3c.GetResult() );
     CHECK( "Cirno" == task3d.GetResult() );
+}
+
+
+TEST( TaskContinueImmediatelyTest )
+{
+    /// The First Continuation should be executed immediately ///
+
+    // Expected execute order:
+    //      task  (Submit)
+    //   >> taskc (Continue)
+    //   >> taske (Submit)
+    //
+    //   Because task delayed for 100 ms, submit of taske is faster than continue of task4c.
+    //   But task4c should run before task4e.
+
+    WorkerThread worker( "Immediately" );
+
+    std::vector< Int > seq;
+
+    auto task = MakeTask( "Task", [&] { seq.push_back( 1 ); ThisThread::SleepFor( Ticks( 100 )); } );
+    auto taskc = task.Then( [&] { seq.push_back( 2 ); } );
+    auto taske = MakeTask( "Task4d", [&] { seq.push_back( 3 ); } );
+
+    worker.Submit( task );
+    worker.Submit( taske );
+
+    taskc.Wait();
+    taske.Wait();
+
+    CHECK( 3 == seq.size() );
+    CHECK( IsSorted( seq ));
+
+    worker.Stop();
 }
 
 
