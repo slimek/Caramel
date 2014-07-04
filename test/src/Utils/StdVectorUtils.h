@@ -85,6 +85,25 @@ inline std::vector< Int > MakeRandomVector( Uint size, Int minValue, Int maxValu
 
 
 ///////////////////////////////////////////////////////////////////////////////
+//
+// Test the content of a vector is sorted.
+//
+
+template< typename T >
+inline Bool IsSorted( const std::vector< T >& vec )
+{
+    if ( vec.size() < 2 ) { return true; }
+
+    for ( Uint i = 0; i < vec.size() - 1; ++ i )
+    {
+        if ( vec[i] > vec[i+1] ) { return false; }
+    }
+
+    return true;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
 
 } // namespace Caramel
 
