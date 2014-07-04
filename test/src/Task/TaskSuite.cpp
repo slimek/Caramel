@@ -9,8 +9,9 @@
 #include <Caramel/Task/WorkerThread.h>
 #include <Caramel/Thread/ThisThread.h>
 #include <UnitTest++/UnitTest++.h>
-#include <vector>
+#include <atomic>
 #include <functional>
+#include <vector>
 
 
 namespace Caramel
@@ -273,6 +274,28 @@ TEST( TaskThenSuite )
 
     CHECK( 42 == task3c.GetResult() );
     CHECK( "Cirno" == task3d.GetResult() );
+
+
+    /// Continue a task after it is faulted
+
+    auto task4 = MakeTask( "Task4", [] { CARAMEL_THROW( "Bad task" ); } );
+    async.Submit( task4 );
+
+    task4.Catch();
+
+    CHECK( true == task4.IsFaulted() );
+
+    Bool faulted = false;
+
+    auto task4c = task4.Then( "Task4-Faulted",
+    [&] ( const Task< void >& task )
+    {
+        faulted = task.IsFaulted();
+    });
+
+    task4c.Wait();
+
+    CHECK( true == faulted );
 }
 
 

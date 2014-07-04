@@ -142,6 +142,7 @@
     <ClInclude Include="..\include\Caramel\Task\TaskFwd.h" />
     <ClInclude Include="..\include\Caramel\Task\TaskPoller.h" />
     <ClInclude Include="..\include\Caramel\Task\ThreadPool.h" />
+    <ClInclude Include="..\include\Caramel\Task\WhenAll.h" />
     <ClInclude Include="..\include\Caramel\Task\WorkerThread.h" />
     <ClInclude Include="..\include\Caramel\Thread\LoopThreadGroup.h" />
     <ClInclude Include="..\include\Caramel\Thread\MutexLocks.h" />

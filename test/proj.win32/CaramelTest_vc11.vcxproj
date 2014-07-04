@@ -151,6 +151,7 @@
     <ClCompile Include="..\src\Task\TaskPollerSuite.cpp" />
     <ClCompile Include="..\src\Task\TaskSuite.cpp" />
     <ClCompile Include="..\src\Task\ThreadPoolSuite.cpp" />
+    <ClCompile Include="..\src\Task\WhenAllSuite.cpp" />
     <ClCompile Include="..\src\Task\WorkerThreadSuite.cpp" />
     <ClCompile Include="..\src\Thread\LoopThreadGroupTest.cpp" />
     <ClCompile Include="..\src\Thread\SpinMutexTest.cpp" />

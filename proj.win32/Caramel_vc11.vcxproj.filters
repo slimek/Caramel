@@ -749,6 +749,9 @@
     <ClInclude Include="..\include\Caramel\Concurrent\Stack.h">
       <Filter>1. Public Packages\Concurrent</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Task\WhenAll.h">
+      <Filter>1. Public Packages\Task</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">
