@@ -100,9 +100,6 @@
     <ClCompile Include="..\src\Thread\SpinMutexTest.cpp">
       <Filter>2. Tests\Thread</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\String\SprintfTest.cpp">
-      <Filter>2. Tests\String</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\CaramelTestPch.cpp">
       <Filter>4. Precompiled Header</Filter>
     </ClCompile>
@@ -115,14 +112,8 @@
     <ClCompile Include="..\src\Lexical\LexicalFloatingTest.cpp">
       <Filter>2. Tests\Lexical</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\String\StringAlgorithmTest.cpp">
-      <Filter>2. Tests\String</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Value\NamedValuesTest.cpp">
       <Filter>2. Tests\Value</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\String\StringToStringTest.cpp">
-      <Filter>2. Tests\String</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Value\AnyTest.cpp">
       <Filter>2. Tests\Value</Filter>
@@ -141,9 +132,6 @@
     </ClCompile>
     <ClCompile Include="..\src\DateTime\DateTimeBoolTest.cpp">
       <Filter>2. Tests\DateTime</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\String\FormatTest.cpp">
-      <Filter>2. Tests\String</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Value\SharedArrayTest.cpp">
       <Filter>2. Tests\Value</Filter>
@@ -174,9 +162,6 @@
     </ClCompile>
     <ClCompile Include="..\src\Lexical\LexicalBooleanTest.cpp">
       <Filter>2. Tests\Lexical</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\String\SplitTest.cpp">
-      <Filter>2. Tests\String</Filter>
     </ClCompile>
     <ClCompile Include="..\src\DateTime\TimeOfDayTest.cpp">
       <Filter>2. Tests\DateTime</Filter>
@@ -285,6 +270,21 @@
     </ClCompile>
     <ClCompile Include="..\src\Task\WhenAllSuite.cpp">
       <Filter>2. Tests\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\String\FormatSuite.cpp">
+      <Filter>2. Tests\String</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\String\SplitSuite.cpp">
+      <Filter>2. Tests\String</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\String\SprintfSuite.cpp">
+      <Filter>2. Tests\String</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\String\StringAlgorithmSuite.cpp">
+      <Filter>2. Tests\String</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\String\StringToStringSuite.cpp">
+      <Filter>2. Tests\String</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

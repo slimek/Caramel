@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - String - Format Test
+// Caramel C++ Library Test - String - Format Suite
 
 #include "CaramelTestPch.h"
 
@@ -11,11 +11,6 @@ namespace Caramel
 
 SUITE( FormatSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Format Test
-//
 
 TEST( FormatTrivialTest )
 {
@@ -70,8 +65,6 @@ TEST( FormatFailureTest )
     CHECK( "Score {}" == Format( "Score {}", 42 ));
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE FormatSuite
 

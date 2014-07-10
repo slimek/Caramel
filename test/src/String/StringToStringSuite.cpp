@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - String - To-String Test
+// Caramel C++ Library Test - String - To-String Suite
 
 #include "CaramelTestPch.h"
 
@@ -12,11 +12,6 @@ namespace Caramel
 
 SUITE( StringToStringSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// To-String Test
-//
 
 TEST( StringToStringTest )
 {
@@ -130,8 +125,6 @@ TEST( StringToStringTTest )
     CHECK( "Double" == ToStringT< Double >() );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE StringToStringSuite
 

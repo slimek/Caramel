@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - String - Split Test
+// Caramel C++ Library Test - String - Split Suite
 
 #include "CaramelTestPch.h"
 
@@ -11,11 +11,6 @@ namespace Caramel
 
 SUITE( SplitSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Split Test
-//
 
 TEST( SplitterFirstTest )
 {
@@ -47,8 +42,6 @@ TEST( SplitterFirstTest )
     CHECK( ""       == split4.after );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE SplitSuite
 

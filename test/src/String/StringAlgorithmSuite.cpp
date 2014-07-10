@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - String - Algorithm Test
+// Caramel C++ Library Test - String - Algorithm Suite
 
 #include "CaramelTestPch.h"
 
@@ -12,11 +12,6 @@ namespace Caramel
 
 SUITE( StringAlgorithmSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// String Algorithm Test
-//
 
 TEST( StringPredicateTest )
 {
@@ -99,8 +94,6 @@ TEST( StringJoinTest )
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-
-} // SUITE StringAlgorithm
+} // SUITE StringAlgorithmSuite
 
 } // namespace Caramel

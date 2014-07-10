@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - String - Sprintf Test
+// Caramel C++ Library Test - String - Sprintf Suite
 
 #include "CaramelTestPch.h"
 
@@ -12,11 +12,6 @@ namespace Caramel
 
 SUITE( SprintfSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Sprintf Test
-//
 
 TEST( SprintfTest )
 {
@@ -47,6 +42,7 @@ TEST( ConcurrentSprintfTest )
     t2.Join();
     t3.Join();
 }
+
 
 } // SUITE SprintfSuite
 

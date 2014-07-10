@@ -141,11 +141,11 @@
     <ClCompile Include="..\src\Random\WeightedRandomMapTest.cpp" />
     <ClCompile Include="..\src\RunTest.cpp" />
     <ClCompile Include="..\src\Statechart\StateMachineSuite.cpp" />
-    <ClCompile Include="..\src\String\FormatTest.cpp" />
-    <ClCompile Include="..\src\String\SplitTest.cpp" />
-    <ClCompile Include="..\src\String\SprintfTest.cpp" />
-    <ClCompile Include="..\src\String\StringAlgorithmTest.cpp" />
-    <ClCompile Include="..\src\String\StringToStringTest.cpp" />
+    <ClCompile Include="..\src\String\FormatSuite.cpp" />
+    <ClCompile Include="..\src\String\SplitSuite.cpp" />
+    <ClCompile Include="..\src\String\SprintfSuite.cpp" />
+    <ClCompile Include="..\src\String\StringAlgorithmSuite.cpp" />
+    <ClCompile Include="..\src\String\StringToStringSuite.cpp" />
     <ClCompile Include="..\src\Task\ContinuationTraitsSuite.cpp" />
     <ClCompile Include="..\src\Task\StdAsyncSuite.cpp" />
     <ClCompile Include="..\src\Task\TaskPollerSuite.cpp" />
