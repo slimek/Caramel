@@ -286,6 +286,9 @@
     <ClCompile Include="..\src\String\StringToStringSuite.cpp">
       <Filter>2. Tests\String</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\String\Utf8StringSuite.cpp">
+      <Filter>2. Tests\String</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">

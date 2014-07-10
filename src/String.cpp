@@ -234,7 +234,7 @@ inline static Bool Utf8String_IsTrail( Byte b )
 }
 
 
-Bool Utf8String::TryParse( const std::string& u8Text )
+Bool Utf8String::Validate( const std::string& u8Text )
 {
     Usize pos = 0;
 
@@ -243,20 +243,34 @@ Bool Utf8String::TryParse( const std::string& u8Text )
         Int num = Utf8String_CalculateNumTrails( static_cast< Byte >( u8Text[ pos ++ ] ));
         
         // not valid leading character
-        if ( 0 > num ) { return false; }
+        if ( num < 0 ) { return false; }
         
         // not enough length
         if ( u8Text.length() < pos + num ) { return false; }
 
-        while ( 0 < num -- )
+        while (( num -- ) > 0 )
         {
             // not trailing character
             if ( ! Utf8String_IsTrail( static_cast< Byte >( u8Text[ pos ++ ] ))) { return false; }
         }
     }
 
-    m_s.assign( u8Text );
     return true;
+}
+
+
+//
+// Conversions
+//
+
+Bool Utf8String::TryParse( const std::string& u8Text )
+{
+    const Bool u8Encoded = Validate( u8Text );
+    if ( u8Encoded )
+    {
+        m_s.assign( u8Text );
+    }
+    return u8Encoded;
 }
 
 

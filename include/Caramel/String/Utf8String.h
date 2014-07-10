@@ -55,19 +55,16 @@ public:
 
     /// Conversions ///
 
-    //
-    // Tests if the input string is UTF-8 encoded    
-    //
+    // Returns false if the input text is not UTF-8 encoded.
     Bool TryParse( const std::string& u8Text );
 
-    //
-    // Converts from other encoding
-    //
+    // Converted a text from another encoding to UTF-8
+    // - Currently only supported on Win32 platform.
+    //   You may cast Windows code page to TextEncoding.
     Bool TryParse( const std::string& text, TextEncoding encoding );
 
-    //
     // Converts from binary data, which should be a UTF-8 text
-    //
+    // - TODO: Not implemented yet.
     Bool TryParse( const Byte* data, Uint length );
 
 
@@ -78,6 +75,12 @@ public:
 
     // NOTE: No implicit conversion to std::string,
     //       which may cause overloading ambiguity.
+
+
+    /// Validation ///
+
+    // Check if a string is UTF-8 encoded.
+    static Bool Validate( const std::string& u8Text );
 
 
 private:
