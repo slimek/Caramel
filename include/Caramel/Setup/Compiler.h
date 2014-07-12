@@ -25,13 +25,13 @@
 #define CARAMEL_CURRENT_FUNCTION __FUNCTION__
 #define CARAMEL_DEPRECATED __declspec( deprecated )
 
-#if ( 1800 <= _MSC_VER )
+#if ( _MSC_VER >= 1900 )
 
 #define CARAMEL_NOEXCEPT noexcept
 
-#elif ( 1700 <= _MSC_VER )
+#else
 
-// Visual C++ 2012 limitations:
+// Visual C++ 2012/2013 limitations:
 // - doesn't support noexcept
 
 #define CARAMEL_NOEXCEPT 

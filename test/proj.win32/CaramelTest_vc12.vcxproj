@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{883BF0F7-5B3B-4D32-BE1E-7FFEBD9A3838}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>CaramelTest</RootNamespace>
+    <ProjectName>CaramelTest</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>bin\$(Platform).$(Configuration)\</OutDir>
+    <IntDir>obj\$(Platform).$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>bin\$(Platform).$(Configuration)\</OutDir>
+    <IntDir>obj\$(Platform).$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_SCL_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\src;..\..\include;..\..\..\CandyJar\include</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>CaramelTestPch.h</PrecompiledHeaderFile>
+      <MinimalRebuild>false</MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\..\..\CandyJar\lib\$(Platform).$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>UnitTest++.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_SCL_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\src;..\..\include;..\..\..\CandyJar\include</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>CaramelTestPch.h</PrecompiledHeaderFile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>..\..\..\CandyJar\lib\$(Platform).$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>UnitTest++.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\Arithmetic\FlagsSuite.cpp" />
+    <ClCompile Include="..\src\Arithmetic\PowerOfTwoSuite.cpp" />
+    <ClCompile Include="..\src\Async\AnyEventDispatcherSuite.cpp" />
+    <ClCompile Include="..\src\Async\AnyEventHandlerSuite.cpp" />
+    <ClCompile Include="..\src\Async\AnyEventQueueSuite.cpp" />
+    <ClCompile Include="..\src\Async\AnyEventSlotSuite.cpp" />
+    <ClCompile Include="..\src\Async\AnyEventSuite.cpp" />
+    <ClCompile Include="..\src\Async\FlowStateSuite.cpp" />
+    <ClCompile Include="..\src\Async\ValueChangeSuite.cpp" />
+    <ClCompile Include="..\src\CaramelTestPch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\Chrono\ClockProxySuite.cpp" />
+    <ClCompile Include="..\src\Chrono\SecondClockSuite.cpp" />
+    <ClCompile Include="..\src\Chrono\TickClockSuite.cpp" />
+    <ClCompile Include="..\src\Chrono\TimedBoolSuite.cpp" />
+    <ClCompile Include="..\src\Concurrent\ConcurrentBlockingQueueSuite.cpp" />
+    <ClCompile Include="..\src\Concurrent\ConcurrentIntervalSetSuite.cpp" />
+    <ClCompile Include="..\src\Concurrent\ConcurrentMapSuite.cpp" />
+    <ClCompile Include="..\src\Concurrent\ConcurrentPriorityQueueSuite.cpp" />
+    <ClCompile Include="..\src\Concurrent\ConcurrentQueueSuite.cpp" />
+    <ClCompile Include="..\src\Concurrent\ConcurrentSetSuite.cpp" />
+    <ClCompile Include="..\src\Concurrent\ConcurrentStackSuite.cpp" />
+    <ClCompile Include="..\src\Data\Base64Test.cpp" />
+    <ClCompile Include="..\src\Data\LookupTableTest.cpp" />
+    <ClCompile Include="..\src\DateTime\DateTest.cpp" />
+    <ClCompile Include="..\src\DateTime\DateTimeBoolTest.cpp" />
+    <ClCompile Include="..\src\DateTime\DateTimeTest.cpp" />
+    <ClCompile Include="..\src\DateTime\TimeOfDayTest.cpp" />
+    <ClCompile Include="..\src\DateTime\TimeSpanTest.cpp" />
+    <ClCompile Include="..\src\Document\IniDocumentTest.cpp" />
+    <ClCompile Include="..\src\Error\AlertTest.cpp" />
+    <ClCompile Include="..\src\Error\AnyFailureTest.cpp" />
+    <ClCompile Include="..\src\Error\CatchExceptionTest.cpp" />
+    <ClCompile Include="..\src\Error\ExceptionPtrTest.cpp" />
+    <ClCompile Include="..\src\FileSystem\DirectoryInfoSuite.cpp" />
+    <ClCompile Include="..\src\FileSystem\PathSuite.cpp" />
+    <ClCompile Include="..\src\Functional\BindTest.cpp" />
+    <ClCompile Include="..\src\Io\TextStreamWriterTest.cpp" />
+    <ClCompile Include="..\src\Lexical\LexicalBooleanTest.cpp" />
+    <ClCompile Include="..\src\Lexical\LexicalFloatingTest.cpp" />
+    <ClCompile Include="..\src\Lexical\LexicalIntegerTest.cpp" />
+    <ClCompile Include="..\src\Memory\SharedPtrUtilsTest.cpp" />
+    <ClCompile Include="..\src\Meta\IsGeneralStringTest.cpp" />
+    <ClCompile Include="..\src\Numeric\NumberTraitsTest.cpp" />
+    <ClCompile Include="..\src\Numeric\UnionBitsTest.cpp" />
+    <ClCompile Include="..\src\Random\RandomTest.cpp" />
+    <ClCompile Include="..\src\Random\WeightedRandomMapTest.cpp" />
+    <ClCompile Include="..\src\RunTest.cpp" />
+    <ClCompile Include="..\src\Statechart\StateMachineSuite.cpp" />
+    <ClCompile Include="..\src\String\FormatSuite.cpp" />
+    <ClCompile Include="..\src\String\SplitSuite.cpp" />
+    <ClCompile Include="..\src\String\SprintfSuite.cpp" />
+    <ClCompile Include="..\src\String\StringAlgorithmSuite.cpp" />
+    <ClCompile Include="..\src\String\StringToStringSuite.cpp" />
+    <ClCompile Include="..\src\String\Utf8StringSuite.cpp" />
+    <ClCompile Include="..\src\Task\ContinuationTraitsSuite.cpp" />
+    <ClCompile Include="..\src\Task\StdAsyncSuite.cpp" />
+    <ClCompile Include="..\src\Task\TaskPollerSuite.cpp" />
+    <ClCompile Include="..\src\Task\TaskSuite.cpp" />
+    <ClCompile Include="..\src\Task\ThreadPoolSuite.cpp" />
+    <ClCompile Include="..\src\Task\WhenAllSuite.cpp" />
+    <ClCompile Include="..\src\Task\WorkerThreadSuite.cpp" />
+    <ClCompile Include="..\src\Thread\LoopThreadGroupTest.cpp" />
+    <ClCompile Include="..\src\Thread\SpinMutexTest.cpp" />
+    <ClCompile Include="..\src\Thread\ThreadTest.cpp" />
+    <ClCompile Include="..\src\Thread\WaitableBoolTest.cpp" />
+    <ClCompile Include="..\src\Trace\TraceTest.cpp" />
+    <ClCompile Include="..\src\Value\AnyTest.cpp" />
+    <ClCompile Include="..\src\Value\NamedValuesTest.cpp" />
+    <ClCompile Include="..\src\Value\SharedArrayTest.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\CaramelTestPch.h" />
+    <ClInclude Include="..\src\Utils\SharedArrayUtils.h" />
+    <ClInclude Include="..\src\Utils\StdVectorUtils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\src\Document\test1.ini" />
+    <None Include="..\src\Document\test2.ini" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\proj.win32\Caramel_vc11.vcxproj">
+      <Project>{ed63d1e4-3de9-4273-a22a-8b558e1bd6c0}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
