@@ -53,6 +53,12 @@ public:
     Utf8String& operator+=( const Utf8String& rhs );
 
 
+    /// Copy / Move ///
+
+    // Prepare to move the internal std::string to others.
+    std::string&& MoveString() { return std::move( m_s ); }
+
+
     /// Conversions ///
 
     // Returns false if the input text is not UTF-8 encoded.

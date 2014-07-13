@@ -31,6 +31,18 @@ TEST( Utf8ValidateTest )
 }
 
 
+TEST( Utf8StringMoveTest )
+{
+    Utf8String source( "Alice" );
+    std::string target;
+
+    target = source.MoveString();
+
+    CHECK( "Alice" == target );
+    CHECK( "" == source.ToString() );
+}
+
+
 } // SUITE Utf8StringSuite
 
 } // namespace Caramel

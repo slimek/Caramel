@@ -398,7 +398,7 @@ Bool MbcsStreamReader::ReadLine( std::string& line )
         CARAMEL_THROW( "Convert from encoding %u failed", m_encoding );
     }
 
-    line = u8Line.ToString();
+    line = u8Line.MoveString();
     return true;
 }
 
@@ -448,16 +448,14 @@ Bool Utf8StreamReader::ReadLine( std::string& line )
 {
     if ( m_ended ) { return false; }
 
-    const std::string chars = this->ReadCharLine();
+    std::string chars = this->ReadCharLine();
 
-    Utf8String u8Line;
-    const Bool encoded = u8Line.TryParse( chars );
-    if ( ! encoded )
+    if ( ! Utf8String::Validate( chars ))
     {
         CARAMEL_THROW( "Encoding is not UTF-8" );
     }
 
-    line = u8Line.ToString();
+    line = std::move( chars );
     return true;
 }
 
