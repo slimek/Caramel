@@ -11,8 +11,8 @@
 
 #if defined( _MSC_VER )
 
-#if ( 1700 > _MSC_VER )
-#error "Caramel doesn't support Visual C++ before 2012"
+#if ( 1800 > _MSC_VER )
+#error "Caramel doesn't support Visual C++ before 2013"
 #endif
 
 #define CARAMEL_COMPILER_IS_MSVC
@@ -31,7 +31,7 @@
 
 #else
 
-// Visual C++ 2012/2013 limitations:
+// Visual C++ 2013 limitations:
 // - doesn't support noexcept
 
 #define CARAMEL_NOEXCEPT 
