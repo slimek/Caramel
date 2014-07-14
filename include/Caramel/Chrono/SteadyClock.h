@@ -14,7 +14,7 @@ namespace Caramel
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Steady Clock
-// - Because VC++ 2012/2013 steady_clock is NOT steady (derived from system_clock),
+// - Because Visual C++ 2013 steady_clock is NOT steady (derived from system_clock),
 //   we preferred Boost.Chrono implementation.
 //
 

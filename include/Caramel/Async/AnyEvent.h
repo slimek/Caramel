@@ -25,11 +25,8 @@ public:
     // Not an event
     AnyEvent();
 
-    #if !defined( CARAMEL_COMPILER_IS_MSVC )
-    // TODO: Visual C++ 2012 doesn't support default functions, wait for VC2013.
     AnyEvent( const AnyEvent& other ) = default;
     AnyEvent& operator=( const AnyEvent& other ) = default;
-    #endif
 
     // Move
     AnyEvent( AnyEvent&& other );

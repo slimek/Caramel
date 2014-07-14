@@ -230,7 +230,7 @@ inline Seconds::DivideResult Seconds::DivideBy( const Seconds& divisor ) const
     result.remainder = Caramel::operator%( *this, divisor );
     
     //
-    // TODO: In VC++ 2012, the below code doesn't compile. I don't know why...
+    // TODO: In Visual C++ 2013, the below code doesn't compile. I don't know why...
     //
     // result.quotient  = static_cast< Int64 >( *this / divisor );
     // result.remainder = *this % divisor;

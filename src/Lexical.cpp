@@ -73,8 +73,7 @@ Bool Floating< Float >::TryParse( const std::string& input )
 
     Char* stop = nullptr;
 
-    // TODO: VC2012 doesn't support C++11 strtof()
-    m_value = static_cast< Float >( ::strtod( input.c_str(), &stop ));
+    m_value = ::strtof( input.c_str(), &stop );
 
     return stop == ( input.data() + input.length() );
 }
