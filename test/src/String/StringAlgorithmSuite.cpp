@@ -89,8 +89,8 @@ TEST( StringExtractorTest )
 
 TEST( StringJoinTest )
 {
-    CHECK( "reimu,marisa,alice" == Join( MakeVector< std::string >( "reimu", "marisa", "alice" ), "," ));
-    CHECK( "" == Join( MakeVector< std::string >(), "," ));
+    CHECK( "reimu,marisa,alice" == Join( std::vector< std::string >{ "reimu", "marisa", "alice" }, "," ));
+    CHECK( "" == Join( std::vector< std::string >(), "," ));
 }
 
 

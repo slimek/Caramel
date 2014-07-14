@@ -181,10 +181,12 @@ TEST( NamedValuesChainTest )
 
 TEST( NamedValuesFromMapTest )
 {
-    std::map< std::string, std::string > smap;
-    smap[ "Alice"  ] = "doll master";
-    smap[ "Marisa" ] = "witch";
-    smap[ "Reimu"  ] = "miko";
+    std::map< std::string, std::string > smap
+    {
+        { "Alice",  "doll master" },
+        { "Marisa", "witch" },
+        { "Reimu",  "miko" }
+    };
 
     const NamedValues nv( smap );
 
