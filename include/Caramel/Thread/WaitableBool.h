@@ -77,13 +77,10 @@ inline WaitableBool::WaitableBool( Bool initialValue )
 
 inline WaitableBool& WaitableBool::operator=( Bool value )
 {
-    Bool oldValue = false;
+    LockGuard lock( m_mutex );
 
-    {
-        LockGuard lock( m_mutex );
-        oldValue = m_value;
-        m_value = value;
-    }
+    const Bool oldValue = m_value;
+    m_value = value;
 
     if ( ! oldValue && value )
     {
