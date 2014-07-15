@@ -162,6 +162,7 @@
     <ClCompile Include="..\src\Value\AnyTest.cpp" />
     <ClCompile Include="..\src\Value\NamedValuesTest.cpp" />
     <ClCompile Include="..\src\Value\SharedArrayTest.cpp" />
+    <ClCompile Include="..\src\Windows\WindowsRegistrySuite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h" />

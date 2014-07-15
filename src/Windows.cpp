@@ -5,6 +5,7 @@
 
 #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
 
+#include "Windows/RegistryImpl.h"
 #include <Caramel/Windows/CrtDebug.h>
 #include <Caramel/Windows/DebuggerTraceAdapter.h>
 #include <Caramel/Windows/FileInfo.h>
@@ -25,6 +26,7 @@ namespace Windows
 //   CrtDebug
 //   DebuggerTraceAdapter
 //   FileInfo
+//   Registry
 //   WideString
 //
 
@@ -115,6 +117,120 @@ Path FileInfo::GetExactPath() const
     const std::wstring longPath( &longBuffer[0] );
 
     return Path( longPath );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Registry
+//
+
+Registry Registry::LocalMachine()
+{
+    return Registry( std::make_shared< RegistryImpl >( HKEY_LOCAL_MACHINE, "LOCAL_MACHINE" ));
+}
+
+
+Registry::Registry( std::shared_ptr< RegistryImpl > impl )
+    : m_impl( impl )
+{
+}
+
+
+//
+// Get Values
+//
+
+Bool Registry::GetStringValue(
+    const Utf8String& keyPath, const Utf8String& valueName, Utf8String& value ) const
+{
+    HKEY key = NULL;
+    const std::string keyFullPath = m_impl->Name() + "\\" + keyPath.ToString();
+
+    const std::wstring keyWsPath = keyPath.ToWstring();
+
+    const LONG keyResult = ::RegOpenKeyExW(
+        m_impl->Handle(), keyPath.ToWstring().c_str(), 0, KEY_READ | KEY_WOW64_64KEY,
+        &key
+    );
+
+    if ( keyResult != ERROR_SUCCESS )
+    {
+        CARAMEL_THROW( "Open registry key %s failed", keyFullPath );
+    }
+
+    return RegistryImpl( key, keyFullPath ).GetStringValue( valueName, value );
+}
+
+
+//
+// Implementation
+//
+
+RegistryImpl::RegistryImpl( HKEY key, const std::string& name )
+    : m_key( key )
+    , m_name( name )
+{
+}
+
+
+RegistryImpl::~RegistryImpl()
+{
+    ::RegCloseKey( m_key );
+}
+
+
+Bool RegistryImpl::GetStringValue( const Utf8String& valueName, Utf8String& value ) const
+{
+    const std::wstring valueWsName = valueName.ToWstring();
+
+    if ( ! this->HasValue( valueWsName )) { return false; }
+
+    auto valueInfo = this->GetValueInfo( valueWsName );
+
+    if ( valueInfo.size == 0 )
+    {
+        value = Utf8String();  // this value is an empty string.
+    }
+
+    DWORD size = valueInfo.size;
+    std::vector< Wchar > buffer( size + 1, 0 );
+
+    const LONG result = ::RegQueryValueExW(
+        m_key, valueWsName.c_str(), NULL, NULL,
+        reinterpret_cast< Byte* >( &buffer[0] ), &size
+    );
+
+    if ( result != ERROR_SUCCESS )
+    {
+        CARAMEL_THROW( "Query registry %s value %s", m_name, valueName );
+    }
+
+    value = Utf8String( std::wstring( &buffer[0] ));
+    return true;
+}
+
+
+Bool RegistryImpl::HasValue( const std::wstring& valueName ) const
+{
+    //return ERROR_SUCCESS ==
+    //    ::RegQueryValueExW( m_key, valueName.c_str(), NULL, NULL, NULL, NULL );
+
+    const LONG result = ::RegQueryValueExW( m_key, valueName.c_str(), NULL, NULL, NULL, NULL );
+    return ERROR_SUCCESS == result;
+}
+
+
+RegistryImpl::ValueInfo RegistryImpl::GetValueInfo( const std::wstring& valueName ) const
+{
+    ValueInfo info;
+
+    const LONG result =
+        ::RegQueryValueExW( m_key, valueName.c_str(), NULL, &info.type, NULL, &info.size );
+
+    CARAMEL_CHECK( result == ERROR_SUCCESS );
+
+    return info;
 }
 
 

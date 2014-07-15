@@ -80,6 +80,9 @@
     <Filter Include="2. Tests\Functional">
       <UniqueIdentifier>{f2787f9d-1e7a-4156-bb7b-5a8de135b96a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\Windows">
+      <UniqueIdentifier>{a703e454-1751-445f-868e-16865c4e4fb1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\RunTest.cpp">
@@ -288,6 +291,9 @@
     </ClCompile>
     <ClCompile Include="..\src\String\Utf8StringSuite.cpp">
       <Filter>2. Tests\String</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Windows\WindowsRegistrySuite.cpp">
+      <Filter>2. Tests\Windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

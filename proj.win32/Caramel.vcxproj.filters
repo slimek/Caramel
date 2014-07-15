@@ -180,6 +180,9 @@
     <Filter Include="1. Public Packages\Chrono\Detail">
       <UniqueIdentifier>{75860549-e1e3-4d66-bdb3-5fdced9fb75e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Sources\Windows">
+      <UniqueIdentifier>{bca6eeed-ec7a-4c25-b6fe-d370a35c8427}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Setup\Compiler.h">
@@ -751,6 +754,12 @@
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Task\WhenAll.h">
       <Filter>1. Public Packages\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Windows\Registry.h">
+      <Filter>1. Public Packages\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Windows\RegistryImpl.h">
+      <Filter>2. Sources\Windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -165,6 +165,7 @@
     <ClInclude Include="..\include\Caramel\Windows\CrtDebug.h" />
     <ClInclude Include="..\include\Caramel\Windows\DebuggerTraceAdapter.h" />
     <ClInclude Include="..\include\Caramel\Windows\FileInfo.h" />
+    <ClInclude Include="..\include\Caramel\Windows\Registry.h" />
     <ClInclude Include="..\include\Caramel\Windows\WideString.h" />
     <ClInclude Include="..\src\Async\AnyEventDispatcherImpl.h" />
     <ClInclude Include="..\src\Async\AnyEventQueueImpl.h" />
@@ -209,6 +210,7 @@
     <ClInclude Include="..\src\Trace\TraceManager.h" />
     <ClInclude Include="..\src\Value\NamedValueEntry.h" />
     <ClInclude Include="..\src\Value\NamedValuesImpl.h" />
+    <ClInclude Include="..\src\Windows\RegistryImpl.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Android.cpp">
