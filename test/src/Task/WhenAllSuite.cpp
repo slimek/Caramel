@@ -20,30 +20,39 @@ TEST( WhenAllTest )
 {
     StdAsync async;
 
-    /// 16 Tasks ///
+    /// 16 Tasks - 100 Repeats ///
 
     std::vector< Task< void > > tasks;
 
     WaitableBool done;
     std::atomic< Uint > count( 0 );
 
-    for ( Uint i = 0; i < 16; ++ i )
+    for ( Uint pass = 0; pass < 100; ++ pass )
     {
-        auto task = MakeTask( "Task", [&] { ++ count; } );
-        tasks.push_back( task );
-        async.Submit( task );
+        done = false;
+        count = 0;
+        Int countInWhenAll = 0;
+
+        tasks.clear();
+
+        for ( Uint i = 0; i < 16; ++ i )
+        {
+            auto task = MakeTask( "Task", [&] { ++ count; } );
+            tasks.push_back( task );
+            async.Submit( task );
+        }
+
+        WhenAll( "When-16-Tasks", tasks,
+        [&] ( const Task< void >& t )
+        {
+            countInWhenAll = count.load();
+            done = true;
+        });
+
+        done.Wait();
+
+        CHECK( 16 == countInWhenAll );
     }
-
-    WhenAll( "When-16-Tasks", tasks,
-    [&] ( const Task< void >& t )
-    {
-        done = true;
-    });
-
-    done.Wait();
-
-    CHECK( 16 == count.load() );
-
 
     /// No Task ///
 

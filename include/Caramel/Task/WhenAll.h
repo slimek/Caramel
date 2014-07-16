@@ -42,7 +42,7 @@ inline void WhenAll( const std::string& name, const TaskSequence& tasks, Functio
 //
 
 template< typename Function >
-class WhenAllWrapper
+class WhenAllWrapper : public std::enable_shared_from_this< WhenAllWrapper< Function >>
 {
 public:
     
@@ -109,13 +109,15 @@ inline void WhenAllWrapper< Function >::CompleteOne( const Task< void >& t )
     if ( t.IsFaulted()
       || m_numTasks == ++ m_completeCount )
     {
+        auto thiz = this->shared_from_this();
+
         // Make a non-const copy to continue another task.
         Task< void > taskCopy = t;
 
         taskCopy.Then( m_name,
         [=] ( const Task< void >& task )
         {
-            m_function( task );
+            thiz->m_function( task );
         });
     }
 }
