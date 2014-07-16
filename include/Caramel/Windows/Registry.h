@@ -39,6 +39,16 @@ public:
     Bool GetStringValue( const Utf8String& keyPath, const Utf8String& valueName, Utf8String& value ) const;
 
 
+    //
+    // Get Values - std::string style
+    // - Returns false if the key or value doesn't exist.
+    //   Throws if the input keyPath or valueName is not UTF-8 encoding.
+    //   The output value is UTF-8 encoding.
+    //
+    
+    Bool GetStringValue( const std::string& keyPath, const std::string& valueName, std::string& value ) const;
+
+
 private:
 
     explicit Registry( std::shared_ptr< RegistryImpl > impl );

@@ -18,12 +18,22 @@ TEST( WindowsRegistryTest )
 
     auto registry = Windows::Registry::LocalMachine();
 
-    Utf8String machineGuid;
+    Utf8String u8MachineGuid;
     CHECK( true == registry.GetStringValue(
         Utf8String( "SOFTWARE\\Microsoft\\Cryptography" ),
         Utf8String( "MachineGuid" ),
+        u8MachineGuid
+    ));
+
+    std::string machineGuid;
+    CHECK( true == registry.GetStringValue(
+        "SOFTWARE\\Microsoft\\Cryptography",
+        "MachineGuid",
         machineGuid
     ));
+
+    std::string exist;
+    CHECK( false == registry.GetStringValue( "THIS\\DoesNot", "Exist", exist ));
 }
 
 } // SUITE WindowsRegistrySuite

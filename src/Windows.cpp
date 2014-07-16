@@ -156,10 +156,32 @@ Bool Registry::GetStringValue(
 
     if ( keyResult != ERROR_SUCCESS )
     {
-        CARAMEL_THROW( "Open registry key %s failed", keyFullPath );
+        if ( keyResult == ERROR_FILE_NOT_FOUND )
+        {
+            return false;
+        }
+        else
+        {
+            CARAMEL_THROW( "Open registry key %s failed, error: %d", keyFullPath, keyResult );
+        }
     }
 
     return RegistryImpl( key, keyFullPath ).GetStringValue( valueName, value );
+}
+
+
+Bool Registry::GetStringValue(
+    const std::string& keyPath, const std::string& valueName, std::string& value ) const
+{
+    CARAMEL_CHECK_UTF8_ARGUMENT( u8KeyPath, keyPath );
+    CARAMEL_CHECK_UTF8_ARGUMENT( u8ValueName, valueName );
+
+    Utf8String u8Value;
+
+    const Bool ok = this->GetStringValue( u8KeyPath, u8ValueName, u8Value );
+
+    value = u8Value.ToString();
+    return ok;
 }
 
 
