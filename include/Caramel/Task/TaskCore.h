@@ -117,6 +117,13 @@ enum TaskState : Int
 //
 // Task Catch Result
 //
+// - When catching an AnyFailure,
+//   you may get it from both the 'anyFailure' and 'exception' fields.
+//   For other exception types the 'anyFailure' is nullptr.
+//
+// - If it is a valid result,
+//   the 'doneState' should be CANCELED, FAULTED or RAN_TO_COMP.
+//
 
 struct TaskCore::CatchResult
 {
