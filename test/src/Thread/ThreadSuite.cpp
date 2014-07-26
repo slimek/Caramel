@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Thread - Thread Test
+// Caramel C++ Library Test - Thread - Thread Suite
 
 #include "CaramelTestPch.h"
 
@@ -19,11 +19,6 @@ namespace Caramel
 
 SUITE( ThreadSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Thread Test
-//
 
 TEST( ThreadTest )
 {
@@ -101,8 +96,6 @@ TEST( ThreadIdTest )
     CHECK( checked );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 }  // SUITE ThreadSuite
 

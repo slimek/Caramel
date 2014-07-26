@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Value - Named Values Test
+// Caramel C++ Library Test - Value - Named Values Suite
 
 #include "CaramelTestPch.h"
 
@@ -11,11 +11,6 @@ namespace Caramel
 
 SUITE( NamedValuesSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Named Values Test
-//
 
 TEST( NamedValuesTrivialTest )
 {
@@ -195,8 +190,6 @@ TEST( NamedValuesFromMapTest )
     CHECK( "miko"        == nv[ "Reimu" ].AsString() );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE NamedValuesSuite
 

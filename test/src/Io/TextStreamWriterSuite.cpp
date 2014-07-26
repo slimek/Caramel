@@ -1,4 +1,4 @@
-﻿// Caramel C++ Library Test - I/O - Text Stream Writer Test
+﻿// Caramel C++ Library Test - I/O - Text Stream Writer Suite
 
 #include "CaramelTestPch.h"
 
@@ -14,11 +14,6 @@ namespace Caramel
 
 SUITE( TextStreamWriterSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Text Stream Writer Test
-//
 
 TEST( TextStreamWriterAsciiTest )
 {
@@ -65,8 +60,6 @@ TEST( TextStreamWriterChineseTest )
     CHECK( text == line );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE TextStreamWriterSuite
 

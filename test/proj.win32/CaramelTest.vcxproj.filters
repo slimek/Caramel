@@ -88,101 +88,8 @@
     <ClCompile Include="..\src\RunTest.cpp">
       <Filter>1. Main Entry</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Thread\ThreadTest.cpp">
-      <Filter>2. Tests\Thread</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Document\IniDocumentTest.cpp">
-      <Filter>2. Tests\Document</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Trace\TraceTest.cpp">
-      <Filter>2. Tests\Trace</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Lexical\LexicalIntegerTest.cpp">
-      <Filter>2. Tests\Lexical</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Thread\SpinMutexTest.cpp">
-      <Filter>2. Tests\Thread</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\CaramelTestPch.cpp">
       <Filter>4. Precompiled Header</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\DateTime\DateTimeTest.cpp">
-      <Filter>2. Tests\DateTime</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Random\RandomTest.cpp">
-      <Filter>2. Tests\Random</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Lexical\LexicalFloatingTest.cpp">
-      <Filter>2. Tests\Lexical</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Value\NamedValuesTest.cpp">
-      <Filter>2. Tests\Value</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Value\AnyTest.cpp">
-      <Filter>2. Tests\Value</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Numeric\NumberTraitsTest.cpp">
-      <Filter>2. Tests\Numeric</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\DateTime\DateTest.cpp">
-      <Filter>2. Tests\DateTime</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Error\AlertTest.cpp">
-      <Filter>2. Tests\Error</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Memory\SharedPtrUtilsTest.cpp">
-      <Filter>2. Tests\Memory</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\DateTime\DateTimeBoolTest.cpp">
-      <Filter>2. Tests\DateTime</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Value\SharedArrayTest.cpp">
-      <Filter>2. Tests\Value</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\DateTime\TimeSpanTest.cpp">
-      <Filter>2. Tests\DateTime</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Io\TextStreamWriterTest.cpp">
-      <Filter>2. Tests\Io</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Thread\WaitableBoolTest.cpp">
-      <Filter>2. Tests\Thread</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Error\AnyFailureTest.cpp">
-      <Filter>2. Tests\Error</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Error\ExceptionPtrTest.cpp">
-      <Filter>2. Tests\Error</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Error\CatchExceptionTest.cpp">
-      <Filter>2. Tests\Error</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Meta\IsGeneralStringTest.cpp">
-      <Filter>2. Tests\Meta</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Numeric\UnionBitsTest.cpp">
-      <Filter>2. Tests\Numeric</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Lexical\LexicalBooleanTest.cpp">
-      <Filter>2. Tests\Lexical</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\DateTime\TimeOfDayTest.cpp">
-      <Filter>2. Tests\DateTime</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Random\WeightedRandomMapTest.cpp">
-      <Filter>2. Tests\Random</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Thread\LoopThreadGroupTest.cpp">
-      <Filter>2. Tests\Thread</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Data\Base64Test.cpp">
-      <Filter>2. Tests\Data</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Data\LookupTableTest.cpp">
-      <Filter>2. Tests\Data</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Functional\BindTest.cpp">
-      <Filter>2. Tests\Functional</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Arithmetic\FlagsSuite.cpp">
       <Filter>2. Tests\Arithmetic</Filter>
@@ -294,6 +201,99 @@
     </ClCompile>
     <ClCompile Include="..\src\Windows\WindowsRegistrySuite.cpp">
       <Filter>2. Tests\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Data\Base64Suite.cpp">
+      <Filter>2. Tests\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Data\LookupTableSuite.cpp">
+      <Filter>2. Tests\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\DateTime\DateSuite.cpp">
+      <Filter>2. Tests\DateTime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\DateTime\DateTimeBoolSuite.cpp">
+      <Filter>2. Tests\DateTime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\DateTime\DateTimeSuite.cpp">
+      <Filter>2. Tests\DateTime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\DateTime\TimeOfDaySuite.cpp">
+      <Filter>2. Tests\DateTime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\DateTime\TimeSpanSuite.cpp">
+      <Filter>2. Tests\DateTime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Document\IniDocumentSuite.cpp">
+      <Filter>2. Tests\Document</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Error\AlertSuite.cpp">
+      <Filter>2. Tests\Error</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Error\AnyFailureSuite.cpp">
+      <Filter>2. Tests\Error</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Error\CatchExceptionSuite.cpp">
+      <Filter>2. Tests\Error</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Error\ExceptionPtrSuite.cpp">
+      <Filter>2. Tests\Error</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Functional\BindSuite.cpp">
+      <Filter>2. Tests\Functional</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Io\TextStreamWriterSuite.cpp">
+      <Filter>2. Tests\Io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Lexical\LexicalBooleanSuite.cpp">
+      <Filter>2. Tests\Lexical</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Lexical\LexicalFloatingSuite.cpp">
+      <Filter>2. Tests\Lexical</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Lexical\LexicalIntegerSuite.cpp">
+      <Filter>2. Tests\Lexical</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Memory\SharedPtrUtilsSuite.cpp">
+      <Filter>2. Tests\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Meta\IsGeneralStringSuite.cpp">
+      <Filter>2. Tests\Meta</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Numeric\NumberTraitsSuite.cpp">
+      <Filter>2. Tests\Numeric</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Numeric\UnionBitsSuite.cpp">
+      <Filter>2. Tests\Numeric</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Random\WeightedRandomMapSuite.cpp">
+      <Filter>2. Tests\Random</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Random\UniformRandomSuite.cpp">
+      <Filter>2. Tests\Random</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Thread\LoopThreadGroupSuite.cpp">
+      <Filter>2. Tests\Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Thread\SpinMutexSuite.cpp">
+      <Filter>2. Tests\Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Thread\ThreadSuite.cpp">
+      <Filter>2. Tests\Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Thread\WaitableBoolSuite.cpp">
+      <Filter>2. Tests\Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Trace\TraceSuite.cpp">
+      <Filter>2. Tests\Trace</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Value\AnySuite.cpp">
+      <Filter>2. Tests\Value</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Value\NamedValuesSuite.cpp">
+      <Filter>2. Tests\Value</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Value\SharedArraySuite.cpp">
+      <Filter>2. Tests\Value</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

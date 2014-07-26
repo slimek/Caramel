@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Random - Random Test
+// Caramel C++ Library Test - Random - Uniform Random Suite
 
 #include "CaramelTestPch.h"
 
@@ -11,13 +11,8 @@
 namespace Caramel
 {
 
-SUITE( RandomSuite )
+SUITE( UniformRandomSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Uniform Random Test
-//
 
 TEST( UniformRandomTest )
 {
@@ -157,8 +152,6 @@ TEST( GenRandomBoolTest )
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-
-} // SUITE RandomSuite
+} // SUITE UniformRandomSuite
 
 } // namespace Caramel

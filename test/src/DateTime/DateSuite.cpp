@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - DateTime - Date Test
+// Caramel C++ Library Test - DateTime - Date Suite
 
 #include "CaramelTestPch.h"
 
@@ -13,11 +13,6 @@ namespace Caramel
 
 SUITE( DateSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Date Test
-//
 
 TEST( DateTest )
 {
@@ -237,8 +232,6 @@ TEST( DaysTimeSpanTest )
     CHECK_THROW( dummy = static_cast< TimeSpan >( dupper + Days( 1 )), Caramel::Exception );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE DateSuite
 

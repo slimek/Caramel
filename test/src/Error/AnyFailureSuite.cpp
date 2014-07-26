@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Error - Any Failure Test
+// Caramel C++ Library Test - Error - Any Failure Suite
 
 #include "CaramelTestPch.h"
 
@@ -13,11 +13,6 @@ namespace Caramel
 
 SUITE( AnyFailureSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Any Failure Test
-//
 
 TEST( AnyFailureTest )
 {
@@ -97,8 +92,6 @@ TEST( AnyFailureToEventTest )
 
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE AnyFailureSuite
 

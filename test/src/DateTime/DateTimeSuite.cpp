@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - DateTime - Date Time Test
+// Caramel C++ Library Test - DateTime - Date Time Suite
 
 #include "CaramelTestPch.h"
 
@@ -11,11 +11,6 @@ namespace Caramel
 
 SUITE( DateTimeSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Date Time Test
-//
 
 TEST( DateTimeBasicTest )
 {
@@ -168,9 +163,6 @@ TEST( DateTimeUtcTest )
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-
 } // SUITE DateTimeSuite
 
 } // namespace Caramel
-

@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Thread - Waitable Boolean Test
+// Caramel C++ Library Test - Thread - Waitable Boolean Suite
 
 #include "CaramelTestPch.h"
 
@@ -13,11 +13,6 @@ namespace Caramel
 
 SUITE( WaitableBoolSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Waitable Bool Test
-//
 
 TEST( WaitableBoolTest )
 {
@@ -64,8 +59,6 @@ TEST( WaitableBoolTest )
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE WaitableBoolSuite
 

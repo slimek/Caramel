@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Enum - Enum Lookup Test
+// Caramel C++ Library Test - Data - Lookup Table Suite
 
 #include "CaramelTestPch.h"
 
@@ -11,11 +11,6 @@ namespace Caramel
 
 SUITE( LookupTableSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Enum Lookup Table Test
-//
 
 enum ImageFormat
 {
@@ -255,8 +250,6 @@ TEST( LookupTableAliasTest )
     CHECK( "jpg" == name );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE LookupTableSuite
 

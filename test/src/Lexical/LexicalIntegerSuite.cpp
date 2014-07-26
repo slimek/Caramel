@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Lexical - Lexical Integer Test
+// Caramel C++ Library Test - Lexical - Lexical Integer Suite
 
 #include "CaramelTestPch.h"
 
@@ -11,11 +11,6 @@ namespace Caramel
 
 SUITE( LexicalIntegerSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Lexical Integer Test
-//
 
 TEST( LexicalIntegerTest )
 {
@@ -141,8 +136,6 @@ TEST( LexicalIntegerHexTest )
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE LexicalIntegerSuite
 

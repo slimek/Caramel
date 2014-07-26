@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Document - INI Document Test
+// Caramel C++ Library Test - Document - INI Document Suite
 
 #include "CaramelTestPch.h"
 
@@ -11,11 +11,6 @@ namespace Caramel
 
 SUITE( IniDocumentSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// INI Document Test
-//
 
 TEST( IniDocumentFundamentalTest )
 {
@@ -90,8 +85,6 @@ TEST( IniDocumentFundamentalTest )
     CHECK_THROW( ints.GetUintValue( "IntBad2" ), Caramel::Exception );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE IniDocumentSuite
 

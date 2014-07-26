@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Error - Alert Test
+// Caramel C++ Library Test - Error - Alert Suite
 
 #include "CaramelTestPch.h"
 
@@ -12,11 +12,6 @@ namespace Caramel
 
 SUITE( AlertSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Alert Test
-//
 
 static std::string s_fileBuffer;
 static std::string s_functionBuffer;
@@ -64,8 +59,6 @@ TEST( AlertTest )
     SetAlertHandler( oldHandler );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE AlertSuite
 

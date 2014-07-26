@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Thread - Loop Thread Group Test
+// Caramel C++ Library Test - Thread - Loop Thread Group Suite
 
 #include "CaramelTestPch.h"
 
@@ -12,11 +12,6 @@ namespace Caramel
 
 SUITE( LoopThreadGroupSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Loop Thread Group Test
-//
 
 TEST( LoopThreadGroupTest )
 {
@@ -39,8 +34,6 @@ TEST( LoopThreadGroupTest )
     CHECK( 0 == count2 );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE LoopThreadGroupSuite
 

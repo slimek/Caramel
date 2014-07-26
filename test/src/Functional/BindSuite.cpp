@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Functional - Bind Test
+// Caramel C++ Library Test - Functional - Bind Suite
 
 #include "CaramelTestPch.h"
 

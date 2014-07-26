@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Numeric - Union Bits Test
+// Caramel C++ Library Test - Numeric - Union Bits Suite
 
 #include "CaramelTestPch.h"
 
@@ -11,11 +11,6 @@ namespace Caramel
 
 SUITE( UnionBitsSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Union Bits Test
-//
 
 TEST( UnionBits16Test )
 {
@@ -67,9 +62,6 @@ TEST( UnionBits32Test )
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-
 } // SUITE UnionBitsSuite
 
 } // namespace Caramel
-

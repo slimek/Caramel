@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Error - Exception Ptr Test
+// Caramel C++ Library Test - Error - Exception Ptr Suite
 
 #include "CaramelTestPch.h"
 
@@ -12,11 +12,6 @@ namespace Caramel
 
 SUITE( ExceptionPtrSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Exception Ptr Test
-//
 
 TEST( ExceptionPtrTest )
 {
@@ -159,8 +154,6 @@ TEST( AnyFailurePtrTest )
     CHECK( nullptr == pf3.operator->() );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE ExceptionPtrSuite
 

@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Error - Catch Exception Test
+// Caramel C++ Library Test - Error - Catch Exception Suite
 
 #include "CaramelTestPch.h"
 
@@ -11,11 +11,6 @@ namespace Caramel
 
 SUITE( CatchExceptionSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Catch Exception Test
-//
 
 TEST( CatchExceptionTest )
 {

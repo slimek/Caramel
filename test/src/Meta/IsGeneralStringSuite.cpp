@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Meta - Is General String Test
+// Caramel C++ Library Test - Meta - Is General String Suite
 
 #include "CaramelTestPch.h"
 
@@ -12,11 +12,6 @@ namespace Caramel
 
 SUITE( IsGeneralStringSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Is General String Test
-//
 
 class IgsTester
 {
@@ -75,8 +70,6 @@ TEST( IsGeneralStringTest )
     CHECK( false == IgsTester( std::vector< Char >() ));
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE IsGeneralStringSuite
 

@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Trace - Trace Test
+// Caramel C++ Library Test - Trace - Trace Suite
 
 #include "CaramelTestPch.h"
 
@@ -13,11 +13,6 @@ namespace Caramel
 
 SUITE( TraceSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Trace Test
-//
 
 class LocalListener : public Trace::Listener
 {
@@ -130,8 +125,6 @@ TEST( TraceMessageQueueTest )
     CHECK( false == queue.TryPop( level, message ));
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE TraceSuite
 

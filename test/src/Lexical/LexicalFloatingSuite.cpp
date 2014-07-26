@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Lexical - Lexical Floating Test
+// Caramel C++ Library Test - Lexical - Lexical Floating Suite
 
 #include "CaramelTestPch.h"
 
@@ -11,11 +11,6 @@ namespace Caramel
 
 SUITE( LexicalFloatingSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Lexical Floating Test
-//
 
 TEST( LexicalFloatinTest )
 {
@@ -62,7 +57,6 @@ TEST( LexicalFloatinTest )
     }
 }
 
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE LexicalFloatingSuite
 

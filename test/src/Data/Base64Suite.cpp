@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Data - Base64 Test
+// Caramel C++ Library Test - Data - Base64 Suite
 
 #include "CaramelTestPch.h"
 
@@ -12,11 +12,6 @@ namespace Caramel
 
 SUITE( Base64Suite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Base64 Test
-//
 
 TEST( Base64TrivialTest )
 {
@@ -69,8 +64,6 @@ TEST( Base64BinaryTest )
     CHECK( result == data );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE Base64Suite
 

@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Numeric - Number Traits Test
+// Caramel C++ Library Test - Numeric - Number Traits Suite
 
 #include "CaramelTestPch.h"
 
@@ -11,11 +11,6 @@ namespace Caramel
 
 SUITE( NumberTraitsSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Number Traits Test
-//
 
 template< typename Floating, typename Integer >
 Bool TestLossless( Integer before )
@@ -82,8 +77,6 @@ TEST( DoubleTraitsTest )
     CHECK( false == TestLossless< Double >( u64max + 2 ));
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE NumberTraitsSuite
 

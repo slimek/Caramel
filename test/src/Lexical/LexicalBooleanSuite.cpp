@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Lexical - Lexical Boolean Test
+// Caramel C++ Library Test - Lexical - Lexical Boolean Suite
 
 #include "CaramelTestPch.h"
 
@@ -11,11 +11,6 @@ namespace Caramel
 
 SUITE( LexicalBooleanSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Lexical Boolean Test
-//
 
 TEST( LexicalBooleanTest )
 {
@@ -69,8 +64,6 @@ TEST( LexicalBooleanTest )
     CHECK( true == lexBool );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE LexicalBooleanSuite
 

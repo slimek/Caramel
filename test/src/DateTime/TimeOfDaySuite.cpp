@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - DateTime - Time of Day Test
+// Caramel C++ Library Test - DateTime - Time of Day Suite
 
 #include "CaramelTestPch.h"
 
@@ -12,11 +12,6 @@ namespace Caramel
 
 SUITE( TimeOfDaySuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Time of Day Test
-//
 
 TEST( TimeOfDayTest )
 {
@@ -81,8 +76,6 @@ TEST( TimeOfDayTest )
     CHECK( TimeOfDay( 14, 30, 15 ) == dt1.TimeOfDay() );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE TimeOfDaySuite
 

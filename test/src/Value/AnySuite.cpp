@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Value - Any Test
+// Caramel C++ Library Test - Value - Any Suite
 
 #include "CaramelTestPch.h"
 
@@ -14,11 +14,6 @@ namespace Caramel
 
 SUITE( AnySuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Any Test
-//
 
 TEST( AnyEmptyTest )
 {
@@ -321,8 +316,6 @@ TEST( AnyAnyTest )
     CHECK( 42 == a3.As< Int >() );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE AnySuite
 

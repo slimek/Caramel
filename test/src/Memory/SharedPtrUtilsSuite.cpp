@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Memory - SharedPtr Utilities Test
+// Caramel C++ Library Test - Memory - SharedPtr Utilities Suite
 
 #include "CaramelTestPch.h"
 
@@ -11,11 +11,6 @@ namespace Caramel
 
 SUITE( SharedPtrUtilsSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Shared Ptr Utilities Test
-//
 
 TEST( SharedPtrArithmeticTest )
 {
@@ -44,8 +39,6 @@ TEST( SharedPtrArithmeticTest )
     CHECK( 89 == *i1c2 );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE SharedPtrUtilsSuite
 

@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Value - Shared Array Test
+// Caramel C++ Library Test - Value - Shared Array Suite
 
 #include "CaramelTestPch.h"
 
@@ -11,11 +11,6 @@ namespace Caramel
 
 SUITE( SharedArraySuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Shared Array Test
-//
 
 TEST( ConstSharedArrayTest )
 {
@@ -65,8 +60,6 @@ TEST( SharedArrayTest )
     CHECK( "" == sa[1] );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE( SharedArraySuite )
 

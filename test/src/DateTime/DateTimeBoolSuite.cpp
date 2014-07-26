@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - DateTime - DateTime-Boolean Test
+// Caramel C++ Library Test - DateTime - DateTime-Boolean Suite
 
 #include "CaramelTestPch.h"
 
@@ -14,9 +14,11 @@ namespace Caramel
 SUITE( DateTimeBoolSuite )
 {
 
-///////////////////////////////////////////////////////////////////////////////
 //
-// DateTime-Boolean Test
+// DateTime provides sufficient stuff to be used by TimedBool
+//
+//   ClockType, TimePoint : DateTime
+//   Duration             : TimeSpan
 //
 
 TEST( DateTimeBoolTest )
@@ -41,8 +43,6 @@ TEST( DateTimeBoolTest )
     CHECK( true  == timer2 );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE DateTimeBoolSuite
 

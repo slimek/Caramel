@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Thread - Spin Mutex Test
+// Caramel C++ Library Test - Thread - Spin Mutex Suite
 
 #include "CaramelTestPch.h"
 
@@ -10,15 +10,8 @@
 namespace Caramel
 {
 
-using namespace std;
-
 SUITE( SpinMutexSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Spin Mutex Test
-//
 
 SpinMutex s_mutex;
 Int s_value = 0;
@@ -65,8 +58,6 @@ TEST( SpinMutexTest )
     CHECK( s_count == LOOP * 3 );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE SpinMutexSuite
 

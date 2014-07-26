@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - DateTime - Time Span Test
+// Caramel C++ Library Test - DateTime - Time Span Suite
 
 #include "CaramelTestPch.h"
 
@@ -13,11 +13,6 @@ namespace Caramel
 
 SUITE( TimeSpanSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Time Span Test
-//
 
 TEST( TimeSpanTest )
 {
@@ -227,8 +222,6 @@ TEST( LargeDateTimeDifferenceTest )
     CHECK(      59 == span2.Seconds() );
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE TimeSpanSuite
 

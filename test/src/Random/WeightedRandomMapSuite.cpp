@@ -1,4 +1,4 @@
-// Caramel C++ Library Test - Random - Weighted Random Map Test
+// Caramel C++ Library Test - Random - Weighted Random Map Suite
 
 #include "CaramelTestPch.h"
 
@@ -11,11 +11,6 @@ namespace Caramel
 
 SUITE( WeightedRandomMapSuite )
 {
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Weighted Random Map Test
-//
 
 TEST( WeightedRandomMapTrivialTest )
 {
@@ -74,8 +69,6 @@ TEST( WeightedRandomMapTest )
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 
 } // SUITE WeightedRandomMapSuite
 
