@@ -27,6 +27,7 @@ namespace Caramel
 //   ConstNamedValueRef
 //   NamedValueRef
 //   NamedValueEntry
+//   NamedValueFeed
 //
 
 namespace Detail
@@ -213,6 +214,16 @@ NamedValues::NamedValues( const std::map< std::string, std::string >& pairs )
     for ( const auto& pair : pairs )
     {
         this->operator[]( pair.first ) = pair.second;
+    }
+}
+
+
+NamedValues::NamedValues( std::initializer_list< Detail::NamedValueFeed > inits )
+    : m_impl( new NamedValuesImpl )
+{
+    for ( const auto& init : inits )
+    {
+        *( m_impl->InsertValue( init.Name() )) = *( init.Entry() );
     }
 }
 
@@ -546,10 +557,7 @@ NamedValueRef::NamedValueRef( NamedValues* host, const std::string& name, NamedV
 NamedValueRef& NamedValueRef::operator=( Bool value )
 {
     this->PrepareEntry();
-
-    m_entry->value = static_cast< Uint64 >( value ? 1 : 0 );
-    m_entry->type  = NAMED_VALUE_BOOL;
-
+    m_entry->SetBool( value );
     return *this;
 }
 
@@ -557,10 +565,7 @@ NamedValueRef& NamedValueRef::operator=( Bool value )
 NamedValueRef& NamedValueRef::operator=( Int value )
 {
     this->PrepareEntry();
-
-    m_entry->value = static_cast< Uint64 >( value );
-    m_entry->type  = NAMED_VALUE_INT;
-
+    m_entry->SetInt( value );
     return *this;
 }
 
@@ -568,10 +573,7 @@ NamedValueRef& NamedValueRef::operator=( Int value )
 NamedValueRef& NamedValueRef::operator=( Uint value )
 {
     this->PrepareEntry();
-
-    m_entry->value = static_cast< Uint64 >( value );
-    m_entry->type  = NAMED_VALUE_UINT;
-
+    m_entry->SetUint( value );
     return *this;
 }
 
@@ -579,10 +581,7 @@ NamedValueRef& NamedValueRef::operator=( Uint value )
 NamedValueRef& NamedValueRef::operator=( Long value )
 {
     this->PrepareEntry();
-
-    m_entry->value = static_cast< Uint64 >( value );
-    m_entry->type  = NAMED_VALUE_INT;
-
+    m_entry->SetLong( value );
     return *this;
 }
 
@@ -590,10 +589,7 @@ NamedValueRef& NamedValueRef::operator=( Long value )
 NamedValueRef& NamedValueRef::operator=( Ulong value )
 {
     this->PrepareEntry();
-
-    m_entry->value = static_cast< Uint64 >( value );
-    m_entry->type  = NAMED_VALUE_UINT;
-
+    m_entry->SetUlong( value );
     return *this;
 }
 
@@ -601,10 +597,7 @@ NamedValueRef& NamedValueRef::operator=( Ulong value )
 NamedValueRef& NamedValueRef::operator=( Int64 value )
 {
     this->PrepareEntry();
-
-    m_entry->value = static_cast< Uint64 >( value );
-    m_entry->type  = NAMED_VALUE_INT64;
-
+    m_entry->SetInt64( value );
     return *this;
 }
 
@@ -612,10 +605,7 @@ NamedValueRef& NamedValueRef::operator=( Int64 value )
 NamedValueRef& NamedValueRef::operator=( Uint64 value )
 {
     this->PrepareEntry();
-
-    m_entry->value = value;
-    m_entry->type  = NAMED_VALUE_INT64;
-
+    m_entry->SetUint64( value );
     return *this;
 }
 
@@ -623,10 +613,7 @@ NamedValueRef& NamedValueRef::operator=( Uint64 value )
 NamedValueRef& NamedValueRef::operator=( Double value )
 {
     this->PrepareEntry();
-
-    m_entry->value = value;
-    m_entry->type  = NAMED_VALUE_DOUBLE;
-
+    m_entry->SetDouble( value );
     return *this;
 }
 
@@ -634,10 +621,7 @@ NamedValueRef& NamedValueRef::operator=( Double value )
 NamedValueRef& NamedValueRef::operator=( const std::string& value )
 {
     this->PrepareEntry();
-
-    m_entry->value = value;
-    m_entry->type  = NAMED_VALUE_STRING;
-
+    m_entry->SetString( value );
     return *this;
 }
 
@@ -665,6 +649,77 @@ void NamedValueRef::PrepareEntry()
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Named Value Entry
+//
+
+//
+// Set Values
+//
+
+void NamedValueEntry::SetBool( Bool v )
+{
+    value = static_cast< Uint64 >( v ? 1 : 0 );
+    type  = NAMED_VALUE_BOOL;
+}
+
+
+void NamedValueEntry::SetInt( Int v )
+{
+    value = static_cast< Uint64 >( v );
+    type  = NAMED_VALUE_INT;
+}
+
+
+void NamedValueEntry::SetUint( Uint v )
+{
+    value = static_cast< Uint64 >( v );
+    type  = NAMED_VALUE_UINT;
+}
+
+
+void NamedValueEntry::SetInt64( Int64 v )
+{
+    value = static_cast< Uint64 >( v );
+    type  = NAMED_VALUE_INT64;
+}
+
+
+void NamedValueEntry::SetUint64( Uint64 v )
+{
+    value = v;
+    type  = NAMED_VALUE_INT64;
+}
+
+
+void NamedValueEntry::SetDouble( Double v )
+{
+    value = v;
+    type  = NAMED_VALUE_DOUBLE;
+}
+
+
+void NamedValueEntry::SetString( const std::string& v )
+{
+    value = v;
+    type  = NAMED_VALUE_STRING;
+}
+
+
+void NamedValueEntry::SetLong( Long v )
+{
+    value = static_cast< Uint64 >( v );
+    type  = NAMED_VALUE_INT;
+}
+
+
+void NamedValueEntry::SetUlong( Ulong v )
+{
+    value = static_cast< Uint64 >( v );
+    type  = NAMED_VALUE_UINT;
+}
+
+
+//
+// Get Values
 //
 
 Bool NamedValueEntry::GetBool() const
@@ -706,6 +761,96 @@ Double NamedValueEntry::GetDouble() const
 std::string NamedValueEntry::GetString() const
 {
     return boost::get< std::string >( value );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Named Value Feed
+//
+
+NamedValueFeed::NamedValueFeed( const std::string& name, Bool v )
+    : m_name( name )
+    , m_entry( new NamedValueEntry )
+{
+    m_entry->SetBool( v );
+}
+
+
+NamedValueFeed::NamedValueFeed( const std::string& name, Int v )
+    : m_name( name )
+    , m_entry( new NamedValueEntry )
+{
+    m_entry->SetInt( v );
+}
+
+
+NamedValueFeed::NamedValueFeed( const std::string& name, Uint v )
+    : m_name( name )
+    , m_entry( new NamedValueEntry )
+{
+    m_entry->SetUint( v );
+}
+
+
+NamedValueFeed::NamedValueFeed( const std::string& name, Int64 v )
+    : m_name( name )
+    , m_entry( new NamedValueEntry )
+{
+    m_entry->SetInt64( v );
+}
+
+
+NamedValueFeed::NamedValueFeed( const std::string& name, Uint64 v )
+    : m_name( name )
+    , m_entry( new NamedValueEntry )
+{
+    m_entry->SetUint64( v );
+}
+
+
+NamedValueFeed::NamedValueFeed( const std::string& name, Double v )
+    : m_name( name )
+    , m_entry( new NamedValueEntry )
+{
+    m_entry->SetDouble( v );
+}
+
+
+NamedValueFeed::NamedValueFeed( const std::string& name, const Char* v )
+    : m_name( name )
+    , m_entry( new NamedValueEntry )
+{
+    if ( ! v )
+    {
+        CARAMEL_INVALID_ARGUMENT();
+    }
+
+    m_entry->SetString( std::string( v ));
+}
+
+
+NamedValueFeed::NamedValueFeed( const std::string& name, const std::string& v )
+    : m_name( name )
+    , m_entry( new NamedValueEntry )
+{
+    m_entry->SetString( std::string( v ));
+}
+
+
+NamedValueFeed::NamedValueFeed( const std::string& name, Long v )
+    : m_name( name )
+    , m_entry( new NamedValueEntry )
+{
+    m_entry->SetLong( v );
+}
+
+
+NamedValueFeed::NamedValueFeed( const std::string& name, Ulong v )
+    : m_name( name )
+    , m_entry( new NamedValueEntry )
+{
+    m_entry->SetUlong( v );
 }
 
 

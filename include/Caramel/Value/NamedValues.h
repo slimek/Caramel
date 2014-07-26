@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
+#include <Caramel/Value/Detail/NamedValueFeed.h>
 #include <Caramel/Value/Detail/NamedValueRef.h>
 #include <map>
 
@@ -28,7 +29,16 @@ namespace Caramel
 //    nv[ "age" ]    = 16;
 //    nv[ "canFly" ] = true;
 //
-// 2. Make values by chaining, fit for function parameters.
+// 2. Make values by initializer list, fit for function parameters.
+//
+//    player->InitSettings(
+//    {
+//        { "name",   "Reimu" },
+//        { "age",    16 },
+//        { "canFly", true }
+//    });
+//
+// 3. Make values by chaining. (deprecated)
 //
 //    player->InitSettings( Caramel::NamedValues
 //        ( "name",   "Reimu" )
@@ -55,6 +65,8 @@ public:
     NamedValues();
     explicit NamedValues( const std::map< std::string, std::string >& pairs );
     
+    NamedValues( std::initializer_list< Detail::NamedValueFeed > inits );
+
 
     /// Insert Values by Chaining ///
 

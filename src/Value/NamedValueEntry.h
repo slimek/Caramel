@@ -42,6 +42,19 @@ struct NamedValueEntry
 {
     NamedValueEntry() : type( NAMED_VALUE_UNDEF ) {}
 
+    
+    void SetBool  ( Bool v );
+    void SetInt   ( Int v );
+    void SetUint  ( Uint v );
+    void SetInt64 ( Int64 v );
+    void SetUint64( Uint64 v );
+    void SetDouble( Double v );
+    void SetString( const std::string& v );
+
+    void SetLong ( Long v );
+    void SetUlong( Ulong v );
+
+
     // Throws if the type is incorrect
     Bool        GetBool()   const;
     Int         GetInt()    const;

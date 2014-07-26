@@ -761,6 +761,9 @@
     <ClInclude Include="..\src\Windows\RegistryImpl.h">
       <Filter>2. Sources\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Value\Detail\NamedValueFeed.h">
+      <Filter>1. Public Packages\Value\Detail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

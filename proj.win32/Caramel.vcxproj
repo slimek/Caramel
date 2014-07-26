@@ -159,6 +159,7 @@
     <ClInclude Include="..\include\Caramel\Value\Any.h" />
     <ClInclude Include="..\include\Caramel\Value\Detail\AnyCasters.h" />
     <ClInclude Include="..\include\Caramel\Value\Detail\AnyHolders.h" />
+    <ClInclude Include="..\include\Caramel\Value\Detail\NamedValueFeed.h" />
     <ClInclude Include="..\include\Caramel\Value\Detail\NamedValueRef.h" />
     <ClInclude Include="..\include\Caramel\Value\NamedValues.h" />
     <ClInclude Include="..\include\Caramel\Value\SharedArray.h" />

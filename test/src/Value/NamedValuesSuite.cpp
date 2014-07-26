@@ -191,6 +191,73 @@ TEST( NamedValuesFromMapTest )
 }
 
 
+void TestNamedValues( const NamedValues& nv ) {}
+
+TEST( NamedValuesInitializerListTest )
+{
+    const NamedValues nv
+    {
+        { "Alice", 7 },
+        { "Marisa", "witch" },
+    };
+
+    CHECK( 7       == nv[ "Alice" ].AsInt() );
+    CHECK( "witch" == nv[ "Marisa" ].AsString() );
+
+
+    /// Test all acceptable types ///
+
+    const Bool   z   = false;
+    const Int    i   = -135;
+    const Uint   u   = 42;
+    const Long   l   = -216;
+    const Ulong  ul  = 1729;
+    const Int64  i64 = -19;
+    const Uint64 u64 = 2048;
+    const Float  f   = 3.14f;
+    const Double d   = 9.8;
+    
+    const std::string s  = "Tribble";
+    const Char*       sz = "Borgs";
+
+    const NamedValues nv2
+    {
+        { "Bool", z },
+        { "Int", i },
+        { "Uint", u },
+        { "Long", l },
+        { "Ulong", ul },
+        { "Int64", i64 },
+        { "Uint64", u64 },
+        { "Float", f },
+        { "Double", d },
+        { "String", s },
+        { "Chars", sz },
+    };
+
+    CHECK( false  == nv2[ "Bool" ].AsBool() );
+    CHECK( -135   == nv2[ "Int" ].AsInt() );
+    CHECK( 42     == nv2[ "Uint" ].AsUint() );
+    CHECK( -216   == nv2[ "Long" ].AsInt() );
+    CHECK( 1729   == nv2[ "Ulong" ].AsUint() );
+    CHECK( -19    == nv2[ "Int64" ].AsInt64() );
+    CHECK( 2048   == nv2[ "Uint64" ].AsUint64() );
+    CHECK( 3.14f  == nv2[ "Float" ].AsDouble() );
+    CHECK( 9.8    == nv2[ "Double" ].AsDouble() );
+    CHECK( "Tribble" == nv2[ "String" ].AsString() );
+    CHECK( "Borgs"   == nv2[ "Chars" ].AsString() );
+
+
+    /// Pass as Parameter ///
+
+    TestNamedValues(
+    {
+        { "Alice", 7 },
+        { "Reimu", "miko" }
+    });
+}
+
+
 } // SUITE NamedValuesSuite
 
 } // namespace Caramel
