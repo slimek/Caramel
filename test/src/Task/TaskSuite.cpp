@@ -225,7 +225,7 @@ TEST( TaskWaitOrCatchTest )
     CHECK( result3.anyFailure );
     CHECK( result3.exception );
 
-    CHECK( 42      == result3.anyFailure->Id() );
+    CHECK( 42      == result3.anyFailure->Code() );
     CHECK( "Cirno" == result3.anyFailure->Value< std::string >() );
 }
 

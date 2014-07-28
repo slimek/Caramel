@@ -18,8 +18,8 @@ class AnyEvent;
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Any Failure
-//  - An exception which can carry an ID and an any type value.
-//    The meaning of failure ID depends on application.
+//  - An exception which can carry an integer code and an any type value.
+//    The meaning of failure codes depends on application.
 //
 
 class AnyFailure : public std::exception
@@ -27,16 +27,16 @@ class AnyFailure : public std::exception
 public:
 
     // A failure without a value
-    explicit AnyFailure( Int id );
+    explicit AnyFailure( Int code );
 
     // A failure with a any value
-    AnyFailure( Int id, const Any& value );
-    AnyFailure( Int id, Any&& value );
+    AnyFailure( Int code, const Any& value );
+    AnyFailure( Int code, Any&& value );
 
 
     /// Accessors ///
 
-    Int Id() const { return m_id; }
+    Int Code() const { return m_code; }
 
     template< typename T >
     T Value() const;
@@ -51,11 +51,6 @@ public:
     Bool HasCustomWhat() const { return m_customWhat; }
 
 
-    /// Conversions ///
-
-    AnyEvent ToAnyEvent() const;
-
-
     /// Overrides std::exception ///
 
     // Returns a generated message from id if m_what not given.
@@ -66,7 +61,7 @@ private:
 
     void Init();
 
-    Int m_id;
+    Int m_code;
     Any m_value;
 
     Bool m_customWhat;

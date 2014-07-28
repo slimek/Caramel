@@ -82,16 +82,16 @@ Exception::Exception(
 // Any Failure
 //
 
-AnyFailure::AnyFailure( Int id )
-    : m_id( id )
+AnyFailure::AnyFailure( Int code )
+    : m_code( code )
     , m_customWhat( false )
 {
     this->Init();
 }
 
 
-AnyFailure::AnyFailure( Int id, const Any& value )
-    : m_id( id )
+AnyFailure::AnyFailure( Int code, const Any& value )
+    : m_code( code )
     , m_value( value )
     , m_customWhat( false )
 {
@@ -99,8 +99,8 @@ AnyFailure::AnyFailure( Int id, const Any& value )
 }
 
 
-AnyFailure::AnyFailure( Int id, Any&& value )
-    : m_id( id )
+AnyFailure::AnyFailure( Int code, Any&& value )
+    : m_code( code )
     , m_value( std::move( value ))
     , m_customWhat( false )
 {
@@ -110,7 +110,7 @@ AnyFailure::AnyFailure( Int id, Any&& value )
 
 void AnyFailure::Init()
 {
-    m_what = Format( "AnyFailure[id:{0}]", m_id );
+    m_what = Format( "AnyFailure[code:{0}]", m_code );
 }
 
 
@@ -131,16 +131,6 @@ AnyFailure& AnyFailure::What( std::string&& what )
     m_what = std::move( what );
     m_customWhat = true;
     return *this;
-}
-
-
-//
-// Conversions
-//
-
-AnyEvent AnyFailure::ToAnyEvent() const
-{
-    return AnyEvent( m_id, m_value );
 }
 
 
@@ -263,12 +253,12 @@ std::string CaramelAnyFailureHolder::TracingMessage() const
 {
     if ( m_exception.HasCustomWhat() )
     {
-        return Format( "Caramel::AnyFailure caught, id: {0}, what: {1}",
-                       m_exception.Id(), m_exception.What() );
+        return Format( "Caramel::AnyFailure caught, code: {0}, what: {1}",
+                       m_exception.Code(), m_exception.What() );
     }
     else
     {
-        return Format( "Caramel::AnyFailure caught, id: {0}", m_exception.Id() );
+        return Format( "Caramel::AnyFailure caught, code: {0}", m_exception.Code() );
     }
 }
 

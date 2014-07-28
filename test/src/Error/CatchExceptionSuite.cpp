@@ -62,7 +62,7 @@ TEST( CatchExceptionTest )
         }
         catch ( const AnyFailure& fx )
         {
-            CHECK( 42 == fx.Id() );
+            CHECK( 42 == fx.Code() );
             CHECK( "The Answer" == fx.Value< std::string >() );
         }
         catch ( ... )
@@ -136,7 +136,7 @@ TEST( CatchExceptionWithResultTest )
         }
         catch ( const AnyFailure& fx )
         {
-            CHECK( 42 == fx.Id() );
+            CHECK( 42 == fx.Code() );
             CHECK( "The Answer" == fx.Value< std::string >() );
         }
         catch ( ... )

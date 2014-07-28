@@ -57,7 +57,7 @@ TEST( ExceptionPtrTest )
     }
     catch ( const AnyFailure& fx )
     {
-        CHECK( 42 == fx.Id() );
+        CHECK( 42 == fx.Code() );
         CHECK( "The Big Answer" == fx.What() );
     }
     catch ( ... )
@@ -131,7 +131,7 @@ TEST( AnyFailurePtrTest )
     AnyFailurePtr pf2 = AnyFailurePtr::CastFrom( px2 );
 
     CHECK( pf2 );
-    CHECK( 42 == pf2->Id() );
+    CHECK( 42 == pf2->Code() );
     CHECK( "The Big Answer" == pf2->What() );
 
 

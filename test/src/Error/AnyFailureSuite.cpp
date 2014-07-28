@@ -22,7 +22,7 @@ TEST( AnyFailureTest )
     }
     catch ( const std::exception& x )
     {
-        CHECK( 0 == std::strcmp( "AnyFailure[id:42]", x.what() ));
+        CHECK( 0 == std::strcmp( "AnyFailure[code:42]", x.what() ));
     }
 
 
@@ -32,7 +32,7 @@ TEST( AnyFailureTest )
     }
     catch ( const AnyFailure& fx )
     {
-        CHECK( 42 == fx.Id() );
+        CHECK( 42 == fx.Code() );
         CHECK( "The Answer" == fx.Value< std::string >() );
         CHECK( false == fx.HasCustomWhat() );
     }
@@ -59,37 +59,10 @@ TEST( AnyFailureTest )
     }
     catch ( const AnyFailure& fx )
     {
-        CHECK( 216 == fx.Id() );
+        CHECK( 216 == fx.Code() );
         CHECK( "Triple Six" == fx.What() );
         CHECK( true == fx.HasCustomWhat() );
     }
-}
-
-
-TEST( AnyFailureToEventTest )
-{
-    AnyEventQueue queue;
-
-    try
-    {
-        throw AnyFailure( 42, "The Answer" );
-    }
-    catch ( const AnyFailure& fx )
-    {
-        AnyEvent evt = fx.ToAnyEvent();
-        queue.Push( evt );
-    }
-    catch ( ... )
-    {
-        CHECK( ! "Not reached" );
-    }
-
-    AnyEvent evt;
-    CHECK( true == queue.TryPop( evt ));
-
-    CHECK( 42 == evt.Id() );
-    CHECK( "The Answer" == evt.Value< std::string >() );
-
 }
 
 
