@@ -108,6 +108,8 @@ Bool Base64Decode( const std::string& base64, SharedArray< Byte >& data )
     std::string buffer;
     const Bool result = Base64Decode( base64, buffer );
 
+    if ( ! result ) { return false; }
+    
     data = SharedArray< Byte >( buffer.length() );
     std::copy( buffer.begin(), buffer.end(), data.begin() );
 
