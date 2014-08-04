@@ -13,60 +13,6 @@ namespace Caramel
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Make a Const Shared Array
-//
-
-template< typename T >
-inline ConstSharedArray< T > MakeConstSharedArray()
-{
-    return ConstSharedArray< T >();
-}
-
-
-template< typename T >
-inline ConstSharedArray< T > MakeConstSharedArray( const T& v0 )
-{
-    SharedArray< T > ary( 1 );
-    ary[0] = v0;
-    return ary;
-}
-
-
-template< typename T >
-inline ConstSharedArray< T > MakeConstSharedArray( const T& v0, const T& v1 )
-{
-    SharedArray< T > ary( 2 );
-    ary[0] = v0;
-    ary[1] = v1;
-    return ary;
-}
-
-
-template< typename T >
-inline ConstSharedArray< T > MakeConstSharedArray( const T& v0, const T& v1, const T& v2 )
-{
-    SharedArray< T > ary( 3 );
-    ary[0] = v0;
-    ary[1] = v1;
-    ary[2] = v2;
-    return ary;
-}
-
-
-template< typename T >
-inline ConstSharedArray< T > MakeConstSharedArray( const T& v0, const T& v1, const T& v2, const T& v3 )
-{
-    SharedArray< T > ary( 4 );
-    ary[0] = v0;
-    ary[1] = v1;
-    ary[2] = v2;
-    ary[3] = v3;
-    return ary;
-}
-
-
-///////////////////////////////////////////////////////////////////////////////
-//
 // Compare if two Shared Array are equal.
 //
 

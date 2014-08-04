@@ -61,6 +61,30 @@ TEST( SharedArrayTest )
 }
 
 
+TEST( SharedArrayInitializerTest )
+{
+    SharedArray< std::string > sa0{};
+
+    CHECK( true == sa0.IsEmpty() );
+    CHECK( 0    == sa0.Size() );
+
+
+    SharedArray< std::string > sa1{ "Cirno" };
+
+    CHECK( false == sa1.IsEmpty() );
+    CHECK( 1     == sa1.Size() );
+    CHECK( "Cirno" == sa1[0] );
+
+
+    SharedArray< std::string > sa3{ "Alice", "Reimu", "Marisa" };
+
+    CHECK( false == sa3.IsEmpty() );
+    CHECK( 3     == sa3.Size() );
+    CHECK( "Alice" == sa3[0] );
+    CHECK( "Marisa" == sa3[2] );
+}
+
+
 } // SUITE( SharedArraySuite )
 
 } // namespace Caramel

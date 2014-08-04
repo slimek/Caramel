@@ -125,7 +125,7 @@ void TestBasicMapWithSnapshot( MapType& map )
 
     CHECK( false == vshot2.IsEmpty() );
     CHECK( 3 == vshot2.Size() );
-    CHECK( vshot2 == MakeConstSharedArray< std::string >( "Marisa", "Alice", "Patchou" ));
+    CHECK(( vshot2 == ConstSharedArray< std::string >{ "Marisa", "Alice", "Patchou" } ));
     CHECK( false == pshot2.IsEmpty() );
     CHECK( 3 == pshot2.Size() );
     CHECK( 8 == pshot2[2].first && "Patchou" == pshot2[2].second );
@@ -136,7 +136,7 @@ void TestBasicMapWithSnapshot( MapType& map )
     auto pshot3 = map.GetPairsSnapshot();
 
     CHECK( 2 == vshot3.Size() );
-    CHECK( vshot3 == MakeConstSharedArray< std::string >( "Marisa", "Alice" ));
+    CHECK(( vshot3 == ConstSharedArray< std::string >{ "Marisa", "Alice" } ));
     CHECK( 2 == pshot3.Size() );
     CHECK( 7 == pshot3[1].first && "Alice" == pshot3[1].second );
 

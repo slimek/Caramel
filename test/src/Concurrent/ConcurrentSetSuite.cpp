@@ -81,6 +81,8 @@ TEST( ConcurrentFlatSetTest )
 template< typename SetType >
 void TestBasicSetWithSnapshot( SetType& set )
 {
+    typedef typename SetType::KeyType KeyType;
+
     auto shot1 = set.GetSnapshot();
 
     CHECK( true == shot1.IsEmpty() );
@@ -94,14 +96,14 @@ void TestBasicSetWithSnapshot( SetType& set )
 
     CHECK( false == shot2.IsEmpty() );
     CHECK( 3 == shot2.Size() );
-    CHECK( shot2 == MakeConstSharedArray( 6, 7, 8 ));
+    CHECK(( shot2 == ConstSharedArray< KeyType >{ 6, 7, 8 } ));
 
     set.Erase( 7 );
 
     auto shot3 = set.GetSnapshot();
 
     CHECK( 2 == shot3.Size() );
-    CHECK( shot3 == MakeConstSharedArray( 6, 8 ));
+    CHECK(( shot3 == ConstSharedArray< KeyType >{ 6, 8 } ));
 
     set.Clear();
 

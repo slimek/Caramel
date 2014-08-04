@@ -9,6 +9,7 @@
 #include <Caramel/Error/Exception.h>
 #include <boost/shared_array.hpp>
 #include <algorithm>
+#include <initializer_list>
 
 
 namespace Caramel
@@ -28,6 +29,7 @@ public:
 
     ConstSharedArray();
     explicit ConstSharedArray( Uint size );
+    explicit ConstSharedArray( std::initializer_list< T > inits );
 
     
     /// Properties ///
@@ -78,6 +80,7 @@ public:
 
     SharedArray();
     explicit SharedArray( Uint size );
+    explicit SharedArray( std::initializer_list< T > inits );
 
 
     /// Accessors (constant) ///
@@ -151,6 +154,18 @@ ConstSharedArray< T >::ConstSharedArray( Uint size )
 
 
 template< typename T >
+ConstSharedArray< T >::ConstSharedArray( std::initializer_list< T > inits )
+    : m_size( inits.size() )
+{
+    // If size is 0, keep a dummy content in m_array.
+    const Uint implSize = ( 0 < m_size ) ? m_size : 1;
+
+    m_array.reset( new T[implSize] );
+    std::copy( inits.begin(), inits.end(), &m_array[0] );    
+}
+
+
+template< typename T >
 SharedArray< T >::SharedArray()
     : ConstSharedArray< T >()
 {
@@ -158,8 +173,15 @@ SharedArray< T >::SharedArray()
 
 
 template< typename T >
-SharedArray< T >::SharedArray ( Uint size )
+SharedArray< T >::SharedArray( Uint size )
     : ConstSharedArray< T >( size )
+{
+}
+
+
+template< typename T >
+SharedArray< T >::SharedArray( std::initializer_list< T > inits )
+    : ConstSharedArray< T >( inits )
 {
 }
 
