@@ -4,6 +4,7 @@
 
 #include "Utils/SharedArrayUtils.h"
 #include <Caramel/Chrono/TimedBool.h>
+#include <Caramel/Concurrent/FlatSet.h>
 #include <Caramel/Concurrent/Set.h>
 #include <Caramel/Random/UniformRandom.h>
 #include <Caramel/Thread/ThisThread.h>
@@ -65,6 +66,13 @@ TEST( ConcurrentSetTest )
 }
 
 
+TEST( ConcurrentFlatSetTest )
+{
+    Concurrent::FlatSet< Int > iset;
+    TestBasicIntSet( iset );
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Basic Set with Snapshot Test
@@ -110,6 +118,13 @@ void TestBasicSetWithSnapshot( SetType& set )
 TEST( ConcurrentSetWithSnapshotTest )
 {
     Concurrent::SetWithSnapshot< Int > iset;
+    TestBasicSetWithSnapshot( iset );
+}
+
+
+TEST( ConcurrentFlatSetWithSnapshotTest )
+{
+    Concurrent::FlatSetWithSnapshot< Int > iset;
     TestBasicSetWithSnapshot( iset );
 }
 

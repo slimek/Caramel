@@ -764,6 +764,9 @@
     <ClInclude Include="..\include\Caramel\Value\Detail\NamedValueFeed.h">
       <Filter>1. Public Packages\Value\Detail</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Concurrent\FlatSet.h">
+      <Filter>1. Public Packages\Concurrent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">
