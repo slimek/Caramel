@@ -111,6 +111,23 @@ void TraceManager::AddManagedListener( Listener* listener )
 // Channel
 //
 
+Channel::Channel()
+    : m_impl( new ChannelImpl )
+{
+}
+
+
+void Channel::Open( const std::string& name, Trace::Level level )
+{
+    CARAMEL_NOT_IMPLEMENTED();
+}
+
+
+void Channel::Write( const std::string& message )
+{
+    CARAMEL_NOT_IMPLEMENTED();
+}
+
 
 //
 // Implementation

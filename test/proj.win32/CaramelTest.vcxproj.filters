@@ -295,6 +295,9 @@
     <ClCompile Include="..\src\Value\SharedArraySuite.cpp">
       <Filter>2. Tests\Value</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Trace\TraceChannelSuite.cpp">
+      <Filter>2. Tests\Trace</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">
