@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
+#include <Caramel/String/Sprintf.h>
 #include <Caramel/Trace/TraceTypes.h>
 
 
@@ -23,6 +24,8 @@ class ChannelImpl;
 
 class Channel
 {
+    friend class Listener;
+
 public:
 
     Channel();
@@ -32,11 +35,26 @@ public:
 
     void Write( const std::string& message );
 
+    template< typename... Args >
+    void Write( const std::string& format, Args&&... args );
+
 
 private:
 
     std::shared_ptr< ChannelImpl > m_impl;
 };
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Implementation
+//
+
+template< typename... Args >
+inline void Channel::Write( const std::string& format, Args&&... args )
+{
+    this->Write( Sprintf( format, std::forward< Args >( args )... ));
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -71,6 +71,26 @@ void TraceManager::BindListenerToBuiltinChannels( Level minLevel, Listener* list
 }
 
 
+void TraceManager::BindListenerToNamedChannel( const std::string& channelName, Listener* listener )
+{
+    ChannelPtr channel;
+
+    {
+        LockGuard lock( m_namedChannelsMutex );
+
+        auto iter = m_namedChannels.left.find( channelName );
+        if ( iter == m_namedChannels.left.end() )
+        {
+            CARAMEL_THROW( "Named channel %s not found", channelName );
+        }
+
+        channel = iter->second;
+    }
+
+    channel->RegisterListener( listener );
+}
+
+
 void TraceManager::UnbindListenerFromAllChannels( Listener* listener )
 {
     for ( const auto& ibc : m_builtinChannels )
@@ -79,10 +99,14 @@ void TraceManager::UnbindListenerFromAllChannels( Listener* listener )
         channel->TryUnregisterListener( listener );
     }
 
-    for ( const auto& inc : m_namedChannels )
     {
-        ChannelPtr channel = inc.second;
-        channel->TryUnregisterListener( listener );
+        LockGuard lock( m_namedChannelsMutex );
+
+        for ( const auto& namedEntry : m_namedChannels )
+        {
+            ChannelPtr channel = namedEntry.right;
+            channel->TryUnregisterListener( listener );
+        }
     }
 }
 
@@ -95,6 +119,40 @@ void TraceManager::WriteToBuiltinChannel( Level level, const std::string& messag
     channel->Write( level, message );
 }
 
+
+//
+// Named Channels
+//
+
+void TraceManager::AddNamedChannel( ChannelPtr channel )
+{
+    const std::string name = channel->GetName();
+
+    LockGuard lock( m_namedChannelsMutex );
+
+    const auto result = m_namedChannels.insert( NamedChannelEntry( name, channel ));
+    if ( ! result.second )
+    {
+        CARAMEL_THROW( "Named channel is duplicate, name: %s", name );
+    }
+}
+
+
+void TraceManager::RemoveNamedChannel( ChannelPtr channel )
+{
+    LockGuard lock( m_namedChannelsMutex );
+
+    const auto count = m_namedChannels.right.erase( channel );
+    if ( count == 0 )
+    {
+        CARAMEL_TRACE_WARN( "Named channel not found, name: %s", channel->GetName() );
+    }
+}
+
+
+//
+// Managed Listeners 
+//
 
 void TraceManager::AddManagedListener( Listener* listener )
 {
@@ -119,13 +177,13 @@ Channel::Channel()
 
 void Channel::Open( const std::string& name, Trace::Level level )
 {
-    CARAMEL_NOT_IMPLEMENTED();
+    m_impl->Open( name, level );
 }
 
 
 void Channel::Write( const std::string& message )
 {
-    CARAMEL_NOT_IMPLEMENTED();
+    m_impl->Write( message );
 }
 
 
@@ -133,9 +191,35 @@ void Channel::Write( const std::string& message )
 // Implementation
 //
 
+void ChannelImpl::Open( const std::string& name, Level level )
+{
+    CARAMEL_ASSERT( ! name.empty() );
+
+    {
+        LockGuard lock( m_mutex );
+        CARAMEL_ASSERT( m_name.empty() );
+        m_name = name;
+        m_level = level;
+    }
+
+    TraceManager::Instance()->AddNamedChannel( this->shared_from_this() );
+}
+
+
+void ChannelImpl::Write( const std::string& message )
+{
+    const auto listeners = m_listeners.GetSnapshot();
+
+    for ( auto listener : listeners )
+    {
+        listener->Write( m_level, message );
+    }
+}
+
+
 void ChannelImpl::RegisterListener( Listener* listener )
 {
-    const Bool inserted = m_listeners.insert( listener ).second;
+    const Bool inserted = m_listeners.Insert( listener );
     if ( ! inserted )
     {
         CARAMEL_THROW( "Listener is duplicate" );
@@ -145,16 +229,14 @@ void ChannelImpl::RegisterListener( Listener* listener )
 
 Bool ChannelImpl::TryUnregisterListener( Listener* listener )
 {
-    ListenerSet::iterator i = m_listeners.find( listener );
-    if ( m_listeners.end() == i )
-    {
-        return false;
-    }
-    else
-    {
-        m_listeners.erase( i );
-        return true;
-    }
+    return m_listeners.Erase( listener ) != 0;
+}
+
+
+std::string ChannelImpl::GetName() const
+{
+    LockGuard lock( m_mutex );
+    return m_name;
 }
 
 
@@ -165,7 +247,9 @@ Bool ChannelImpl::TryUnregisterListener( Listener* listener )
 
 void BuiltinChannel::Write( Level level, const std::string& message )
 {
-    for ( Listener* listener : m_listeners )
+    const auto listeners = m_listeners.GetSnapshot();
+
+    for ( auto listener : listeners )
     {
         listener->Write( level, message );
     }
@@ -261,12 +345,13 @@ void Listener::BindBuiltinChannels( Level minLevel )
 
 void Listener::BindChannelByName( const std::string& channelName )
 {
+    TraceManager::Instance()->BindListenerToNamedChannel( channelName, this );
 }
 
 
 void Listener::BindChannel( Channel& channel )
 {
-    
+    channel.m_impl->RegisterListener( this );
 }
 
 

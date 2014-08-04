@@ -10,7 +10,10 @@
 #include <Caramel/Object/Singleton.h>
 #include <Caramel/Trace/Listeners.h>
 #include <boost/container/flat_map.hpp>
+#include <boost/bimap/bimap.hpp>
+#include <boost/bimap/set_of.hpp>
 #include <map>
+#include <mutex>
 #include <set>
 
 
@@ -32,16 +35,26 @@ public:
     TraceManager();
     ~TraceManager();
 
-    //
-    // You would bind a listener to built-in channels all above the level.
-    //
+
+    // You would bind a listener to built-in channels all above the minLevel.
     void BindListenerToBuiltinChannels( Level minLevel, Listener* listener );
     
+    void BindListenerToNamedChannel( const std::string& channelName, Listener* listener );
+
     void UnbindListenerFromAllChannels( Listener* listener );
 
     void WriteToBuiltinChannel( Level level, const std::string& message );
 
+
+    /// Managed Listener ///
+
     void AddManagedListener( Listener* listener );
+
+
+    /// Named Channels ///
+
+    void AddNamedChannel( ChannelPtr channel );
+    void RemoveNamedChannel( ChannelPtr channel );
 
 
 private:
@@ -59,7 +72,16 @@ private:
 
     /// User-defined Channels - Accessed by names ///
 
-    typedef std::map< std::string, ChannelPtr > NamedChannelMap;
+    mutable std::mutex m_namedChannelsMutex;
+
+    // Boost.Bimap< Name, Channel >
+    typedef boost::bimaps::bimap<
+        boost::bimaps::set_of< std::string >,
+        boost::bimaps::set_of< ChannelPtr >
+    > NamedChannelMap;
+
+    typedef NamedChannelMap::value_type NamedChannelEntry;
+
     NamedChannelMap m_namedChannels;
 
 

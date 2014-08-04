@@ -5,9 +5,10 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
+#include <Caramel/Concurrent/FlatSet.h>
 #include <Caramel/Trace/Channel.h>
 #include <Caramel/Trace/Listeners.h>
-#include <boost/container/flat_set.hpp>
+#include <mutex>
 
 
 namespace Caramel
@@ -21,19 +22,35 @@ namespace Trace
 // Channel
 //
 
-class ChannelImpl
+class ChannelImpl : public std::enable_shared_from_this< ChannelImpl >
 {
 public:
 
+    void Open( const std::string& name, Level level );
+
+    void Write( const std::string& message );
+
+
+    /// Listeners ///
+    
     void RegisterListener( Listener* listener );
     
     // Returns false if listener not found.
     Bool TryUnregisterListener( Listener* listener );
 
 
+    /// Properties ///
+
+    std::string GetName() const;
+
 protected:
 
-    typedef boost::container::flat_set< Listener* > ListenerSet;
+    mutable std::mutex m_mutex;
+
+    std::string m_name;
+    Level m_level { LEVEL_SILENT };
+
+    typedef Concurrent::FlatSetWithSnapshot< Listener* > ListenerSet;
     ListenerSet m_listeners;
 };
 
