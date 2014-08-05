@@ -26,7 +26,7 @@ TEST( IsPowerOfTwoTest )
     CHECK( false == IsPowerOfTwoN< 3 >::VALUE );
     CHECK( false == IsPowerOfTwoN< 42 >::VALUE );
     CHECK( false == IsPowerOfTwoN< 0x7FFFFFFF >::VALUE );
-    CHECK( false == IsPowerOfTwoN< -1 >::VALUE );
+    CHECK( false == IsPowerOfTwoN< (Uint)-1 >::VALUE );
 
 
     /// Runtime Function ///
