@@ -149,7 +149,7 @@ TEST( TaskWithExceptionTest )
 
     /// Exception in Wait() ///
 
-    auto task1 = MakeTask( "BadTask1", [] { throw std::exception( "bad1" ); } );
+    auto task1 = MakeTask( "BadTask1", [] { throw std::runtime_error( "bad1" ); } );
     async.Submit( task1 );
 
     try
@@ -166,7 +166,7 @@ TEST( TaskWithExceptionTest )
 
     /// Exception in GetResult() ///
 
-    Task< Int > task2 = MakeTask( "BadTask2", [] { throw std::exception( "bad2" ); return 42; } );
+    Task< Int > task2 = MakeTask( "BadTask2", [] { throw std::runtime_error( "bad2" ); return 42; } );
     async.Submit( task2 );
 
     try
@@ -202,7 +202,7 @@ TEST( TaskWaitOrCatchTest )
 
     /// Fault with std::exception ///
 
-    auto task2 = MakeTask( "Task2", [] { throw std::exception( "bad" ); } );
+    auto task2 = MakeTask( "Task2", [] { throw std::runtime_error( "bad" ); } );
     async.Submit( task2 );
 
     const auto result2 = task2.Catch();
