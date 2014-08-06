@@ -164,8 +164,6 @@ TEST( TimeSpanLimitTest )
     const auto max = TimeSpan::MaxValue();
     const auto min = TimeSpan::MinValue();
 
-    const double v = max.TotalHours();
-
     CHECK(  9223372036854.7754 == max.TotalSeconds() );
     CHECK( -9223372036854.7754 == min.TotalSeconds() );
 
