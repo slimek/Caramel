@@ -20,8 +20,10 @@ project.properties
 
 # Xcode Generated Files
 xcschememanagement.plist
+*.xccheckout
 *.xcscheme
 *.xcuserstate
 *.xcworkspacedata
 *.a
 temp.txt
+
