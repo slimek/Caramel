@@ -48,7 +48,7 @@ TEST( IsGeneralStringTest )
     const Char* csz = "Const Char Ptr";
     CHECK( true == IgsTester( csz ));
 
-    Char* sz = "Char Ptr";
+    Char* sz = (Char*)( "Char Ptr" );
     CHECK( true == IgsTester( sz ));
 
     const Char csa[] = "Const Char Array";
