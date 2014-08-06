@@ -150,6 +150,8 @@
 		010356401991C00600F61887 /* NamedValueRef.h in Headers */ = {isa = PBXBuildFile; fileRef = 010355A91991C00600F61887 /* NamedValueRef.h */; };
 		010356411991C00600F61887 /* NamedValues.h in Headers */ = {isa = PBXBuildFile; fileRef = 010355AA1991C00600F61887 /* NamedValues.h */; };
 		010356421991C00600F61887 /* SharedArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 010355AB1991C00600F61887 /* SharedArray.h */; };
+		0154C9BC1992118C00D7B67D /* Async.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0154C9BB1992118C00D7B67D /* Async.cpp */; };
+		0154C9BE199211B300D7B67D /* Data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0154C9BD199211B300D7B67D /* Data.cpp */; };
 		6A23F6CB1849A1B800FD4293 /* CaramelPch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A23F68E1849A1B800FD4293 /* CaramelPch.cpp */; };
 		6A23F6CC1849A1B800FD4293 /* CaramelPch.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A23F68F1849A1B800FD4293 /* CaramelPch.h */; };
 		6A23F6CD1849A1B800FD4293 /* Configuration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A23F6901849A1B800FD4293 /* Configuration.cpp */; };
@@ -345,6 +347,8 @@
 		010355A91991C00600F61887 /* NamedValueRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NamedValueRef.h; sourceTree = "<group>"; };
 		010355AA1991C00600F61887 /* NamedValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NamedValues.h; sourceTree = "<group>"; };
 		010355AB1991C00600F61887 /* SharedArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedArray.h; sourceTree = "<group>"; };
+		0154C9BB1992118C00D7B67D /* Async.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Async.cpp; sourceTree = "<group>"; };
+		0154C9BD199211B300D7B67D /* Data.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Data.cpp; sourceTree = "<group>"; };
 		6A23F6861849A13C00FD4293 /* libCaramel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCaramel.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A23F68E1849A1B800FD4293 /* CaramelPch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CaramelPch.cpp; sourceTree = "<group>"; };
 		6A23F68F1849A1B800FD4293 /* CaramelPch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaramelPch.h; sourceTree = "<group>"; };
@@ -883,6 +887,8 @@
 		6A23F68D1849A1B800FD4293 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				0154C9BD199211B300D7B67D /* Data.cpp */,
+				0154C9BB1992118C00D7B67D /* Async.cpp */,
 				6AC73136188D661C00188F23 /* Android.cpp */,
 				6A23F68E1849A1B800FD4293 /* CaramelPch.cpp */,
 				6A23F68F1849A1B800FD4293 /* CaramelPch.h */,
@@ -1283,6 +1289,7 @@
 				6A23F6EB1849A1B800FD4293 /* Statechart.cpp in Sources */,
 				6A23F6E41849A1B800FD4293 /* Program.cpp in Sources */,
 				6A23F6D71849A1B800FD4293 /* Error.cpp in Sources */,
+				0154C9BE199211B300D7B67D /* Data.cpp in Sources */,
 				6A23F6CD1849A1B800FD4293 /* Configuration.cpp in Sources */,
 				6A23F6E11849A1B800FD4293 /* Object.cpp in Sources */,
 				6A23F6F81849A1B800FD4293 /* Value.cpp in Sources */,
@@ -1299,6 +1306,7 @@
 				6A23F6CB1849A1B800FD4293 /* CaramelPch.cpp in Sources */,
 				6A23F6F01849A1B800FD4293 /* Task.cpp in Sources */,
 				6A23F6E71849A1B800FD4293 /* Random.cpp in Sources */,
+				0154C9BC1992118C00D7B67D /* Async.cpp in Sources */,
 				6A23F6F51849A1B800FD4293 /* Trace.cpp in Sources */,
 				6A23F6DD1849A1B800FD4293 /* Io.cpp in Sources */,
 				6A23F6DF1849A1B800FD4293 /* Math.cpp in Sources */,
