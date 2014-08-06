@@ -77,7 +77,6 @@
 		0150AA221990E5B20037F11B /* AnySuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9DA1990E5B20037F11B /* AnySuite.cpp */; };
 		0150AA231990E5B20037F11B /* NamedValuesSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9DB1990E5B20037F11B /* NamedValuesSuite.cpp */; };
 		0150AA241990E5B20037F11B /* SharedArraySuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9DC1990E5B20037F11B /* SharedArraySuite.cpp */; };
-		0150AA251990E5B20037F11B /* WindowsRegistrySuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9DE1990E5B20037F11B /* WindowsRegistrySuite.cpp */; };
 		6AAF38F11849D3B00010FAF1 /* libCaramel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AAF38F01849D3940010FAF1 /* libCaramel.a */; };
 /* End PBXBuildFile section */
 
@@ -179,7 +178,6 @@
 		0150A9DA1990E5B20037F11B /* AnySuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnySuite.cpp; sourceTree = "<group>"; };
 		0150A9DB1990E5B20037F11B /* NamedValuesSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NamedValuesSuite.cpp; sourceTree = "<group>"; };
 		0150A9DC1990E5B20037F11B /* SharedArraySuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SharedArraySuite.cpp; sourceTree = "<group>"; };
-		0150A9DE1990E5B20037F11B /* WindowsRegistrySuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WindowsRegistrySuite.cpp; sourceTree = "<group>"; };
 		6A706EBB184985D3004C9602 /* CaramelTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CaramelTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AAF38EB1849D3930010FAF1 /* Caramel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Caramel.xcodeproj; path = ../../proj.mac/Caramel.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -225,7 +223,6 @@
 				0150A9D31990E5B20037F11B /* Trace */,
 				0150A9D61990E5B20037F11B /* Utils */,
 				0150A9D91990E5B20037F11B /* Value */,
-				0150A9DD1990E5B20037F11B /* Windows */,
 			);
 			name = src;
 			path = ../src;
@@ -464,14 +461,6 @@
 			path = Value;
 			sourceTree = "<group>";
 		};
-		0150A9DD1990E5B20037F11B /* Windows */ = {
-			isa = PBXGroup;
-			children = (
-				0150A9DE1990E5B20037F11B /* WindowsRegistrySuite.cpp */,
-			);
-			path = Windows;
-			sourceTree = "<group>";
-		};
 		6A706E681849853D004C9602 = {
 			isa = PBXGroup;
 			children = (
@@ -619,7 +608,6 @@
 				0150AA1D1990E5B20037F11B /* SpinMutexSuite.cpp in Sources */,
 				0150AA221990E5B20037F11B /* AnySuite.cpp in Sources */,
 				0150AA1F1990E5B20037F11B /* WaitableBoolSuite.cpp in Sources */,
-				0150AA251990E5B20037F11B /* WindowsRegistrySuite.cpp in Sources */,
 				0150A9F21990E5B20037F11B /* ConcurrentSetSuite.cpp in Sources */,
 				0150A9F11990E5B20037F11B /* ConcurrentQueueSuite.cpp in Sources */,
 				0150AA031990E5B20037F11B /* TextStreamWriterSuite.cpp in Sources */,
