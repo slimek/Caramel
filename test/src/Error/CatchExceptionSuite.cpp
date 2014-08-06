@@ -71,7 +71,9 @@ TEST( CatchExceptionTest )
         }
     }
 
-    /// Access Violation ///
+    
+    /// Access Violation - Only for Win32 ///
+    #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
     {
         auto x = CatchException(
         []
@@ -97,6 +99,7 @@ TEST( CatchExceptionTest )
             CHECK( ! "Not reached" );
         }
     }
+    #endif // CARAMEL_SYSETM_IS_WINDOWS
 }
 
 
@@ -145,7 +148,8 @@ TEST( CatchExceptionWithResultTest )
         }
     }
 
-    /// Access Violation ///
+    /// Access Violation - Only for Win32 ///
+    #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
     {
         auto xc = CatchException(
         []
@@ -171,6 +175,7 @@ TEST( CatchExceptionWithResultTest )
             CHECK( ! "Not reached" );
         }
     }
+    #endif // CARAMEL_SYSTEM_IS_WINDOWS
 }
 
 
