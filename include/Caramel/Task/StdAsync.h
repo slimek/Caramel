@@ -24,7 +24,8 @@ public:
 
     void Submit( TaskCore& task ) override;
 
-
+    using TaskExecutor::Submit;
+    
 private:
 
     void AddReadyTask( TaskCore& task ) override;

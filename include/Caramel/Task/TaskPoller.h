@@ -29,6 +29,8 @@ public:
 
     void Submit( TaskCore& task ) override;
 
+    using TaskExecutor::Submit;
+    
     void PollOne();
 
     //

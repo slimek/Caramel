@@ -27,6 +27,8 @@ public:
 
     void Submit( TaskCore& task ) override;
 
+    using TaskExecutor::Submit;   
+    
     // Blocks the calling thread, until all the pooled threads joined.
     void Shutdown();
 
