@@ -10,8 +10,6 @@
 		6DA51D66193EB82B00050A24 /* Async.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DA51D65193EB82B00050A24 /* Async.cpp */; };
 		6DAC96D3191B5D760007BF91 /* Android.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAC9682191B5D760007BF91 /* Android.cpp */; };
 		6DAC96D4191B5D760007BF91 /* Apple.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DAC9683191B5D760007BF91 /* Apple.mm */; };
-		6DAC96D5191B5D760007BF91 /* libCaramel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DAC9687191B5D760007BF91 /* libCaramel.a */; };
-		6DAC96D6191B5D760007BF91 /* libCaramel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DAC9689191B5D760007BF91 /* libCaramel.a */; };
 		6DAC96D7191B5D760007BF91 /* CaramelPch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAC968A191B5D760007BF91 /* CaramelPch.cpp */; };
 		6DAC96D8191B5D760007BF91 /* Configuration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAC968C191B5D760007BF91 /* Configuration.cpp */; };
 		6DAC96D9191B5D760007BF91 /* Data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAC968D191B5D760007BF91 /* Data.cpp */; };
@@ -272,8 +270,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6DAC96D5191B5D760007BF91 /* libCaramel.a in Frameworks */,
-				6DAC96D6191B5D760007BF91 /* libCaramel.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
