@@ -767,6 +767,9 @@
     <ClInclude Include="..\include\Caramel\Concurrent\FlatSet.h">
       <Filter>1. Public Packages\Concurrent</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Statechart\PromptStateMachine.h">
+      <Filter>1. Public Packages\Statechart</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

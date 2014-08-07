@@ -24,7 +24,7 @@ typedef std::function< void() > Action;
 
 class State
 {
-    friend class StateMachine;
+    friend class StateMachineImpl;
 
 public:
 

@@ -112,6 +112,7 @@
     <ClInclude Include="..\include\Caramel\Setup\PchHeaders.h" />
     <ClInclude Include="..\include\Caramel\Setup\System.h" />
     <ClInclude Include="..\include\Caramel\Setup\Version.h" />
+    <ClInclude Include="..\include\Caramel\Statechart\PromptStateMachine.h" />
     <ClInclude Include="..\include\Caramel\Statechart\State.h" />
     <ClInclude Include="..\include\Caramel\Statechart\StateMachine.h" />
     <ClInclude Include="..\include\Caramel\String\Algorithm.h" />

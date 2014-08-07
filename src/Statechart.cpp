@@ -7,6 +7,7 @@
 #include "Statechart/Transition.h"
 #include <Caramel/Error/CatchException.h>
 #include <Caramel/Functional/ScopeExit.h>
+#include <Caramel/Statechart/PromptStateMachine.h>
 #include <Caramel/Task/TaskPoller.h>
 #include <Caramel/Thread/ThisThread.h>
 
@@ -21,6 +22,7 @@ namespace Statechart
 // Contents
 //
 //   StateMachine
+//   PromptStateMachine
 //   State
 //
 
@@ -54,35 +56,13 @@ StateMachine::~StateMachine()
 
 State StateMachine::AddState( Int stateId )
 {
-    CARAMEL_CHECK( ! m_impl->m_initiated );
-
-    StatePtr newState = std::make_shared< StateImpl >( stateId, m_impl->m_name );
-    if ( ! m_impl->m_states.Insert( stateId, newState ))
-    {
-        CARAMEL_THROW( "State duplicate, machine: %s, stateId: %d", m_impl->m_name, stateId );
-    }
-    return State( newState );
+    return m_impl->AddState( stateId );
 }
 
 
 void StateMachine::Initiate( Int stateId )
 {
-    CARAMEL_CHECK( ! m_impl->m_initiated );
-
-    StatePtr initialState;
-    if ( ! m_impl->m_states.Find( stateId, initialState ))
-    {
-        CARAMEL_THROW( "Initial state not found, machine: %s, stateId: %d",
-                       m_impl->m_name, stateId );
-    }
-
-    // All target states of transitions must exist.
-    // Throws if verify failed.
-    m_impl->VerifyStatesAndTransitions();
-
-    m_impl->PostInitiate( initialState );
-
-    m_impl->m_initiated = true;
+    m_impl->Initiate( stateId );
 }
 
 
@@ -177,6 +157,19 @@ StateMachineImpl::StateMachineImpl( const std::string& name, TaskExecutor& execu
 // Building
 //
 
+State StateMachineImpl::AddState( Int stateId )
+{
+    CARAMEL_CHECK( ! m_initiated );
+
+    StatePtr newState = std::make_shared< StateImpl >( stateId, m_name );
+    if ( ! m_states.Insert( stateId, newState ))
+    {
+        CARAMEL_THROW( "State duplicate, machine: %s, stateId: %d", m_name, stateId );
+    }
+    return State( newState );
+}
+
+
 void StateMachineImpl::VerifyStatesAndTransitions()
 {
     // Verification:
@@ -200,20 +193,37 @@ void StateMachineImpl::VerifyStatesAndTransitions()
 }
 
 
-//
-// Events and Transitions
-//
-
-void StateMachineImpl::PostInitiate( StatePtr initialState )
+void StateMachineImpl::Initiate( Int stateId )
 {
+    CARAMEL_CHECK( ! m_initiated );
+
+    StatePtr initialState;
+    if ( ! m_states.Find( stateId, initialState ))
+    {
+        CARAMEL_THROW( "Initial state not found, machine: %s, stateId: %d",
+                       m_name, stateId );
+    }
+
+    // All target states of transitions must exist.
+    // Throws if verify failed.
+    this->VerifyStatesAndTransitions();
+
+    // Post the initiate task.
+
     auto task = MakeTask(
-        Sprintf( "Machine[%s].ProcessInitiate", m_name ),
+        Format( "Machine[{0}].ProcessInitiate", m_name ),
         [=] { this->ProcessInitiate( initialState ); }
     );
 
-    this->m_taskExecutor->Submit( task );
+    m_taskExecutor->Submit( task );
+
+    m_initiated = true;
 }
 
+
+//
+// Events and Transitions
+//
 
 void StateMachineImpl::ProcessInitiate( StatePtr initialState )
 {
@@ -321,6 +331,15 @@ void StateMachineImpl::DoTransit( StatePtr targetState, const Action& transition
     m_currentState = targetState;
 
     this->EnterState();
+}
+
+
+void StateMachineImpl::PollAllEvents()
+{
+    CARAMEL_CHECK( m_builtinTaskPoller );
+    CARAMEL_CHECK( m_initiated );
+
+    m_builtinTaskPoller->PollFor( Ticks::MaxValue() );
 }
 
 
@@ -436,6 +455,90 @@ void StateMachineImpl::Send( const AnyEvent& event, Uint age )
     {
         this->PostEvent( event );
     }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Prompt State Machine
+//
+
+PromptStateMachine::PromptStateMachine( const std::string& name )
+    : m_impl( new StateMachineImpl( name ))
+{
+}
+
+
+PromptStateMachine::~PromptStateMachine()
+{
+}
+
+
+//
+// Building Machine
+//
+
+State PromptStateMachine::AddState( Int stateId )
+{
+    return m_impl->AddState( stateId );
+}
+
+
+void PromptStateMachine::Initiate( Int stateId )
+{
+    m_impl->Initiate( stateId );
+    m_impl->PollAllEvents();
+}
+
+
+//
+// Process Events
+//
+
+void PromptStateMachine::ProcessEvent( Int eventId )
+{
+    this->ProcessEvent( AnyEvent( eventId ));
+}
+
+
+void PromptStateMachine::ProcessEvent( Int eventId, const Any& value )
+{
+    this->ProcessEvent( AnyEvent( eventId, value ));
+}
+
+
+void PromptStateMachine::ProcessEvent( Int eventId, Any&& value )
+{
+    this->ProcessEvent( AnyEvent( eventId, std::move( value )));
+}
+
+
+void PromptStateMachine::ProcessEvent( const AnyEvent& event )
+{
+    m_impl->PostEvent( event );
+    m_impl->PollAllEvents();
+}
+
+
+void PromptStateMachine::PlanToTransit( Int stateId )
+{
+    m_impl->PlanToTransit( stateId );
+}
+
+
+//
+// Properties
+//
+
+Int PromptStateMachine::GetCurrentStateId() const
+{
+    return m_impl->m_currentState->GetId();
+}
+
+
+AnyEvent PromptStateMachine::GetActiveEvent() const
+{
+    return m_impl->m_activeEvent;
 }
 
 

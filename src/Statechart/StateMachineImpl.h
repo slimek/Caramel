@@ -29,6 +29,7 @@ namespace Statechart
 
 class StateMachineImpl : public AnyEventTargetImpl
 {
+    friend class PromptStateMachine;
     friend class StateMachine;
 
 public:
@@ -39,12 +40,12 @@ public:
 
     /// Building Machine ///
 
-    void VerifyStatesAndTransitions();
+    State AddState( Int stateId );
+    void Initiate( Int stateId );
 
 
     /// Events and Transitions ///
 
-    void PostInitiate( StatePtr initialState );
     void ProcessInitiate( StatePtr initialState );
 
     void PostEvent( const AnyEvent& event );
@@ -57,6 +58,10 @@ public:
 
     void StartTimer( const Ticks& ticks, Int eventId );
 
+    
+    // This function is valid only when the executor is built-in.
+    void PollAllEvents();
+
 
     /// Implements AnyEventTargetImpl ///
 
@@ -66,6 +71,8 @@ public:
 private:
 
     /// Internal Functions ///
+
+    void VerifyStatesAndTransitions();
 
     void EnterState();
     void ExitState();

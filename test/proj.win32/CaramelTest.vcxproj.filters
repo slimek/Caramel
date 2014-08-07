@@ -298,6 +298,9 @@
     <ClCompile Include="..\src\Trace\TraceChannelSuite.cpp">
       <Filter>2. Tests\Trace</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Statechart\PromptStateMachineSuite.cpp">
+      <Filter>2. Tests\Statechart</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">
