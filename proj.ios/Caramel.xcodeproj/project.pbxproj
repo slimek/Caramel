@@ -46,6 +46,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		011E97511994ABDA00CAED6A /* Caramel-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Caramel-Prefix.pch"; sourceTree = "<group>"; };
 		6DA51D61193EB82B00050A24 /* AnyEventDispatcherImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyEventDispatcherImpl.h; sourceTree = "<group>"; };
 		6DA51D62193EB82B00050A24 /* AnyEventQueueImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyEventQueueImpl.h; sourceTree = "<group>"; };
 		6DA51D63193EB82B00050A24 /* AnyEventSlotImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyEventSlotImpl.h; sourceTree = "<group>"; };
@@ -276,6 +277,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		011E97501994ABC300CAED6A /* proj.ios */ = {
+			isa = PBXGroup;
+			children = (
+				011E97511994ABDA00CAED6A /* Caramel-Prefix.pch */,
+			);
+			name = proj.ios;
+			sourceTree = "<group>";
+		};
 		6DA51D60193EB82B00050A24 /* Async */ = {
 			isa = PBXGroup;
 			children = (
@@ -992,8 +1001,9 @@
 			isa = PBXGroup;
 			children = (
 				6DAC95CA191B5D680007BF91 /* include */,
-				6DAFE0EE1815118B00859097 /* Products */,
 				6DAC9681191B5D760007BF91 /* src */,
+				011E97501994ABC300CAED6A /* proj.ios */,
+				6DAFE0EE1815118B00859097 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1090,7 +1100,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1108,6 +1117,8 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Caramel-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1123,15 +1134,13 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					../include,
-					../src,
 					../../CandyJar/include,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = "\"../../CandyJar/lib/ios\"";
-				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SEPARATE_STRIP = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = ../src;
 			};
 			name = Debug;
 		};
@@ -1139,7 +1148,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1156,6 +1164,8 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Caramel-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1168,15 +1178,13 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					../include,
-					../src,
 					../../CandyJar/include,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = "\"../../CandyJar/lib/ios\"";
-				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SEPARATE_STRIP = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = ../src;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1187,17 +1195,6 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CONFIGURATION_BUILD_DIR = "$(inherited)";
 				DSTROOT = /tmp/Caramel.dst;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "";
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/ShuaiTseng/Documents/work/CandyJar/lib/ios-iphoneos",
-					"/Users/ShuaiTseng/Documents/work/CandyJar/lib/ios-iphonesimulator",
-					"/Users/ShuaiTseng/Documents/work/Caramel/src/Caramel/lib/ios-iphoneos",
-					"/Users/ShuaiTseng/Documents/work/Caramel/src/Caramel/lib/ios-iphonesimulator",
-					/Users/ShuaiTseng/Documents/work/CandyJar/lib/ios,
-				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1210,17 +1207,6 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CONFIGURATION_BUILD_DIR = "$(inherited)";
 				DSTROOT = /tmp/Caramel.dst;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "";
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/ShuaiTseng/Documents/work/CandyJar/lib/ios-iphoneos",
-					"/Users/ShuaiTseng/Documents/work/CandyJar/lib/ios-iphonesimulator",
-					"/Users/ShuaiTseng/Documents/work/Caramel/src/Caramel/lib/ios-iphoneos",
-					"/Users/ShuaiTseng/Documents/work/Caramel/src/Caramel/lib/ios-iphonesimulator",
-					/Users/ShuaiTseng/Documents/work/CandyJar/lib/ios,
-				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
