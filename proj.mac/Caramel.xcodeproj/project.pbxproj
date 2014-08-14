@@ -152,6 +152,7 @@
 		010356421991C00600F61887 /* SharedArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 010355AB1991C00600F61887 /* SharedArray.h */; };
 		0154C9BC1992118C00D7B67D /* Async.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0154C9BB1992118C00D7B67D /* Async.cpp */; };
 		0154C9BE199211B300D7B67D /* Data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0154C9BD199211B300D7B67D /* Data.cpp */; };
+		0155AB6D199C97FE00B78527 /* Caramel-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 0155AB6C199C97FE00B78527 /* Caramel-Prefix.pch */; };
 		6A23F6CB1849A1B800FD4293 /* CaramelPch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A23F68E1849A1B800FD4293 /* CaramelPch.cpp */; };
 		6A23F6CC1849A1B800FD4293 /* CaramelPch.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A23F68F1849A1B800FD4293 /* CaramelPch.h */; };
 		6A23F6CD1849A1B800FD4293 /* Configuration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A23F6901849A1B800FD4293 /* Configuration.cpp */; };
@@ -349,6 +350,7 @@
 		010355AB1991C00600F61887 /* SharedArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedArray.h; sourceTree = "<group>"; };
 		0154C9BB1992118C00D7B67D /* Async.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Async.cpp; sourceTree = "<group>"; };
 		0154C9BD199211B300D7B67D /* Data.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Data.cpp; sourceTree = "<group>"; };
+		0155AB6C199C97FE00B78527 /* Caramel-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Caramel-Prefix.pch"; sourceTree = "<group>"; };
 		6A23F6861849A13C00FD4293 /* libCaramel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCaramel.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A23F68E1849A1B800FD4293 /* CaramelPch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CaramelPch.cpp; sourceTree = "<group>"; };
 		6A23F68F1849A1B800FD4293 /* CaramelPch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaramelPch.h; sourceTree = "<group>"; };
@@ -867,11 +869,20 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
+		0155AB6B199C97A800B78527 /* proj.mac */ = {
+			isa = PBXGroup;
+			children = (
+				0155AB6C199C97FE00B78527 /* Caramel-Prefix.pch */,
+			);
+			name = proj.mac;
+			sourceTree = "<group>";
+		};
 		6A23F67D1849A13C00FD4293 = {
 			isa = PBXGroup;
 			children = (
 				010354F31991C00500F61887 /* include */,
 				6A23F68D1849A1B800FD4293 /* src */,
+				0155AB6B199C97A800B78527 /* proj.mac */,
 				6A23F6871849A13C00FD4293 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -1081,6 +1092,7 @@
 				010355ED1991C00600F61887 /* FileInfo.h in Headers */,
 				010355E21991C00600F61887 /* IniDocument.h in Headers */,
 				010355BA1991C00600F61887 /* AnyEventSlot.h in Headers */,
+				0155AB6D199C97FE00B78527 /* Caramel-Prefix.pch in Headers */,
 				010356291991C00600F61887 /* TaskCore.h in Headers */,
 				010355C51991C00600F61887 /* BlockingQueue.h in Headers */,
 				010356371991C00600F61887 /* WaitableBool.h in Headers */,
@@ -1408,6 +1420,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Caramel-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					../include,
 					../../CandyJar/include,
@@ -1422,6 +1436,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Caramel-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					../include,
 					../../CandyJar/include,

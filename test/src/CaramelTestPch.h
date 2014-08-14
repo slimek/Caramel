@@ -2,6 +2,7 @@
 
 #ifndef __CARAMEL_TEST_CARAMEL_TEST_PCH_H
 #define __CARAMEL_TEST_CARAMEL_TEST_PCH_H
+#pragma once
 
 
 ///////////////////////////////////////////////////////////////////////////////

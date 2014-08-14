@@ -77,6 +77,7 @@
 		0150AA221990E5B20037F11B /* AnySuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9DA1990E5B20037F11B /* AnySuite.cpp */; };
 		0150AA231990E5B20037F11B /* NamedValuesSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9DB1990E5B20037F11B /* NamedValuesSuite.cpp */; };
 		0150AA241990E5B20037F11B /* SharedArraySuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9DC1990E5B20037F11B /* SharedArraySuite.cpp */; };
+		0155AB69199C92B100B78527 /* PromptStateMachineSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0155AB68199C92B100B78527 /* PromptStateMachineSuite.cpp */; };
 		6AAF38F11849D3B00010FAF1 /* libCaramel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AAF38F01849D3940010FAF1 /* libCaramel.a */; };
 /* End PBXBuildFile section */
 
@@ -178,6 +179,8 @@
 		0150A9DA1990E5B20037F11B /* AnySuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnySuite.cpp; sourceTree = "<group>"; };
 		0150A9DB1990E5B20037F11B /* NamedValuesSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NamedValuesSuite.cpp; sourceTree = "<group>"; };
 		0150A9DC1990E5B20037F11B /* SharedArraySuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SharedArraySuite.cpp; sourceTree = "<group>"; };
+		0155AB68199C92B100B78527 /* PromptStateMachineSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PromptStateMachineSuite.cpp; sourceTree = "<group>"; };
+		0155AB6A199C92CF00B78527 /* CaramelTest-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CaramelTest-Prefix.pch"; sourceTree = "<group>"; };
 		6A706EBB184985D3004C9602 /* CaramelTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CaramelTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AAF38EB1849D3930010FAF1 /* Caramel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Caramel.xcodeproj; path = ../../proj.mac/Caramel.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -390,6 +393,7 @@
 		0150A9BD1990E5B20037F11B /* Statechart */ = {
 			isa = PBXGroup;
 			children = (
+				0155AB68199C92B100B78527 /* PromptStateMachineSuite.cpp */,
 				0150A9BE1990E5B20037F11B /* StateMachineSuite.cpp */,
 			);
 			path = Statechart;
@@ -461,10 +465,19 @@
 			path = Value;
 			sourceTree = "<group>";
 		};
+		0155AB66199C915F00B78527 /* proj.mac */ = {
+			isa = PBXGroup;
+			children = (
+				0155AB6A199C92CF00B78527 /* CaramelTest-Prefix.pch */,
+			);
+			name = proj.mac;
+			sourceTree = "<group>";
+		};
 		6A706E681849853D004C9602 = {
 			isa = PBXGroup;
 			children = (
 				0150A97A1990E5B20037F11B /* src */,
+				0155AB66199C915F00B78527 /* proj.mac */,
 				6AAF38EB1849D3930010FAF1 /* Caramel.xcodeproj */,
 				6A706EBB184985D3004C9602 /* CaramelTest */,
 			);
@@ -548,6 +561,7 @@
 				0150AA1C1990E5B20037F11B /* LoopThreadGroupSuite.cpp in Sources */,
 				0150A9FB1990E5B20037F11B /* IniDocumentSuite.cpp in Sources */,
 				0150AA051990E5B20037F11B /* LexicalFloatingSuite.cpp in Sources */,
+				0155AB69199C92B100B78527 /* PromptStateMachineSuite.cpp in Sources */,
 				0150AA061990E5B20037F11B /* LexicalIntegerSuite.cpp in Sources */,
 				0150A9E41990E5B20037F11B /* AnyEventSlotSuite.cpp in Sources */,
 				0150A9FA1990E5B20037F11B /* TimeSpanSuite.cpp in Sources */,
@@ -729,6 +743,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CaramelTest-Prefix.pch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -737,6 +753,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CaramelTest-Prefix.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
