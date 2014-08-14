@@ -32,10 +32,19 @@ namespace Caramel
 
 //
 // Thread Local Storages
+// - NOTES: In Xcode 5.1 , Clang supports the keyword 'thread_local',
+//          But its C++ Runtime Library (libc++) not...
 //
+
+#if ! defined( CARAMEL_SYSTEM_OF_APPLE )
+
+#define HAS_THREAD_LOCAL
 
 // This would be set before the thread's working function starts.
 CARAMEL_THREAD_LOCAL ThreadImpl* tls_thisThread = nullptr;
+
+#endif
+
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -101,7 +110,12 @@ void ThreadImpl::RunWork()
     //auto thiz = this->shared_from_this();
 
     m_threadId = std::make_shared< ThreadIdImpl >( std::this_thread::get_id() );
-    tls_thisThread = this;
+    
+    #if defined( HAS_THREAD_LOCAL )
+    {
+        tls_thisThread = this;
+    }
+    #endif
 
     m_started = true;
 
@@ -249,7 +263,15 @@ void ThisThread::Yield()
 
 void ThisThread::AtThreadExit( std::function< void() > atExit )
 {
-    tls_thisThread->SetAtExit( atExit );
+    #if defined( HAS_THREAD_LOCAL )
+    {
+        tls_thisThread->SetAtExit( atExit );
+    }
+    #else
+    {
+        CARAMEL_NOT_IMPLEMENTED();
+    }
+    #endif
 }
 
 

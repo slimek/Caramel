@@ -91,6 +91,8 @@ TEST( ThreadIdTest )
 }
 
 
+#if ! defined( CARAMEL_SYSTEM_OF_APPLE )
+
 TEST( ThisThreadAtExitTest )
 {
     WaitableBool gate;
@@ -115,6 +117,8 @@ TEST( ThisThreadAtExitTest )
 
     CHECK( true == flag );
 }
+
+#endif // CARAMEL_SYSTEM_OF_APPLE
 
 
 }  // SUITE ThreadSuite
