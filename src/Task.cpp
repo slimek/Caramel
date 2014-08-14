@@ -490,7 +490,7 @@ WorkerThread::~WorkerThread()
         
         m_impl->m_stopped = true;
         m_impl->m_readyTasks.Complete();
-        m_impl->m_thread->Detach();
+        m_impl->m_thread->Join();
     }
 }
 

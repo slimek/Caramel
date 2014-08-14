@@ -38,12 +38,6 @@ TEST( ThreadTest )
     t3.Join();
 
     CHECK_CLOSE( watch.Slice(), Ticks( 110 ), Ticks( 10 ));
-
-    Thread t4( "Execute4", [=] { ThisThread::SleepFor( Ticks( 100 )); } );
-    t4.Detach();
-
-    // Detach returns immediately
-    CHECK_CLOSE( watch.Slice(), Ticks( 10 ), Ticks( 10 ));
 }
 
 
@@ -94,6 +88,32 @@ TEST( ThreadIdTest )
     t1.Join();
 
     CHECK( checked );
+}
+
+
+TEST( ThisThreadAtExitTest )
+{
+    WaitableBool gate;
+    Bool flag = false;
+
+    Thread t1( "AtExit",
+    [&]
+    {
+        ThisThread::AtThreadExit(
+        [&]
+        {
+            flag = true;
+        });
+
+        gate.Wait();
+    });
+
+    CHECK( false == flag );
+
+    gate = true;
+    t1.Join();
+
+    CHECK( true == flag );
 }
 
 

@@ -19,7 +19,7 @@ namespace Caramel
 // Thread
 //
 
-class ThreadImpl
+class ThreadImpl : public std::enable_shared_from_this< ThreadImpl >
 {
     friend class Thread;
     friend class LoopThread;
@@ -27,6 +27,10 @@ class ThreadImpl
 public:
 
     ThreadImpl( const std::string& name, WorkFunction work );
+
+
+    // Set the handler when the thread exits.
+    void SetAtExit( std::function< void() > atExit );
 
 
 private:
@@ -40,6 +44,8 @@ private:
 
     ThreadIdPtr  m_threadId;
     WaitableBool m_started;
+
+    std::function< void() > m_atExit { nullptr };
 };
 
 

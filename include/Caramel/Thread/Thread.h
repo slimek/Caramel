@@ -7,7 +7,6 @@
 #include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Thread/ThreadTypes.h>
-#include <boost/noncopyable.hpp>
 
 
 namespace Caramel
@@ -36,7 +35,6 @@ public:
     void Start( const std::string& name, WorkFunction work );
 
     void Join();
-    void Detach();
 
 
     /// Properties ///

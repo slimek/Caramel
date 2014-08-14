@@ -30,6 +30,14 @@ namespace Caramel
 //   LoopThreadGroup
 //
 
+//
+// Thread Local Storages
+//
+
+// This would be set before the thread's working function starts.
+CARAMEL_THREAD_LOCAL ThreadImpl* tls_thisThread = nullptr;
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Thread
@@ -64,13 +72,6 @@ void Thread::Join()
 }
 
 
-void Thread::Detach()
-{
-    CARAMEL_ASSERT( m_impl );
-    m_impl->m_thread->detach();
-}
-
-
 //
 // Properties
 //
@@ -96,14 +97,39 @@ ThreadImpl::ThreadImpl( const std::string& name, WorkFunction work )
 
 void ThreadImpl::RunWork()
 {
+    // Thread keeps a reference to itself.
+    //auto thiz = this->shared_from_this();
+
     m_threadId = std::make_shared< ThreadIdImpl >( std::this_thread::get_id() );
+    tls_thisThread = this;
+
     m_started = true;
 
-    auto xc = CatchException( m_workFunction );
-    if ( xc )
+    auto workXc = CatchException( m_workFunction );
+    if ( workXc )
     {
-        CARAMEL_TRACE_WARN( "Thread[%s] caugut exception:\n%s", m_name, xc.TracingMessage() );
+        CARAMEL_TRACE_WARN( "Thread[%s] caugut exception:\n%s",
+                            m_name, workXc.TracingMessage() );
     }
+
+    if ( m_atExit )
+    {
+        auto exitXc = CatchException( m_atExit );
+        if ( exitXc )
+        {
+            CARAMEL_TRACE_WARN( "Thread[%s].atExit() throws:\n%s",
+                                m_name, exitXc.TracingMessage() );
+        }
+    }
+}
+
+
+void ThreadImpl::SetAtExit( std::function< void() > atExit )
+{
+    CARAMEL_ASSERT( *m_threadId == std::this_thread::get_id() );
+    CARAMEL_ASSERT( ! m_atExit );
+
+    m_atExit = atExit;
 }
 
 
@@ -218,6 +244,12 @@ void ThisThread::SleepFor( const Ticks& duration )
 void ThisThread::Yield()
 {
     std::this_thread::yield();
+}
+
+
+void ThisThread::AtThreadExit( std::function< void() > atExit )
+{
+    tls_thisThread->SetAtExit( atExit );
 }
 
 

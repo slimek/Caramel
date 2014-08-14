@@ -32,6 +32,9 @@ public:
 
     // Hint to reschedule threads, to allow other threads run.
     static void Yield();
+
+    // Set the handler when the thread exits.
+    static void AtThreadExit( std::function< void() > atExit );
 };
 
 
