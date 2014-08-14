@@ -28,13 +28,16 @@
 #if ( _MSC_VER >= 1900 )
 
 #define CARAMEL_NOEXCEPT noexcept
+#define CARAMEL_THREAD_LOCAL thread_local
 
 #else
 
 // Visual C++ 2013 limitations:
 // - doesn't support noexcept
+//   doesn't support thread_local, but have a workaround.
 
 #define CARAMEL_NOEXCEPT 
+#define CARAMEL_THREAD_LOCAL __declspec( thread )
 
 #endif
 
@@ -62,6 +65,7 @@
 #define CARAMEL_CURRENT_FUNCTION __PRETTY_FUNCTION__
 #define CARAMEL_DEPRECATED
 #define CARAMEL_NOEXCEPT noexcept
+#define CARAMEL_THREAD_LOCAL thread_local
 
 // For INT32_MIN and other limit defines
 #define __STDC_LIMIT_MACROS
@@ -91,6 +95,7 @@
 #define CARAMEL_CURRENT_FUNCTION __PRETTY_FUNCTION__
 #define CARAMEL_DEPRECATED
 #define CARAMEL_NOEXCEPT noexcept
+#define CARAMEL_THREAD_LOCAL thread_local
 
 
 #endif // Clang
