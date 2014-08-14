@@ -19,7 +19,7 @@ namespace Caramel
 // Thread
 //
 
-class ThreadImpl : public std::enable_shared_from_this< ThreadImpl >
+class ThreadImpl
 {
     friend class Thread;
     friend class LoopThread;
