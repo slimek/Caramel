@@ -373,7 +373,7 @@ void Alert(
 
     switch ( result )
     {
-    case ALERT_RESULT_CONTINUE_ALL:
+    case ALERT_RESULT_CONTINUE:
         return;
 
     case ALERT_RESULT_BREAK:
@@ -396,9 +396,6 @@ void Alert(
         CARAMEL_TRACE_INFO( "Program aborts by alert result" );
         ::abort();
         return;
-
-    case ALERT_RESULT_CONTINUE_ONCE:
-        CARAMEL_NOT_IMPLEMENTED();
     }
 }
 
@@ -453,7 +450,7 @@ AlertResult DefaultAlertHandler(
     }
     #endif
 
-    return ALERT_RESULT_CONTINUE_ALL;
+    return ALERT_RESULT_CONTINUE;
 }
 
 #endif // NDEBUG
@@ -468,7 +465,7 @@ AlertResult TraceAlertHandler(
         file, line, function, message
     );
 
-    return ALERT_RESULT_CONTINUE_ALL;
+    return ALERT_RESULT_CONTINUE;
 }
 
 

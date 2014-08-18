@@ -31,10 +31,9 @@ void Alert(
 //   "Alert" is an warning event which expect the user interference.
 //   You may give a UI dialog to show the warning message, and allow user to
 //   choose the next step:
-//     1. Continue once - next time this alert occur, handle it again.
-//     2. Continue all - ignore all this alert later.
-//     3. Break the programe and start to debug (if possible).
-//     4. Abort the program.
+//     1. Continue the program.
+//     2. Break the programe and start to debug (if possible).
+//     3. Abort the program.
 //
 //   The default behavior is ANSI C assert(), whose behavior depends on platform
 //   implementation.
@@ -42,11 +41,10 @@ void Alert(
 
 enum AlertResult
 {
-    ALERT_RESULT_NONE           = 0,
-    ALERT_RESULT_CONTINUE_ONCE  = 1,
-    ALERT_RESULT_CONTINUE_ALL   = 2,
-    ALERT_RESULT_BREAK          = 3,
-    ALERT_RESULT_ABORT          = 4,  // *1
+    ALERT_RESULT_NONE       = 0,
+    ALERT_RESULT_CONTINUE   = 1,
+    ALERT_RESULT_BREAK      = 2,
+    ALERT_RESULT_ABORT      = 3,  // *1
 };
 
 // NOTE: Some handlers may abort the program itself.
