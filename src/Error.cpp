@@ -440,9 +440,9 @@ AlertResult DefaultAlertHandler(
     {
         __assert2( file.c_str(), line, function.c_str(), message.c_str() );
     }
-    #elif defined( CARAMEL_SYSTEM_IS_IOS )
+    #elif defined( CARAMEL_SYSTEM_OF_APPLE )
     {
-        ; // TODO: Add iOS assert() implementation
+        __assert( message.c_str(), file.c_str(), line );
     }
     #else
     {
