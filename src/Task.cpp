@@ -310,6 +310,7 @@ TaskCore::CatchResult TaskImpl::Catch() const
     this->DoWait();
 
     TaskCore::CatchResult result;
+    result.name = m_name;
     result.doneState = m_state;
 
     if ( m_exception )

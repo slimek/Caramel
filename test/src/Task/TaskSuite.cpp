@@ -196,6 +196,7 @@ TEST( TaskWaitOrCatchTest )
     const auto result1 = task1.Catch();
 
     CHECK( TASK_STATE_RAN_TO_COMP == result1.doneState );
+    CHECK( "Task1" == result1.name );
     CHECK( ! result1.anyFailure );
     CHECK( ! result1.exception );
 
@@ -208,6 +209,7 @@ TEST( TaskWaitOrCatchTest )
     const auto result2 = task2.Catch();
 
     CHECK( TASK_STATE_FAULTED == result2.doneState );
+    CHECK( "Task2" == result2.name );
     CHECK( ! result2.anyFailure );
     CHECK( result2.exception );
 
@@ -222,6 +224,7 @@ TEST( TaskWaitOrCatchTest )
     const auto result3 = task3.Catch();
 
     CHECK( TASK_STATE_FAULTED == result3.doneState );
+    CHECK( "Task3" == result3.name );
     CHECK( result3.anyFailure );
     CHECK( result3.exception );
 
@@ -296,6 +299,28 @@ TEST( TaskThenSuite )
     task4c.Wait();
 
     CHECK( true == faulted );
+
+
+    /// Catch in Then ///
+
+    auto task5 = MakeTask( "Task5", [] {} );
+    TaskCore::CatchResult result5;
+
+    auto then5 = task5.Then(
+    [&] ( const Task< void >& task )
+    {
+        result5 = task.Catch(); 
+    });
+
+    async.Submit( task5 );
+    then5.Wait();
+
+    CHECK( TASK_STATE_RAN_TO_COMP == result5.doneState );
+    CHECK( "Task5" == result5.name );
+    CHECK( ! result5.anyFailure );
+    CHECK( ! result5.exception );
+
+    CHECK( "Task5-Then" == then5.Name() );
 }
 
 
@@ -308,8 +333,8 @@ TEST( TaskContinueImmediatelyTest )
     //   >> taskc (Continue)
     //   >> taske (Submit)
     //
-    //   Because task delayed for 100 ms, submit of taske is faster than continue of task4c.
-    //   But task4c should run before task4e.
+    //   Because task delayed for 100 ms, submit of taske is faster than continue of taskc.
+    //   But taskc should run before task4e.
 
     WorkerThread worker( "Immediately" );
 

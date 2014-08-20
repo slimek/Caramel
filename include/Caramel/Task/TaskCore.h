@@ -127,11 +127,8 @@ enum TaskState : Int
 
 struct TaskCore::CatchResult
 {
-    CatchResult()
-        : doneState( TASK_STATE_UNDEF )
-    {}
-
-    TaskState doneState;
+    std::string name;
+    TaskState doneState { TASK_STATE_UNDEF };
 
     AnyFailurePtr anyFailure;
     ExceptionPtr  exception;
