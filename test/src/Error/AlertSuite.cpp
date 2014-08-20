@@ -24,7 +24,7 @@ AlertResult LocalAlertHandler(
     s_fileBuffer = file;
     s_functionBuffer = function;
     s_messageBuffer = messgae;
-    return ALERT_RESULT_CONTINUE_ALL;
+    return ALERT_RESULT_CONTINUE;
 }
 
 
