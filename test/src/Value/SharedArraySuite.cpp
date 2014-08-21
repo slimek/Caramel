@@ -2,8 +2,11 @@
 
 #include "CaramelTestPch.h"
 
+#include "Utils/SharedArrayUtils.h"
 #include <Caramel/Value/SharedArray.h>
 #include <UnitTest++/UnitTest++.h>
+#include <set>
+#include <vector>
 
 
 namespace Caramel
@@ -82,6 +85,21 @@ TEST( SharedArrayInitializerTest )
     CHECK( 3     == sa3.Size() );
     CHECK( "Alice" == sa3[0] );
     CHECK( "Marisa" == sa3[2] );
+}
+
+
+TEST( SharedArrayRangeTest )
+{
+    std::vector< Int > data{ 1, 2, 3 };
+    SharedArray< Int > array1( data.begin(), data.size() );
+
+    CHECK(( array1 == SharedArray< Int >{ 1, 2, 3 } ));
+
+    std::set< std::string > names{ "Alice", "Reimu", "Marisa" };
+    ConstSharedArray< std::string > array2( names.begin(), names.size() );
+
+    // std::set would sort the values.
+    CHECK(( array2 == SharedArray< std::string >{ "Alice", "Marisa", "Reimu" } ));
 }
 
 

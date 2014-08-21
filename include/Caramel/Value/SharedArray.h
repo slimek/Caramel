@@ -31,6 +31,9 @@ public:
     explicit ConstSharedArray( Uint size );
     explicit ConstSharedArray( std::initializer_list< T > inits );
 
+    template< typename InputIterator >
+    ConstSharedArray( InputIterator first, Uint count );
+
     
     /// Properties ///
 
@@ -82,6 +85,9 @@ public:
     explicit SharedArray( Uint size );
     explicit SharedArray( std::initializer_list< T > inits );
     
+    template< typename InputIterator >
+    SharedArray( InputIterator first, Uint count );
+
 
     /// Accessors (constant) ///
 
@@ -166,6 +172,19 @@ inline ConstSharedArray< T >::ConstSharedArray( std::initializer_list< T > inits
 
 
 template< typename T >
+template< typename InputIterator >
+inline ConstSharedArray< T >::ConstSharedArray( InputIterator first, Uint count )
+    : m_size( count )
+{
+    // If size is 0, keep a dummy content in m_array.
+    const Uint implSize = ( 0 < m_size ) ? m_size : 1;
+
+    m_array.reset( new T[implSize] );
+    std::copy_n( first, count, &m_array[0] );
+}
+
+
+template< typename T >
 inline SharedArray< T >::SharedArray()
     : ConstSharedArray< T >()
 {
@@ -182,6 +201,14 @@ inline SharedArray< T >::SharedArray( Uint size )
 template< typename T >
 inline SharedArray< T >::SharedArray( std::initializer_list< T > inits )
     : ConstSharedArray< T >( inits )
+{
+}
+
+
+template< typename T >
+template< typename InputIterator >
+inline SharedArray< T >::SharedArray( InputIterator first, Uint count )
+    : ConstSharedArray< T >( first, count )
 {
 }
 
