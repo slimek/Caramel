@@ -81,7 +81,7 @@ public:
     SharedArray();
     explicit SharedArray( Uint size );
     explicit SharedArray( std::initializer_list< T > inits );
-
+    
 
     /// Accessors (constant) ///
 
@@ -135,7 +135,7 @@ protected:
 //
 
 template< typename T >
-ConstSharedArray< T >::ConstSharedArray()
+inline ConstSharedArray< T >::ConstSharedArray()
     : m_array( new T[1] )  // dummy content
     , m_size( 0 )
 {
@@ -143,7 +143,7 @@ ConstSharedArray< T >::ConstSharedArray()
 
 
 template< typename T >
-ConstSharedArray< T >::ConstSharedArray( Uint size )
+inline ConstSharedArray< T >::ConstSharedArray( Uint size )
     : m_size( size )
 {
     // If size is 0, keep a dummy content in m_array.
@@ -154,7 +154,7 @@ ConstSharedArray< T >::ConstSharedArray( Uint size )
 
 
 template< typename T >
-ConstSharedArray< T >::ConstSharedArray( std::initializer_list< T > inits )
+inline ConstSharedArray< T >::ConstSharedArray( std::initializer_list< T > inits )
     : m_size( inits.size() )
 {
     // If size is 0, keep a dummy content in m_array.
@@ -166,21 +166,21 @@ ConstSharedArray< T >::ConstSharedArray( std::initializer_list< T > inits )
 
 
 template< typename T >
-SharedArray< T >::SharedArray()
+inline SharedArray< T >::SharedArray()
     : ConstSharedArray< T >()
 {
 }
 
 
 template< typename T >
-SharedArray< T >::SharedArray( Uint size )
+inline SharedArray< T >::SharedArray( Uint size )
     : ConstSharedArray< T >( size )
 {
 }
 
 
 template< typename T >
-SharedArray< T >::SharedArray( std::initializer_list< T > inits )
+inline SharedArray< T >::SharedArray( std::initializer_list< T > inits )
     : ConstSharedArray< T >( inits )
 {
 }
@@ -191,14 +191,14 @@ SharedArray< T >::SharedArray( std::initializer_list< T > inits )
 //
 
 template< typename T >
-Bool ConstSharedArray< T >::Contains( const T& value ) const
+inline Bool ConstSharedArray< T >::Contains( const T& value ) const
 {
     return this->End() != std::find( this->Begin(), this->End(), value );
 }
 
 
 template< typename T >
-const T& ConstSharedArray< T >::operator[]( Uint i ) const
+inline const T& ConstSharedArray< T >::operator[]( Uint i ) const
 {
     CARAMEL_ASSERT( m_size > i );
     return m_array[i];
@@ -206,7 +206,7 @@ const T& ConstSharedArray< T >::operator[]( Uint i ) const
 
 
 template< typename T >
-T& SharedArray< T >::operator[]( Uint i )
+inline T& SharedArray< T >::operator[]( Uint i )
 {
     CARAMEL_ASSERT( m_size > i );
     return m_array[i];
@@ -218,7 +218,7 @@ T& SharedArray< T >::operator[]( Uint i )
 //
 
 template< typename T >
-void SharedArray< T >::Reset( Uint size )
+inline void SharedArray< T >::Reset( Uint size )
 {
     m_array.reset( new T[size] );
     m_size = size;
