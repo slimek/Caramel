@@ -7,7 +7,7 @@
 #include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Error/Assert.h>
 #include <Caramel/Error/Exception.h>
-#include <boost/shared_array.hpp>
+#include <boost/shared_ptr.hpp>
 #include <algorithm>
 #include <initializer_list>
 
@@ -18,7 +18,7 @@ namespace Caramel
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Shared Array
-// - A lightweight wrapper for std::shared_array< T >.
+// - A lightweight wrapper for std::shared_ptr< T[] >.
 //   NOT thread-safe.
 //
 
@@ -69,7 +69,7 @@ public:
     
 protected:
 
-    typedef boost::shared_array< T > ArrayType;
+    typedef boost::shared_ptr< T[] > ArrayType;
     ArrayType m_array;
 
     Uint m_size;
