@@ -56,7 +56,7 @@ public:
     typedef const ValueType* ConstIterator;
 
     ConstIterator Begin() const { return &m_array[0]; }
-    ConstIterator End()   const { return &m_array[ m_size ]; }
+    ConstIterator End()   const { return &m_array[static_cast< std::ptrdiff_t >( m_size )]; }
 
 
     /// STL Compatible ///
@@ -106,7 +106,7 @@ public:
     typedef ValueType* Iterator;
 
     Iterator Begin() { return &m_array[0]; }
-    Iterator End()   { return &m_array[ m_size ]; }
+    Iterator End()   { return &m_array[static_cast< std::ptrdiff_t >( m_size )]; }
 
 
     /// STL Compatible ///
