@@ -7,6 +7,7 @@
 #include <Caramel/Setup/CaramelDefs.h>
 #include "Task/TaskImpl.h"
 #include <Caramel/Thread/Thread.h>
+#include <boost/noncopyable.hpp>
 #include <condition_variable>
 #include <mutex>
 
@@ -21,7 +22,7 @@ namespace Caramel
 
 class ThreadPoolImpl;
 
-class PooledThread
+class PooledThread : public boost::noncopyable
 {
 public:
 
@@ -31,7 +32,8 @@ public:
     /// Operations ///
 
     void Wake( TaskCore& task );
-    void StopAndJoin();
+    void Stop();
+    void Join();
 
 
 private:

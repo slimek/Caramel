@@ -62,6 +62,30 @@ TEST( ThreadPoolNormalTest )
 }
 
 
+//
+// Shutdown a ThreadPool while it has some tasks pending.
+//
+// EXPECTED: Discard all pending tasks and return as soon as possible.
+//
+TEST( ThreadPoolShutdownTest )
+{
+    ThreadPool pool( "Shutdown", 4 );
+
+    for ( Uint i = 0; i < 256; ++ i )
+    {
+        pool.Submit( MakeTask( "Pending",
+            [] { ThisThread::SleepFor( Ticks( 10 )); } ));
+    }
+
+    CHECK( pool.GetNumReadyTasks() > 0 );
+
+    TickWatch watch;
+    pool.Shutdown();
+
+    CHECK( watch.Elapsed() < Ticks( 100 ));
+}
+
+
 } // SUITE ThreadPoolSuite
 
 } // namespace Caramel

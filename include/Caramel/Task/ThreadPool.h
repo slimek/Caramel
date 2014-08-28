@@ -29,8 +29,15 @@ public:
 
     using TaskExecutor::Submit;   
     
-    // Blocks the calling thread, until all the pooled threads joined.
+    // Discard all tasks not running,
+    // then blocks the calling thread until all the pooled threads joined.
     void Shutdown();
+
+
+    /// Properties ///
+
+    Uint GetNumReadyTasks() const;
+
 
 private:
 

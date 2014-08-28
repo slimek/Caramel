@@ -22,6 +22,8 @@ namespace Caramel
 
 class ThreadPoolImpl
 {
+    friend class ThreadPool;
+
 public:
 
     ThreadPoolImpl( const std::string& name, Uint numThreads, ThreadPool* host );

@@ -624,11 +624,16 @@ void PooledThread::Wake( TaskCore& task )
 }
 
 
-void PooledThread::StopAndJoin()
+void PooledThread::Stop()
 {
     CARAMEL_ASSERT( ! m_stopped );
-
     m_stopped = true;
+}
+
+
+void PooledThread::Join()
+{
+    CARAMEL_ASSERT( m_stopped );
     m_waken.notify_one();
     m_thread->Join();
 }
@@ -702,6 +707,12 @@ void ThreadPool::Shutdown()
 }
 
 
+Uint ThreadPool::GetNumReadyTasks() const
+{
+    return m_impl->m_readyTasks.Size();
+}
+
+
 //
 // Implementation
 //
@@ -740,21 +751,32 @@ void ThreadPoolImpl::Shutdown()
     CARAMEL_ASSERT( ! m_shutdown );
 
     m_shutdown = true;
+    m_readyTasks.Clear();
 
-    while ( m_readyThreads.Size() != m_threads.size() || ! m_readyTasks.IsEmpty() )
+    // Stop all threads first, then wait them to join.
+
+    for ( auto& pt : m_threads )
     {
-        ThisThread::SleepFor( Ticks( 100 ));
+        pt.Stop();
     }
 
-    for ( Uint i = 0; i < m_threads.size(); ++ i )
+    for ( auto& pt : m_threads )
     {
-        m_threads[i].StopAndJoin();
+        pt.Join();
     }
 }
 
 
 void ThreadPoolImpl::AddReadyTask( TaskCore& task )
 {
+    // TODO: AddReadyTask() and Shutdown() should be mutually exclusive...
+
+    if ( m_shutdown )
+    {
+        CARAMEL_TRACE_WARN( "ThreadPool[%s] discard Task[%s]", m_name, task.Name() );
+        return;
+    }
+
     task.BecomeReady( *m_host );
 
     if ( m_readyTasks.IsEmpty() )
