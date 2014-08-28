@@ -40,6 +40,30 @@ TEST( SharedPtrArithmeticTest )
 }
 
 
+//
+// Substitute for Android NDK r9
+//
+TEST( SharedPtrAtomicTest )
+{
+    /// Load ///
+
+    auto p1 = std::make_shared< Int >( 42 );
+
+    auto p1c = AtomicLoad( &p1 );
+
+    CHECK( *p1c == 42 );
+
+
+    /// Store ///
+
+    auto p2 = std::make_shared< Int >( 51 );
+
+    AtomicStore( &p1, p2 );
+
+    CHECK( *p1 == 51 );
+}
+
+
 } // SUITE SharedPtrUtilsSuite
 
 } // namespace Caramel
