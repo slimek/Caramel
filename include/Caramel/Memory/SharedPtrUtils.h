@@ -58,7 +58,7 @@ inline void SubstractAssign( std::shared_ptr< T >& lhs, const std::shared_ptr< U
 //
 
 template< typename T >
-inline std::shared_ptr< T > AtomicLoad( std::shared_ptr< T >* sp )
+inline std::shared_ptr< T > AtomicLoad( const std::shared_ptr< T >* sp )
 {
     boost::detail::spinlock::scoped_lock lock(
         boost::detail::spinlock_pool< 0 >::spinlock_for( &sp ));

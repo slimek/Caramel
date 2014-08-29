@@ -53,6 +53,13 @@ TEST( SharedPtrAtomicTest )
 
     CHECK( *p1c == 42 );
 
+    const std::shared_ptr< Int > cp1 = p1;
+
+    // const std::shared_ptr should allow to load.
+    auto cp1c = AtomicLoad( &cp1 );
+
+    CHECK( *cp1c == 42 );
+
 
     /// Store ///
 
