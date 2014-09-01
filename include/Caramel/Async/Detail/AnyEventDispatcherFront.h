@@ -39,20 +39,21 @@ namespace Detail
 //         });
 //     }
 //
-//   And for some reasons you want to ignore the loading result. Just reset the dispatcher :
+//   Then for some reasons you want to ignore the loading result before the loading completes
+//   - suppose it takes a long time :) . What you need to do is just resetting the dispatcher :
 //
 //     void MyModel::Reset()
 //     {
 //         m_dispatcher.Reset();
 //     }
 //
-//   In this case, the file is still loaded, and an event is post. But the host dispatcher
-//   has been unlinked from is front, therefore the event would be ignored.
+//   In this case, the file is still loaded, and an event is post. But since the host dispatcher
+//   has been unlinked from its front, the event goes nowhere and would be ignored.
 // 
 
 class AnyEventDispatcherFront
 {
-    friend class AnyEventDispatcher;
+    friend class Caramel::AnyEventDispatcher;
 
 public:
 
