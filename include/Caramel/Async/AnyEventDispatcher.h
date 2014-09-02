@@ -45,6 +45,14 @@ public:
     void DispatchEvent( Int eventId, Any&& value );
 
 
+    /// AnyEventTarget Operations ///
+
+    // Unlink from all linked dispatchers. Usually you call this to unlink
+    // from all fronts.
+    // Dispatcher doesn't cache events, therefore there is nothing to discard.
+    void Reset() override;
+
+
 private:
 
     /// Implements AnyEventTarget ///

@@ -132,6 +132,16 @@ TEST( AnyEventDispatcherToDispatcherTest )
 
     CHECK( true == dq1.TryPop( value ));
     CHECK( 81 == value.Id() );
+
+    
+    // Reset 
+    // If we reset disp2, it should unlink from disp1.
+
+    disp2.Reset();
+
+    disp1.DispatchEvent( 125 );
+
+    CHECK( false == dq1.TryPop( value ));
 }
 
 

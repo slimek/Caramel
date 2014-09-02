@@ -128,6 +128,20 @@ AnyEvent StateMachine::GetActiveEvent() const
 
 
 //
+// AnyEventTarget Operations
+//
+
+void StateMachine::Reset()
+{
+    // We do not provide AnyEventTarget::Reset() function for StateMachine,
+    // Because a "Reset" function for the machine is ambiguous :
+    // You are unlinking the target, or resetting the machine ?
+
+    CARAMEL_NOT_IMPLEMENTED();
+}
+
+
+//
 // Implementation
 //
 

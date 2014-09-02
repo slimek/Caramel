@@ -51,12 +51,12 @@ public:
     T Value() const;
 
 
-    /// Operations ///
+    /// AnyEventTarget Operations ///
 
     // This function has two effects:
     // 1. Unlink from all linked dispatchers.
     // 2. Discard the event if have received one.
-    void Reset();
+    void Reset() override;
 
 
 private:

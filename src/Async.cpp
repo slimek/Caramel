@@ -342,6 +342,12 @@ void AnyEventDispatcher::DispatchEvent( Int eventId, Any&& value )
 }
 
 
+void AnyEventDispatcher::Reset()
+{
+    m_impl->IncrementAge();
+}
+
+
 //
 // Implementation
 //

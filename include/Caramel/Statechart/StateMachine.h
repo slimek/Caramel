@@ -90,6 +90,10 @@ private:
 
     AnyEventTargetPtr GetTargetImpl() const override;
 
+    // We do not provide AnyEventTarget::Reset() function for StateMachine,
+    // Because a "Reset" function for the machine is ambiguous :
+    // You are unlinking the target, or resetting the machine ?
+    void Reset() override;
 
     std::shared_ptr< StateMachineImpl > m_impl;
 };
