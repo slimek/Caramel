@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
+#include <Caramel/Async/Detail/AnyEventDispatcherFront.h>
 #include <Caramel/Async/AnyEventTarget.h>
 #include <boost/noncopyable.hpp>
 
@@ -43,6 +44,13 @@ public:
     void DispatchEvent( Int eventId );
     void DispatchEvent( Int eventId, const Any& value );
     void DispatchEvent( Int eventId, Any&& value );
+
+
+    //
+    // Create a Temporary Front Dispatcher
+    // - See AnyEventDispatcherFront.h for its usage.
+    //
+    Detail::AnyEventDispatcherFront Front();
 
 
     /// AnyEventTarget Operations ///

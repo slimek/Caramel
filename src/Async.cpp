@@ -19,6 +19,7 @@ namespace Caramel
 //   AnyEventQueue
 //   AnyEventSlot
 //   AnyEventDispatcher
+//   Detail::AnyEventDispatcherFront
 //   AnyEventHandler
 //
 
@@ -342,6 +343,20 @@ void AnyEventDispatcher::DispatchEvent( Int eventId, Any&& value )
 }
 
 
+//
+// Temporary Front Dispatcher
+//
+
+Detail::AnyEventDispatcherFront AnyEventDispatcher::Front()
+{
+    return Detail::AnyEventDispatcherFront( m_impl );
+}
+
+
+//
+// AnyEventTarget Operations
+//
+
 void AnyEventDispatcher::Reset()
 {
     m_impl->IncrementAge();
@@ -400,6 +415,52 @@ void AnyEventDispatcherImpl::Send( const AnyEvent& event, Uint age )
         this->Dispatch( event );
     }
 }
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Any Event Dispatcher Front
+//
+
+namespace Detail
+{
+
+AnyEventDispatcherFront::AnyEventDispatcherFront( AnyEventTargetPtr hostDispatcher )
+    : m_impl( new AnyEventDispatcherImpl )
+{
+    m_impl->LinkTarget( std::move( hostDispatcher ));
+}
+
+
+//
+// Dispatch Events
+//
+
+void AnyEventDispatcherFront::Dispatch( const AnyEvent& event ) const
+{
+    m_impl->Dispatch( event );
+}
+
+
+void AnyEventDispatcherFront::DispatchEvent( Int eventId ) const
+{
+    m_impl->Dispatch( AnyEvent( eventId ));
+}
+
+
+void AnyEventDispatcherFront::DispatchEvent( Int eventId, const Any& value ) const
+{
+    m_impl->Dispatch( AnyEvent( eventId, value ));
+}
+
+
+void AnyEventDispatcherFront::DispatchEvent( Int eventId, Any&& value ) const
+{
+    m_impl->Dispatch( AnyEvent( eventId, std::move( value )));
+}
+
+
+} // namespace Detail
 
 
 ///////////////////////////////////////////////////////////////////////////////

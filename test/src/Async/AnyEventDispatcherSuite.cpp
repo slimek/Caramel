@@ -4,6 +4,8 @@
 
 #include <Caramel/Async/AnyEventDispatcher.h>
 #include <Caramel/Async/AnyEventQueue.h>
+#include <Caramel/Async/AnyEventSlot.h>
+#include <Caramel/Task/StdAsync.h>
 #include <UnitTest++/UnitTest++.h>
 
 
@@ -142,6 +144,46 @@ TEST( AnyEventDispatcherToDispatcherTest )
     disp1.DispatchEvent( 125 );
 
     CHECK( false == dq1.TryPop( value ));
+}
+
+
+TEST( AnyEventDispatcherFrontTest )
+{
+    AnyEventDispatcher disp;
+    AnyEventSlot slot;
+
+    disp.LinkTarget( slot );
+
+    CHECK( false == slot );
+
+    auto front1 = disp.Front();
+    front1.DispatchEvent( 42 );
+
+    CHECK( true == slot );
+    CHECK( 42 == slot.Take().Id() );
+
+    disp.Reset();  // Unlink disp from front1
+
+    front1.DispatchEvent( 51 );
+
+    CHECK( false == slot );
+
+    auto front2 = disp.Front();
+
+    auto task = MakeTask( "DispatcherFront",
+    [=]
+    {
+        front2.DispatchEvent( 7, "Alice" );
+    });
+
+    StdAsync().Submit( task );
+    task.Wait();
+
+    CHECK( true == slot );
+
+    auto event = slot.Take();
+    CHECK( 7 == event.Id() );
+    CHECK( "Alice" == event.Value< std::string >() );
 }
 
 

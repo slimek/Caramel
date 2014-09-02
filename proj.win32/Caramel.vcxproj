@@ -20,6 +20,7 @@
     <ClInclude Include="..\include\Caramel\Async\AnyEventHandler.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEventSlot.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEventTarget.h" />
+    <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventDispatcherFront.h" />
     <ClInclude Include="..\include\Caramel\Async\FlowState.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEventQueue.h" />
     <ClInclude Include="..\include\Caramel\Async\ValueChange.h" />

@@ -183,6 +183,9 @@
     <Filter Include="2. Sources\Windows">
       <UniqueIdentifier>{bca6eeed-ec7a-4c25-b6fe-d370a35c8427}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\Async\Detail">
+      <UniqueIdentifier>{3cf911ae-7561-458d-bbe5-84956c931de8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Setup\Compiler.h">
@@ -769,6 +772,9 @@
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Statechart\PromptStateMachine.h">
       <Filter>1. Public Packages\Statechart</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventDispatcherFront.h">
+      <Filter>1. Public Packages\Async\Detail</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
