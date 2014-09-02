@@ -301,6 +301,9 @@
     <ClCompile Include="..\src\Statechart\PromptStateMachineSuite.cpp">
       <Filter>2. Tests\Statechart</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Meta\MetaRangeSuite.cpp">
+      <Filter>2. Tests\Meta</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">

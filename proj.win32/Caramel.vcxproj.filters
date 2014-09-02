@@ -776,6 +776,9 @@
     <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventDispatcherFront.h">
       <Filter>1. Public Packages\Async\Detail</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Meta\Range.h">
+      <Filter>1. Public Packages\Meta</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

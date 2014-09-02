@@ -94,6 +94,7 @@
     <ClInclude Include="..\include\Caramel\Meta\IfThenElse.h" />
     <ClInclude Include="..\include\Caramel\Meta\IntegralTypes.h" />
     <ClInclude Include="..\include\Caramel\Meta\IsGeneralString.h" />
+    <ClInclude Include="..\include\Caramel\Meta\Range.h" />
     <ClInclude Include="..\include\Caramel\Meta\Select.h" />
     <ClInclude Include="..\include\Caramel\Meta\Utility.h" />
     <ClInclude Include="..\include\Caramel\Numeric\UnionBits.h" />
