@@ -74,10 +74,13 @@ public:
     Bool FindOrInsert( const Key& k, Value& v );
 
 
-    /// Locked Iterator Accessor ///
+    /// Locked Accessors ///
 
     class ConstLockedMap;
     friend class ConstLockedMap;
+
+    class MutableLockedMap;
+    friend class MutableLockedMap;
 
     // For Replicator
     typedef ConstLockedMap ConstLockedDictionary;
@@ -190,7 +193,7 @@ inline Bool BasicMap< MapT, ReplicateP >::FindOrInsert( const Key& k, Value& v )
 
 
 //
-// Locked Iterator Accessor
+// Locked Accessors
 //
 
 template< typename MapT, typename ReplicateP >
@@ -199,6 +202,16 @@ class BasicMap< MapT, ReplicateP >::ConstLockedMap : public Detail::ConstLockedM
 public:
     explicit ConstLockedMap( const BasicMap& host )
         : Detail::ConstLockedMap< MapT >( host.m_mapMutex, host.m_map )
+    {}
+};
+
+
+template< typename MapT, typename ReplicateP >
+class BasicMap< MapT, ReplicateP >::MutableLockedMap : public Detail::MutableLockedMap< MapT >
+{
+public:
+    explicit MutableLockedMap( BasicMap& host )
+        : Detail::MutableLockedMap< MapT >( host.m_mapMutex, host.m_map )
     {}
 };
 

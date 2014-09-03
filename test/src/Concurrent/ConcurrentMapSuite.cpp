@@ -55,6 +55,22 @@ void TestBasicMap( MapType& map )
     temp = "Cirno";
     CHECK( true == map.FindOrInsert( 9, temp ));   // Found, not inserted
     CHECK( "Utsuho" == temp );
+
+
+    /// Mutable Locked Map ///
+
+    {
+        MapType::MutableLockedMap mMap( map );
+        mMap.Clear();
+
+        CHECK( true == map.IsEmpty() );
+
+        mMap.Insert( 8, "Mystia" );
+        mMap.Insert( 5, "Hina" );
+    }
+
+    CHECK( 2 == map.Size() );
+    CHECK( true  == map.Contains( 8 ));
 }
 
 
