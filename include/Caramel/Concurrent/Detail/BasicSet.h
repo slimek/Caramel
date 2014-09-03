@@ -93,7 +93,7 @@ private:
 //
 
 template< typename SetT, typename ReplicateP >
-Bool BasicSet< SetT, ReplicateP >::Contains( const Key& k ) const
+inline Bool BasicSet< SetT, ReplicateP >::Contains( const Key& k ) const
 {
     LockGuard lock( m_setMutex );
     return m_set.end() != m_set.find( k );
@@ -105,7 +105,7 @@ Bool BasicSet< SetT, ReplicateP >::Contains( const Key& k ) const
 //
 
 template< typename SetT, typename ReplicateP >
-Bool BasicSet< SetT, ReplicateP >::Insert( const Key& k )
+inline Bool BasicSet< SetT, ReplicateP >::Insert( const Key& k )
 {
     LockGuard lock( m_setMutex );
 
@@ -121,7 +121,7 @@ Bool BasicSet< SetT, ReplicateP >::Insert( const Key& k )
 
 
 template< typename SetT, typename ReplicateP >
-Uint BasicSet< SetT, ReplicateP >::Erase( const Key& k )
+inline Uint BasicSet< SetT, ReplicateP >::Erase( const Key& k )
 {
     LockGuard lock( m_setMutex );
 
@@ -137,7 +137,7 @@ Uint BasicSet< SetT, ReplicateP >::Erase( const Key& k )
 
 
 template< typename SetT, typename ReplicateP >
-void BasicSet< SetT, ReplicateP >::Clear()
+inline void BasicSet< SetT, ReplicateP >::Clear()
 {
     LockGuard lock( m_setMutex );
 

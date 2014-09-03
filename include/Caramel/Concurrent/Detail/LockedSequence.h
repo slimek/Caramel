@@ -66,7 +66,7 @@ private:
 //
 
 template< typename SequenceT >
-ConstLockedSequence< SequenceT >::ConstLockedSequence( std::mutex& mutex, const SequenceT& seq )
+inline ConstLockedSequence< SequenceT >::ConstLockedSequence( std::mutex& mutex, const SequenceT& seq )
     : m_lock( mutex )
     , m_constSequence( seq )
 {

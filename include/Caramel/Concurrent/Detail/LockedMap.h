@@ -75,7 +75,7 @@ private:
 //
 
 template< typename MapT >
-ConstLockedMap< MapT >::ConstLockedMap( std::mutex& mutex, const MapT& map )
+inline ConstLockedMap< MapT >::ConstLockedMap( std::mutex& mutex, const MapT& map )
     : m_lock( mutex )
     , m_constMap( map )
 {

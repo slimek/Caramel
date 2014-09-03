@@ -101,7 +101,7 @@ private:
 //
 
 template< typename MapT, typename ReplicateP >
-Bool BasicMap< MapT, ReplicateP >::Contains( const Key& k ) const
+inline Bool BasicMap< MapT, ReplicateP >::Contains( const Key& k ) const
 {
     LockGuard lock( m_mapMutex );
     return m_map.end() != m_map.find( k );
@@ -109,7 +109,7 @@ Bool BasicMap< MapT, ReplicateP >::Contains( const Key& k ) const
 
 
 template< typename MapT, typename ReplicateP >
-Bool BasicMap< MapT, ReplicateP >::Find( const Key& k, Value& v ) const
+inline Bool BasicMap< MapT, ReplicateP >::Find( const Key& k, Value& v ) const
 {
     LockGuard lock( m_mapMutex );
 
@@ -125,7 +125,7 @@ Bool BasicMap< MapT, ReplicateP >::Find( const Key& k, Value& v ) const
 //
 
 template< typename MapT, typename ReplicateP >
-Bool BasicMap< MapT, ReplicateP >::Insert( const Key& k, const Value& v )
+inline Bool BasicMap< MapT, ReplicateP >::Insert( const Key& k, const Value& v )
 {
     LockGuard lock( m_mapMutex );
 
@@ -141,7 +141,7 @@ Bool BasicMap< MapT, ReplicateP >::Insert( const Key& k, const Value& v )
 
 
 template< typename MapT, typename ReplicateP >
-Uint BasicMap< MapT, ReplicateP >::Erase( const Key& k )
+inline Uint BasicMap< MapT, ReplicateP >::Erase( const Key& k )
 {
     LockGuard lock( m_mapMutex );
 
@@ -157,7 +157,7 @@ Uint BasicMap< MapT, ReplicateP >::Erase( const Key& k )
 
 
 template< typename MapT, typename ReplicateP >
-void BasicMap< MapT, ReplicateP >::Clear()
+inline void BasicMap< MapT, ReplicateP >::Clear()
 {
     LockGuard lock( m_mapMutex );
 
@@ -174,7 +174,7 @@ void BasicMap< MapT, ReplicateP >::Clear()
 //
 
 template< typename MapT, typename ReplicateP >
-Bool BasicMap< MapT, ReplicateP >::FindOrInsert( const Key& k, Value& v )
+inline Bool BasicMap< MapT, ReplicateP >::FindOrInsert( const Key& k, Value& v )
 {
     LockGuard lock( m_mapMutex );
 

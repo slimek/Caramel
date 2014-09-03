@@ -71,7 +71,7 @@ private:
 //
 
 template< typename SetT >
-ConstLockedSet< SetT >::ConstLockedSet( std::mutex& mutex, const SetT& set )
+inline ConstLockedSet< SetT >::ConstLockedSet( std::mutex& mutex, const SetT& set )
     : m_lock( mutex )
     , m_constSet( set )
 {
