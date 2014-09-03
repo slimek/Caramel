@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Android\LogTraceAdapter.h" />
     <ClInclude Include="..\include\Caramel\Apple\LogTraceAdapter.h" />
+    <ClInclude Include="..\include\Caramel\Apple\SharedObjcPtr.h" />
     <ClInclude Include="..\include\Caramel\Arithmetic\Flags.h" />
     <ClInclude Include="..\include\Caramel\Arithmetic\PowerOfTwo.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEvent.h" />

@@ -779,6 +779,9 @@
     <ClInclude Include="..\include\Caramel\Meta\Range.h">
       <Filter>1. Public Packages\Meta</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Apple\SharedObjcPtr.h">
+      <Filter>4. Non-Win32 Platform\Apple</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">
