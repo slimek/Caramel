@@ -35,6 +35,7 @@ public:
     ~SharedObjcPtr();
 
     T* Get() const { return m_p; }
+    T* Retain() const { return [m_p retain]; }
 
 private:
     T* m_p;
@@ -80,6 +81,7 @@ inline SharedObjcPtr< T >& SharedObjcPtr< T >::operator=( const SharedObjcPtr< T
 {
     [m_p autorelease];
     m_p = [sp.m_p retain];
+    return *this;
 }
 
 
@@ -89,6 +91,7 @@ inline SharedObjcPtr< T >& SharedObjcPtr< T >::operator=( SharedObjcPtr< T >&& s
     [m_p autorelease];
     m_p = sp.m_p;
     sp.m_p = nil;
+    return *this;
 }
 
 
