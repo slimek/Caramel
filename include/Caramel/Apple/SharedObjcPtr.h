@@ -28,8 +28,10 @@ public:
 
     SharedObjcPtr();
     SharedObjcPtr( const SharedObjcPtr& sp );
+    SharedObjcPtr( SharedObjPtr&& sp );
     explicit SharedObjcPtr( T* p );
     SharedObjcPtr& operator=( const SharedObjcPtr& sp );
+    SharedObjcPtr& operator=( SharedObjcPtr&& sp );
     ~SharedObjcPtr();
 
     T* Get() const { return m_p; }
@@ -59,6 +61,14 @@ inline SharedObjcPtr< T >::SharedObjcPtr( const SharedObjcPtr& sp )
 
 
 template< typename T >
+inline SharedObjcPtr< T >::SharedObjcPtr( SharedObjcPtr&& sp )
+    : m_p( sp.m_p )
+{
+    sp.m_p = nil;
+}
+
+
+template< typename T >
 inline SharedObjcPtr< T >::SharedObjcPtr( T* p )
     : m_p( [p retain] )
 {
@@ -70,6 +80,15 @@ inline SharedObjcPtr< T >& SharedObjcPtr< T >::operator=( const SharedObjcPtr< T
 {
     [m_p autorelease];
     m_p = [sp.m_p retain];
+}
+
+
+template< typename T >
+inline SharedObjcPtr< T >& SharedObjcPtr< T >::operator=( SharedObjcPtr< T >&& sp )
+{
+    [m_p autorelease];
+    m_p = sp.m_p;
+    sp.m_p = nil;
 }
 
 
