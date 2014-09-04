@@ -28,7 +28,7 @@ public:
 
     SharedObjcPtr();
     SharedObjcPtr( const SharedObjcPtr& sp );
-    SharedObjcPtr( SharedObjPtr&& sp );
+    SharedObjcPtr( SharedObjcPtr&& sp );
     explicit SharedObjcPtr( T* p );
     SharedObjcPtr& operator=( const SharedObjcPtr& sp );
     SharedObjcPtr& operator=( SharedObjcPtr&& sp );
