@@ -79,8 +79,8 @@ public:
     class ConstLockedMap;
     friend class ConstLockedMap;
 
-    class MutableLockedMap;
-    friend class MutableLockedMap;
+    class LockedMap;
+    friend class LockedMap;
 
     // For Replicator
     typedef ConstLockedMap ConstLockedDictionary;
@@ -207,11 +207,11 @@ public:
 
 
 template< typename MapT, typename ReplicateP >
-class BasicMap< MapT, ReplicateP >::MutableLockedMap : public Detail::MutableLockedMap< MapT >
+class BasicMap< MapT, ReplicateP >::LockedMap : public Detail::LockedMap< MapT >
 {
 public:
-    explicit MutableLockedMap( BasicMap& host )
-        : Detail::MutableLockedMap< MapT >( host.m_mapMutex, host.m_map )
+    explicit LockedMap( BasicMap& host )
+        : Detail::LockedMap< MapT >( host.m_mapMutex, host.m_map )
     {}
 };
 

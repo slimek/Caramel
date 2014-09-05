@@ -60,13 +60,13 @@ void TestBasicMap( MapType& map )
     /// Mutable Locked Map ///
 
     {
-        MapType::MutableLockedMap mMap( map );
-        mMap.Clear();
+        MapType::LockedMap lockedMap( map );
+        lockedMap.Clear();
 
         CHECK( true == map.IsEmpty() );
 
-        mMap.Insert( 8, "Mystia" );
-        mMap.Insert( 5, "Hina" );
+        lockedMap.Insert( 8, "Mystia" );
+        lockedMap.Insert( 5, "Hina" );
     }
 
     CHECK( 2 == map.Size() );

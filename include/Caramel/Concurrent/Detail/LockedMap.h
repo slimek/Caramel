@@ -73,15 +73,15 @@ private:
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Mutable Locked Map
+// Locked Map (mutable)
 //
 
 template< typename MapType >
-class MutableLockedMap : public boost::noncopyable
+class LockedMap : public boost::noncopyable
 {
 public:
 
-    MutableLockedMap( std::mutex& mutex, MapType& map );
+    LockedMap( std::mutex& mutex, MapType& map );
 
 
     /// Operations ///
@@ -123,7 +123,7 @@ inline ConstLockedMap< MapT >::ConstLockedMap( std::mutex& mutex, const MapT& ma
 //
 
 template< typename MapT >
-inline MutableLockedMap< MapT >::MutableLockedMap( std::mutex& mutex, MapT& map )
+inline LockedMap< MapT >::LockedMap( std::mutex& mutex, MapT& map )
     : m_lock( mutex )
     , m_map( map )
 {
@@ -131,14 +131,14 @@ inline MutableLockedMap< MapT >::MutableLockedMap( std::mutex& mutex, MapT& map 
 
 
 template< typename MapT >
-inline void MutableLockedMap< MapT >::Clear()
+inline void LockedMap< MapT >::Clear()
 {
     m_map.clear();
 }
 
 
 template< typename MapT >
-inline Bool MutableLockedMap< MapT >::Insert( const Key& k, const Value& v )
+inline Bool LockedMap< MapT >::Insert( const Key& k, const Value& v )
 {
     return m_map.insert( std::make_pair( k, v )).second;
 }
