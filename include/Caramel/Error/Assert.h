@@ -18,7 +18,7 @@
 
 #define CARAMEL_ASSERT( expr ) ( (void)0 )
 
-#define CARAMEL_VERIFY( expr ) ( expr )
+#define CARAMEL_VERIFY( expr ) ( (void)( expr ) )
 
 #else  // NDEBUG
 
