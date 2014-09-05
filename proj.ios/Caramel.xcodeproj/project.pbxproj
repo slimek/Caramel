@@ -47,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		011E97511994ABDA00CAED6A /* Caramel-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Caramel-Prefix.pch"; sourceTree = "<group>"; };
+		01849EB719B958D900BFF9D4 /* SharedNsoPtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedNsoPtr.h; sourceTree = "<group>"; };
 		6DA51D61193EB82B00050A24 /* AnyEventDispatcherImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyEventDispatcherImpl.h; sourceTree = "<group>"; };
 		6DA51D62193EB82B00050A24 /* AnyEventQueueImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyEventQueueImpl.h; sourceTree = "<group>"; };
 		6DA51D63193EB82B00050A24 /* AnyEventSlotImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyEventSlotImpl.h; sourceTree = "<group>"; };
@@ -361,6 +362,7 @@
 		6DAC95CE191B5D680007BF91 /* Apple */ = {
 			isa = PBXGroup;
 			children = (
+				01849EB719B958D900BFF9D4 /* SharedNsoPtr.h */,
 				6DAC95CF191B5D680007BF91 /* LogTraceAdapter.h */,
 			);
 			path = Apple;

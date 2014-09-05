@@ -1,7 +1,7 @@
-// Caramel C++ Library - Apple Facility - Shared Obj-C Pointer Header
+// Caramel C++ Library - Apple Facility - Shared NSObject Pointer Header
 
-#ifndef __CARAMEL_APPLE_SHARED_OBJC_PTR_H
-#define __CARAMEL_APPLE_SHARED_OBJC_PTR_H
+#ifndef __CARAMEL_APPLE_SHARED_NSO_PTR_H
+#define __CARAMEL_APPLE_SHARED_NSO_PTR_H
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
@@ -18,21 +18,21 @@ namespace Apple
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Shared Obj-C Pointer
+// Shared NSObject Pointer
 //
 
 template< typename T >
-class SharedObjcPtr
+class SharedNsoPtr
 {
 public:
 
-    SharedObjcPtr();
-    SharedObjcPtr( const SharedObjcPtr& sp );
-    SharedObjcPtr( SharedObjcPtr&& sp );
-    explicit SharedObjcPtr( T* p );
-    SharedObjcPtr& operator=( const SharedObjcPtr& sp );
-    SharedObjcPtr& operator=( SharedObjcPtr&& sp );
-    ~SharedObjcPtr();
+    SharedNsoPtr();
+    SharedNsoPtr( const SharedNsoPtr& sp );
+    SharedNsoPtr( SharedNsoPtr&& sp );
+    explicit SharedNsoPtr( T* p );
+    SharedNsoPtr& operator=( const SharedNsoPtr& sp );
+    SharedNsoPtr& operator=( SharedNsoPtr&& sp );
+    ~SharedNsoPtr();
 
     T* Get() const { return m_p; }
     T* Retain() const { return [m_p retain]; }
@@ -48,21 +48,21 @@ private:
 //
 
 template< typename T >
-inline SharedObjcPtr< T >::SharedObjcPtr()
+inline SharedNsoPtr< T >::SharedNsoPtr()
     : m_p( nil )
 {
 }
 
 
 template< typename T >
-inline SharedObjcPtr< T >::SharedObjcPtr( const SharedObjcPtr& sp )
+inline SharedNsoPtr< T >::SharedNsoPtr( const SharedNsoPtr& sp )
     : m_p( [sp.m_p retain] )
 {
 }
 
 
 template< typename T >
-inline SharedObjcPtr< T >::SharedObjcPtr( SharedObjcPtr&& sp )
+inline SharedNsoPtr< T >::SharedNsoPtr( SharedNsoPtr&& sp )
     : m_p( sp.m_p )
 {
     sp.m_p = nil;
@@ -70,14 +70,14 @@ inline SharedObjcPtr< T >::SharedObjcPtr( SharedObjcPtr&& sp )
 
 
 template< typename T >
-inline SharedObjcPtr< T >::SharedObjcPtr( T* p )
+inline SharedNsoPtr< T >::SharedNsoPtr( T* p )
     : m_p( [p retain] )
 {
 }
 
 
 template< typename T >
-inline SharedObjcPtr< T >& SharedObjcPtr< T >::operator=( const SharedObjcPtr< T >& sp )
+inline SharedNsoPtr< T >& SharedNsoPtr< T >::operator=( const SharedNsoPtr< T >& sp )
 {
     [m_p autorelease];
     m_p = [sp.m_p retain];
@@ -86,7 +86,7 @@ inline SharedObjcPtr< T >& SharedObjcPtr< T >::operator=( const SharedObjcPtr< T
 
 
 template< typename T >
-inline SharedObjcPtr< T >& SharedObjcPtr< T >::operator=( SharedObjcPtr< T >&& sp )
+inline SharedNsoPtr< T >& SharedNsoPtr< T >::operator=( SharedNsoPtr< T >&& sp )
 {
     [m_p autorelease];
     m_p = sp.m_p;
@@ -96,7 +96,7 @@ inline SharedObjcPtr< T >& SharedObjcPtr< T >::operator=( SharedObjcPtr< T >&& s
 
 
 template< typename T >
-inline SharedObjcPtr< T >::~SharedObjcPtr< T >()
+inline SharedNsoPtr< T >::~SharedNsoPtr< T >()
 {
     [m_p release];
 }
@@ -110,4 +110,4 @@ inline SharedObjcPtr< T >::~SharedObjcPtr< T >()
 
 #endif // CARAMEL_SYSTEM_OF_APPLE
 
-#endif // __CARAMEL_APPLE_SHARED_OBJC_PTR_H
+#endif // __CARAMEL_APPLE_SHARED_NSO_PTR_H
