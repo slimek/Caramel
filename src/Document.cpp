@@ -210,9 +210,9 @@ Bool IniSection::HasValue( const std::string& valueName ) const
 }
 
 
-Bool IniSection::GetBoolValue( const std::string& valueName ) const
+Bool IniSection::GetBool( const std::string& valueName ) const
 {
-    const std::string value = m_impl->GetStringValue( valueName );
+    const std::string value = m_impl->GetString( valueName );
 
     Lexical::Boolean bvalue;
     if ( bvalue.TryParse( value ))
@@ -225,9 +225,9 @@ Bool IniSection::GetBoolValue( const std::string& valueName ) const
 }
 
 
-Int IniSection::GetIntValue( const std::string& valueName ) const
+Int IniSection::GetInt( const std::string& valueName ) const
 {
-    const std::string value = m_impl->GetStringValue( valueName );
+    const std::string value = m_impl->GetString( valueName );
 
     Lexical::Integer< Int > ivalue;
     if ( ivalue.TryParse( value ))
@@ -249,9 +249,9 @@ Int IniSection::GetIntValue( const std::string& valueName ) const
 }
 
 
-Uint IniSection::GetUintValue( const std::string& valueName ) const
+Uint IniSection::GetUint( const std::string& valueName ) const
 {
-    const std::string value = m_impl->GetStringValue( valueName );
+    const std::string value = m_impl->GetString( valueName );
 
     Lexical::Integer< Uint > uvalue;
     if ( uvalue.TryParse( value ))
@@ -273,21 +273,21 @@ Uint IniSection::GetUintValue( const std::string& valueName ) const
 }
 
 
-Float IniSection::GetFloatValue( const std::string& valueName ) const
+Float IniSection::GetFloat( const std::string& valueName ) const
 {
     CARAMEL_NOT_IMPLEMENTED();
 }
 
 
-std::string IniSection::GetStringValue( const std::string& valueName ) const
+std::string IniSection::GetString( const std::string& valueName ) const
 {
-    return m_impl->GetStringValue( valueName );
+    return m_impl->GetString( valueName );
 }
 
 
-//std::vector< std::string > IniSection::GetStringArrayValue( const std::string& valueName ) const
+//std::vector< std::string > IniSection::GetStringArray( const std::string& valueName ) const
 //{
-//    return m_impl->GetStringArrayValue( valueName );
+//    return m_impl->GetStringArray( valueName );
 //}
 
 
@@ -318,7 +318,7 @@ Bool IniSectionImpl::HasValue( const std::string& valueName ) const
 }
 
 
-std::string IniSectionImpl::GetStringValue( const std::string& valueName ) const
+std::string IniSectionImpl::GetString( const std::string& valueName ) const
 {
     ValueMap::const_iterator ivalue = m_values.find( valueName );
     if ( m_values.end() != ivalue )

@@ -38,9 +38,9 @@ public:
 
     Bool HasValue( const std::string& valueName ) const;
 
-    std::string GetStringValue( const std::string& valueName ) const;
+    std::string GetString( const std::string& valueName ) const;
 
-    //std::vector< std::string > GetStringArrayValue( const std::string& valueName ) const;
+    //std::vector< std::string > GetStringArray( const std::string& valueName ) const;
 
 
     /// Value Manipulators ///

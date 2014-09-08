@@ -20,69 +20,69 @@ TEST( IniDocumentFundamentalTest )
 
     auto bools = iniDoc.GetSection( "Booleans" );
 
-    CHECK( true  == bools.GetBoolValue( "BoolTrue" ));
-    CHECK( true  == bools.GetBoolValue( "BoolTrueUpper" ));
-    CHECK( true  == bools.GetBoolValue( "BoolTrueCamel" ));
-    CHECK( true  == bools.GetBoolValue( "BoolTrueInt" ));
-    CHECK( false == bools.GetBoolValue( "BoolFalse" ));
-    CHECK( false == bools.GetBoolValue( "BoolFalseUpper" ));
-    CHECK( false == bools.GetBoolValue( "BoolFalseCamel" ));
-    CHECK( false == bools.GetBoolValue( "BoolFalseInt" ));
+    CHECK( true  == bools.GetBool( "BoolTrue" ));
+    CHECK( true  == bools.GetBool( "BoolTrueUpper" ));
+    CHECK( true  == bools.GetBool( "BoolTrueCamel" ));
+    CHECK( true  == bools.GetBool( "BoolTrueInt" ));
+    CHECK( false == bools.GetBool( "BoolFalse" ));
+    CHECK( false == bools.GetBool( "BoolFalseUpper" ));
+    CHECK( false == bools.GetBool( "BoolFalseCamel" ));
+    CHECK( false == bools.GetBool( "BoolFalseInt" ));
 
-    CHECK_THROW( bools.GetBoolValue( "BoolBad" ), Caramel::Exception );
+    CHECK_THROW( bools.GetBool( "BoolBad" ), Caramel::Exception );
 
 
     // As Integers
-    CHECK( 1 == bools.GetIntValue( "BoolTrue" ));
-    CHECK( 0 == bools.GetIntValue( "BoolFalse" ));
-    CHECK( 1 == bools.GetUintValue( "BoolTrue" ));
-    CHECK( 0 == bools.GetUintValue( "BoolFalse" ));
+    CHECK( 1 == bools.GetInt( "BoolTrue" ));
+    CHECK( 0 == bools.GetInt( "BoolFalse" ));
+    CHECK( 1 == bools.GetUint( "BoolTrue" ));
+    CHECK( 0 == bools.GetUint( "BoolFalse" ));
 
     // As String
-    CHECK( "true"  == bools.GetStringValue( "BoolTrue" ));
-    CHECK( "false" == bools.GetStringValue( "BoolFalse" ));
+    CHECK( "true"  == bools.GetString( "BoolTrue" ));
+    CHECK( "false" == bools.GetString( "BoolFalse" ));
 
 
     /// Integers ///
 
     auto ints = iniDoc.GetSection( "Ints" );
 
-    CHECK( 0 == ints.GetIntValue( "IntZero" ));
-    CHECK( 1 == ints.GetIntValue( "IntOne" ));
-    CHECK( 7 == ints.GetIntValue( "IntSeven" ));
-    CHECK( INT_MAX == ints.GetIntValue( "IntIntMax" ));
-    CHECK( -1 == ints.GetIntValue( "IntNegOne" ));
-    CHECK( INT_MIN == ints.GetIntValue( "IntIntMin" ));
+    CHECK( 0 == ints.GetInt( "IntZero" ));
+    CHECK( 1 == ints.GetInt( "IntOne" ));
+    CHECK( 7 == ints.GetInt( "IntSeven" ));
+    CHECK( INT_MAX == ints.GetInt( "IntIntMax" ));
+    CHECK( -1 == ints.GetInt( "IntNegOne" ));
+    CHECK( INT_MIN == ints.GetInt( "IntIntMin" ));
 
-    CHECK( 1 == ints.GetIntValue( "IntHexOne" ));           // 0x1
-    CHECK( 1 == ints.GetIntValue( "IntHexOneLong" ));       // 0x00000001
-    CHECK( -1 == ints.GetIntValue( "IntHexNegOne" ));       // 0xffffffff
-    CHECK( INT_MAX == ints.GetIntValue( "IntHexIntMax" ));  // 0x7fffffff
-    CHECK( INT_MIN == ints.GetIntValue( "IntHexIntMin" ));  // 0x80000000
-    CHECK( 15 == ints.GetIntValue( "IntHexFifteenUpper" )); // 0XF
+    CHECK( 1 == ints.GetInt( "IntHexOne" ));           // 0x1
+    CHECK( 1 == ints.GetInt( "IntHexOneLong" ));       // 0x00000001
+    CHECK( -1 == ints.GetInt( "IntHexNegOne" ));       // 0xffffffff
+    CHECK( INT_MAX == ints.GetInt( "IntHexIntMax" ));  // 0x7fffffff
+    CHECK( INT_MIN == ints.GetInt( "IntHexIntMin" ));  // 0x80000000
+    CHECK( 15 == ints.GetInt( "IntHexFifteenUpper" )); // 0XF
 
-    CHECK_THROW( ints.GetIntValue( "IntBad1" ), Caramel::Exception );
-    CHECK_THROW( ints.GetIntValue( "IntBad2" ), Caramel::Exception );
+    CHECK_THROW( ints.GetInt( "IntBad1" ), Caramel::Exception );
+    CHECK_THROW( ints.GetInt( "IntBad2" ), Caramel::Exception );
 
 
     /// Unsigned Integers ///
 
-    CHECK( 0 == ints.GetUintValue( "IntZero" ));
-    CHECK( 1 == ints.GetUintValue( "IntOne" ));
-    CHECK( 7 == ints.GetUintValue( "IntSeven" ));
-    CHECK( INT_MAX == ints.GetUintValue( "IntIntMax" ));
-    CHECK( UINT_MAX == ints.GetUintValue( "IntNegOne" ));
-    CHECK( (Uint32)INT_MAX + 1 == ints.GetUintValue( "IntIntMin" ));
+    CHECK( 0 == ints.GetUint( "IntZero" ));
+    CHECK( 1 == ints.GetUint( "IntOne" ));
+    CHECK( 7 == ints.GetUint( "IntSeven" ));
+    CHECK( INT_MAX == ints.GetUint( "IntIntMax" ));
+    CHECK( UINT_MAX == ints.GetUint( "IntNegOne" ));
+    CHECK( (Uint32)INT_MAX + 1 == ints.GetUint( "IntIntMin" ));
 
-    CHECK( 1 == ints.GetUintValue( "IntHexOne" ));                      // 0x1
-    CHECK( 1 == ints.GetUintValue( "IntHexOneLong" ));                  // 0x00000001
-    CHECK( UINT_MAX == ints.GetUintValue( "IntHexNegOne" ));            // 0xffffffff
-    CHECK( INT_MAX == ints.GetUintValue( "IntHexIntMax" ));             // 0x7fffffff
-    CHECK( (Uint32)INT_MAX + 1 == ints.GetUintValue( "IntHexIntMin" )); // 0x80000000
-    CHECK( 15 == ints.GetUintValue( "IntHexFifteenUpper" ));            // 0XF
+    CHECK( 1 == ints.GetUint( "IntHexOne" ));                      // 0x1
+    CHECK( 1 == ints.GetUint( "IntHexOneLong" ));                  // 0x00000001
+    CHECK( UINT_MAX == ints.GetUint( "IntHexNegOne" ));            // 0xffffffff
+    CHECK( INT_MAX == ints.GetUint( "IntHexIntMax" ));             // 0x7fffffff
+    CHECK( (Uint32)INT_MAX + 1 == ints.GetUint( "IntHexIntMin" )); // 0x80000000
+    CHECK( 15 == ints.GetUint( "IntHexFifteenUpper" ));            // 0XF
 
-    CHECK_THROW( ints.GetUintValue( "IntBad1" ), Caramel::Exception );
-    CHECK_THROW( ints.GetUintValue( "IntBad2" ), Caramel::Exception );
+    CHECK_THROW( ints.GetUint( "IntBad1" ), Caramel::Exception );
+    CHECK_THROW( ints.GetUint( "IntBad2" ), Caramel::Exception );
 }
 
 

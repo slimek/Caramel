@@ -36,23 +36,23 @@ public:
     //   2. The value can't be converted to the type.
     //
 
-    Bool   GetBoolValue ( const std::string& valueName ) const;
-    Int    GetIntValue  ( const std::string& valueName ) const;
-    Uint   GetUintValue ( const std::string& valueName ) const;
-    Float  GetFloatValue( const std::string& valueName ) const;
+    Bool   GetBool ( const std::string& valueName ) const;
+    Int    GetInt  ( const std::string& valueName ) const;
+    Uint   GetUint ( const std::string& valueName ) const;
+    Float  GetFloat( const std::string& valueName ) const;
 
     //
     // Get String Value
     // - If the value is quoted, the beginning and ending quotes would be removed.
     //   The string is UTF-8 encoded.
     //    
-    std::string GetStringValue( const std::string& valueName ) const;
+    std::string GetString( const std::string& valueName ) const;
 
 
     //
     // Get Array Values
     //
-    //std::vector< std::string > GetStringArrayValue( const std::string& valueName ) const;
+    //std::vector< std::string > GetStringArray( const std::string& valueName ) const;
 
 
 private:
