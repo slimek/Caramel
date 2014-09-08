@@ -92,8 +92,8 @@ inline Bool operator==( const StringConvertible< T >& lhs, const U& rhs )
 }
 
 
-template< typename T, typename U >
-inline Bool operator==( const T& lhs, const StringConvertible< U >& rhs )
+template< typename U, typename T >
+inline Bool operator==( const U& lhs, const StringConvertible< T >& rhs )
 {
     return rhs.EqualTo( lhs );
 }
@@ -106,8 +106,8 @@ inline Bool operator!=( const StringConvertible< T >& lhs, const U& rhs )
 }
 
 
-template< typename T, typename U >
-inline Bool operator!=( const T& lhs, const StringConvertible< U >& rhs )
+template< typename U, typename T >
+inline Bool operator!=( const U& lhs, const StringConvertible< T >& rhs )
 {
     return ! rhs.EqualTo( lhs );
 }
