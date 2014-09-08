@@ -5,7 +5,9 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
+#include <Caramel/Meta/IsGeneralString.h>
 #include <Caramel/Meta/Utility.h>
+#include <boost/utility/enable_if.hpp>
 #include <iosfwd>
 #include <type_traits>
 
@@ -16,7 +18,7 @@ namespace Caramel
 ///////////////////////////////////////////////////////////////////////////////
 //
 // String Convertible
-// - Provides an adapter from a custom to std::string.
+// - Provides an adapter from a custom type to std::string.
 //
 
 template< typename Derived >
@@ -31,6 +33,16 @@ public:
     {
         os << static_cast< const Derived& >( x ).ToString();
         return os;
+    }
+
+
+    /// Comparison ///
+
+    template< typename U >
+    Bool EqualTo(
+        const U& x, typename boost::enable_if< IsGeneralStringT< U > >::type* = nullptr ) const
+    {
+        return static_cast< const Derived& >( *this ).ToString() == x;
     }
 
 
@@ -66,6 +78,39 @@ template< typename T >
 struct IsStringConvertibleT
     : BoolType< std::is_base_of< StringConvertible< T >, T >::value >
 {};
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// String Comparison
+//
+
+template< typename T, typename U >
+inline Bool operator==( const StringConvertible< T >& lhs, const U& rhs )
+{
+    return lhs.EqualTo( rhs );
+}
+
+
+template< typename T, typename U >
+inline Bool operator==( const T& lhs, const StringConvertible< U >& rhs )
+{
+    return rhs.EqualTo( lhs );
+}
+
+
+template< typename T, typename U >
+inline Bool operator!=( const StringConvertible< T >& lhs, const U& rhs )
+{
+    return ! lhs.EqualTo( rhs );
+}
+
+
+template< typename T, typename U >
+inline Bool operator!=( const T& lhs, const StringConvertible< U >& rhs )
+{
+    return ! rhs.EqualTo( lhs );
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////
