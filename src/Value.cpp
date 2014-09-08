@@ -254,6 +254,12 @@ Uint NamedValues::Size() const
 // Accessors
 //
 
+Bool NamedValues::HasValue( const std::string& name ) const
+{
+    return m_impl->m_valueEntries.find( name ) != m_impl->m_valueEntries.end();
+}
+
+
 Detail::NamedValueRef NamedValues::operator[]( const std::string& name )
 {
     Detail::NamedValueEntry* entry = nullptr;

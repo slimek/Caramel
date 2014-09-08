@@ -16,13 +16,15 @@ TEST( NamedValuesTrivialTest )
 {
     NamedValues nv;
 
-    CHECK( true == nv.IsEmpty() );
-    CHECK( 0    == nv.Size() );
+    CHECK( true  == nv.IsEmpty() );
+    CHECK( 0     == nv.Size() );
+    CHECK( false == nv.HasValue( "miko" ));
 
     auto values = nv.GetValueMap();
 
     CHECK( true == values.empty() );
     CHECK( 0    == values.size() );
+
 }
 
 
@@ -43,6 +45,10 @@ TEST( NamedValuesTest )
     nv[ "missed" ]  = 0;
     nv[ "score" ]   = INT64_MAX;
     nv[ "hiscore" ] = UINT64_MAX;
+
+    // Has Value
+    CHECK( true  == nv.HasValue( "miko" ));
+    CHECK( false == nv.HasValue( "fairy" ));
 
     // With same type
     CHECK( "Reimu"    == nv[ "miko" ].AsString() );

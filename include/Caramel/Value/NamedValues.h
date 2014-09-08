@@ -85,6 +85,8 @@ public:
 
     /// Access a Value ///
 
+    Bool HasValue( const std::string& name ) const;
+
     Detail::NamedValueRef      operator[]( const std::string& name );
     Detail::ConstNamedValueRef operator[]( const std::string& name ) const;
 
