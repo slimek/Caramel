@@ -98,6 +98,22 @@ IniSection IniDocument::GetSection( const std::string& sectionName )
 }
 
 
+std::vector< IniSection > IniDocument::GetAllSections() const
+{
+    const auto& sects = m_impl->m_sectionMap;
+
+    std::vector< IniSection > result;
+    result.reserve( sects.size() );
+
+    for ( const auto& sect : sects )
+    {
+        result.push_back( IniSection( sect.second ));
+    }
+
+    return result;
+}
+
+
 //
 // Implementation
 //
@@ -112,7 +128,6 @@ IniDocumentImpl::IniDocumentImpl()
 void IniDocumentImpl::LoadFromText( TextReader& reader )
 {
     this->Clear();
-    this->AddSection( "", "" );
 
     Uint lineNo = 0;
     std::string rawLine;
@@ -124,15 +139,22 @@ void IniDocumentImpl::LoadFromText( TextReader& reader )
 
         switch ( iniLine.Type() )
         {
-        case IniLine::TYPE_BLANK:
-            m_currSection->AddRawLine( rawLine );
-            break;
-
         case IniLine::TYPE_SECTION:
             this->AddSection( iniLine.Name(), rawLine );
             break;
 
+        case IniLine::TYPE_BLANK:
+            if ( m_currSection )
+            {
+                m_currSection->AddRawLine( rawLine );
+            }
+            break;
+
         case IniLine::TYPE_VALUE:
+            if ( ! m_currSection )
+            {
+                CARAMEL_THROW( "No section given before the first value: %s", iniLine.Name() );
+            }
             m_currSection->AddValue( iniLine.Name(), iniLine.Value(), rawLine );
             break;
 
@@ -197,6 +219,12 @@ IniSectionPtr IniDocumentImpl::FindSection( const std::string& sectionName ) con
 IniSection::IniSection( IniSectionPtr impl )
     : m_impl( impl )
 {
+}
+
+
+std::string IniSection::GetName() const
+{
+    return m_impl->GetName();
 }
 
 
@@ -291,6 +319,20 @@ std::string IniSection::GetString( const std::string& valueName ) const
 //}
 
 
+NamedValues IniSection::ToNamedValues() const
+{
+    const auto& values = m_impl->m_values;
+
+    NamedValues result;
+    for ( const auto& nameValue : values )
+    {
+        result[ nameValue.first ] = nameValue.second.value;
+    }
+
+    return result;
+}
+
+
 //
 // Implementation
 //
@@ -357,6 +399,7 @@ std::string IniSectionImpl::GetString( const std::string& valueName ) const
 //
 //    CARAMEL_THROW( "Value %s not found in section: %s", valueName, m_name );
 //}
+
 
 //
 // Manipulations

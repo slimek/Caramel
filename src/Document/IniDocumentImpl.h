@@ -21,6 +21,8 @@ namespace Caramel
 
 class IniDocumentImpl
 {
+    friend IniDocument;
+
 public:
 
     IniDocumentImpl();

@@ -2,8 +2,11 @@
 
 #include "CaramelTestPch.h"
 
+#include "Utils/StdVectorUtils.h"
 #include <Caramel/Document/IniDocument.h>
 #include <UnitTest++/UnitTest++.h>
+#include <algorithm>
+#include <functional>
 
 
 namespace Caramel
@@ -83,6 +86,39 @@ TEST( IniDocumentFundamentalTest )
 
     CHECK_THROW( ints.GetUint( "IntBad1" ), Caramel::Exception );
     CHECK_THROW( ints.GetUint( "IntBad2" ), Caramel::Exception );
+
+
+    /// Get All Sections ///
+
+    auto sections = iniDoc.GetAllSections();
+
+    CHECK( 2 == sections.size() );
+
+    SortBy( sections, std::mem_fn( &IniSection::GetName ));
+    
+    CHECK( "Booleans" == sections[0].GetName() );
+    CHECK( "Ints" == sections[1].GetName() );
+}
+
+
+TEST( IniDocumentNamedValuesTest )
+{
+    IniDocument iniDoc( "../src/Document/test1.ini" );
+
+    auto bools = iniDoc.GetSection( "Booleans" );
+    const auto bnvs = bools.ToNamedValues();
+
+    CHECK( true == bnvs["BoolTrue"].AsBool() );
+    CHECK( true == bnvs["BoolTrueInt"].AsBool() );
+
+    CHECK_THROW( bnvs["BoolBad"].AsBool(), Caramel::Exception );
+
+
+    auto ints = iniDoc.GetSection( "Ints" );
+    const auto invs = ints.ToNamedValues();
+
+    CHECK( 0 == invs["IntZero"].AsInt() );
+    CHECK( 2147483647 == invs["IntIntMax"].AsInt() );
 }
 
 

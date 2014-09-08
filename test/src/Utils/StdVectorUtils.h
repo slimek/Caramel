@@ -6,6 +6,8 @@
 
 #include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Random/UniformRandom.h>
+#include <algorithm>
+#include <set>
 #include <vector>
 
 
@@ -46,6 +48,44 @@ inline Bool IsSorted( const std::vector< T >& vec )
     }
 
     return true;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Compare a vector with a set of data,
+// returns true if each element matched just once.
+//
+
+template< typename T >
+inline Bool ExactlyMatch( const std::vector< T >& v, std::initializer_list< T >&& init )
+{
+    std::set< T > s( std::move( init ));
+
+    for ( const auto& x : v )
+    {
+        auto iter = s.find( x );
+        if ( iter == s.end() ) { return false; }
+        s.erase( iter );
+    }
+
+    return s.empty();
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Sort a vector by the element's member function, or member extractor.
+//
+
+template< typename T, typename Getter >
+inline void SortBy( std::vector< T >& v, Getter getter )
+{
+    std::sort( v.begin(), v.end(),
+    [&] ( const T& lhs, const T& rhs )
+    {
+        return getter( lhs ) < getter( rhs );
+    });
 }
 
 

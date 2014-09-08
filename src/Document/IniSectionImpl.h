@@ -23,6 +23,7 @@ namespace Caramel
 class IniSectionImpl
 {
     friend class IniDocumentImpl;
+    friend class IniSection;
 
 public:
     

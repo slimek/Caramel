@@ -62,6 +62,8 @@ public:
 
     IniSection GetSection( const std::string& sectionName );
 
+    std::vector< IniSection > GetAllSections() const;
+
 
 private:
 

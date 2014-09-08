@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
+#include <Caramel/Value/NamedValues.h>
 #include <vector>
 
 
@@ -24,6 +25,9 @@ class IniSection
 
 public:
 
+    std::string GetName() const;
+
+
     /// Value Accessors ///
 
     Bool HasValue( const std::string& valueName ) const;
@@ -41,18 +45,18 @@ public:
     Uint   GetUint ( const std::string& valueName ) const;
     Float  GetFloat( const std::string& valueName ) const;
 
-    //
     // Get String Value
     // - If the value is quoted, the beginning and ending quotes would be removed.
     //   The string is UTF-8 encoded.
-    //    
     std::string GetString( const std::string& valueName ) const;
 
 
-    //
     // Get Array Values
-    //
     //std::vector< std::string > GetStringArray( const std::string& valueName ) const;
+
+
+    // Convert all values into a general collection
+    NamedValues ToNamedValues() const;
 
 
 private:

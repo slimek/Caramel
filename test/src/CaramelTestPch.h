@@ -18,6 +18,11 @@
 // Headers
 //
 
+// ANSI C++ Headers
+#include <map>
+#include <set>
+#include <vector>
+
 // Caramel Headers
 #include <Caramel/Setup/PchHeaders.h>
 #include <Caramel/String/Format.h>
