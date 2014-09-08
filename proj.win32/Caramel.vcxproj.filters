@@ -779,7 +779,7 @@
     <ClInclude Include="..\include\Caramel\Meta\Range.h">
       <Filter>1. Public Packages\Meta</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\Apple\SharedObjcPtr.h">
+    <ClInclude Include="..\include\Caramel\Apple\SharedNsoPtr.h">
       <Filter>4. Non-Win32 Platform\Apple</Filter>
     </ClInclude>
   </ItemGroup>
