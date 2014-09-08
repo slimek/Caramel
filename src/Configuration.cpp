@@ -7,6 +7,7 @@
 #include "Configuration/ConfigSectionImpl.h"
 #include <Caramel/Configuration/ConfigValues.h>
 #include <Caramel/Document/IniDocument.h>
+#include <Caramel/Thread/MutexLocks.h>
 
 
 namespace Caramel
@@ -21,6 +22,8 @@ namespace Caramel
 //   ConfigSection
 //   ConfigValue
 //   ConfigBool
+//   ConfigInt
+//   ConfigString
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -130,8 +133,10 @@ void ConfigSectionImpl::Load( const NamedValues& valueData )
     {
         const std::string valueName = value->GetName();
 
-        if ( ! valueData.HasValue( valueName ) && ! value->HasDefault() )
+        if ( ! valueData.HasValue( valueName ))
         {
+            if ( value->HasDefault() ) { continue; }
+
             CARAMEL_THROW( "Value %s/%s not found", m_name, valueName );
         }
 
@@ -177,6 +182,77 @@ void ConfigBool::Load( const NamedValues& data )
     CARAMEL_ASSERT( data.HasValue( m_name ));
 
     m_value = data[ m_name ].AsBool();
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Configuration Int
+//
+
+ConfigInt::ConfigInt( ConfigSection& section, const std::string& name )
+    : ConfigValue( name, false )
+{
+    section.AddValue( *this );
+}
+
+
+ConfigInt::ConfigInt( ConfigSection& section, const std::string& name, Int defaultValue )
+    : ConfigValue( name, true )
+    , m_value( defaultValue )
+{
+    section.AddValue( *this );
+}
+
+
+void ConfigInt::Load( const NamedValues& data )
+{
+    CARAMEL_ASSERT( data.HasValue( m_name ));
+
+    m_value = data[ m_name ].AsInt();
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Configuration String
+//
+
+ConfigString::ConfigString( ConfigSection& section, const std::string& name )
+    : ConfigValue( name, false )
+{
+    section.AddValue( *this );
+}
+
+
+ConfigString::ConfigString(
+    ConfigSection& section, const std::string& name, const std::string& defaultValue )
+    : ConfigValue( name, true )
+    , m_value( defaultValue )
+{
+    section.AddValue( *this );
+}
+
+
+void ConfigString::Load( const NamedValues& data )
+{
+    CARAMEL_ASSERT( data.HasValue( m_name ));
+
+    LockGuard lock( m_mutex );
+    m_value = data[ m_name ].AsString();
+}
+
+
+std::string ConfigString::ToString() const
+{
+    LockGuard lock( m_mutex );
+    return m_value;
+}
+
+
+ConfigString::operator std::string() const
+{
+    return this->ToString();
 }
 
 

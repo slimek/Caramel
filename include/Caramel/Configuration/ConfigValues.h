@@ -6,7 +6,9 @@
 
 #include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Configuration/ConfigSection.h>
+#include <Caramel/String/StringConvertible.h>
 #include <boost/noncopyable.hpp>
+#include <mutex>
 
 
 namespace Caramel
@@ -58,16 +60,69 @@ public:
     ConfigBool( ConfigSection& s, const std::string& name );
     ConfigBool( ConfigSection& s, const std::string& name, Bool defaultValue );
 
+    // Conversions
     Bool ToBool()   const { return m_value; }
     operator Bool() const { return m_value; }
 
-
+    // Build
     void Load( const NamedValues& data ) override;
 
 
 private:
 
     Bool m_value { false };
+};
+
+
+//
+// Integer
+//
+
+class ConfigInt : public ConfigValue
+{
+public:
+
+    ConfigInt( ConfigSection& s, const std::string& name );
+    ConfigInt( ConfigSection& s, const std::string& name, Int defaultValue );
+
+    // Conversions
+    Int ToInt()    const { return m_value; }
+    operator Int() const { return m_value; }
+
+    // Build
+    void Load( const NamedValues& data ) override;
+
+
+private:
+
+    Int m_value { 0 };
+};
+
+
+//
+// String
+//
+
+class ConfigString : public ConfigValue
+                   , public StringConvertible< ConfigString >
+{
+public:
+
+    ConfigString( ConfigSection& section, const std::string& name );
+    ConfigString( ConfigSection& section, const std::string& name, const std::string& defaultValue );
+
+    // Conversions
+    std::string ToString() const;
+    operator std::string() const;
+
+    // Build
+    void Load( const NamedValues& data ) override;
+
+
+private:
+
+    std::string m_value;
+    mutable std::mutex m_mutex;
 };
 
 
