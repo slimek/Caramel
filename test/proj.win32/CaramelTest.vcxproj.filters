@@ -83,6 +83,9 @@
     <Filter Include="2. Tests\Windows">
       <UniqueIdentifier>{a703e454-1751-445f-868e-16865c4e4fb1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\Configuration">
+      <UniqueIdentifier>{11280e9a-9ce1-4bb2-8b47-95b4745d399a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\RunTest.cpp">
@@ -304,6 +307,9 @@
     <ClCompile Include="..\src\Meta\MetaRangeSuite.cpp">
       <Filter>2. Tests\Meta</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Configuration\ConfigurationSuite.cpp">
+      <Filter>2. Tests\Configuration</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">
@@ -322,6 +328,9 @@
     </None>
     <None Include="..\src\Document\test2.ini">
       <Filter>2. Tests\Document</Filter>
+    </None>
+    <None Include="..\src\Configuration\values.ini">
+      <Filter>2. Tests\Configuration</Filter>
     </None>
   </ItemGroup>
 </Project>

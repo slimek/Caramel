@@ -186,6 +186,12 @@
     <Filter Include="1. Public Packages\Async\Detail">
       <UniqueIdentifier>{3cf911ae-7561-458d-bbe5-84956c931de8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\Configuration">
+      <UniqueIdentifier>{dcd2add8-8b01-43cb-bfbc-100f678b6bf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\Configuration">
+      <UniqueIdentifier>{c200b6bd-ef29-4e43-be94-4a41463309dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Setup\Compiler.h">
@@ -781,6 +787,27 @@
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Apple\SharedNsoPtr.h">
       <Filter>4. Non-Win32 Platform\Apple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Configuration\ConfigManager.h">
+      <Filter>2. Sources\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Configuration\ConfigSection.h">
+      <Filter>1. Public Packages\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Configuration\ConfigValues.h">
+      <Filter>1. Public Packages\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Configuration\ConfigSectionImpl.h">
+      <Filter>2. Sources\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Configuration\ConfigRootImpl.h">
+      <Filter>2. Sources\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Configuration\ConfigRoot.h">
+      <Filter>1. Public Packages\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Configuration\ConfigFromIni.h">
+      <Filter>1. Public Packages\Configuration</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -51,6 +51,10 @@
     <ClInclude Include="..\include\Caramel\Concurrent\Set.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\BlockingQueue.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\Stack.h" />
+    <ClInclude Include="..\include\Caramel\Configuration\ConfigFromIni.h" />
+    <ClInclude Include="..\include\Caramel\Configuration\ConfigRoot.h" />
+    <ClInclude Include="..\include\Caramel\Configuration\ConfigSection.h" />
+    <ClInclude Include="..\include\Caramel\Configuration\ConfigValues.h" />
     <ClInclude Include="..\include\Caramel\Data\Base64.h" />
     <ClInclude Include="..\include\Caramel\Data\LookupTable.h" />
     <ClInclude Include="..\include\Caramel\Data\PlainTypes.h" />
@@ -170,6 +174,9 @@
     <ClInclude Include="..\src\Async\AnyEventSlotImpl.h" />
     <ClInclude Include="..\src\Async\AnyEventTargetImpl.h" />
     <ClInclude Include="..\src\CaramelPch.h" />
+    <ClInclude Include="..\src\Configuration\ConfigManager.h" />
+    <ClInclude Include="..\src\Configuration\ConfigRootImpl.h" />
+    <ClInclude Include="..\src\Configuration\ConfigSectionImpl.h" />
     <ClInclude Include="..\src\DateTime\DateImpl.h" />
     <ClInclude Include="..\src\DateTime\DateTimeImpl.h" />
     <ClInclude Include="..\src\DateTime\DateTimeManager.h" />
