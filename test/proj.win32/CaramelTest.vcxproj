@@ -174,6 +174,7 @@
     <ClInclude Include="..\src\Utils\StdVectorUtils.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\src\Configuration\items.ini" />
     <None Include="..\src\Configuration\values.ini" />
     <None Include="..\src\Document\test1.ini" />
     <None Include="..\src\Document\test2.ini" />

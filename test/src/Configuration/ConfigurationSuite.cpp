@@ -15,16 +15,16 @@ namespace Caramel
 SUITE( ConfigurationSuite )
 {
 
-static ConfigSection cs_t( "Values" );
+static ConfigSection cs_vs( "Values" );
 
-static ConfigBool cv_flagTrue( cs_t, "FlagTrue" );
-static ConfigBool cv_flagFalse( cs_t, "FlagFalse", true );
+static ConfigBool cv_flagTrue( cs_vs, "FlagTrue" );
+static ConfigBool cv_flagFalse( cs_vs, "FlagFalse", true );
 
-static ConfigInt cv_int0( cs_t, "Int0" );
-static ConfigInt cv_int42( cs_t, "Int42", -1 );
+static ConfigInt cv_int0( cs_vs, "Int0" );
+static ConfigInt cv_int42( cs_vs, "Int42", -1 );
 
-static ConfigString cv_name( cs_t, "Name" );
-static ConfigString cv_role( cs_t, "Role", "Mage" );
+static ConfigString cv_name( cs_vs, "Name" );
+static ConfigString cv_role( cs_vs, "Role", "Mage" );
 
 
 TEST( ConfigValuesTest )
@@ -61,6 +61,25 @@ TEST( ConfigValuesTest )
 
     CHECK( "Alice" == cv_name );
     CHECK( "Thief" != cv_role );
+}
+
+
+static ConfigSection cs_p( "Items", "Potion" );
+
+static ConfigInt cv_id( cs_p, "Id" );
+static ConfigString cv_desc( cs_p, "Desc" );
+
+TEST( ConfigRootTest )
+{
+    /// Load the INI into a named Root ///
+
+    IniDocument ini( "..\\src\\Configuration\\items.ini" );
+
+    ConfigRoot root( "Items" );
+    root.Load( MakeConfigSectionMap( ini ));
+
+    CHECK( 15     == cv_id );
+    CHECK( "Heal" == cv_desc );
 }
 
 

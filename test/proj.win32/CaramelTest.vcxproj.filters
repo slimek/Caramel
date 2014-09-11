@@ -332,5 +332,8 @@
     <None Include="..\src\Configuration\values.ini">
       <Filter>2. Tests\Configuration</Filter>
     </None>
+    <None Include="..\src\Configuration\items.ini">
+      <Filter>2. Tests\Configuration</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -23,8 +23,10 @@ class ConfigRoot
 {
 public:
 
-    // Read for the default root.
+    // Reference to the default root.
     ConfigRoot();
+
+    explicit ConfigRoot( const std::string& name );
 
     // Each section presents as a NamedValues.
     void Load( const std::map< std::string, NamedValues >& sectionMap );

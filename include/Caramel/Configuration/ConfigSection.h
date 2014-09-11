@@ -22,7 +22,10 @@ class ConfigSection
 {
 public:
 
+    // Uses the default root.
     explicit ConfigSection( const std::string& name );
+
+    ConfigSection( const std::string& rootName, const std::string& sectionName );
 
 
     void AddValue( ConfigValue& value );

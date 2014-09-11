@@ -31,9 +31,21 @@ namespace Caramel
 // Configuration Manager
 //
 
-ConfigManager::ConfigManager()
-    : m_root( new ConfigRootImpl )
+ConfigRootPtr ConfigManager::FindOrCreateRoot( const std::string& name )
 {
+    // This function uses a double-check locking idiom
+
+    ConfigRootPtr root;
+
+    if ( m_roots.Find( name, root )) { return root; }
+
+    root = std::make_shared< ConfigRootImpl >( name );
+
+    // If the root of the name has been inserted by another thread at this moment,
+    // the 'root' variable would be replaced by the value in m_roots.
+    m_roots.FindOrInsert( name, root );
+
+    return root;
 }
 
 
@@ -44,8 +56,14 @@ ConfigManager::ConfigManager()
 //
 
 ConfigRoot::ConfigRoot()
-    : m_impl( ConfigManager::Instance()->GetRoot() )
+    : m_impl( ConfigManager::Instance()->FindOrCreateRoot( "" ))
 {    
+}
+
+
+ConfigRoot::ConfigRoot( const std::string& name )
+    : m_impl( ConfigManager::Instance()->FindOrCreateRoot( name ))
+{
 }
 
 
@@ -58,6 +76,12 @@ void ConfigRoot::Load( const std::map< std::string, NamedValues >& sectionMap )
 //
 // Implementation
 //
+
+ConfigRootImpl::ConfigRootImpl( const std::string& name )
+    : m_name( name )
+{
+}
+
 
 void ConfigRootImpl::AddSection( ConfigSectionPtr section )
 {
@@ -95,7 +119,15 @@ void ConfigRootImpl::Load( const std::map< std::string, NamedValues >& sectionMa
 ConfigSection::ConfigSection( const std::string& name )
     : m_impl( new ConfigSectionImpl( name ))
 {
-    auto root = ConfigManager::Instance()->GetRoot();
+    auto root = ConfigManager::Instance()->FindOrCreateRoot( "" );
+    root->AddSection( m_impl );
+}
+
+
+ConfigSection::ConfigSection( const std::string& rootName, const std::string& sectionName )
+    : m_impl( new ConfigSectionImpl( sectionName ))
+{
+    auto root = ConfigManager::Instance()->FindOrCreateRoot( rootName );
     root->AddSection( m_impl );
 }
 

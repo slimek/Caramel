@@ -21,13 +21,12 @@ class ConfigManager : public Singleton< ConfigManager >
 {
 public:
 
-    ConfigManager();
-
-    ConfigRootPtr GetRoot() const { return m_root; }
+    ConfigRootPtr FindOrCreateRoot( const std::string& name );
 
 private:
 
-    ConfigRootPtr m_root;
+    typedef Concurrent::Map< std::string, ConfigRootPtr > RootMap;
+    RootMap m_roots;
 };
 
 

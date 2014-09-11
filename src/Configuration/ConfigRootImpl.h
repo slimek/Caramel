@@ -22,11 +22,17 @@ class ConfigRootImpl
 {
 public:
 
+    explicit ConfigRootImpl( const std::string& name );
+
     void AddSection( ConfigSectionPtr section );
 
     void Load( const std::map< std::string, NamedValues >& sectionMap );
 
+    std::string GetName() const { return m_name; }
+
 private:
+
+    std::string m_name;
 
     typedef Concurrent::MapWithSnapshot< std::string, ConfigSectionPtr > SectionMap;
     SectionMap m_sections;
