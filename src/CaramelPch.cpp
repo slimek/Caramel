@@ -67,11 +67,16 @@ static_assert( 4 == sizeof( Ulong ), "sizeof( Ulong ) should be 4" );
 
 #elif defined( CARAMEL_COMPILER_IS_CLANG )
 
+#if ! defined( CARAMEL_LONG_IS_INDIVIDUAL )
+#error In Clang, Long should be an individual type.
+#endif
+
 #if defined( CARAMEL_SYSTEM_IS_64_BIT )
 
 // TODO: Not verify yet.
 
-static_assert( std::is_same< Long, Int64 >::value, "Long should be a typedef of Int64" );
+static_assert( ! std::is_same< Long, Int64 >::value, "Long should be an individual type" );
+static_assert( ! std::is_same< Long, Int   >::value, "Long should be an individual type" );
 
 static_assert( 8 == sizeof( Long ),  "sizeof( Long ) should be 8" );
 static_assert( 8 == sizeof( Ulong ), "sizeof( Ulong ) should be 8" );

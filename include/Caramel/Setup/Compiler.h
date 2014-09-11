@@ -32,8 +32,7 @@
 // Compiler Specific Implementation
 //
 
-// In Visual C++, long is an indivisial type.
-// On the contrary, in GNU C++ and Clang, long is a typedef to int32 or int64.
+// In Visual C++, long is an individual type.
 #define CARAMEL_LONG_IS_INDIVIDUAL
 
 
@@ -76,15 +75,29 @@
 #define CARAMEL_COMPILER_NAME "GNU C++"
 
 
-// Compiler settings
+//
+// Compiler Specific Syntax
+//
 
 #define CARAMEL_CURRENT_FUNCTION __PRETTY_FUNCTION__
 #define CARAMEL_DEPRECATED
-#define CARAMEL_NOEXCEPT noexcept
-#define CARAMEL_THREAD_LOCAL thread_local
+
+
+//
+// Compiler Specific Implementation
+//
 
 // For INT32_MIN and other limit defines
 #define __STDC_LIMIT_MACROS
+
+
+//
+// C++11 Compatibility
+//
+
+#define CARAMEL_NOEXCEPT noexcept
+#define CARAMEL_THREAD_LOCAL thread_local
+
 
 
 #endif // GNU C++
@@ -106,10 +119,26 @@
 #define CARAMEL_COMPILER_NAME "Clang"
 
 
-// Compiler settings
+//
+// Compiler Specific Syntax
+//
 
 #define CARAMEL_CURRENT_FUNCTION __PRETTY_FUNCTION__
 #define CARAMEL_DEPRECATED
+
+
+//
+// Compiler Specific Implementation
+//
+
+// In Clang, long is an individual type.
+#define CARAMEL_LONG_IS_INDIVIDUAL
+
+
+//
+// C++ 11 Compatibility
+//
+
 #define CARAMEL_NOEXCEPT noexcept
 #define CARAMEL_THREAD_LOCAL thread_local
 
