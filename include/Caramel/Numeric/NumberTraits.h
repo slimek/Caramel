@@ -74,7 +74,7 @@ template<>
 struct NumberTraits< Int64 >
     : public Detail::NumberTraits_Arithmetic< Int64 >
 {
-    static const Int64 MAX_INT32 = 0xFFFFFFFFi64;
+    static const Int64 MAX_INT32 = 0xFFFFFFFFll;
 };
 
 
