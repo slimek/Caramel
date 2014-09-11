@@ -67,6 +67,18 @@ struct NumberTraits
 
 
 //
+// Specialization for Integer Types
+//
+
+template<>
+struct NumberTraits< Int64 >
+    : public Detail::NumberTraits_Arithmetic< Int64 >
+{
+    static const Int64 MAX_INT32 = 0xFFFFFFFFi64;
+};
+
+
+//
 // Specialization for Floating Types
 //
 
@@ -104,6 +116,7 @@ struct NumberTraits< Double >
 // Aliases
 //
 
+typedef NumberTraits< Int64 >  Int64Traits;
 typedef NumberTraits< Float >  FloatTraits;
 typedef NumberTraits< Double > DoubleTraits;
 

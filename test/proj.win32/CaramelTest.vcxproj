@@ -137,6 +137,7 @@
     <ClCompile Include="..\src\Memory\SharedPtrUtilsSuite.cpp" />
     <ClCompile Include="..\src\Meta\IsGeneralStringSuite.cpp" />
     <ClCompile Include="..\src\Meta\MetaRangeSuite.cpp" />
+    <ClCompile Include="..\src\Numeric\NumberConverterSuite.cpp" />
     <ClCompile Include="..\src\Numeric\NumberTraitsSuite.cpp" />
     <ClCompile Include="..\src\Numeric\UnionBitsSuite.cpp" />
     <ClCompile Include="..\src\Random\UniformRandomSuite.cpp" />

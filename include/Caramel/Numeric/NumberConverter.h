@@ -34,6 +34,14 @@ struct NumberConverter< Int32, Int64 >
     {
         return INT32_MIN <= value && value <= INT32_MAX;
     }
+
+    static Bool TryExactConvert( Int32& outValue, Int64 inValue )
+    {
+        if ( ! CanExactConvert( inValue )) { return false; }
+
+        outValue = static_cast< Int32 >( inValue );
+        return true;
+    }
 };
 
 
@@ -43,6 +51,14 @@ struct NumberConverter< Int32, Uint64 >
     static Bool CanExactConvert( Uint64 value )
     {
         return value <= INT32_MAX;
+    }
+
+    static Bool TryExactConvert( Int32& outValue, Uint64 inValue )
+    {
+        if ( ! CanExactConvert( inValue )) { return false; }
+
+        outValue = static_cast< Int32 >( inValue );
+        return true;
     }
 };
 
@@ -58,6 +74,14 @@ struct NumberConverter< Uint32, Int64 >
     {
         return 0 <= value && value <= UINT32_MAX;
     }
+
+    static Bool TryExactConvert( Uint32& outValue, Int64 inValue )
+    {
+        if ( ! CanExactConvert( inValue )) { return false; }
+
+        outValue = static_cast< Uint32 >( inValue );
+        return true;
+    }
 };
 
 
@@ -67,6 +91,14 @@ struct NumberConverter< Uint32, Uint64 >
     static Bool CanExactConvert( Uint64 value )
     {
         return value <= UINT32_MAX;
+    }
+
+    static Bool TryExactConvert( Uint32& outValue, Uint64 inValue )
+    {
+        if ( ! CanExactConvert( inValue )) { return false; }
+
+        outValue = static_cast< Uint32 >( inValue );
+        return true;
     }
 };
 
