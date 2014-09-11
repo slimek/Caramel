@@ -310,6 +310,9 @@
     <ClCompile Include="..\src\Configuration\ConfigurationSuite.cpp">
       <Filter>2. Tests\Configuration</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Value\ScalarSuite.cpp">
+      <Filter>2. Tests\Value</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">

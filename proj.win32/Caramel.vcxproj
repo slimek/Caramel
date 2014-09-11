@@ -163,6 +163,7 @@
     <ClInclude Include="..\include\Caramel\Value\Detail\NamedValueFeed.h" />
     <ClInclude Include="..\include\Caramel\Value\Detail\NamedValueRef.h" />
     <ClInclude Include="..\include\Caramel\Value\NamedValues.h" />
+    <ClInclude Include="..\include\Caramel\Value\Scalar.h" />
     <ClInclude Include="..\include\Caramel\Value\SharedArray.h" />
     <ClInclude Include="..\include\Caramel\Windows\CrtDebug.h" />
     <ClInclude Include="..\include\Caramel\Windows\DebuggerTraceAdapter.h" />
@@ -215,6 +216,7 @@
     <ClInclude Include="..\src\Trace\TraceManager.h" />
     <ClInclude Include="..\src\Value\NamedValueEntry.h" />
     <ClInclude Include="..\src\Value\NamedValuesImpl.h" />
+    <ClInclude Include="..\src\Value\ScalarImpl.h" />
     <ClInclude Include="..\src\Windows\RegistryImpl.h" />
   </ItemGroup>
   <ItemGroup>

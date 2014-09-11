@@ -3,6 +3,7 @@
 #include "CaramelPch.h"
 
 #include "Value/NamedValuesImpl.h"
+#include "Value/ScalarImpl.h"
 #include <Caramel/Lexical/Boolean.h>
 #include <Caramel/Lexical/Floating.h>
 #include <Caramel/Lexical/Integer.h>
@@ -28,6 +29,7 @@ namespace Caramel
 //   NamedValueRef
 //   NamedValueEntry
 //   NamedValueFeed
+//   Scalar
 //
 
 namespace Detail
@@ -860,8 +862,109 @@ NamedValueFeed::NamedValueFeed( const std::string& name, Ulong v )
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-
 } // namespace Detail
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Scalar
+//
+
+Scalar::Scalar()
+    : m_impl( new ScalarImpl )
+{}
+
+// Set Value and Type delegates
+void Scalar::SetBool( Bool v ) { m_impl->SetBool( v ); }
+
+// Get Value with exactly conversion
+Bool        Scalar::AsBool()   const { return m_impl->AsBool(); }
+Int         Scalar::AsInt()    const { return m_impl->AsInt(); }
+std::string Scalar::AsString() const { return m_impl->AsString(); }
+
+
+//
+// Implementation
+//
+
+//
+// Set Value and Type
+//
+
+void ScalarImpl::SetBool( Bool v )
+{
+    m_value = static_cast< Uint64 >( v ? 1 : 0 );
+    m_type  = SCALAR_BOOL;
+}
+
+
+//
+// Get Value with exaclty conversion
+//
+
+Bool ScalarImpl::AsBool() const
+{
+    switch ( m_type )
+    {
+    case SCALAR_BOOL:
+        return this->GetBool();
+
+    default:
+        CARAMEL_NOT_REACHED();
+    }
+}
+
+
+Int ScalarImpl::AsInt() const
+{
+    switch ( m_type )
+    {
+    case SCALAR_BOOL:
+        return ( this->GetBool() ? 1 : 0 );
+
+    default:
+        CARAMEL_NOT_REACHED();
+    }
+}
+
+
+std::string ScalarImpl::AsString() const
+{
+    switch ( m_type )
+    {
+    case SCALAR_STRING:
+        return this->GetString();
+
+    case SCALAR_BOOL:
+        return ToString( this->GetBool() );
+
+    case SCALAR_UNDEF:
+        CARAMEL_THROW( "Value is undef" );
+
+    default:
+        CARAMEL_NOT_REACHED();
+    }
+}
+
+
+//
+// Get Value
+//
+
+Bool ScalarImpl::GetBool() const
+{
+    CARAMEL_CHECK( m_type == SCALAR_BOOL );
+    return ( boost::get< Uint64 >( m_value ) != 0 );
+}
+
+
+std::string ScalarImpl::GetString() const
+{
+    CARAMEL_CHECK( m_type == SCALAR_STRING );
+    return boost::get< std::string >( m_value );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
 
 } // namespace Caramel
