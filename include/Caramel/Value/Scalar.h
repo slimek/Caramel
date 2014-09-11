@@ -17,10 +17,14 @@ namespace Caramel
 // - A single value which can be represented as a string.
 //
 //   Supporting value types:
-//       Bool, Int, Uint, Int64, Uint64, Float, Double, std::string
+//
+//          Bool | Int | Uint | Int64 | Uint64 | Float | Double | std::string
+//   Get -   o      o     o      o       o        o       o        o
+//   Set -   o                   o       o                o        o
+//
 //
 // REMARKS:
-//   This type DOES NOT follow the std::is_scalar() rule.
+//   This type does NOT follow the std::is_scalar() rule.
 //
 
 class ScalarImpl;
