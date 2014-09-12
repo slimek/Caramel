@@ -20,10 +20,26 @@
 #define CARAMEL_COMPILER_NAME "Visual C++"
 
 
-// Compiler settings
+//
+// Compiler Specific Syntax
+//
 
 #define CARAMEL_CURRENT_FUNCTION __FUNCTION__
 #define CARAMEL_DEPRECATED __declspec( deprecated )
+
+
+//
+// Compiler Specific Implementation
+//
+
+// In Visual C++, long is an indivisial type.
+// On the contrary, in GNU C++ and Clang, long is a typedef to int32 or int64.
+#define CARAMEL_LONG_IS_INDIVIDUAL
+
+
+//
+// C++11 Compatibility
+//
 
 #if ( _MSC_VER >= 1900 )
 

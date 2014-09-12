@@ -60,6 +60,10 @@
 
 #endif
 
+#if defined( __LP64__ )
+#define CARAMEL_SYSTEM_IS_64_BIT
+#endif
+
 
 #endif // __APPLE__ and __MACH__
 
@@ -73,6 +77,10 @@
 
 #define CARAMEL_SYSTEM_IS_ANDROID
 #define CARAMEL_SYSTEM_NAME "Android"
+
+#if defined( __LP64__ )
+#define CARAMEL_SYSTEM_IS_64_BIT
+#endif
 
 
 #endif // Android
