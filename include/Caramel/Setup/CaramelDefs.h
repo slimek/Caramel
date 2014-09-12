@@ -63,11 +63,12 @@ typedef double Double;
 typedef void Void;   
 
 //
-// Use Usize where return a std::size_t from STL.
-// Known defines are:
-//            VC++      GNU C++
-//   32-bit | Uint32  | Long (32-bit)
-//   64-bit | Uint64  | Long (64-bit)
+// Use Usize where return a std::size_t from STL. It is a tyepdef:
+//
+//   Uint  : Visual C++ & GNU C++
+//   Ulong : Clang
+//
+// It may be 32-bit or 64-bit, depends on the system.
 //
 typedef std::size_t Usize;   
 
