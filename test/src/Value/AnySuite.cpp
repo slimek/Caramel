@@ -32,11 +32,29 @@ TEST( AnyIntegerTest )
     
     CHECK( 42 == ai.As< Int >() );
     CHECK( 42 == ai.As< Uint >() );
+    CHECK( 42 == ai.As< Int64 >() );
+    CHECK( 42 == ai.As< Uint64 >() );
 
     Any au( 216u );
 
     CHECK( 216 == au.As< Int >() );
     CHECK( 216 == au.As< Uint >() );
+    CHECK( 216 == au.As< Int64 >() );
+    CHECK( 216 == au.As< Uint64 >() );
+
+    Any ai64( -2048LL );
+
+    CHECK( -2048 == ai64.As< Int >() );
+    CHECK( -2048 == ai64.As< Int64 >() );
+    CHECK_THROW( ai64.As< Uint >(), Caramel::Exception );
+    CHECK_THROW( ai64.As< Uint64 >(), Caramel::Exception );
+
+    Any au64( 5730uLL );
+
+    CHECK( 5730 == au64.As< Int >() );
+    CHECK( 5730 == au64.As< Uint >() );
+    CHECK( 5730 == au64.As< Int64 >() );
+    CHECK( 5730 == au64.As< Uint64 >() );
 
 
     /// Out of Range would throw exceptions ///
@@ -104,8 +122,10 @@ TEST( AnyEnumTest )
     Any ae( COLOR_BLUE );
 
     CHECK( 42         == ae.As< Int >() );
+    CHECK( 42         == ae.As< Int64 >() );
     CHECK( COLOR_BLUE == ae.As< Color >() );
 
+    // enum type doesn't match
     CHECK_THROW( ae.As< FillMode >(), Caramel::Exception );
 }
 

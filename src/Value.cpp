@@ -65,6 +65,20 @@ AnyInteger::AnyInteger( Uint value )
 }
 
 
+AnyInteger::AnyInteger( Int64 value )
+    : m_isUint64( false )
+    , m_value( value )
+{
+}
+
+
+AnyInteger::AnyInteger( Uint64 value )
+    : m_isUint64( true )
+    , m_value( value )
+{
+}
+
+
 //
 // Retrieve Value
 // - We allow conversion only when it doesn't lose precision,
@@ -94,6 +108,20 @@ void AnyInteger::Get( Int& value ) const
 void AnyInteger::Get( Uint& value ) const
 {
     m_isUint64 ? AnyInteger_Get( value, static_cast< Uint64 >( m_value ))
+               : AnyInteger_Get( value, m_value );
+}
+
+
+void AnyInteger::Get( Int64& value ) const
+{
+    m_isUint64 ? AnyInteger_Get( value, static_cast< Uint64 >( m_value ))
+               : value = m_value;
+}
+
+
+void AnyInteger::Get( Uint64& value ) const
+{
+    m_isUint64 ? value = m_value
                : AnyInteger_Get( value, m_value );
 }
 
@@ -175,6 +203,20 @@ void AnyEnum::Get( Int& value ) const
 void AnyEnum::Get( Uint& value ) const
 {
     AnyEnum_Get( value, this->ToInt64() );
+}
+
+
+void AnyEnum::Get( Int64& value ) const
+{
+    value = this->ToInt64();
+}
+
+
+void AnyEnum::Get( Uint64& value ) const
+{
+    const Int64 enumValue = this->ToInt64();
+    CARAMEL_CHECK( 0 <= enumValue );
+    value = static_cast< Uint64 >( enumValue );
 }
 
 

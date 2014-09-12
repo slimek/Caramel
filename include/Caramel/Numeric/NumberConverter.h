@@ -104,6 +104,42 @@ struct NumberConverter< Uint32, Uint64 >
 
 
 //
+// Specialization - Output to Int64
+//
+
+template<>
+struct NumberConverter< Int64, Uint64 >
+{
+    static Bool CanExactConvert( Uint64 value )
+    {
+        return value <= INT64_MAX;
+    }
+
+    static Bool TryExactConvert( Int64& outValue, Uint64 inValue )
+    {
+        if ( ! CanExactConvert( inValue )) { return false; }
+
+        outValue = static_cast< Int64 >( inValue );
+        return true;
+    }
+};
+
+
+//
+// Specialization - Output to Uint64
+//
+
+template<>
+struct NumberConverter< Uint64, Int64 >
+{
+    static Bool CanExactConvert( Int64 value )
+    {
+        return 0 <= value;
+    }
+};
+
+
+//
 // Specialization - Output to Float
 //
 

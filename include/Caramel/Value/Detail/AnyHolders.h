@@ -61,11 +61,16 @@ public:
 
     explicit AnyInteger( Int value );
     explicit AnyInteger( Uint value );
+    explicit AnyInteger( Int64 value );
+    explicit AnyInteger( Uint64 value );
 
     /// Retrieve Value ///
 
     void Get( Int& value ) const;
     void Get( Uint& value ) const;
+
+    void Get( Int64& value ) const;
+    void Get( Uint64& value ) const;
 
     void Get( Float& value ) const;
     void Get( Double& value ) const;
@@ -132,6 +137,9 @@ public:
 
     void Get( Int& value ) const;
     void Get( Uint& value ) const;
+
+    void Get( Int64& value ) const;
+    void Get( Uint64& value ) const;
 
     virtual Int64 ToInt64() const = 0;
 
