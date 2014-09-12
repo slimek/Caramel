@@ -18,6 +18,10 @@
 #define CARAMEL_SYSTEM_IS_WINDOWS
 #define CARAMEL_SYSTEM_NAME "Windows"
 
+#if defined( _WIN64 )
+#define CARAMEL_SYSTEM_IS_64_BIT
+#endif
+
 
 // Exclude min/max macros in <windef.h> of Windows Platform SDK
 

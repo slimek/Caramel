@@ -27,10 +27,39 @@ static_assert( 8 == sizeof( Int64 ),  "Int64 should be size 8" );
 static_assert( 8 == sizeof( Uint64 ), "Uint64 should be size 8" );
 
 
-// The size of the below types may depend on the system...
+// Type aliases
+
+static_assert( std::is_same< Byte, Uint8 >::value, "Byte and Uint8 should be the same" );
+
+
+// Type similar but not the same
+
+static_assert( ! std::is_same< Char, Int8 >::value, "Char and Int8 are different" );
+
+
+// The size of the below types depends on the system
+
+#if defined( CARAMEL_SYSTEM_IS_64_BIT )
+
+// TODO: not verify yet.
+
+static_assert( 8 == sizeof( Int ),   "Int should be size 8" );
+static_assert( 8 == sizeof( Uint ),  "Uint should be size 8" );
+
+static_assert( std::is_same< Int,   Int64  >::value, "Int and Int64 should be the same" );
+static_assert( std::is_same< Uint,  Uint64 >::value, "Uint and Uint64 should be the same" );
+static_assert( std::is_same< Usize, Uint64 >::value, "std::size_t should be Uint64" );
+
+#else
 
 static_assert( 4 == sizeof( Int ),   "Int should be size 4" );
 static_assert( 4 == sizeof( Uint ),  "Uint should be size 4" );
+
+static_assert( std::is_same< Int,   Int32  >::value, "Int and Int32 should be the same" );
+static_assert( std::is_same< Uint,  Uint32 >::value, "Uint and Uint32 should be the same" );
+static_assert( std::is_same< Usize, Uint32 >::value, "std::size_t should be Uint32" );
+
+#endif // System is 64-bit or 32-bit
 
 
 /// Type Traits of Fundamental Typedefs ///
@@ -54,10 +83,6 @@ static_assert( std::is_unsigned< Ulong > ::value, "Ulong should be unsigned" );
 
 #if defined( CARAMEL_COMPILER_IS_MSVC )
 
-#if ! defined( CARAMEL_LONG_IS_INDIVIDUAL )
-#error In Visual C++, Long should be an individual type.
-#endif
-
 static_assert( ! std::is_same< Long, Int32 >::value, "Long should be an individual type" );
 static_assert( ! std::is_same< Long, Int64 >::value, "Long should be an individual type" );
 
@@ -65,18 +90,31 @@ static_assert( 4 == sizeof( Long ),  "sizeof( Long ) should be 4" );
 static_assert( 4 == sizeof( Ulong ), "sizeof( Ulong ) should be 4" );
 
 
+#if defined( CARAMEL_SYSTEM_IS_64_BIT )
+
+// TODO: Not verify yet.
+
+static_assert( std::is_same< Usize, Uint64 >::value, "std::size_t should be Uint64" );
+static_assert( 8 == sizeof( Usize ), "sizeof( std::size_t ) should be 8" );
+
+#else // System is 32-bit
+
+static_assert( std::is_same< Usize, Uint32 >::value, "std::size_t should be Uint32" );
+static_assert( 4 == sizeof( Usize ), "sizeof( std::size_t ) should be 4" );
+
+#endif
+
+
 #elif defined( CARAMEL_COMPILER_IS_CLANG )
 
-#if ! defined( CARAMEL_LONG_IS_INDIVIDUAL )
-#error In Clang, Long should be an individual type.
-#endif
+static_assert( std::is_same< Usize, Long >::value, "std::size_t should be Long" );
+
 
 #if defined( CARAMEL_SYSTEM_IS_64_BIT )
 
 // TODO: Not verify yet.
 
 static_assert( ! std::is_same< Long, Int64 >::value, "Long should be an individual type" );
-static_assert( ! std::is_same< Long, Int   >::value, "Long should be an individual type" );
 
 static_assert( 8 == sizeof( Long ),  "sizeof( Long ) should be 8" );
 static_assert( 8 == sizeof( Ulong ), "sizeof( Ulong ) should be 8" );
@@ -84,7 +122,6 @@ static_assert( 8 == sizeof( Ulong ), "sizeof( Ulong ) should be 8" );
 #else // System is 32-bit
 
 static_assert( ! std::is_same< Long, Int32 >::value, "Long should be an individual type" );
-static_assert( ! std::is_same< Long, Int   >::value, "Long should be an individual type" );
 
 static_assert( 4 == sizeof( Long ),  "sizeof( Long ) should be 4" );
 static_assert( 4 == sizeof( Ulong ), "sizeof( Ulong ) should be 4" );
@@ -98,19 +135,25 @@ static_assert( 4 == sizeof( Ulong ), "sizeof( Ulong ) should be 4" );
 
 // TODO: Not verify yet.
 
-static_assert( std::is_same< Long, Int64 >::value, "Long should be a typedef of Int64" );
+static_assert( ! std::is_same< Long, Int64 >::value, "Long should be an individual type" );
 
 static_assert( 8 == sizeof( Long ),  "sizeof( Long ) should be 8" );
 static_assert( 8 == sizeof( Ulong ), "sizeof( Ulong ) should be 8" );
 
+static_assert( std::is_same< Usize, Uint64 >::value, "std::size_t should be Uint64" );
+static_assert( 8 == sizeof( Usize ), "sizeof( std::size_t ) should be 8" );
+
+
 #else // System is 32-bit
 
-// TODO: Not verify yet.
-
-static_assert( std::is_same< Long, Int32 >::value, "Long should be a typedef of Int32" );
+static_assert( ! std::is_same< Long, Int32 >::value, "Long should be an individual type" );
 
 static_assert( 4 == sizeof( Long ),  "sizeof( Long ) should be 4" );
 static_assert( 4 == sizeof( Ulong ), "sizeof( Ulong ) should be 4" );
+
+static_assert( std::is_same< Usize, Uint32 >::value, "std::size_t should be Uint32" );
+static_assert( 4 == sizeof( Usize ), "sizeof( std::size_t ) should be 4" );
+
 
 #endif
 

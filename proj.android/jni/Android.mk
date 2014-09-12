@@ -7,6 +7,7 @@ LOCAL_MODULE := Caramel
 CRM_SRC := ../../src
 
 LOCAL_SRC_FILES := \
+	$(CRM_SRC)/CaramelPch.cpp \
 	$(CRM_SRC)/Android.cpp \
 	$(CRM_SRC)/Async.cpp \
 	$(CRM_SRC)/Data.cpp \

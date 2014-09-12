@@ -29,14 +29,6 @@
 
 
 //
-// Compiler Specific Implementation
-//
-
-// In Visual C++, long is an individual type.
-#define CARAMEL_LONG_IS_INDIVIDUAL
-
-
-//
 // C++11 Compatibility
 //
 
@@ -125,14 +117,6 @@
 
 #define CARAMEL_CURRENT_FUNCTION __PRETTY_FUNCTION__
 #define CARAMEL_DEPRECATED
-
-
-//
-// Compiler Specific Implementation
-//
-
-// In Clang, long is an individual type.
-#define CARAMEL_LONG_IS_INDIVIDUAL
 
 
 //
