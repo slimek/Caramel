@@ -58,6 +58,15 @@
 #define CARAMEL_ARCH_IS_X86
 #define CARAMEL_ARCH_NAME "x86"
 
+#define CARAMEL_USIZE_IS_UINT32
+
+#elif defined( _M_X64 )
+
+#define CARAMEL_ARCH_IS_X64
+#define CARAMEL_ARCH_NAME "x64"
+
+#define CARAMEL_USIZE_IS_UINT64
+
 #endif
 
 
@@ -91,6 +100,8 @@
 //
 // Compiler Specific Implementation
 //
+
+#define CARAMEL_USIZE_IS_UINT32
 
 // For INT32_MIN and other limit defines
 #define __STDC_LIMIT_MACROS
@@ -146,6 +157,17 @@
 
 #define CARAMEL_CURRENT_FUNCTION __PRETTY_FUNCTION__
 #define CARAMEL_DEPRECATED
+
+
+//
+// Compiler Specific Implementation
+//
+
+#define CARAMEL_USIZE_IS_ULONG
+
+#if defined( __LP64__ )
+#define CARAMEL_LONG_IS_64_BIT
+#endif
 
 
 //

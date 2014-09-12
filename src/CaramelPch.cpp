@@ -7,11 +7,6 @@
 void CaramelPchDummy() {}
 
 
-//
-// Architecture Detection
-//
-
-
 namespace Caramel
 {
 
@@ -34,10 +29,16 @@ static_assert( 8 == sizeof( Uint64 ), "Uint64 should be size 8" );
 static_assert( 1 == sizeof( Char ), "Char should be size 1" );
 static_assert( 1 == sizeof( Byte ), "Byte should be size 1" );
 
+static_assert( 4 == sizeof( Int ),  "Int should be size 4" );
+static_assert( 4 == sizeof( Uint ), "Uint should be size 4" );
+
+
 
 /// Type Aliases ///
 
-static_assert( std::is_same< Byte, Uint8 >::value, "Byte and Uint8 should be the same" );
+static_assert( std::is_same< Byte, Uint8 > ::value, "Byte and Uint8 should be the same" );
+static_assert( std::is_same< Int,  Int32 > ::value, "Int and Int32 should be the same" );
+static_assert( std::is_same< Uint, Uint32 >::value, "Uint and Uint32 should be the same" );
 
 
 /// Types that are similar but not the same ///
@@ -48,6 +49,10 @@ static_assert( ! std::is_same< Wchar, Int16 > ::value, "Wchar and Int16 are diff
 static_assert( ! std::is_same< Wchar, Uint16 >::value, "Wchar and Uint16 are different" ); // Visual C++
 static_assert( ! std::is_same< Wchar, Int32 > ::value, "Wchar and Int32 are different" );  // GNU C++
 static_assert( ! std::is_same< Wchar, Uint32 >::value, "Wchar and Uint32 are different" );
+static_assert( ! std::is_same< Long,  Int32 > ::value, "Long and Int32 are different" );
+static_assert( ! std::is_same< Long,  Int64 > ::value, "Long and Int64 are different" );
+static_assert( ! std::is_same< Ulong, Uint32 >::value, "Ulong and Uint32 are different" );
+static_assert( ! std::is_same< Ulong, Uint64 >::value, "Ulong and Uint64 are different" );
 
 
 /// Signed or Unsigned ///
@@ -73,168 +78,71 @@ static_assert( std::is_unsigned< Byte >::value, "Byte should be unsigned" );
 // Some fundamental types depend on Compiler and System:
 //
 //                  Visual C++   Clang        GNU C++
-//   Int / Uint   | 32 or 64   | always 32  | (not verify yet)
+//   Int / Uint   | always 32  | always 32  | (not verify yet)
 //   Long / Ulong | always 32  | 32 or 64   |
 //
 // std::size_t (Usize) are different typedefs :
 //
 //                  Visual C++   Clang        GNU C++
-//   std::size_t  | Uint       | Ulong      | Uint
+//   OS is 32-bit | Uint       | Ulong      | Uint
+//         64-bit | Uitn64     | Ulong      | ?
 //
-// char and wchar_t (Wchar), size and sign are different :
+// wchar_t (Wchar) size depends on System
 //
-//                  Visual C++   Clang        GNU C++
-//                                           [x86]  [arm]
-//   char         | S 8        | S 8        | S 8  | U 8
-//   wchar_t      | U 16       | S 32       | S 32 | U 32
-
-//
-// Visual C+
+//               Windows   OS X & iOS   Android
+//   wchar_t   | 2       | 4          | 4
 //
 
-#if defined( CARAMEL_COMPILER_IS_MSVC )
-
-static_assert( ! std::is_same< Long, Int32 >::value, "Long should be an individual type" );
-static_assert( ! std::is_same< Long, Int64 >::value, "Long should be an individual type" );
-
-static_assert( 4 == sizeof( Long ),  "sizeof( Long ) should be 4" );
-static_assert( 4 == sizeof( Ulong ), "sizeof( Ulong ) should be 4" );
-
-static_assert( std::is_signed< Char >::value, "Char should be signed" );
-
-static_assert( 2 == sizeof( Wchar ), "Wchar should be size 2" );
-static_assert( std::is_unsigned< Wchar >::value, "Wchar should be unsigned" );
-
-
-#if defined( CARAMEL_SYSTEM_IS_64_BIT )
-
-static_assert( 8 == sizeof( Int ),   "Int should be size 8" );
-static_assert( 8 == sizeof( Uint ),  "Uint should be size 8" );
-
-static_assert( std::is_same< Int,  Int64  >::value, "Int and Int64 should be the same" );
-static_assert( std::is_same< Uint, Uint64 >::value, "Uint and Uint64 should be the same" );
-
-static_assert( 8 == sizeof( Usize ), "sizeof( std::size_t ) should be 8" );
-
-static_assert( std::is_same< Usize, Uint64 >::value, "std::size_t should be Uint64" );
-
-
-#else // System is 32-bit
-
-static_assert( 4 == sizeof( Int ),   "Int should be size 4" );
-static_assert( 4 == sizeof( Uint ),  "Uint should be size 4" );
-
-static_assert( std::is_same< Int,  Int32  >::value, "Int and Int32 should be the same" );
-static_assert( std::is_same< Uint, Uint32 >::value, "Uint and Uint32 should be the same" );
-
-static_assert( 4 == sizeof( Usize ), "sizeof( std::size_t ) should be 4" );
-
-static_assert( std::is_same< Usize, Uint32 >::value, "std::size_t should be Uint32" );
-
-
-#endif
-
-
-//
-// Clang
-//
-
-#elif defined( CARAMEL_COMPILER_IS_CLANG )
-
-static_assert( 4 == sizeof( Int ),   "Int should be size 4" );
-static_assert( 4 == sizeof( Uint ),  "Uint should be size 4" );
-
-static_assert( std::is_same< Int,  Int32  >::value, "Int and Int32 should be the same" );
-static_assert( std::is_same< Uint, Uint32 >::value, "Uint and Uint32 should be the same" );
-
-static_assert( std::is_same< std::size_t, Ulong >::value, "std::size_t should be Ulong" );
-
-static_assert( 4 == sizeof( Wchar ), "Wchar should be size 4" );
-
-static_assert( std::is_signed< Char >::value, "Char should be signed" );
-static_assert( std::is_signed< Wchar >::value, "Wchar should be signed" );
-
-
-#if defined( CARAMEL_SYSTEM_IS_64_BIT )
-
-static_assert( ! std::is_same< Long, Int64 >::value, "Long should be an individual type" );
-
-static_assert( 8 == sizeof( Long ),  "sizeof( Long ) should be 8" );
-static_assert( 8 == sizeof( Ulong ), "sizeof( Ulong ) should be 8" );
-static_assert( 8 == sizeof( Usize ), "sizeof( std::size_t ) should be 8" );
-
-
-#else // System is 32-bit
-
-static_assert( ! std::is_same< Long, Int32 >::value, "Long should be an individual type" );
-
-static_assert( 4 == sizeof( Long ),  "sizeof( Long ) should be 4" );
-static_assert( 4 == sizeof( Ulong ), "sizeof( Ulong ) should be 4" );
-static_assert( 4 == sizeof( Usize ), "sizeof( std::size_t ) should be 4" );
-
-
-#endif
-
-
-//
-// GNU C++
-//
-
-#elif defined( CARAMEL_COMPILER_IS_GCC )
-
-static_assert( 4 == sizeof( Int ),   "Int should be size 4" );
-static_assert( 4 == sizeof( Uint ),  "Uint should be size 4" );
-
-static_assert( std::is_same< Int,  Int32  >::value, "Int and Int32 should be the same" );
-static_assert( std::is_same< Uint, Uint32 >::value, "Uint and Uint32 should be the same" );
-
-static_assert( std::is_same< Usize, Uint >::value, "std::size_t should be Uint" );
-
-static_assert( 4 == sizeof( Wchar ), "Wchar should be size 4" );
-
-
-#if defined( CARAMEL_ARCH_IS_X86 )
-
-static_assert( std::is_signed< Char >::value,  "Char should be signed" );
-static_assert( std::is_signed< Wchar >::value, "Wchar should be signed" );
-
-#elif defined( CARAMEL_ARCH_IS_ARM )
-
-static_assert( std::is_unsigned< Char >::value,  "Char should be unsigned" );
-static_assert( std::is_unsigned< Wchar >::value, "Wchar should be unsigned" );
-
-#endif 
-
-
-#if defined( CARAMEL_SYSTEM_IS_64_BIT )
-
-// TODO: Not verify yet.
-
-static_assert( ! std::is_same< Long, Int64 >::value, "Long should be an individual type" );
+#if defined( CARAMEL_LONG_IS_64_BIT )
 
 static_assert( 8 == sizeof( Long ),  "sizeof( Long ) should be 8" );
 static_assert( 8 == sizeof( Ulong ), "sizeof( Ulong ) should be 8" );
 
-static_assert( 8 == sizeof( Usize ), "sizeof( std::size_t ) should be 8" );
-
-static_assert( std::is_same< Usize, Uint64 >::value, "std::size_t should be Uint64" );
-
-
-#else // System is 32-bit
-
-static_assert( ! std::is_same< Long, Int32 >::value, "Long should be an individual type" );
+#else
 
 static_assert( 4 == sizeof( Long ),  "sizeof( Long ) should be 4" );
 static_assert( 4 == sizeof( Ulong ), "sizeof( Ulong ) should be 4" );
 
-static_assert( 4 == sizeof( Usize ), "sizeof( std::size_t ) should be 4" );
-
-static_assert( std::is_same< Usize, Uint32 >::value, "std::size_t should be Uint32" );
+#endif // Long is 64-bit
 
 
-#endif
+// Usize is std::size_t
+static_assert( std::is_same< std::size_t, Usize >::value, "Usize is std::size_t" );
 
-#endif // CARAMEL_COMPILER_IS_xxx
+#if defined( CARAMEL_USIZE_IS_ULONG )
+static_assert( std::is_same< Usize, Ulong >::value, "Usize should be Ulong" );
+
+#elif defined( CARAMEL_USIZE_IS_UINT32 )
+static_assert( std::is_same< Usize, Uint32 >::value, "Usize should be Uint32" );
+
+#elif defined( CARAMEL_USIZE_IS_UINT64 )
+static_assert( std::is_same< Usize, Uint64 >::value, "Usize should be Uint64" );
+
+#else
+#error Usize underline type not detected.
+
+#endif  // The underling type of Usize = std::size_t
+
+
+#if defined( CARAMEL_SYSTEM_IS_64_BIT )
+static_assert( 8 == sizeof( Usize ), "sizeof( Usize ) should be 8" );
+
+#else
+static_assert( 4 == sizeof( Usize ), "sizeof( Usize ) should be 8" );
+
+#endif  // System is 64-bit
+
+
+#if defined( CARAMEL_WCHAR_IS_32_BIT )
+static_assert( 4 == sizeof( Wchar ), "sizeof( Wchar ) should be 4" );
+
+#elif defined( CARAMEL_WCHAR_IS_16_BIT )
+static_assert( 2 == sizeof( Wchar ), "sizeof( Wchar ) should be 2" );
+
+#else
+#error Wchar size not detected
+
+#endif  // Size of Wchar
 
 
 /// Boost Versions ///

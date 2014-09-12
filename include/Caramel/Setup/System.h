@@ -22,6 +22,8 @@
 #define CARAMEL_SYSTEM_IS_64_BIT
 #endif
 
+#define CARAMEL_WCHAR_IS_16_BIT
+
 
 // Exclude min/max macros in <windef.h> of Windows Platform SDK
 
@@ -68,6 +70,8 @@
 #define CARAMEL_SYSTEM_IS_64_BIT
 #endif
 
+#define CARAMEL_WCHAR_IS_32_BIT
+
 
 #endif // __APPLE__ and __MACH__
 
@@ -85,6 +89,8 @@
 #if defined( __LP64__ )
 #define CARAMEL_SYSTEM_IS_64_BIT
 #endif
+
+#define CARAMEL_WCHAR_IS_32_BIT
 
 
 #endif // Android
