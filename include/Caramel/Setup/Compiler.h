@@ -48,6 +48,19 @@
 
 #endif
 
+
+//
+// Architecture
+//
+
+#if defined( _M_IX86 )
+
+#define CARAMEL_ARCH_IS_X86
+#define CARAMEL_ARCH_NAME "x86"
+
+#endif
+
+
 #endif // Visual C++
 
 
@@ -90,6 +103,22 @@
 #define CARAMEL_NOEXCEPT noexcept
 #define CARAMEL_THREAD_LOCAL thread_local
 
+
+//
+// Architecture
+//
+
+#if defined( __i386__ )
+
+#define CARAMEL_ARCH_IS_X86
+#define CARAMEL_ARCH_NAME "x86"
+
+#elif defined( __arm__ )
+
+#define CARAMEL_ARCH_IS_ARM
+#define CARAMEL_ARCH_NAME "arm"
+
+#endif
 
 
 #endif // GNU C++
@@ -137,6 +166,10 @@
 
 #if !defined( CARAMEL_COMPILER_NAME )
 #error Other compilers are unsupported yet.
+#endif
+
+#if !defined( CARAMEL_ARCH_NAME )
+#error Architecture not detected.
 #endif
 
 
