@@ -85,8 +85,8 @@ static_assert( std::is_unsigned< Byte >::value, "Byte should be unsigned" );
 //
 //                  Visual C++   Clang        GNU C++
 //                                           [x86]  [arm]
-//   char         | S 8        |            | S 8  | U 8
-//   wchar_t      | U 16       |            | S 32 | U 32
+//   char         | S 8        | S 8        | S 8  | U 8
+//   wchar_t      | U 16       | S 32       | S 32 | U 32
 
 //
 // Visual C+
