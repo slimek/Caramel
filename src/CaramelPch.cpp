@@ -149,6 +149,11 @@ static_assert( std::is_same< Uint, Uint32 >::value, "Uint and Uint32 should be t
 
 static_assert( std::is_same< std::size_t, Ulong >::value, "std::size_t should be Ulong" );
 
+static_assert( 4 == sizeof( Wchar ), "Wchar should be size 4" );
+
+static_assert( std::is_signed< Char >::value, "Char should be signed" );
+static_assert( std::is_signed< Wchar >::value, "Wchar should be signed" );
+
 
 #if defined( CARAMEL_SYSTEM_IS_64_BIT )
 
