@@ -60,7 +60,7 @@ void TestBasicMap( MapType& map )
     /// Mutable Locked Map ///
 
     {
-        MapType::LockedMap lockedMap( map );
+        typename MapType::LockedMap lockedMap( map );
         lockedMap.Clear();
 
         CHECK( true == map.IsEmpty() );
