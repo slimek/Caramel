@@ -31,6 +31,14 @@ class FlatMap : public Detail::BasicMap< boost::container::flat_map< Key, Value 
 };
 
 
+//
+// Convenient Alias
+//
+
+template< typename Key, typename Value >
+using FlatMapWithSnapshot = FlatMap< Key, Value, ReplicateSnapshot >;
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // namespace Concurrent

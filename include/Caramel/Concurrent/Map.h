@@ -35,9 +35,7 @@ class Map : public Detail::BasicMap< std::map< Key, Value >, ReplicatePolicy >
 //
 
 template< typename Key, typename Value >
-class MapWithSnapshot : public Detail::BasicMap< std::map< Key, Value >, ReplicateSnapshot >
-{
-};
+using MapWithSnapshot = Map< Key, Value, ReplicateSnapshot >;
 
 
 ///////////////////////////////////////////////////////////////////////////////

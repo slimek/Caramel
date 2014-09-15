@@ -91,8 +91,7 @@ private:
 //
 
 template< typename Key, typename Value >
-class ReversePriorityQueue : public PriorityQueue< Key, Value, std::greater< Key > >
-{};
+using ReversePriorityQueue = PriorityQueue< Key, Value, std::greater< Key > >;
 
 
 ///////////////////////////////////////////////////////////////////////////////

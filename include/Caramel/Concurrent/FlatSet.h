@@ -32,10 +32,7 @@ class FlatSet : public Detail::BasicSet< boost::container::flat_set< Key >, Repl
 //
 
 template< typename Key >
-class FlatSetWithSnapshot
-    : public Detail::BasicSet< boost::container::flat_set< Key >, ReplicateSnapshot >
-{
-};
+using FlatSetWithSnapshot = FlatSet< Key, ReplicateSnapshot >;
 
 
 ///////////////////////////////////////////////////////////////////////////////

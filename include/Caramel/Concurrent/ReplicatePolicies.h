@@ -51,18 +51,12 @@ struct ReplicateNothing
 
 struct ReplicateSnapshot
 {
-    // TODO: Replace the derived class with C++11 alias templates
-
     template< typename Derived, typename Value >
-    class Collection : public Detail::CollectionSnapshot< Derived, Value >
-    {
-    };
-
+    using Collection = Detail::CollectionSnapshot< Derived, Value >;
 
     template< typename Derived, typename Key, typename Value >
-    class Dictionary : public Detail::DictionarySnapshot< Derived, Key, Value >
-    {
-    };
+    using Dictionary = Detail::DictionarySnapshot< Derived, Key, Value >;
+
 };
 
 

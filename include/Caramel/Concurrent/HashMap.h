@@ -35,10 +35,7 @@ class HashMap : public Detail::BasicMap< std::unordered_map< Key, Value >, Repli
 //
 
 template< typename Key, typename Value >
-class HashMapWithSnapshot
-    : public Detail::BasicMap< std::unordered_map< Key, Value >, ReplicateSnapshot >
-{
-};
+using HashMapWithSnapshot = HashMap< Key, Value, ReplicateSnapshot >;
 
 
 ///////////////////////////////////////////////////////////////////////////////

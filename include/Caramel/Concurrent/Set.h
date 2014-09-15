@@ -32,9 +32,7 @@ class Set : public Detail::BasicSet< std::set< Key >, ReplicatePolicy >
 //
 
 template< typename Key >
-class SetWithSnapshot : public Detail::BasicSet< std::set< Key >, ReplicateSnapshot >
-{
-};
+using SetWithSnapshot = Set< Key, ReplicateSnapshot >;
 
 
 ///////////////////////////////////////////////////////////////////////////////

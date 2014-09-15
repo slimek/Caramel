@@ -82,10 +82,7 @@ private:
 //
 
 template< typename T >
-class QueueWithSnapshot : public Queue< T, ReplicateSnapshot >
-{
-};
-
+using QueueWithSnapshot = Queue< T, ReplicateSnapshot >;
 
 
 ///////////////////////////////////////////////////////////////////////////////
