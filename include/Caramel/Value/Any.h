@@ -26,8 +26,8 @@ namespace Caramel
 //     Output   |   Input Categories   |  Input Types
 //   ------------------------------------------------------
 //     Boolean  <=  Boolean            |  Bool 
-//     Integer  <=  Integer / Enum     |  Int/Uint, any enums
-//     Floating <=  Floating / Integer |  Float/Double, Int/Uint
+//     Integer  <=  Integer / Enum     |  Int/Uint, Int64/Uint64, any enums
+//     Floating <=  Floating / Integer |  Float/Double, Int/Uint, Int64/Uint64
 //     String   <=  String             |  std::string, Char*
 //     Enum     <=  Enum               |  enum
 //     Object   <=  Object             |  other types
