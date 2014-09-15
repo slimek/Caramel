@@ -192,6 +192,9 @@
     <Filter Include="2. Sources\Configuration">
       <UniqueIdentifier>{c200b6bd-ef29-4e43-be94-4a41463309dd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\Numeric\Detail">
+      <UniqueIdentifier>{3aaa2fa9-aeda-4a36-ba02-ea3972c3c580}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Setup\Compiler.h">
@@ -814,6 +817,15 @@
     </ClInclude>
     <ClInclude Include="..\src\Value\ScalarImpl.h">
       <Filter>2. Sources\Value</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Numeric\NumberRelation.h">
+      <Filter>1. Public Packages\Numeric</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Numeric\Detail\NumberRelationArithmetic.h">
+      <Filter>1. Public Packages\Numeric\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Numeric\Detail\NumberRelationEnum.h">
+      <Filter>1. Public Packages\Numeric\Detail</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

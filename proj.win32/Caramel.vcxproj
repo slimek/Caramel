@@ -102,6 +102,9 @@
     <ClInclude Include="..\include\Caramel\Meta\Range.h" />
     <ClInclude Include="..\include\Caramel\Meta\Select.h" />
     <ClInclude Include="..\include\Caramel\Meta\Utility.h" />
+    <ClInclude Include="..\include\Caramel\Numeric\Detail\NumberRelationArithmetic.h" />
+    <ClInclude Include="..\include\Caramel\Numeric\Detail\NumberRelationEnum.h" />
+    <ClInclude Include="..\include\Caramel\Numeric\NumberRelation.h" />
     <ClInclude Include="..\include\Caramel\Numeric\UnionBits.h" />
     <ClInclude Include="..\include\Caramel\Numeric\NumberConverter.h" />
     <ClInclude Include="..\include\Caramel\Numeric\NumberConvertible.h" />
