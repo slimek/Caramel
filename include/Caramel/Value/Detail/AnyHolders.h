@@ -77,6 +77,10 @@ public:
 
 private:
 
+    template< typename T >
+    void DoGet( T& value ) const;
+
+
     Bool  m_isUint64;
     Int64 m_value;
 };

@@ -98,46 +98,20 @@ void AnyInteger_Get( T& value, U intValue )
 }
 
 
-void AnyInteger::Get( Int& value ) const
+template< typename T >
+void AnyInteger::DoGet( T& value ) const
 {
     m_isUint64 ? AnyInteger_Get( value, static_cast< Uint64 >( m_value ))
                : AnyInteger_Get( value, m_value );
 }
 
 
-void AnyInteger::Get( Uint& value ) const
-{
-    m_isUint64 ? AnyInteger_Get( value, static_cast< Uint64 >( m_value ))
-               : AnyInteger_Get( value, m_value );
-}
-
-
-void AnyInteger::Get( Int64& value ) const
-{
-    m_isUint64 ? AnyInteger_Get( value, static_cast< Uint64 >( m_value ))
-               : value = m_value;
-}
-
-
-void AnyInteger::Get( Uint64& value ) const
-{
-    m_isUint64 ? value = m_value
-               : AnyInteger_Get( value, m_value );
-}
-
-
-void AnyInteger::Get( Float& value ) const
-{
-    m_isUint64 ? AnyInteger_Get( value, static_cast< Uint64 >( m_value ))
-               : AnyInteger_Get( value, m_value );
-}
-
-
-void AnyInteger::Get( Double& value ) const
-{
-    m_isUint64 ? AnyInteger_Get( value, static_cast< Uint64 >( m_value ))
-               : AnyInteger_Get( value, m_value );
-}
+void AnyInteger::Get( Int& value )    const { this->DoGet( value ); }
+void AnyInteger::Get( Uint& value )   const { this->DoGet( value ); }
+void AnyInteger::Get( Int64& value )  const { this->DoGet( value ); }
+void AnyInteger::Get( Uint64& value ) const { this->DoGet( value ); }
+void AnyInteger::Get( Float& value )  const { this->DoGet( value ); }
+void AnyInteger::Get( Double& value ) const { this->DoGet( value ); }
 
 
 ///////////////////////////////////////////////////////////////////////////////
