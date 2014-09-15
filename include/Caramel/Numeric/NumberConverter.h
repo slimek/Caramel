@@ -23,6 +23,14 @@ template< typename OutputT, typename InputT >
 struct NumberConverter;
 
 
+// A type can always exactly convert to itself
+template< typename T >
+struct NumberConverter< T, T >
+{
+    static Bool CanExactConvert( T& value ) { return true; }
+};
+
+
 //
 // Specialization - Output to Int32
 //
