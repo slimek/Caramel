@@ -53,28 +53,6 @@ inline Bool IsSorted( const std::vector< T >& vec )
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Compare a vector with a set of data,
-// returns true if each element matched just once.
-//
-
-template< typename T >
-inline Bool ExactlyMatch( const std::vector< T >& v, std::initializer_list< T >&& init )
-{
-    std::set< T > s( std::move( init ));
-
-    for ( const auto& x : v )
-    {
-        auto iter = s.find( x );
-        if ( iter == s.end() ) { return false; }
-        s.erase( iter );
-    }
-
-    return s.empty();
-}
-
-
-///////////////////////////////////////////////////////////////////////////////
-//
 // Sort a vector by the element's member function, or member extractor.
 //
 

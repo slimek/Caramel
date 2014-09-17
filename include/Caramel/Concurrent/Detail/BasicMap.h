@@ -36,6 +36,8 @@ class BasicMap : public ReplicatePolicy::template Dictionary
 {
 public:
 
+    typedef MapType UnderlyingType;
+
     typedef typename MapType::key_type    Key,   KeyType;
     typedef typename MapType::mapped_type Value, ValueType;
 
@@ -65,6 +67,8 @@ public:
     Uint Erase( const Key& k );
 
     void Clear();
+
+    void Swap( MapType& otherMap );
 
 
     /// Combo Manipulators ///
@@ -169,6 +173,16 @@ inline void BasicMap< MapT, ReplicateP >::Clear()
         m_map.clear();
         this->Replicator::ReplicaClear();
     }
+}
+
+
+template< typename MapT, typename ReplicateP >
+inline void BasicMap< MapT, ReplicateP >::Swap( MapT& otherMap )
+{
+    LockGuard lock( m_mapMutex );
+
+    m_map.swap( otherMap );
+    this->Replicator::ReplicaClear();
 }
 
 

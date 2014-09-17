@@ -2,7 +2,7 @@
 
 #include "CaramelTestPch.h"
 
-#include "Utils/SharedArrayUtils.h"
+#include "Utils/Matcher.h"
 #include <Caramel/Concurrent/FlatMap.h>
 #include <Caramel/Concurrent/HashMap.h>
 #include <Caramel/Concurrent/Map.h>
@@ -46,6 +46,19 @@ void TestBasicMap( MapType& map )
     CHECK( true == map.IsEmpty() );
     CHECK( 0 == map.Size() );
     CHECK( false == map.Contains( 1 ));
+
+    typename MapType::UnderlyingType newMap;
+    newMap.insert( std::make_pair( 6, std::string( "Aya" )));
+    newMap.insert( std::make_pair( 7, std::string( "Nitori" )));
+
+    map.Swap( newMap );
+
+    CHECK( false == map.IsEmpty() );
+    CHECK( 2 == map.Size() );
+    CHECK( true == map.Contains( 7 ));
+    CHECK( true == map.Find( 6, temp ));
+    CHECK( "Aya" == temp );
+
 
     /// Combo Manipulators ///
 
@@ -141,7 +154,7 @@ void TestBasicMapWithSnapshot( MapType& map )
 
     CHECK( false == vshot2.IsEmpty() );
     CHECK( 3 == vshot2.Size() );
-    CHECK(( vshot2 == ConstSharedArray< std::string >{ "Marisa", "Alice", "Patchou" } ));
+    CHECK( Match< std::string >( vshot2, { "Marisa", "Alice", "Patchou" } ));
     CHECK( false == pshot2.IsEmpty() );
     CHECK( 3 == pshot2.Size() );
     CHECK( 8 == pshot2[2].first && "Patchou" == pshot2[2].second );
@@ -152,7 +165,7 @@ void TestBasicMapWithSnapshot( MapType& map )
     auto pshot3 = map.GetPairsSnapshot();
 
     CHECK( 2 == vshot3.Size() );
-    CHECK(( vshot3 == ConstSharedArray< std::string >{ "Marisa", "Alice" } ));
+    CHECK( Match< std::string >( vshot3, { "Marisa", "Alice" } ));
     CHECK( 2 == pshot3.Size() );
     CHECK( 7 == pshot3[1].first && "Alice" == pshot3[1].second );
 
@@ -163,6 +176,17 @@ void TestBasicMapWithSnapshot( MapType& map )
 
     CHECK( true == vshot4.IsEmpty() );
     CHECK( true == pshot4.IsEmpty() );
+
+
+    typename MapType::UnderlyingType newMap;
+    newMap.insert( std::make_pair( 1, std::string( "Hijiri" )));
+    newMap.insert( std::make_pair( 2, std::string( "Kokoro" )));
+
+    map.Swap( newMap );
+
+    auto vshot5 = map.GetValuesSnapshot();
+
+    CHECK( Match< std::string >( vshot5, { "Hijiri", "Kokoro" } ));
 }
 
 
