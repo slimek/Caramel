@@ -6,9 +6,9 @@
 
 #include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Object/Detail/LifetimeTracker.h>
-#include <Caramel/Thread/SpinMutex.h>
 #include <boost/noncopyable.hpp>
 #include <atomic>
+#include <mutex>
 
 
 namespace Caramel
@@ -34,8 +34,10 @@ private:
     static void CreateInstance();
     static void DestroyInstance( T* );
 
+    static std::once_flag& OnceFlag();
+
     static volatile T* m_instance;
-    static SpinMutex m_mutex;
+    static Int m_onceFlag;
     static Bool m_instanceDestroyed;
 
     // NOTE: m_destroyed has no function in code.
@@ -57,7 +59,7 @@ template< typename T, Uint longevity >
 volatile T* Singleton< T, longevity >::m_instance = nullptr;
 
 template< typename T, Uint longevity >
-SpinMutex Singleton< T, longevity >::m_mutex;
+Int Singleton< T, longevity >::m_onceFlag = 0;
 
 template< typename T, Uint longevity >
 Bool Singleton< T, longevity >::m_instanceDestroyed = false;
@@ -71,14 +73,7 @@ inline T* Singleton< T, longevity >::Instance()
 {
     if ( m_instance ) { return const_cast< T* >( m_instance ); }
 
-    /// Dobule-checking Lock ///
-
-    SpinMutex::ScopedLock lock( m_mutex );
-
-    if ( ! m_instance )
-    {
-        CreateInstance();
-    }
+    std::call_once( OnceFlag(), &CreateInstance );
 
     return const_cast< T* >( m_instance );
 }
@@ -112,6 +107,17 @@ inline void Singleton< T, longevity >::DestroyInstance( T* )
 
     delete m_instance;
     m_instance = nullptr;
+}
+
+
+//
+// Once Flag Hacking
+// - TODO: Replace it with std::once_flag when Visual C++ supports constexpr.
+//
+template< typename T, Uint longevity >
+inline std::once_flag& Singleton< T, longevity >::OnceFlag()
+{
+    return *reinterpret_cast< std::once_flag* >( &m_onceFlag );
 }
 
 
