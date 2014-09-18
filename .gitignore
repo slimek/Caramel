@@ -19,6 +19,7 @@ libs/
 project.properties
 
 # Xcode Generated Files
+xcuserdata/
 xcschememanagement.plist
 *.xccheckout
 *.xcscheme
