@@ -23,6 +23,14 @@ namespace Caramel
 // - Longevity greater than 0x7FFFFFFF is reserved for Caramel internal usage.
 // - Credit to "Loki" library.
 //
+// ATTENTION:
+//   Since Visual C++ 2013 doesn't support constexpr, its std::once_flag
+//   may not be initialized before main().
+//   Here we use a Int to simulate std::once_flag::_Flag.
+//
+// TODO:
+//   Remove the workaround when Visual C++ supports constexpr.
+//
 
 template< typename T, Uint longevity = 0 >
 class Singleton : public boost::noncopyable
@@ -34,11 +42,16 @@ private:
     static void CreateInstance();
     static void DestroyInstance( T* );
 
-    static std::once_flag& OnceFlag();
-
     static volatile T* m_instance;
-    static Int m_onceFlag;
     static Bool m_instanceDestroyed;
+
+    static std::once_flag& CreatedFlag();
+#if defined( CARAMEL_COMPILER_IS_MSVC )
+    static Int m_created;
+#else
+    static std::once_flag m_created;
+#endif
+
 
     // NOTE: m_destroyed has no function in code.
     //       but you may use it to check if a singleton is created more than once
@@ -59,10 +72,14 @@ template< typename T, Uint longevity >
 volatile T* Singleton< T, longevity >::m_instance = nullptr;
 
 template< typename T, Uint longevity >
-Int Singleton< T, longevity >::m_onceFlag = 0;
+Bool Singleton< T, longevity >::m_instanceDestroyed = false;
 
 template< typename T, Uint longevity >
-Bool Singleton< T, longevity >::m_instanceDestroyed = false;
+#if defined( CARAMEL_COMPILER_IS_MSVC )
+Int Singleton< T, longevity >::m_created = _ONCE_FLAG_CPP_INIT;
+#else
+std::once_flag Singleton< T, longevity >::m_created;
+#endif
 
 
 //
@@ -73,7 +90,7 @@ inline T* Singleton< T, longevity >::Instance()
 {
     if ( m_instance ) { return const_cast< T* >( m_instance ); }
 
-    std::call_once( OnceFlag(), &CreateInstance );
+    std::call_once( CreatedFlag(), &CreateInstance );
 
     return const_cast< T* >( m_instance );
 }
@@ -111,13 +128,21 @@ inline void Singleton< T, longevity >::DestroyInstance( T* )
 
 
 //
-// Once Flag Hacking
+// Once Flag Workaround
 // - TODO: Replace it with std::once_flag when Visual C++ supports constexpr.
 //
 template< typename T, Uint longevity >
-inline std::once_flag& Singleton< T, longevity >::OnceFlag()
+inline std::once_flag& Singleton< T, longevity >::CreatedFlag()
 {
-    return *reinterpret_cast< std::once_flag* >( &m_onceFlag );
+    #if defined( CARAMEL_COMPILER_IS_MSVC )
+    {
+        return *reinterpret_cast< std::once_flag* >( &m_created );
+    }
+    #else
+    {
+        return m_created;
+    }
+    #endif
 }
 
 
