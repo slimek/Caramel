@@ -235,6 +235,27 @@ TEST( LargeDateTimeDifferenceTest )
 }
 
 
+TEST( TimeSpanTryParseTest )
+{
+    TimeSpan span;
+
+    CHECK( false == span.TryParse( "" ));           // empty string
+    CHECK( false == span.TryParse( "Zeit" ));       // not a time span
+    
+    CHECK( true == span.TryParse( "12" ));          // 1 int is hours
+    CHECK( Hours( 12 ) == span );
+
+    CHECK( true == span.TryParse( "12:34" ));       // 2 ints are hh:mm
+    CHECK( TimeSpan( 12, 34, 0 ) == span );
+
+    CHECK( true == span.TryParse( "12:34:56" ));    // 3 ints are hh:mm:ss
+    CHECK( TimeSpan( 12, 34, 56 ) == span );
+
+    CHECK( true == span.TryParse( "12:34:78" ));    // components would automatically carry in.
+    CHECK( TimeSpan( 12, 35, 18 ) == span );
+}
+
+
 } // SUITE TimeSpanSuite
 
 } // namespace Caramel

@@ -591,6 +591,22 @@ std::string TimeSpan::ToString() const
 }
 
 
+Bool TimeSpan::TryParse( const std::string& input )
+{
+    if ( input.empty() ) { return false; }
+
+    try
+    {
+        *this = TimeSpan::FromString( input );
+        return true;
+    }
+    catch ( ... )
+    {
+        return false;
+    }
+}
+
+
 TimeSpan::operator Caramel::Seconds() const
 {
     return Caramel::Seconds( this->TotalSeconds() );

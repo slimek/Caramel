@@ -43,6 +43,10 @@ public:
     static TimeSpan MinValue();
     static TimeSpan MaxValue();
 
+    // Accepted formats:
+    //   hh
+    //   hh:mm
+    //   hh:mm:ss
     static TimeSpan FromString( const std::string& s );
 
 
@@ -83,6 +87,9 @@ public:
     /// Conversions ///
 
     std::string ToString() const;
+
+    // This function is based on FromString().
+    Bool TryParse( const std::string& s );
 
     operator Caramel::Seconds() const;
 
