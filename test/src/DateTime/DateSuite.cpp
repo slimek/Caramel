@@ -82,6 +82,21 @@ TEST( DateFormatTest )
 }
 
 
+TEST( DateTryParseTest )
+{
+    Date date;
+
+    CHECK( false == date.TryParse( "" ));
+    CHECK( false == date.TryParse( "Tag" ));
+
+    CHECK( true == date.TryParse( "2013-04-05" ));
+    CHECK( Date( 2013, 4, 5 ) == date );
+
+    CHECK( true == date.TryParse( "1987/6/5" ));
+    CHECK( Date( 1987, 6, 5 ) == date );
+}
+
+
 TEST( DateMacroTest )
 {
     const auto dm = Date::FromMacro( __DATE__ );

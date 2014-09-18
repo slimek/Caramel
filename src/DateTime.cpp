@@ -155,6 +155,22 @@ std::string Date::Format( const std::string& format ) const
 }
 
 
+Bool Date::TryParse( const std::string& input )
+{
+    if ( input.empty() ) { return false; }
+
+    try
+    {
+        *this = Date::FromString( input );
+        return true;
+    }
+    catch ( ... )
+    {
+        return false;
+    }
+}
+
+
 //
 // Implementation
 //

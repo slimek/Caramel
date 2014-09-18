@@ -80,6 +80,9 @@ public:
     // According to strftime() format.
     std::string Format( const std::string& format ) const;
 
+    // This function is based on FromString().
+    Bool TryParse( const std::string& s );
+
 
 private:
 
