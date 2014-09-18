@@ -155,6 +155,20 @@ TEST( TimeSpanTest )
         const TimeSpan t5 = Hours( 6 ) + Minutes( 49 ) - Seconds( 36 );
 
         CHECK( TimeSpan( 6, 48, 24 ) == t5 );
+
+        
+        /// Operation with Days ///
+           
+        const TimeSpan h12( 12, 0, 0 );
+        const auto d2h12 = h12 + Days( 2 );
+        const auto d1h12 = d2h12 - Days( 1 );
+
+        CHECK( TimeSpan( 60, 0, 0 ) == d2h12 );
+        CHECK( TimeSpan( 36, 0, 0 ) == d1h12 );
+
+        const auto d2 = Days::Truncate( d2h12 );
+
+        CHECK( Days( 2 ) == d2 );
     }
 }
 

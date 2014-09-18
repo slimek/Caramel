@@ -203,6 +203,12 @@ Days Days::MaxValue()
 }
 
 
+Days Days::Truncate( const TimeSpan& span )
+{
+    return Days( static_cast< Int >( span.TotalDays() ));
+}
+
+
 //
 // Operators
 //

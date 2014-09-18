@@ -35,6 +35,7 @@ public:
     /// Creators ///
 
     static Days MaxValue();
+    static Days Truncate( const TimeSpan& span );
 
 
     /// Operators ///
