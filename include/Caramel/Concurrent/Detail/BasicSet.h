@@ -62,6 +62,11 @@ public:
     Bool Insert( const Key& k );
     Uint Erase( const Key& k );
 
+    // true  : All keys are inserted.
+    // false : One or more keys aren't inserted.
+    template< typename InputIterator >
+    Bool Insert( InputIterator first, InputIterator last );
+
     void Clear();
 
 
@@ -133,6 +138,21 @@ inline Uint BasicSet< SetT, ReplicateP >::Erase( const Key& k )
     }
 
     return static_cast< Uint >( erased );
+}
+
+
+template< typename SetT, typename ReplicateP >
+template< typename InputIterator >
+inline Bool BasicSet< SetT, ReplicateP >::Insert( InputIterator first, InputIterator last )
+{
+    Bool allInserted = true;
+
+    for ( auto iter = first; iter != last; ++ iter )
+    {
+        allInserted &= this->Insert( *iter );
+    }
+
+    return allInserted;
 }
 
 

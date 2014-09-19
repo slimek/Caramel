@@ -52,6 +52,20 @@ void TestBasicIntSet( SetType& set )
     set.Clear();
 
     CHECK( true == set.IsEmpty() );
+
+    std::vector< Int > ints{ 3, 5, 8 };
+
+    CHECK( true == set.Insert( ints.begin(), ints.end() ));
+    CHECK( true == set.Contains( 5 ));
+    CHECK( 3    == set.Size() );
+
+    set.Clear();
+
+    ints = { 2, 2, 7 };
+
+    CHECK( false == set.Insert( ints.begin(), ints.end() ));
+    CHECK( true  == set.Contains( 2 ));
+    CHECK( 2     == set.Size() );
 }
 
 
