@@ -100,6 +100,16 @@ TEST( SharedArrayRangeTest )
 
     // std::set would sort the values.
     CHECK(( array2 == SharedArray< std::string >{ "Alice", "Marisa", "Reimu" } ));
+
+
+    // Transform into square
+    ConstSharedArray< Int > array3( data.begin(), data.size(), [] ( Int v ) { return v * v; } );
+    CHECK(( array3 == SharedArray< Int >{ 1, 4, 9 } ));
+
+    // Transform into string length
+    ConstSharedArray< Uint > array4(
+        array2.Begin(), array2.Size(), [] ( const std::string& s ) { return s.length(); } );
+    CHECK(( array4 == SharedArray< Uint >{ 5, 6, 5 } ));
 }
 
 

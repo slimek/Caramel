@@ -34,6 +34,10 @@ public:
     template< typename InputIterator >
     ConstSharedArray( InputIterator first, Uint count );
 
+    // Transform the range to make an array.
+    template< typename InputIterator, typename Function >
+    ConstSharedArray( InputIterator first, Uint count, Function func );
+
     
     /// Properties ///
 
@@ -68,6 +72,8 @@ public:
 
     
 protected:
+
+    void InitArray();
 
     typedef boost::shared_ptr< T[] > ArrayType;
     ArrayType m_array;
@@ -152,10 +158,7 @@ template< typename T >
 inline ConstSharedArray< T >::ConstSharedArray( Uint size )
     : m_size( size )
 {
-    // If size is 0, keep a dummy content in m_array.
-    const Uint implSize = ( 0 < size ) ? size : 1;
-
-    m_array.reset( new T[implSize] );
+    this->InitArray();
 }
 
 
@@ -163,10 +166,7 @@ template< typename T >
 inline ConstSharedArray< T >::ConstSharedArray( std::initializer_list< T > inits )
     : m_size( inits.size() )
 {
-    // If size is 0, keep a dummy content in m_array.
-    const Uint implSize = ( 0 < m_size ) ? m_size : 1;
-
-    m_array.reset( new T[implSize] );
+    this->InitArray();
     std::copy( inits.begin(), inits.end(), &m_array[0] );    
 }
 
@@ -176,11 +176,29 @@ template< typename InputIterator >
 inline ConstSharedArray< T >::ConstSharedArray( InputIterator first, Uint count )
     : m_size( count )
 {
+    this->InitArray();
+    std::copy_n( first, count, &m_array[0] );
+}
+
+
+template< typename T >
+template< typename InputIterator, typename Function >
+inline ConstSharedArray< T >::ConstSharedArray( InputIterator first, Uint count, Function func )
+    : m_size( count )
+{
+    this->InitArray();
+    std::transform( first, first + count, &m_array[0], func );
+}
+
+
+// Init the internal array by m_size, should only be called by ctors.
+template< typename T >
+inline void ConstSharedArray< T >::InitArray()
+{
     // If size is 0, keep a dummy content in m_array.
     const Uint implSize = ( 0 < m_size ) ? m_size : 1;
 
     m_array.reset( new T[implSize] );
-    std::copy_n( first, count, &m_array[0] );
 }
 
 
