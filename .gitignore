@@ -16,7 +16,6 @@ bin/
 gen/
 libs/
 .settings/
-project.properties
 
 # Xcode Generated Files
 xcuserdata/
