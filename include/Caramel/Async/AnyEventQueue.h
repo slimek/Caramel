@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
+#include <Caramel/Async/Detail/AnyEventQueueFront.h>
 #include <Caramel/Async/AnyEventTarget.h>
 #include <boost/noncopyable.hpp>
 
@@ -40,6 +41,13 @@ public:
 
     Bool TryPop( AnyEvent& event );
     
+
+    //
+    // Create a temporary Front Queue
+    // - See AnyEventQueueFront.h for its usage.
+    //
+    Detail::AnyEventQueueFront Front();
+
 
     /// AnyEventTarget Operations ///
 

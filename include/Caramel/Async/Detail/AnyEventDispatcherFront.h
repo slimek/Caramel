@@ -13,7 +13,7 @@ namespace Caramel
 
 // Forwards declaration
 class AnyEventDispatcher;
-class AnyEventDispatcherImpl;
+class AnyEventFrontImpl;
 
 namespace Detail
 {
@@ -74,7 +74,7 @@ private:
 
     explicit AnyEventDispatcherFront( AnyEventTargetPtr hostDispatcher );
 
-    std::shared_ptr< AnyEventDispatcherImpl > m_impl;
+    std::shared_ptr< AnyEventFrontImpl > m_impl;
 };
 
 

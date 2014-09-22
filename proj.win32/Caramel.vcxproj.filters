@@ -827,6 +827,12 @@
     <ClInclude Include="..\include\Caramel\Numeric\Detail\NumberRelationEnum.h">
       <Filter>1. Public Packages\Numeric\Detail</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventQueueFront.h">
+      <Filter>1. Public Packages\Async\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Async\AnyEventFrontImpl.h">
+      <Filter>2. Sources\Async</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

@@ -3,6 +3,7 @@
 #include "CaramelPch.h"
 
 #include "Async/AnyEventDispatcherImpl.h"
+#include "Async/AnyEventFrontImpl.h"
 #include "Async/AnyEventQueueImpl.h"
 #include "Async/AnyEventSlotImpl.h"
 #include "Async/AnyEventTargetImpl.h"
@@ -19,6 +20,7 @@ namespace Caramel
 //   AnyEventQueue
 //   AnyEventSlot
 //   AnyEventDispatcher
+//   Detail::AnyEventQueueFront
 //   Detail::AnyEventDispatcherFront
 //   AnyEventHandler
 //
@@ -146,6 +148,16 @@ void AnyEventQueue::Reset()
 {
     m_impl->IncrementAge();
     m_impl->Clear();
+}
+
+
+//
+// Temporary Front Dispatcher
+//
+
+Detail::AnyEventQueueFront AnyEventQueue::Front()
+{
+    return Detail::AnyEventQueueFront( m_impl );
 }
 
 
@@ -419,6 +431,68 @@ void AnyEventDispatcherImpl::Send( const AnyEvent& event, Uint age )
 
 ///////////////////////////////////////////////////////////////////////////////
 //
+// Any Event Front
+//
+
+AnyEventFrontImpl::AnyEventFrontImpl( AnyEventTargetPtr target )
+    : m_target( target )
+    , m_age( target->GetAge() )
+{
+}
+
+
+void AnyEventFrontImpl::Pass( const AnyEvent& event )
+{
+    m_target->Send( event, m_age );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Any Event Queue Front
+//
+
+namespace Detail
+{
+
+AnyEventQueueFront::AnyEventQueueFront( AnyEventTargetPtr hostQueue )
+    : m_impl( new AnyEventFrontImpl( hostQueue ))
+{
+}
+
+
+//
+// Dispatch Events
+//
+
+void AnyEventQueueFront::Push( const AnyEvent& event ) const
+{
+    m_impl->Pass( event );
+}
+
+
+void AnyEventQueueFront::PushEvent( Int eventId ) const
+{
+    m_impl->Pass( AnyEvent( eventId ));
+}
+
+
+void AnyEventQueueFront::PushEvent( Int eventId, const Any& value ) const
+{
+    m_impl->Pass( AnyEvent( eventId, value ));
+}
+
+
+void AnyEventQueueFront::PushEvent( Int eventId, Any&& value ) const
+{
+    m_impl->Pass( AnyEvent( eventId, std::move( value )));
+}
+
+} // namespace Detail
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
 // Any Event Dispatcher Front
 //
 
@@ -426,9 +500,8 @@ namespace Detail
 {
 
 AnyEventDispatcherFront::AnyEventDispatcherFront( AnyEventTargetPtr hostDispatcher )
-    : m_impl( new AnyEventDispatcherImpl )
+    : m_impl( new AnyEventFrontImpl( hostDispatcher ))
 {
-    m_impl->LinkTarget( std::move( hostDispatcher ));
 }
 
 
@@ -438,25 +511,25 @@ AnyEventDispatcherFront::AnyEventDispatcherFront( AnyEventTargetPtr hostDispatch
 
 void AnyEventDispatcherFront::Dispatch( const AnyEvent& event ) const
 {
-    m_impl->Dispatch( event );
+    m_impl->Pass( event );
 }
 
 
 void AnyEventDispatcherFront::DispatchEvent( Int eventId ) const
 {
-    m_impl->Dispatch( AnyEvent( eventId ));
+    m_impl->Pass( AnyEvent( eventId ));
 }
 
 
 void AnyEventDispatcherFront::DispatchEvent( Int eventId, const Any& value ) const
 {
-    m_impl->Dispatch( AnyEvent( eventId, value ));
+    m_impl->Pass( AnyEvent( eventId, value ));
 }
 
 
 void AnyEventDispatcherFront::DispatchEvent( Int eventId, Any&& value ) const
 {
-    m_impl->Dispatch( AnyEvent( eventId, std::move( value )));
+    m_impl->Pass( AnyEvent( eventId, std::move( value )));
 }
 
 

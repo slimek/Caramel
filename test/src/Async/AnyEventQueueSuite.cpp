@@ -4,6 +4,7 @@
 
 #include <Caramel/Async/AnyEventDispatcher.h>
 #include <Caramel/Async/AnyEventQueue.h>
+#include <Caramel/Task/StdAsync.h>
 #include <UnitTest++/UnitTest++.h>
 
 
@@ -109,6 +110,43 @@ TEST( AnyEventQueueUnlinkTest )
 
     CHECK( true == equeue.TryPop( event ));
     CHECK( 19   == event.Id() );
+}
+
+
+TEST( AnyEventQueueFrontTest )
+{
+    AnyEventQueue queue;
+    AnyEvent event;
+
+    auto front1 = queue.Front();
+    front1.PushEvent( 42 );
+
+    CHECK( true == queue.TryPop( event ));
+    CHECK( 42 == event.Id() );
+
+    queue.Reset();  // Unlink queue from front.
+
+    front1.PushEvent( 41 );
+
+    CHECK( false == queue.TryPop( event ));
+
+    
+    /// Capture front to a lambda ///
+
+    auto front2 = queue.Front();
+
+    auto task = MakeTask( "QueueFront",
+    [=]
+    {
+        front2.PushEvent( 8, "Marisa" );
+    });
+
+    StdAsync().Submit( task );
+    task.Wait();
+
+    CHECK( true == queue.TryPop( event ));
+    CHECK( 8 == event.Id() );
+    CHECK( "Marisa" == event.Value< std::string >() );
 }
 
 
