@@ -42,7 +42,7 @@ public:
 
     /// Predicates ///
 
-    operator Bool() const { return static_cast< Bool >( m_holder ); }
+    explicit operator Bool() const { return static_cast< Bool >( m_holder ); }
 
 
     /// Operations ///

@@ -16,23 +16,23 @@ TEST( CatchExceptionTest )
 {
     /// No Exception ///
     {
-        auto x = CatchException( [] { ; } );
+        auto xc = CatchException( [] { ; } );
 
-        CHECK( false == x );
+        CHECK( ! xc );
 
-        ExceptionPtr px = x.Exception();
+        ExceptionPtr px = xc.Exception();
     
-        CHECK( false == px );
+        CHECK( ! px );
     }
 
 
     /// Exception ///
     {
-        auto x = CatchException( [] { CARAMEL_THROW( "Alice in Shanghai" ); } );
+        auto xc = CatchException( [] { CARAMEL_THROW( "Alice in Shanghai" ); } );
 
-        CHECK ( true == x );
+        CHECK ( xc );
 
-        ExceptionPtr px = x.Exception();
+        ExceptionPtr px = xc.Exception();
 
         try
         {
@@ -50,11 +50,11 @@ TEST( CatchExceptionTest )
 
     /// Any Failure ///
     {
-        auto x = CatchException( [] { throw AnyFailure( 42, "The Answer" ); } );
+        auto xc = CatchException( [] { throw AnyFailure( 42, "The Answer" ); } );
 
-        CHECK( true == x );
+        CHECK( xc );
 
-        ExceptionPtr px = x.Exception();
+        ExceptionPtr px = xc.Exception();
 
         try
         {
@@ -75,16 +75,16 @@ TEST( CatchExceptionTest )
     /// Access Violation - Only for Win32 ///
     #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
     {
-        auto x = CatchException(
+        auto xc = CatchException(
         []
         {
             Int* pi = nullptr;
             ++ *pi;
         });
 
-        CHECK( true == x );
+        CHECK( xc );
 
-        ExceptionPtr px = x.Exception();
+        ExceptionPtr px = xc.Exception();
 
         try
         {
@@ -109,7 +109,7 @@ TEST( CatchExceptionWithResultTest )
     {
         auto xc = CatchException( [] { CARAMEL_THROW( "Alice in Shanghai" ); return false; } );
 
-        CHECK( true == xc );
+        CHECK( xc );
         CHECK(( true == std::is_same< Bool, decltype( xc.Result() ) >::value ));
 
         try
@@ -130,7 +130,7 @@ TEST( CatchExceptionWithResultTest )
     {
         auto xc = CatchException( [] { throw AnyFailure( 42, "The Answer" ); return 126; } );
 
-        CHECK( true == xc );
+        CHECK( xc );
         CHECK(( true == std::is_same< Int, decltype( xc.Result() ) >::value ));
 
         try
@@ -159,7 +159,7 @@ TEST( CatchExceptionWithResultTest )
             return std::string( "Marisa" );
         });
 
-        CHECK( true == xc );
+        CHECK( xc );
         CHECK(( true == std::is_same< std::string, decltype( xc.Result() ) >::value ));
 
         try
