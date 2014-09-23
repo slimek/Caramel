@@ -31,7 +31,7 @@ struct SplitterFirst
 {
     SplitterFirst( const std::string& input, Char c );
 
-    operator Bool() const { return splitted; }
+    explicit operator Bool() const { return splitted; }
 
     Bool splitted;
     std::string before;
