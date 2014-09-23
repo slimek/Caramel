@@ -15,6 +15,17 @@ namespace Caramel
 SUITE( TimedBoolSuite )
 {
 
+TEST( TickedBoolTrivialTest )
+{
+    typedef TimedBool< TickClock > TickedBool;
+
+    TickedBool tb( Ticks( 100 ));
+
+    CHECK( Ticks( 100 ) == tb.GetDuration() );
+    CHECK( TickClock::Now() < tb.GetDeadline() );
+}
+
+
 TEST( TickedBoolTest )
 {
     typedef TimedBool< TickClock > TickedBool;
