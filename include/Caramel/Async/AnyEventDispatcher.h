@@ -55,8 +55,7 @@ public:
 
     /// AnyEventTarget Operations ///
 
-    // Unlink from all linked dispatchers. Usually you call this to unlink
-    // from all proxies.
+    // Unlink from all linked dispatchers. Usually you call this to unlink from all proxies.
     // Dispatcher doesn't cache events, therefore there is nothing to discard.
     void Reset() override;
 

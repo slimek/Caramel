@@ -3,6 +3,7 @@
 #include "CaramelTestPch.h"
 
 #include <Caramel/Async/AnyEventDispatcher.h>
+#include <Caramel/Async/AnyEventHandler.h>
 #include <Caramel/Async/AnyEventQueue.h>
 #include <Caramel/Task/StdAsync.h>
 #include <UnitTest++/UnitTest++.h>
@@ -126,7 +127,7 @@ TEST( AnyEventQueueProxyTest )
 
     queue.Reset();  // Unlink queue from proxy1.
 
-    proxy1.PushEvent( 41 );
+    proxy1.PushEvent( 51 );
 
     CHECK( false == queue.TryPop( event ));
 
@@ -147,6 +148,16 @@ TEST( AnyEventQueueProxyTest )
     CHECK( true == queue.TryPop( event ));
     CHECK( 8 == event.Id() );
     CHECK( "Marisa" == event.Value< std::string >() );
+
+
+    /// Put into an AnyEventHandler ///
+
+    AnyEventHandler handler( proxy2 );
+    handler( AnyEvent( 514, "Koishi" ));
+
+    CHECK( true == queue.TryPop( event ));
+    CHECK( 514 == event.Id() );
+    CHECK( "Koishi" == event.Value< std::string >() );
 }
 
 

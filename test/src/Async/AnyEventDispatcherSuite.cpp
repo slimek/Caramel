@@ -3,6 +3,7 @@
 #include "CaramelTestPch.h"
 
 #include <Caramel/Async/AnyEventDispatcher.h>
+#include <Caramel/Async/AnyEventHandler.h>
 #include <Caramel/Async/AnyEventQueue.h>
 #include <Caramel/Async/AnyEventSlot.h>
 #include <Caramel/Task/StdAsync.h>
@@ -184,6 +185,18 @@ TEST( AnyEventDispatcherProxyTest )
     auto event = slot.Take();
     CHECK( 7 == event.Id() );
     CHECK( "Alice" == event.Value< std::string >() );
+
+
+    /// Put into an AnyEventHandler ///
+
+    AnyEventHandler handler( proxy2 );
+    handler( AnyEvent( 501, "Satori" ));
+
+    CHECK( true == slot );
+
+    event = slot.Take();
+    CHECK( 501 == event.Id() );
+    CHECK( "Satori" == event.Value< std::string >() );
 }
 
 

@@ -435,16 +435,26 @@ void AnyEventDispatcherImpl::Send( const AnyEvent& event, Uint age )
 // Any Event Target Proxy
 //
 
-AnyEventTargetProxyImpl::AnyEventTargetProxyImpl( AnyEventTargetPtr target )
-    : m_target( target )
-    , m_age( target->GetAge() )
+AnyEventTargetProxyImpl::AnyEventTargetProxyImpl( AnyEventTargetPtr hostTarget )
+    : m_hostTarget( hostTarget )
+    , m_hostAge( hostTarget->GetAge() )
 {
 }
 
 
-void AnyEventTargetProxyImpl::Send( const AnyEvent& event )
+void AnyEventTargetProxyImpl::SendToHost( const AnyEvent& event )
 {
-    m_target->Send( event, m_age );
+    m_hostTarget->Send( event, m_hostAge );
+}
+
+
+void AnyEventTargetProxyImpl::Send( const AnyEvent& event, Uint age )
+{
+    UniqueLock ulock = this->CompareAge( age );
+    if ( ulock )
+    {
+        this->SendToHost( event );
+    }
 }
 
 
@@ -468,26 +478,42 @@ AnyEventQueueProxy::AnyEventQueueProxy( AnyEventTargetPtr hostQueue )
 
 void AnyEventQueueProxy::Push( const AnyEvent& event ) const
 {
-    m_impl->Send( event );
+    m_impl->SendToHost( event );
 }
 
 
 void AnyEventQueueProxy::PushEvent( Int eventId ) const
 {
-    m_impl->Send( AnyEvent( eventId ));
+    m_impl->SendToHost( AnyEvent( eventId ));
 }
 
 
 void AnyEventQueueProxy::PushEvent( Int eventId, const Any& value ) const
 {
-    m_impl->Send( AnyEvent( eventId, value ));
+    m_impl->SendToHost( AnyEvent( eventId, value ));
 }
 
 
 void AnyEventQueueProxy::PushEvent( Int eventId, Any&& value ) const
 {
-    m_impl->Send( AnyEvent( eventId, std::move( value )));
+    m_impl->SendToHost( AnyEvent( eventId, std::move( value )));
 }
+
+//
+// Implements AnyEventTarget
+//
+
+void AnyEventQueueProxy::Reset()
+{
+    m_impl->IncrementAge();
+}
+
+
+AnyEventTargetPtr AnyEventQueueProxy::GetTargetImpl() const
+{
+    return m_impl;
+}
+
 
 } // namespace Detail
 
@@ -512,25 +538,41 @@ AnyEventDispatcherProxy::AnyEventDispatcherProxy( AnyEventTargetPtr hostDispatch
 
 void AnyEventDispatcherProxy::Dispatch( const AnyEvent& event ) const
 {
-    m_impl->Send( event );
+    m_impl->SendToHost( event );
 }
 
 
 void AnyEventDispatcherProxy::DispatchEvent( Int eventId ) const
 {
-    m_impl->Send( AnyEvent( eventId ));
+    m_impl->SendToHost( AnyEvent( eventId ));
 }
 
 
 void AnyEventDispatcherProxy::DispatchEvent( Int eventId, const Any& value ) const
 {
-    m_impl->Send( AnyEvent( eventId, value ));
+    m_impl->SendToHost( AnyEvent( eventId, value ));
 }
 
 
 void AnyEventDispatcherProxy::DispatchEvent( Int eventId, Any&& value ) const
 {
-    m_impl->Send( AnyEvent( eventId, std::move( value )));
+    m_impl->SendToHost( AnyEvent( eventId, std::move( value )));
+}
+
+
+//
+// Implements AnyEventTarget
+//
+
+void AnyEventDispatcherProxy::Reset()
+{
+    m_impl->IncrementAge();
+}
+
+
+AnyEventTargetPtr AnyEventDispatcherProxy::GetTargetImpl() const
+{
+    return m_impl;
 }
 
 

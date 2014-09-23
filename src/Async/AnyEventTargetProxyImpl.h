@@ -16,18 +16,22 @@ namespace Caramel
 // Any Event Target Proxy
 //
 
-class AnyEventTargetProxyImpl
+class AnyEventTargetProxyImpl : public AnyEventTargetImpl
 {
 public:
 
     explicit AnyEventTargetProxyImpl( AnyEventTargetPtr hostTarget );
 
-    void Send( const AnyEvent& event );
+    void SendToHost( const AnyEvent& event );
+
+    /// Implements AnyEventTargetImpl ///
+
+    void Send( const AnyEvent& event, Uint age ) override;
 
 private:
 
-    AnyEventTargetPtr m_target;
-    Uint m_age { 0 };
+    AnyEventTargetPtr m_hostTarget;
+    Uint m_hostAge { 0 };
 };
 
 

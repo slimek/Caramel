@@ -51,7 +51,7 @@ namespace Detail
 //   has been unlinked from its proxy, the event goes nowhere and would be ignored.
 // 
 
-class AnyEventDispatcherProxy
+class AnyEventDispatcherProxy : public AnyEventTarget
 {
     friend class Caramel::AnyEventDispatcher;
 
@@ -69,10 +69,20 @@ public:
     void DispatchEvent( Int eventId, const Any& value ) const;
     void DispatchEvent( Int eventId, Any&& value ) const;
 
+    
+    /// AnyEventTarget operations ///
+
+    // Unlink from all linked dispatchers.
+    // Proxy doesn't cache events, therefore there is nothing to discard.
+    // But you CAN still use this proxy to send events to its host.
+    void Reset() override;
+
 
 private:
 
     explicit AnyEventDispatcherProxy( AnyEventTargetPtr hostDispatcher );
+
+    AnyEventTargetPtr GetTargetImpl() const override;
 
     std::shared_ptr< AnyEventTargetProxyImpl > m_impl;
 };
