@@ -5,6 +5,7 @@
 #include "Task/PooledThread.h"
 #include "Task/TaskImpl.h"
 #include "Task/TaskPollerImpl.h"
+#include "Task/TaskTimerImpl.h"
 #include "Task/ThreadPoolImpl.h"
 #include "Task/WorkerThreadImpl.h"
 #include <Caramel/Chrono/TickClock.h>
@@ -24,6 +25,7 @@ namespace Caramel
 // Contents
 //
 //   Task
+//   TaskTimer
 //   TaskPoller
 //   WorkerThread
 //   PooledThread
@@ -374,6 +376,95 @@ Bool TaskImpl::TransitFromTo( TaskState fromState, TaskState toState )
 void TaskImpl::NotifyDone()
 {
     m_becomesDone.notify_all();    
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Task Timer
+//
+
+TaskTimer::TaskTimer(
+    const std::string& name, TaskExecutor& executor, const Ticks& period, WorkFunction f )
+    : m_impl( new TaskTimerImpl( name, executor, period ))
+{
+    // For using shared_from_this(), we wait the shared_ptr created.
+    m_impl->MakeAndSubmitTask( f );
+}
+
+
+TaskTimer::~TaskTimer()
+{
+    if ( m_impl )
+    {
+        m_impl->Cancel();
+    }
+}
+
+
+void TaskTimer::Start(
+    const std::string& name, TaskExecutor& executor, const Ticks& period, WorkFunction f )
+{
+    if ( m_impl )
+    {
+        CARAMEL_THROW( "TaskTimer[%s] is working, make new timer[%s] failed", m_impl->Name(), name );
+    }
+
+    m_impl.reset( new TaskTimerImpl( name, executor, period ));
+    m_impl->MakeAndSubmitTask( f );
+}
+
+void TaskTimer::Cancel()
+{
+    if ( ! m_impl ) { return; }
+
+    m_impl->Cancel();
+}
+
+
+//
+// Implementation
+//
+
+TaskTimerImpl::TaskTimerImpl(
+    const std::string& name, TaskExecutor& executor, const Ticks& period )
+    : m_name( name )
+    , m_executor( &executor )
+    , m_period( period )
+{
+}
+
+
+void TaskTimerImpl::MakeAndSubmitTask( WorkFunction f )
+{
+    if ( m_canceled ) { return; }
+
+    auto thiz = this->shared_from_this();
+
+    auto task = MakeTask( m_name,
+    [=]
+    {
+        if ( thiz->m_canceled ) { return; }
+
+        auto xc = CatchException( f );
+        if ( xc )
+        {
+            CARAMEL_TRACE_WARN( "TaskTimer[%s] throws:\n%s",
+                                thiz->m_name, xc.TracingMessage() );
+        }
+
+        thiz->MakeAndSubmitTask( f );
+    });
+
+    task.DelayFor( m_period );
+
+    m_executor->Submit( task );
+}
+
+
+void TaskTimerImpl::Cancel()
+{
+    m_canceled = true;
 }
 
 

@@ -319,6 +319,9 @@
     <ClCompile Include="..\src\Numeric\NumberRelationSuite.cpp">
       <Filter>2. Tests\Numeric</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Task\TaskTimerSuite.cpp">
+      <Filter>2. Tests\Task</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">

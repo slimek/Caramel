@@ -147,6 +147,7 @@
     <ClInclude Include="..\include\Caramel\Task\TaskFwd.h" />
     <ClInclude Include="..\include\Caramel\Task\TaskPoller.h" />
     <ClInclude Include="..\include\Caramel\Task\ThreadPool.h" />
+    <ClInclude Include="..\include\Caramel\Task\TaskTimer.h" />
     <ClInclude Include="..\include\Caramel\Task\WhenAll.h" />
     <ClInclude Include="..\include\Caramel\Task\WorkerThread.h" />
     <ClInclude Include="..\include\Caramel\Thread\LoopThreadGroup.h" />
@@ -211,6 +212,7 @@
     <ClInclude Include="..\src\Task\PooledThread.h" />
     <ClInclude Include="..\src\Task\TaskImpl.h" />
     <ClInclude Include="..\src\Task\TaskPollerImpl.h" />
+    <ClInclude Include="..\src\Task\TaskTimerImpl.h" />
     <ClInclude Include="..\src\Task\ThreadPoolImpl.h" />
     <ClInclude Include="..\src\Task\WorkerThreadImpl.h" />
     <ClInclude Include="..\src\Thread\LoopThreadGroupImpl.h" />
