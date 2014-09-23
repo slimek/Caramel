@@ -74,7 +74,7 @@ public:
     void operator()( const AnyEvent& event ) const;
 
     // Check if a valid function exists.
-    operator Bool() const { return static_cast< Bool >( m_handler ); }
+    explicit operator Bool() const { return static_cast< Bool >( m_handler ); }
 
 
 private:

@@ -24,11 +24,11 @@ TEST( AnyEventHandlerTrivalTest )
     AnyEventHandler func( [] ( const AnyEvent& e ) {} );
     AnyEventHandler signal( slot );
 
-    CHECK( false == def );
-    CHECK( false == null );
-    CHECK( true  == empty );
-    CHECK( true  == func );
-    CHECK( true  == signal );
+    CHECK( ! def );
+    CHECK( ! null );
+    CHECK( empty );
+    CHECK( func );
+    CHECK( signal );
 
     AnyEvent event;
 
@@ -57,11 +57,11 @@ TEST( AnyEventHandlerFromSlotTest )
 
     AnyEventHandler handler( slot );
 
-    CHECK( false == slot );
+    CHECK( ! slot );
 
     handler( AnyEvent( 2, 42 ));
 
-    CHECK( true == slot );
+    CHECK( slot );
     CHECK( 2  == slot.Id() );
     CHECK( 42 == slot.Value< Int >() );
 
@@ -72,7 +72,7 @@ TEST( AnyEventHandlerFromSlotTest )
 
     handler( AnyEvent( 7, "Alice" ));
 
-    CHECK( false == slot );
+    CHECK( ! slot );
 }
 
 

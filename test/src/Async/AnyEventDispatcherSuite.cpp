@@ -155,19 +155,19 @@ TEST( AnyEventDispatcherProxyTest )
 
     disp.LinkTarget( slot );
 
-    CHECK( false == slot );
+    CHECK( ! slot );
 
     auto proxy1 = disp.Proxy();
     proxy1.DispatchEvent( 42 );
 
-    CHECK( true == slot );
+    CHECK( slot );
     CHECK( 42 == slot.Take().Id() );
 
     disp.Reset();  // Unlink disp from proxy1
 
     proxy1.DispatchEvent( 51 );
 
-    CHECK( false == slot );
+    CHECK( ! slot );
 
     auto proxy2 = disp.Proxy();
 
@@ -180,7 +180,7 @@ TEST( AnyEventDispatcherProxyTest )
     StdAsync().Submit( task );
     task.Wait();
 
-    CHECK( true == slot );
+    CHECK( slot );
 
     auto event = slot.Take();
     CHECK( 7 == event.Id() );
@@ -192,7 +192,7 @@ TEST( AnyEventDispatcherProxyTest )
     AnyEventHandler handler( proxy2 );
     handler( AnyEvent( 501, "Satori" ));
 
-    CHECK( true == slot );
+    CHECK( slot );
 
     event = slot.Take();
     CHECK( 501 == event.Id() );

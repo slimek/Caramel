@@ -30,7 +30,7 @@ public:
 
     /// Properties ///
 
-    operator Bool() const { return this->IsValid(); }
+    explicit operator Bool() const { return this->IsValid(); }
 
     // Not receive an event yet.
     Bool IsEmpty() const { return ! this->IsValid(); }

@@ -18,7 +18,7 @@ TEST( AnyEventSlotTrivialTest )
 {
     AnyEventSlot slot;
 
-    CHECK( false == slot );
+    CHECK( ! slot );
     CHECK( false == slot.IsValid() );
     CHECK( true  == slot.IsEmpty() );
 
@@ -35,7 +35,7 @@ TEST( AnyEventSlotTest )
     disp.LinkTarget( slot );
     disp.DispatchEvent( 2, 42 );
 
-    CHECK( true  == slot );
+    CHECK( slot );
     CHECK( true  == slot.IsValid() );
     CHECK( false == slot.IsEmpty() );
     CHECK( 2     == slot.Id() );
@@ -51,10 +51,10 @@ TEST( AnyEventSlotTest )
     // - It would unlink from all sources automatically.
 
     slot.Reset();
-    CHECK( false == slot );
+    CHECK( ! slot );
 
     disp.DispatchEvent( 5, "Reimu" );
-    CHECK( false == slot );
+    CHECK( ! slot );
 
     
     // Link again
@@ -62,7 +62,7 @@ TEST( AnyEventSlotTest )
     disp.LinkTarget( slot );
     disp.DispatchEvent( 7, "Alice" );
 
-    CHECK( true    == slot );
+    CHECK( slot );
     CHECK( 7       == slot.Id() );
     CHECK( "Alice" == slot.Value< std::string >() );
 
@@ -71,7 +71,7 @@ TEST( AnyEventSlotTest )
 
     auto event = slot.Take();
 
-    CHECK( false   == slot );
+    CHECK( ! slot );
     CHECK( 7       == event.Id() );
     CHECK( "Alice" == event.Value< std::string >() );
 
@@ -80,14 +80,14 @@ TEST( AnyEventSlotTest )
 
     disp.DispatchEvent( 42 );
 
-    CHECK( true   == slot );
-    CHECK( 42     == slot.Id() );
+    CHECK( slot );
+    CHECK( 42 == slot.Id() );
     CHECK_THROW( slot.Value< Int >(), Caramel::Exception );
 
     auto event2 = slot.Take();
 
-    CHECK( false == slot );
-    CHECK( 42    == event2.Id() );
+    CHECK( ! slot );
+    CHECK( 42 == event2.Id() );
 }
 
 
