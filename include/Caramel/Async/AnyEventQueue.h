@@ -5,7 +5,7 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
-#include <Caramel/Async/Detail/AnyEventQueueFront.h>
+#include <Caramel/Async/Detail/AnyEventQueueProxy.h>
 #include <Caramel/Async/AnyEventTarget.h>
 #include <boost/noncopyable.hpp>
 
@@ -43,16 +43,16 @@ public:
     
 
     //
-    // Create a temporary Front Queue
-    // - See AnyEventQueueFront.h for its usage.
+    // Create a temporary queue proxy
+    // - See AnyEventQueueProxy.h for its usage.
     //
-    Detail::AnyEventQueueFront Front();
+    Detail::AnyEventQueueProxy Proxy();
 
 
     /// AnyEventTarget Operations ///
 
     // This function has two effects:
-    // 1. Unlink from all linked dispatchers.
+    // 1. Unlink from all linked dispatchers and proxies.
     // 2. Discard all unprocessed events.
     void Reset() override;
 

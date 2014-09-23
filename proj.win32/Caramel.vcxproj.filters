@@ -782,9 +782,6 @@
     <ClInclude Include="..\include\Caramel\Statechart\PromptStateMachine.h">
       <Filter>1. Public Packages\Statechart</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventDispatcherFront.h">
-      <Filter>1. Public Packages\Async\Detail</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Caramel\Meta\Range.h">
       <Filter>1. Public Packages\Meta</Filter>
     </ClInclude>
@@ -827,10 +824,13 @@
     <ClInclude Include="..\include\Caramel\Numeric\Detail\NumberRelationEnum.h">
       <Filter>1. Public Packages\Numeric\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventQueueFront.h">
+    <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventDispatcherProxy.h">
       <Filter>1. Public Packages\Async\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Async\AnyEventFrontImpl.h">
+    <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventQueueProxy.h">
+      <Filter>1. Public Packages\Async\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Async\AnyEventTargetProxyImpl.h">
       <Filter>2. Sources\Async</Filter>
     </ClInclude>
   </ItemGroup>

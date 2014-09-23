@@ -113,32 +113,32 @@ TEST( AnyEventQueueUnlinkTest )
 }
 
 
-TEST( AnyEventQueueFrontTest )
+TEST( AnyEventQueueProxyTest )
 {
     AnyEventQueue queue;
     AnyEvent event;
 
-    auto front1 = queue.Front();
-    front1.PushEvent( 42 );
+    auto proxy1 = queue.Proxy();
+    proxy1.PushEvent( 42 );
 
     CHECK( true == queue.TryPop( event ));
     CHECK( 42 == event.Id() );
 
-    queue.Reset();  // Unlink queue from front.
+    queue.Reset();  // Unlink queue from proxy1.
 
-    front1.PushEvent( 41 );
+    proxy1.PushEvent( 41 );
 
     CHECK( false == queue.TryPop( event ));
 
     
-    /// Capture front to a lambda ///
+    /// Capture proxy to a lambda ///
 
-    auto front2 = queue.Front();
+    auto proxy2 = queue.Proxy();
 
-    auto task = MakeTask( "QueueFront",
+    auto task = MakeTask( "QueueProxy",
     [=]
     {
-        front2.PushEvent( 8, "Marisa" );
+        proxy2.PushEvent( 8, "Marisa" );
     });
 
     StdAsync().Submit( task );

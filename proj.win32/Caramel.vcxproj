@@ -21,8 +21,8 @@
     <ClInclude Include="..\include\Caramel\Async\AnyEventHandler.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEventSlot.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEventTarget.h" />
-    <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventDispatcherFront.h" />
-    <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventQueueFront.h" />
+    <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventDispatcherProxy.h" />
+    <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventQueueProxy.h" />
     <ClInclude Include="..\include\Caramel\Async\FlowState.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEventQueue.h" />
     <ClInclude Include="..\include\Caramel\Async\ValueChange.h" />
@@ -175,7 +175,7 @@
     <ClInclude Include="..\include\Caramel\Windows\Registry.h" />
     <ClInclude Include="..\include\Caramel\Windows\WideString.h" />
     <ClInclude Include="..\src\Async\AnyEventDispatcherImpl.h" />
-    <ClInclude Include="..\src\Async\AnyEventFrontImpl.h" />
+    <ClInclude Include="..\src\Async\AnyEventTargetProxyImpl.h" />
     <ClInclude Include="..\src\Async\AnyEventQueueImpl.h" />
     <ClInclude Include="..\src\Async\AnyEventSlotImpl.h" />
     <ClInclude Include="..\src\Async\AnyEventTargetImpl.h" />

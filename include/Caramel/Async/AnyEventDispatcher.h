@@ -5,7 +5,7 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
-#include <Caramel/Async/Detail/AnyEventDispatcherFront.h>
+#include <Caramel/Async/Detail/AnyEventDispatcherProxy.h>
 #include <Caramel/Async/AnyEventTarget.h>
 #include <boost/noncopyable.hpp>
 
@@ -47,16 +47,16 @@ public:
 
 
     //
-    // Create a Temporary Front Dispatcher
-    // - See AnyEventDispatcherFront.h for its usage.
+    // Create a temporary dispatcher proxy.
+    // - See AnyEventDispatcherProxy.h for its usage.
     //
-    Detail::AnyEventDispatcherFront Front();
+    Detail::AnyEventDispatcherProxy Proxy();
 
 
     /// AnyEventTarget Operations ///
 
     // Unlink from all linked dispatchers. Usually you call this to unlink
-    // from all fronts.
+    // from all proxies.
     // Dispatcher doesn't cache events, therefore there is nothing to discard.
     void Reset() override;
 

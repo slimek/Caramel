@@ -1,7 +1,7 @@
-// Caramel C++ Library - Async Facility - Detail - Any Event Queue Front Header
+// Caramel C++ Library - Async Facility - Detail - Any Event Queue Proxy Header
 
-#ifndef __CARAMEL_ASYNC_DETAIL_ANY_EVENT_QUEUE_FRONT_H
-#define __CARAMEL_ASYNC_DETAIL_ANY_EVENT_QUEUE_FRONT_H
+#ifndef __CARAMEL_ASYNC_DETAIL_ANY_EVENT_QUEUE_PROYX_H
+#define __CARAMEL_ASYNC_DETAIL_ANY_EVENT_QUEUE_PROYX_H
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
@@ -12,45 +12,45 @@ namespace Caramel
 
 // Forwards declaration
 class AnyEventQueue;
-class AnyEventFrontImpl;
+class AnyEventTargetProxyImpl;
 
 namespace Detail
 {
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Any Event Queue Front
-// - A tempoarary copyable front for AnyEventQueue.
-//   Can only be created by AnyEventQueue::Front().
+// Any Event Queue Proxy
+// - A tempoarary copyable proxy for AnyEventQueue.
+//   Can only be created by AnyEventQueue::Proxy().
 //
 // USGAE:
 //
-//   AnyEventQueueFront is mostly used in a lambda expression. For example:
+//   AnyEventQueueProxy is mostly used in a lambda expression. For example:
 //
 //     void MyModel::LoadFile()
 //     {
-//         auto front = m_queue.Front();
+//         auto queue = m_queue.Proxy();
 //         auto task = MakeTask( "Load",
 //         [=]
 //         {
 //             const ByteArray data = InputFile( fileName ).LoadData();
-//             front.PushEvent( EVENT_FILE_LOADED, data );
+//             queue.PushEvent( EVENT_FILE_LOADED, data );
 //         });
 //     }
 //
 //   Then for some reasons you want to ignore the loading result before the loading completes
-//   - suppose it takes a long time :) . What you need to do is just resetting the queue :
+//   -- suppose it takes a long time :) -- What you need to do is just resetting the queue :
 //
 //     void MyModel::Reset()
 //     {
 //         m_queue.Reset();
 //     }
 //
-//   In this case, the file is still loaded, and an event is post. But since the host queue
-//   has been unlinked from its front, the event goes nowhere and would be ignored.
+//   In this case, the file is still loaded, and an event is pushed. But since the host queue
+//   has been unlinked from its proxy, the event goes nowhere and would be ignored.
 // 
 
-class AnyEventQueueFront
+class AnyEventQueueProxy
 {
     friend class Caramel::AnyEventQueue;
 
@@ -64,9 +64,9 @@ public:
 
 private:
 
-    explicit AnyEventQueueFront( AnyEventTargetPtr hostQueue );
+    explicit AnyEventQueueProxy( AnyEventTargetPtr hostQueue );
 
-    std::shared_ptr< AnyEventFrontImpl > m_impl;
+    std::shared_ptr< AnyEventTargetProxyImpl > m_impl;
 };
 
 
@@ -76,4 +76,4 @@ private:
 
 } // namespace Caramel
 
-#endif // __CARAMEL_ASYNC_DETAIL_ANY_EVENT_QUEUE_FRONT_H
+#endif // __CARAMEL_ASYNC_DETAIL_ANY_EVENT_QUEUE_PROYX_H

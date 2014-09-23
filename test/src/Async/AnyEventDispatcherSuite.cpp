@@ -147,7 +147,7 @@ TEST( AnyEventDispatcherToDispatcherTest )
 }
 
 
-TEST( AnyEventDispatcherFrontTest )
+TEST( AnyEventDispatcherProxyTest )
 {
     AnyEventDispatcher disp;
     AnyEventSlot slot;
@@ -156,24 +156,24 @@ TEST( AnyEventDispatcherFrontTest )
 
     CHECK( false == slot );
 
-    auto front1 = disp.Front();
-    front1.DispatchEvent( 42 );
+    auto proxy1 = disp.Proxy();
+    proxy1.DispatchEvent( 42 );
 
     CHECK( true == slot );
     CHECK( 42 == slot.Take().Id() );
 
-    disp.Reset();  // Unlink disp from front1
+    disp.Reset();  // Unlink disp from proxy1
 
-    front1.DispatchEvent( 51 );
+    proxy1.DispatchEvent( 51 );
 
     CHECK( false == slot );
 
-    auto front2 = disp.Front();
+    auto proxy2 = disp.Proxy();
 
-    auto task = MakeTask( "DispatcherFront",
+    auto task = MakeTask( "DispatcherProxy",
     [=]
     {
-        front2.DispatchEvent( 7, "Alice" );
+        proxy2.DispatchEvent( 7, "Alice" );
     });
 
     StdAsync().Submit( task );

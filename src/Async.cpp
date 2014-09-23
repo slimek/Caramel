@@ -3,7 +3,7 @@
 #include "CaramelPch.h"
 
 #include "Async/AnyEventDispatcherImpl.h"
-#include "Async/AnyEventFrontImpl.h"
+#include "Async/AnyEventTargetProxyImpl.h"
 #include "Async/AnyEventQueueImpl.h"
 #include "Async/AnyEventSlotImpl.h"
 #include "Async/AnyEventTargetImpl.h"
@@ -20,8 +20,9 @@ namespace Caramel
 //   AnyEventQueue
 //   AnyEventSlot
 //   AnyEventDispatcher
-//   Detail::AnyEventQueueFront
-//   Detail::AnyEventDispatcherFront
+//   AnyEventTargetProxy
+//   Detail::AnyEventQueueProxy
+//   Detail::AnyEventDispatcherProxy
 //   AnyEventHandler
 //
 
@@ -152,12 +153,12 @@ void AnyEventQueue::Reset()
 
 
 //
-// Temporary Front Dispatcher
+// Temporary Queue Proxy
 //
 
-Detail::AnyEventQueueFront AnyEventQueue::Front()
+Detail::AnyEventQueueProxy AnyEventQueue::Proxy()
 {
-    return Detail::AnyEventQueueFront( m_impl );
+    return Detail::AnyEventQueueProxy( m_impl );
 }
 
 
@@ -356,12 +357,12 @@ void AnyEventDispatcher::DispatchEvent( Int eventId, Any&& value )
 
 
 //
-// Temporary Front Dispatcher
+// Temporary Dispatcher Proxy
 //
 
-Detail::AnyEventDispatcherFront AnyEventDispatcher::Front()
+Detail::AnyEventDispatcherProxy AnyEventDispatcher::Proxy()
 {
-    return Detail::AnyEventDispatcherFront( m_impl );
+    return Detail::AnyEventDispatcherProxy( m_impl );
 }
 
 
@@ -431,17 +432,17 @@ void AnyEventDispatcherImpl::Send( const AnyEvent& event, Uint age )
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Any Event Front
+// Any Event Target Proxy
 //
 
-AnyEventFrontImpl::AnyEventFrontImpl( AnyEventTargetPtr target )
+AnyEventTargetProxyImpl::AnyEventTargetProxyImpl( AnyEventTargetPtr target )
     : m_target( target )
     , m_age( target->GetAge() )
 {
 }
 
 
-void AnyEventFrontImpl::Pass( const AnyEvent& event )
+void AnyEventTargetProxyImpl::Send( const AnyEvent& event )
 {
     m_target->Send( event, m_age );
 }
@@ -449,14 +450,14 @@ void AnyEventFrontImpl::Pass( const AnyEvent& event )
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Any Event Queue Front
+// Any Event Queue Proxy
 //
 
 namespace Detail
 {
 
-AnyEventQueueFront::AnyEventQueueFront( AnyEventTargetPtr hostQueue )
-    : m_impl( new AnyEventFrontImpl( hostQueue ))
+AnyEventQueueProxy::AnyEventQueueProxy( AnyEventTargetPtr hostQueue )
+    : m_impl( new AnyEventTargetProxyImpl( hostQueue ))
 {
 }
 
@@ -465,27 +466,27 @@ AnyEventQueueFront::AnyEventQueueFront( AnyEventTargetPtr hostQueue )
 // Dispatch Events
 //
 
-void AnyEventQueueFront::Push( const AnyEvent& event ) const
+void AnyEventQueueProxy::Push( const AnyEvent& event ) const
 {
-    m_impl->Pass( event );
+    m_impl->Send( event );
 }
 
 
-void AnyEventQueueFront::PushEvent( Int eventId ) const
+void AnyEventQueueProxy::PushEvent( Int eventId ) const
 {
-    m_impl->Pass( AnyEvent( eventId ));
+    m_impl->Send( AnyEvent( eventId ));
 }
 
 
-void AnyEventQueueFront::PushEvent( Int eventId, const Any& value ) const
+void AnyEventQueueProxy::PushEvent( Int eventId, const Any& value ) const
 {
-    m_impl->Pass( AnyEvent( eventId, value ));
+    m_impl->Send( AnyEvent( eventId, value ));
 }
 
 
-void AnyEventQueueFront::PushEvent( Int eventId, Any&& value ) const
+void AnyEventQueueProxy::PushEvent( Int eventId, Any&& value ) const
 {
-    m_impl->Pass( AnyEvent( eventId, std::move( value )));
+    m_impl->Send( AnyEvent( eventId, std::move( value )));
 }
 
 } // namespace Detail
@@ -493,14 +494,14 @@ void AnyEventQueueFront::PushEvent( Int eventId, Any&& value ) const
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Any Event Dispatcher Front
+// Any Event Dispatcher Proxy
 //
 
 namespace Detail
 {
 
-AnyEventDispatcherFront::AnyEventDispatcherFront( AnyEventTargetPtr hostDispatcher )
-    : m_impl( new AnyEventFrontImpl( hostDispatcher ))
+AnyEventDispatcherProxy::AnyEventDispatcherProxy( AnyEventTargetPtr hostDispatcher )
+    : m_impl( new AnyEventTargetProxyImpl( hostDispatcher ))
 {
 }
 
@@ -509,27 +510,27 @@ AnyEventDispatcherFront::AnyEventDispatcherFront( AnyEventTargetPtr hostDispatch
 // Dispatch Events
 //
 
-void AnyEventDispatcherFront::Dispatch( const AnyEvent& event ) const
+void AnyEventDispatcherProxy::Dispatch( const AnyEvent& event ) const
 {
-    m_impl->Pass( event );
+    m_impl->Send( event );
 }
 
 
-void AnyEventDispatcherFront::DispatchEvent( Int eventId ) const
+void AnyEventDispatcherProxy::DispatchEvent( Int eventId ) const
 {
-    m_impl->Pass( AnyEvent( eventId ));
+    m_impl->Send( AnyEvent( eventId ));
 }
 
 
-void AnyEventDispatcherFront::DispatchEvent( Int eventId, const Any& value ) const
+void AnyEventDispatcherProxy::DispatchEvent( Int eventId, const Any& value ) const
 {
-    m_impl->Pass( AnyEvent( eventId, value ));
+    m_impl->Send( AnyEvent( eventId, value ));
 }
 
 
-void AnyEventDispatcherFront::DispatchEvent( Int eventId, Any&& value ) const
+void AnyEventDispatcherProxy::DispatchEvent( Int eventId, Any&& value ) const
 {
-    m_impl->Pass( AnyEvent( eventId, std::move( value )));
+    m_impl->Send( AnyEvent( eventId, std::move( value )));
 }
 
 
