@@ -58,6 +58,13 @@ public:
     AnyEventHandler( const AnyEventHandler& other );
     AnyEventHandler( AnyEventHandler&& other );
 
+    // Assignment
+    // - Use copy-and-swap idiom.
+    AnyEventHandler& operator=( AnyEventHandler rhs );
+
+    friend void swap( AnyEventHandler& x, AnyEventHandler& y );
+
+
     // Construct by r-value
     // - Use SFINAE to prevent ambiguous with move constructor.
     template< typename HandlerT >
@@ -89,6 +96,17 @@ private:
 
     std::function< void( const AnyEvent& ) > m_handler;
 };
+
+
+//
+// Swap
+// - Compatible with std::swap().
+//
+
+inline void swap( AnyEventHandler& x, AnyEventHandler& y )
+{
+    x.m_handler.swap( y.m_handler );
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////

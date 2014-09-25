@@ -137,6 +137,38 @@ TEST( AnyEventHandlerConversionTest )
 }
 
 
+TEST( AnyEventHandlerAssignmentTest )
+{
+    AnyEventQueue queue;
+    AnyEventSlot slot;
+
+    AnyEventHandler h1( queue );
+    AnyEventHandler h2( slot );
+    AnyEvent event;
+
+    h1 = h2;
+
+    h1( AnyEvent( 514, "Koishi" ));
+
+    CHECK( false == queue.TryPop( event ));
+    CHECK( slot );
+    CHECK( 514 == slot.Id() );
+    CHECK( "Koishi" == slot.Value< std::string >() );
+
+    slot.Take();  // Take out the event.
+                  // Don't call Reset() or you will unlink from the handlers.
+
+    // Self-assign
+    h2 = h2;
+
+    h2( AnyEvent( 501, "Satori" ));
+
+    CHECK( slot );
+    CHECK( 501 == slot.Id() );
+    CHECK( "Satori" == slot.Value< std::string >() );
+}
+
+
 } // SUITE AnyEventHandlerSuite
 
 } // namespace Caramel
