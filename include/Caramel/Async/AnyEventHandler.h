@@ -58,13 +58,6 @@ public:
     AnyEventHandler( const AnyEventHandler& other );
     AnyEventHandler( AnyEventHandler&& other );
 
-    // Assignment
-    // - Use copy-and-swap idiom.
-    AnyEventHandler& operator=( AnyEventHandler rhs );
-
-    friend void swap( AnyEventHandler& x, AnyEventHandler& y );
-
-
     // Construct by r-value
     // - Use SFINAE to prevent ambiguous with move constructor.
     template< typename HandlerT >
@@ -72,6 +65,11 @@ public:
         HandlerT&& handler,
         typename boost::disable_if< std::is_same< AnyEventHandler&, HandlerT > >::type* = nullptr
     );
+
+    AnyEventHandler& operator=( AnyEventHandler rhs );
+
+    void Swap( AnyEventHandler& other );
+
 
     // Create an empty handler.
     // - Invoke a null handler results in segment fault, but an empty handler just do nothing.
@@ -96,17 +94,6 @@ private:
 
     std::function< void( const AnyEvent& ) > m_handler;
 };
-
-
-//
-// Swap
-// - Compatible with std::swap().
-//
-
-inline void swap( AnyEventHandler& x, AnyEventHandler& y )
-{
-    x.m_handler.swap( y.m_handler );
-}
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -138,6 +125,24 @@ template< typename HandlerT >
 inline void AnyEventHandler::Init( HandlerT&& handler, std::false_type )
 {
     m_handler = std::forward< HandlerT >( handler );
+}
+
+
+//
+// Unified Assignment
+// - Use copy-and-swap idiom.
+//
+
+inline AnyEventHandler& AnyEventHandler::operator=( AnyEventHandler rhs )
+{
+    this->Swap( rhs );
+    return *this;
+}
+
+
+inline void AnyEventHandler::Swap( AnyEventHandler& other )
+{
+    m_handler.swap( other.m_handler );
 }
 
 

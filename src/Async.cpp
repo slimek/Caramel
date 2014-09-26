@@ -608,13 +608,6 @@ AnyEventHandler::AnyEventHandler( AnyEventHandler&& other )
 }
 
 
-AnyEventHandler& AnyEventHandler::operator=( AnyEventHandler rhs )
-{
-    swap( *this, rhs );
-    return *this;
-}
-
-
 AnyEventHandler AnyEventHandler::Empty()
 {
     return AnyEventHandler( [] ( const AnyEvent& ) {} );  // Returns an empty handler.
