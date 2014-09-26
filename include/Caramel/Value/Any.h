@@ -45,7 +45,6 @@ public:
     template< typename T >
     Any( const T& value );
 
-
     //
     // Construct by r-value
     // - Use SFINAE to prevent ambiguous with move constructor.
@@ -55,18 +54,10 @@ public:
         T&& value,
         typename boost::disable_if< std::is_same< Any&, T > >::type* = nullptr
     );
-
     
-    //
-    // Assignment
-    // - Use copy-and-swap idiom.
-    //   NOTES: C++11 requires an explicit assignment when you declare a move constructor.
-    //          But Visual C++ ingores this rule.
-    //
-
     Any& operator=( Any rhs );
     
-    friend void swap( Any& x, Any& y );
+    void Swap( Any& other );
 
 
     /// Retrieve Value ///
@@ -97,17 +88,6 @@ template< typename T >
 inline Any MakeAny( const T& value )
 {
     return Any( value );
-}
-
-
-//
-// Swap
-// - Compatible with std::swap().
-//
-
-inline void swap( Any& x, Any& y )
-{
-    x.m_holder.swap( y.m_holder );
 }
 
 
@@ -147,15 +127,23 @@ inline Any::Any(
 
 
 //
-// Assignment
+// Unified Assignment
+// - Use copy-and-swap idiom.
+//   NOTES: C++11 requires an explicit assignment when you declare a move constructor.
+//          But Visual C++ ingores this rule.
 //
 
 inline Any& Any::operator=( Any rhs )
 {
-    swap( *this, rhs );
+    this->Swap( rhs );
     return *this;
 }
 
+
+inline void Any::Swap( Any& other )
+{
+    m_holder.swap( other.m_holder );
+}
 
 
 //
