@@ -1043,7 +1043,7 @@
 		6DAFE0E51815118B00859097 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = Sixion;
 			};
 			buildConfigurationList = 6DAFE0E81815118B00859097 /* Build configuration list for PBXProject "Caramel" */;
