@@ -23,7 +23,13 @@ TEST( StringPredicateTest )
     CHECK( false == Contains( "Alice", 'f' ));
     CHECK( false == Contains( "",      'a' ));
 
+    CHECK( true  == StartsWith( "Alice", 'A' ));
+    CHECK( false == StartsWith( "Alice", 'a' ));
+    CHECK( false == StartsWith( "Alice", 'l' ));
+    CHECK( false == StartsWith( "",      'f' ));
+
     CHECK( true  == EndsWith( "Alice", 'e' ));
+    CHECK( false == EndsWith( "Alice", 'E' ));
     CHECK( false == EndsWith( "Alice", 'c' ));
     CHECK( false == EndsWith( "",      'f' ));
 

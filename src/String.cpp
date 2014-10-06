@@ -360,6 +360,12 @@ Bool Contains( const std::string& s, Char c )
 }
 
 
+Bool StartsWith( const std::string& s, Char c )
+{
+    return boost::algorithm::starts_with( s, CharRange( c ));
+}
+
+
 Bool EndsWith( const std::string& s, Char c )
 {
     return boost::algorithm::ends_with( s, CharRange( c ));
