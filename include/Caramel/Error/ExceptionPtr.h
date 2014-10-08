@@ -16,11 +16,8 @@ namespace Caramel
 //
 // Exception Pointer
 //
-//   A construct to simulate std::exception_ptr.
-//
-//   TODO: This is a workaround for Android NDK r9x, where GNU C++ 4.8 on ARM
-//         doesn't support std::exception_ptr.
-//         You may replace this with std::exception_ptr as soon as possible.
+//   It is similar to std::exception_ptr, but can be cast to an AnyFailiure.
+//   We need this mechanism in Task exception handling.
 //
 
 class ExceptionPtr
@@ -79,7 +76,6 @@ ExceptionPtr CurrentException();
 // Any Failure Pointer
 //
 //   Specialized ExceptionPtr, to provide AnyFailure operations.
-//
 //
 
 class AnyFailurePtr : public ExceptionPtr
