@@ -76,7 +76,7 @@ private:
 
     //
     // Holder Builders
-    // - The second parameter is IsAnyConvertible< T >.
+    // - The second parameter is IsAnyConvertibleT< T >.
     //
 
     template< typename T >
@@ -164,7 +164,7 @@ inline void Any::BuildHolder( T&& value, std::false_type )
 template< typename T >
 inline void Any::BuildHolder( const T& value, std::true_type )
 {
-    auto any = value.ToAny();
+    auto any = value.ToAny();  // T is AnyConvertible
     m_holder = std::move( any.m_holder );
 }
 
@@ -217,7 +217,14 @@ inline T Any::As() const
 //
 //     boost::any anyText( "Alice" );  // Compiler error !
 //                                     // boost::any doesn't accept array.
-// 
+//
+//   Caramel::Any solves this problem by an implicit conversion rule.
+//   It defines conversion between the common fundamental types, without any
+//   precision lost (it throws in runtime if it can't convert exactly).
+//
+//   Caramel::Any also provides AnyConvertible< T >. You may use it to customize
+//   how a type would convert to an Any.
+//
 
 ///////////////////////////////////////////////////////////////////////////////
 
