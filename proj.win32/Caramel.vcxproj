@@ -163,6 +163,7 @@
     <ClInclude Include="..\include\Caramel\Trace\Trace.h" />
     <ClInclude Include="..\include\Caramel\Trace\TraceTypes.h" />
     <ClInclude Include="..\include\Caramel\Value\Any.h" />
+    <ClInclude Include="..\include\Caramel\Value\AnyConvertible.h" />
     <ClInclude Include="..\include\Caramel\Value\Detail\AnyCasters.h" />
     <ClInclude Include="..\include\Caramel\Value\Detail\AnyHolders.h" />
     <ClInclude Include="..\include\Caramel\Value\Detail\NamedValueFeed.h" />

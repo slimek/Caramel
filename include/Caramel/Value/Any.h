@@ -7,6 +7,7 @@
 #include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Value/Detail/AnyCasters.h>
 #include <Caramel/Value/Detail/AnyHolders.h>
+#include <Caramel/Value/AnyConvertible.h>
 #include <boost/utility/enable_if.hpp>
 #include <type_traits>
 
@@ -72,6 +73,20 @@ public:
 
 
 private:
+
+    //
+    // Holder Builders
+    // - The second parameter is IsAnyConvertible< T >.
+    //
+
+    template< typename T >
+    void BuildHolder( const T& value, std::false_type );
+    template< typename T >
+    void BuildHolder( T&& value, std::false_type );
+
+    template< typename T >
+    void BuildHolder( const T& value, std::true_type );
+
     std::shared_ptr< Detail::AnyHolder > m_holder;
         
 };
@@ -110,8 +125,8 @@ inline Any::Any( Any&& rhs )
 
 template< typename T >
 inline Any::Any( const T& value )
-    : m_holder( new typename Detail::AnyHolderSelect< T >::Type( value ))
 {
+    this->BuildHolder( value, IsAnyConvertibleT< T >() );
 }
 
 
@@ -120,9 +135,37 @@ inline Any::Any(
     T&& value,
     typename boost::disable_if< std::is_same< Any&, T > >::type*
 )
-    : m_holder( new typename Detail::AnyHolderSelect<
-        typename std::remove_reference< T >::type >::Type( static_cast< T&& >( value )))
 {
+    this->BuildHolder(
+        std::forward< T >( value ),
+        IsAnyConvertibleT< typename std::remove_reference< T >::type >() );
+}
+
+
+//
+// Holder Builders
+//
+
+template< typename T >
+inline void Any::BuildHolder( const T& value, std::false_type )
+{
+    m_holder.reset( new typename Detail::AnyHolderSelect< T >::Type( value ));
+}
+
+
+template< typename T >
+inline void Any::BuildHolder( T&& value, std::false_type )
+{
+     m_holder.reset( new typename Detail::AnyHolderSelect<
+        typename std::remove_reference< T >::type >::Type( static_cast< T&& >( value )));
+}
+
+
+template< typename T >
+inline void Any::BuildHolder( const T& value, std::true_type )
+{
+    auto any = value.ToAny();
+    m_holder = std::move( any.m_holder );
 }
 
 

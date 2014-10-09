@@ -4,6 +4,7 @@
 
 #include <Caramel/Numeric/NumberTraits.h>
 #include <Caramel/Value/Any.h>
+#include <Caramel/Value/AnyConvertible.h>
 #include <UnitTest++/UnitTest++.h>
 #include <cfloat>
 #include <vector>
@@ -310,14 +311,22 @@ TEST( AnyMoveTest )
     Any a1( i1 );
     CHECK( 1 == s_copyCount );
     CHECK( 0 == s_moveCount );
+    CHECK( 42 == i1.value );   // can't be moved
 
     // Move
     Any a2( AnyItem( 51 ));
     CHECK( 1 == s_copyCount );
     CHECK( 1 == s_moveCount );    
 
+    // Force to move
+    Any a3( std::move( i1 ));
+    CHECK( 1 == s_copyCount );
+    CHECK( 2 == s_moveCount );    
+
     CHECK( 42 == a1.As< AnyItem >().value );
     CHECK( 51 == a2.As< AnyItem >().value );
+    CHECK( 42 == a3.As< AnyItem >().value );
+    CHECK( 0 == i1.value );  // has been moved.
 }
 
 
@@ -334,6 +343,57 @@ TEST( AnyAnyTest )
 
     CHECK( 42 == a2.As< Int >() );
     CHECK( 42 == a3.As< Int >() );
+}
+
+class StringProxyRigid
+{
+public:
+    explicit StringProxyRigid( std::string&& value )
+        : m_value( std::move( value ))
+    {}
+
+private:
+    std::string m_value;    
+};
+
+
+class StringProxySmart : public AnyConvertible< StringProxySmart >
+{
+public:
+    explicit StringProxySmart( std::string&& value )
+        : m_value( std::move( value ))
+    {}
+
+    Any ToAny() const { return Any( m_value ); }
+
+private:
+    std::string m_value;    
+};
+
+
+TEST( AnyConvertibleTest )
+{
+    StringProxyRigid rigid( "Rigid" );
+    StringProxySmart smart( "Smart" );
+
+    CHECK( false == IsAnyConvertibleT< StringProxyRigid >::VALUE );
+    CHECK( true  == IsAnyConvertibleT< StringProxySmart >::VALUE );
+
+    
+    // Without AnyConvertible : it is a StringProxyRigid
+
+    Any anyR( rigid );
+    CHECK_THROW( anyR.As< std::string >(), Caramel::Exception );
+
+    
+    // With AnyConvertible : ToAny() gives it a std::string.
+
+    Any anyS( smart );
+    CHECK( "Smart" == anyS.As< std::string >() );
+
+    const auto& csmart = smart;
+    Any anyCs( csmart );
+    CHECK( "Smart" == anyCs.As< std::string >() );
 }
 
 
