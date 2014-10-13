@@ -88,6 +88,9 @@ public:
 
     std::string ToString() const;
 
+    // According to the ANSI C strftime() format.
+    std::string Format( const std::string& format ) const;
+
     // This function is based on FromString().
     Bool TryParse( const std::string& s );
 

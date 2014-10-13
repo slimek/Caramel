@@ -256,6 +256,18 @@ TEST( TimeSpanTryParseTest )
 }
 
 
+TEST( TimeSpanFormatTest )
+{
+    TimeSpan t0;
+    TimeSpan t1( 12, 34, 56 );
+    TimeSpan t2 = Days( 2 ) + Minutes( 42 );
+
+    CHECK( "00:00:00" == t0.Format( "%H:%M:%S" ));
+    CHECK( "12:34:56" == t1.Format( "%H:%M:%S" ));
+    CHECK( "48h42m"   == t2.Format( "%Hh%Mm" ));
+}
+
+
 } // SUITE TimeSpanSuite
 
 } // namespace Caramel

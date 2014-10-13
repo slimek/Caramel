@@ -607,6 +607,12 @@ std::string TimeSpan::ToString() const
 }
 
 
+std::string TimeSpan::Format( const std::string& format ) const
+{
+    return DateTimeManager::Instance()->FormatTimeDuration( *m_impl, format );
+}
+
+
 Bool TimeSpan::TryParse( const std::string& input )
 {
     if ( input.empty() ) { return false; }
