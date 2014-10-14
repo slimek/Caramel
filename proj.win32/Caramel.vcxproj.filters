@@ -842,6 +842,9 @@
     <ClInclude Include="..\include\Caramel\Value\AnyConvertible.h">
       <Filter>1. Public Packages\Value</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Lexical\Version.h">
+      <Filter>1. Public Packages\Lexical</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

@@ -94,6 +94,7 @@
     <ClInclude Include="..\include\Caramel\Lexical\Floating.h" />
     <ClInclude Include="..\include\Caramel\Lexical\Integer.h" />
     <ClInclude Include="..\include\Caramel\Lexical\IntegerList.h" />
+    <ClInclude Include="..\include\Caramel\Lexical\Version.h" />
     <ClInclude Include="..\include\Caramel\Math\Floating.h" />
     <ClInclude Include="..\include\Caramel\Memory\SharedPtrUtils.h" />
     <ClInclude Include="..\include\Caramel\Memory\UniquePtrUtils.h" />

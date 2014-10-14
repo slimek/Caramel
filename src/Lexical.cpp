@@ -5,7 +5,9 @@
 #include <Caramel/Lexical/Boolean.h>
 #include <Caramel/Lexical/Floating.h>
 #include <Caramel/Lexical/Integer.h>
+#include <Caramel/Lexical/Version.h>
 #include <Caramel/String/Algorithm.h>
+#include <boost/tokenizer.hpp>
 
 
 namespace Caramel
@@ -20,6 +22,7 @@ namespace Lexical
 //   Boolean
 //   Floating
 //   Integer
+//   Version
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -207,6 +210,152 @@ Bool Integer< Uint32 >::TryParseHex( const std::string& input )
     m_value = static_cast< Uint32 >( ::strtoul( input.c_str(), &stop, 16 ));
     
     return stop == ( input.data() + input.length() );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+Version::Version( Uint32 major, Uint32 minor, Uint32 build, Uint32 revision )
+{
+    m_majorMinor    = ( static_cast< Uint64 >( major ) << 32 ) | static_cast< Uint64 >( minor );
+    m_buildRevision = ( static_cast< Uint64 >( build ) << 32 ) | static_cast< Uint64 >( revision );
+}
+
+
+Version Version::FromString( const std::string& versionString )
+{
+    Version ver;
+    if ( ! ver.TryParse( versionString ))
+    {
+        CARAMEL_THROW( "\"%s\" is not a version string", versionString );
+    }
+    return ver;
+}
+
+
+//
+// Properties
+//
+
+Uint32 Version::Major() const
+{
+    return static_cast< Uint32 >( m_majorMinor >> 32 );
+}
+
+
+Uint32 Version::Minor() const
+{
+    return static_cast< Uint32 >( m_majorMinor & 0xFFFFFFFFULL );
+}
+
+
+Uint32 Version::Build() const
+{
+    return static_cast< Uint32 >( m_buildRevision >> 32 );
+}
+
+
+Uint32 Version::Revision() const
+{
+    return static_cast< Uint32 >( m_buildRevision & 0xFFFFFFFFULL );
+}
+
+
+//
+// Operators
+//
+
+Bool Version::operator==( const Version& rhs ) const
+{
+    return m_majorMinor == rhs.m_majorMinor && m_buildRevision == rhs.m_buildRevision;
+}
+
+
+Bool Version::operator<( const Version& rhs ) const
+{
+    if ( m_majorMinor == rhs.m_majorMinor )
+    {
+        return m_buildRevision < rhs.m_buildRevision;
+    }
+    else
+        return m_majorMinor < rhs.m_majorMinor;
+}
+
+
+//
+// Conversion
+//
+
+std::string Version::ToString() const
+{
+    return Format( "{0}.{1}.{2}.{3}",
+                   this->Major(), this->Minor(), this->Build(), this->Revision() );
+}
+
+
+std::string Version::ToString( Uint numComponents ) const
+{
+    switch ( numComponents )
+    {
+    case 0: return "";
+    case 1: return Format( "{0}", this->Major() );
+    case 2: return Format( "{0}.{1}", this->Major(), this->Minor() );
+    case 3: return Format( "{0}.{1}.{2}", this->Major(), this->Minor(), this->Build() );
+    case 4: return this->ToString();
+
+    default:
+        CARAMEL_THROW( "Invalid number of components: %u", numComponents );
+    }
+}
+
+
+//
+// Parsing
+//
+
+Bool Version::TryParse( const std::string& input )
+{
+    if ( input.empty() ) { return false; }
+
+    typedef boost::tokenizer< boost::char_separator< Char >> Tokens;
+
+    const boost::char_separator< Char > sep( "." );
+    const Tokens tokzer( input, sep );
+    const std::vector< std::string > tokens( tokzer.begin(), tokzer.end() );
+
+    if ( tokens.empty() )
+    {
+        CARAMEL_TRACE_DEBUG( "No components found: \"%s\"", input );
+        return false;
+    }
+
+    if ( tokens.size() > 4 )
+    {
+        CARAMEL_TRACE_DEBUG( "Too many components found: \"%s\"", input );
+        return false;
+    }
+
+    Uint32 comps[4] = { 0 };
+
+    for ( Uint i = 0; i < tokens.size(); ++ i )
+    {
+        Integer< Uint32 > value;
+        if ( ! value.TryParse( tokens[i] ))
+        {
+            CARAMEL_TRACE_DEBUG( "Invalid version string: \"%s\"", input );
+            return false;
+        }
+
+        comps[i] = value;
+    }
+
+    m_majorMinor    = ( static_cast< Uint64 >( comps[0] ) << 32 ) | static_cast< Uint64 >( comps[1] );
+    m_buildRevision = ( static_cast< Uint64 >( comps[2] ) << 32 ) | static_cast< Uint64 >( comps[3] );
+
+    return true;
 }
 
 

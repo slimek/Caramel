@@ -65,6 +65,12 @@ TEST( LexicalBooleanTest )
 }
 
 
+TEST( LexicalVersionParseTest )
+{
+    
+}
+
+
 } // SUITE LexicalBooleanSuite
 
 } // namespace Caramel

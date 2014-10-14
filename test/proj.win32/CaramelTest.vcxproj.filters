@@ -322,6 +322,9 @@
     <ClCompile Include="..\src\Task\TaskTimerSuite.cpp">
       <Filter>2. Tests\Task</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Lexical\LexicalVersionSuite.cpp">
+      <Filter>2. Tests\Lexical</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">
