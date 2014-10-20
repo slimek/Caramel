@@ -300,7 +300,6 @@ std::string Version::ToString( Uint numComponents ) const
 {
     switch ( numComponents )
     {
-    case 0: return "";
     case 1: return Format( "{0}", this->Major() );
     case 2: return Format( "{0}.{1}", this->Major(), this->Minor() );
     case 3: return Format( "{0}.{1}.{2}", this->Major(), this->Minor(), this->Build() );

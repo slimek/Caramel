@@ -64,7 +64,6 @@ public:
     // Partial String
     // - Only represents some components of the version number.
     //
-    //   0 : "" (empty string)
     //   1 : M
     //   2 : M.m
     //   3 : M.m.b

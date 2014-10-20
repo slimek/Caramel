@@ -70,11 +70,11 @@ TEST( LexicalVersionTrivialTest )
 
     /// Partial components to String ///
 
-    CHECK( ""        == v4.ToString( 0 ));
     CHECK( "1"       == v4.ToString( 1 ));
     CHECK( "1.2"     == v4.ToString( 2 ));
     CHECK( "1.2.3"   == v4.ToString( 3 ));
     CHECK( "1.2.3.4" == v4.ToString( 4 ));
+    CHECK_THROW( v4.ToString( 0 ), Caramel::Exception );
     CHECK_THROW( v4.ToString( 5 ), Caramel::Exception );
 }
 
