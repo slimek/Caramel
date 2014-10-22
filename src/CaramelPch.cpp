@@ -128,7 +128,7 @@ static_assert( std::is_same< Usize, Uint64 >::value, "Usize should be Uint64" );
 static_assert( 8 == sizeof( Usize ), "sizeof( Usize ) should be 8" );
 
 #else
-static_assert( 4 == sizeof( Usize ), "sizeof( Usize ) should be 8" );
+static_assert( 4 == sizeof( Usize ), "sizeof( Usize ) should be 4" );
 
 #endif  // System is 64-bit
 
