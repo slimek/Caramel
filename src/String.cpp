@@ -425,6 +425,12 @@ void Trim( std::string& s )
 }
 
 
+std::string TrimCopy( const std::string& s )
+{
+    return boost::algorithm::trim_copy( s );
+}
+
+
 //
 // Concatenation
 //

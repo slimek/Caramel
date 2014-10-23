@@ -100,6 +100,27 @@ TEST( StringJoinTest )
 }
 
 
+TEST( StringTrimTest )
+{
+    std::string marisa = "  Marisa  ";
+
+    Trim( marisa );
+    CHECK( "Marisa" == marisa );
+
+    // Trim may do nothing
+    Trim( marisa );
+    CHECK( "Marisa" == marisa );
+
+
+    /// Trim the Copy ///
+
+    CHECK( "Alice" == TrimCopy( "Alice" ));
+    CHECK( "Alice" == TrimCopy( "  Alice" ));
+    CHECK( "Alice" == TrimCopy( "Alice  " ));
+    CHECK( "Alice" == TrimCopy( "\tAlice\n" ));
+}
+
+
 } // SUITE StringAlgorithmSuite
 
 } // namespace Caramel

@@ -56,6 +56,8 @@ std::string AfterFirst( const std::string& s, Char c );
 
 void Trim( std::string& s );
 
+std::string TrimCopy( const std::string& s );
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //
