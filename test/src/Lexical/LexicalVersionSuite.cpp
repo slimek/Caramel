@@ -104,16 +104,61 @@ TEST( LexicalVersionParseTest )
     // Non-number is not allowed
     CHECK( false == ver.TryParse( "9.20b" ));
 
+    // White spaces are trimed
+    CHECK( true == ver.TryParse( "  3.1.4  " ));
+    CHECK( true == ver.TryParse( "\t6.2.3\n" ));
 
-    /// From String ///
+    /// From String directly ///
 
-    auto v1 = Version::FromString( "3.1.4" );
+    Version v1( "3.1.4" );
     CHECK( "3.1.4.0" == v1.ToString() );
 
-    auto v2 = Version::FromString( "3.01.4.0" );
+    Version v2( "3.01.4.0" );
     CHECK( v1 == v2 );
 
-    CHECK_THROW( Version::FromString( "not a version" ), Caramel::Exception );
+    CHECK_THROW( Version( "not a version" ), Caramel::Exception );
+}
+
+
+TEST( LexicalVersionCompareTest )
+{
+    Version va ( "1.2.3.4" );
+    Version va2( "1.2.3.4" );
+    Version vb ( "4.3.2.1" );
+
+    CHECK( va == va2 );
+    CHECK( va != vb  );
+    
+    CHECK( va >= va2 );
+    CHECK( vb >= va  );
+    CHECK( vb >  va  );
+
+    CHECK( va <= va2 );
+    CHECK( va <= vb  );
+    CHECK( va <  vb  );
+
+    CHECK( !( va != va2 ));
+    CHECK( !( va >  va2 ));
+    CHECK( !( va <  va2 ));
+
+
+    /// Higher Components is more Significant ///
+
+    auto v2_1 = Version( "2.1" );
+    auto v1_2 = Version( "1.2" );
+
+    CHECK( v2_1 > v1_2 );
+
+    auto v3_3_2 = Version( "3.3.2" );
+    auto v3_1_4 = Version( "3.1.4" );
+
+    CHECK( v3_3_2 > v3_1_4 );
+
+
+    auto v1_1_10_5 = Version( "1.1.10.5" );
+    auto v1_1_7_12 = Version( "1.1.7.12" );
+
+    CHECK( v1_1_10_5 > v1_1_7_12 );
 }
 
 

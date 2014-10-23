@@ -38,7 +38,7 @@ public:
     explicit Version( Uint32 major, Uint32 minor = 0, Uint32 build = 0, Uint32 revision = 0 );
 
     // Throws if the input is not a valid version string.
-    static Version FromString( const std::string& versionString );
+    explicit Version( const std::string& versionString );
 
 
     /// Propertyes ///

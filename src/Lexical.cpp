@@ -225,14 +225,12 @@ Version::Version( Uint32 major, Uint32 minor, Uint32 build, Uint32 revision )
 }
 
 
-Version Version::FromString( const std::string& versionString )
+Version::Version( const std::string& versionString )
 {
-    Version ver;
-    if ( ! ver.TryParse( versionString ))
+    if ( ! this->TryParse( versionString ))
     {
         CARAMEL_THROW( "\"%s\" is not a version string", versionString );
     }
-    return ver;
 }
 
 
@@ -315,8 +313,10 @@ std::string Version::ToString( Uint numComponents ) const
 // Parsing
 //
 
-Bool Version::TryParse( const std::string& input )
+Bool Version::TryParse( const std::string& rawInput )
 {
+    const std::string input = TrimCopy( rawInput );
+
     if ( input.empty() ) { return false; }
 
     typedef boost::tokenizer< boost::char_separator< Char >> Tokens;
