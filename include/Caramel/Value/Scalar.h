@@ -5,7 +5,7 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
-#include <boost/noncopyable.hpp>
+#include <boost/optional.hpp>
 
 
 namespace Caramel
@@ -16,11 +16,11 @@ namespace Caramel
 // Scalar
 // - A single value which can be represented as a string.
 //
+//   Immutable.
+//
 //   Supporting value types:
 //
-//          Bool | Int | Uint | Int64 | Uint64 | Float | Double | std::string
-//   Get -   o      o     o      o       o        o       o        o
-//   Set -   o                   o       o                o        o
+//     Bool, Int, Uint, Int64, Uint64, Float, Double, std::string
 //
 //
 // REMARKS:
@@ -29,38 +29,35 @@ namespace Caramel
 
 class ScalarImpl;
 
-class Scalar : public boost::noncopyable
+class Scalar
 {
 public:
 
     // Default: an undef value. Can not be converted to any type.
     Scalar();
 
+    explicit Scalar( Bool v );
+    explicit Scalar( Int v );
+    explicit Scalar( Uint v );
+    explicit Scalar( Int64 v );
+    explicit Scalar( Uint64 v );
+    explicit Scalar( Double v );
+    explicit Scalar( std::string v );
+
     
     //
-    // Set Value and Type
+    // Get Value by exactly conversion
     //
 
-    void SetBool  ( Bool v );
-    void SetInt64 ( Int64 v );
-    void SetUint64( Uint64 v );
-    void SetDouble( Double v );
-    void SetString( const std::string& v );
+    boost::optional< Bool >   AsBool()   const;
+    boost::optional< Int >    AsInt()    const;
+    boost::optional< Uint >   AsUint()   const;
+    boost::optional< Int64 >  AsInt64()  const;
+    boost::optional< Uint64 > AsUint64() const;
+    boost::optional< Float >  AsFloat()  const;
+    boost::optional< Double > AsDouble() const;
 
-
-    //
-    // Get Value with exactly conversion.
-    // - Throws if conversion failed.
-    //
-
-    Bool        AsBool()   const;
-    Int         AsInt()    const;
-    Uint        AsUint()   const;
-    Int64       AsInt64()  const;
-    Uint64      AsUint64() const;
-    Float       AsFloat()  const;
-    Double      AsDouble() const;
-    std::string AsString() const;
+    boost::optional< std::string > AsString() const;
 
 
 private:

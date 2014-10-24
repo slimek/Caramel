@@ -14,19 +14,36 @@ SUITE( ScalarSuite )
 
 TEST( ScalarTrivialTest )
 {
-    Scalar s;
+    const Scalar s;
 
     // Undef scalar should throws.
+    CHECK_THROW( s.AsBool(), Caramel::Exception );
     CHECK_THROW( s.AsString(), Caramel::Exception );
+}
 
 
-    /// Boolean ///
+TEST( ScalarBoolTest )
+{
+    // Bool can convert to String, but not Integer or Floating.
 
-    s.SetBool( true );
+    const Scalar st( true );
 
-    CHECK( true   == s.AsBool() );
-    CHECK( 1      == s.AsInt() );
-    CHECK( "true" == s.AsString() );
+    CHECK( true   == st.AsBool() );
+    CHECK( "true" == *st.AsString() );
+
+    // Convertible ?
+    CHECK( true  == static_cast< Bool >( st.AsBool() ));
+    CHECK( false == static_cast< Bool >( st.AsInt() ));
+    
+
+    const Scalar sf( false );
+
+    CHECK( false   == sf.AsBool() );
+    CHECK( "false" == *sf.AsString() );
+
+    // Convertible ?
+    CHECK( true  == static_cast< Bool >( st.AsBool() ));
+    CHECK( false == static_cast< Bool >( st.AsInt() ));
 }
 
 

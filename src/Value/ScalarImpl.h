@@ -38,30 +38,24 @@ class ScalarImpl
 {
 public:
 
+    ScalarImpl() {}
+
+    template< typename T >
+    explicit ScalarImpl( T value, ScalarType type )
+        : m_value( value )
+        , m_type( type )
+    {}
+
+    // Specialized overloading
+    explicit ScalarImpl( std::string&& value )
+        : m_value( std::move( value ))
+        , m_type( SCALAR_STRING )
+    {}
+
+
     /// Observers ///
 
     ScalarType GetType() const { return m_type; }
-
-
-    /// Set Value and Type ///
-
-    void SetBool  ( Bool v );
-    void SetInt64 ( Int64 v );
-    void SetUint64( Uint64 v );
-    void SetDouble( Double v );
-    void SetString( const std::string& v );
-
-
-    /// Get Value with exactly conversion ///
-
-    Bool        AsBool()   const;
-    Int         AsInt()    const;
-    Uint        AsUint()   const;
-    Int64       AsInt64()  const;
-    Uint64      AsUint64() const;
-    Float       AsFloat()  const;
-    Double      AsDouble() const;
-    std::string AsString() const;
 
 
     /// Get Value ///
@@ -83,7 +77,7 @@ public:
 
 private:
 
-    boost::variant< Uint64, Double, std::string > m_value;
+    boost::variant< Int64, Uint64, Double, std::string > m_value;
     ScalarType m_type { SCALAR_UNDEF };
 };
 

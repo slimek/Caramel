@@ -890,40 +890,33 @@ Scalar::Scalar()
     : m_impl( new ScalarImpl )
 {}
 
-// Set Value and Type delegates
-void Scalar::SetBool( Bool v ) { m_impl->SetBool( v ); }
 
-// Get Value with exactly conversion
-Bool        Scalar::AsBool()   const { return m_impl->AsBool(); }
-Int         Scalar::AsInt()    const { return m_impl->AsInt(); }
-std::string Scalar::AsString() const { return m_impl->AsString(); }
+Scalar::Scalar( Bool v )
+    : m_impl( new ScalarImpl(( v ? 1LL : 0LL ), SCALAR_BOOL ))
+{}
 
 
-//
-// Implementation
-//
+Scalar::Scalar( Int v )
+    : m_impl( new ScalarImpl( static_cast< Int64 >( v ), SCALAR_INT64 ))
+{}
+
 
 //
-// Set Value and Type
+// Get Values with exaclty conversion
 //
 
-void ScalarImpl::SetBool( Bool v )
+boost::optional< Bool > Scalar::AsBool() const
 {
-    m_value = static_cast< Uint64 >( v ? 1 : 0 );
-    m_type  = SCALAR_BOOL;
-}
-
-
-//
-// Get Value with exaclty conversion
-//
-
-Bool ScalarImpl::AsBool() const
-{
-    switch ( m_type )
+    switch ( m_impl->GetType() )
     {
     case SCALAR_BOOL:
-        return this->GetBool();
+        return m_impl->GetBool();
+
+    case SCALAR_INT64:
+        return ( 0 != m_impl->GetInt64() );
+
+    case SCALAR_UNDEF:
+        CARAMEL_THROW( "Value is undef" );
 
     default:
         CARAMEL_NOT_REACHED();
@@ -931,12 +924,26 @@ Bool ScalarImpl::AsBool() const
 }
 
 
-Int ScalarImpl::AsInt() const
+boost::optional< Int > Scalar::AsInt() const
 {
-    switch ( m_type )
+    Int value = 0;
+
+    switch ( m_impl->GetType() )
     {
+    case SCALAR_INT64:
+    {
+        if ( NumberConverter< Int, Int64 >::TryExactConvert( value, m_impl->GetInt64() ))
+        {
+            return boost::none;
+        }
+        return value;
+    }
+
     case SCALAR_BOOL:
-        return ( this->GetBool() ? 1 : 0 );
+        return boost::none;        
+
+    case SCALAR_UNDEF:
+        CARAMEL_THROW( "Value is undef" );
 
     default:
         CARAMEL_NOT_REACHED();
@@ -944,15 +951,18 @@ Int ScalarImpl::AsInt() const
 }
 
 
-std::string ScalarImpl::AsString() const
+boost::optional< std::string > Scalar::AsString() const
 {
-    switch ( m_type )
+    switch ( m_impl->GetType() )
     {
     case SCALAR_STRING:
-        return this->GetString();
+        return m_impl->GetString();
 
     case SCALAR_BOOL:
-        return ToString( this->GetBool() );
+        return ToString( m_impl->GetBool() );
+
+    case SCALAR_INT64:
+        return ToString( m_impl->GetInt64() );
 
     case SCALAR_UNDEF:
         CARAMEL_THROW( "Value is undef" );
@@ -964,13 +974,20 @@ std::string ScalarImpl::AsString() const
 
 
 //
-// Get Value
+// Implementation
 //
 
 Bool ScalarImpl::GetBool() const
 {
     CARAMEL_CHECK( m_type == SCALAR_BOOL );
-    return ( boost::get< Uint64 >( m_value ) != 0 );
+    return ( boost::get< Int64 >( m_value ) != 0 );
+}
+
+
+Int64 ScalarImpl::GetInt64() const
+{
+    CARAMEL_CHECK( m_type == SCALAR_INT64 );
+    return boost::get< Int64 >( m_value );
 }
 
 
