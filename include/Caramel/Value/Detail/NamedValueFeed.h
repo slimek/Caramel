@@ -5,13 +5,11 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
+#include <Caramel/Value/Scalar.h>
 
 
 namespace Caramel
 {
-
-// Forwards Declaration
-class NamedValueEntry;
 
 namespace Detail
 {
@@ -41,14 +39,14 @@ public:
     
     /// Properties ///
 
-    std::string            Name()  const { return m_name; }
-    const NamedValueEntry* Entry() const { return m_entry.get(); }
+    std::string   Name()  const { return m_name; }
+    const Scalar* Value() const { return m_value.get(); }
 
 
 private:
 
     std::string m_name;
-    std::shared_ptr< NamedValueEntry > m_entry;    
+    std::shared_ptr< Scalar > m_value;
 };
 
 

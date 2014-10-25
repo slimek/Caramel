@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
+#include <Caramel/Value/Scalar.h>
 
 
 namespace Caramel
@@ -16,8 +17,6 @@ class NamedValues;
 namespace Detail
 {
 
-struct NamedValueEntry;
-
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Constant Named Value
@@ -27,7 +26,7 @@ class ConstNamedValueRef
 {
 public:
 
-    ConstNamedValueRef( const std::string& name, NamedValueEntry* entry );
+    ConstNamedValueRef( const std::string& name, Scalar* value );
 
 
     /// Accessors ///
@@ -43,8 +42,8 @@ public:
 
 protected:
 
-    std::string      m_name;
-    NamedValueEntry* m_entry;
+    std::string m_name;
+    Scalar*     m_value;
 };
 
 
@@ -57,7 +56,7 @@ class NamedValueRef : public ConstNamedValueRef
 {
 public:
 
-    NamedValueRef( NamedValues* host, const std::string& name, NamedValueEntry* entry );
+    NamedValueRef( NamedValues* host, const std::string& name, Scalar* value );
 
 
     /// Operators ///

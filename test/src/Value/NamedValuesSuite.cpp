@@ -83,8 +83,8 @@ TEST( NamedValuesTest )
     // Convert to Double
     CHECK( 1.0   == cnv[ "isRed" ].AsDouble() );
     CHECK( 3.0   == cnv[ "life" ].AsDouble() );
+    CHECK( 1.15  == cnv[ "ratio" ].AsDouble() );
     CHECK( -10.0 == cnv[ "stage" ].AsDouble() );
-    CHECK( static_cast< Double >( INT64_MAX ) == cnv[ "score" ].AsDouble() );
 
     // Convert to String
     CHECK( "true"   == cnv[ "isRed" ].AsString() );

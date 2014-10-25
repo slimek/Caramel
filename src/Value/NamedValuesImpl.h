@@ -5,8 +5,8 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
-#include "Value/NamedValueEntry.h"
 #include <Caramel/Value/NamedValues.h>
+#include <Caramel/Value/Scalar.h>
 #include <map>
 
 
@@ -24,12 +24,12 @@ class NamedValuesImpl
 
 public:
 
-    Detail::NamedValueEntry* InsertValue( const std::string& name );
+    Scalar* InsertValue( const std::string& name );
 
 private:
 
-    typedef std::map< std::string, Detail::NamedValueEntry > ValueMap;
-    ValueMap m_valueEntries;
+    typedef std::map< std::string, Scalar > ValueMap;
+    ValueMap m_values;
 };
 
 

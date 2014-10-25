@@ -241,7 +241,7 @@ NamedValues::NamedValues( std::initializer_list< Detail::NamedValueFeed > inits 
 {
     for ( const auto& init : inits )
     {
-        *( m_impl->InsertValue( init.Name() )) = *( init.Entry() );
+        *( m_impl->InsertValue( init.Name() )) = *( init.Value() );
     }
 }
 
@@ -258,13 +258,13 @@ void NamedValues::Init()
 
 Bool NamedValues::IsEmpty() const
 {
-    return m_impl->m_valueEntries.empty();
+    return m_impl->m_values.empty();
 }
 
 
 Uint NamedValues::Size() const
 {
-    return static_cast< Uint >( m_impl->m_valueEntries.size() );
+    return static_cast< Uint >( m_impl->m_values.size() );
 }
 
 
@@ -274,33 +274,33 @@ Uint NamedValues::Size() const
 
 Bool NamedValues::HasValue( const std::string& name ) const
 {
-    return m_impl->m_valueEntries.find( name ) != m_impl->m_valueEntries.end();
+    return m_impl->m_values.find( name ) != m_impl->m_values.end();
 }
 
 
 Detail::NamedValueRef NamedValues::operator[]( const std::string& name )
 {
-    Detail::NamedValueEntry* entry = nullptr;
+    Scalar* value = nullptr;
 
-    auto ientry = m_impl->m_valueEntries.find( name );
-    if ( m_impl->m_valueEntries.end() != ientry )
+    auto ivalue = m_impl->m_values.find( name );
+    if ( m_impl->m_values.end() != ivalue )
     {
-        entry = &( ientry->second );
+        value = &( ivalue->second );
     }
 
-    return Detail::NamedValueRef( this, name, entry );
+    return Detail::NamedValueRef( this, name, value );
 }
 
 
 Detail::ConstNamedValueRef NamedValues::operator[]( const std::string& name ) const
 {
-    auto ientry = m_impl->m_valueEntries.find( name );
-    if ( m_impl->m_valueEntries.end() == ientry )
+    auto ivalue = m_impl->m_values.find( name );
+    if ( m_impl->m_values.end() == ivalue )
     {
         CARAMEL_THROW( "Value not found, name: %s", name );
     }
 
-    return Detail::ConstNamedValueRef( name, &( ientry->second ));
+    return Detail::ConstNamedValueRef( name, &( ivalue->second ));
 }
 
 
@@ -308,11 +308,11 @@ NamedValues::ValueMap NamedValues::GetValueMap() const
 {
     ValueMap vmap;
 
-    for ( auto& entry : m_impl->m_valueEntries )
+    for ( auto& nameValue : m_impl->m_values )
     {
-        const std::string name = entry.first;
+        const std::string name = nameValue.first;
         
-        Detail::ConstNamedValueRef valueRef( name, &( entry.second ));
+        Detail::ConstNamedValueRef valueRef( name, &( nameValue.second ));
 
         vmap.insert( std::make_pair( name, valueRef.AsString() ));
     }
@@ -325,9 +325,9 @@ NamedValues::ValueMap NamedValues::GetValueMap() const
 // Implementation
 //
 
-Detail::NamedValueEntry* NamedValuesImpl::InsertValue( const std::string& name )
+Scalar* NamedValuesImpl::InsertValue( const std::string& name )
 {
-    return &m_valueEntries[ name ];
+    return &m_values[ name ];
 }
 
 
@@ -339,9 +339,9 @@ namespace Detail
 // Constant Named Value Reference
 //
 
-ConstNamedValueRef::ConstNamedValueRef( const std::string& name, NamedValueEntry* entry )
+ConstNamedValueRef::ConstNamedValueRef( const std::string& name, Scalar* value )
     : m_name( name )
-    , m_entry( entry )
+    , m_value( value )
 {
 }
 
@@ -352,217 +352,73 @@ ConstNamedValueRef::ConstNamedValueRef( const std::string& name, NamedValueEntry
 
 Bool ConstNamedValueRef::AsBool() const
 {
-    switch ( m_entry->type )
+    const auto value = m_value->AsBool();
+    if ( ! value )
     {
-    case NAMED_VALUE_BOOL:
-        return m_entry->GetBool();
-
-    case NAMED_VALUE_INT:
-    case NAMED_VALUE_UINT:
-        return ( 0 != m_entry->GetInt() );
-
-    case NAMED_VALUE_INT64:
-    case NAMED_VALUE_UINT64:
-        return ( 0 != m_entry->GetInt64() );
-
-    case NAMED_VALUE_DOUBLE:
-        return ( 0.0 != m_entry->GetDouble() );
-    
-    case NAMED_VALUE_STRING:
-    {
-        Lexical::Boolean xbool;
-        if ( ! xbool.TryParse( m_entry->GetString() ))
-        {
-            CARAMEL_THROW( "Can't convert string value to bool, name: %s", m_name );
-        }
-        return xbool;
+        CARAMEL_THROW( "Can't convert \"%s\" value to Bool", m_name );
     }
-
-    default:
-        CARAMEL_NOT_REACHED();
-    }
+    return *value;
 }
 
 
 Int ConstNamedValueRef::AsInt() const
 {
-    switch ( m_entry->type )
+    const auto value = m_value->AsInt();
+    if ( ! value )
     {
-    case NAMED_VALUE_BOOL:
-    case NAMED_VALUE_INT:
-    case NAMED_VALUE_UINT:
-        return m_entry->GetInt();
-
-    case NAMED_VALUE_STRING:
-    {
-        Lexical::Integer< Int > xint;
-        if ( ! xint.TryParse( m_entry->GetString() ))
-        {
-            CARAMEL_THROW( "Can't convert string value to int, name: %s", m_name );
-        }
-        return xint;
+        CARAMEL_THROW( "Can't convert \"%s\" value to Int", m_name );
     }
-
-    case NAMED_VALUE_INT64:
-        CARAMEL_THROW( "Can't convert int64 value to int, name: %s", m_name );
-
-    case NAMED_VALUE_UINT64:
-        CARAMEL_THROW( "Can't convert uint64 value to int, name: %s", m_name );
-
-    case NAMED_VALUE_DOUBLE:
-        CARAMEL_THROW( "Can't convert double value to int, name: %s", m_name );
-    
-    default:
-        CARAMEL_NOT_REACHED();
-    }
+    return *value;
 }
 
 
 Uint ConstNamedValueRef::AsUint() const
 {
-    switch ( m_entry->type )
+    const auto value = m_value->AsUint();
+    if ( ! value )
     {
-    case NAMED_VALUE_BOOL:
-    case NAMED_VALUE_INT:
-    case NAMED_VALUE_UINT:
-        return m_entry->GetUint();
-
-    case NAMED_VALUE_STRING:
-    {
-        Lexical::Integer< Uint > xuint;
-        if ( ! xuint.TryParse( m_entry->GetString() ))
-        {
-            CARAMEL_THROW( "Can't convert string value to uint, name: %s", m_name );
-        }
-        return xuint;
+        CARAMEL_THROW( "Can't convert \"%s\" value to Uint", m_name );
     }
-
-    case NAMED_VALUE_INT64:
-        CARAMEL_THROW( "Can't convert int64 value to uint, name: %s", m_name );
-
-    case NAMED_VALUE_UINT64:
-        CARAMEL_THROW( "Can't convert uint64 value to uint, name: %s", m_name );
-
-    case NAMED_VALUE_DOUBLE:
-        CARAMEL_THROW( "Can't convert double value to uint, name: %s", m_name );
-    
-    default:
-        CARAMEL_NOT_REACHED();
-    }
+    return *value;
 }
 
 
 Int64 ConstNamedValueRef::AsInt64() const
 {
-    switch ( m_entry->type )
+    const auto value = m_value->AsInt64();
+    if ( ! value )
     {
-    case NAMED_VALUE_BOOL:
-    case NAMED_VALUE_INT:
-    case NAMED_VALUE_UINT:
-    case NAMED_VALUE_INT64:
-    case NAMED_VALUE_UINT64:
-        return m_entry->GetInt64();
-
-    case NAMED_VALUE_STRING:
-    {
-        Lexical::Integer< Int64 > xuint;
-        if ( ! xuint.TryParse( m_entry->GetString() ))
-        {
-            CARAMEL_THROW( "Can't convert string value to int64, name: %s", m_name );
-        }
-        return xuint;
+        CARAMEL_THROW( "Can't convert \"%s\" value to Int64", m_name );
     }
-
-    case NAMED_VALUE_DOUBLE:
-        CARAMEL_THROW( "Can't convert double value to int64, name: %s", m_name );
-
-    default:
-        CARAMEL_NOT_REACHED();
-    }
+    return *value;
 }
 
 
 Uint64 ConstNamedValueRef::AsUint64() const
 {
-    switch ( m_entry->type )
+    const auto value = m_value->AsUint64();
+    if ( ! value )
     {
-    case NAMED_VALUE_BOOL:
-    case NAMED_VALUE_INT:
-    case NAMED_VALUE_UINT:
-    case NAMED_VALUE_INT64:
-    case NAMED_VALUE_UINT64:
-        return m_entry->GetUint64();
-
-    case NAMED_VALUE_STRING:
-    {
-        Lexical::Integer< Uint64 > xuint;
-        if ( ! xuint.TryParse( m_entry->GetString() ))
-        {
-            CARAMEL_THROW( "Can't convert string value to uint64, name: %s", m_name );
-        }
-        return xuint;
+        CARAMEL_THROW( "Can't convert \"%s\" value to Uint64", m_name );
     }
-
-    case NAMED_VALUE_DOUBLE:
-        CARAMEL_THROW( "Can't convert double value to uint64, name: %s", m_name );
-
-    default:
-        CARAMEL_NOT_REACHED();
-    }
+    return *value;
 }
 
 
 Double ConstNamedValueRef::AsDouble() const
 {
-    switch ( m_entry->type )
+    const auto value = m_value->AsDouble();
+    if ( ! value )
     {
-    case NAMED_VALUE_BOOL:
-    case NAMED_VALUE_INT:
-        return static_cast< Double >( m_entry->GetInt() );
-
-    case NAMED_VALUE_UINT:
-        return static_cast< Double >( m_entry->GetUint() );
-
-    case NAMED_VALUE_INT64:
-        return static_cast< Double >( m_entry->GetInt64() );
-
-    case NAMED_VALUE_UINT64:
-        return static_cast< Double >( m_entry->GetUint64() );
-
-    case NAMED_VALUE_DOUBLE:
-        return m_entry->GetDouble();
-
-    case NAMED_VALUE_STRING:
-    {
-        Lexical::Floating< Double > xdouble;
-        if ( ! xdouble.TryParse( m_entry->GetString() ))
-        {
-            CARAMEL_THROW( "Can't convert string value to double, name: %s", m_name );
-        }
-        return xdouble;
+        CARAMEL_THROW( "Can't convert \"%s\" value to Double", m_name );
     }
-
-    default:
-        CARAMEL_NOT_REACHED();
-    }
+    return *value;
 }
 
 
 std::string ConstNamedValueRef::AsString() const
 {
-    switch ( m_entry->type )
-    {
-    case NAMED_VALUE_BOOL:   return ToString( m_entry->GetBool() );
-    case NAMED_VALUE_INT:    return ToString( m_entry->GetInt() );
-    case NAMED_VALUE_UINT:   return ToString( m_entry->GetUint() );
-    case NAMED_VALUE_INT64:  return ToString( m_entry->GetInt64() );
-    case NAMED_VALUE_UINT64: return ToString( m_entry->GetUint64() );
-    case NAMED_VALUE_DOUBLE: return ToString( m_entry->GetDouble() );
-    case NAMED_VALUE_STRING: return m_entry->GetString();
-
-    default:
-        CARAMEL_NOT_REACHED();
-    }
+    return *( m_value->AsString() );
 }
 
 
@@ -571,8 +427,8 @@ std::string ConstNamedValueRef::AsString() const
 // Name Value Reference
 //
 
-NamedValueRef::NamedValueRef( NamedValues* host, const std::string& name, NamedValueEntry* entry )
-    : ConstNamedValueRef( name, entry )
+NamedValueRef::NamedValueRef( NamedValues* host, const std::string& name, Scalar* value )
+    : ConstNamedValueRef( name, value )
     , m_host( host )
 {
 }
@@ -581,7 +437,7 @@ NamedValueRef::NamedValueRef( NamedValues* host, const std::string& name, NamedV
 NamedValueRef& NamedValueRef::operator=( Bool value )
 {
     this->PrepareEntry();
-    m_entry->SetBool( value );
+    *m_value = Scalar( value );
     return *this;
 }
 
@@ -589,7 +445,7 @@ NamedValueRef& NamedValueRef::operator=( Bool value )
 NamedValueRef& NamedValueRef::operator=( Int value )
 {
     this->PrepareEntry();
-    m_entry->SetInt( value );
+    *m_value = Scalar( value );
     return *this;
 }
 
@@ -597,7 +453,7 @@ NamedValueRef& NamedValueRef::operator=( Int value )
 NamedValueRef& NamedValueRef::operator=( Uint value )
 {
     this->PrepareEntry();
-    m_entry->SetUint( value );
+    *m_value = Scalar( value );
     return *this;
 }
 
@@ -605,7 +461,7 @@ NamedValueRef& NamedValueRef::operator=( Uint value )
 NamedValueRef& NamedValueRef::operator=( Long value )
 {
     this->PrepareEntry();
-    m_entry->SetLong( value );
+    *m_value = Scalar( value );
     return *this;
 }
 
@@ -613,7 +469,7 @@ NamedValueRef& NamedValueRef::operator=( Long value )
 NamedValueRef& NamedValueRef::operator=( Ulong value )
 {
     this->PrepareEntry();
-    m_entry->SetUlong( value );
+    *m_value = Scalar( value );
     return *this;
 }
 
@@ -621,7 +477,7 @@ NamedValueRef& NamedValueRef::operator=( Ulong value )
 NamedValueRef& NamedValueRef::operator=( Int64 value )
 {
     this->PrepareEntry();
-    m_entry->SetInt64( value );
+    *m_value = Scalar( value );
     return *this;
 }
 
@@ -629,7 +485,7 @@ NamedValueRef& NamedValueRef::operator=( Int64 value )
 NamedValueRef& NamedValueRef::operator=( Uint64 value )
 {
     this->PrepareEntry();
-    m_entry->SetUint64( value );
+    *m_value = Scalar( value );
     return *this;
 }
 
@@ -637,7 +493,7 @@ NamedValueRef& NamedValueRef::operator=( Uint64 value )
 NamedValueRef& NamedValueRef::operator=( Double value )
 {
     this->PrepareEntry();
-    m_entry->SetDouble( value );
+    *m_value = Scalar( value );
     return *this;
 }
 
@@ -645,7 +501,7 @@ NamedValueRef& NamedValueRef::operator=( Double value )
 NamedValueRef& NamedValueRef::operator=( const std::string& value )
 {
     this->PrepareEntry();
-    m_entry->SetString( value );
+    *m_value = Scalar( value );
     return *this;
 }
 
@@ -663,128 +519,10 @@ NamedValueRef& NamedValueRef::operator=( const Char* value )
 
 void NamedValueRef::PrepareEntry()
 {
-    if ( ! m_entry )
+    if ( ! m_value )
     {
-        m_entry = m_host->m_impl->InsertValue( m_name );
+        m_value = m_host->m_impl->InsertValue( m_name );
     }
-}
-
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Named Value Entry
-//
-
-//
-// Set Values
-//
-
-void NamedValueEntry::SetBool( Bool v )
-{
-    value = static_cast< Uint64 >( v ? 1 : 0 );
-    type  = NAMED_VALUE_BOOL;
-}
-
-
-void NamedValueEntry::SetInt( Int v )
-{
-    value = static_cast< Uint64 >( v );
-    type  = NAMED_VALUE_INT;
-}
-
-
-void NamedValueEntry::SetUint( Uint v )
-{
-    value = static_cast< Uint64 >( v );
-    type  = NAMED_VALUE_UINT;
-}
-
-
-void NamedValueEntry::SetInt64( Int64 v )
-{
-    value = static_cast< Uint64 >( v );
-    type  = NAMED_VALUE_INT64;
-}
-
-
-void NamedValueEntry::SetUint64( Uint64 v )
-{
-    value = v;
-    type  = NAMED_VALUE_INT64;
-}
-
-
-void NamedValueEntry::SetDouble( Double v )
-{
-    value = v;
-    type  = NAMED_VALUE_DOUBLE;
-}
-
-
-void NamedValueEntry::SetString( const std::string& v )
-{
-    value = v;
-    type  = NAMED_VALUE_STRING;
-}
-
-
-void NamedValueEntry::SetLong( Long v )
-{
-    value = static_cast< Uint64 >( v );
-    type  = NAMED_VALUE_INT;
-}
-
-
-void NamedValueEntry::SetUlong( Ulong v )
-{
-    value = static_cast< Uint64 >( v );
-    type  = NAMED_VALUE_UINT;
-}
-
-
-//
-// Get Values
-//
-
-Bool NamedValueEntry::GetBool() const
-{
-    return 0 != boost::get< Uint64 >( value );
-}
-
-
-Int NamedValueEntry::GetInt() const
-{
-    return static_cast< Int >( boost::get< Uint64 >( value ));
-}
-
-
-Uint NamedValueEntry::GetUint() const
-{
-    return static_cast< Uint >( boost::get< Uint64 >( value ));
-}
-
-
-Int64 NamedValueEntry::GetInt64() const
-{
-    return static_cast< Int64 >( boost::get< Uint64 >( value ));
-}
-
-
-Uint64 NamedValueEntry::GetUint64() const
-{
-    return boost::get< Uint64 >( value );
-}
-
-
-Double NamedValueEntry::GetDouble() const
-{
-    return boost::get< Double >( value );
-}
-
-
-std::string NamedValueEntry::GetString() const
-{
-    return boost::get< std::string >( value );
 }
 
 
@@ -795,87 +533,68 @@ std::string NamedValueEntry::GetString() const
 
 NamedValueFeed::NamedValueFeed( const std::string& name, Bool v )
     : m_name( name )
-    , m_entry( new NamedValueEntry )
-{
-    m_entry->SetBool( v );
-}
+    , m_value( new Scalar( v ))
+{}
 
 
 NamedValueFeed::NamedValueFeed( const std::string& name, Int v )
     : m_name( name )
-    , m_entry( new NamedValueEntry )
-{
-    m_entry->SetInt( v );
-}
+    , m_value( new Scalar( v ))
+{}
 
 
 NamedValueFeed::NamedValueFeed( const std::string& name, Uint v )
     : m_name( name )
-    , m_entry( new NamedValueEntry )
-{
-    m_entry->SetUint( v );
-}
+    , m_value( new Scalar( v ))
+{}
 
 
 NamedValueFeed::NamedValueFeed( const std::string& name, Int64 v )
     : m_name( name )
-    , m_entry( new NamedValueEntry )
-{
-    m_entry->SetInt64( v );
-}
+    , m_value( new Scalar( v ))
+{}
 
 
 NamedValueFeed::NamedValueFeed( const std::string& name, Uint64 v )
     : m_name( name )
-    , m_entry( new NamedValueEntry )
-{
-    m_entry->SetUint64( v );
-}
+    , m_value( new Scalar( v ))
+{}
 
 
 NamedValueFeed::NamedValueFeed( const std::string& name, Double v )
     : m_name( name )
-    , m_entry( new NamedValueEntry )
-{
-    m_entry->SetDouble( v );
-}
+    , m_value( new Scalar( v ))
+{}
 
 
 NamedValueFeed::NamedValueFeed( const std::string& name, const Char* v )
     : m_name( name )
-    , m_entry( new NamedValueEntry )
 {
     if ( ! v )
     {
         CARAMEL_INVALID_ARGUMENT();
     }
 
-    m_entry->SetString( std::string( v ));
+    m_value.reset( new Scalar( v ));
 }
 
 
 NamedValueFeed::NamedValueFeed( const std::string& name, const std::string& v )
     : m_name( name )
-    , m_entry( new NamedValueEntry )
-{
-    m_entry->SetString( std::string( v ));
-}
+    , m_value( new Scalar( v ))
+{}
 
 
 NamedValueFeed::NamedValueFeed( const std::string& name, Long v )
     : m_name( name )
-    , m_entry( new NamedValueEntry )
-{
-    m_entry->SetLong( v );
-}
+    , m_value( new Scalar( v ))
+{}
 
 
 NamedValueFeed::NamedValueFeed( const std::string& name, Ulong v )
     : m_name( name )
-    , m_entry( new NamedValueEntry )
-{
-    m_entry->SetUlong( v );
-}
+    , m_value( new Scalar( v ))
+{}
 
 
 } // namespace Detail
