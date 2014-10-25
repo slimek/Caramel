@@ -49,6 +49,14 @@ struct NumberRelation
 {};
 
 
+// Specialized relation of type itself
+template< typename T >
+struct NumberRelation< T, T >
+{
+    static Bool CanExactConvert( T ) { return true; }
+};
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // namespace Caramel
