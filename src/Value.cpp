@@ -458,22 +458,6 @@ NamedValueRef& NamedValueRef::operator=( Uint value )
 }
 
 
-NamedValueRef& NamedValueRef::operator=( Long value )
-{
-    this->PrepareEntry();
-    *m_value = Scalar( value );
-    return *this;
-}
-
-
-NamedValueRef& NamedValueRef::operator=( Ulong value )
-{
-    this->PrepareEntry();
-    *m_value = Scalar( value );
-    return *this;
-}
-
-
 NamedValueRef& NamedValueRef::operator=( Int64 value )
 {
     this->PrepareEntry();
@@ -483,6 +467,22 @@ NamedValueRef& NamedValueRef::operator=( Int64 value )
 
 
 NamedValueRef& NamedValueRef::operator=( Uint64 value )
+{
+    this->PrepareEntry();
+    *m_value = Scalar( value );
+    return *this;
+}
+
+
+NamedValueRef& NamedValueRef::operator=( Long value )
+{
+    this->PrepareEntry();
+    *m_value = Scalar( value );
+    return *this;
+}
+
+
+NamedValueRef& NamedValueRef::operator=( Ulong value )
 {
     this->PrepareEntry();
     *m_value = Scalar( value );
@@ -561,6 +561,18 @@ NamedValueFeed::NamedValueFeed( std::string name, Uint64 v )
 {}
 
 
+NamedValueFeed::NamedValueFeed( std::string name, Long v )
+    : m_name( std::move( name ))
+    , m_value( new Scalar( v ))
+{}
+
+
+NamedValueFeed::NamedValueFeed( std::string name, Ulong v )
+    : m_name( std::move( name ))
+    , m_value( new Scalar( v ))
+{}
+
+
 NamedValueFeed::NamedValueFeed( std::string name, Double v )
     : m_name( std::move( name ))
     , m_value( new Scalar( v ))
@@ -582,18 +594,6 @@ NamedValueFeed::NamedValueFeed( std::string name, const Char* v )
 NamedValueFeed::NamedValueFeed( std::string name, std::string v )
     : m_name( std::move( name ))
     , m_value( new Scalar( std::move( v )))
-{}
-
-
-NamedValueFeed::NamedValueFeed( std::string name, Long v )
-    : m_name( std::move( name ))
-    , m_value( new Scalar( v ))
-{}
-
-
-NamedValueFeed::NamedValueFeed( std::string name, Ulong v )
-    : m_name( std::move( name ))
-    , m_value( new Scalar( v ))
 {}
 
 

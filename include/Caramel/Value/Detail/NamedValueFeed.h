@@ -29,12 +29,11 @@ public:
     NamedValueFeed( std::string name, Uint v );
     NamedValueFeed( std::string name, Int64 v );
     NamedValueFeed( std::string name, Uint64 v );
+    NamedValueFeed( std::string name, Long v );
+    NamedValueFeed( std::string name, Ulong v );
     NamedValueFeed( std::string name, Double v );
     NamedValueFeed( std::string name, std::string v );
     NamedValueFeed( std::string name, const Char* v );
-
-    NamedValueFeed( std::string name, Long v );
-    NamedValueFeed( std::string name, Ulong v );
 
     
     /// Properties ///

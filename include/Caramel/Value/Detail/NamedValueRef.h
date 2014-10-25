@@ -64,10 +64,10 @@ public:
     NamedValueRef& operator=( Bool v );
     NamedValueRef& operator=( Int v );
     NamedValueRef& operator=( Uint v );
-    NamedValueRef& operator=( Long v );
-    NamedValueRef& operator=( Ulong v );
     NamedValueRef& operator=( Int64 v );
     NamedValueRef& operator=( Uint64 v );
+    NamedValueRef& operator=( Long v );
+    NamedValueRef& operator=( Ulong v );
     NamedValueRef& operator=( Double v );
     NamedValueRef& operator=( const std::string& v );
     NamedValueRef& operator=( const Char* v );
