@@ -661,7 +661,12 @@ Scalar::Scalar( Double v )
 {}
 
 
-Scalar::Scalar( std::string v )
+Scalar::Scalar( const std::string& v )
+    : m_impl( new ScalarImpl( v, SCALAR_STRING ))
+{}
+
+
+Scalar::Scalar( std::string&& v )
     : m_impl( new ScalarImpl( std::move( v ), SCALAR_STRING ))
 {}
 

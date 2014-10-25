@@ -59,7 +59,8 @@ public:
     explicit Scalar( Long v );
     explicit Scalar( Ulong v );
     explicit Scalar( Double v );
-    explicit Scalar( std::string v );
+    explicit Scalar( const std::string& v );
+    explicit Scalar( std::string&& v );
 
     // Specialized for string literal.
     explicit Scalar( const Char* sz );

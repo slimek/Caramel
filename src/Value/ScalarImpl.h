@@ -47,6 +47,12 @@ public:
     {}
 
     // Specialized overloading
+
+    explicit ScalarImpl( const std::string& value )
+        : m_value( value )
+        , m_type( SCALAR_STRING )
+    {}
+
     explicit ScalarImpl( std::string&& value )
         : m_value( std::move( value ))
         , m_type( SCALAR_STRING )
