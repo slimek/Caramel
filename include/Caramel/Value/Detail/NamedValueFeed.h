@@ -24,17 +24,17 @@ class NamedValueFeed
 {
 public:
 
-    NamedValueFeed( const std::string& name, Bool v );
-    NamedValueFeed( const std::string& name, Int v );
-    NamedValueFeed( const std::string& name, Uint v );
-    NamedValueFeed( const std::string& name, Int64 v );
-    NamedValueFeed( const std::string& name, Uint64 v );
-    NamedValueFeed( const std::string& name, Double v );
-    NamedValueFeed( const std::string& name, const std::string& v );
-    NamedValueFeed( const std::string& name, const Char* v );
+    NamedValueFeed( std::string name, Bool v );
+    NamedValueFeed( std::string name, Int v );
+    NamedValueFeed( std::string name, Uint v );
+    NamedValueFeed( std::string name, Int64 v );
+    NamedValueFeed( std::string name, Uint64 v );
+    NamedValueFeed( std::string name, Double v );
+    NamedValueFeed( std::string name, std::string v );
+    NamedValueFeed( std::string name, const Char* v );
 
-    NamedValueFeed( const std::string& name, Long v );
-    NamedValueFeed( const std::string& name, Ulong v );
+    NamedValueFeed( std::string name, Long v );
+    NamedValueFeed( std::string name, Ulong v );
 
     
     /// Properties ///

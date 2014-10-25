@@ -531,44 +531,44 @@ void NamedValueRef::PrepareEntry()
 // Named Value Feed
 //
 
-NamedValueFeed::NamedValueFeed( const std::string& name, Bool v )
-    : m_name( name )
+NamedValueFeed::NamedValueFeed( std::string name, Bool v )
+    : m_name( std::move( name ))
     , m_value( new Scalar( v ))
 {}
 
 
-NamedValueFeed::NamedValueFeed( const std::string& name, Int v )
-    : m_name( name )
+NamedValueFeed::NamedValueFeed( std::string name, Int v )
+    : m_name( std::move( name ))
     , m_value( new Scalar( v ))
 {}
 
 
-NamedValueFeed::NamedValueFeed( const std::string& name, Uint v )
-    : m_name( name )
+NamedValueFeed::NamedValueFeed( std::string name, Uint v )
+    : m_name( std::move( name ))
     , m_value( new Scalar( v ))
 {}
 
 
-NamedValueFeed::NamedValueFeed( const std::string& name, Int64 v )
-    : m_name( name )
+NamedValueFeed::NamedValueFeed( std::string name, Int64 v )
+    : m_name( std::move( name ))
     , m_value( new Scalar( v ))
 {}
 
 
-NamedValueFeed::NamedValueFeed( const std::string& name, Uint64 v )
-    : m_name( name )
+NamedValueFeed::NamedValueFeed( std::string name, Uint64 v )
+    : m_name( std::move( name ))
     , m_value( new Scalar( v ))
 {}
 
 
-NamedValueFeed::NamedValueFeed( const std::string& name, Double v )
-    : m_name( name )
+NamedValueFeed::NamedValueFeed( std::string name, Double v )
+    : m_name( std::move( name ))
     , m_value( new Scalar( v ))
 {}
 
 
-NamedValueFeed::NamedValueFeed( const std::string& name, const Char* v )
-    : m_name( name )
+NamedValueFeed::NamedValueFeed( std::string name, const Char* v )
+    : m_name( std::move( name ))
 {
     if ( ! v )
     {
@@ -579,20 +579,20 @@ NamedValueFeed::NamedValueFeed( const std::string& name, const Char* v )
 }
 
 
-NamedValueFeed::NamedValueFeed( const std::string& name, const std::string& v )
-    : m_name( name )
+NamedValueFeed::NamedValueFeed( std::string name, std::string v )
+    : m_name( std::move( name ))
+    , m_value( new Scalar( std::move( v )))
+{}
+
+
+NamedValueFeed::NamedValueFeed( std::string name, Long v )
+    : m_name( std::move( name ))
     , m_value( new Scalar( v ))
 {}
 
 
-NamedValueFeed::NamedValueFeed( const std::string& name, Long v )
-    : m_name( name )
-    , m_value( new Scalar( v ))
-{}
-
-
-NamedValueFeed::NamedValueFeed( const std::string& name, Ulong v )
-    : m_name( name )
+NamedValueFeed::NamedValueFeed( std::string name, Ulong v )
+    : m_name( std::move( name ))
     , m_value( new Scalar( v ))
 {}
 
