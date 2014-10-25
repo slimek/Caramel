@@ -997,16 +997,16 @@ boost::optional< std::string > Scalar::AsString() const
         return m_impl->GetString();
 
     case SCALAR_BOOL:
-        return ToString( m_impl->GetBool() );
+        return Caramel::ToString( m_impl->GetBool() );
 
     case SCALAR_INT64:
-        return ToString( m_impl->GetInt64() );
+        return Caramel::ToString( m_impl->GetInt64() );
 
     case SCALAR_UINT64:
-        return ToString( m_impl->GetUint64() );
+        return Caramel::ToString( m_impl->GetUint64() );
 
     case SCALAR_DOUBLE:
-        return ToString( m_impl->GetDouble() );
+        return Caramel::ToString( m_impl->GetDouble() );
 
     case SCALAR_UNDEF:
         CARAMEL_THROW( "Value is undef" );
@@ -1014,6 +1014,17 @@ boost::optional< std::string > Scalar::AsString() const
     default:
         CARAMEL_NOT_REACHED();
     }
+}
+
+
+std::string Scalar::ToString() const
+{
+    if ( m_impl->GetType() == SCALAR_UNDEF )
+    {
+        return "(undef)";
+    }
+
+    return *( this->AsString() );
 }
 
 

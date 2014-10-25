@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
+#include <Caramel/String/StringConvertible.h>
 #include <boost/optional.hpp>
 
 
@@ -44,7 +45,7 @@ namespace Caramel
 
 class ScalarImpl;
 
-class Scalar
+class Scalar : public StringConvertible< Scalar >
 {
 public:
 
@@ -68,6 +69,7 @@ public:
     
     //
     // Get Value by exactly conversion
+    // - Throws if the value is undef.
     //
 
     boost::optional< Bool >   AsBool()   const;
@@ -79,6 +81,12 @@ public:
     boost::optional< Double > AsDouble() const;
 
     boost::optional< std::string > AsString() const;
+
+    
+    // Represent this value as a string.
+    // - Even the undef value may represent as "(undef)".
+
+    std::string ToString() const;
 
 
 private:
