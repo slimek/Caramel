@@ -51,10 +51,6 @@ public:
     std::string GetString( const std::string& valueName ) const;
 
 
-    // Get Array Values
-    //std::vector< std::string > GetStringArray( const std::string& valueName ) const;
-
-
     // Convert all values into a general collection
     NamedValues ToNamedValues() const;
 

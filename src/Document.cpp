@@ -296,12 +296,6 @@ std::string IniSection::GetString( const std::string& valueName ) const
 }
 
 
-//std::vector< std::string > IniSection::GetStringArray( const std::string& valueName ) const
-//{
-//    return m_impl->GetStringArray( valueName );
-//}
-
-
 NamedValues IniSection::ToNamedValues() const
 {
     const auto& values = m_impl->m_values;
@@ -337,9 +331,6 @@ IniSectionImpl::IniSectionImpl( const std::string& name, const std::string& rawL
 Bool IniSectionImpl::HasValue( const std::string& valueName ) const
 {
     return m_values.end() != m_values.find( valueName );
-
-    //return m_values.end()      != m_values.find( valueName )
-    //    || m_arrayValues.end() != m_arrayValues.find( valueName );
 }
 
 
@@ -353,18 +344,6 @@ Scalar IniSectionImpl::GetValue( const std::string& valueName ) const
 
     CARAMEL_THROW( "Value \"%s\" not found in section: \"%s\"", valueName, m_name );
 }
-
-
-//std::vector< std::string > IniSectionImpl::GetStringArrayValue( const std::string& valueName ) const
-//{
-//    ArrayValueMap::const_iterator iarray = m_arrayValues.find( valueName );
-//    if ( m_arrayValues.end() != iarray )
-//    {
-//        return iarray->second.values;
-//    }
-//
-//    CARAMEL_THROW( "Value %s not found in section: %s", valueName, m_name );
-//}
 
 
 //
@@ -391,30 +370,6 @@ void IniSectionImpl::AddValue(
 
     m_rawLines.push_back( rawLine );
 }
-
-
-//void IniSectionImpl::AddArrayValue(
-//    const std::string& valueName,
-//    const std::vector< std::string >& inputValues,
-//    const std::vector< std::string >& inputRawLines )
-//{
-//    if ( this->HasValue( valueName ))
-//    {
-//        CARAMEL_THROW( "Duplicate value %s in section %s", valueName, m_name );
-//    }
-//
-//    RawLineEntry rawLine;
-//    for ( Uint i = 0; i < inputRawLines.size(); ++ i )
-//    {
-//        rawLine.rawLine = inputRawLines[i];
-//        m_rawLines.push_back( rawLine );
-//    }
-//
-//    ArrayValueEntry value;
-//    value.values = inputValues;
-//    value.lastRawLineIndex = m_rawLines.size();
-//    m_arrayValues.insert( std::make_pair( valueName, value ));
-//}
 
 
 void IniSectionImpl::AddRawLine( const std::string& inputRawLine )
