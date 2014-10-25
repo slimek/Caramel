@@ -240,76 +240,59 @@ Bool IniSection::HasValue( const std::string& valueName ) const
 
 Bool IniSection::GetBool( const std::string& valueName ) const
 {
-    const std::string value = m_impl->GetString( valueName );
-
-    Lexical::Boolean bvalue;
-    if ( bvalue.TryParse( value ))
+    const auto value = m_impl->GetValue( valueName );
+    const auto bvalue = value.AsBool();
+    if ( ! bvalue )
     {
-        return bvalue;
+        CARAMEL_THROW( "Can't convert value %s \"%s\" to Bool, in section %s",
+                       valueName, value, m_impl->GetName() );
     }
-
-    CARAMEL_THROW( "Can't convert value %s \"%s\" to Bool, in section %s",
-                   valueName, value, m_impl->GetName() );
+    return *bvalue;
 }
 
 
 Int IniSection::GetInt( const std::string& valueName ) const
 {
-    const std::string value = m_impl->GetString( valueName );
-
-    Lexical::Integer< Int > ivalue;
-    if ( ivalue.TryParse( value ))
+    const auto value = m_impl->GetValue( valueName );
+    const auto ivalue = value.AsInt();
+    if ( ! ivalue )
     {
-        return ivalue;
+        CARAMEL_THROW( "Can't convert value %s \"%s\" to Int, in section %s",
+                       valueName, value, m_impl->GetName() );
     }
-
-    // Boolean is convertible to Int
-
-    Lexical::Boolean bvalue;
-    if ( bvalue.TryParse( value ))
-    {
-        return bvalue ? 1 : 0;
-    }
-
-
-    CARAMEL_THROW( "Can't convert value %s \"%s\" to Int, in section %s",
-                   valueName, value, m_impl->GetName() );
+    return *ivalue;
 }
 
 
 Uint IniSection::GetUint( const std::string& valueName ) const
 {
-    const std::string value = m_impl->GetString( valueName );
-
-    Lexical::Integer< Uint > uvalue;
-    if ( uvalue.TryParse( value ))
+    const auto value = m_impl->GetValue( valueName );
+    const auto uvalue = value.AsUint();
+    if ( ! uvalue )
     {
-        return uvalue;
+        CARAMEL_THROW( "Can't convert value %s \"%s\" to Uint, in section %s",
+                       valueName, value, m_impl->GetName() );
     }
-
-    // Boolean is convertible to Uint
-
-    Lexical::Boolean bvalue;
-    if ( bvalue.TryParse( value ))
-    {
-        return bvalue ? 1 : 0;
-    }
-
-
-    CARAMEL_THROW( "Can't convert value %s \"%s\" to Int, in section %s",
-                   valueName, value, m_impl->GetName() );
+    return *uvalue;
 }
 
 
 Float IniSection::GetFloat( const std::string& valueName ) const
 {
-    CARAMEL_NOT_IMPLEMENTED();
+    const auto value = m_impl->GetValue( valueName );
+    const auto fvalue = value.AsFloat();
+    if ( ! fvalue )
+    {
+        CARAMEL_THROW( "Can't convert value %s \"%s\" to Float, in section %s",
+                       valueName, value, m_impl->GetName() );
+    }
+    return *fvalue;
 }
 
 
 std::string IniSection::GetString( const std::string& valueName ) const
 {
-    return m_impl->GetString( valueName );
+    return *( m_impl->GetValue( valueName ).AsString() );
 }
 
 
@@ -360,32 +343,15 @@ Bool IniSectionImpl::HasValue( const std::string& valueName ) const
 }
 
 
-std::string IniSectionImpl::GetString( const std::string& valueName ) const
+Scalar IniSectionImpl::GetValue( const std::string& valueName ) const
 {
-    ValueMap::const_iterator ivalue = m_values.find( valueName );
-    if ( m_values.end() != ivalue )
+    auto ivalue = m_values.find( valueName );
+    if ( ivalue != m_values.end() )
     {
         return ivalue->second.value;
     }
 
-    //ArrayValueMap::const_iterator iarray = m_arrayValues.find( valueName );
-    //if ( m_arrayValues.end() != iarray )
-    //{
-    //    const std::vector< std::string >& values = iarray->second.values;
-    //    
-    //    if ( values.empty() ) { return std::string(); }
-    //
-    //    std::string result = values[0];
-    //    const std::string sep( "," );
-    //    for ( Uint i = 1; i < values.size(); ++ i )
-    //    {
-    //        result += sep + values[i];
-    //    }
-    //
-    //    return result;
-    //}
-
-    CARAMEL_THROW( "Value %s not found in section: %s", valueName, m_name );
+    CARAMEL_THROW( "Value \"%s\" not found in section: \"%s\"", valueName, m_name );
 }
 
 
@@ -414,7 +380,7 @@ void IniSectionImpl::AddValue(
     }
 
     ValueEntry value;
-    value.value = inputValue;
+    value.value = Scalar( inputValue );
     value.rawLineIndex = m_rawLines.size();
 
     m_values.insert( std::make_pair( valueName, value ));

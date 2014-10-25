@@ -35,12 +35,6 @@ TEST( IniDocumentFundamentalTest )
     CHECK_THROW( bools.GetBool( "BoolBad" ), Caramel::Exception );
 
 
-    // As Integers
-    CHECK( 1 == bools.GetInt( "BoolTrue" ));
-    CHECK( 0 == bools.GetInt( "BoolFalse" ));
-    CHECK( 1 == bools.GetUint( "BoolTrue" ));
-    CHECK( 0 == bools.GetUint( "BoolFalse" ));
-
     // As String
     CHECK( "true"  == bools.GetString( "BoolTrue" ));
     CHECK( "false" == bools.GetString( "BoolFalse" ));

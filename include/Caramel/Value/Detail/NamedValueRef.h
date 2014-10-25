@@ -73,6 +73,8 @@ public:
     NamedValueRef& operator=( const std::string& v );
     NamedValueRef& operator=( const Char* v );
 
+    NamedValueRef& operator=( const Scalar& v );
+
 
 private:
 

@@ -7,6 +7,7 @@
 #include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Document/IniSection.h>
 #include <Caramel/String/CainLess.h>
+#include <Caramel/Value/Scalar.h>
 #include <deque>
 #include <map>
 #include <vector>
@@ -39,7 +40,7 @@ public:
 
     Bool HasValue( const std::string& valueName ) const;
 
-    std::string GetString( const std::string& valueName ) const;
+    Scalar GetValue( const std::string& valueName ) const;
 
     //std::vector< std::string > GetStringArray( const std::string& valueName ) const;
 
@@ -76,12 +77,8 @@ private:
 
     struct ValueEntry
     {
-        ValueEntry()
-            : rawLineIndex( 0 )
-        {}
-
-        std::string value;
-        Uint        rawLineIndex;
+        Scalar value;
+        Uint   rawLineIndex { 0 };
     };
 
     typedef std::map< std::string, ValueEntry, CainLess > ValueMap;

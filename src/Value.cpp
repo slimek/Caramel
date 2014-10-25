@@ -528,6 +528,14 @@ NamedValueRef& NamedValueRef::operator=( const Char* value )
 }
 
 
+NamedValueRef& NamedValueRef::operator=( const Scalar& value )
+{
+    this->PrepareEntry();
+    *m_value = value;
+    return *this;
+}
+
+
 void NamedValueRef::PrepareEntry()
 {
     if ( ! m_value )
