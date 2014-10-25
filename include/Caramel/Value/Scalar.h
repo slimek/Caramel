@@ -22,6 +22,21 @@ namespace Caramel
 //
 //     Bool, Int, Uint, Int64, Uint64, Float, Double, std::string
 //
+//   The conversion rule are:
+//
+//     1. Arithmetic types can convert if exactly (lossless)
+//     2. Floating can NOT convert to Integer
+//     3. Anything can convert to String
+//     4. String can conver to anything if is a valid text.
+//        Format checking is done by Caramel.Lexical components.
+//
+//     Output   |   Boolean | Integer  | Floating | String
+//   ------------------------------------------------------
+//     Boolean  <=  Ok        Ok         Ok         if valid
+//     Integer  <=  Ok        if exact   *NO*       if valid
+//     Floating <=  Ok        if exact   if exact   if valid
+//     String   <=  Ok        Ok         Ok         Ok
+//
 //
 // REMARKS:
 //   This type does NOT follow the std::is_scalar() rule.
@@ -41,8 +56,13 @@ public:
     explicit Scalar( Uint v );
     explicit Scalar( Int64 v );
     explicit Scalar( Uint64 v );
+    explicit Scalar( Long v );
+    explicit Scalar( Ulong v );
     explicit Scalar( Double v );
     explicit Scalar( std::string v );
+
+    // Specialized for string literal.
+    explicit Scalar( const Char* sz );
 
     
     //

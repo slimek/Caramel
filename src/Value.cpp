@@ -901,6 +901,46 @@ Scalar::Scalar( Int v )
 {}
 
 
+Scalar::Scalar( Uint v )
+    : m_impl( new ScalarImpl( static_cast< Uint64 >( v ), SCALAR_UINT64 ))
+{}
+
+
+Scalar::Scalar( Int64 v )
+    : m_impl( new ScalarImpl( v, SCALAR_INT64 ))
+{}
+
+
+Scalar::Scalar( Uint64 v )
+    : m_impl( new ScalarImpl( v, SCALAR_UINT64 ))
+{}
+
+
+Scalar::Scalar( Long v )
+    : m_impl( new ScalarImpl( static_cast< Int64 >( v ), SCALAR_INT64 ))
+{}
+
+
+Scalar::Scalar( Ulong v )
+    : m_impl( new ScalarImpl( static_cast< Uint64 >( v ), SCALAR_UINT64 ))
+{}
+
+
+Scalar::Scalar( Double v )
+    : m_impl( new ScalarImpl( v, SCALAR_DOUBLE ))
+{}
+
+
+Scalar::Scalar( std::string v )
+    : m_impl( new ScalarImpl( std::move( v ), SCALAR_STRING ))
+{}
+
+
+Scalar::Scalar( const Char* sz )
+    : m_impl( new ScalarImpl( std::string( sz ), SCALAR_STRING ))
+{}
+
+
 //
 // Get Values with exaclty conversion
 //
@@ -914,6 +954,22 @@ boost::optional< Bool > Scalar::AsBool() const
 
     case SCALAR_INT64:
         return ( 0 != m_impl->GetInt64() );
+
+    case SCALAR_UINT64:
+        return ( 0 != m_impl->GetUint64() );
+
+    case SCALAR_DOUBLE:
+        return ( 0.0 != m_impl->GetDouble() );
+
+    case SCALAR_STRING:
+    {
+        Lexical::Boolean lexBool;
+        if ( lexBool.TryParse( m_impl->GetString() ))
+        {
+            return lexBool;
+        }
+        return boost::none;
+    }
 
     case SCALAR_UNDEF:
         CARAMEL_THROW( "Value is undef" );
@@ -934,16 +990,263 @@ boost::optional< Int > Scalar::AsInt() const
     {
         if ( NumberConverter< Int, Int64 >::TryExactConvert( value, m_impl->GetInt64() ))
         {
-            return boost::none;
+            return value;
         }
-        return value;
+        return boost::none;
     }
 
     case SCALAR_BOOL:
-        return boost::none;        
+    {
+        return m_impl->GetBool() ? 1 : 0;
+    }
+
+    case SCALAR_UINT64:
+    {
+        if ( NumberConverter< Int, Uint64 >::TryExactConvert( value, m_impl->GetUint64() ))
+        {
+            return value;
+        }
+        return boost::none;
+    }
+
+    case SCALAR_DOUBLE:
+        return boost::none;
+
+    case SCALAR_STRING:
+    {
+        Lexical::Integer< Int > lexInt;
+        if ( lexInt.TryParse( m_impl->GetString() ))
+        {
+            return lexInt;
+        }
+        return boost::none;
+    }
 
     case SCALAR_UNDEF:
         CARAMEL_THROW( "Value is undef" );
+
+    default:
+        CARAMEL_NOT_REACHED();
+    }
+}
+
+
+boost::optional< Uint > Scalar::AsUint() const
+{
+    Uint value = 0;
+
+    switch ( m_impl->GetType() )
+    {
+    case SCALAR_UINT64:
+    {
+        if ( NumberConverter< Uint, Uint64 >::TryExactConvert( value, m_impl->GetUint64() ))
+        {
+            return value;
+        }
+        return boost::none;
+    }
+
+    case SCALAR_BOOL:
+    {
+        return m_impl->GetBool() ? 1 : 0;
+    }
+
+    case SCALAR_INT64:
+    {
+        if ( NumberConverter< Uint, Int64 >::TryExactConvert( value, m_impl->GetInt64() ))
+        {
+            return value;
+        }
+        return boost::none;
+    }
+
+    case SCALAR_DOUBLE:
+        return boost::none;
+    
+    case SCALAR_STRING:
+    {
+        Lexical::Integer< Uint > lexUint;
+        if ( lexUint.TryParse( m_impl->GetString() ))
+        {
+            return lexUint;
+        }
+        return boost::none;
+    }
+
+    case SCALAR_UNDEF:
+        CARAMEL_THROW( "Value is undef" );
+
+    default:
+        CARAMEL_NOT_REACHED();
+    }
+}
+
+
+boost::optional< Int64 > Scalar::AsInt64() const
+{
+    Int64 value = 0;
+
+    switch ( m_impl->GetType() )
+    {
+    case SCALAR_INT64:
+        return m_impl->GetInt64();
+
+    case SCALAR_BOOL:
+        return m_impl->GetBool() ? 1 : 0;
+
+    case SCALAR_UINT64:
+    {
+        if ( NumberConverter< Int64, Uint64 >::TryExactConvert( value, m_impl->GetUint64() ))
+        {
+            return value;
+        }
+        return boost::none;
+    }
+
+    case SCALAR_DOUBLE:
+        return boost::none;
+
+    case SCALAR_STRING:
+    {
+        Lexical::Integer< Int64 > lexInt;
+        if ( lexInt.TryParse( m_impl->GetString() ))
+        {
+            return lexInt;
+        }
+        return boost::none;
+    }
+
+    default:
+        CARAMEL_NOT_REACHED();
+    }
+}
+
+
+boost::optional< Uint64 > Scalar::AsUint64() const
+{
+    Uint64 value = 0;
+
+    switch ( m_impl->GetType() )
+    {
+    case SCALAR_UINT64:
+        return m_impl->GetUint64();
+
+    case SCALAR_BOOL:
+        return m_impl->GetBool() ? 1 : 0;
+
+    case SCALAR_INT64:
+    {
+        if ( NumberConverter< Uint64, Int64 >::TryExactConvert( value, m_impl->GetInt64() ))
+        {
+            return value;
+        }
+        return boost::none;
+    }
+
+    case SCALAR_DOUBLE:
+        return boost::none;
+
+    case SCALAR_STRING:
+    {
+        Lexical::Integer< Uint64 > lexUint;
+        if ( lexUint.TryParse( m_impl->GetString() ))
+        {
+            return lexUint;
+        }
+        return boost::none;
+    }
+
+    default:
+        CARAMEL_NOT_REACHED();
+    }
+}
+
+
+boost::optional< Float > Scalar::AsFloat() const
+{
+    Float value = 0.0f;
+
+    switch ( m_impl->GetType() )
+    {
+    case SCALAR_DOUBLE:
+        return static_cast< Float >( m_impl->GetDouble() );
+
+    case SCALAR_BOOL:
+        return m_impl->GetBool() ? 1.0f : 0.0f;
+
+    case SCALAR_INT64:
+    {
+        if ( NumberConverter< Float, Int64 >::TryExactConvert( value, m_impl->GetInt64() ))
+        {
+            return value;
+        }
+        return boost::none;
+    }
+
+    case SCALAR_UINT64:
+    {
+        if ( NumberConverter< Float, Uint64 >::TryExactConvert( value, m_impl->GetUint64() ))
+        {
+            return value;
+        }
+        return boost::none;
+    }
+
+    case SCALAR_STRING:
+    {
+        Lexical::Floating< Float > lexFloat;
+        if ( lexFloat.TryParse( m_impl->GetString() ))
+        {
+            return lexFloat;
+        }
+        return boost::none;
+    }
+
+    default:
+        CARAMEL_NOT_REACHED();
+    }
+}
+
+
+boost::optional< Double > Scalar::AsDouble() const
+{
+    Double value = 0.0;
+
+    switch ( m_impl->GetType() )
+    {
+    case SCALAR_DOUBLE:
+        return m_impl->GetDouble();
+
+    case SCALAR_BOOL:
+        return m_impl->GetBool() ? 1.0 : 0.0;
+
+    case SCALAR_INT64:
+    {
+        if ( NumberConverter< Double, Int64 >::TryExactConvert( value, m_impl->GetInt64() ))
+        {
+            return value;
+        }
+        return boost::none;
+    }
+
+    case SCALAR_UINT64:
+    {
+        if ( NumberConverter< Double, Uint64 >::TryExactConvert( value, m_impl->GetUint64() ))
+        {
+            return value;
+        }
+        return boost::none;
+    }
+
+    case SCALAR_STRING:
+    {
+        Lexical::Floating< Double > lexDouble;
+        if ( lexDouble.TryParse( m_impl->GetString() ))
+        {
+            return lexDouble;
+        }
+        return boost::none;
+    }
 
     default:
         CARAMEL_NOT_REACHED();
@@ -964,6 +1267,12 @@ boost::optional< std::string > Scalar::AsString() const
     case SCALAR_INT64:
         return ToString( m_impl->GetInt64() );
 
+    case SCALAR_UINT64:
+        return ToString( m_impl->GetUint64() );
+
+    case SCALAR_DOUBLE:
+        return ToString( m_impl->GetDouble() );
+
     case SCALAR_UNDEF:
         CARAMEL_THROW( "Value is undef" );
 
@@ -979,21 +1288,35 @@ boost::optional< std::string > Scalar::AsString() const
 
 Bool ScalarImpl::GetBool() const
 {
-    CARAMEL_CHECK( m_type == SCALAR_BOOL );
+    CARAMEL_ASSERT( m_type == SCALAR_BOOL );
     return ( boost::get< Int64 >( m_value ) != 0 );
 }
 
 
 Int64 ScalarImpl::GetInt64() const
 {
-    CARAMEL_CHECK( m_type == SCALAR_INT64 );
+    CARAMEL_ASSERT( m_type == SCALAR_INT64 );
     return boost::get< Int64 >( m_value );
+}
+
+
+Uint64 ScalarImpl::GetUint64() const
+{
+    CARAMEL_ASSERT( m_type == SCALAR_UINT64 );
+    return boost::get< Uint64 >( m_value );
+}
+
+
+Double ScalarImpl::GetDouble() const
+{
+    CARAMEL_ASSERT( m_type == SCALAR_DOUBLE );
+    return boost::get< Double >( m_value );
 }
 
 
 std::string ScalarImpl::GetString() const
 {
-    CARAMEL_CHECK( m_type == SCALAR_STRING );
+    CARAMEL_ASSERT( m_type == SCALAR_STRING );
     return boost::get< std::string >( m_value );
 }
 
