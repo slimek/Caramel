@@ -405,6 +405,17 @@ Uint64 ConstNamedValueRef::AsUint64() const
 }
 
 
+Float ConstNamedValueRef::AsFloat() const
+{
+    const auto value = m_value->AsFloat();
+    if ( ! value )
+    {
+        CARAMEL_THROW( "Can't convert \"%s\" value to Float", m_name );
+    }
+    return *value;
+}
+
+
 Double ConstNamedValueRef::AsDouble() const
 {
     const auto value = m_value->AsDouble();

@@ -80,6 +80,12 @@ TEST( NamedValuesTest )
     CHECK( false == cnv[ "missed" ].AsBool() );
     CHECK( true  == cnv[ "score" ].AsBool() );
 
+    // Convert to Float
+    CHECK( 1.0f   == cnv[ "isRed" ].AsFloat() );
+    CHECK( 3.0f   == cnv[ "life" ].AsFloat() );
+    CHECK( 1.15f  == cnv[ "ratio" ].AsFloat() );
+    CHECK( -10.0f == cnv[ "stage" ].AsFloat() );
+
     // Convert to Double
     CHECK( 1.0   == cnv[ "isRed" ].AsDouble() );
     CHECK( 3.0   == cnv[ "life" ].AsDouble() );

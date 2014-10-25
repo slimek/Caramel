@@ -36,6 +36,7 @@ public:
     Uint        AsUint()   const;
     Int64       AsInt64()  const;
     Uint64      AsUint64() const;
+    Float       AsFloat()  const;
     Double      AsDouble() const;
     std::string AsString() const;
 
