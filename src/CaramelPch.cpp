@@ -106,29 +106,28 @@ static_assert( 4 == sizeof( Ulong ), "sizeof( Ulong ) should be 4" );
 #endif // Long is 64-bit
 
 
-// Usize is std::size_t
-static_assert( std::is_same< std::size_t, Usize >::value, "Usize is std::size_t" );
+// Verify the underlying type of std::size_t
 
-#if defined( CARAMEL_USIZE_IS_ULONG )
-static_assert( std::is_same< Usize, Ulong >::value, "Usize should be Ulong" );
+#if defined( CARAMEL_SIZE_T_IS_ULONG )
+static_assert( std::is_same< std::size_t, Ulong >::value, "std::size_t should be Ulong" );
 
-#elif defined( CARAMEL_USIZE_IS_UINT32 )
-static_assert( std::is_same< Usize, Uint32 >::value, "Usize should be Uint32" );
+#elif defined( CARAMEL_SIZE_T_IS_UINT32 )
+static_assert( std::is_same< std::size_t, Uint32 >::value, "std::size_t should be Uint32" );
 
-#elif defined( CARAMEL_USIZE_IS_UINT64 )
-static_assert( std::is_same< Usize, Uint64 >::value, "Usize should be Uint64" );
+#elif defined( CARAMEL_SIZE_T_IS_UINT64 )
+static_assert( std::is_same< std::size_t, Uint64 >::value, "std::size_t should be Uint64" );
 
 #else
-#error Usize underline type not detected.
+#error std::size_t underline type not detected.
 
-#endif  // The underling type of Usize = std::size_t
+#endif
 
 
 #if defined( CARAMEL_SYSTEM_IS_64_BIT )
-static_assert( 8 == sizeof( Usize ), "sizeof( Usize ) should be 8" );
+static_assert( 8 == sizeof( std::size_t ), "sizeof( std::size_t ) should be 8" );
 
 #else
-static_assert( 4 == sizeof( Usize ), "sizeof( Usize ) should be 4" );
+static_assert( 4 == sizeof( std::size_t ), "sizeof( std::size_t ) should be 4" );
 
 #endif  // System is 64-bit
 
