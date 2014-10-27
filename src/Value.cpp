@@ -709,7 +709,7 @@ boost::optional< Bool > Scalar::AsBool() const
         Lexical::Boolean lexBool;
         if ( lexBool.TryParse( m_impl->GetString() ))
         {
-            return lexBool;
+            return static_cast< Bool >( lexBool );  // Then can convert to boost::optional< Bool >
         }
         return boost::none;
     }
@@ -760,7 +760,7 @@ boost::optional< Int > Scalar::AsInt() const
         Lexical::Integer< Int > lexInt;
         if ( lexInt.TryParse( m_impl->GetString() ))
         {
-            return lexInt;
+            return static_cast< Int >( lexInt );
         }
         return boost::none;
     }
@@ -811,7 +811,7 @@ boost::optional< Uint > Scalar::AsUint() const
         Lexical::Integer< Uint > lexUint;
         if ( lexUint.TryParse( m_impl->GetString() ))
         {
-            return lexUint;
+            return static_cast< Uint >( lexUint );
         }
         return boost::none;
     }
@@ -854,7 +854,7 @@ boost::optional< Int64 > Scalar::AsInt64() const
         Lexical::Integer< Int64 > lexInt;
         if ( lexInt.TryParse( m_impl->GetString() ))
         {
-            return lexInt;
+            return static_cast< Int64 >( lexInt );
         }
         return boost::none;
     }
@@ -894,7 +894,7 @@ boost::optional< Uint64 > Scalar::AsUint64() const
         Lexical::Integer< Uint64 > lexUint;
         if ( lexUint.TryParse( m_impl->GetString() ))
         {
-            return lexUint;
+            return static_cast< Uint64 >( lexUint );
         }
         return boost::none;
     }
@@ -940,7 +940,7 @@ boost::optional< Float > Scalar::AsFloat() const
         Lexical::Floating< Float > lexFloat;
         if ( lexFloat.TryParse( m_impl->GetString() ))
         {
-            return lexFloat;
+            return static_cast< Float >( lexFloat );
         }
         return boost::none;
     }
@@ -986,7 +986,7 @@ boost::optional< Double > Scalar::AsDouble() const
         Lexical::Floating< Double > lexDouble;
         if ( lexDouble.TryParse( m_impl->GetString() ))
         {
-            return lexDouble;
+            return static_cast< Double >( lexDouble );
         }
         return boost::none;
     }

@@ -23,6 +23,8 @@ namespace Caramel
 template< typename OutputT, typename InputT >
 struct NumberConverter : public NumberRelation< OutputT, InputT >
 {
+    using NumberRelation< OutputT, InputT >::CanExactConvert;
+
     static Bool TryExactConvert( OutputT& outValue, InputT inValue )
     {
         if ( ! CanExactConvert( inValue )) { return false; }
