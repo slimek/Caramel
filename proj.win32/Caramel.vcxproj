@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Android\LogTraceAdapter.h" />
+    <ClInclude Include="..\include\Caramel\Android\Streambuf.h" />
     <ClInclude Include="..\include\Caramel\Apple\LogTraceAdapter.h" />
     <ClInclude Include="..\include\Caramel\Apple\SharedNsoPtr.h" />
     <ClInclude Include="..\include\Caramel\Arithmetic\Flags.h" />
