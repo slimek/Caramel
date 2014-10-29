@@ -68,8 +68,9 @@ public:
 
     
     //
-    // Get Value by exactly conversion
-    // - Throws if the value is undef.
+    // Represents this value as the required type.
+    // - Returns boost::none if it can't be represented exactly.
+    //   Throws if the value is undef.
     //
 
     boost::optional< Bool >   AsBool()   const;
@@ -83,9 +84,8 @@ public:
     boost::optional< std::string > AsString() const;
 
     
-    // Represent this value as a string.
-    // - Even the undef value may represent as "(undef)".
-
+    // Convert this value to a string.
+    // - Always success: even the undef value may return "(undef)".
     std::string ToString() const;
 
 

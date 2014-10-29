@@ -17,7 +17,7 @@ namespace Caramel
 //
 // Named Values
 // - A general name-value pair collections.
-//   Supporting value types: Bool, Int, Uint, Int64, Double, std::string.
+//   Supporting value types: Bool, Int, Uint, Int64, Uint64, Float, Double, std::string.
 //
 // USAGE:
 //
