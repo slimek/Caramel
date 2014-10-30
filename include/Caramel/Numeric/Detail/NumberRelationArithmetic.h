@@ -6,6 +6,7 @@
 
 #include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Numeric/NumberTraits.h>
+#include <cfloat>
 #include <cstdint>
 
 
