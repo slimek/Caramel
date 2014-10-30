@@ -59,6 +59,11 @@ LOCAL_SRC_FILES := \
 	$(CRMTEST_SRC)/CaramelTestPch.cpp \
 	$(CRMTEST_SRC)/AndroidRun.cpp \
 	$(CRMTEST_SRC)/Arithmetic/FlagsSuite.cpp \
+	$(CRMTEST_SRC)/Arithmetic/PowerOfTwoSuite.cpp \
+	$(CRMTEST_SRC)/Chrono/ClockProxySuite.cpp \
+	$(CRMTEST_SRC)/Chrono/SecondClockSuite.cpp \
+	$(CRMTEST_SRC)/Chrono/TickClockSuite.cpp \
+	$(CRMTEST_SRC)/Chrono/TimedBoolSuite.cpp \
 	$(CRMTEST_SRC)/Trace/TraceChannelSuite.cpp \
 	$(CRMTEST_SRC)/Trace/TraceSuite.cpp \
 
