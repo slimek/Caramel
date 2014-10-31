@@ -12,14 +12,14 @@ ifeq ($(NDEBUG),1)
 
 # Release
 APP_OPTIM := release
-CARAMEL_CONFIG := Release
+CARAMEL_CONFIG := gcc48.Release
 
 else
 
 # Debug
 
 APP_OPTIM := debug
-CARAMEL_CONFIG := Debug
+CARAMEL_CONFIG := gcc48.Debug
 
 endif
 
