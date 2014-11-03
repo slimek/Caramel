@@ -61,6 +61,12 @@ void RunTest::Main()
 extern "C"
 {
 
+jint JNI_OnLoad( JavaVM* vm, void* reserved )
+{
+    return JNI_VERSION_1_4;
+}
+
+
 void Java_com_slimek_carameltest_CaramelTestActivity_Run( JNIEnv* env, jobject thiz )
 {
 	auto testTop = new Caramel::RunTest;  // Do not delete it.
