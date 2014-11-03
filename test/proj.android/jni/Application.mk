@@ -21,6 +21,8 @@ else
 APP_OPTIM := debug
 CARAMEL_CONFIG := gcc48.Debug
 
+APP_CFLAGS += -g
+
 endif
 
 NDK_APP_OUT := obj/$(CARAMEL_CONFIG)

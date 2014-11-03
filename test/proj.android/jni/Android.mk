@@ -37,12 +37,6 @@ LOCAL_SRC_FILES := $(CANDY_LIB)/libUnitTest++.a
 include $(PREBUILT_STATIC_LIBRARY)
 
 
-include $(CLEAR_VARS)
-LOCAL_MODULE := Caramel
-LOCAL_SRC_FILES := $(GIT_ROOT)/Caramel/proj.android/obj/$(CARAMEL_CONFIG)/local/$(TARGET_ARCH_ABI)/libCaramel.a
-include $(PREBUILT_STATIC_LIBRARY)
-
-
 #
 # Build Carver App
 #
@@ -89,3 +83,11 @@ LOCAL_LDLIBS := \
 	
 include $(BUILD_SHARED_LIBRARY)
 	
+
+#
+# Import other dependencies
+#
+ 
+$(call import-add-path,$(GIT_ROOT)/)
+$(call import-module,Caramel/proj.android/jni)
+
