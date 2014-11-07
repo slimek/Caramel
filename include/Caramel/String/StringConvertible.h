@@ -7,6 +7,7 @@
 #include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Meta/IsGeneralString.h>
 #include <Caramel/Meta/Utility.h>
+#include <boost/operators.hpp>
 #include <boost/utility/enable_if.hpp>
 #include <iosfwd>
 #include <type_traits>
@@ -23,6 +24,7 @@ namespace Caramel
 
 template< typename Derived >
 class StringConvertible
+    : public boost::equality_comparable< StringConvertible< Derived >, std::string >
 {
 
 public:
@@ -36,7 +38,15 @@ public:
     }
 
 
-    /// Comparison ///
+    /// Operators ///
+
+    Bool operator==( const std::string& rhs ) const
+    {
+        return static_cast< const Derived& >( *this ).ToString() == rhs;
+    }
+
+
+    /// Comparisons ///
 
     template< typename U >
     Bool EqualTo(
@@ -78,39 +88,6 @@ template< typename T >
 struct IsStringConvertibleT
     : BoolType< std::is_base_of< StringConvertible< T >, T >::value >
 {};
-
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// String Comparison
-//
-
-template< typename T, typename U >
-inline Bool operator==( const StringConvertible< T >& lhs, const U& rhs )
-{
-    return lhs.EqualTo( rhs );
-}
-
-
-template< typename U, typename T >
-inline Bool operator==( const U& lhs, const StringConvertible< T >& rhs )
-{
-    return rhs.EqualTo( lhs );
-}
-
-
-template< typename T, typename U >
-inline Bool operator!=( const StringConvertible< T >& lhs, const U& rhs )
-{
-    return ! lhs.EqualTo( rhs );
-}
-
-
-template< typename U, typename T >
-inline Bool operator!=( const U& lhs, const StringConvertible< T >& rhs )
-{
-    return ! rhs.EqualTo( lhs );
-}
 
 
 ///////////////////////////////////////////////////////////////////////////////

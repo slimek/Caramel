@@ -328,6 +328,9 @@
     <ClCompile Include="..\src\Async\AnyEventPollerSuite.cpp">
       <Filter>2. Tests\Async</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\String\StringConvertibleSuite.cpp">
+      <Filter>2. Tests\String</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">
