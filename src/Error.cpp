@@ -201,21 +201,51 @@ LONG ExceptionCatcherCore::ExceptionFilter( EXCEPTION_POINTERS* exception, DWORD
 // Exception Ptr
 //
 
+ExceptionPtr::ExceptionPtr()
+    : m_holder( nullptr )
+{}
+
+
+ExceptionPtr::ExceptionPtr( std::nullptr_t )
+    : m_holder( nullptr )
+{}
+
+
+ExceptionPtr::ExceptionPtr( Detail::ExceptionHolder* holder )
+    : m_holder( holder )
+{}
+
+
 ExceptionPtr::ExceptionPtr( const Caramel::Exception& e )
     : m_holder( new Detail::CaramelExceptionHolder( e ))
-{
-}
+{}
 
 
 ExceptionPtr::ExceptionPtr( const Caramel::AnyFailure& e )
     : m_holder( new Detail::CaramelAnyFailureHolder( e ))
-{
-}
+{}
 
 
 ExceptionPtr::ExceptionPtr( const std::shared_ptr< Detail::ExceptionHolder >& holder )
     : m_holder( holder )
+{}
+
+
+ExceptionPtr ExceptionPtr::Unknown()
 {
+    return ExceptionPtr( new Detail::UnknownExceptionHolder );
+}
+
+
+Bool ExceptionPtr::operator==( std::nullptr_t ) const
+{
+    return ! m_holder;
+}
+
+
+void ExceptionPtr::Rethrow() const
+{
+    m_holder->Rethrow();
 }
 
 
