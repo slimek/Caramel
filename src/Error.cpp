@@ -334,6 +334,12 @@ AnyFailurePtr::AnyFailurePtr()
 }
 
 
+AnyFailurePtr::AnyFailurePtr( std::nullptr_t )
+    : ExceptionPtr( nullptr )
+{
+}
+
+
 AnyFailurePtr::AnyFailurePtr( const std::shared_ptr< Detail::CaramelAnyFailureHolder >& holder )
     : ExceptionPtr( holder )
 {

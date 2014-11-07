@@ -13,6 +13,26 @@ namespace Caramel
 SUITE( ExceptionPtrSuite )
 {
 
+TEST( ExceptionPtrNullTest )
+{
+    ExceptionPtr px0;
+
+    CHECK( ! px0 );
+    CHECK( nullptr == px0 );
+
+    ExceptionPtr px1( nullptr );
+
+    CHECK( ! px1 );
+    CHECK( nullptr == px1 );
+
+    ExceptionPtr px2;
+    px2 = nullptr;
+
+    CHECK( ! px2 );
+    CHECK( nullptr == px2 );
+}
+
+
 TEST( ExceptionPtrTest )
 {
     /// std::exception ///
@@ -91,6 +111,26 @@ TEST( ExceptionPtrTest )
     {
         CHECK( ! "Not reached" );
     }
+}
+
+
+TEST( AnyFailurePtrNullTest )
+{
+    AnyFailurePtr af0;
+
+    CHECK( ! af0 );
+    CHECK( nullptr == af0 );
+
+    AnyFailurePtr af1( nullptr );
+
+    CHECK( ! af1 );
+    CHECK( nullptr == af1 );
+
+    AnyFailurePtr af2;
+    af2 = nullptr;
+
+    CHECK( ! af2 );
+    CHECK( nullptr == af2 );
 }
 
 

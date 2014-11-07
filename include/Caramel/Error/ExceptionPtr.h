@@ -6,6 +6,7 @@
 
 #include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Error/Detail/ExceptionHolders.h>
+#include <boost/operators.hpp>
 #include <exception>
 
 
@@ -20,11 +21,12 @@ namespace Caramel
 //   We need this mechanism in Task exception handling.
 //
 
-class ExceptionPtr
+class ExceptionPtr : public boost::equality_comparable< ExceptionPtr, std::nullptr_t >
 {
 public:
 
     ExceptionPtr();
+    ExceptionPtr( std::nullptr_t );
 
     explicit ExceptionPtr( const Caramel::Exception& e );
     explicit ExceptionPtr( const Caramel::AnyFailure& e );
@@ -34,12 +36,18 @@ public:
     template< typename E >
     static ExceptionPtr Clone( const E& exception );
 
+    // Represents an exception not recognized by Caramel.Error facility.
     static ExceptionPtr Unknown();
 
 
     /// Predicates ///
 
     explicit operator Bool() const { return static_cast< Bool >( m_holder ); }
+
+
+    /// Operators ///
+
+    Bool operator==( std::nullptr_t rhs ) const;
 
 
     /// Operations ///
@@ -83,6 +91,7 @@ class AnyFailurePtr : public ExceptionPtr
 public:
 
     AnyFailurePtr();
+    AnyFailurePtr( std::nullptr_t );
 
     // Return a null pointer if e is not an AnyFailure.
     static AnyFailurePtr CastFrom( const ExceptionPtr& e );
@@ -107,6 +116,12 @@ inline ExceptionPtr::ExceptionPtr()
 }
 
 
+inline ExceptionPtr::ExceptionPtr( std::nullptr_t )
+    : m_holder( nullptr )
+{
+}
+
+
 inline ExceptionPtr::ExceptionPtr( Detail::ExceptionHolder* holder )
     : m_holder( holder )
 {
@@ -125,6 +140,20 @@ inline ExceptionPtr ExceptionPtr::Unknown()
     return ExceptionPtr( new Detail::UnknownExceptionHolder );
 }
 
+
+//
+// Operators
+//
+
+inline Bool ExceptionPtr::operator==( std::nullptr_t ) const
+{
+    return ! m_holder;
+}
+
+
+//
+// Operations
+//
 
 inline void ExceptionPtr::Rethrow() const
 {
