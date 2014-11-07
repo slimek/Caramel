@@ -31,6 +31,9 @@ TEST( ExceptionPtrNullTest )
 
     CHECK( ! px2 );
     CHECK( nullptr == px2 );
+
+    // Null ExceptionPtr should be equal.
+    CHECK( px1 == px2 );
 }
 
 
@@ -172,6 +175,7 @@ TEST( AnyFailurePtrTest )
     AnyFailurePtr pf2 = AnyFailurePtr::CastFrom( px2 );
 
     CHECK( pf2 );
+    CHECK( pf2 == px2 );
     CHECK( 42 == pf2->Code() );
     CHECK( "The Big Answer" == pf2->What() );
 

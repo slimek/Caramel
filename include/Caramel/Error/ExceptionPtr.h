@@ -21,7 +21,8 @@ namespace Caramel
 //   We need this mechanism in Task exception handling.
 //
 
-class ExceptionPtr : public boost::equality_comparable< ExceptionPtr, std::nullptr_t >
+class ExceptionPtr : public boost::equality_comparable< ExceptionPtr >
+                   , public boost::equality_comparable< ExceptionPtr, std::nullptr_t >
 {
 public:
 
@@ -48,6 +49,7 @@ public:
 
     /// Operators ///
 
+    Bool operator==( const ExceptionPtr& rhs ) const;
     Bool operator==( std::nullptr_t rhs ) const;
 
 

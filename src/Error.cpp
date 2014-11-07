@@ -237,6 +237,12 @@ ExceptionPtr ExceptionPtr::Unknown()
 }
 
 
+Bool ExceptionPtr::operator==( const ExceptionPtr& rhs ) const
+{
+    return m_holder == rhs.m_holder;
+}
+
+
 Bool ExceptionPtr::operator==( std::nullptr_t ) const
 {
     return ! m_holder;
