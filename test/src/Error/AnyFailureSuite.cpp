@@ -5,7 +5,9 @@
 #include <Caramel/Async/AnyEvent.h>
 #include <Caramel/Async/AnyEventQueue.h>
 #include <Caramel/Error/AnyFailure.h>
+#include <Caramel/Error/ExceptionPtr.h>
 #include <UnitTest++/UnitTest++.h>
+#include <cstring>
 
 
 namespace Caramel
@@ -42,7 +44,7 @@ TEST( AnyFailureTest )
     }
 
 
-    std::exception_ptr px;
+    ExceptionPtr px;
 
     try
     {
@@ -50,12 +52,12 @@ TEST( AnyFailureTest )
     }
     catch ( ... )
     {
-        px = std::current_exception();
+        px = CurrentException();
     }
 
     try
     {
-        std::rethrow_exception( px );
+        px.Rethrow();
     }
     catch ( const AnyFailure& fx )
     {
