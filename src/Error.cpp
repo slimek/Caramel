@@ -151,6 +151,7 @@ void ExceptionCatcherCore::OnCatchCaramelException( const Caramel::Exception& e 
 void ExceptionCatcherCore::OnCatchCaramelAnyFailure( const Caramel::AnyFailure& e )
 {
     m_exception = ExceptionPtr( e );
+    m_anyFailure = AnyFailurePtr::CastFrom( m_exception );
 }
 
 

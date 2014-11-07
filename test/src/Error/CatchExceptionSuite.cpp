@@ -19,18 +19,21 @@ TEST( CatchExceptionTest )
         auto xc = CatchException( [] { ; } );
 
         CHECK( ! xc );
+        CHECK( ! xc.AnyFailure() );
+        CHECK( ! xc.Exception() );
 
         ExceptionPtr px = xc.Exception();
-    
         CHECK( ! px );
     }
 
 
-    /// Exception ///
+    /// Caramel::Exception ///
     {
         auto xc = CatchException( [] { CARAMEL_THROW( "Alice in Shanghai" ); } );
 
-        CHECK ( xc );
+        CHECK( xc );
+        CHECK( ! xc.AnyFailure() );
+        CHECK( xc.Exception() );
 
         ExceptionPtr px = xc.Exception();
 
@@ -53,6 +56,8 @@ TEST( CatchExceptionTest )
         auto xc = CatchException( [] { throw AnyFailure( 42, "The Answer" ); } );
 
         CHECK( xc );
+        CHECK( xc.AnyFailure() );
+        CHECK( xc.Exception() );
 
         ExceptionPtr px = xc.Exception();
 
@@ -69,6 +74,15 @@ TEST( CatchExceptionTest )
         {
             CHECK( ! "Not reached" );
         }
+
+        AnyFailurePtr paf = xc.AnyFailure();
+
+        CHECK( 42 == paf->Code() );
+        CHECK( "The Answer" == paf->Value< std::string >() );
+
+
+        // The two exception pointers should be the same.
+        CHECK( px == paf );
     }
 
     
