@@ -68,7 +68,14 @@ public:
 
     virtual ~ProgramOptionValue() {}
 
+    
+    /// Check if this Option Exists ///
+
     Bool Exists() const;
+    explicit operator Bool() const { return this->Exists(); }
+
+
+    /// Properties ///
 
     std::string GetLongName() const { return m_longName; }
 
