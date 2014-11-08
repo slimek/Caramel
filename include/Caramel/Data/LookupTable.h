@@ -22,6 +22,17 @@ namespace Caramel
 // - A Bi-directional table for integer/enum values and their names.
 //   The string comparison is always case-insensitive.
 //
+//   USAGE:
+//
+//     const auto images = Caramel::LookupTable< ImageType >
+//         ( IMAGE_PNG, "png" )
+//         ( IMAGE_JPG, "jpg", "jpeg" )   // with up to 2 aliases
+//         ( IMAGE_GIF, "gif" );
+//
+//     ImageFormat image = IMAGE_UNDEF;
+//     if ( table.FindValueByName( imageName, image ))
+//     { ... }
+//     
 
 template< typename ValueType >
 class LookupTable
