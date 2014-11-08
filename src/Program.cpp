@@ -188,14 +188,16 @@ void ProgramOptionsManager::ParseArguments( const std::vector< std::string >& ar
 
     m_arguments = arguments;
 
-    po::store(
-        po::command_line_parser( m_arguments )
-            .options( m_optionsDesc )
-            .positional( m_positionalDesc )
-            .allow_unregistered()
-            .run(),
-        m_variablesMap
-    );
+    auto parser = po::command_line_parser( m_arguments )
+                 .options( m_optionsDesc )
+                 .allow_unregistered();
+
+    if ( m_positionalAdded )
+    {
+        parser.positional( m_positionalDesc );
+    }
+
+    po::store( parser.run(), m_variablesMap );
 
     po::notify( m_variablesMap );
 }
