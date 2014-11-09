@@ -4,10 +4,11 @@
 
 #include <Caramel/Android/LogTraceAdapter.h>
 #include <Caramel/Android/Streambuf.h>
-#include <Caramel/Thread/Thread.h>
+#include <Caramel/Functional/ScopeExit.h>
 #include <UnitTest++/TestReporterCout.h>
 #include <jni.h>
 #include <iostream>
+#include <thread>
 
 
 namespace Caramel
@@ -16,42 +17,61 @@ namespace Caramel
 class RunTest
 {
 public:
+	RunTest();
 	void Start();
 
 private:
 	void Main();
-
-	Thread m_thread;
 };
 
 
-void RunTest::Start()
-{
-	m_thread.Start( "RunTest::Main", [=] { this->Main(); } );
-}
-
-
-void RunTest::Main()
+RunTest::RunTest()
 {
 	auto logTracer = new Android::LogTraceAdapter( "CaramelTest" );
 	logTracer->BindBuiltinChannels( Trace::LEVEL_DEBUG );
 	Trace::Listeners::AddManaged( logTracer );
 
 	SetAlertHandler( ThrowAlertHandler );
+}
 
-	std::cout.rdbuf( new Android::Streambuf( "std::cout" ));
+
+void RunTest::Start()
+{
+	std::thread( [=] { this->Main(); } ).detach();
+}
+
+
+void RunTest::Main()
+{
+	auto strbuf = std::make_shared< Android::Streambuf >( "std::cout" );
+
+	auto backup = std::cout.rdbuf();
+	auto scope = ScopeExit( [=] { std::cout.rdbuf( backup ); });
+
+	std::cout.rdbuf( strbuf.get() );
 
 	std::cout << "Android::Streambuf created" << std::endl;
 
 	CARAMEL_TRACE_INFO( "Caramel Test Starts" );
 
-	/// Run All Tests ///
 
 	using namespace UnitTest;
 
 	TestReporterCout reporter;
 	TestRunner runner( reporter );
-	runner.RunTestsIf( Test::GetTestList(), NULL, True(), 0 );
+
+	//#define RUN_SUITE
+
+	#if defined( RUN_SUITE )
+	{
+		runner.RunTestsIf( Test::GetTestList(), RUN_SUITE, True(), 0 );
+	}
+	#else
+	{
+		/// Run All Tests ///
+		runner.RunTestsIf( Test::GetTestList(), NULL, True(), 0 );
+	}
+	#endif
 }
 
 
@@ -69,7 +89,7 @@ jint JNI_OnLoad( JavaVM* vm, void* reserved )
 
 void Java_com_slimek_carameltest_CaramelTestActivity_Run( JNIEnv* env, jobject thiz )
 {
-	auto testTop = new Caramel::RunTest;  // Do not delete it.
+	static auto testTop = new Caramel::RunTest;  // Do not delete it.
 	testTop->Start();
 }
 
