@@ -157,6 +157,45 @@ TEST( AnyEventMoveTest )
 }
 
 
+//
+// Nested AnyEvent
+//
+
+TEST( AnyEventOfAnyEventTest )
+{
+    AnyEvent inner( 7, "Alice" );
+    AnyEvent outer( 42, inner );
+
+    CHECK( outer.Id() == 42 );
+    CHECK( outer.HasValue() == true );
+    CHECK( outer.Value< AnyEvent >().IsValid() == true );
+    CHECK( outer.Value< AnyEvent >().Id() == 7 );
+    CHECK( outer.Value< AnyEvent >().Value< std::string >() == "Alice" );
+
+
+    // Nested invalid event
+
+    AnyEvent invalid;
+    AnyEvent wrapper( 9, invalid );
+
+    CHECK( wrapper.Id() == 9 );
+    CHECK( wrapper.HasValue() == true );
+    CHECK( wrapper.Value< AnyEvent >().IsValid() == false );
+
+
+    // Nested of Nested
+
+    AnyEvent marisa( 1, "Marisa" );
+    AnyEvent witch( 2, marisa );
+    AnyEvent normal( 3, witch );
+
+    CHECK( normal.Id() == 3 );
+    CHECK( normal.Value< AnyEvent >().Id() == 2 );
+    CHECK( normal.Value< AnyEvent >().Value< AnyEvent >().Id() == 1 );
+    CHECK( normal.Value< AnyEvent >().Value< AnyEvent >().Value< std::string >() == "Marisa" );
+}
+
+
 } // SUITE AnyEventSuite
 
 } // namespace Caramel

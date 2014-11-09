@@ -6,6 +6,7 @@
 
 #include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Error/Detail/ExceptionHolders.h>
+#include <boost/operators.hpp>
 #include <exception>
 
 
@@ -20,26 +21,36 @@ namespace Caramel
 //   We need this mechanism in Task exception handling.
 //
 
-class ExceptionPtr
+class ExceptionPtr : public boost::equality_comparable< ExceptionPtr >
+                   , public boost::equality_comparable< ExceptionPtr, std::nullptr_t >
 {
 public:
 
     ExceptionPtr();
+    ExceptionPtr( std::nullptr_t );
 
     explicit ExceptionPtr( const Caramel::Exception& e );
     explicit ExceptionPtr( const Caramel::AnyFailure& e );
-
+    
     explicit ExceptionPtr( Detail::ExceptionHolder* holder );
 
+    // Clone the exception, which must inherit from std::exception.
     template< typename E >
-    static ExceptionPtr Clone( const E& exception );
+    static ExceptionPtr Clone( const E& e );
 
+    // Represents an exception not recognized by Caramel.Error facility.
     static ExceptionPtr Unknown();
 
 
     /// Predicates ///
 
     explicit operator Bool() const { return static_cast< Bool >( m_holder ); }
+
+
+    /// Operators ///
+
+    Bool operator==( const ExceptionPtr& rhs ) const;
+    Bool operator==( std::nullptr_t rhs ) const;
 
 
     /// Operations ///
@@ -83,6 +94,7 @@ class AnyFailurePtr : public ExceptionPtr
 public:
 
     AnyFailurePtr();
+    AnyFailurePtr( std::nullptr_t );
 
     // Return a null pointer if e is not an AnyFailure.
     static AnyFailurePtr CastFrom( const ExceptionPtr& e );
@@ -101,34 +113,12 @@ private:
 // Implementation
 //
 
-inline ExceptionPtr::ExceptionPtr()
-    : m_holder( nullptr )
-{
-}
-
-
-inline ExceptionPtr::ExceptionPtr( Detail::ExceptionHolder* holder )
-    : m_holder( holder )
-{
-}
-
-
 template< typename E >
-inline ExceptionPtr ExceptionPtr::Clone( const E& clonee )
+inline ExceptionPtr ExceptionPtr::Clone( const E& x )
 {
-    return ExceptionPtr( new Detail::StdExceptionHolder< E >( clonee ));
-}
+    static_assert( std::is_base_of< std::exception, E >::value, "E must inherits from std::exception" );
 
-
-inline ExceptionPtr ExceptionPtr::Unknown()
-{
-    return ExceptionPtr( new Detail::UnknownExceptionHolder );
-}
-
-
-inline void ExceptionPtr::Rethrow() const
-{
-    m_holder->Rethrow();
+    return ExceptionPtr( new Detail::StdExceptionHolder< E >( x ));
 }
 
 

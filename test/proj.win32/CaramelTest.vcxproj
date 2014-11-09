@@ -94,6 +94,7 @@
     <ClCompile Include="..\src\Arithmetic\PowerOfTwoSuite.cpp" />
     <ClCompile Include="..\src\Async\AnyEventDispatcherSuite.cpp" />
     <ClCompile Include="..\src\Async\AnyEventHandlerSuite.cpp" />
+    <ClCompile Include="..\src\Async\AnyEventPollerSuite.cpp" />
     <ClCompile Include="..\src\Async\AnyEventQueueSuite.cpp" />
     <ClCompile Include="..\src\Async\AnyEventSlotSuite.cpp" />
     <ClCompile Include="..\src\Async\AnyEventSuite.cpp" />
@@ -151,6 +152,7 @@
     <ClCompile Include="..\src\String\SplitSuite.cpp" />
     <ClCompile Include="..\src\String\SprintfSuite.cpp" />
     <ClCompile Include="..\src\String\StringAlgorithmSuite.cpp" />
+    <ClCompile Include="..\src\String\StringConvertibleSuite.cpp" />
     <ClCompile Include="..\src\String\StringToStringSuite.cpp" />
     <ClCompile Include="..\src\String\Utf8StringSuite.cpp" />
     <ClCompile Include="..\src\Task\ContinuationTraitsSuite.cpp" />

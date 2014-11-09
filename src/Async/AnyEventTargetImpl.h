@@ -30,6 +30,8 @@ public:
 
     /// Target Destroyed ///
 
+    // The owner should call this function in destructor.
+    // - ATTENTION: If the owner is copyable, you may need additional reference counting.
     void Destroy();
 
     Bool IsDestroyed() const { return m_destroyed; }

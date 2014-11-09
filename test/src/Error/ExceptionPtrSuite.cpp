@@ -5,6 +5,7 @@
 #include <Caramel/Error/AnyFailure.h>
 #include <Caramel/Error/ExceptionPtr.h>
 #include <UnitTest++/UnitTest++.h>
+#include <cstring>
 
 
 namespace Caramel
@@ -12,6 +13,29 @@ namespace Caramel
 
 SUITE( ExceptionPtrSuite )
 {
+
+TEST( ExceptionPtrNullTest )
+{
+    ExceptionPtr px0;
+
+    CHECK( ! px0 );
+    CHECK( nullptr == px0 );
+
+    ExceptionPtr px1( nullptr );
+
+    CHECK( ! px1 );
+    CHECK( nullptr == px1 );
+
+    ExceptionPtr px2;
+    px2 = nullptr;
+
+    CHECK( ! px2 );
+    CHECK( nullptr == px2 );
+
+    // Null ExceptionPtr should be equal.
+    CHECK( px1 == px2 );
+}
+
 
 TEST( ExceptionPtrTest )
 {
@@ -94,6 +118,26 @@ TEST( ExceptionPtrTest )
 }
 
 
+TEST( AnyFailurePtrNullTest )
+{
+    AnyFailurePtr af0;
+
+    CHECK( ! af0 );
+    CHECK( nullptr == af0 );
+
+    AnyFailurePtr af1( nullptr );
+
+    CHECK( ! af1 );
+    CHECK( nullptr == af1 );
+
+    AnyFailurePtr af2;
+    af2 = nullptr;
+
+    CHECK( ! af2 );
+    CHECK( nullptr == af2 );
+}
+
+
 TEST( AnyFailurePtrTest )
 {
     /// std::exception ///
@@ -131,6 +175,7 @@ TEST( AnyFailurePtrTest )
     AnyFailurePtr pf2 = AnyFailurePtr::CastFrom( px2 );
 
     CHECK( pf2 );
+    CHECK( pf2 == px2 );
     CHECK( 42 == pf2->Code() );
     CHECK( "The Big Answer" == pf2->What() );
 

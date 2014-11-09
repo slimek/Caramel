@@ -23,7 +23,7 @@ enum ImageFormat
 
 TEST( EnumLookupTableTest )
 {
-    auto table = LookupTable< ImageFormat >
+    const auto table = LookupTable< ImageFormat >
         ( IMAGE_PNG, "png" )
         ( IMAGE_JPG, "jpg" )
         ( IMAGE_GIF, "gif" );
@@ -142,7 +142,7 @@ static const PlainPair< ImageFormat, const Char* > IMAGE_FORMAT_NAMES[] =
 
 TEST( EnumLookupTableFromArrayTest )
 {
-    auto table = LookupTable< ImageFormat >( IMAGE_FORMAT_NAMES );
+    const auto table = LookupTable< ImageFormat >( IMAGE_FORMAT_NAMES );
 
     std::string name;
     CHECK( true == table.FindName( IMAGE_GIF, name ));
@@ -165,7 +165,7 @@ TEST( EnumLookupTableFromArrayTest )
 
 TEST( IntLookupTableTest )
 {
-    auto itable = LookupTable< Int >
+    const auto itable = LookupTable< Int >
         ( 1, "one" )
         ( 2, "two" )
         ( 3, "three" );
@@ -190,7 +190,7 @@ TEST( IntLookupTableTest )
 
 TEST( LookupTableAliasTest )
 {
-    auto table = LookupTable< ImageFormat >
+    const auto table = LookupTable< ImageFormat >
         ( IMAGE_PNG, "png", "apng" )
         ( IMAGE_JPG, "jpg", "jpeg", "jpe" )
         ( IMAGE_GIF, "gif" );
@@ -227,7 +227,7 @@ TEST( LookupTableAliasTest )
     
     /// Compare : The first name is always to be found ///
 
-    auto rtable = LookupTable< ImageFormat >
+    const auto rtable = LookupTable< ImageFormat >
         ( IMAGE_PNG, "apng", "png" )
         ( IMAGE_JPG, "jpe", "jpg", "jpeg" )
         ( IMAGE_GIF, "gif" );
@@ -241,7 +241,7 @@ TEST( LookupTableAliasTest )
 
     /// MakeLookupTable() with Aliases - just test compiling ///
 
-    auto table2 = MakeLookupTable
+    const auto table2 = MakeLookupTable
         ( IMAGE_JPG, "jpg", "jpeg", "jpe" )
         ( IMAGE_PNG, "png", "apng" )
         ( IMAGE_GIF, "gif" );

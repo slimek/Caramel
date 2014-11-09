@@ -3,10 +3,12 @@
 #include "CaramelPch.h"
 
 #include "Async/AnyEventDispatcherImpl.h"
-#include "Async/AnyEventTargetProxyImpl.h"
+#include "Async/AnyEventPollerImpl.h"
+#include "Async/AnyEventPollerSourceImpl.h"
 #include "Async/AnyEventQueueImpl.h"
 #include "Async/AnyEventSlotImpl.h"
 #include "Async/AnyEventTargetImpl.h"
+#include "Async/AnyEventTargetProxyImpl.h"
 #include <Caramel/Async/AnyEventHandler.h>
 
 
@@ -23,6 +25,8 @@ namespace Caramel
 //   AnyEventTargetProxy
 //   Detail::AnyEventQueueProxy
 //   Detail::AnyEventDispatcherProxy
+//   AnyEventPoller
+//   Detail::AnyEventPollerSource
 //   AnyEventHandler
 //
 
@@ -573,6 +577,170 @@ void AnyEventDispatcherProxy::Reset()
 AnyEventTargetPtr AnyEventDispatcherProxy::GetTargetImpl() const
 {
     return m_impl;
+}
+
+
+} // namespace Detail
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Any Event Poller
+//
+
+AnyEventPoller::AnyEventPoller()
+    : m_impl( new AnyEventPollerImpl )
+{}
+
+
+AnyEventPoller::~AnyEventPoller()
+{}
+
+
+Detail::AnyEventPollerSource
+AnyEventPoller::Receive( std::function< void( const AnyEvent& ) > handler )
+{
+    CARAMEL_ASSERT( handler );
+
+    return Detail::AnyEventPollerSource(
+        std::make_shared< Detail::AnyEventPollerSource::Impl >( m_impl, handler ));
+}
+
+
+void AnyEventPoller::PollOne()
+{
+    m_impl->PollOne();
+}
+
+
+void AnyEventPoller::Reset()
+{
+    m_impl->IncrementAge();
+    m_impl->Clear();
+}
+
+
+//
+// Implementation
+//
+
+void AnyEventPollerImpl::Emit( Entry&& entry, Uint age )
+{
+    auto ulock = this->CompareAge( age );
+    if ( ulock )
+    {
+        m_entries.Push( std::move( entry ));
+    }
+}
+
+
+void AnyEventPollerImpl::PollOne()
+{
+    Entry e;
+    if ( m_entries.TryPop( e ))
+    {
+        if ( ! e.handler )
+        {
+            if ( e.event.IsValid() )
+            {
+                CARAMEL_ALERT( "Handler is invalid, event id: %d", e.event.Id() );
+            }
+            else
+            {
+                CARAMEL_ALERT( "Handler is invalid" );
+            }
+            return;
+        }
+
+        e.handler( e.event );
+    }
+}
+
+
+void AnyEventPollerImpl::Clear()
+{
+    m_entries.Clear();
+}
+
+
+//
+// Reference Aging
+//
+
+void AnyEventPollerImpl::IncrementAge()
+{
+    UniqueLock ulock( m_ageMutex );
+    ++ m_age;
+}
+
+
+UniqueLock AnyEventPollerImpl::CompareAge( Uint age ) const
+{
+    UniqueLock ulock( m_ageMutex );
+    if ( m_age != age )
+    {
+        ulock.unlock();
+    }
+    return std::move( ulock );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Any Event Poller Source
+//
+
+namespace Detail
+{
+
+AnyEventPollerSource::AnyEventPollerSource( std::shared_ptr< Impl > impl )
+    : m_impl( impl )
+    , m_null( std::make_shared< std::nullptr_t >() )
+{}
+
+
+AnyEventPollerSource::~AnyEventPollerSource()
+{
+    if ( m_null.unique() )  // This is the last copy of a source.
+    {
+        m_impl->Destroy();
+    }
+}
+
+
+void AnyEventPollerSource::Reset()
+{
+    m_impl->IncrementAge();
+}
+
+
+AnyEventTargetPtr AnyEventPollerSource::GetTargetImpl() const
+{
+    return m_impl;
+}
+
+
+//
+// Implementation
+//
+
+AnyEventPollerSource::Impl::Impl(
+    std::shared_ptr< AnyEventPollerImpl > poller,
+    std::function< void( const AnyEvent& ) > handler )
+    : m_poller( poller )
+    , m_handler( handler )
+    , m_pollerAge( poller->GetAge() )
+{
+}
+
+
+void AnyEventPollerSource::Impl::Send( const AnyEvent& event, Uint age )
+{
+    auto ulock = this->CompareAge( age );
+    if ( ulock )
+    {
+        m_poller->Emit( { event, m_handler }, m_pollerAge );
+    }
 }
 
 

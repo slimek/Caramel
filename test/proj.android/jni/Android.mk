@@ -58,6 +58,17 @@ LOCAL_SRC_FILES := \
 	$(CRMTEST_SRC)/Chrono/SecondClockSuite.cpp \
 	$(CRMTEST_SRC)/Chrono/TickClockSuite.cpp \
 	$(CRMTEST_SRC)/Chrono/TimedBoolSuite.cpp \
+	$(CRMTEST_SRC)/Error/AlertSuite.cpp \
+	$(CRMTEST_SRC)/Error/AnyFailureSuite.cpp \
+	$(CRMTEST_SRC)/Error/CatchExceptionSuite.cpp \
+	$(CRMTEST_SRC)/Error/ExceptionPtrSuite.cpp \
+	$(CRMTEST_SRC)/String/FormatSuite.cpp \
+	$(CRMTEST_SRC)/String/SplitSuite.cpp \
+	$(CRMTEST_SRC)/String/SprintfSuite.cpp \
+	$(CRMTEST_SRC)/String/StringAlgorithmSuite.cpp \
+	$(CRMTEST_SRC)/String/StringConvertibleSuite.cpp \
+	$(CRMTEST_SRC)/String/StringToStringSuite.cpp \
+	$(CRMTEST_SRC)/String/Utf8StringSuite.cpp \
 	$(CRMTEST_SRC)/Trace/TraceChannelSuite.cpp \
 	$(CRMTEST_SRC)/Trace/TraceSuite.cpp \
 

@@ -24,6 +24,8 @@ namespace Detail
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Exception Catcher Core
+// - When an AnyFailure is caught, both m_anyFailure and m_exception exist.
+//   For other exceptions, m_anyFailure is null and only m_exception exists.
 //
 
 class ExceptionCatcherCore
@@ -33,9 +35,12 @@ public:
     explicit operator Bool() const { return static_cast< Bool >( m_exception ); }
     Bool IsCaught()          const { return static_cast< Bool >( m_exception ); }
 
-    ExceptionPtr Exception() const { return m_exception; }
+    AnyFailurePtr AnyFailure() const { return m_anyFailure; }
+    ExceptionPtr  Exception()  const { return m_exception; }
 
     std::string TracingMessage() const { return m_exception.TracingMessage(); }
+
+    void Rethrow() { m_exception.Rethrow(); }
 
 
 protected: 
@@ -54,7 +59,8 @@ protected:
 
     /// Data Members ///
 
-    ExceptionPtr m_exception;
+    AnyFailurePtr m_anyFailure;
+    ExceptionPtr  m_exception;
 };
 
 

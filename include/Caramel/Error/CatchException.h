@@ -17,6 +17,27 @@ namespace Caramel
 //
 // Catch Exception & Exception Catcher
 //
+// USAGE:
+//
+//   std::string MyServer::FindUserName( Int userId )
+//   {
+//       const auto xc = CatchException( [] { m_db->FindUserData( userId ); } );
+//       if ( xc )
+//       {
+//            // Handle exception here, you may:
+//            // - Log more detail information.
+//            // - Do some workaround or fallback.
+//            // - Throw another exception, or re-throw the catched exception.
+//
+//            LOG( "FindUserName() : user id {0} not found, error: {1}",
+//                 userId, xc.TracingMessage() );
+//            xc.Rethrow();
+//       }
+//      
+//       // If the function succeeded, call Result() to get the return value.
+//       return xc.Result();
+//   }
+//
 
 template< typename ResultT >
 class ExceptionCatcher : public Detail::ExceptionCatcherCore
