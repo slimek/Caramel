@@ -931,8 +931,6 @@ void ThreadPoolImpl::TryDispatchOneTask()
 // Std Async
 //
 
-#if !defined( CARAMEL_SYSTEM_IS_ANDROID )
-
 void StdAsync::Submit( TaskCore& task )
 {
     if ( task.HasDelay() )
@@ -945,6 +943,8 @@ void StdAsync::Submit( TaskCore& task )
     }
 }
 
+
+#if !defined( CARAMEL_SYSTEM_IS_ANDROID )
 
 void StdAsync::AddReadyTask( TaskCore& task )
 {
@@ -963,15 +963,19 @@ void StdAsync::AddReadyTask( TaskCore& task )
 
 // NOTES: Until Android NDK r9b, std::future and std::async are not supported.
 
-void StdAsync::Submit( TaskCore& task )
-{
-    CARAMEL_NOT_IMPLEMENTED();
-}
-
-
 void StdAsync::AddReadyTask( TaskCore& task )
 {
-    CARAMEL_NOT_IMPLEMENTED();
+    task.BecomeReady( *this );
+
+    std::thread thread(
+    [task]
+    {
+        // task is a const variable and can't call Run();
+        TaskCore copy = task;
+        copy.Run();
+    });
+
+    thread.detach();
 }
 
 #endif // !CARAMEL_SYSTEM_IS_ANDROID
