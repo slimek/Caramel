@@ -94,6 +94,13 @@ std::vector< DirectoryInfo > DirectoryInfo::GetDirectories() const
 }
 
 
+std::vector< DirectoryInfo > DirectoryInfo::GetDirectoriesRecursively() const
+{
+    return Traverse<
+        DirectoryInfo, boost::filesystem::recursive_directory_iterator >( false );
+}
+
+
 std::vector< FileInfo > DirectoryInfo::GetFiles() const
 {
     return Traverse<
@@ -124,6 +131,52 @@ void DirectoryInfo::Create()
     }
 }
 
+void DirectoryInfo::CopyAllTo( const Path& goalPath )
+{
+	std::string sourceRoot = m_path->ToString();
+
+	std::string goalRoot = goalPath.ToString();
+
+	// Build goal directory
+	std::vector<DirectoryInfo> directoryInfos = this->GetDirectoriesRecursively();
+	std::vector<FileInfo> fileInfos = this->GetFilesRecursively();
+
+	// Copy all directory
+	for( auto directoryInfo : directoryInfos )
+	{
+		std::string directoryString( directoryInfo.GetPath().ToString() );
+		directoryString.replace( directoryString.find( sourceRoot ), sourceRoot.size(), goalRoot );
+		directoryInfo.CopyTo( Path( directoryString ) );
+	}
+
+	// Copy all file
+	for( auto fileInfo : fileInfos )
+	{
+		std::string fileString( fileInfo.GetPath().ToString() );
+		fileString.replace( fileString.find( sourceRoot ), sourceRoot.size(), goalRoot );
+		fileInfo.CopyTo( Path( fileString ) );
+	}
+}
+
+void DirectoryInfo::CopyTo( const Path& goalPath )
+{
+	boost::system::error_code errorCode;
+    boost::filesystem::copy( *m_path, *goalPath.m_impl, errorCode );
+    if ( errorCode != 0 )
+    {
+		CARAMEL_THROW( "CopyTo directory from \"%s\" to \"%s\" failed. code:%d", m_path->ToString(), goalPath.ToString(), errorCode.value() );
+    }
+}
+
+void DirectoryInfo::Rename( const Path& goalPath )
+{
+	boost::system::error_code errorCode;
+    boost::filesystem::rename( *m_path, *goalPath.m_impl, errorCode );
+    if ( errorCode != 0 )
+    {
+		CARAMEL_THROW( "Rename directory from \"%s\" to \"%s\" failed. code:%d", m_path->ToString(), goalPath.ToString(), errorCode.value() );
+    }
+}
 
 void DirectoryInfo::Delete()
 {
@@ -181,6 +234,16 @@ void FileInfo::Delete()
     if ( ! ok )
     {
         CARAMEL_THROW( "Delete file \"%s\" failed", m_path->ToString() );
+    }
+}
+
+void FileInfo::CopyTo( const Path& goalPath )
+{
+	boost::system::error_code errorCode;
+    boost::filesystem::copy_file( *m_path, *goalPath.m_impl, errorCode );
+    if ( errorCode != 0 )
+    {
+		CARAMEL_THROW( "CopyTo File from \"%s\" to \"%s\" failed. code:%d", m_path->ToString(), goalPath.ToString(), errorCode.value() );
     }
 }
 

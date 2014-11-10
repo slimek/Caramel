@@ -37,6 +37,8 @@ public:
 
 	void Delete();
 
+	void CopyTo( const Path& goalPath );
+
 protected:
 
     explicit FileInfo( std::shared_ptr< PathImpl > path );
