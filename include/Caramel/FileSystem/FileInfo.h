@@ -31,13 +31,16 @@ public:
     
     /// Properties ///
 
-    Bool Exists() const;
-
+    Bool Exists()  const;
     Path GetPath() const;
+
+
+    /// Operations ///
+
+	void CopyTo( const Path& goalPath );
 
 	void Delete();
 
-	void CopyTo( const Path& goalPath );
 
 protected:
 

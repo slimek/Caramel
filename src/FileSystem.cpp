@@ -131,6 +131,7 @@ void DirectoryInfo::Create()
     }
 }
 
+
 void DirectoryInfo::CopyAllTo( const Path& goalPath )
 {
 	std::string sourceRoot = m_path->ToString();
@@ -158,15 +159,18 @@ void DirectoryInfo::CopyAllTo( const Path& goalPath )
 	}
 }
 
+
 void DirectoryInfo::CopyTo( const Path& goalPath )
 {
 	boost::system::error_code errorCode;
     boost::filesystem::copy( *m_path, *goalPath.m_impl, errorCode );
     if ( errorCode != 0 )
     {
-		CARAMEL_THROW( "CopyTo directory from \"%s\" to \"%s\" failed. code:%d", m_path->ToString(), goalPath.ToString(), errorCode.value() );
+		CARAMEL_THROW( "CopyTo directory from \"%s\" to \"%s\" failed. code:%d",
+                       m_path->ToString(), goalPath.ToString(), errorCode.value() );
     }
 }
+
 
 void DirectoryInfo::Rename( const Path& goalPath )
 {
@@ -174,9 +178,11 @@ void DirectoryInfo::Rename( const Path& goalPath )
     boost::filesystem::rename( *m_path, *goalPath.m_impl, errorCode );
     if ( errorCode != 0 )
     {
-		CARAMEL_THROW( "Rename directory from \"%s\" to \"%s\" failed. code:%d", m_path->ToString(), goalPath.ToString(), errorCode.value() );
+		CARAMEL_THROW( "Rename directory from \"%s\" to \"%s\" failed. code:%d",
+                       m_path->ToString(), goalPath.ToString(), errorCode.value() );
     }
 }
+
 
 void DirectoryInfo::Delete()
 {
@@ -187,6 +193,7 @@ void DirectoryInfo::Delete()
     }
 }
 
+
 void DirectoryInfo::DeleteAll()
 {
     const auto removes = boost::filesystem::remove_all( *m_path );
@@ -195,6 +202,7 @@ void DirectoryInfo::DeleteAll()
         CARAMEL_THROW( "Delete directory \"%s\" but not found", m_path->ToString() );
     }
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -213,6 +221,10 @@ FileInfo::FileInfo( std::shared_ptr< PathImpl > path )
 }
 
 
+//
+// Properties
+//
+
 Bool FileInfo::Exists() const
 {
     boost::filesystem::file_status status = boost::filesystem::status( *m_path );
@@ -228,6 +240,22 @@ Path FileInfo::GetPath() const
 }
 
 
+//
+// Operations
+//
+
+void FileInfo::CopyTo( const Path& goalPath )
+{
+	boost::system::error_code errorCode;
+    boost::filesystem::copy_file( *m_path, *goalPath.m_impl, errorCode );
+    if ( errorCode != 0 )
+    {
+		CARAMEL_THROW( "CopyTo File from \"%s\" to \"%s\" failed. code:%d",
+                       m_path->ToString(), goalPath.ToString(), errorCode.value() );
+    }
+}
+
+
 void FileInfo::Delete() 
 {
 	const Bool ok = boost::filesystem::remove( *m_path );
@@ -237,15 +265,6 @@ void FileInfo::Delete()
     }
 }
 
-void FileInfo::CopyTo( const Path& goalPath )
-{
-	boost::system::error_code errorCode;
-    boost::filesystem::copy_file( *m_path, *goalPath.m_impl, errorCode );
-    if ( errorCode != 0 )
-    {
-		CARAMEL_THROW( "CopyTo File from \"%s\" to \"%s\" failed. code:%d", m_path->ToString(), goalPath.ToString(), errorCode.value() );
-    }
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 //

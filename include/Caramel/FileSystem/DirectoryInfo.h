@@ -36,10 +36,11 @@ public:
 
     /// Properties ///
 
-    Bool Exists() const;
-
+    Bool Exists()  const;
     Path GetPath() const;
 
+
+    /// Directory / File Iteration ///
 
     // Get all sub-directories in this directory
     std::vector< DirectoryInfo > GetDirectories() const;
