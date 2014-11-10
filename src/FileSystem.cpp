@@ -132,18 +132,16 @@ void DirectoryInfo::Create()
 }
 
 
-void DirectoryInfo::CopyAllTo( const Path& goalPath )
+void DirectoryInfo::CopyAllTo( const Path& goalPath ) const
 {
-	std::string sourceRoot = m_path->ToString();
+	const std::string sourceRoot = m_path->ToString();
+	const std::string goalRoot = goalPath.ToString();
 
-	std::string goalRoot = goalPath.ToString();
-
-	// Build goal directory
-	std::vector<DirectoryInfo> directoryInfos = this->GetDirectoriesRecursively();
-	std::vector<FileInfo> fileInfos = this->GetFilesRecursively();
+	const auto directoryInfos = this->GetDirectoriesRecursively();
+	const auto fileInfos = this->GetFilesRecursively();
 
 	// Copy all directory
-	for( auto directoryInfo : directoryInfos )
+	for ( const auto& directoryInfo : directoryInfos )
 	{
 		std::string directoryString( directoryInfo.GetPath().ToString() );
 		directoryString.replace( directoryString.find( sourceRoot ), sourceRoot.size(), goalRoot );
@@ -151,7 +149,7 @@ void DirectoryInfo::CopyAllTo( const Path& goalPath )
 	}
 
 	// Copy all file
-	for( auto fileInfo : fileInfos )
+	for ( const auto& fileInfo : fileInfos )
 	{
 		std::string fileString( fileInfo.GetPath().ToString() );
 		fileString.replace( fileString.find( sourceRoot ), sourceRoot.size(), goalRoot );
@@ -160,7 +158,7 @@ void DirectoryInfo::CopyAllTo( const Path& goalPath )
 }
 
 
-void DirectoryInfo::CopyTo( const Path& goalPath )
+void DirectoryInfo::CopyTo( const Path& goalPath ) const
 {
 	boost::system::error_code errorCode;
     boost::filesystem::copy( *m_path, *goalPath.m_impl, errorCode );
@@ -244,7 +242,7 @@ Path FileInfo::GetPath() const
 // Operations
 //
 
-void FileInfo::CopyTo( const Path& goalPath )
+void FileInfo::CopyTo( const Path& goalPath ) const
 {
 	boost::system::error_code errorCode;
     boost::filesystem::copy_file( *m_path, *goalPath.m_impl, errorCode );
@@ -290,9 +288,11 @@ Path::Path( const Utf8String& path )
 
 
 //
-// Construct from OS default encoding.
-// - In Windows, it is ACP (acitve code page).
-//   In other OS, it is UTF-8.
+// Construct from UTF-8 encoded path.
+// - ASCII encoded path is fine.
+// - NOTES: In Windows, a std::string may be encoded in ACP (acitve code page),
+//          and would cause an exception in these functions.
+//          Use Utf8String or Windows::WideString to convert the path to Unicode.
 //
 
 Path::Path( const std::string& path )

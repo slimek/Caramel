@@ -63,11 +63,11 @@ public:
 
 	// Copy all file to goalPath. Goal directory can't exist. 
     // Throws if any file copy failed.
-	void CopyAllTo( const Path& goalPath );
+	void CopyAllTo( const Path& goalPath ) const;
 
 	// Copy directory to goalPath. 
 	// Throws if goal directory exist.
-	void CopyTo( const Path& goalPath );
+	void CopyTo( const Path& goalPath ) const;
 
 	// Move directory to goalPath.
 	// Throws if goal directory exist.

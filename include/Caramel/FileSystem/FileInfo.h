@@ -37,7 +37,7 @@ public:
 
     /// Operations ///
 
-	void CopyTo( const Path& goalPath );
+	void CopyTo( const Path& goalPath ) const;
 
 	void Delete();
 
