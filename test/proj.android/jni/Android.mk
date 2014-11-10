@@ -54,6 +54,14 @@ LOCAL_SRC_FILES := \
 	$(CRMTEST_SRC)/AndroidRun.cpp \
 	$(CRMTEST_SRC)/Arithmetic/FlagsSuite.cpp \
 	$(CRMTEST_SRC)/Arithmetic/PowerOfTwoSuite.cpp \
+	$(CRMTEST_SRC)/Async/AnyEventDispatcherSuite.cpp \
+	$(CRMTEST_SRC)/Async/AnyEventHandlerSuite.cpp \
+	$(CRMTEST_SRC)/Async/AnyEventPollerSuite.cpp \
+	$(CRMTEST_SRC)/Async/AnyEventQueueSuite.cpp \
+	$(CRMTEST_SRC)/Async/AnyEventSlotSuite.cpp \
+	$(CRMTEST_SRC)/Async/AnyEventSuite.cpp \
+	$(CRMTEST_SRC)/Async/FlowStateSuite.cpp \
+	$(CRMTEST_SRC)/Async/ValueChangeSuite.cpp \
 	$(CRMTEST_SRC)/Chrono/ClockProxySuite.cpp \
 	$(CRMTEST_SRC)/Chrono/SecondClockSuite.cpp \
 	$(CRMTEST_SRC)/Chrono/TickClockSuite.cpp \
