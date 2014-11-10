@@ -1,11 +1,11 @@
 APP_PLATFORM := android-15
 APP_ABI := x86 armeabi
 
-APP_STL := c++_static
+APP_STL := gnustl_static
 NDK_TOOLCHAIN_VERSION := 4.8
 
 APP_CFLAGS := -fexceptions
-APP_CPPFLAGS := -frtti -std=c++11 -fsigned-char
+APP_CPPFLAGS := -std=c++11 -frtti -fsigned-char
 APP_LDFLAGS := -latomic
 
 ifeq ($(NDEBUG),1)
