@@ -77,30 +77,24 @@ private:
 };
 
 
-
-std::string GetStdExceptionTracingMessage( const std::exception& e );
-
-template< typename E >
 class StdExceptionHolder : public ExceptionHolder
+                         , public std::exception
 {
 public:
 
-    typedef E ExceptionType;
-
-    explicit StdExceptionHolder( const E& exception )
-        : m_exception( exception )
+    explicit StdExceptionHolder( const std::exception& e )
+        : m_what( e.what() )
     {}
 
-    void Rethrow() const override { throw m_exception; }
+    void Rethrow() const override { throw *this; }
 
-    std::string TracingMessage() const override
-    {
-        return GetStdExceptionTracingMessage( m_exception );
-    }
+    const Char* what() const CARAMEL_NOEXCEPT override { return m_what.c_str(); }
+
+    std::string TracingMessage() const override;
 
 private:
 
-    ExceptionType m_exception;
+    std::string m_what;
 };
 
 
