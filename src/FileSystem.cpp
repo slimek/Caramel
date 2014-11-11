@@ -94,6 +94,13 @@ std::vector< DirectoryInfo > DirectoryInfo::GetDirectories() const
 }
 
 
+std::vector< DirectoryInfo > DirectoryInfo::GetDirectoriesRecursively() const
+{
+    return Traverse<
+        DirectoryInfo, boost::filesystem::recursive_directory_iterator >( false );
+}
+
+
 std::vector< FileInfo > DirectoryInfo::GetFiles() const
 {
     return Traverse<
@@ -125,6 +132,56 @@ void DirectoryInfo::Create()
 }
 
 
+void DirectoryInfo::CopyAllTo( const Path& goalPath ) const
+{
+	const std::string sourceRoot = m_path->ToString();
+	const std::string goalRoot = goalPath.ToString();
+
+	const auto directoryInfos = this->GetDirectoriesRecursively();
+	const auto fileInfos = this->GetFilesRecursively();
+
+	// Copy all directory
+	for ( const auto& directoryInfo : directoryInfos )
+	{
+		std::string directoryString( directoryInfo.GetPath().ToString() );
+		directoryString.replace( directoryString.find( sourceRoot ), sourceRoot.size(), goalRoot );
+		directoryInfo.CopyTo( Path( directoryString ) );
+	}
+
+	// Copy all file
+	for ( const auto& fileInfo : fileInfos )
+	{
+		std::string fileString( fileInfo.GetPath().ToString() );
+		fileString.replace( fileString.find( sourceRoot ), sourceRoot.size(), goalRoot );
+		fileInfo.CopyTo( Path( fileString ) );
+	}
+}
+
+
+void DirectoryInfo::CopyTo( const Path& goalPath ) const
+{
+	boost::system::error_code errorCode;
+    boost::filesystem::copy( *m_path, *goalPath.m_impl, errorCode );
+    if ( errorCode != 0 )
+    {
+		CARAMEL_THROW( "CopyTo directory from \"%s\" to \"%s\" failed. code:%d",
+                       m_path->ToString(), goalPath.ToString(), errorCode.value() );
+    }
+}
+
+
+void DirectoryInfo::Rename( const Path& goalPath )
+{
+	boost::system::error_code errorCode;
+    boost::filesystem::rename( *m_path, *goalPath.m_impl, errorCode );
+    if ( errorCode != 0 )
+    {
+		CARAMEL_THROW( "Rename directory from \"%s\" to \"%s\" failed. code:%d",
+                       m_path->ToString(), goalPath.ToString(), errorCode.value() );
+    }
+}
+
+
 void DirectoryInfo::Delete()
 {
     const Bool ok = boost::filesystem::remove( *m_path );
@@ -134,6 +191,7 @@ void DirectoryInfo::Delete()
     }
 }
 
+
 void DirectoryInfo::DeleteAll()
 {
     const auto removes = boost::filesystem::remove_all( *m_path );
@@ -142,6 +200,7 @@ void DirectoryInfo::DeleteAll()
         CARAMEL_THROW( "Delete directory \"%s\" but not found", m_path->ToString() );
     }
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -160,6 +219,10 @@ FileInfo::FileInfo( std::shared_ptr< PathImpl > path )
 }
 
 
+//
+// Properties
+//
+
 Bool FileInfo::Exists() const
 {
     boost::filesystem::file_status status = boost::filesystem::status( *m_path );
@@ -175,6 +238,22 @@ Path FileInfo::GetPath() const
 }
 
 
+//
+// Operations
+//
+
+void FileInfo::CopyTo( const Path& goalPath ) const
+{
+	boost::system::error_code errorCode;
+    boost::filesystem::copy_file( *m_path, *goalPath.m_impl, errorCode );
+    if ( errorCode != 0 )
+    {
+		CARAMEL_THROW( "CopyTo File from \"%s\" to \"%s\" failed. code:%d",
+                       m_path->ToString(), goalPath.ToString(), errorCode.value() );
+    }
+}
+
+
 void FileInfo::Delete() 
 {
 	const Bool ok = boost::filesystem::remove( *m_path );
@@ -183,6 +262,7 @@ void FileInfo::Delete()
         CARAMEL_THROW( "Delete file \"%s\" failed", m_path->ToString() );
     }
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -208,9 +288,11 @@ Path::Path( const Utf8String& path )
 
 
 //
-// Construct from OS default encoding.
-// - In Windows, it is ACP (acitve code page).
-//   In other OS, it is UTF-8.
+// Construct from UTF-8 encoded path.
+// - ASCII encoded path is fine.
+// - NOTES: In Windows, a std::string may be encoded in ACP (acitve code page),
+//          and would cause an exception in these functions.
+//          Use Utf8String or Windows::WideString to convert the path to Unicode.
 //
 
 Path::Path( const std::string& path )

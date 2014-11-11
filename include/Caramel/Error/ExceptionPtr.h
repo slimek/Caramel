@@ -29,14 +29,11 @@ public:
     ExceptionPtr();
     ExceptionPtr( std::nullptr_t );
 
+    explicit ExceptionPtr( const std::exception& e );
     explicit ExceptionPtr( const Caramel::Exception& e );
     explicit ExceptionPtr( const Caramel::AnyFailure& e );
     
     explicit ExceptionPtr( Detail::ExceptionHolder* holder );
-
-    // Clone the exception, which must inherit from std::exception.
-    template< typename E >
-    static ExceptionPtr Clone( const E& e );
 
     // Represents an exception not recognized by Caramel.Error facility.
     static ExceptionPtr Unknown();
@@ -106,20 +103,6 @@ private:
     explicit AnyFailurePtr(
         const std::shared_ptr< Detail::CaramelAnyFailureHolder >& holder );
 };
-
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Implementation
-//
-
-template< typename E >
-inline ExceptionPtr ExceptionPtr::Clone( const E& x )
-{
-    static_assert( std::is_base_of< std::exception, E >::value, "E must inherits from std::exception" );
-
-    return ExceptionPtr( new Detail::StdExceptionHolder< E >( x ));
-}
 
 
 ///////////////////////////////////////////////////////////////////////////////

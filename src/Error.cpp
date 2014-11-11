@@ -157,7 +157,7 @@ void ExceptionCatcherCore::OnCatchCaramelAnyFailure( const Caramel::AnyFailure& 
 
 void ExceptionCatcherCore::OnCatchStdException( const std::exception& e )
 {
-    m_exception = ExceptionPtr::Clone( e );
+    m_exception = ExceptionPtr( e );
 }
 
 
@@ -214,6 +214,11 @@ ExceptionPtr::ExceptionPtr( std::nullptr_t )
 
 ExceptionPtr::ExceptionPtr( Detail::ExceptionHolder* holder )
     : m_holder( holder )
+{}
+
+
+ExceptionPtr::ExceptionPtr( const std::exception& e )
+    : m_holder( new Detail::StdExceptionHolder( e ))
 {}
 
 
@@ -304,9 +309,10 @@ std::string CaramelAnyFailureHolder::TracingMessage() const
 // std::exception
 //
 
-std::string GetStdExceptionTracingMessage( const std::exception& e )
+
+std::string StdExceptionHolder::TracingMessage() const
 {
-    return Format( "std::exception caught, what: {0}", e.what() );
+    return Format( "std::exception caught, what: {0}", m_what );
 }
 
 
