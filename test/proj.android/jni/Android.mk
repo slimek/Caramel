@@ -66,6 +66,13 @@ LOCAL_SRC_FILES := \
 	$(CRMTEST_SRC)/Chrono/SecondClockSuite.cpp \
 	$(CRMTEST_SRC)/Chrono/TickClockSuite.cpp \
 	$(CRMTEST_SRC)/Chrono/TimedBoolSuite.cpp \
+	$(CRMTEST_SRC)/Concurrent/ConcurrentBlockingQueueSuite.cpp \
+	$(CRMTEST_SRC)/Concurrent/ConcurrentIntervalSetSuite.cpp \
+	$(CRMTEST_SRC)/Concurrent/ConcurrentMapSuite.cpp \
+	$(CRMTEST_SRC)/Concurrent/ConcurrentPriorityQueueSuite.cpp \
+	$(CRMTEST_SRC)/Concurrent/ConcurrentQueueSuite.cpp \
+	$(CRMTEST_SRC)/Concurrent/ConcurrentSetSuite.cpp \
+	$(CRMTEST_SRC)/Concurrent/ConcurrentStackSuite.cpp \
 	$(CRMTEST_SRC)/Error/AlertSuite.cpp \
 	$(CRMTEST_SRC)/Error/AnyFailureSuite.cpp \
 	$(CRMTEST_SRC)/Error/CatchExceptionSuite.cpp \

@@ -135,7 +135,7 @@ TEST( ConcurrentFlatMapTest )
 //
 
 template< typename MapType >
-void TestBasicMapWithSnapshot( MapType& map )
+void TestBasicMapWithSnapshot( MapType& map, Bool ordered )
 {
     auto vshot1 = map.GetValuesSnapshot();
     auto pshot1 = map.GetPairsSnapshot();
@@ -157,7 +157,10 @@ void TestBasicMapWithSnapshot( MapType& map )
     CHECK( Match< std::string >( vshot2, { "Marisa", "Alice", "Patchou" } ));
     CHECK( false == pshot2.IsEmpty() );
     CHECK( 3 == pshot2.Size() );
-    CHECK( 8 == pshot2[2].first && "Patchou" == pshot2[2].second );
+    if ( ordered )
+    {
+        CHECK( 8 == pshot2[2].first && "Patchou" == pshot2[2].second );
+    }
 
     map.Erase( 8 );
 
@@ -167,7 +170,10 @@ void TestBasicMapWithSnapshot( MapType& map )
     CHECK( 2 == vshot3.Size() );
     CHECK( Match< std::string >( vshot3, { "Marisa", "Alice" } ));
     CHECK( 2 == pshot3.Size() );
-    CHECK( 7 == pshot3[1].first && "Alice" == pshot3[1].second );
+    if ( ordered )
+    {
+        CHECK( 7 == pshot3[1].first && "Alice" == pshot3[1].second );
+    }
 
     map.Clear();
 
@@ -193,14 +199,14 @@ void TestBasicMapWithSnapshot( MapType& map )
 TEST( ConcurrentMapWithSnapshotTest )
 {
     Concurrent::MapWithSnapshot< Int, std::string > imap;
-    TestBasicMapWithSnapshot( imap );
+    TestBasicMapWithSnapshot( imap, true );
 }
 
 
 TEST( ConcurrentHashMapWithSnapshotTest )
 {
     Concurrent::HashMapWithSnapshot< Int, std::string > imap;
-    TestBasicMapWithSnapshot( imap );
+    TestBasicMapWithSnapshot( imap, false );
 }
 
 
