@@ -84,6 +84,10 @@ TEST( DateTimeStringTest )
 
     CHECK( true == dt2.TryParse( "2014-03-15T08:23:14" ));
     CHECK( dt2 == Date( 2014, 3, 15 ) + TimeOfDay( 8, 23, 14 ));
+
+    // You may omit seconds.
+    const auto dt3 = DateTime::FromString( "2013-04-05T18:09" );
+    CHECK( dt3 == Date( 2013, 4, 5 ) + TimeOfDay( 18, 9, 0 ));
 }
 
 
