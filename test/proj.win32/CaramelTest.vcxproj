@@ -177,15 +177,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h" />
+    <ClInclude Include="..\src\Utils\AssetPath.h" />
     <ClInclude Include="..\src\Utils\Matcher.h" />
     <ClInclude Include="..\src\Utils\SharedArrayUtils.h" />
     <ClInclude Include="..\src\Utils\StdVectorUtils.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\src\Configuration\items.ini" />
-    <None Include="..\src\Configuration\values.ini" />
-    <None Include="..\src\Document\test1.ini" />
-    <None Include="..\src\Document\test2.ini" />
+    <None Include="..\assets\items.ini" />
+    <None Include="..\assets\test1.ini" />
+    <None Include="..\assets\test2.ini" />
+    <None Include="..\assets\values.ini" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\proj.win32\Caramel.vcxproj">

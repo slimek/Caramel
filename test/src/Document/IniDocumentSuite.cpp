@@ -2,6 +2,7 @@
 
 #include "CaramelTestPch.h"
 
+#include "Utils/AssetPath.h"
 #include "Utils/StdVectorUtils.h"
 #include <Caramel/Document/IniDocument.h>
 #include <UnitTest++/UnitTest++.h>
@@ -17,7 +18,7 @@ SUITE( IniDocumentSuite )
 
 TEST( IniDocumentFundamentalTest )
 {
-    IniDocument iniDoc( "../src/Document/test1.ini" );
+    IniDocument iniDoc( AssetPath( "test1.ini" ));
 
     /// Booleans ///
 
@@ -97,7 +98,7 @@ TEST( IniDocumentFundamentalTest )
 
 TEST( IniDocumentNamedValuesTest )
 {
-    IniDocument iniDoc( "../src/Document/test1.ini" );
+    IniDocument iniDoc( AssetPath( "test1.ini" ));
 
     auto bools = iniDoc.GetSection( "Booleans" );
     const auto bnvs = bools.ToNamedValues();
@@ -113,6 +114,17 @@ TEST( IniDocumentNamedValuesTest )
 
     CHECK( 0 == invs["IntZero"].AsInt() );
     CHECK( 2147483647 == invs["IntIntMax"].AsInt() );
+}
+
+
+TEST( IniDocumentSyntaxTest )
+{
+    // Test the below syntaxes:
+    //   1. Trim the left spaces.
+    //   2. A '=' in a quoted value.
+    //   3. The comments after a value.
+
+    IniDocument iniDoc( AssetPath( "test2.ini" ));
 }
 
 
