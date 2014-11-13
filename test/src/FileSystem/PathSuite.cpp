@@ -95,13 +95,24 @@ TEST( PathCombineTest )
 {
     const Path p1( "dir" );
     const Path p2( "file" );
+    const Path answer( "dir/file" );
 
-    CHECK( Path( "dir/file" ) == p1 / p2 );
+    CHECK( answer == p1 / p2 );
 
     Path p3 = p1;
     p3.Combine( p2 );
 
-    CHECK( Path( "dir/file" ) == p3 );
+    CHECK( answer == p3 );
+
+
+    /// boost::path would automatically merge the '/' ///
+
+    const Path p4( "dir/" );
+    const Path p5( "/file" );
+
+    CHECK( answer == p4 / p2 );  //  dir//file ?
+    CHECK( answer == p1 / p5 );  //  dir//file ?
+    CHECK( answer == p4 / p5 );  //  dir///file ?
 }
 
 

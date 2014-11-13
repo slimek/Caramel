@@ -35,9 +35,8 @@ public:
 
 
 //
-// Concrete Holders
+// Holder for Caramel::Exceptoin
 //
-
 class CaramelExceptionHolder : public ExceptionHolder
 {
 public:
@@ -56,6 +55,9 @@ private:
 };
 
 
+//
+// Holder for Caramel::AnyFailure
+//
 class CaramelAnyFailureHolder : public ExceptionHolder
 {
 public:
@@ -77,6 +79,17 @@ private:
 };
 
 
+//
+// Holder for std::exception
+// - In GNU C++,
+//   1. when copy a std::exception its "what" string would NOT be copied,
+//      you will lost the message and only get a "std::exception" text.
+//   2. There is no std::exception( std::string ), i.e., it is impossible
+//      to throw a bare std::exception with a message. You needs a derived class.
+//
+//   Therefore, we store the "what" string (not the std::exception) in the holder
+//   and rethrow the holder itself.
+//
 class StdExceptionHolder : public ExceptionHolder
                          , public std::exception
 {
@@ -99,9 +112,8 @@ private:
 
 
 //
-// Unknown Holder
+// Holder for other unknown exceptions.
 //
-
 class UnknownExceptionHolder : public ExceptionHolder
 {
 public:
@@ -115,15 +127,14 @@ public:
 #if defined( CARAMEL_COMPILER_IS_MSVC )
 
 //
-// Windows Exceptoin Holder
-// - The SEH exceptions, including Access Violation, Stack Overflow, etc.
+// Holder for Windows SEH Exceptions
+// - Including "access violation", "stack overflow", etc.
 //
-
 class WindowsExceptionHolder : public ExceptionHolder
 {
 public:
 
-    WindowsExceptionHolder( Uint32 exceptionCode )
+    explicit WindowsExceptionHolder( Uint32 exceptionCode )
         : m_code( exceptionCode )
     {}
 

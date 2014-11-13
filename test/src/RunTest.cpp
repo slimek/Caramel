@@ -2,6 +2,7 @@
 
 #include "CaramelTestPch.h"
 
+#include "Utils/AssetPath.h"
 #include <Caramel/Error/Alert.h>
 #include <Caramel/Program/ConsoleApplication.h>
 #include <Caramel/Program/ProgramOptions.h>
@@ -75,6 +76,22 @@ int main( int argc, char* argv[] )
     RunTest app;
     return app.Run( argc, argv );
 }
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Utilities
+//
+
+namespace Caramel
+{
+
+Path AssetPath( const string& fileName )
+{
+    return Path( "..\\assets" ) / fileName;
+}
+
+} // namespace Caramel
 
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -62,12 +62,6 @@
     <Filter Include="2. Tests\Io">
       <UniqueIdentifier>{b23e8bfd-4e50-471f-9692-56dbae3bb27c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="4. Precompiled Header">
-      <UniqueIdentifier>{5bf651e5-940d-421f-bfc0-e548e50759fa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="3. Utils for Testing">
-      <UniqueIdentifier>{fbe46388-e545-41a5-95c2-68c7f29afae6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="2. Tests\Meta">
       <UniqueIdentifier>{57f14968-8822-4d4f-acc5-91086e5e0aec}</UniqueIdentifier>
     </Filter>
@@ -86,13 +80,22 @@
     <Filter Include="2. Tests\Configuration">
       <UniqueIdentifier>{11280e9a-9ce1-4bb2-8b47-95b4745d399a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="5. Precompiled Header">
+      <UniqueIdentifier>{5bf651e5-940d-421f-bfc0-e548e50759fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="4. Utils for Testing">
+      <UniqueIdentifier>{fbe46388-e545-41a5-95c2-68c7f29afae6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Testing Assets">
+      <UniqueIdentifier>{2bf94cfb-8d6a-424c-83c1-5269782f85e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\RunTest.cpp">
       <Filter>1. Main Entry</Filter>
     </ClCompile>
     <ClCompile Include="..\src\CaramelTestPch.cpp">
-      <Filter>4. Precompiled Header</Filter>
+      <Filter>5. Precompiled Header</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Arithmetic\FlagsSuite.cpp">
       <Filter>2. Tests\Arithmetic</Filter>
@@ -334,30 +337,33 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">
-      <Filter>4. Precompiled Header</Filter>
+      <Filter>5. Precompiled Header</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Utils\StdVectorUtils.h">
-      <Filter>3. Utils for Testing</Filter>
+      <Filter>4. Utils for Testing</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Utils\SharedArrayUtils.h">
-      <Filter>3. Utils for Testing</Filter>
+      <Filter>4. Utils for Testing</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Utils\Matcher.h">
-      <Filter>3. Utils for Testing</Filter>
+      <Filter>4. Utils for Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Utils\AssetPath.h">
+      <Filter>4. Utils for Testing</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\src\Document\test1.ini">
-      <Filter>2. Tests\Document</Filter>
+    <None Include="..\assets\items.ini">
+      <Filter>3. Testing Assets</Filter>
     </None>
-    <None Include="..\src\Document\test2.ini">
-      <Filter>2. Tests\Document</Filter>
+    <None Include="..\assets\values.ini">
+      <Filter>3. Testing Assets</Filter>
     </None>
-    <None Include="..\src\Configuration\values.ini">
-      <Filter>2. Tests\Configuration</Filter>
+    <None Include="..\assets\test1.ini">
+      <Filter>3. Testing Assets</Filter>
     </None>
-    <None Include="..\src\Configuration\items.ini">
-      <Filter>2. Tests\Configuration</Filter>
+    <None Include="..\assets\test2.ini">
+      <Filter>3. Testing Assets</Filter>
     </None>
   </ItemGroup>
 </Project>
