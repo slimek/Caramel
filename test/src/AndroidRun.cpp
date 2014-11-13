@@ -2,11 +2,13 @@
 
 #include "CaramelTestPch.h"
 
+#include "Utils/AssetPath.h"
 #include <Caramel/Android/LogTraceAdapter.h>
 #include <Caramel/Android/Streambuf.h>
 #include <Caramel/Functional/ScopeExit.h>
 #include <UnitTest++/TestReporterCout.h>
 #include <jni.h>
+#include <android/asset_manager.h>
 #include <iostream>
 #include <thread>
 
@@ -78,6 +80,11 @@ void RunTest::Main()
 } // namespace Caramel
 
 
+///////////////////////////////////////////////////////////////////////////////
+//
+// JNI Functions
+//
+
 extern "C"
 {
 
@@ -87,8 +94,13 @@ jint JNI_OnLoad( JavaVM* vm, void* reserved )
 }
 
 
-void Java_com_slimek_carameltest_CaramelTestActivity_Run( JNIEnv* env, jobject thiz )
+static AAssetManager* s_assetManager = nullptr;
+
+void Java_com_slimek_carameltest_CaramelTestActivity_Run(
+	JNIEnv* env, jobject thiz, jobject assetManager )
 {
+	s_assetManager = AAssetManager_fromJava( env, assetManager );
+
 	static auto testTop = new Caramel::RunTest;  // Do not delete it.
 	testTop->Start();
 }

@@ -1,6 +1,8 @@
 package com.slimek.carameltest;
 
 import android.app.Activity;
+import android.content.res.AssetManager;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,7 +18,7 @@ public class CaramelTestActivity extends Activity
 		System.loadLibrary( "CaramelTest" );
 	}
 	
-	public native void Run();
+	public native void Run( AssetManager mgr );
 	
 	@Override
 	public void onCreate( Bundle savedInstanceState )
@@ -37,7 +39,7 @@ public class CaramelTestActivity extends Activity
 				@Override
 				public void onClick( View view )
 				{
-					Run();
+					Run( getResources().getAssetManager() );
 				}
 			}
 		);
