@@ -348,7 +348,7 @@
     <ClInclude Include="..\src\Utils\Matcher.h">
       <Filter>4. Utils for Testing</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Utils\AssetPath.h">
+    <ClInclude Include="..\src\Utils\AssetReader.h">
       <Filter>4. Utils for Testing</Filter>
     </ClInclude>
   </ItemGroup>

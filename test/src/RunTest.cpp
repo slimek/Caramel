@@ -2,8 +2,9 @@
 
 #include "CaramelTestPch.h"
 
-#include "Utils/AssetPath.h"
+#include "Utils/AssetReader.h"
 #include <Caramel/Error/Alert.h>
+#include <Caramel/FileSystem/Path.h>
 #include <Caramel/Program/ConsoleApplication.h>
 #include <Caramel/Program/ProgramOptions.h>
 #include <UnitTest++/UnitTest++.h>
@@ -86,10 +87,17 @@ int main( int argc, char* argv[] )
 namespace Caramel
 {
 
-Path AssetPath( const string& fileName )
+AssetReader::AssetReader( const std::string& fileName )
+    : m_file( Path( "..\\assets" ) / fileName )
+    , m_reader( m_file )
+{}
+
+
+Bool AssetReader::ReadLine( std::string& line )
 {
-    return Path( "..\\assets" ) / fileName;
+    return m_reader.ReadLine( line );
 }
+
 
 } // namespace Caramel
 

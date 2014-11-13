@@ -2,7 +2,7 @@
 
 #include "CaramelTestPch.h"
 
-#include "Utils/AssetPath.h"
+#include "Utils/AssetReader.h"
 #include "Utils/StdVectorUtils.h"
 #include <Caramel/Document/IniDocument.h>
 #include <UnitTest++/UnitTest++.h>
@@ -18,7 +18,8 @@ SUITE( IniDocumentSuite )
 
 TEST( IniDocumentFundamentalTest )
 {
-    IniDocument iniDoc( AssetPath( "test1.ini" ));
+    IniDocument iniDoc;
+    iniDoc.LoadFromText( AssetReader( "test1.ini" ));
 
     /// Booleans ///
 
@@ -98,7 +99,8 @@ TEST( IniDocumentFundamentalTest )
 
 TEST( IniDocumentNamedValuesTest )
 {
-    IniDocument iniDoc( AssetPath( "test1.ini" ));
+    IniDocument iniDoc;
+    iniDoc.LoadFromText( AssetReader( "test1.ini" ));
 
     auto bools = iniDoc.GetSection( "Booleans" );
     const auto bnvs = bools.ToNamedValues();
@@ -124,7 +126,8 @@ TEST( IniDocumentSyntaxTest )
     //   2. A '=' in a quoted value.
     //   3. The comments after a value.
 
-    IniDocument iniDoc( AssetPath( "test2.ini" ));
+    IniDocument iniDoc;
+    iniDoc.LoadFromText( AssetReader( "test2.ini" ));
 }
 
 

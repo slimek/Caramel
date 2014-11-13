@@ -177,7 +177,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h" />
-    <ClInclude Include="..\src\Utils\AssetPath.h" />
+    <ClInclude Include="..\src\Utils\AssetReader.h" />
     <ClInclude Include="..\src\Utils\Matcher.h" />
     <ClInclude Include="..\src\Utils\SharedArrayUtils.h" />
     <ClInclude Include="..\src\Utils\StdVectorUtils.h" />

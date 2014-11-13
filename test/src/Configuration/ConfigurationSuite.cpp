@@ -2,7 +2,7 @@
 
 #include "CaramelTestPch.h"
 
-#include "Utils/AssetPath.h"
+#include "Utils/AssetReader.h"
 #include <Caramel/Configuration/ConfigFromIni.h>
 #include <Caramel/Configuration/ConfigRoot.h>
 #include <Caramel/Configuration/ConfigValues.h>
@@ -42,7 +42,8 @@ TEST( ConfigValuesTest )
 
     /// Load the INI ///
 
-    IniDocument ini( AssetPath( "values.ini" ));
+    IniDocument ini;
+    ini.LoadFromText( AssetReader( "values.ini" ));
 
     ConfigRoot root;
     root.Load( MakeConfigSectionMap( ini ));
@@ -74,7 +75,8 @@ TEST( ConfigRootTest )
 {
     /// Load the INI into a named Root ///
 
-    IniDocument ini( AssetPath( "items.ini" ));
+    IniDocument ini;
+    ini.LoadFromText( AssetReader( "items.ini" ));
 
     ConfigRoot root( "Items" );
     root.Load( MakeConfigSectionMap( ini ));
