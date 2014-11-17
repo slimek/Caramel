@@ -92,6 +92,9 @@ public:
     std::string ToString() const;     // YYYY-MM-DD hh:mm:ss
     std::string ToIsoString() const;  // YYYY-MM-DDThh:mm:ss
 
+    // Returns ISO 8601 basic format. Less readable.
+    std::string ToIsoBasicString() const;  // YYYYMMDDThhmmss
+
     // According to the ANSI C strftime() format.
     std::string Format( const std::string& format ) const;
 

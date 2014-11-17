@@ -35,6 +35,7 @@ TEST( DateTimeStringTest )
 
     CHECK( "2013-04-05 18:09:30" == time1.ToString() );
     CHECK( "2013-04-05T18:09:30" == time1.ToIsoString() );
+    CHECK( "20130405T180930" == time1.ToIsoBasicString() );
 
     const auto span1 = TimeSpan::FromString( "22:08:19" );
 

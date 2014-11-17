@@ -422,6 +422,12 @@ std::string DateTime::ToIsoString() const
 }
 
 
+std::string DateTime::ToIsoBasicString() const
+{
+    return boost::posix_time::to_iso_string( *m_impl );
+}
+
+
 std::string DateTime::Format( const std::string& format ) const
 {
     return DateTimeManager::Instance()->FormatDateTime( *m_impl, format );
