@@ -1,10 +1,10 @@
-// Caramel C++ Library Test - Async - Any Event Poller Suite
+// Caramel C++ Library Test - Async - Any Event Reactor Suite
 
 #include "CaramelTestPch.h"
 
 #include <Caramel/Async/AnyEventDispatcher.h>
 #include <Caramel/Async/AnyEventHandler.h>
-#include <Caramel/Async/AnyEventPoller.h>
+#include <Caramel/Async/AnyEventReactor.h>
 #include <Caramel/Task/StdAsync.h>
 #include <Caramel/Thread/ThisThread.h>
 #include <UnitTest++/UnitTest++.h>
@@ -13,17 +13,17 @@
 namespace Caramel
 {
 
-SUITE( AnyEventPollerSuite )
+SUITE( AnyEventReactorSuite )
 {
 
-TEST( AnyEventPollerTest )
+TEST( AnyEventReactorTest )
 {
-    AnyEventPoller poller;
+    AnyEventReactor reactor;
     AnyEvent buffer;
 
     auto threadId = ThisThread::GetId();
 
-    auto source = poller.Receive(
+    auto source = reactor.Receive(
     [&] ( const AnyEvent& event )
     {
         buffer = event;
@@ -35,7 +35,7 @@ TEST( AnyEventPollerTest )
 
     CHECK( buffer.IsValid() == false );
 
-    poller.PollOne();
+    reactor.PollOne();
 
     CHECK( buffer.IsValid() == true );
     CHECK( buffer.Id() == 7 );
@@ -49,7 +49,7 @@ TEST( AnyEventPollerTest )
     disp.LinkTarget( source );
     disp.DispatchEvent( 9, "Cirno" );
 
-    poller.PollOne();
+    reactor.PollOne();
 
     CHECK( buffer.Id() == 9 );
     CHECK( buffer.Value< std::string >() == "Cirno" );
@@ -61,7 +61,7 @@ TEST( AnyEventPollerTest )
 
     handler( AnyEvent( 514, "Koishi" ));
 
-    poller.PollOne();
+    reactor.PollOne();
 
     CHECK( buffer.Id() == 514 );
     CHECK( buffer.Value< std::string >() == "Koishi" );
@@ -69,7 +69,7 @@ TEST( AnyEventPollerTest )
 
     /// Passed to Another Thread ///
 
-    auto task = MakeTask( "EventPoller",
+    auto task = MakeTask( "Eventreactor",
     [=]
     {
         source.AsHandler()( AnyEvent( 42, "Yukari" ));
@@ -80,7 +80,7 @@ TEST( AnyEventPollerTest )
 
     task.Wait();
 
-    poller.PollOne();
+    reactor.PollOne();
 
     CHECK( buffer.Id() == 42 );
     CHECK( buffer.Value< std::string >() == "Yukari" );
@@ -88,7 +88,7 @@ TEST( AnyEventPollerTest )
 
     //
     // Reset the Source
-    // - Unlink from dispatchers, but can still emit event to poller.
+    // - Unlink from dispatchers, but can still emit event to reactor.
     //
 
     // Clear the buffer
@@ -99,20 +99,20 @@ TEST( AnyEventPollerTest )
 
     disp.DispatchEvent( 3, "Utsuho" );
 
-    poller.PollOne();
+    reactor.PollOne();
 
     CHECK( buffer.IsValid() == false );
 
     source.AsHandler()( AnyEvent( 5, "Kaguya" ));
 
-    poller.PollOne();
+    reactor.PollOne();
 
     CHECK( buffer.Id() == 5 );
     CHECK( buffer.Value< std::string >() == "Kaguya" );
 
 
     //
-    // Reset the Poller
+    // Reset the reactor
     // - Unlink from all sources, and clear the event queue.
     //
 
@@ -120,23 +120,23 @@ TEST( AnyEventPollerTest )
     buffer = AnyEvent();
     CHECK( buffer.IsValid() == false );
 
-    // Put an event into poller, but doesn't consume it.
+    // Put an event into reactor, but doesn't consume it.
     source.AsHandler()( AnyEvent( 8, "Eirin" ));
 
-    poller.Reset();
+    reactor.Reset();
 
     // After reset, the previous events are discarded.
-    poller.PollOne();
+    reactor.PollOne();
     CHECK( buffer.IsValid() == false );
 
-    // Sources are also unlinked from poller.
+    // Sources are also unlinked from reactor.
     source.AsHandler()( AnyEvent( 6, "Nitori" ));
 
-    poller.PollOne();
+    reactor.PollOne();
     CHECK( buffer.IsValid() == false );
 }
 
 
-} // SUITE AnyEventPollerSuite
+} // SUITE AnyEventReactorSuite
 
 } // namespace Caramel

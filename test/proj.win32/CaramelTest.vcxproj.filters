@@ -328,11 +328,11 @@
     <ClCompile Include="..\src\Lexical\LexicalVersionSuite.cpp">
       <Filter>2. Tests\Lexical</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Async\AnyEventPollerSuite.cpp">
-      <Filter>2. Tests\Async</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\String\StringConvertibleSuite.cpp">
       <Filter>2. Tests\String</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Async\AnyEventReactorSuite.cpp">
+      <Filter>2. Tests\Async</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

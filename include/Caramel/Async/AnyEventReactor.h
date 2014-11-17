@@ -1,11 +1,11 @@
-// Caramel C++ Library - Async Facility - Any Event Poller Header
+// Caramel C++ Library - Async Facility - Any Event Reactor Header
 
-#ifndef __CARAMEL_ASYNC_ANY_EVENT_POLLER_H
-#define __CARAMEL_ASYNC_ANY_EVENT_POLLER_H
+#ifndef __CARAMEL_ASYNC_ANY_EVENT_REACTOR_H
+#define __CARAMEL_ASYNC_ANY_EVENT_REACTOR_H
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
-#include <Caramel/Async/Detail/AnyEventPollerSource.h>
+#include <Caramel/Async/Detail/AnyEventReactorSource.h>
 #include <Caramel/Async/AnyEvent.h>
 #include <boost/noncopyable.hpp>
 #include <functional>
@@ -16,27 +16,27 @@ namespace Caramel
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Any Event Poller
+// Any Event Reactor
 // - The class provides the mechanism:
 //
 //   1. Start an asynchronous action, and assign a completion handler to it.
 //   2. When the action is done, the background thread put the event and its handler
-//      into the Poller.
+//      into the Reactor.
 //   3. A user thread polls the events and calls their own handler.
 //
 
-class AnyEventPollerImpl;
+class AnyEventReactorImpl;
 
-class AnyEventPoller : public boost::noncopyable
+class AnyEventReactor : public boost::noncopyable
 {
 public:
 
-    AnyEventPoller();
-    ~AnyEventPoller();
+    AnyEventReactor();
+    ~AnyEventReactor();
 
 
     // Provide the source to emit events.
-    Detail::AnyEventPollerSource Receive( std::function< void( const AnyEvent& ) > handler );
+    Detail::AnyEventReactorSource Receive( std::function< void( const AnyEvent& ) > handler );
 
     // Polling the enqueued events, and call the receiving handler with polled events.
     void PollOne();
@@ -49,7 +49,7 @@ private:
 
     /// Data Members ///
 
-    std::shared_ptr< AnyEventPollerImpl > m_impl;
+    std::shared_ptr< AnyEventReactorImpl > m_impl;
 };
 
 
@@ -57,4 +57,4 @@ private:
 
 } // namespace Caramel
 
-#endif // __CARAMEL_ASYNC_ANY_EVENT_POLLER_H
+#endif // __CARAMEL_ASYNC_ANY_EVENT_REACTOR_H

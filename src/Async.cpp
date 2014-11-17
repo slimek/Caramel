@@ -3,9 +3,9 @@
 #include "CaramelPch.h"
 
 #include "Async/AnyEventDispatcherImpl.h"
-#include "Async/AnyEventPollerImpl.h"
-#include "Async/AnyEventPollerSourceImpl.h"
 #include "Async/AnyEventQueueImpl.h"
+#include "Async/AnyEventReactorImpl.h"
+#include "Async/AnyEventReactorSourceImpl.h"
 #include "Async/AnyEventSlotImpl.h"
 #include "Async/AnyEventTargetImpl.h"
 #include "Async/AnyEventTargetProxyImpl.h"
@@ -25,8 +25,8 @@ namespace Caramel
 //   AnyEventTargetProxy
 //   Detail::AnyEventQueueProxy
 //   Detail::AnyEventDispatcherProxy
-//   AnyEventPoller
-//   Detail::AnyEventPollerSource
+//   AnyEventReactor
+//   Detail::AnyEventReactorSource
 //   AnyEventHandler
 //
 
@@ -585,35 +585,35 @@ AnyEventTargetPtr AnyEventDispatcherProxy::GetTargetImpl() const
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Any Event Poller
+// Any Event Reactor
 //
 
-AnyEventPoller::AnyEventPoller()
-    : m_impl( new AnyEventPollerImpl )
+AnyEventReactor::AnyEventReactor()
+    : m_impl( new AnyEventReactorImpl )
 {}
 
 
-AnyEventPoller::~AnyEventPoller()
+AnyEventReactor::~AnyEventReactor()
 {}
 
 
-Detail::AnyEventPollerSource
-AnyEventPoller::Receive( std::function< void( const AnyEvent& ) > handler )
+Detail::AnyEventReactorSource
+AnyEventReactor::Receive( std::function< void( const AnyEvent& ) > handler )
 {
     CARAMEL_ASSERT( handler );
 
-    return Detail::AnyEventPollerSource(
-        std::make_shared< Detail::AnyEventPollerSource::Impl >( m_impl, handler ));
+    return Detail::AnyEventReactorSource(
+        std::make_shared< Detail::AnyEventReactorSource::Impl >( m_impl, handler ));
 }
 
 
-void AnyEventPoller::PollOne()
+void AnyEventReactor::PollOne()
 {
     m_impl->PollOne();
 }
 
 
-void AnyEventPoller::Reset()
+void AnyEventReactor::Reset()
 {
     m_impl->IncrementAge();
     m_impl->Clear();
@@ -624,7 +624,7 @@ void AnyEventPoller::Reset()
 // Implementation
 //
 
-void AnyEventPollerImpl::Emit( Entry&& entry, Uint age )
+void AnyEventReactorImpl::Emit( Entry&& entry, Uint age )
 {
     auto ulock = this->CompareAge( age );
     if ( ulock )
@@ -634,7 +634,7 @@ void AnyEventPollerImpl::Emit( Entry&& entry, Uint age )
 }
 
 
-void AnyEventPollerImpl::PollOne()
+void AnyEventReactorImpl::PollOne()
 {
     Entry e;
     if ( m_entries.TryPop( e ))
@@ -657,7 +657,7 @@ void AnyEventPollerImpl::PollOne()
 }
 
 
-void AnyEventPollerImpl::Clear()
+void AnyEventReactorImpl::Clear()
 {
     m_entries.Clear();
 }
@@ -667,14 +667,14 @@ void AnyEventPollerImpl::Clear()
 // Reference Aging
 //
 
-void AnyEventPollerImpl::IncrementAge()
+void AnyEventReactorImpl::IncrementAge()
 {
     UniqueLock ulock( m_ageMutex );
     ++ m_age;
 }
 
 
-UniqueLock AnyEventPollerImpl::CompareAge( Uint age ) const
+UniqueLock AnyEventReactorImpl::CompareAge( Uint age ) const
 {
     UniqueLock ulock( m_ageMutex );
     if ( m_age != age )
@@ -687,19 +687,19 @@ UniqueLock AnyEventPollerImpl::CompareAge( Uint age ) const
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Any Event Poller Source
+// Any Event Reactor Source
 //
 
 namespace Detail
 {
 
-AnyEventPollerSource::AnyEventPollerSource( std::shared_ptr< Impl > impl )
+AnyEventReactorSource::AnyEventReactorSource( std::shared_ptr< Impl > impl )
     : m_impl( impl )
     , m_null( std::make_shared< std::nullptr_t >() )
 {}
 
 
-AnyEventPollerSource::~AnyEventPollerSource()
+AnyEventReactorSource::~AnyEventReactorSource()
 {
     if ( m_null.unique() )  // This is the last copy of a source.
     {
@@ -708,13 +708,13 @@ AnyEventPollerSource::~AnyEventPollerSource()
 }
 
 
-void AnyEventPollerSource::Reset()
+void AnyEventReactorSource::Reset()
 {
     m_impl->IncrementAge();
 }
 
 
-AnyEventTargetPtr AnyEventPollerSource::GetTargetImpl() const
+AnyEventTargetPtr AnyEventReactorSource::GetTargetImpl() const
 {
     return m_impl;
 }
@@ -724,22 +724,22 @@ AnyEventTargetPtr AnyEventPollerSource::GetTargetImpl() const
 // Implementation
 //
 
-AnyEventPollerSource::Impl::Impl(
-    std::shared_ptr< AnyEventPollerImpl > poller,
+AnyEventReactorSource::Impl::Impl(
+    std::shared_ptr< AnyEventReactorImpl > reactor,
     std::function< void( const AnyEvent& ) > handler )
-    : m_poller( poller )
+    : m_reactor( reactor )
     , m_handler( handler )
-    , m_pollerAge( poller->GetAge() )
+    , m_reactorAge( reactor->GetAge() )
 {
 }
 
 
-void AnyEventPollerSource::Impl::Send( const AnyEvent& event, Uint age )
+void AnyEventReactorSource::Impl::Send( const AnyEvent& event, Uint age )
 {
     auto ulock = this->CompareAge( age );
     if ( ulock )
     {
-        m_poller->Emit( { event, m_handler }, m_pollerAge );
+        m_reactor->Emit( { event, m_handler }, m_reactorAge );
     }
 }
 

@@ -1,7 +1,7 @@
-// Caramel C++ Library - Async Facility - Detail - Any Event Poller Source Header
+// Caramel C++ Library - Async Facility - Detail - Any Event Reactor Source Header
 
-#ifndef __CARAMEL_ASYNC_DETAIL_ANY_EVENT_POLLER_SOURCE_H
-#define __CARAMEL_ASYNC_DETAIL_ANY_EVENT_POLLER_SOURCE_H
+#ifndef __CARAMEL_ASYNC_DETAIL_ANY_EVENT_REACTOR_SOURCE_H
+#define __CARAMEL_ASYNC_DETAIL_ANY_EVENT_REACTOR_SOURCE_H
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
@@ -13,23 +13,23 @@ namespace Caramel
 {
 
 // Forwards declaration
-class AnyEventPoller;
+class AnyEventReactor;
 
 namespace Detail
 {
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Any Event Poller source
+// Any Event Reactor Source
 //
 
-class AnyEventPollerSource : public AnyEventTarget
+class AnyEventReactorSource : public AnyEventTarget
 {
-    friend class Caramel::AnyEventPoller;
+    friend class Caramel::AnyEventReactor;
 
 public:
 
-    ~AnyEventPollerSource();
+    ~AnyEventReactorSource();
 
 
     /// AnyEventTarget operations ///
@@ -42,7 +42,7 @@ private:
 
     class Impl;
     
-    AnyEventPollerSource( std::shared_ptr< Impl > impl );
+    AnyEventReactorSource( std::shared_ptr< Impl > impl );
 
     AnyEventTargetPtr GetTargetImpl() const override;
 
@@ -62,4 +62,4 @@ private:
 
 } // namespace Caramel
 
-#endif // __CARAMEL_ASYNC_DETAIL_ANY_EVENT_POLLER_SOURCE_H
+#endif // __CARAMEL_ASYNC_DETAIL_ANY_EVENT_REACTOR_SOURCE_H

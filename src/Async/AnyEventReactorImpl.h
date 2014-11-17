@@ -1,11 +1,11 @@
-// Caramel C++ Library - Async Facility - Any Event Poller Private Header
+// Caramel C++ Library - Async Facility - Any Event Reactor Private Header
 
-#ifndef __CARAMEL_ASYNC_ANY_EVENT_POLLER_IMPL_H
-#define __CARAMEL_ASYNC_ANY_EVENT_POLLER_IMPL_H
+#ifndef __CARAMEL_ASYNC_ANY_EVENT_REACTOR_IMPL_H
+#define __CARAMEL_ASYNC_ANY_EVENT_REACTOR_IMPL_H
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
-#include <Caramel/Async/AnyEventPoller.h>
+#include <Caramel/Async/AnyEventReactor.h>
 #include <Caramel/Concurrent/Queue.h>
 #include <Caramel/Thread/MutexLocks.h>
 
@@ -18,7 +18,7 @@ namespace Caramel
 // Any Event Poller
 //
 
-class AnyEventPollerImpl
+class AnyEventReactorImpl
 {
 public:
 
@@ -59,4 +59,4 @@ private:
 
 } // namespace Caramel
 
-#endif // __CARAMEL_ASYNC_ANY_EVENT_POLLER_IMPL_H
+#endif // __CARAMEL_ASYNC_ANY_EVENT_REACTOR_IMPL_H

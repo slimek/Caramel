@@ -94,7 +94,7 @@
     <ClCompile Include="..\src\Arithmetic\PowerOfTwoSuite.cpp" />
     <ClCompile Include="..\src\Async\AnyEventDispatcherSuite.cpp" />
     <ClCompile Include="..\src\Async\AnyEventHandlerSuite.cpp" />
-    <ClCompile Include="..\src\Async\AnyEventPollerSuite.cpp" />
+    <ClCompile Include="..\src\Async\AnyEventReactorSuite.cpp" />
     <ClCompile Include="..\src\Async\AnyEventQueueSuite.cpp" />
     <ClCompile Include="..\src\Async\AnyEventSlotSuite.cpp" />
     <ClCompile Include="..\src\Async\AnyEventSuite.cpp" />

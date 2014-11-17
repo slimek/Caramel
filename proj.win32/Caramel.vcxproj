@@ -20,11 +20,11 @@
     <ClInclude Include="..\include\Caramel\Async\AnyEvent.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEventDispatcher.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEventHandler.h" />
-    <ClInclude Include="..\include\Caramel\Async\AnyEventPoller.h" />
+    <ClInclude Include="..\include\Caramel\Async\AnyEventReactor.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEventSlot.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEventTarget.h" />
     <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventDispatcherProxy.h" />
-    <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventPollerSource.h" />
+    <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventReactorSource.h" />
     <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventQueueProxy.h" />
     <ClInclude Include="..\include\Caramel\Async\FlowState.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEventQueue.h" />
@@ -181,8 +181,8 @@
     <ClInclude Include="..\include\Caramel\Windows\Registry.h" />
     <ClInclude Include="..\include\Caramel\Windows\WideString.h" />
     <ClInclude Include="..\src\Async\AnyEventDispatcherImpl.h" />
-    <ClInclude Include="..\src\Async\AnyEventPollerImpl.h" />
-    <ClInclude Include="..\src\Async\AnyEventPollerSourceImpl.h" />
+    <ClInclude Include="..\src\Async\AnyEventReactorImpl.h" />
+    <ClInclude Include="..\src\Async\AnyEventReactorSourceImpl.h" />
     <ClInclude Include="..\src\Async\AnyEventTargetProxyImpl.h" />
     <ClInclude Include="..\src\Async\AnyEventQueueImpl.h" />
     <ClInclude Include="..\src\Async\AnyEventSlotImpl.h" />
