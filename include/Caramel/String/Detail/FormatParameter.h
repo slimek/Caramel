@@ -6,6 +6,7 @@
 
 #include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Meta/IfThenElse.h>
+#include <Caramel/Meta/IsGeneralString.h>
 #include <Caramel/Numeric/NumberConvertible.h>
 #include <Caramel/String/StringConvertible.h>
 #include <type_traits>
@@ -30,6 +31,16 @@ struct FormatParameter_IdentityCopy
 {
     T operator() ( T x ) const { return x; }
 };  
+
+
+//
+// C++ String Literal types
+//
+template< typename T >
+struct FormatParameter_GeneralString
+{
+    std::string operator() ( const T& x ) const { return std::string( x ); }
+};
 
 
 //
@@ -68,10 +79,11 @@ struct FormatParameter_NumberConvertible
 template< typename T >
 struct FormatParameterSelect
 {
-    typedef typename IfThenElse4T
+    typedef typename IfThenElse5T
     <
         std::is_fundamental< T >::value,    FormatParameter_IdentityCopy< T >,
         std::is_enum< T >::value,           FormatParameter_IdentityCopy< T >,
+        IsGeneralStringT< T >::VALUE,       FormatParameter_GeneralString< T >,
         IsStringConvertibleT< T >::VALUE,   FormatParameter_StringConvertible< T >,
         IsNumberConvertibleT< T >::VALUE,   FormatParameter_NumberConvertible< T >,
                                             EmptyType
@@ -99,32 +111,7 @@ struct FormatParameter
 template<>
 struct FormatParameter< std::string >
 {
-    std::string operator() ( const std::string& s ) const { return s; }
-};
-
-
-template<>
-struct FormatParameter< Char* >
-{
-    std::string operator() ( const Char* sz ) const { return std::string( sz ); }
-};
-
-
-//
-// C-style literal string
-//
-
-template< Uint n >
-struct FormatParameter< const Char[n] >
-{
-    std::string operator() ( const Char(& sz)[n] ) const { return std::string( sz ); }
-};
-
-
-template< Uint n >
-struct FormatParameter< Char[n] >
-{
-    std::string operator() ( const Char(& sz)[n] ) const { return std::string( sz ); }
+    const std::string& operator() ( const std::string& s ) const { return s; }
 };
 
 

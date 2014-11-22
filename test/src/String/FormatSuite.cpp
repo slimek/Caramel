@@ -2,7 +2,10 @@
 
 #include "CaramelTestPch.h"
 
+#include <Caramel/Chrono/SecondClock.h>
+#include <Caramel/Chrono/TickClock.h>
 #include <Caramel/String/Format.h>
+#include <Caramel/Value/Scalar.h>
 #include <UnitTest++/UnitTest++.h>
 
 
@@ -54,6 +57,12 @@ TEST( FormatStringTest )
 {
     CHECK( "Miko: Reimu" == Format( "Miko: {0}", "Reimu" ));
     CHECK( "Ah Ha Ha Ha!" == Format( "{1} {0} {0} {0}!", "Ha", "Ah" ));
+
+    auto text0 = "Perfect";
+    const Char text1[] = "Cherry";
+    const Char* text2 = "Blossom";
+
+    CHECK( "Perfect Cherry Blossom" == Format( "{0} {1} {2}", text0, text1, text2 ));
 }
 
 
@@ -63,6 +72,28 @@ TEST( FormatFailureTest )
     CHECK( "Score {0" == Format( "Score {0", 42 ));
     CHECK( "Score 0}" == Format( "Score 0}", 42 ));
     CHECK( "Score {}" == Format( "Score {}", 42 ));
+}
+
+
+TEST( FormatStringConvertibleTest )
+{
+    // Scalar is StringConvertible
+
+    Scalar s0( 77 );
+    Scalar s1( "Alice" );
+    
+    CHECK( "Alice has 77 dolls" == Format( "{1} has {0} dolls", s0, s1 ));
+}
+
+
+TEST( FormatNumberConvertibleTest )
+{
+    // Ticks and Seconds are NumberConvertible
+
+    Ticks ticks( 512 );
+    Seconds secs( 3.14 );
+
+    CHECK( "512 3.14" == Format( "{0} {1}", ticks, secs ));
 }
 
 
