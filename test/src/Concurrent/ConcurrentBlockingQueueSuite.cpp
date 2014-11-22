@@ -4,9 +4,9 @@
 
 #include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Concurrent/BlockingQueue.h>
+#include <Caramel/Task/StdAsync.h>
 #include <Caramel/Thread/ThisThread.h>
 #include <UnitTest++/UnitTest++.h>
-#include <future>
 
 
 namespace Caramel
@@ -17,6 +17,8 @@ SUITE( ConcurrentBlockingQueueSuite )
 
 TEST( BlockingQueueBasicTest )
 {
+    StdAsync async;
+
     /// Int Queue ///
 
     {
@@ -41,11 +43,11 @@ TEST( BlockingQueueBasicTest )
         
         // Pulse All
 
-        std::async( std::launch::async, [&]
+        async.Submit( MakeTask( "PulseAll", [&]
         {
             ThisThread::SleepFor( Ticks( 100 ));
             iqueue.PulseAll();
-        });
+        }));
 
         iqueue.PopOrWaitFor( value, Ticks( 500 ));
 
@@ -54,11 +56,12 @@ TEST( BlockingQueueBasicTest )
 
         // Wait and Available
 
-        std::async( std::launch::async, [&]
+        async.Submit( MakeTask( "WaitAndAvailable",
+        [&]
         {
             ThisThread::SleepFor( Ticks( 100 ));
             iqueue.Push( 125 );
-        });
+        }));
 
         CHECK( false == iqueue.PopOrWaitFor( value, Ticks( 0 )));
         CHECK( true  == iqueue.PopOrWaitFor( value, Ticks( 200 )));
@@ -69,11 +72,12 @@ TEST( BlockingQueueBasicTest )
 
         // Complete
 
-        std::async( std::launch::async, [&]
+        async.Submit( MakeTask( "Complete",
+        [&]
         {
             ThisThread::SleepFor( Ticks( 100 ));
             iqueue.Complete();
-        });
+        }));
 
         CHECK( false == iqueue.PopOrWaitFor( value, Ticks( 200 )));
         

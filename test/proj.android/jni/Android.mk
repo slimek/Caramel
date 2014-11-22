@@ -54,14 +54,40 @@ LOCAL_SRC_FILES := \
 	$(CRMTEST_SRC)/AndroidRun.cpp \
 	$(CRMTEST_SRC)/Arithmetic/FlagsSuite.cpp \
 	$(CRMTEST_SRC)/Arithmetic/PowerOfTwoSuite.cpp \
+	$(CRMTEST_SRC)/Async/AnyEventDispatcherSuite.cpp \
+	$(CRMTEST_SRC)/Async/AnyEventHandlerSuite.cpp \
+	$(CRMTEST_SRC)/Async/AnyEventReactorSuite.cpp \
+	$(CRMTEST_SRC)/Async/AnyEventQueueSuite.cpp \
+	$(CRMTEST_SRC)/Async/AnyEventSlotSuite.cpp \
+	$(CRMTEST_SRC)/Async/AnyEventSuite.cpp \
+	$(CRMTEST_SRC)/Async/FlowStateSuite.cpp \
+	$(CRMTEST_SRC)/Async/ValueChangeSuite.cpp \
 	$(CRMTEST_SRC)/Chrono/ClockProxySuite.cpp \
 	$(CRMTEST_SRC)/Chrono/SecondClockSuite.cpp \
 	$(CRMTEST_SRC)/Chrono/TickClockSuite.cpp \
 	$(CRMTEST_SRC)/Chrono/TimedBoolSuite.cpp \
+	$(CRMTEST_SRC)/Concurrent/ConcurrentBlockingQueueSuite.cpp \
+	$(CRMTEST_SRC)/Concurrent/ConcurrentIntervalSetSuite.cpp \
+	$(CRMTEST_SRC)/Concurrent/ConcurrentMapSuite.cpp \
+	$(CRMTEST_SRC)/Concurrent/ConcurrentPriorityQueueSuite.cpp \
+	$(CRMTEST_SRC)/Concurrent/ConcurrentQueueSuite.cpp \
+	$(CRMTEST_SRC)/Concurrent/ConcurrentSetSuite.cpp \
+	$(CRMTEST_SRC)/Concurrent/ConcurrentStackSuite.cpp \
+	$(CRMTEST_SRC)/Data/Base64Suite.cpp \
+	$(CRMTEST_SRC)/Data/LookupTableSuite.cpp \
+	$(CRMTEST_SRC)/DateTime/DateSuite.cpp \
+	$(CRMTEST_SRC)/DateTime/DateTimeBoolSuite.cpp \
+	$(CRMTEST_SRC)/DateTime/DateTimeSuite.cpp \
+	$(CRMTEST_SRC)/DateTime/TimeOfDaySuite.cpp \
+	$(CRMTEST_SRC)/DateTime/TimeSpanSuite.cpp \
 	$(CRMTEST_SRC)/Error/AlertSuite.cpp \
 	$(CRMTEST_SRC)/Error/AnyFailureSuite.cpp \
 	$(CRMTEST_SRC)/Error/CatchExceptionSuite.cpp \
 	$(CRMTEST_SRC)/Error/ExceptionPtrSuite.cpp \
+	$(CRMTEST_SRC)/Lexical/LexicalBooleanSuite.cpp \
+	$(CRMTEST_SRC)/Lexical/LexicalFloatingSuite.cpp \
+	$(CRMTEST_SRC)/Lexical/LexicalIntegerSuite.cpp \
+	$(CRMTEST_SRC)/Lexical/LexicalVersionSuite.cpp \
 	$(CRMTEST_SRC)/String/FormatSuite.cpp \
 	$(CRMTEST_SRC)/String/SplitSuite.cpp \
 	$(CRMTEST_SRC)/String/SprintfSuite.cpp \
