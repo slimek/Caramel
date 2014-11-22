@@ -519,64 +519,9 @@ template<> std::string ToStringT< Double >() { return "Double"; }
 namespace Detail
 {
 
-Formatter::Formatter( const std::string& format )
-    : m_impl( new FormatterImpl( format ))
-{
-}
-
-
-void Formatter::Feed( Uint index, Int value )
-{
-    m_impl->Distribute( index, [=] ( const std::string& ) -> std::string
-    {
-        return ToString( value );
-    });
-}
-
-
-void Formatter::Feed( Uint index, Uint value )
-{
-    m_impl->Distribute( index, [=] ( const std::string& ) -> std::string
-    {
-        return ToString( value );
-    });
-}
-
-
-void Formatter::Feed( Uint index, Int64 value )
-{
-    m_impl->Distribute( index, [=] ( const std::string& ) -> std::string
-    {
-        return ToString( value );
-    });
-}
-
-
-void Formatter::Feed( Uint index, Float value )
-{
-    m_impl->Distribute( index, [=] ( const std::string& ) -> std::string
-    {
-        return ToString( value );
-    });
-}
-
-
-void Formatter::Feed( Uint index, Double value )
-{
-    m_impl->Distribute( index, [=] ( const std::string& ) -> std::string
-    {
-        return ToString( value );
-    });
-}
-
-
-void Formatter::Feed( Uint index, const std::string& value )
-{
-    m_impl->Distribute( index, [=] ( const std::string& ) -> std::string
-    {
-        return value;
-    });
-}
+Formatter::Formatter( const std::string& format )   
+    : m_impl( new Formatter::Impl( format ))
+{}
 
 
 std::string Formatter::GetString() const
@@ -586,10 +531,68 @@ std::string Formatter::GetString() const
 
 
 //
+// Feeding Arguments
+//
+
+void Formatter::Feed( Int value )
+{
+    m_impl->Distribute( [=] ( const std::string& ) -> std::string
+    {
+        return ToString( value );
+    });
+}
+
+
+void Formatter::Feed( Uint value )
+{
+    m_impl->Distribute( [=] ( const std::string& ) -> std::string
+    {
+        return ToString( value );
+    });
+}
+
+
+void Formatter::Feed( Int64 value )
+{
+    m_impl->Distribute( [=] ( const std::string& ) -> std::string
+    {
+        return ToString( value );
+    });
+}
+
+
+void Formatter::Feed( Float value )
+{
+    m_impl->Distribute( [=] ( const std::string& ) -> std::string
+    {
+        return ToString( value );
+    });
+}
+
+
+void Formatter::Feed( Double value )
+{
+    m_impl->Distribute( [=] ( const std::string& ) -> std::string
+    {
+        return ToString( value );
+    });
+}
+
+
+void Formatter::Feed( const std::string& value )
+{
+    m_impl->Distribute( [=] ( const std::string& ) -> std::string
+    {
+        return value;
+    });
+}
+
+
+//
 // Implementation
 //
 
-FormatterImpl::FormatterImpl( const std::string& format )
+Formatter::Impl::Impl( const std::string& format )
 {
     std::string buffer = format;
     std::string head = "";
@@ -634,23 +637,25 @@ FormatterImpl::FormatterImpl( const std::string& format )
 }
 
 
-void FormatterImpl::Distribute(
-    Uint argIndex, std::function< std::string ( const std::string& ) > formatter )
+void Formatter::Impl::Distribute(
+    std::function< std::string ( const std::string& ) > formatResolver )
 {
-    for ( FormatItem& item : m_items )
-    {
-        if ( argIndex != item.argIndex ) { continue; }
+    const Uint index = m_feedingIndex ++;
 
-        item.content = formatter( "" );  // TODO: Item format may be specified in format string.
+    for ( auto& item : m_items )
+    {
+        if ( index != item.argIndex ) { continue; }
+
+        item.content = formatResolver( "" );  // TODO: Item format may be specified in format string.
     }
 }
 
 
-std::string FormatterImpl::GetString() const
+std::string Formatter::Impl::GetString() const
 {
     std::ostringstream stream;
 
-    for ( const FormatItem& item : m_items )
+    for ( const auto& item : m_items )
     {
         stream << item.head << item.content;
     }
@@ -662,7 +667,6 @@ std::string FormatterImpl::GetString() const
 
 
 } // namespace Detail
-
 
 ///////////////////////////////////////////////////////////////////////////////
 

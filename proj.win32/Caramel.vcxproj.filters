@@ -857,6 +857,12 @@
     <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventReactorSource.h">
       <Filter>1. Public Packages\Async\Detail</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\String\Detail\FormatRecursive.h">
+      <Filter>1. Public Packages\String\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\String\Detail\FormatParameter.h">
+      <Filter>1. Public Packages\String\Detail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

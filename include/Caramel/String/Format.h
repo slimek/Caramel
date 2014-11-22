@@ -6,7 +6,7 @@
 
 #include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/String/Detail/Formatter.h>
-#include <Caramel/String/Detail/SprintfParameter.h>
+#include <Caramel/String/Detail/FormatRecursive.h>
 
 
 namespace Caramel
@@ -17,94 +17,27 @@ namespace Caramel
 // Format Functions
 //
 
+// With Variadic Arguments
 
-// Functions with no Arguments
-
-inline std::string Format( const Char* format )
+template< typename... Args >
+inline std::string Format( const std::string& format, Args&&... args )
 {
-    return std::string( format );
+    Detail::Formatter formatter( format );
+    return Detail::FormatRecursive( formatter, std::forward< Args >( args )... );
 }
 
 
-inline const std::string& Format( const std::string& format )
+// With no Arguments
+
+inline std::string Format( const std::string& format )
 {
     return format;
 }
 
 
-//
-// Format with Arguments
-//
-
-template< typename T0 >
-inline std::string Format( const std::string& format, const T0& a0 )
+inline std::string Format( std::string&& format )
 {
-    Detail::Formatter formatter( format );
-    formatter.Feed( 0, Detail::SprintfParameter< T0 >()( a0 ));
-    return formatter.GetString();
-}
-
-
-template< typename T0, typename T1 >
-inline std::string Format( const std::string& format, const T0& a0, const T1& a1 )
-{
-    Detail::Formatter formatter( format );
-    formatter.Feed( 0, Detail::SprintfParameter< T0 >()( a0 ));
-    formatter.Feed( 1, Detail::SprintfParameter< T1 >()( a1 ));
-    return formatter.GetString();
-}
-
-
-template< typename T0, typename T1, typename T2 >
-inline std::string Format(
-    const std::string& format, const T0& a0, const T1& a1, const T2& a2 )
-{
-    Detail::Formatter formatter( format );
-    formatter.Feed( 0, Detail::SprintfParameter< T0 >()( a0 ));
-    formatter.Feed( 1, Detail::SprintfParameter< T1 >()( a1 ));
-    formatter.Feed( 2, Detail::SprintfParameter< T2 >()( a2 ));
-    return formatter.GetString();
-}
-
-
-template< typename T0, typename T1, typename T2, typename T3 >
-inline std::string Format(
-    const std::string& format, const T0& a0, const T1& a1, const T2& a2, const T3& a3 )
-{
-    Detail::Formatter formatter( format );
-    formatter.Feed( 0, Detail::SprintfParameter< T0 >()( a0 ));
-    formatter.Feed( 1, Detail::SprintfParameter< T1 >()( a1 ));
-    formatter.Feed( 2, Detail::SprintfParameter< T2 >()( a2 ));
-    formatter.Feed( 3, Detail::SprintfParameter< T3 >()( a3 ));
-    return formatter.GetString();
-}
-
-
-template< typename T0, typename T1, typename T2, typename T3, typename T4 >
-inline std::string Format(
-    const std::string& format, const T0& a0, const T1& a1, const T2& a2, const T3& a3, const T4& a4 )
-{
-    Detail::Formatter formatter( format );
-    formatter.Feed( 0, Detail::SprintfParameter< T0 >()( a0 ));
-    formatter.Feed( 1, Detail::SprintfParameter< T1 >()( a1 ));
-    formatter.Feed( 2, Detail::SprintfParameter< T2 >()( a2 ));
-    formatter.Feed( 3, Detail::SprintfParameter< T3 >()( a3 ));
-    formatter.Feed( 4, Detail::SprintfParameter< T4 >()( a4 ));
-    return formatter.GetString();
-}
-
-template< typename T0, typename T1, typename T2, typename T3, typename T4, typename T5 >
-inline std::string Format(
-    const std::string& format, const T0& a0, const T1& a1, const T2& a2, const T3& a3, const T4& a4, const T5& a5 )
-{
-    Detail::Formatter formatter( format );
-    formatter.Feed( 0, Detail::SprintfParameter< T0 >()( a0 ));
-    formatter.Feed( 1, Detail::SprintfParameter< T1 >()( a1 ));
-    formatter.Feed( 2, Detail::SprintfParameter< T2 >()( a2 ));
-    formatter.Feed( 3, Detail::SprintfParameter< T3 >()( a3 ));
-    formatter.Feed( 4, Detail::SprintfParameter< T4 >()( a4 ));
-	formatter.Feed( 5, Detail::SprintfParameter< T5 >()( a5 ));
-    return formatter.GetString();
+    return std::move( format );
 }
 
 

@@ -132,6 +132,8 @@
     <ClInclude Include="..\include\Caramel\Statechart\StateMachine.h" />
     <ClInclude Include="..\include\Caramel\String\Algorithm.h" />
     <ClInclude Include="..\include\Caramel\String\CainLess.h" />
+    <ClInclude Include="..\include\Caramel\String\Detail\FormatParameter.h" />
+    <ClInclude Include="..\include\Caramel\String\Detail\FormatRecursive.h" />
     <ClInclude Include="..\include\Caramel\String\Detail\Formatter.h" />
     <ClInclude Include="..\include\Caramel\String\Detail\SprintfParameter.h" />
     <ClInclude Include="..\include\Caramel\String\Format.h" />

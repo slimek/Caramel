@@ -21,36 +21,31 @@ namespace Detail
 // Formatter
 //
 
-class FormatterImpl
+class Formatter::Impl
 {
-    friend class Formatter;
-
 public:
 
-    explicit FormatterImpl( const std::string& format );
+    explicit Impl( const std::string& format );
 
-    void Distribute( Uint argIndex, std::function< std::string ( const std::string& ) > formatter );
-    
+    void Distribute( std::function< std::string( const std::string& ) > formatResolver );
+
     std::string GetString() const;
 
 
 private:
-
+    
     struct FormatItem
     {
-        FormatItem()
-            : argIndex( 0 )
-        {}
-        
-        Uint  argIndex;
+        Uint argIndex { 0 };
 
         std::string head;
         std::string content;
     };
 
     std::vector< FormatItem > m_items;
-
     std::string m_tail;
+
+    Uint m_feedingIndex { 0 };  // Increment after each Distribute() called.
 };
 
 

@@ -18,30 +18,33 @@ namespace Detail
 // Formatter
 //
 
-class FormatterImpl;
-
 class Formatter
 {
 public:
 
     explicit Formatter( const std::string& format );
 
-    void Feed( Uint index, Int    value );
-    void Feed( Uint index, Uint   value );
-    void Feed( Uint index, Int64  value );
-    void Feed( Uint index, Float  value );
-    void Feed( Uint index, Double value );
-
-    void Feed( Uint index, const std::string& value );
-
-
     std::string GetString() const;
+
+
+    /// Feeding Arguments ///
+
+    void Feed( Int    value );
+    void Feed( Uint   value );
+    void Feed( Int64  value );
+    void Feed( Uint64 value );
+    void Feed( Float  value );
+    void Feed( Double value );
+
+    void Feed( const std::string& value );
 
 
 private:
 
-    std::shared_ptr< FormatterImpl > m_impl;
+    class Impl;
+    std::shared_ptr< Impl > m_impl;
 };
+
 
 ///////////////////////////////////////////////////////////////////////////////
 
