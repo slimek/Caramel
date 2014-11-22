@@ -20,11 +20,12 @@ public class CaramelTestActivity extends Activity
 	
 	public native void Run( AssetManager mgr );
 	
+	
 	@Override
 	public void onCreate( Bundle savedInstanceState )
 	{
 		super.onCreate( savedInstanceState );
-
+		
 		LinearLayout layout = new LinearLayout( this );
 		layout.setOrientation( LinearLayout.VERTICAL );
 		
@@ -39,7 +40,7 @@ public class CaramelTestActivity extends Activity
 				@Override
 				public void onClick( View view )
 				{
-					Run( getResources().getAssetManager() );
+					Run( getResources().getAssets() );
 				}
 			}
 		);
