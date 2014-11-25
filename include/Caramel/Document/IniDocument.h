@@ -41,6 +41,7 @@ public:
     void LoadFromFile( const Utf8String&  fileName );
 
     void LoadFromText( TextReader& reader );
+    void LoadFromText( TextReader&& reader );
 
     void SaveToFile( const std::string& fileName, TextEncoding encoding );
     void SaveToFile( const Utf8String&  fileName, TextEncoding encoding );

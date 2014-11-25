@@ -86,6 +86,12 @@ void IniDocument::LoadFromText( TextReader& reader )
 }
 
 
+void IniDocument::LoadFromText( TextReader&& reader )
+{
+    m_impl->LoadFromText( reader );
+}
+
+
 IniSection IniDocument::GetSection( const std::string& sectionName )
 {
     IniSectionPtr section = m_impl->FindSection( sectionName );
