@@ -32,16 +32,16 @@ public:
     // Write a UTF-8 encoded string into stream.
     // - Throws if the text is not UTF-8 encoded.
     //
-    void Write( const std::string& text );
-    void Write( const Utf8String& text );
+    void Write( const std::string& text ) override;
+    void Write( const Utf8String& text ) override;
 
 
     //
     // Write a UTF-8 encoded string and a new line into stream.
     // - Throws if the text is not UTF-8 encoded.
     //
-    void WriteLine( const std::string& text );
-    void WriteLine( const Utf8String& text );
+    void WriteLine( const std::string& text ) override;
+    void WriteLine( const Utf8String& text ) override;
 
 
 private:

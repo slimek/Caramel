@@ -46,7 +46,7 @@ public:
     // Reads a line in UTF-8 encoded.
     // Returns false if EOF.
     //
-    Bool ReadLine( std::string& line );
+    Bool ReadLine( std::string& line ) override;
 
     //
     // Reads all data until the end of stream.

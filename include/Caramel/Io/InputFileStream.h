@@ -33,13 +33,13 @@ public:
     // Implements InputStream
     //
 
-    Uint Read( Void* buffer, Uint size );
+    Uint Read( Void* buffer, Uint size ) override;
 
-    void Seek( Int offset );
+    void Seek( Int offset ) override;
 
-    Uint Tell() const;
+    Uint Tell() const override;
 
-    Bool IsEof() const;
+    Bool IsEof() const override;
 
 };
 
