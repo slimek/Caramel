@@ -17,6 +17,11 @@
 namespace Caramel
 {
 
+///////////////////////////////////////////////////////////////////////////////
+//
+// Android Run Test Wrapper
+//
+
 class RunTest
 {
 public:
@@ -107,3 +112,39 @@ void Java_com_slimek_carameltest_CaramelTestActivity_Run(
 }
 
 } // extern "C"
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Asset Reader
+//
+
+namespace Caramel
+{
+
+AssetReader::AssetReader( const std::string& fileName )
+{
+	AAsset* asset = AAssetManager_open(
+		s_assetManager, fileName.c_str(), AASSET_MODE_UNKNOWN );
+
+	off_t fileSize = AAsset_getLength( asset );
+	m_buffer.resize( fileSize );
+
+	AAsset_read( asset, &m_buffer[0], fileSize );
+	AAsset_close( asset );
+
+	m_stream.reset( new InputMemoryStream( &m_buffer[0], m_buffer.size() ));
+	m_reader.reset( new TextStreamReader( *m_stream ));
+}
+
+
+Bool AssetReader::ReadLine( std::string& line )
+{
+	return m_reader->ReadLine( line );
+}
+
+
+} // namespace Caramel
+
+
+///////////////////////////////////////////////////////////////////////////////
