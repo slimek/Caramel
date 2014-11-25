@@ -12,6 +12,7 @@ LOCAL_SRC_FILES := \
 	$(CRM_SRC)/Async.cpp \
 	$(CRM_SRC)/Data.cpp \
 	$(CRM_SRC)/DateTime.cpp \
+	$(CRM_SRC)/Document.cpp \
 	$(CRM_SRC)/Error.cpp \
 	$(CRM_SRC)/FileSystem.cpp \
 	$(CRM_SRC)/Io.cpp \

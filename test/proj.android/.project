@@ -96,6 +96,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>assets</name>
+			<type>2</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/assets</locationURI>
+		</link>
+		<link>
 			<name>src.cpp</name>
 			<type>2</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/src</locationURI>
