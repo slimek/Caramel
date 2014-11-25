@@ -131,6 +131,7 @@
     <ClCompile Include="..\src\FileSystem\DirectoryInfoSuite.cpp" />
     <ClCompile Include="..\src\FileSystem\PathSuite.cpp" />
     <ClCompile Include="..\src\Functional\BindSuite.cpp" />
+    <ClCompile Include="..\src\Io\InputMemoryStreamSuite.cpp" />
     <ClCompile Include="..\src\Io\TextStreamWriterSuite.cpp" />
     <ClCompile Include="..\src\Lexical\LexicalBooleanSuite.cpp" />
     <ClCompile Include="..\src\Lexical\LexicalFloatingSuite.cpp" />

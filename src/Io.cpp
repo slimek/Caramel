@@ -8,6 +8,7 @@
 #include "Io/Utf8StreamWriter.h"
 #include <Caramel/Io/FileStream.h>
 #include <Caramel/Io/InputFileStream.h>
+#include <Caramel/Io/InputMemoryStream.h>
 #include <Caramel/Io/OutputFileStream.h>
 #include <Caramel/Io/TextStreamReader.h>
 #include <Caramel/Io/TextStreamWriter.h>
@@ -28,6 +29,7 @@ namespace Caramel
 //   FileStream
 //   InputFileStream
 //   OutputFileStream
+//   InputMemoryStream
 //
 // < Readers >
 //   TextStreamReader
@@ -267,6 +269,68 @@ void OutputFileStream::Write( const Void* buffer, Uint size )
     if ( written != size )
     {
         CARAMEL_THROW( "Write file %s failed, errno: %u", m_fileName, errno );
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Input Memory Stream
+//
+
+InputMemoryStream::InputMemoryStream( const Void* buffer, Uint length )
+    : m_buffer( static_cast< const Byte* >( buffer ))
+    , m_length( length )
+{}
+
+
+Uint InputMemoryStream::Read( Void* buffer, Uint length )
+{
+    const Uint avails = m_length - m_position;
+    Byte* dest = static_cast< Byte* >( buffer );
+
+    if ( avails > length )
+    {
+        std::copy( &m_buffer[m_position], &m_buffer[m_position + length], dest );
+        m_position += length;
+        return length;
+    }
+    else
+    {
+        std::copy( &m_buffer[m_position], &m_buffer[m_position + avails], dest );
+        m_position = m_length;
+        return avails;
+    }
+}
+
+
+void InputMemoryStream::Seek( Int offset )
+{
+    if ( offset > 0 )
+    {
+        const Uint uoffset = static_cast< Uint >( offset );
+
+        const Uint avails = m_length - m_position;
+        if ( uoffset < avails )
+        {
+            m_position += uoffset;
+        }
+        else
+        {
+            m_position = m_length;
+        }
+    }
+    else
+    {
+        const Uint uoffset = static_cast< Uint >( - offset );
+        if ( uoffset < m_position )
+        {
+            m_position -= uoffset;
+        }
+        else
+        {
+            m_position = 0;
+        }
     }
 }
 

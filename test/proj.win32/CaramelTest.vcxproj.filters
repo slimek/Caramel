@@ -334,6 +334,9 @@
     <ClCompile Include="..\src\Async\AnyEventReactorSuite.cpp">
       <Filter>2. Tests\Async</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Io\InputMemoryStreamSuite.cpp">
+      <Filter>2. Tests\Io</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">

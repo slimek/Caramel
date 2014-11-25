@@ -86,6 +86,7 @@
     <ClInclude Include="..\include\Caramel\Functional\ScopeExit.h" />
     <ClInclude Include="..\include\Caramel\Io\FileStream.h" />
     <ClInclude Include="..\include\Caramel\Io\InputFileStream.h" />
+    <ClInclude Include="..\include\Caramel\Io\InputMemoryStream.h" />
     <ClInclude Include="..\include\Caramel\Io\InputStream.h" />
     <ClInclude Include="..\include\Caramel\Io\OutputFileStream.h" />
     <ClInclude Include="..\include\Caramel\Io\OutputStream.h" />
