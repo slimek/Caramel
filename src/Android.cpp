@@ -5,6 +5,7 @@
 
 #if defined( CARAMEL_SYSTEM_IS_ANDROID )
 
+#include <Caramel/Android/JniClass.h>
 #include <Caramel/Android/LogTraceAdapter.h>
 #include <Caramel/Android/Streambuf.h>
 #include <android/log.h>
@@ -22,6 +23,8 @@ namespace Android
 //
 //   LogTraceAdapter
 //   Streambuf
+//   JniClass
+//   JniStaticMethodCore
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -84,6 +87,32 @@ Int Streambuf::sync()
 
 	return rc;
 }
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// JNI Class
+//
+
+JniClass::JniClass( std::string classPath )
+	: m_classPath( std::move( classPath ))
+{}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// JNI Static Method Core
+//
+
+namespace Detail
+{
+
+JniStaticMethodCore::JniStaticMethodCore( std::string&& classPath, std::string&& methodName )
+	: m_classPath( std::move( classPath ))
+	, m_methodName( std::move( methodName ))
+{}
+
+} // namespace Detail
 
 
 ///////////////////////////////////////////////////////////////////////////////
