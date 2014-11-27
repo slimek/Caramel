@@ -8,8 +8,6 @@
 #include <iostream>
 
 
-#if defined( CARAMEL_SYSTEM_IS_ANDROID )
-
 namespace Caramel
 {
 
@@ -49,7 +47,5 @@ private:
 } // namespace Android
 
 } // namespace Caramel
-
-#endif // CARAMEL_SYSTEM_IS_ANDROID
 
 #endif // __CARAMEL_ANDROID_STREAMBUF_H

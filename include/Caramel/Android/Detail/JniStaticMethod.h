@@ -9,8 +9,6 @@
 #include <Caramel/Android/Detail/JniSignature.h>
 
 
-#if defined( CARAMEL_SYSTEM_IS_ANDROID )
-
 namespace Caramel
 {
 
@@ -99,7 +97,5 @@ inline Result JniStaticMethod< Result >::Call( const Args&... args )
 } // namespace Android
 
 } // namespace Caramel
-
-#endif // CARAMEL_SYSTEM_IS_ANDROID
 
 #endif // __CARAMEL_ANDROID_DETAIL_JNI_STATIC_METHOD_H

@@ -5,10 +5,6 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
-
-
-#if defined( CARAMEL_SYSTEM_IS_ANDROID )
-
 #include <Caramel/Trace/Listeners.h>
 
 
@@ -43,7 +39,5 @@ private:
 } // namespace Android
 
 } // namespace Caramel
-
-#endif // CARAMEL_SYSTEM_IS_ANDROID
 
 #endif // __CARAMEL_ANDROID_LOG_TRACE_ADAPTER_H

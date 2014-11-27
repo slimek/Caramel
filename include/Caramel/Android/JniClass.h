@@ -8,9 +8,6 @@
 #include <Caramel/Android/Detail/JniStaticMethod.h>
 
 
-#if defined( CARAMEL_SYSTEM_IS_ANDROID )
-
-
 namespace Caramel
 {
 
@@ -60,7 +57,4 @@ inline Detail::JniStaticMethod< Result > JniClass::Method( std::string methodNam
 
 } // namespace Caramel
 
-#endif // CARAMEL_SYSTEM_IS_ANDROID
-
 #endif // __CARAMEL_ANDROID_JNI_CLASS_H
-

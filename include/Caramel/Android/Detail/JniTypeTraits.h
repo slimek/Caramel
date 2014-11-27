@@ -7,8 +7,6 @@
 #include <Caramel/Setup/CaramelDefs.h>
 
 
-#if defined( CARAMEL_SYSTEM_IS_ANDROID )
-
 namespace Caramel
 {
 
@@ -107,7 +105,5 @@ struct JniTypeTraits< JniObject >
 } // namespace Android
 
 } // namespace Caramel
-
-#endif // CARAMEL_SYSTEM_IS_ANDROID
 
 #endif // __CARAMEL_ANDROID_DETAIL_JNI_TYPE_TRAITS_H
