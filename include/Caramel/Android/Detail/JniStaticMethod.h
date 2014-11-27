@@ -7,6 +7,7 @@
 #include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Android/Detail/JniTypeTraits.h>
 #include <Caramel/Android/Detail/JniSignature.h>
+#include <jni.h>
 
 
 namespace Caramel
@@ -30,10 +31,16 @@ protected:
 	JniStaticMethodCore( std::string&& classPath, std::string&& methodName );
 
 
-private:
+protected:
+
+	void BuildMethod( const std::string& signature );
 
 	std::string m_classPath;
 	std::string m_methodName;
+
+	JNIEnv*   m_env { nullptr };
+	jclass    m_class;
+	jmethodID m_methodId;
 };
 
 

@@ -2,9 +2,7 @@
 
 #include "CaramelPch.h"
 
-
-#if defined( CARAMEL_SYSTEM_IS_ANDROID )
-
+#include "Android/JniCenter.h"
 #include <Caramel/Android/JniClass.h>
 #include <Caramel/Android/LogTraceAdapter.h>
 #include <Caramel/Android/Streambuf.h>
@@ -23,6 +21,7 @@ namespace Android
 //
 //   LogTraceAdapter
 //   Streambuf
+//   JniCenter
 //   JniClass
 //   Detail::JniStaticMethodCore
 //   Detail::JniTypeTraits
@@ -92,6 +91,70 @@ Int Streambuf::sync()
 
 ///////////////////////////////////////////////////////////////////////////////
 //
+// JNI Center
+//
+
+JniCenter::~JniCenter()
+{
+	if ( m_classLoader )
+	{
+		this->GetEnvOfCurrentThread()->DeleteGlobalRef( m_classLoader );
+	}
+}
+
+
+void JniCenter::Initialize( JavaVM* jvm, const std::string& userClassPath )
+{
+	CARAMEL_ASSERT( jvm );
+	CARAMEL_ASSERT( ! m_jvm );
+
+	m_jvm = jvm;
+
+	JNIEnv* env = this->GetEnvOfCurrentThread();
+
+	// Get a user-defined class.
+	auto userClass = env->FindClass( userClassPath.c_str() );
+
+	auto classClass = env->FindClass( "java/lang/Class" );
+	auto classLoaderClass = env->FindClass( "java/lang/ClassLoader" );
+
+	auto getClassLoaderMethod = env->GetMethodID(
+		classClass, "getClassLoader", "()Ljava/lang/ClassLoader;" );
+
+	m_classLoader = env->NewGlobalRef(
+		env->CallObjectMethod( userClass, getClassLoaderMethod ));
+	m_findClassMethod = env->GetMethodID(
+		classLoaderClass, "findClass", "(Ljava/lang/String;)Ljava/lang/Class;" );
+
+	CARAMEL_ASSERT( m_findClassMethod );
+}
+
+
+// The JNIEnv of each thread.
+static thread_local JNIEnv* tls_threadJniEnv = nullptr;
+
+JNIEnv* JniCenter::GetEnvOfCurrentThread()
+{
+	if ( nullptr != tls_threadJniEnv ) { return tls_threadJniEnv; }
+
+	CARAMEL_ASSERT( m_jvm );
+
+	CARAMEL_NOT_IMPLEMENTED();
+}
+
+
+//
+// Stand-alone Functions
+//
+
+void JniInitialize( JavaVM* jvm, const std::string& userClassPath )
+{
+	JniCenter::Instance()->Initialize( jvm, userClassPath );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
 // JNI Class
 //
 
@@ -143,6 +206,7 @@ std::string JniTypeTraits< std::vector< JniObject > >::Signature()		{ return "[L
 
 } // namespace Detail
 
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Validation
@@ -162,5 +226,3 @@ STATIC_ASSERT_LOG_TRACE_LEVEL( ERROR );
 } // namespace Android
 
 } // namespace Caramel
-
-#endif // CARAMEL_SYSTEM_IS_ANDROID
