@@ -12,5 +12,5 @@ void OnClick()
 {
 	auto method = s_activity.Method< void >( "UpdateLabel" );
 	method.Call();
-	method.Call( "Hello world", 42 );
+	method.Call( std::string( "Hello world" ), 42 );
 }

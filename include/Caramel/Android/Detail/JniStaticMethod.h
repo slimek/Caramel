@@ -87,7 +87,7 @@ template< typename Result >
 template< typename... Args >
 inline Result JniStaticMethod< Result >::Call( const Args&... args )
 {
-	const auto signature = MakeJniSignature< Result, Args... >();
+	const auto signature = MakeJniSignature< Result >( args... );
 	return Result();
 }
 

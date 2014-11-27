@@ -26,7 +26,7 @@ namespace Detail
 // JNI Type Traits
 // - Supporting Types :
 //   1. void
-//   2. The 8 fundamental types supported by JNI.
+//   2. The fundamental types supported by JNI.
 //   3. std::string and std::vector< std::string >
 //   4. JniObject and std::vector< JniObject >
 //
@@ -54,6 +54,27 @@ template<>
 struct JniTypeTraits< Bool >
 {
 	static std::string Signature();  // "Z"
+};
+
+
+template<>
+struct JniTypeTraits< Int >
+{
+	static std::string Signature();  // "I"
+};
+
+
+template<>
+struct JniTypeTraits< Int64 >
+{
+	static std::string Signature();  // "J"
+};
+
+
+template<>
+struct JniTypeTraits< Float >
+{
+	static std::string Signature();  // "D"
 };
 
 
