@@ -265,7 +265,14 @@ void ThisThread::AtThreadExit( std::function< void() > atExit )
 {
     #if defined( HAS_THREAD_LOCAL )
     {
-        tls_thisThread->SetAtExit( atExit );
+        if ( tls_thisThread )
+        {
+            tls_thisThread->SetAtExit( atExit );
+        }
+        else
+        {
+            CARAMEL_ALERT( "This thread is not a Caramel thread" );
+        }
     }
     #else
     {
