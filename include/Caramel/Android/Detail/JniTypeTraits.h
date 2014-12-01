@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
+#include <Caramel/Android/Detail/JniLocals.h>
 
 
 namespace Caramel
@@ -52,6 +53,8 @@ template<>
 struct JniTypeTraits< Bool >
 {
 	static std::string Signature();  // "Z"
+
+	typedef JniFundamentalLocal< Bool > Local;
 };
 
 
@@ -59,6 +62,8 @@ template<>
 struct JniTypeTraits< Int >
 {
 	static std::string Signature();  // "I"
+
+	typedef JniFundamentalLocal< Int > Local;
 };
 
 
@@ -66,6 +71,8 @@ template<>
 struct JniTypeTraits< Int64 >
 {
 	static std::string Signature();  // "J"
+
+	typedef JniFundamentalLocal< Int64 > Local;
 };
 
 
@@ -73,6 +80,8 @@ template<>
 struct JniTypeTraits< Float >
 {
 	static std::string Signature();  // "D"
+
+	typedef JniFundamentalLocal< Float > Local;
 };
 
 
@@ -84,6 +93,8 @@ template<>
 struct JniTypeTraits< std::string >
 {
 	static std::string Signature();  // "Ljava/lang/String;"
+
+	typedef JniStringLocal Local;
 };
 
 

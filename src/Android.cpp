@@ -6,6 +6,7 @@
 #include <Caramel/Android/JniClass.h>
 #include <Caramel/Android/LogTraceAdapter.h>
 #include <Caramel/Android/Streambuf.h>
+#include <Caramel/Thread/ThisThread.h>
 #include <android/log.h>
 #include <cstring>
 
@@ -25,6 +26,7 @@ namespace Android
 //   JniClass
 //   Detail::JniStaticMethodCore
 //   Detail::JniTypeTraits
+//   Detail::JniLocals
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -139,7 +141,49 @@ JNIEnv* JniCenter::GetEnvOfCurrentThread()
 
 	CARAMEL_ASSERT( m_jvm );
 
-	CARAMEL_NOT_IMPLEMENTED();
+
+	if ( JNI_OK == m_jvm->GetEnv( (void**)&tls_threadJniEnv, JNI_VERSION_1_4 ))
+	{
+		CARAMEL_ASSERT( tls_threadJniEnv );
+
+		// This thread is already attached to Java VM at somewhere.
+
+		CARAMEL_TRACE_DEBUG( "JniCenter: This thread already has its own Env" );
+		return tls_threadJniEnv;
+	}
+
+	if ( 0 == m_jvm->AttachCurrentThread( &tls_threadJniEnv, nullptr ))
+	{
+		CARAMEL_ASSERT( tls_threadJniEnv );
+
+		// This thread has been attached to Java VM.
+		// Set an exit routine to detach if from Java VM when it exits.
+
+		JavaVM* jvm = m_jvm;
+		ThisThread::AtThreadExit( [jvm] { jvm->DetachCurrentThread(); } );
+
+		return tls_threadJniEnv;
+	}
+
+	CARAMEL_ALERT( "Failed to get JNIEvn for current thread" );
+}
+
+
+jclass JniCenter::GetClassId( const std::string& classPath )
+{
+	auto env = this->GetEnvOfCurrentThread();
+
+	Detail::JniStringLocal jname( classPath, env );
+
+	jclass klass = static_cast< jclass >(
+		env->CallObjectMethod( m_classLoader, m_findClassMethod, jname.Jni() ));
+
+	if ( ! klass )
+	{
+		CARAMEL_ALERT( "GetClassId() failed, classPath: %s", classPath );
+	}
+
+	return klass;
 }
 
 
@@ -176,6 +220,24 @@ JniStaticMethodCore::JniStaticMethodCore( std::string&& classPath, std::string&&
 	, m_methodName( std::move( methodName ))
 {}
 
+
+void JniStaticMethodCore::BuildMethod( const std::string& signature )
+{
+	auto center = JniCenter::Instance();
+
+	m_env = center->GetEnvOfCurrentThread();
+	m_class = center->GetClassId( m_classPath );
+	m_method = m_env->GetStaticMethodID( m_class, m_methodName.c_str(), signature.c_str() );
+
+	if ( ! m_method )
+	{
+		CARAMEL_THROW(
+			"GetStaticMethodID() failed, classPath: %s, methodName: %s, signature: %s",
+			m_classPath, m_methodName, signature );
+	}
+}
+
+
 } // namespace Detail
 
 
@@ -203,6 +265,56 @@ std::string JniTypeTraits< std::vector< std::string > >::Signature() 	{ return "
 std::string JniTypeTraits< JniObject >::Signature() 					{ return "Ljava/lang/Object;"; }
 std::string JniTypeTraits< std::vector< JniObject > >::Signature()		{ return "[Ljava/lang/Object;"; }
 */
+
+} // namespace Detail
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// JNI Local Wrappers
+//
+
+namespace Detail
+{
+
+//
+// JNI for String
+//
+
+JniStringLocal::JniStringLocal( const std::string& cs, JNIEnv* env )
+	: m_jstring( env->NewStringUTF( cs.c_str() ))
+	, m_env( env )
+{}
+
+
+JniStringLocal::JniStringLocal( jstring js, JNIEnv* env )
+	: m_jstring( js )
+	, m_env( env )
+{}
+
+
+JniStringLocal::~JniStringLocal()
+{
+	if ( m_jstring )
+	{
+		m_env->DeleteLocalRef( m_jstring );
+	}
+}
+
+
+std::string JniStringLocal::ToString() const
+{
+	const Char* chars = m_env->GetStringUTFChars( m_jstring, nullptr );
+
+	if ( ! chars ) { return std::string(); }
+
+	const std::string str( chars );
+	m_env->ReleaseStringUTFChars( m_jstring, chars );
+
+	return str;
+}
+
+
 
 } // namespace Detail
 

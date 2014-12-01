@@ -5,8 +5,9 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
-#include <Caramel/Android/Detail/JniTypeTraits.h>
+#include <Caramel/Android/Detail/JniLocals.h>
 #include <Caramel/Android/Detail/JniSignature.h>
+#include <Caramel/Android/Detail/JniTypeTraits.h>
 #include <jni.h>
 
 
@@ -39,8 +40,8 @@ protected:
 	std::string m_methodName;
 
 	JNIEnv*   m_env { nullptr };
-	jclass    m_class;
-	jmethodID m_methodId;
+	jclass    m_class { nullptr };
+	jmethodID m_method { nullptr };
 };
 
 
@@ -62,6 +63,12 @@ public:
 
 	template< typename... Args >
 	Result Call( const Args&... args );
+
+
+private:
+
+	template< typename... JniArgs >
+	Result CallMethod( const JniArgs&... jniArgs );
 };
 
 
@@ -83,8 +90,8 @@ inline JniStaticMethod< Result >::JniStaticMethod( std::string classPath, std::s
 template< typename Result >
 inline Result JniStaticMethod< Result >::Call()
 {
-	const auto signature = MakeJniSignature< Result >();
-	return Result();
+	this->BuildMethod( MakeJniSignature< Result >() );
+	return this->CallMethod();
 }
 
 
@@ -92,8 +99,27 @@ template< typename Result >
 template< typename... Args >
 inline Result JniStaticMethod< Result >::Call( const Args&... args )
 {
-	const auto signature = MakeJniSignature< Result >( args... );
-	return Result();
+	this->BuildMethod( MakeJniSignature< Result >( args... ));
+	return this->CallMethod(
+		( typename JniTypeTraits< Args >::Local( args, m_env )).Jni()... );
+}
+
+
+template<>
+template< typename... JniArgs >
+inline void JniStaticMethod< void >::CallMethod( const JniArgs&... jniArgs )
+{
+	m_env->CallStaticVoidMethod( m_class, m_method, jniArgs... );
+}
+
+
+template<>
+template< typename... JniArgs >
+inline std::string JniStaticMethod< std::string >::CallMethod( const JniArgs&... jniArgs )
+{
+	jstring jstr = (jstring)m_env->CallStaticObjectMethod( m_class, m_method, jniArgs... );
+	JniStringLocal local( jstr, m_env );
+	return local.ToString();
 }
 
 
