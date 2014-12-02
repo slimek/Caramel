@@ -8,6 +8,7 @@
 #include <Caramel/Android/Detail/JniLocals.h>
 #include <Caramel/Android/Detail/JniSignature.h>
 #include <Caramel/Android/Detail/JniTypeTraits.h>
+#include <Caramel/Android/JniObject.h>
 #include <jni.h>
 
 
@@ -122,6 +123,14 @@ inline std::string JniStaticMethod< std::string >::CallMethod( const JniArgs&...
 	return local.ToString();
 }
 
+
+template<>
+template< typename... JniArgs >
+inline JniObject JniStaticMethod< JniObject >::CallMethod( const JniArgs&... jniArgs )
+{
+	jobject jobj = m_env->CallStaticObjectMethod( m_class, m_method, jniArgs... );
+	return JniObject( jobj, m_env );
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 

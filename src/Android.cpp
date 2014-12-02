@@ -24,7 +24,9 @@ namespace Android
 //   Streambuf
 //   JniCenter
 //   JniClass
+//   JniObject
 //   Detail::JniStaticMethodCore
+//   Detail::JniMethodCore
 //   Detail::JniTypeTraits
 //   Detail::JniLocals
 //
@@ -209,6 +211,17 @@ JniClass::JniClass( std::string classPath )
 
 ///////////////////////////////////////////////////////////////////////////////
 //
+// JNI Object
+//
+
+JniObject::JniObject( jobject obj, JNIEnv* env )
+	: m_object( obj )
+	, m_env( env )
+{}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
 // JNI Static Method Core
 //
 
@@ -257,12 +270,12 @@ std::string JniTypeTraits< void >::Signature()							{ return "V"; }
 std::string JniTypeTraits< Bool >::Signature() 							{ return "Z"; }
 std::string JniTypeTraits< Int >::Signature()							{ return "I"; }
 std::string JniTypeTraits< Int64 >::Signature()                         { return "J"; }
+std::string JniTypeTraits< Float >::Signature()							{ return "D"; }
 std::string JniTypeTraits< std::string >::Signature() 					{ return "Ljava/lang/String;"; }
+std::string JniTypeTraits< JniObject >::Signature() 					{ return "Ljava/lang/Object;"; }
 
 /*
-std::string JniTypeTraits< Float >::Signature()							{ return "D"; }
 std::string JniTypeTraits< std::vector< std::string > >::Signature() 	{ return "[Ljava/lang/String;"; }
-std::string JniTypeTraits< JniObject >::Signature() 					{ return "Ljava/lang/Object;"; }
 std::string JniTypeTraits< std::vector< JniObject > >::Signature()		{ return "[Ljava/lang/Object;"; }
 */
 

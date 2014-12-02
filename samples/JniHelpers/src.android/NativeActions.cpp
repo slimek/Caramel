@@ -10,6 +10,7 @@ using namespace Caramel;
 using namespace Caramel::Android;
 
 static JniClass s_activityClass( "com/slimek/caramel/samples/jnihelpers/JniHelpersActivity" );
+static JniClass s_textView( "android/widget/TextView" );
 
 
 void Run()
@@ -17,6 +18,8 @@ void Run()
 	CARAMEL_TRACE_INFO( "Native Run" );
 
 	s_activityClass.Method< void >( "Salute" ).Call( std::string( "Hello world" ));
+
+	JniObject activity = s_activityClass.Method< JniObject >( "Instance" ).Call();
 }
 
 
