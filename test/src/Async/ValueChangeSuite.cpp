@@ -12,7 +12,7 @@ namespace Caramel
 SUITE( ValueChangeSuite )
 {
 
-TEST( IntValueChangeTest )
+TEST( ValueChangeIntTest )
 {
     ValueChange< Int > ichange( 0 );
 
@@ -38,6 +38,60 @@ TEST( IntValueChangeTest )
 
     CHECK( false == ichange.Enters< 1 >() );
     CHECK( false == ichange.Exits< 1 >() );
+}
+
+
+TEST( ValueChangeBoolTest )
+{
+    ValueChange< Bool > b1;  // default initial to false.
+
+    CHECK( false == b1.Enters< false >() );
+    CHECK( false == b1.Enters< true >() );
+    CHECK( false == b1.Exits< false >() );
+    CHECK( false == b1.Exits< true >() );
+
+    b1.Update( true );
+
+    CHECK( false == b1.Enters< false >() );
+    CHECK( true  == b1.Enters< true >() );
+    CHECK( true  == b1.Exits< false >() );
+    CHECK( false == b1.Exits< true >() );
+
+    b1.Update( true );
+
+    CHECK( false == b1.Enters< false >() );
+    CHECK( false == b1.Enters< true >() );
+    CHECK( false == b1.Exits< false >() );
+    CHECK( false == b1.Exits< true >() );
+
+    b1.Update( false );
+
+    CHECK( true  == b1.Enters< false >() );
+    CHECK( false == b1.Enters< true >() );
+    CHECK( false == b1.Exits< false >() );
+    CHECK( true  == b1.Exits< true >() );
+
+    b1.Update( false );
+
+    CHECK( false == b1.Enters< false >() );
+    CHECK( false == b1.Enters< true >() );
+    CHECK( false == b1.Exits< false >() );
+    CHECK( false == b1.Exits< true >() );
+
+
+    ValueChange< Bool > b2( true );  // with initial value
+
+    CHECK( false == b2.Enters< false >() );
+    CHECK( false == b2.Enters< true >() );
+    CHECK( false == b2.Exits< false >() );
+    CHECK( false == b2.Exits< true >() );
+
+    b2.Update( false );
+
+    CHECK( true  == b2.Enters< false >() );
+    CHECK( false == b2.Enters< true >() );
+    CHECK( false == b2.Exits< false >() );
+    CHECK( true  == b2.Exits< true >() );
 }
 
 
