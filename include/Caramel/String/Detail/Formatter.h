@@ -29,6 +29,7 @@ public:
 
     /// Feeding Arguments ///
 
+    void Feed( Bool   value );
     void Feed( Int    value );
     void Feed( Uint   value );
     void Feed( Int64  value );

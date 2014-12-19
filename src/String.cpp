@@ -639,12 +639,15 @@ void Formatter::Feed( Double value )
 }
 
 
+void Formatter::Feed( Bool value )
+{
+    m_impl->Distribute( [=] ( const std::string& ) { return ToString( value ); });
+}
+
+
 void Formatter::Feed( const std::string& value )
 {
-    m_impl->Distribute( [=] ( const std::string& ) -> std::string
-    {
-        return value;
-    });
+    m_impl->Distribute( [=] ( const std::string& ) { return value; });
 }
 
 

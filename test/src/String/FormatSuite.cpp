@@ -30,6 +30,12 @@ TEST( FormatTrivialTest )
 }
 
 
+TEST( FormatBooleanTest )
+{
+    CHECK( "Kami is true not false" == Format( "Kami is {0} not {1}", true, false ));
+}
+
+
 TEST( FormatIntegerTest )
 {
     CHECK( "Score 0" == Format( "Score {0}", 0 ));
