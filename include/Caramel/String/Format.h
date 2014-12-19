@@ -14,25 +14,14 @@ namespace Caramel
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Format Functions
+// Format Function
 //
-
-// With Variadic Arguments
 
 template< typename... Args >
 inline std::string Format( const std::string& format, Args&&... args )
 {
     Detail::Formatter formatter( format );
     return Detail::FormatRecursive( formatter, std::forward< Args >( args )... );
-}
-
-
-// With no Arguments
-
-inline std::string Format( const std::string& format )
-{
-    Detail::Formatter formatter( format );
-    return formatter.GetString();
 }
 
 

@@ -20,6 +20,18 @@ namespace Detail
 // Format Recursive
 //
 
+//
+// No argument
+//
+inline std::string FormatRecursive( Formatter& formatter )
+{
+    return formatter.GetString();
+}
+
+
+//
+// One argument (terminal condition)
+//
 template< typename T >
 inline std::string FormatRecursive( Formatter& formatter, T&& x )
 {
@@ -30,6 +42,9 @@ inline std::string FormatRecursive( Formatter& formatter, T&& x )
 }
 
 
+//
+// Variadic arguments
+//
 template< typename T, typename... Args >
 inline std::string FormatRecursive( Formatter& formatter, T&& x, Args&&... args )
 {
