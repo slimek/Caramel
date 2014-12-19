@@ -116,6 +116,28 @@ TEST( FormatFixedPointTest )
 }
 
 
+TEST( FormatArgumentsTest )
+{
+    CHECK( "ABCDEFGH12345678" ==
+        Format( "{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}{11}{12}{13}{14}{15}",
+                "A", "B", "C", "D", "E", "F", "G", "H", 1, 2, 3, 4, 5, 6, 7, 8 ));
+
+    CHECK( "7777777777777777" ==
+        Format( "{0}{0}{0}{0}{0}{0}{0}{0}{0}{0}{0}{0}{0}{0}{0}{0}", 7 ));
+
+    
+    /// Missing Arguments - the placeholder would disappear ///
+
+    CHECK( "Yukari" == Format( "Y{0}k{1}a{2}ri{3}", "u" ));
+    CHECK( "Yakumo" == Format( "Y{0}aku{1}{2}m{3}o" ));
+
+
+    /// Redundant Arguments would be discarded ///
+
+    CHECK( "Yuyuko" == Format( "Yu{0}ko", "yu", 8, "saki", "lunatic" ));
+}
+
+
 } // SUITE FormatSuite
 
 } // namespace Caramel

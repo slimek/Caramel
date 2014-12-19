@@ -31,13 +31,8 @@ inline std::string Format( const std::string& format, Args&&... args )
 
 inline std::string Format( const std::string& format )
 {
-    return format;
-}
-
-
-inline std::string Format( std::string&& format )
-{
-    return std::move( format );
+    Detail::Formatter formatter( format );
+    return formatter.GetString();
 }
 
 
