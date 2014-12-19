@@ -561,6 +561,33 @@ void Formatter::Feed( Int64 value )
 }
 
 
+void Formatter::Feed( Uint64 value )
+{
+    m_impl->Distribute( [=] ( const std::string& ) -> std::string
+    {
+        return ToString( value );
+    });
+}
+
+
+void Formatter::Feed( Long value )
+{
+    m_impl->Distribute( [=] ( const std::string& ) -> std::string
+    {
+        return ToString( value );
+    });
+}
+
+
+void Formatter::Feed( Ulong value )
+{
+    m_impl->Distribute( [=] ( const std::string& ) -> std::string
+    {
+        return ToString( value );
+    });
+}
+
+
 void Formatter::Feed( Float value )
 {
     m_impl->Distribute( [=] ( const std::string& ) -> std::string

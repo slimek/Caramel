@@ -33,6 +33,8 @@ public:
     void Feed( Uint   value );
     void Feed( Int64  value );
     void Feed( Uint64 value );
+    void Feed( Long   value );
+    void Feed( Ulong  value );
     void Feed( Float  value );
     void Feed( Double value );
 

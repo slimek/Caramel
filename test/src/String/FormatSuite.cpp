@@ -37,9 +37,17 @@ TEST( FormatIntegerTest )
     CHECK( "2014/1/1 Happy NY!" == Format( "{0}/{1}/{2} Happy NY!", 2014, 1u, 1u ));
     CHECK( "Version 1.4.16.256" == Format( "Version {3}.{2}.{1}.{0}", 256, 16, 4, 1 ));
 
-    const Int64 bigInt = 123456789012;
+    const Int64 i64 = -123456789012;
+    CHECK( "Int64 -123456789012" == Format( "Int64 {0}", i64 ));
 
-    CHECK( "BigInt 123456789012" == Format( "BigInt {0}", bigInt ));
+    const Uint64 u64 = 123456789012;
+    CHECK( "Uint64 123456789012" == Format( "Uint64 {0}", u64 ));
+
+    const Long il = -45678912;
+    CHECK( "Long -45678912" == Format( "Long {0}", il ));
+
+    const Ulong ul = 45678912;
+    CHECK( "Ulong 45678912" == Format( "Ulong {0}", ul ));
 }
 
 
