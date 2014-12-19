@@ -217,6 +217,7 @@
     <ClInclude Include="..\src\Statechart\StateImpl.h" />
     <ClInclude Include="..\src\Statechart\StateMachineImpl.h" />
     <ClInclude Include="..\src\Statechart\Transition.h" />
+    <ClInclude Include="..\src\String\Converters.h" />
     <ClInclude Include="..\src\String\FormatterImpl.h" />
     <ClInclude Include="..\src\String\SprintfManager.h" />
     <ClInclude Include="..\src\Task\PooledThread.h" />

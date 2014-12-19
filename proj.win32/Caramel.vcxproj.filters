@@ -866,6 +866,9 @@
     <ClInclude Include="..\include\Caramel\Io\InputMemoryStream.h">
       <Filter>1. Public Packages\Io</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\String\Converters.h">
+      <Filter>2. Sources\String</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

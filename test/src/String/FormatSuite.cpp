@@ -105,6 +105,17 @@ TEST( FormatNumberConvertibleTest )
 }
 
 
+TEST( FormatFixedPointTest )
+{
+    /// Floating Values ///
+
+    CHECK( "0.00"   == Format( "{0:F}", 0.0f ));  // default is F2
+    CHECK( "3.1416" == Format( "{0:F4}", 3.1415926 ));
+    CHECK( "512"    == Format( "{0:F0}", 512.49 ));
+    CHECK( "42.000" == Format( "{0:F3}", 42.0 ));
+}
+
+
 } // SUITE FormatSuite
 
 } // namespace Caramel

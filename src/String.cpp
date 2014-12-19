@@ -2,6 +2,7 @@
 
 #include "CaramelPch.h"
 
+#include "String/Converters.h"
 #include "String/FormatterImpl.h"
 #include "String/SprintfManager.h"
 #include <Caramel/Functional/ScopeExit.h>
@@ -17,6 +18,7 @@
 #include <boost/range/irange.hpp>
 #include <cstdarg>
 #include <cstdio>
+#include <iomanip>
 #include <sstream>
 
 #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
@@ -36,6 +38,8 @@ namespace Caramel
 //   SprintfManager
 //   Utf8String
 //   Algorithm
+//   IntegerConverter
+//   FloatingConverter
 //   ToString
 //   ToStringT
 //   Formatter
@@ -443,6 +447,75 @@ std::string Join( const std::vector< std::string >& sequence, const std::string&
 
 ///////////////////////////////////////////////////////////////////////////////
 //
+// Integer Converter
+//
+
+template< typename T >
+std::string IntegerConverter< T >::ToString() const
+{
+    std::stringstream ss;
+    ss << std::dec << m_value;
+    return ss.str();
+}
+
+
+template< typename T >
+std::string IntegerConverter< T >::operator() ( const std::string& format ) const
+{
+    return this->ToString();
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Floating Converter
+//
+
+template< typename T >
+std::string FloatingConverter< T >::ToString() const
+{
+    std::stringstream ss;
+    ss << m_value;
+    return ss.str();
+}
+
+
+template< typename T >
+std::string FloatingConverter< T >::ToStringWithFixedPoint( Int digits ) const
+{
+    std::stringstream ss;
+    ss << std::fixed << std::setprecision( digits ) << m_value;
+    return ss.str();
+}
+
+
+template< typename T >
+std::string FloatingConverter< T >::operator() ( const std::string& format ) const
+{
+    if ( StartsWith( format, 'F' ))
+    {
+        if ( format == "F" ) { return this->ToStringWithFixedPoint( 2 ); }
+
+        const std::string sdigits = format.substr( 1 );
+        Lexical::Integer< Uint > digits;
+        if ( digits.TryParse( sdigits ))
+        {
+            return this->ToStringWithFixedPoint( digits );
+        }
+
+        CARAMEL_ALERT( "Invalid floating format: %s", format );
+    }
+    else if ( ! format.empty() )
+    {
+        CARAMEL_ALERT( "Unknown floating format: %s", format );
+    }
+
+    return this->ToString();
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
 // ToString
 //
 
@@ -456,38 +529,22 @@ std::string ToString( Bool x )
 // Integers
 //
 
-template< typename T >
-std::string IntegerToString( T x )
-{
-    std::stringstream ss;
-    ss << std::dec << x;
-    return ss.str();
-}
-
-std::string ToString( Int16 x )  { return IntegerToString( x ); }
-std::string ToString( Uint16 x ) { return IntegerToString( x ); }
-std::string ToString( Int32 x )  { return IntegerToString( x ); }
-std::string ToString( Uint32 x ) { return IntegerToString( x ); }
-std::string ToString( Long x )   { return IntegerToString( x ); }
-std::string ToString( Ulong x )  { return IntegerToString( x ); }
-std::string ToString( Int64 x )  { return IntegerToString( x ); }
-std::string ToString( Uint64 x ) { return IntegerToString( x ); }
+std::string ToString( Int16 x )  { return IntegerConverter< Int16 > ( x ).ToString(); }
+std::string ToString( Uint16 x ) { return IntegerConverter< Uint16 >( x ).ToString(); }
+std::string ToString( Int32 x )  { return IntegerConverter< Int32 > ( x ).ToString(); }
+std::string ToString( Uint32 x ) { return IntegerConverter< Uint32 >( x ).ToString(); }
+std::string ToString( Long x )   { return IntegerConverter< Long >  ( x ).ToString(); }
+std::string ToString( Ulong x )  { return IntegerConverter< Ulong > ( x ).ToString(); }
+std::string ToString( Int64 x )  { return IntegerConverter< Int64 > ( x ).ToString(); }
+std::string ToString( Uint64 x ) { return IntegerConverter< Uint64 >( x ).ToString(); }
 
 
 //
 // Floatings
 //
 
-template< typename T >
-std::string FloatingToString( T x )
-{
-    std::stringstream ss;
-    ss << x;
-    return ss.str();
-}
-
-std::string ToString( Float  x ) { return FloatingToString( x ); } 
-std::string ToString( Double x ) { return FloatingToString( x ); }
+std::string ToString( Float  x ) { return FloatingConverter< Float > ( x ).ToString(); } 
+std::string ToString( Double x ) { return FloatingConverter< Double >( x ).ToString(); }
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -536,73 +593,49 @@ std::string Formatter::GetString() const
 
 void Formatter::Feed( Int value )
 {
-    m_impl->Distribute( [=] ( const std::string& ) -> std::string
-    {
-        return ToString( value );
-    });
+    m_impl->Distribute( IntegerConverter< Int >( value ));
 }
 
 
 void Formatter::Feed( Uint value )
 {
-    m_impl->Distribute( [=] ( const std::string& ) -> std::string
-    {
-        return ToString( value );
-    });
+    m_impl->Distribute( IntegerConverter< Uint >( value ));
 }
 
 
 void Formatter::Feed( Int64 value )
 {
-    m_impl->Distribute( [=] ( const std::string& ) -> std::string
-    {
-        return ToString( value );
-    });
+    m_impl->Distribute( IntegerConverter< Int64 >( value ));
 }
 
 
 void Formatter::Feed( Uint64 value )
 {
-    m_impl->Distribute( [=] ( const std::string& ) -> std::string
-    {
-        return ToString( value );
-    });
+    m_impl->Distribute( IntegerConverter< Uint64 >( value ));
 }
 
 
 void Formatter::Feed( Long value )
 {
-    m_impl->Distribute( [=] ( const std::string& ) -> std::string
-    {
-        return ToString( value );
-    });
+    m_impl->Distribute( IntegerConverter< Long >( value ));
 }
 
 
 void Formatter::Feed( Ulong value )
 {
-    m_impl->Distribute( [=] ( const std::string& ) -> std::string
-    {
-        return ToString( value );
-    });
+    m_impl->Distribute( IntegerConverter< Ulong >( value ));
 }
 
 
 void Formatter::Feed( Float value )
 {
-    m_impl->Distribute( [=] ( const std::string& ) -> std::string
-    {
-        return ToString( value );
-    });
+    m_impl->Distribute( FloatingConverter< Float >( value ));
 }
 
 
 void Formatter::Feed( Double value )
 {
-    m_impl->Distribute( [=] ( const std::string& ) -> std::string
-    {
-        return ToString( value );
-    });
+    m_impl->Distribute( FloatingConverter< Double >( value ));
 }
 
 
@@ -637,7 +670,9 @@ Formatter::Impl::Impl( const std::string& format )
         
         head += BeforeFirst( piece, '{' );
 
-        const std::string sindex = AfterFirst( piece, '{' );
+        const std::string inBrace = AfterFirst( piece, '{' );
+        const std::string sindex = BeforeFirst( inBrace, ':' );
+
         Lexical::Integer< Uint > index;
         
         if ( ! index.TryParse( sindex ))
@@ -647,6 +682,8 @@ Formatter::Impl::Impl( const std::string& format )
 
         FormatItem item;
         item.argIndex = index;
+        item.format = AfterFirst( inBrace, ':' );
+
         item.head = head;
         head.clear();
         
@@ -673,7 +710,7 @@ void Formatter::Impl::Distribute(
     {
         if ( index != item.argIndex ) { continue; }
 
-        item.content = formatResolver( "" );  // TODO: Item format may be specified in format string.
+        item.content = formatResolver( item.format );
     }
 }
 

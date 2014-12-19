@@ -39,6 +39,7 @@ private:
         Uint argIndex { 0 };
 
         std::string head;
+        std::string format;
         std::string content;
     };
 
