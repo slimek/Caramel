@@ -6,7 +6,7 @@
 
 #include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Chrono/TickClock.h>
-#include <Caramel/Error/ExceptionPtr.h>
+#include <Caramel/Error/TryCatchResult.h>
 #include <Caramel/Task/TaskFwd.h>
 #include <Caramel/Task/Detail/TaskHolders.h>
 
@@ -116,22 +116,17 @@ enum TaskState : Int
 
 //
 // Task Catch Result
-//
-// - When catching an AnyFailure,
-//   you may get it from both the 'anyFailure' and 'exception' fields.
-//   For other exception types the 'anyFailure' is nullptr.
-//
 // - If it is a valid result,
 //   the 'doneState' should be CANCELED, FAULTED or RAN_TO_COMP.
+//   
+//   In the case of RAN_TO_COMP, both anyFailure and exception (in TryCatchResult)
+//   should be nullptr.
 //
 
-struct TaskCore::CatchResult
+struct TaskCore::CatchResult : public TryCatchResult
 {
     std::string name;
     TaskState doneState { TASK_STATE_UNDEF };
-
-    AnyFailurePtr anyFailure;
-    ExceptionPtr  exception;
 };
 
 

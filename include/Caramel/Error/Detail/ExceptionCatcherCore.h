@@ -8,6 +8,7 @@
 #include <Caramel/Error/AnyFailure.h>
 #include <Caramel/Error/Exception.h>
 #include <Caramel/Error/ExceptionPtr.h>
+#include <Caramel/Error/TryCatchResult.h>
 #include <exception>
 
 #if defined( CARAMEL_COMPILER_IS_MSVC )
@@ -41,6 +42,8 @@ public:
     std::string TracingMessage() const { return m_exception.TracingMessage(); }
 
     void Rethrow() { m_exception.Rethrow(); }
+
+    operator TryCatchResult() const { return TryCatchResult{ m_anyFailure, m_exception }; }
 
 
 protected: 

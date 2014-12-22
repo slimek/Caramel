@@ -79,6 +79,7 @@
     <ClInclude Include="..\include\Caramel\Error\Exception.h" />
     <ClInclude Include="..\include\Caramel\Error\CatchException.h" />
     <ClInclude Include="..\include\Caramel\Error\ExceptionPtr.h" />
+    <ClInclude Include="..\include\Caramel\Error\TryCatchResult.h" />
     <ClInclude Include="..\include\Caramel\FileSystem\DirectoryInfo.h" />
     <ClInclude Include="..\include\Caramel\FileSystem\FileInfo.h" />
     <ClInclude Include="..\include\Caramel\FileSystem\Path.h" />
