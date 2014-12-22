@@ -39,18 +39,15 @@ TEST( TryCatchResultTest )
 
     TaskPoller poller;
 
-    auto task1 = MakeTask( "Task1", [] { CARAMEL_THROW( "Voy a revolver" ); } );
-    poller.Submit( task1 );
+    auto task1 = poller.Submit( "Task1", [] { CARAMEL_THROW( "Voy a revolver!" ); } );
     poller.PollOne();
     TestException( task1.Catch() );
 
-    auto task2 = MakeTask( "Task2", [] { throw AnyFailure( 51 ); } );
-    poller.Submit( task2 );
+    auto task2 = poller.Submit( "Task2", [] { throw AnyFailure( 51 ); } );
     poller.PollOne();
     TestAnyFailure( task2.Catch(), 51 );
 
-    auto task3 = MakeTask( "Task3", [] {} );
-    poller.Submit( task3 );
+    auto task3 = poller.Submit( "Task3", [] {} );
     poller.PollOne();
 
     auto res3 = task3.Catch();

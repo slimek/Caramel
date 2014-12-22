@@ -28,14 +28,19 @@ public:
     virtual void Submit( TaskCore& task ) = 0;
 
 
-    /// Compiler Workaround ///
-
-    // Some compiler doesn't allow to convert a rvalue to non-const lvalue implicity.
-    // This function may change a rvalue to a lvalue.
+    // Compiler Workaround :
+    // - Some compiler doesn't allow to convert a rvalue to non-const lvalue implicity.
+    //   This function may change a rvalue to a lvalue.
     void Submit( TaskCore&& task )
     {
         this->Submit( task );
     }
+
+
+    // Directly submit a function into a task.
+    template< typename Function >
+    auto Submit( const std::string& taskName, Function taskFunction )
+        -> Task< decltype( taskFunction() ) >;
 
 
 private:
@@ -44,6 +49,22 @@ private:
     virtual void AddReadyTask( TaskCore& task ) = 0;
 
 };
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Implementation
+//
+
+template< typename Function >
+inline auto TaskExecutor::Submit(
+    const std::string& taskName, Function taskFunction )
+        -> Task< decltype( taskFunction() ) >
+{
+    auto task = MakeTask( taskName, std::move( taskFunction ));
+    this->Submit( task );
+    return task;
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////
