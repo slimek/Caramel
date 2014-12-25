@@ -23,9 +23,28 @@ TEST( DateTimeBasicTest )
     CHECK( true  == now.IsValid() );
     CHECK( min < now && now < max );
 
+    //
     // Limit values: these are Boost.DateTime spec
+    //
+
     CHECK( "1400-01-01 00:00:00"        == min.ToString() );
     CHECK( "9999-12-31 23:59:59.999999" == max.ToString() );
+
+    CHECK( 1400 == min.Year() );
+    CHECK( 1 == min.Month() );
+    CHECK( 1 == min.Day() );
+    CHECK( 0 == min.Hour() );
+    CHECK( 0 == min.Minute() );
+    CHECK( 0 == min.Second() );
+    CHECK( 0 == min.Millisecond() );
+
+    CHECK( 9999 == max.Year() );
+    CHECK( 12 == max.Month() );
+    CHECK( 31 == max.Day() );
+    CHECK( 23 == max.Hour() );
+    CHECK( 59 == max.Minute() );
+    CHECK( 59 == max.Second() );
+    CHECK( 999 == max.Millisecond() );
 }
 
 
@@ -89,6 +108,13 @@ TEST( DateTimeStringTest )
     // You may omit seconds.
     const auto dt3 = DateTime::FromString( "2013-04-05T18:09" );
     CHECK( dt3 == Date( 2013, 4, 5 ) + TimeOfDay( 18, 9, 0 ));
+
+    // With milliseconds
+    // - The fraction less than milliseconds are dropped.
+    const auto dt4 = DateTime::FromString( "2013-04-05T18:09:27.345" );
+    CHECK( dt4.Millisecond() == 345 );
+    const auto dt5 = DateTime::FromString( "2013-04-05T18:09:27.234567" );
+    CHECK( dt5.Millisecond() == 234 );
 }
 
 
@@ -140,10 +166,10 @@ TEST( DateAndTimeOfDayTest )
 
     // Split Date and TimeOfDay from DateTime
     {
-        const auto dateTime = DateTime::FromString( "1987/06/05 4:32:10" );
+        const auto dt1 = DateTime::FromString( "1987/06/05 4:32:10" );
 
-        CHECK( Date( 1987, 6, 5 ) == dateTime.Date() );
-        CHECK( TimeOfDay( 4, 32, 10 ) == dateTime.TimeOfDay() );
+        CHECK( Date( 1987, 6, 5 ) == dt1.Date() );
+        CHECK( TimeOfDay( 4, 32, 10 ) == dt1.TimeOfDay() );
     }
 }
 

@@ -26,7 +26,6 @@ class TimeSpan : public boost::totally_ordered< TimeSpan >
                , public boost::additive< TimeSpan >
 {
     friend class DateTime;
-    friend class Hours;
     friend class Seconds;
 
 public:
@@ -54,15 +53,18 @@ public:
 
     //
     // Components
+    // - All positive, or all negative.
     //
-    Int32 Days()    const;
-    Int32 Hours()   const;  // 0 - 23
-    Int32 Minutes() const;  // 0 - 59
-    Int32 Seconds() const;  // 0 - 59
+    Int Days()         const;
+    Int Hours()        const;  // +/- 0 - 23
+    Int Minutes()      const;  // +/- 0 - 59
+    Int Seconds()      const;  // +/- 0 - 59
+    Int Milliseconds() const;  // +/- 0 - 999
 
 
     //
     // Total Durations
+    // - All positive, or all negative.
     //
     Double TotalDays()    const;
     Double TotalHours()   const;

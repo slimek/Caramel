@@ -24,6 +24,8 @@ public:
     TimeDuration( boost::posix_time::time_duration&& td )
         : boost::posix_time::time_duration( td )
     {}
+
+    Int Millisecond() const;
 };
 
 

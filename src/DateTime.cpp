@@ -25,6 +25,7 @@ namespace Caramel
 //   Date
 //   Days
 //   DateTime
+//   TimeDuration
 //   TimeSpan
 //   TimeOfDay
 //   DateTimeManager
@@ -363,6 +364,11 @@ Int DateTime::Hour()   const { return m_impl->time_of_day().hours(); }
 Int DateTime::Minute() const { return m_impl->time_of_day().minutes(); }
 Int DateTime::Second() const { return m_impl->time_of_day().seconds(); }
 
+Int DateTime::Millisecond() const
+{
+    return this->TimeOfDay().Millisecond();
+}
+
 
 Date DateTime::Date() const
 {
@@ -476,6 +482,18 @@ DateTimeImpl::DateTimeImpl( boost::posix_time::ptime&& pt )
 
 ///////////////////////////////////////////////////////////////////////////////
 //
+// Time Duration
+//
+
+Int TimeDuration::Millisecond() const
+{
+    // The resolution of boost::posix::time_duration is microsecond.
+    return static_cast< Int >( this->fractional_seconds() / 1000 );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
 // Time Span
 //
 
@@ -495,8 +513,12 @@ TimeSpan::TimeSpan( const Caramel::Seconds& seconds )
 {
     CARAMEL_ASSERT( LONG_MAX >= seconds.ToDouble() );
 
+    Double intPart = 0;
+    const Double fraction = std::modf( seconds.ToDouble(), &intPart );
+
     m_impl.reset( new TimeDuration(
-        boost::posix_time::seconds( static_cast< Long >( seconds.ToDouble() ))));
+        boost::posix_time::seconds( static_cast< Long >( intPart ))
+      + boost::posix_time::millisec( static_cast< Int64 >( fraction * 1000 ))));
 }
 
 
@@ -539,10 +561,11 @@ TimeSpan TimeSpan::FromString( const std::string& s )
 // Accessors
 //
 
-Int32 TimeSpan::Days()    const { return m_impl->hours() / 24; }
-Int32 TimeSpan::Hours()   const { return m_impl->hours() % 24; }
-Int32 TimeSpan::Minutes() const { return m_impl->minutes(); }
-Int32 TimeSpan::Seconds() const { return m_impl->seconds(); }
+Int TimeSpan::Days()         const { return m_impl->hours() / 24; }
+Int TimeSpan::Hours()        const { return m_impl->hours() % 24; }
+Int TimeSpan::Minutes()      const { return m_impl->minutes(); }
+Int TimeSpan::Seconds()      const { return m_impl->seconds(); }
+Int TimeSpan::Milliseconds() const { return m_impl->Millisecond(); }
 
 Double TimeSpan::TotalDays()    const { return this->TotalSeconds() / 86400; }
 Double TimeSpan::TotalHours()   const { return this->TotalSeconds() / 3600; }
@@ -720,9 +743,10 @@ TimeOfDay TimeOfDay::FromString( const std::string& s )
 // Accessors
 //
 
-Int TimeOfDay::Hour()   const { return m_impl->hours(); }
-Int TimeOfDay::Minute() const { return m_impl->minutes(); }
-Int TimeOfDay::Second() const { return m_impl->seconds(); }
+Int TimeOfDay::Hour()        const { return m_impl->hours(); }
+Int TimeOfDay::Minute()      const { return m_impl->minutes(); }
+Int TimeOfDay::Second()      const { return m_impl->seconds(); }
+Int TimeOfDay::Millisecond() const { return m_impl->Millisecond(); }
 
 
 //
@@ -812,6 +836,10 @@ std::string DateTimeManager::FormatTimeDuration(
 // Validations
 //
 
+//
+// Date
+//
+
 static_assert(
     std::is_same< boost::gregorian::greg_year::value_type, Uint16 >::value,
     "Type of greg_year should be Uint16" );
@@ -823,6 +851,14 @@ static_assert(
 static_assert(
     std::is_same< boost::gregorian::greg_day::value_type, Uint16 >::value,
     "Type of greg_day should be Uint16" );
+
+//
+// Time Duration
+//
+
+static_assert(
+    std::is_same< boost::posix_time::time_duration::traits_type, boost::date_time::micro_res >::value,
+    "The resolution of time_duration should be micro-seconds" );
 
 static_assert(
     std::is_same< boost::posix_time::time_duration::hour_type, Int32 >::value,
@@ -836,6 +872,9 @@ static_assert(
     std::is_same< boost::posix_time::time_duration::sec_type, Int32 >::value,
     "Type of sec_type should be Int32" );
 
+static_assert(
+    std::is_same< boost::posix_time::time_duration::fractional_seconds_type, Int64 >::value,
+    "Type of fractional_seconds_type should be Int64" );
     
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -37,10 +37,16 @@ public:
     DateTime( const Caramel::Date& date, const Caramel::TimeOfDay& time );
 
 
-    /// Creators ///
+    //
+    // Time from System Clock.
+    // - The precision of both functions are in seconds.
+    //
 
-    static DateTime Now();     // System local timezone
-    static DateTime UtcNow();
+    static DateTime Now();     // Local timezone
+    static DateTime UtcNow();  // UTC                   
+
+
+    /// Limit Values ///
 
     static DateTime MinValue();
     static DateTime MaxValue();
@@ -63,9 +69,10 @@ public:
     Int Month() const;
     Int Day()   const;
 
-    Int Hour()   const;
-    Int Minute() const;
-    Int Second() const;
+    Int Hour()        const;
+    Int Minute()      const;
+    Int Second()      const;
+    Int Millisecond() const;
 
     Caramel::Date      Date()      const;
     Caramel::TimeOfDay TimeOfDay() const;

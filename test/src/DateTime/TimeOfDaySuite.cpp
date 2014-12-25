@@ -27,6 +27,7 @@ TEST( TimeOfDayTest )
     CHECK( 0 == zero.Hour() );
     CHECK( 0 == zero.Minute() );
     CHECK( 0 == zero.Second() );
+    CHECK( 0 == zero.Millisecond() );
 
     const auto tod1 = TimeOfDay::FromString( "12:34:56" );
 
@@ -37,6 +38,9 @@ TEST( TimeOfDayTest )
     CHECK( 56 == tod1.Second() );
 
     CHECK( "23:59:59" == TimeOfDay::FromString( "23:59:59" ).ToString() );
+
+
+    /// Invalid Values ///
 
     // Time of Day can be longer than a day
     CHECK_THROW( TimeOfDay( 24, 0, 0 ), Exception );
@@ -74,6 +78,18 @@ TEST( TimeOfDayTest )
 
     CHECK( TimeOfDay() == dt0.TimeOfDay() );
     CHECK( TimeOfDay( 14, 30, 15 ) == dt1.TimeOfDay() );
+
+    
+    /// With Fractional ///
+
+    const auto tod3 = TimeOfDay::FromString( "12:34:56.785" );
+    CHECK( tod3.Millisecond() == 785 );
+
+    const auto tod4 = TimeOfDay::FromString( "12:34:56.125385" );
+    CHECK( tod4.Millisecond() == 125 );
+
+    const auto dt2 = DateTime::FromString( "2013-04-05 16:27:38.235" );
+    CHECK( 235 == dt2.TimeOfDay().Millisecond() );
 }
 
 

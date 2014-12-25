@@ -24,6 +24,7 @@ TEST( TimeSpanTest )
         CHECK( 0 == time0.Hours() );
         CHECK( 0 == time0.Minutes() );
         CHECK( 0 == time0.Seconds() );
+        CHECK( 0 == time0.Milliseconds() );
 
         CHECK( 0 == time0.TotalDays() );
         CHECK( 0 == time0.TotalHours() );
@@ -72,6 +73,14 @@ TEST( TimeSpanTest )
         CHECK( 18 == time4.Hours() );
         CHECK( 15 == time4.Minutes() );
         CHECK( 5  == time4.Seconds() );
+
+        // Nagative TimeSpan
+
+        const auto time5 = - Minutes( 30 );
+
+        CHECK( 0 == time5.Days() );
+        CHECK( 0 == time5.Hours() );
+        CHECK( -30 == time5.Minutes() );
     }
 
     /// Comparison ///
@@ -132,6 +141,23 @@ TEST( TimeSpanTest )
         CHECK( false == ( time1 <= secs2 ));
         CHECK( false == ( time1 == secs2 ));
         CHECK( false == ( secs2 == time1 ));
+
+
+        /// Seconds with Fractional ///
+
+        const TimeSpan time3 = Seconds( 0.5 );
+
+        CHECK( 0 == time3.Seconds() );
+        CHECK( 500 == time3.Milliseconds() );
+        CHECK( "00:00:00.500000" == time3.ToString() );
+          // TODO: How to reduce the digits of the fractional part?
+
+        // The part less than milliseconds is dropped.
+        const TimeSpan time4 = Seconds( - 35.6125 );
+
+        CHECK( -35 == time4.Seconds() );
+        CHECK( -612 == time4.Milliseconds() );
+        CHECK( "-00:00:35.612000" == time4.ToString() );
     }
 
     /// Arithmetic ///
@@ -149,6 +175,8 @@ TEST( TimeSpanTest )
         TimeSpan t4 = t1;
         t4 -= Minutes( 30 );
         CHECK( -TimeSpan( 0, 29, 18 ) == t4 );
+        CHECK( -29 == t4.Minutes() );
+        CHECK( -18 == t4.Seconds() );
 
         CHECK( Seconds( 42 ) == t1 );  // t1 should not be modified
 
@@ -253,18 +281,36 @@ TEST( TimeSpanTryParseTest )
 
     CHECK( true == span.TryParse( "12:34:78" ));    // components would automatically carry in.
     CHECK( TimeSpan( 12, 35, 18 ) == span );
+
+    //
+    // With fractional part
+    // - Both '.' and ',' are acceptable.
+    //
+
+    CHECK( true == span.TryParse( "12:34:56.78" ));
+    CHECK( TimeSpan( 12, 34, 56 ) + Seconds( 0.78 ) == span );
+
+    CHECK( true == span.TryParse( "12:34:56,78" ));
+    CHECK( TimeSpan( 12, 34, 56 ) + Seconds( 0.78 ) == span );
 }
 
 
 TEST( TimeSpanFormatTest )
 {
-    TimeSpan t0;
-    TimeSpan t1( 12, 34, 56 );
-    TimeSpan t2 = Days( 2 ) + Minutes( 42 );
+    const TimeSpan t0;
+    const TimeSpan t1( 12, 34, 56 );
+    const TimeSpan t2 = Days( 2 ) + Minutes( 42 );
+    const TimeSpan t3 = Seconds( 35.125 );
 
-    CHECK( "00:00:00" == t0.Format( "%H:%M:%S" ));
-    CHECK( "12:34:56" == t1.Format( "%H:%M:%S" ));
-    CHECK( "48h42m"   == t2.Format( "%Hh%Mm" ));
+    CHECK( "00:00:00"  == t0.Format( "%H:%M:%S" ));
+    CHECK( "12:34:56"  == t1.Format( "%H:%M:%S" ));
+    CHECK( "48h42m"    == t2.Format( "%Hh%Mm" ));
+    CHECK( "35.125000" == t3.Format( "%S.%f" ));
+
+    // TODO: There are no easy way to format the days part?
+    CHECK( 0 == t2.Hours() );
+    CHECK( 2 == t2.Days() );
+    // CHECK( "02d00h42m" == t2.FormatEx( ??? ));
 }
 
 

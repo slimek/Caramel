@@ -42,9 +42,10 @@ public:
 
     /// Accessors ///
 
-    Int Hour()   const;
-    Int Minute() const;
-    Int Second() const;
+    Int Hour()        const;  // 0 - 23
+    Int Minute()      const;  // 0 - 59
+    Int Second()      const;  // 0 - 59
+    Int Millisecond() const;  // 0 - 999
 
 
     /// Operators ///
