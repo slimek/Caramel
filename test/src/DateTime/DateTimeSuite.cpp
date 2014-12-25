@@ -65,21 +65,6 @@ TEST( DateTimeStringTest )
     CHECK( 5025 == span2.TotalSeconds() );
 
 
-    /// Operations between DateTime and TimeSpan ///
-
-    const auto time2 = DateTime::FromString( "2013-04-05 00:00:00" );
-    
-    CHECK( time1 - time2 == TimeSpan::FromString( "18:09:30" ));
-
-    const auto time3 = time2 + TimeSpan::FromString( "02:35:18" );
-
-    CHECK( "2013-04-05 02:35:18" == time3.ToString() );
-
-    const auto time4 = time2 - TimeSpan::FromString( "15:47:36" );
-
-    CHECK( "2013-04-04 08:12:24" == time4.ToString() );
-
-
     /// Try Parse ///
 
     DateTime dt;
@@ -149,6 +134,31 @@ TEST( DateTimeComparisonsTest )
     CHECK( false == ( dt1 != dt3 ));
     CHECK( false == ( dt1 <  dt3 ));
     CHECK( false == ( dt1 >  dt3 ));
+}
+
+
+TEST( DateTimeArithmeticTest )
+{
+    const auto dt1 = DateTime::FromString( "2013-04-05 18:09:30" );
+    const auto dt2 = DateTime::FromString( "2013-04-05 00:00:00" );
+    
+    CHECK( dt1 - dt2 == TimeSpan::FromString( "18:09:30" ));
+
+    const auto dt3 = dt2 + TimeSpan::FromString( "02:35:18" );
+
+    CHECK( "2013-04-05 02:35:18" == dt3.ToString() );
+
+    const auto dt4 = dt2 - TimeSpan::FromString( "15:47:36" );
+
+    CHECK( "2013-04-04 08:12:24" == dt4.ToString() );
+
+    const auto dt5 = dt4 - Milliseconds( 1400 );
+
+    CHECK( "2013-04-04 08:12:22.600000" == dt5.ToString() );
+
+    const auto dt6 = dt5 + Seconds( 2.75 );
+
+    CHECK( "2013-04-04 08:12:25.350000" == dt6.ToString() );
 }
 
 

@@ -129,6 +129,13 @@ public:
 //        but it can convert to TimeSpan implicitly.
 
 
+class Milliseconds : public TimeSpan
+{
+public:
+    explicit Milliseconds( Int32 millis );
+};
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // namespace Caramel

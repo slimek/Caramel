@@ -683,6 +683,13 @@ Minutes::Minutes( Int32 minutes )
 }
 
 
+Milliseconds::Milliseconds( Int32 millis )
+    : TimeSpan( std::make_shared< TimeDuration >(
+        boost::posix_time::millisec( millis )))
+{
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Time of Day

@@ -152,12 +152,22 @@ TEST( TimeSpanTest )
         CHECK( "00:00:00.500000" == time3.ToString() );
           // TODO: How to reduce the digits of the fractional part?
 
-        // The part less than milliseconds is dropped.
-        const TimeSpan time4 = Seconds( - 35.6125 );
+        const TimeSpan time4 = Milliseconds( 1350 );
 
-        CHECK( -35 == time4.Seconds() );
-        CHECK( -612 == time4.Milliseconds() );
-        CHECK( "-00:00:35.612000" == time4.ToString() );
+        CHECK( 1 == time4.Seconds() );
+        CHECK( 350 == time4.Milliseconds() );
+        CHECK( "00:00:01.350000" == time4.ToString() );
+
+        const Seconds secs3 = time4;
+        
+        CHECK( Seconds( 1.35 ) == secs3 );
+
+        // The part less than milliseconds is dropped.
+        const TimeSpan time5 = Seconds( - 35.6125 );
+
+        CHECK( -35 == time5.Seconds() );
+        CHECK( -612 == time5.Milliseconds() );
+        CHECK( "-00:00:35.612000" == time5.ToString() );
     }
 
     /// Arithmetic ///
