@@ -237,6 +237,18 @@ TEST( TimeSpanLimitTest )
     CHECK( min < overMax && overMax < min + Seconds( 1 ) );
     CHECK( max - Seconds( 1 ) < overMin && overMin < max );
 
+
+    /// Zero ///
+
+    const auto zero = TimeSpan::Zero();
+
+    CHECK( 0 == zero.TotalSeconds() );
+    CHECK( 0 == zero.Days() );
+    CHECK( 0 == zero.Hours() );
+    CHECK( 0 == zero.Minutes() );
+    CHECK( 0 == zero.Seconds() );
+    CHECK( 0 == zero.Milliseconds() );
+    CHECK( TimeSpan::FromString( "0:00:00" ) == zero );
 }
 
 

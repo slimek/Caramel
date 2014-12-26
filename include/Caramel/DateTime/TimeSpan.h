@@ -39,6 +39,7 @@ public:
 
     /// Creators///
 
+    static TimeSpan Zero();
     static TimeSpan MinValue();
     static TimeSpan MaxValue();
 

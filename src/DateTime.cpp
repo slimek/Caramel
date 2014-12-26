@@ -532,6 +532,12 @@ TimeSpan::TimeSpan( std::shared_ptr< TimeDuration > impl )
 // Creators
 //
 
+TimeSpan TimeSpan::Zero()
+{
+    return TimeSpan();
+}
+
+
 TimeSpan TimeSpan::MinValue()
 {
     const auto minImpl = boost::posix_time::time_duration::impl_type::min().as_number();
