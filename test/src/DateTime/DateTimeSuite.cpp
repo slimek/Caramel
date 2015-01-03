@@ -90,6 +90,13 @@ TEST( DateTimeStringTest )
     CHECK( true == dt2.TryParse( "2014-03-15T08:23:14" ));
     CHECK( dt2 == Date( 2014, 3, 15 ) + TimeOfDay( 8, 23, 14 ));
 
+    // With UTC 'Z' designator
+    CHECK( true == dt2.TryParse( "1984-05-06T17:28:39Z" ));
+    CHECK( dt2 == Date( 1984, 5, 6 ) + TimeOfDay( 17, 28, 39 ));
+
+    // ISO 8601 with Time Zone is not supported.
+    CHECK( false == dt2.TryParse( "2013-04-16T07:28:39+08:00" ));
+
     // You may omit seconds.
     const auto dt3 = DateTime::FromString( "2013-04-05T18:09" );
     CHECK( dt3 == Date( 2013, 4, 5 ) + TimeOfDay( 18, 9, 0 ));

@@ -332,9 +332,21 @@ DateTime DateTime::FromString( const std::string& s )
         // Assume it is an ISO format datetime.
         //
         // NOTES:
-        //   boost::posix_time::from_iso_string() accetps formats as YYYYMMDDThh:mm:ss
-        //   But we want to be compatible with Json.NET format YYYY-MM-DDThh:mm:ss
+        //   boost::posix_time::from_iso_string() accetps ISO 8601 basic formats, as
         //
+        //     YYYYMMDDThh:mm:ss
+        //
+        //   But the format (also ISO 8601) used by Json.NET is not accepts
+        //
+        //     YYYY-MM-DDThh:mm:ss
+        //
+        //   Also, when we parse the time part saperately, the trailing 'Z' must be removed first.
+        //
+
+        if ( EndsWith( split.after, 'Z' ))
+        {
+            split.after = split.after.substr( 0, split.after.length() - 1 );
+        }
 
         return Date::FromString( split.before ) + TimeOfDay::FromString( split.after );
     }

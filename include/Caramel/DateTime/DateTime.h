@@ -22,7 +22,7 @@ namespace Caramel
 //   This class supports two string formats:
 //
 //     Normal   : YYYY-MM-DD hh:mm[:ss]
-//     ISO 8601 : YYYY-MM-DDThh:mm[:ss] -> Compatible with Json.NET
+//     ISO 8601 : YYYY-MM-DDThh:mm[:ss][Z] -> Compatible with Json.NET
 //
 
 class DateTimeImpl;
@@ -51,10 +51,16 @@ public:
     static DateTime MinValue();
     static DateTime MaxValue();
 
-    // Accepted formats:
-    //   YYYY-MM-DD hh:mm[:ss]
-    //   YYYY/MM/DD hh:mm[:ss]
-    //   YYYY-MM-DDThh:mm[:ss]
+    //
+    // Parse a string to get a DateTime.
+    // - Accepted formats:
+    //     YYYY-MM-DD hh:mm[:ss]
+    //     YYYY/MM/DD hh:mm[:ss]
+    //     YYYY-MM-DDThh:mm[:ss][.ff][Z] - ISO 8601, Compatible with Json.NET
+    //
+    //   NOTES: ISO 8601 format with time zone is not supported.
+    //          i.e. suffixed with +/-hh:mm
+    //
     static DateTime FromString( const std::string& s );
 
 
@@ -105,6 +111,7 @@ public:
     // According to the ANSI C strftime() format.
     std::string Format( const std::string& format ) const;
 
+    // This function is based on FromString().
     Bool TryParse( const std::string& s );
 
     
