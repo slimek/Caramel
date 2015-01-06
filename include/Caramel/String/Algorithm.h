@@ -18,10 +18,10 @@ namespace Caramel
 
 // String : Char
 
-Bool Contains( const std::string& s, Char c );
+Bool Contains( const std::string& input, Char c );
 
-Bool StartsWith( const std::string& s, Char c );
-Bool EndsWith  ( const std::string& s, Char c );
+Bool StartsWith( const std::string& input, Char c );
+Bool EndsWith  ( const std::string& input, Char c );
 
 
 // String : String

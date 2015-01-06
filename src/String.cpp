@@ -358,21 +358,21 @@ inline boost::integer_range< Char > CharRange( Char c )
 // Predicates
 //
 
-Bool Contains( const std::string& s, Char c )
+Bool Contains( const std::string& input, Char c )
 {
-    return boost::algorithm::contains( s, CharRange( c ));
+    return boost::algorithm::contains( input, CharRange( c ));
 }
 
 
-Bool StartsWith( const std::string& s, Char c )
+Bool StartsWith( const std::string& input, Char c )
 {
-    return boost::algorithm::starts_with( s, CharRange( c ));
+    return boost::algorithm::starts_with( input, CharRange( c ));
 }
 
 
-Bool EndsWith( const std::string& s, Char c )
+Bool EndsWith( const std::string& input, Char c )
 {
-    return boost::algorithm::ends_with( s, CharRange( c ));
+    return boost::algorithm::ends_with( input, CharRange( c ));
 }
 
 
