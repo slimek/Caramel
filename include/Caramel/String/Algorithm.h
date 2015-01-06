@@ -32,9 +32,15 @@ Bool EndsWith  ( const std::string& input, const std::string& test );
 
 /// Case insensitive ///
 
+// String : Char
+
+Bool CainStartsWith( const std::string& input, Char c );
+Bool CainEndsWith  ( const std::string& input, Char c );
+
 // String : String
 
 Bool CainStartsWith( const std::string& input, const std::string& test );
+Bool CainEndsWith  ( const std::string& input, const std::string& test );
 
 Bool CainEquals( const std::string& input, const std::string& test );
 

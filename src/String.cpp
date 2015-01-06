@@ -388,9 +388,27 @@ Bool EndsWith( const std::string& input, const std::string& test )
 }
 
 
+Bool CainStartsWith( const std::string& input, Char c )
+{
+    return boost::algorithm::istarts_with( input, CharRange( c ));
+}
+
+
+Bool CainEndsWith( const std::string& input, Char c )
+{
+    return boost::algorithm::iends_with( input, CharRange( c ));
+}
+
+
 Bool CainStartsWith( const std::string& input, const std::string& test )
 {
     return boost::algorithm::istarts_with( input, test );
+}
+
+
+Bool CainEndsWith( const std::string& input, const std::string& test )
+{
+    return boost::algorithm::iends_with( input, test );
 }
 
 

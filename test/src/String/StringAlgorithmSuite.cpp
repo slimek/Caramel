@@ -58,12 +58,32 @@ TEST( StringPredicateTest )
     // Case Insensitive
     //
 
+    /// String : c ///
+
+    CHECK( true  == CainStartsWith( "Alice", 'A' ));
+    CHECK( true  == CainStartsWith( "Alice", 'a' ));
+    CHECK( false == CainStartsWith( "Alice", 'l' ));
+    CHECK( false == CainStartsWith( "",      'a' ));
+
+    CHECK( true  == CainEndsWith( "Alice", 'E' ));
+    CHECK( true  == CainEndsWith( "Alice", 'e' ));
+    CHECK( false == CainEndsWith( "Alice", 'c' ));
+    CHECK( false == CainEndsWith( "",      'e' ));
+
+
     /// String : String ///
 
     CHECK( true  == CainStartsWith( "Alice", "Ali" ));
     CHECK( true  == CainStartsWith( "aLIce", "ali" ));
+    CHECK( true  == CainStartsWith( "Alice", "" ));
     CHECK( false == CainStartsWith( "Alice", "bad" ));
     CHECK( false == CainStartsWith( "",      "ali" ));
+
+    CHECK( true  == CainEndsWith( "Alice", "Ice" ));
+    CHECK( true  == CainEndsWith( "Alice", "ICE" ));
+    CHECK( true  == CainEndsWith( "Alice", "" ));
+    CHECK( false == CainEndsWith( "Alice", "bad" ));
+    CHECK( false == CainEndsWith( "",      "ice" ));
 
     CHECK( true  == CainEquals( "Alice", "Alice" ));
     CHECK( true  == CainEquals( "ALICE", "alice" ));
