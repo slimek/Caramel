@@ -119,11 +119,11 @@ TEST( FormatFixedPointTest )
     CHECK( "3.1416" == Format( "{0:F4}", 3.1415926 ));
     CHECK( "512"    == Format( "{0:F0}", 512.49 ));
     CHECK( "513"    == Format( "{0:F0}", 512.50 ));
-    CHECK( "0"      == Format( "{0:F0}", 0.32757));
     CHECK( "42.000" == Format( "{0:F3}", 42.0 ));
+    CHECK( "0"      == Format( "{0:F0}", 0.32757));
+    CHECK( "0.001"  == Format( "{0:F3}", 0.00085 ));
 
     // 'f' can be lowercase
-    CHECK( "0.00"   == Format( "{0:f}", 0.0 ));
     CHECK( "3.1416" == Format( "{0:f4}", 3.1415926 ));
     CHECK( "512"    == Format( "{0:f0}", 512.49 ));
     CHECK( "513"    == Format( "{0:f0}", 512.50 ));
@@ -137,8 +137,14 @@ TEST( FormatFixedPointTest )
     CHECK( "-6.23"    == Format( "{0:F}", -6.2253 ));
     CHECK( "-134"     == Format( "{0:F0}", -133.98 ));
     CHECK( "-4.52100" == Format( "{0:F5}", -4.521 ));
+    CHECK( "-32.00"   == Format( "{0:F2}", -32.0 ));
 
-    CHECK( "0" == Format( "{0:F0}", -0.1248 ));  // NOT "-0": Zero does not need sign.
+    // Negative Zero
+    // - Do not output "-0" or "-0.00" : according to .NET Format rule,
+    //   a negative zero does not output with sing.
+    CHECK( "0"    == Format( "{0:F0}", -0.1248 ));
+    CHECK( "0.0"  == Format( "{0:F1}", -0.0123 ));
+    CHECK( "0.00" == Format( "{0:f}", -0.0 ));
 
     // Float is ok
     CHECK( "0.00"   == Format( "{0:F}", 0.0f ));

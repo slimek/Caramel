@@ -503,16 +503,17 @@ std::string FloatingConverter< T >::ToStringWithFixedPoint( Uint digits ) const
 {
     std::stringstream ss;
     ss << std::fixed << std::setprecision( digits ) << m_value;
+    const auto result = ss.str();
 
-    // There is a special case when digits is 0
-    if ( digits == 0 )
+    if ( StartsWith( result, '-' ))
     {
-        const auto result = ss.str();
+        // Special case: Zero does not output with sing - according to .NET Format rule.
 
-        // Should not return "-0": Zero does not need sign.
-        if ( result == "-0" ) { return std::string( "0" ); }
-        
-        return result;
+        // If all chars are '0' or '.' -> The output is a zero.
+        if ( result.find_first_not_of( "0.", 1 ) > result.length() )
+        {
+            return result.substr( 1 );  // Remove the leading '-'
+        }
     }
 
     return ss.str();
