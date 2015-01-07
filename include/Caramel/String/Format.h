@@ -65,10 +65,10 @@ inline std::string Format( const std::string& format, Args&&... args )
 //
 //     "F" or "f" : Fixed-point, number of decimal digits. Default precision is 2.
 //
-//         1234.567 "F"  -> 1234.57 (default)
-//         1234.567 "F0" -> 1234    (the decimal point is also omitted)
+//         1234.567 "F"  -> 1234.57    (default)
+//         1234.567 "F0" -> 1235       (the decimal point is also omitted)
 //         1234.567 "F1" -> 1234.6
-//         1234.567 "F4" -> 1234.5670
+//         1234.567 "F5" -> 1234.56700
 //
 //
 //   Acceptable Argument Types

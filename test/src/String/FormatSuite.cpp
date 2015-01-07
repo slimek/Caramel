@@ -118,12 +118,15 @@ TEST( FormatFixedPointTest )
     CHECK( "0.00"   == Format( "{0:F}", 0.0 ));  // default is F2
     CHECK( "3.1416" == Format( "{0:F4}", 3.1415926 ));
     CHECK( "512"    == Format( "{0:F0}", 512.49 ));
+    CHECK( "513"    == Format( "{0:F0}", 512.50 ));
     CHECK( "0"      == Format( "{0:F0}", 0.32757));
     CHECK( "42.000" == Format( "{0:F3}", 42.0 ));
 
+    // 'f' can be lowercase
     CHECK( "0.00"   == Format( "{0:f}", 0.0 ));
     CHECK( "3.1416" == Format( "{0:f4}", 3.1415926 ));
     CHECK( "512"    == Format( "{0:f0}", 512.49 ));
+    CHECK( "513"    == Format( "{0:f0}", 512.50 ));
     CHECK( "42.000" == Format( "{0:f3}", 42.0 ));
 
     // Very long...
@@ -141,6 +144,7 @@ TEST( FormatFixedPointTest )
     CHECK( "0.00"   == Format( "{0:F}", 0.0f ));
     CHECK( "3.1416" == Format( "{0:F4}", 3.1415926f ));
     CHECK( "512"    == Format( "{0:F0}", 512.49f ));
+    CHECK( "513"    == Format( "{0:F0}", 512.50f ));
 }
 
 
