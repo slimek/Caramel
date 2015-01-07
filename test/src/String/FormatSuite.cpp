@@ -111,10 +111,8 @@ TEST( FormatNumberConvertibleTest )
 }
 
 
-TEST( FormatFixedPointTest )
+TEST( FormatFixedPointForFloatingTest )
 {
-    /// Floating Values ///
-
     CHECK( "0.00"   == Format( "{0:F}", 0.0 ));  // default is F2
     CHECK( "3.1416" == Format( "{0:F4}", 3.1415926 ));
     CHECK( "512"    == Format( "{0:F0}", 512.49 ));
@@ -151,6 +149,67 @@ TEST( FormatFixedPointTest )
     CHECK( "3.1416" == Format( "{0:F4}", 3.1415926f ));
     CHECK( "512"    == Format( "{0:F0}", 512.49f ));
     CHECK( "513"    == Format( "{0:F0}", 512.50f ));
+}
+
+
+TEST( FormatFixedPointForIntegerTest )
+{
+    // Int / Int32
+    CHECK( "0.00"    == Format( "{0:F}", 0 ));
+    CHECK( "0"       == Format( "{0:F0}", 0 ));
+    CHECK( "2048"    == Format( "{0:F0}", 2048 ));
+    CHECK( "127.000" == Format( "{0:F3}", 127 ));
+    CHECK( "-42.0"   == Format( "{0:F1}", -42 ));
+
+    // Uint / Uint32
+    CHECK( "0.00"    == Format( "{0:F}", 0u ));
+    CHECK( "0"       == Format( "{0:F0}", 0u ));
+    CHECK( "2048"    == Format( "{0:F0}", 2048u ));
+    CHECK( "127.000" == Format( "{0:F3}", 127u ));
+    CHECK( "4294967295.0" == Format( "{0:F1}", UINT_MAX ));
+
+    // Int64
+    CHECK( "0.00"    == Format( "{0:F}", 0ll ));
+    CHECK( "0"       == Format( "{0:F0}", 0ll ));
+    CHECK( "2048"    == Format( "{0:F0}", 2048ll ));
+    CHECK( "127.000" == Format( "{0:F3}", 127ll ));
+    CHECK( "-42.0"   == Format( "{0:F1}", -42ll ));
+
+    // Uint64
+    CHECK( "0.00"    == Format( "{0:F}", 0ull ));
+    CHECK( "0"       == Format( "{0:F0}", 0ull ));
+    CHECK( "2048"    == Format( "{0:F0}", 2048ull ));
+    CHECK( "127.000" == Format( "{0:F3}", 127ull ));
+
+    // Int16
+    const Int16 i16z = 0;
+    const Int16 i16u = 1;
+    CHECK( "0.00"      == Format( "{0:F}",  i16z ));
+    CHECK( "1"         == Format( "{0:F0}", i16u ));
+    CHECK( "32767.000" == Format( "{0:F3}", INT16_MAX ));
+    CHECK( "-32768.0"  == Format( "{0:F1}", INT16_MIN ));
+
+    // Uint16
+    const Uint16 u16z = 0;
+    const Uint16 u16u = 1;
+    CHECK( "0.00"      == Format( "{0:F}",  u16z ));
+    CHECK( "1"         == Format( "{0:F0}", u16u ));
+    CHECK( "65535.000" == Format( "{0:F3}", UINT16_MAX ));
+
+    // Int8
+    const Int8 i8z = 0;
+    const Int8 i8u = 1;
+    CHECK( "0.00"    == Format( "{0:F}",  i8z ));
+    CHECK( "1"       == Format( "{0:F0}", i8u ));
+    CHECK( "127.000" == Format( "{0:F3}", INT8_MAX ));
+    CHECK( "-128.0"  == Format( "{0:F1}", INT8_MIN ));
+
+    // Uint8
+    const Uint8 u8z = 0;
+    const Uint8 u8u = 1;
+    CHECK( "0.00"    == Format( "{0:F}",  u8z ));
+    CHECK( "1"       == Format( "{0:F0}", u8u ));
+    CHECK( "255.000" == Format( "{0:F3}", UINT8_MAX ));
 }
 
 

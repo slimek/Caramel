@@ -872,6 +872,9 @@
     <ClInclude Include="..\include\Caramel\Error\TryCatchResult.h">
       <Filter>1. Public Packages\Error</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\String\NumberFormat.h">
+      <Filter>2. Sources\String</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

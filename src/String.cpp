@@ -4,6 +4,7 @@
 
 #include "String/Converters.h"
 #include "String/FormatterImpl.h"
+#include "String/NumberFormat.h"
 #include "String/SprintfManager.h"
 #include <Caramel/Functional/ScopeExit.h>
 #include <Caramel/Lexical/Integer.h>
@@ -38,6 +39,7 @@ namespace Caramel
 //   SprintfManager
 //   Utf8String
 //   Algorithm
+//   NumberFormat
 //   IntegerConverter
 //   FloatingConverter
 //   ToString
@@ -465,6 +467,36 @@ std::string Join( const std::vector< std::string >& sequence, const std::string&
 
 ///////////////////////////////////////////////////////////////////////////////
 //
+// Number Format
+//
+
+NumberFormat::NumberFormat( const std::string& format, Uint defaultPrecision )
+    : m_precision( defaultPrecision )
+{
+    if ( format.empty() ) { return; }
+
+    m_specifier = format[0];
+
+    if ( format.length() == 1 ) { return; }
+
+    /// Extract Precision ///
+
+    const std::string sprec = format.substr( 1 );
+    Lexical::Integer< Uint > iprec;
+    if ( iprec.TryParse( sprec ))
+    {
+        m_precision = iprec;
+    }
+    else
+    {
+        // Parse precision failed, clear m_specifier to invalidate the format.
+        m_specifier = '\0';
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
 // Integer Converter
 //
 
@@ -478,9 +510,30 @@ std::string IntegerConverter< T >::ToString() const
 
 
 template< typename T >
+std::string IntegerConverter< T >::ToStringWithFixedPoint( Uint digits ) const
+{
+    if ( digits == 0 ) { return this->ToString(); }
+
+    return this->ToString() + "." + std::string( digits, '0' );
+}
+
+
+template< typename T >
 std::string IntegerConverter< T >::operator() ( const std::string& format ) const
 {
-    return this->ToString();
+    if ( format.empty() ) { return this->ToString(); }
+
+    const NumberFormat numFmt( format, 2 );  // 2 is default precision for all specifiers
+
+    switch ( numFmt.Specifier() )
+    {
+    case 'F': case 'f':
+        return this->ToStringWithFixedPoint( numFmt.Precision() );
+
+    default:
+        CARAMEL_ALERT( "Invalid integer format: %s", format );
+        return this->ToString();
+    }
 }
 
 
@@ -523,25 +576,19 @@ std::string FloatingConverter< T >::ToStringWithFixedPoint( Uint digits ) const
 template< typename T >
 std::string FloatingConverter< T >::operator() ( const std::string& format ) const
 {
-    if ( CainStartsWith( format, 'F' ))
+    if ( format.empty() ) { return this->ToString(); }
+
+    const NumberFormat numFmt( format, 2 );  // 2 is default precision for all specifiers
+
+    switch ( numFmt.Specifier() )
     {
-        if ( CainEquals( format, "F" )) { return this->ToStringWithFixedPoint( 2 ); }
+    case 'F': case 'f':
+        return this->ToStringWithFixedPoint( numFmt.Precision() );
 
-        const std::string sdigits = format.substr( 1 );
-        Lexical::Integer< Uint > digits;
-        if ( digits.TryParse( sdigits ))
-        {
-            return this->ToStringWithFixedPoint( digits );
-        }
-
+    default:
         CARAMEL_ALERT( "Invalid floating format: %s", format );
+        return this->ToString();
     }
-    else if ( ! format.empty() )
-    {
-        CARAMEL_ALERT( "Unknown floating format: %s", format );
-    }
-
-    return this->ToString();
 }
 
 

@@ -220,6 +220,7 @@
     <ClInclude Include="..\src\Statechart\Transition.h" />
     <ClInclude Include="..\src\String\Converters.h" />
     <ClInclude Include="..\src\String\FormatterImpl.h" />
+    <ClInclude Include="..\src\String\NumberFormat.h" />
     <ClInclude Include="..\src\String\SprintfManager.h" />
     <ClInclude Include="..\src\Task\PooledThread.h" />
     <ClInclude Include="..\src\Task\TaskImpl.h" />
