@@ -499,10 +499,22 @@ std::string FloatingConverter< T >::ToString() const
 
 
 template< typename T >
-std::string FloatingConverter< T >::ToStringWithFixedPoint( Int digits ) const
+std::string FloatingConverter< T >::ToStringWithFixedPoint( Uint digits ) const
 {
     std::stringstream ss;
     ss << std::fixed << std::setprecision( digits ) << m_value;
+
+    // There is a special case when digits is 0
+    if ( digits == 0 )
+    {
+        const auto result = ss.str();
+
+        // Should not return "-0": Zero does not need sign.
+        if ( result == "-0" ) { return std::string( "0" ); }
+        
+        return result;
+    }
+
     return ss.str();
 }
 
@@ -510,9 +522,9 @@ std::string FloatingConverter< T >::ToStringWithFixedPoint( Int digits ) const
 template< typename T >
 std::string FloatingConverter< T >::operator() ( const std::string& format ) const
 {
-    if ( StartsWith( format, 'F' ))
+    if ( CainStartsWith( format, 'F' ))
     {
-        if ( format == "F" ) { return this->ToStringWithFixedPoint( 2 ); }
+        if ( CainEquals( format, "F" )) { return this->ToStringWithFixedPoint( 2 ); }
 
         const std::string sdigits = format.substr( 1 );
         Lexical::Integer< Uint > digits;

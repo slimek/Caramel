@@ -115,10 +115,32 @@ TEST( FormatFixedPointTest )
 {
     /// Floating Values ///
 
-    CHECK( "0.00"   == Format( "{0:F}", 0.0f ));  // default is F2
+    CHECK( "0.00"   == Format( "{0:F}", 0.0 ));  // default is F2
     CHECK( "3.1416" == Format( "{0:F4}", 3.1415926 ));
     CHECK( "512"    == Format( "{0:F0}", 512.49 ));
+    CHECK( "0"      == Format( "{0:F0}", 0.32757));
     CHECK( "42.000" == Format( "{0:F3}", 42.0 ));
+
+    CHECK( "0.00"   == Format( "{0:f}", 0.0 ));
+    CHECK( "3.1416" == Format( "{0:f4}", 3.1415926 ));
+    CHECK( "512"    == Format( "{0:f0}", 512.49 ));
+    CHECK( "42.000" == Format( "{0:f3}", 42.0 ));
+
+    // Very long...
+    CHECK( "0.123456789000" == Format( "{0:F12}", 0.123456789 ));
+    CHECK( "7890123456.0" == Format( "{0:F1}", 7890123456.0 ));
+
+    // Negative
+    CHECK( "-6.23"    == Format( "{0:F}", -6.2253 ));
+    CHECK( "-134"     == Format( "{0:F0}", -133.98 ));
+    CHECK( "-4.52100" == Format( "{0:F5}", -4.521 ));
+
+    CHECK( "0" == Format( "{0:F0}", -0.1248 ));  // NOT "-0": Zero does not need sign.
+
+    // Float is ok
+    CHECK( "0.00"   == Format( "{0:F}", 0.0f ));
+    CHECK( "3.1416" == Format( "{0:F4}", 3.1415926f ));
+    CHECK( "512"    == Format( "{0:F0}", 512.49f ));
 }
 
 

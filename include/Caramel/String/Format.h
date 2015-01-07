@@ -63,9 +63,10 @@ inline std::string Format( const std::string& format, Args&&... args )
 //
 //   Format String for Floating Item
 //
-//     "F" : Fixed-point, number of decimal digits. Default precision is 2.
+//     "F" or "f" : Fixed-point, number of decimal digits. Default precision is 2.
 //
-//         1234.567 "F"  -> 1234.57
+//         1234.567 "F"  -> 1234.57 (default)
+//         1234.567 "F0" -> 1234    (the decimal point is also omitted)
 //         1234.567 "F1" -> 1234.6
 //         1234.567 "F4" -> 1234.5670
 //
