@@ -5,6 +5,7 @@
 #include "Utils/SharedArrayUtils.h"
 #include <Caramel/Value/SharedArray.h>
 #include <UnitTest++/UnitTest++.h>
+#include <boost/range/algorithm.hpp>
 #include <set>
 #include <vector>
 
@@ -124,6 +125,21 @@ TEST( SharedArrayFillTest )
 
     ConstSharedArray< Float > array3( 3, 42.f );
     CHECK(( array3 == SharedArray< Float >{ 42.f, 42.f, 42.f } ));
+}
+
+
+TEST( SharedArrayBoostRangeTest )
+{
+    SharedArray< Int > ary( 3 );
+    CHECK( ary.Begin() == boost::begin( ary ));
+
+    ConstSharedArray< std::string > cary( 5 );
+    CHECK( cary.Begin() == boost::begin( cary ));
+
+    // We can pass the compiling ~
+    // - Both SharedArray and ConstSharedArray are accepted by Boost.Range algorithms.
+    boost::range::sort( ary );
+    boost::range::max_element( cary );
 }
 
 

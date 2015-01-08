@@ -76,6 +76,12 @@ public:
     const_iterator begin() const { return this->Begin(); }
     const_iterator end()   const { return this->End(); }
 
+    // This iterator is non-mutable. It would be overridden by SharedArray.
+    typedef const ValueType* iterator;
+
+    iterator begin() { return this->Begin(); }
+    iterator end()   { return this->End(); }
+
     
 protected:
 
@@ -110,6 +116,8 @@ public:
     using ConstSharedArray< T >::operator[];
     using ConstSharedArray< T >::Begin;
     using ConstSharedArray< T >::End;
+    using ConstSharedArray< T >::begin;
+    using ConstSharedArray< T >::end;
 
 
     /// Accessors (non-constant) ///
