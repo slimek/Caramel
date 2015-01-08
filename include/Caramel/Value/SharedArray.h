@@ -8,6 +8,7 @@
 #include <Caramel/Error/Assert.h>
 #include <Caramel/Error/Exception.h>
 #include <boost/shared_ptr.hpp>
+#include <boost/utility/enable_if.hpp>
 #include <algorithm>
 #include <initializer_list>
 
@@ -31,11 +32,16 @@ public:
     explicit ConstSharedArray( Uint size );
     explicit ConstSharedArray( std::initializer_list< T > inits );
 
-    template< typename InputIterator >
+    // Fill this array with 'value'    
+    explicit ConstSharedArray( Uint size, const T& value );
+
+    template< typename InputIterator,
+              typename = typename boost::disable_if< std::is_integral< InputIterator >>::type >
     ConstSharedArray( InputIterator first, Uint count );
 
     // Transform the range to make an array.
-    template< typename InputIterator, typename Function >
+    template< typename InputIterator, typename Function,
+              typename = typename boost::disable_if< std::is_integral< InputIterator >>::type >
     ConstSharedArray( InputIterator first, Uint count, Function func );
 
     
@@ -90,8 +96,12 @@ public:
     SharedArray();
     explicit SharedArray( Uint size );
     explicit SharedArray( std::initializer_list< T > inits );
-    
-    template< typename InputIterator >
+
+    // Fill this array with 'value'    
+    explicit SharedArray( Uint size, const T& value );
+
+    template< typename InputIterator,
+              typename = typename boost::disable_if< std::is_integral< InputIterator >>::type >
     SharedArray( InputIterator first, Uint count );
 
 
@@ -163,6 +173,15 @@ inline ConstSharedArray< T >::ConstSharedArray( Uint size )
 
 
 template< typename T >
+inline ConstSharedArray< T >::ConstSharedArray( Uint size, const T& value )
+    : m_size( size )
+{
+    this->InitArray();
+    std::fill( &m_array[0], &m_array[0] + size, value );
+}
+
+
+template< typename T >
 inline ConstSharedArray< T >::ConstSharedArray( std::initializer_list< T > inits )
     : m_size( inits.size() )
 {
@@ -172,7 +191,7 @@ inline ConstSharedArray< T >::ConstSharedArray( std::initializer_list< T > inits
 
 
 template< typename T >
-template< typename InputIterator >
+template< typename InputIterator, typename Sfinae >
 inline ConstSharedArray< T >::ConstSharedArray( InputIterator first, Uint count )
     : m_size( count )
 {
@@ -182,7 +201,7 @@ inline ConstSharedArray< T >::ConstSharedArray( InputIterator first, Uint count 
 
 
 template< typename T >
-template< typename InputIterator, typename Function >
+template< typename InputIterator, typename Function, typename Sfinae >
 inline ConstSharedArray< T >::ConstSharedArray( InputIterator first, Uint count, Function func )
     : m_size( count )
 {
@@ -217,6 +236,13 @@ inline SharedArray< T >::SharedArray( Uint size )
 
 
 template< typename T >
+inline SharedArray< T >::SharedArray( Uint size, const T& value )
+    : ConstSharedArray< T >( size, value )
+{
+}
+
+
+template< typename T >
 inline SharedArray< T >::SharedArray( std::initializer_list< T > inits )
     : ConstSharedArray< T >( inits )
 {
@@ -224,7 +250,7 @@ inline SharedArray< T >::SharedArray( std::initializer_list< T > inits )
 
 
 template< typename T >
-template< typename InputIterator >
+template< typename InputIterator, typename Sfinae >
 inline SharedArray< T >::SharedArray( InputIterator first, Uint count )
     : ConstSharedArray< T >( first, count )
 {

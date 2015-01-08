@@ -113,6 +113,20 @@ TEST( SharedArrayRangeTest )
 }
 
 
+// Test of the fill constructors
+TEST( SharedArrayFillTest )
+{
+    SharedArray< Int > array1( 1, 7 );
+    CHECK(( array1 == SharedArray< Int >{ 7 } ));
+
+    SharedArray< std::string > array2( 2, "Alice" );
+    CHECK(( array2 == SharedArray< std::string >{ "Alice", "Alice" } ));
+
+    ConstSharedArray< Float > array3( 3, 42.f );
+    CHECK(( array3 == SharedArray< Float >{ 42.f, 42.f, 42.f } ));
+}
+
+
 } // SUITE( SharedArraySuite )
 
 } // namespace Caramel
