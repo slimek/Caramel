@@ -213,6 +213,42 @@ TEST( FormatFixedPointForIntegerTest )
 }
 
 
+TEST( FormatNumberTest )
+{
+    /// Floatings ///
+
+    CHECK( "0.00"   == Format( "{0:N}", 0.0 ));   // Default is N2
+    CHECK( "3.1416" == Format( "{0:N4}", 3.1415926 ));
+    CHECK( "512"    == Format( "{0:N0}", 512.49 ));
+
+    CHECK( "123,456.789"  == Format( "{0:N3}", 123456.789 ));
+    CHECK( "32,159.001"   == Format( "{0:N3}", 32159.00085 ));
+    CHECK( "-24,515,387.2" == Format( "{0:N1}", -24515387.2 ));
+    CHECK( "-0.14286"      == Format( "{0:N5}", -0.142857 ));
+    CHECK( "-127.94"       == Format( "{0:N}", -127.94 ));
+
+    // 'n' can be lowercase
+    CHECK( "47.13" == Format( "{0:n}", 47.128 ));
+    CHECK( "1,023" == Format( "{0:n0}", 1022.52 ));
+
+
+    /// Integers ///
+
+    CHECK( "0.00" == Format( "{0:N}", 0 ));     // Default is N2
+
+    CHECK( "1,234.00"  == Format( "{0:N}", 1234 ));
+    CHECK( "573,012.0" == Format( "{0:N1}", 573012 ));
+    CHECK( "-25,357"   == Format( "{0:N0}", -25357 ));
+    CHECK( "-365.0000" == Format( "{0:N4}", -365 ));
+    
+    CHECK( "4,294,967,295" == Format( "{0:N0}", UINT_MAX ));
+
+    // 'n' can be lowercase
+    CHECK( "-35.00"        == Format( "{0:n}", -35 ));
+    CHECK( "1,875,300.000" == Format( "{0:n3}", 1875300 ));
+}
+
+
 TEST( FormatArgumentsTest )
 {
     CHECK( "ABCDEFGH12345678" ==

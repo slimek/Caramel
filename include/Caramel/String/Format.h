@@ -79,6 +79,22 @@ inline std::string Format( const std::string& format, Args&&... args )
 //         1234  "F3" -> 1234.000
 //
 //
+//     "N" or "n" : Number with group separators and decimal digits. Default precision is 2.
+//
+//         [Floating]
+//
+//         1234.567 "N"  -> 1,234.57    (default)
+//         1234.567 "N0" -> 1,235       (the decimal point is also omitted)
+//         1234.567 "N1" -> 1,234.6
+//         1234.567 "N5" -> 1,234.56700
+//
+//         [Integer]
+//
+//         1234  "N"  -> 1,234.00    (default)
+//         1234  "N0" -> 1,234       (the decimal point is also omitted)
+//         1234  "N3" -> 1,234.000
+//
+//
 //   Acceptable Argument Types
 //
 //     1. All arithmetic types.

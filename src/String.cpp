@@ -10,6 +10,7 @@
 #include <Caramel/Lexical/Integer.h>
 #include <Caramel/String/Algorithm.h>
 #include <Caramel/String/Format.h>
+#include <Caramel/String/Split.h>
 #include <Caramel/String/Sprintf.h>
 #include <Caramel/String/ToString.h>
 #include <Caramel/String/Utf8String.h>
@@ -497,6 +498,35 @@ NumberFormat::NumberFormat( const std::string& format, Uint defaultPrecision )
 
 ///////////////////////////////////////////////////////////////////////////////
 //
+// Converter Common Strings
+//
+
+static std::string SeparateIntegralString( const std::string& integral )
+{
+    // Separate the string with thousands separator.
+    // i.e. insert a ',' for every 3 digits from decimal point.
+
+    std::stringstream ss;
+
+    for ( std::size_t i = 0; i < integral.length(); ++ i )
+    {
+        ss << integral[i];
+
+        if ( integral[i] == '-' ) { continue; }  // Prevent "-,123.0"
+
+        const auto nth = ( integral.length() - i );  // the nth digit from decimal point.
+        if ( nth > 3 && ( nth % 3 == 1 ))
+        {
+            ss << ',';
+        }
+    }
+
+    return ss.str();
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
 // Integer Converter
 //
 
@@ -519,6 +549,23 @@ std::string IntegerConverter< T >::ToStringWithFixedPoint( Uint digits ) const
 
 
 template< typename T >
+std::string IntegerConverter< T >::ToStringWithGroup( Uint digits ) const
+{
+    const std::string fixed = this->ToStringWithFixedPoint( digits );
+    
+    if ( digits == 0 )
+    {
+        return SeparateIntegralString( fixed );
+    }
+    else
+    {
+        const SplitterFirst spliter( fixed, '.' );
+        return SeparateIntegralString( spliter.before ) + '.' + spliter.after;
+    }
+}
+
+
+template< typename T >
 std::string IntegerConverter< T >::operator() ( const std::string& format ) const
 {
     if ( format.empty() ) { return this->ToString(); }
@@ -529,6 +576,9 @@ std::string IntegerConverter< T >::operator() ( const std::string& format ) cons
     {
     case 'F': case 'f':
         return this->ToStringWithFixedPoint( numFmt.Precision() );
+
+    case 'N': case 'n':
+        return this->ToStringWithGroup( numFmt.Precision() );
 
     default:
         CARAMEL_ALERT( "Invalid integer format: %s", format );
@@ -574,6 +624,23 @@ std::string FloatingConverter< T >::ToStringWithFixedPoint( Uint digits ) const
 
 
 template< typename T >
+std::string FloatingConverter< T >::ToStringWithGroup( Uint digits ) const
+{
+    const std::string fixed = this->ToStringWithFixedPoint( digits );
+    
+    if ( digits == 0 )
+    {
+        return SeparateIntegralString( fixed );
+    }
+    else
+    {
+        const SplitterFirst spliter( fixed, '.' );
+        return SeparateIntegralString( spliter.before ) + '.' + spliter.after;
+    }
+}
+
+
+template< typename T >
 std::string FloatingConverter< T >::operator() ( const std::string& format ) const
 {
     if ( format.empty() ) { return this->ToString(); }
@@ -584,6 +651,9 @@ std::string FloatingConverter< T >::operator() ( const std::string& format ) con
     {
     case 'F': case 'f':
         return this->ToStringWithFixedPoint( numFmt.Precision() );
+
+    case 'N': case 'n':
+        return this->ToStringWithGroup( numFmt.Precision() );
 
     default:
         CARAMEL_ALERT( "Invalid floating format: %s", format );

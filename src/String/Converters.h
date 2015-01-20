@@ -29,6 +29,7 @@ public:
 
     std::string ToString() const;
     std::string ToStringWithFixedPoint( Uint digits ) const;
+    std::string ToStringWithGroup( Uint digits ) const;
 
     std::string operator()( const std::string& format ) const;
 
@@ -56,6 +57,7 @@ public:
 
     std::string ToString() const;
     std::string ToStringWithFixedPoint( Uint digits ) const;
+    std::string ToStringWithGroup( Uint digits ) const;
 
     std::string operator()( const std::string& format ) const;
 
