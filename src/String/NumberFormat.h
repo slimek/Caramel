@@ -21,16 +21,18 @@ class NumberFormat
 {
 public:
     
-    NumberFormat( const std::string& format, Uint defaultPrecision );
+    explicit NumberFormat( const std::string& format );
 
     Char Specifier() const { return m_specifier; }
-    Uint Precision() const { return m_precision; }
+
+    Uint Precision( Uint defaultPrecision ) const;
 
 
 private:
 
-    Char m_specifier { '\0' };    
-    Uint m_precision { 0 };    
+    Char m_specifier { '\0' };
+    Uint m_precision { 0 };
+    Bool m_hasPrecision { false };
 };
 
 

@@ -95,6 +95,16 @@ inline std::string Format( const std::string& format, Args&&... args )
 //         1234  "N3" -> 1,234.000
 //
 //
+//   Format String for Integral Item
+//
+//     "X" or "x" : Hexadecimal. The precision is the least digits.
+//
+//         1234  "X"  -> 4D2
+//         1234  "X5" -> 004D2
+//         1234  "X1" -> 4D2     
+//         1234  "x"  -> 4d2     (lowercase)
+//
+//
 //   Acceptable Argument Types
 //
 //     1. All arithmetic types.

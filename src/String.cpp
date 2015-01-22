@@ -471,8 +471,7 @@ std::string Join( const std::vector< std::string >& sequence, const std::string&
 // Number Format
 //
 
-NumberFormat::NumberFormat( const std::string& format, Uint defaultPrecision )
-    : m_precision( defaultPrecision )
+NumberFormat::NumberFormat( const std::string& format )
 {
     if ( format.empty() ) { return; }
 
@@ -487,12 +486,19 @@ NumberFormat::NumberFormat( const std::string& format, Uint defaultPrecision )
     if ( iprec.TryParse( sprec ))
     {
         m_precision = iprec;
+        m_hasPrecision = true;
     }
     else
     {
         // Parse precision failed, clear m_specifier to invalidate the format.
         m_specifier = '\0';
     }
+}
+
+
+Uint NumberFormat::Precision( Uint defaultPrecision ) const
+{
+    return m_hasPrecision ? m_precision : defaultPrecision;
 }
 
 
@@ -539,6 +545,24 @@ std::string IntegerConverter< T >::ToString() const
 }
 
 
+template<>
+std::string IntegerConverter< Int8 >::ToString() const
+{
+    std::stringstream ss;
+    ss << std::dec << static_cast< Int >( m_value );
+    return ss.str();
+}
+
+
+template<>
+std::string IntegerConverter< Uint8 >::ToString() const
+{
+    std::stringstream ss;
+    ss << std::dec << static_cast< Uint >( m_value );
+    return ss.str();
+}
+
+
 template< typename T >
 std::string IntegerConverter< T >::ToStringWithFixedPoint( Uint digits ) const
 {
@@ -566,19 +590,84 @@ std::string IntegerConverter< T >::ToStringWithGroup( Uint digits ) const
 
 
 template< typename T >
+std::string IntegerConverter< T >::ToStringHexadecimalRaw( Bool useUppercase ) const
+{
+    std::stringstream ss;
+    ss << std::hex << ( useUppercase ? std::uppercase : std::nouppercase )
+       << m_value;
+    return ss.str();    
+}
+
+
+template<>
+std::string IntegerConverter< Int8 >::ToStringHexadecimalRaw( Bool useUppercase ) const
+{
+    std::stringstream ss;
+    ss << std::hex << ( useUppercase ? std::uppercase : std::nouppercase )
+       << static_cast< Int >( m_value );
+    const auto result = ss.str();
+    if ( result.length() < 2 )
+    {
+        return result;
+    }
+    else
+        return result.substr( result.length() - 2 );
+}
+
+
+template<>
+std::string IntegerConverter< Uint8 >::ToStringHexadecimalRaw( Bool useUppercase ) const
+{
+    std::stringstream ss;
+    ss << std::hex << ( useUppercase ? std::uppercase : std::nouppercase )
+       << static_cast< Uint >( m_value );
+    const auto result = ss.str();
+    if ( result.length() < 2 )
+    {
+        return result;
+    }
+    else
+        return result.substr( result.length() - 2 );
+}
+
+
+template< typename T >
+std::string IntegerConverter< T >::ToStringHexadecimal( Uint digits, Bool useUppercase ) const
+{
+    const std::string hexValue = this->ToStringHexadecimalRaw( useUppercase );
+    if ( digits > hexValue.length() )
+    {
+        return std::string( digits - hexValue.length(), '0' ) + hexValue;
+    }
+    else
+    {
+        return hexValue;
+    }
+}
+
+
+template< typename T >
 std::string IntegerConverter< T >::operator() ( const std::string& format ) const
 {
     if ( format.empty() ) { return this->ToString(); }
 
-    const NumberFormat numFmt( format, 2 );  // 2 is default precision for all specifiers
+    const NumberFormat numFmt( format );
 
     switch ( numFmt.Specifier() )
     {
     case 'F': case 'f':
-        return this->ToStringWithFixedPoint( numFmt.Precision() );
+        return this->ToStringWithFixedPoint( numFmt.Precision( 2 ));
 
     case 'N': case 'n':
-        return this->ToStringWithGroup( numFmt.Precision() );
+        return this->ToStringWithGroup( numFmt.Precision( 2 ));
+
+    case 'X':
+        return this->ToStringHexadecimal( numFmt.Precision( 1 ), true );
+        break;
+
+    case 'x':
+        return this->ToStringHexadecimal( numFmt.Precision( 1 ), false );
+        break;
 
     default:
         CARAMEL_ALERT( "Invalid integer format: %s", format );
@@ -645,15 +734,15 @@ std::string FloatingConverter< T >::operator() ( const std::string& format ) con
 {
     if ( format.empty() ) { return this->ToString(); }
 
-    const NumberFormat numFmt( format, 2 );  // 2 is default precision for all specifiers
+    const NumberFormat numFmt( format );
 
     switch ( numFmt.Specifier() )
     {
     case 'F': case 'f':
-        return this->ToStringWithFixedPoint( numFmt.Precision() );
+        return this->ToStringWithFixedPoint( numFmt.Precision( 2 ));
 
     case 'N': case 'n':
-        return this->ToStringWithGroup( numFmt.Precision() );
+        return this->ToStringWithGroup( numFmt.Precision( 2 ));
 
     default:
         CARAMEL_ALERT( "Invalid floating format: %s", format );
@@ -738,6 +827,30 @@ std::string Formatter::GetString() const
 //
 // Feeding Arguments
 //
+
+void Formatter::Feed( Int8 value )
+{
+    m_impl->Distribute( IntegerConverter< Int8 >( value ));
+}
+
+
+void Formatter::Feed( Uint8 value )
+{
+    m_impl->Distribute( IntegerConverter< Uint8 >( value ));
+}
+
+
+void Formatter::Feed( Int16 value )
+{
+    m_impl->Distribute( IntegerConverter< Int16 >( value ));
+}
+
+
+void Formatter::Feed( Uint16 value )
+{
+    m_impl->Distribute( IntegerConverter< Uint16 >( value ));
+}
+
 
 void Formatter::Feed( Int value )
 {

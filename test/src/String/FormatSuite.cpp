@@ -249,6 +249,69 @@ TEST( FormatNumberTest )
 }
 
 
+TEST( FormatHexadecimalTest )
+{
+    CHECK( "0" == Format( "{0:X}", 0 ));   // Default is X1
+
+    CHECK( "1AE"   == Format( "{0:X}", 0x1AE ));
+    CHECK( "1AE"   == Format( "{0:X0}", 0x1AE ));
+    CHECK( "001AE" == Format( "{0:X5}", 0x1AE ));
+
+    // Int / Int32
+    const Int32 i32n = -1;
+    CHECK( "7FFFFFFF" == Format( "{0:X}", INT32_MAX ));
+    CHECK( "FFFFFFFF" == Format( "{0:X}", i32n ));
+
+    // Uint / UInt32
+    CHECK( "FFFFFFFF" == Format( "{0:X}", UINT32_MAX ));
+
+    // Int8
+    const Int8 i8n = -1;
+    CHECK( "7F" == Format( "{0:X}", INT8_MAX ));
+    CHECK( "FF" == Format( "{0:X}", i8n ));
+    CHECK( "000FF" == Format( "{0:X5}", i8n ));
+
+    // Uint8
+    const Uint8 u8v = 124;
+    CHECK( "7C" == Format( "{0:X}", u8v ));
+    CHECK( "FF" == Format( "{0:X}", UINT8_MAX ));
+    CHECK( "000FF" == Format( "{0:X5}", UINT8_MAX ));
+
+    // Int16
+    const Int16 i16n = -1;
+    CHECK( "7FFF" == Format( "{0:X}", INT16_MAX ));
+    CHECK( "FFFF" == Format( "{0:X}", i16n ));
+    CHECK( "0FFFF" == Format( "{0:X5}", i16n ));
+
+    // Uint16
+    const Uint16 u16v = 32754;
+    CHECK( "7FF2" == Format( "{0:X}", u16v ));
+    CHECK( "FFFF" == Format( "{0:X}", UINT16_MAX ));
+    CHECK( "0FFFF" == Format( "{0:X5}", UINT16_MAX ));
+
+    // Int64
+    const Int64 i64n = -1;
+    CHECK( "7FFFFFFFFFFFFFFF" == Format( "{0:X}", INT64_MAX ));
+    CHECK( "FFFFFFFFFFFFFFFF" == Format( "{0:X}", i64n ));
+
+    // Uint64
+    const Uint64 u64v = 1000000000000uLL;
+    CHECK( "E8D4A51000" == Format( "{0:X}", u64v ));
+    CHECK( "FFFFFFFFFFFFFFFF" == Format( "{0:X}", UINT64_MAX ));
+    CHECK( "FFFFFFFFFFFFFFFF" == Format( "{0:X5}", UINT64_MAX ));
+
+    // Lowercase
+    CHECK( "1ae"   == Format( "{0:x}", 0x1AE ));
+    CHECK( "1ae"   == Format( "{0:x0}", 0x1AE ));
+    CHECK( "001ae" == Format( "{0:x5}", 0x1AE ));
+    CHECK( "ff"    == Format( "{0:x}", i8n ));
+    CHECK( "7c"    == Format( "{0:x}", u8v ));
+    CHECK( "0ffff" == Format( "{0:x5}", i16n ));
+    CHECK( "7ff2"  == Format( "{0:x}", u16v ));
+    CHECK( "e8d4a51000" == Format( "{0:x}", u64v ));
+}
+
+
 TEST( FormatArgumentsTest )
 {
     CHECK( "ABCDEFGH12345678" ==

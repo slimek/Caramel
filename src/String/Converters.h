@@ -30,10 +30,13 @@ public:
     std::string ToString() const;
     std::string ToStringWithFixedPoint( Uint digits ) const;
     std::string ToStringWithGroup( Uint digits ) const;
+    std::string ToStringHexadecimal( Uint digits, Bool useUppercase ) const;
 
     std::string operator()( const std::string& format ) const;
 
 private:
+
+    std::string ToStringHexadecimalRaw( Bool useUppercase ) const;
     
     T m_value;
 };
