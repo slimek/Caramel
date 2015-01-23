@@ -115,16 +115,16 @@ TEST( FormatFixedPointForFloatingTest )
 {
     CHECK( "0.00"   == Format( "{0:F}", 0.0 ));  // default is F2
     CHECK( "3.1416" == Format( "{0:F4}", 3.1415926 ));
-    CHECK( "512"    == Format( "{0:F0}", 512.49 ));
-    CHECK( "513"    == Format( "{0:F0}", 512.50 ));
+    CHECK( "511"    == Format( "{0:F0}", 511.49 ));
+    CHECK( "512"    == Format( "{0:F0}", 511.50 ));
     CHECK( "42.000" == Format( "{0:F3}", 42.0 ));
     CHECK( "0"      == Format( "{0:F0}", 0.32757));
     CHECK( "0.001"  == Format( "{0:F3}", 0.00085 ));
 
     // 'f' can be lowercase
     CHECK( "3.1416" == Format( "{0:f4}", 3.1415926 ));
-    CHECK( "512"    == Format( "{0:f0}", 512.49 ));
-    CHECK( "513"    == Format( "{0:f0}", 512.50 ));
+    CHECK( "511"    == Format( "{0:f0}", 511.49 ));
+    CHECK( "512"    == Format( "{0:f0}", 511.50 ));
     CHECK( "42.000" == Format( "{0:f3}", 42.0 ));
 
     // Very long...
@@ -144,11 +144,20 @@ TEST( FormatFixedPointForFloatingTest )
     CHECK( "0.0"  == Format( "{0:F1}", -0.0123 ));
     CHECK( "0.00" == Format( "{0:f}", -0.0 ));
 
+    // Rounding: MSVC and GCC/Clang are different:
+    CHECK( "512" == Format( "{0:F0}", 512.49 ));
+    #if defined( CARAMEL_COMPILER_IS_MSVC )
+    CHECK( "513" == Format( "{0:F0}", 512.50 ));  // Round-up
+    #else
+    CHECK( "512" == Format( "{0:F0}", 512.50 ));  // Round-to-Even
+    #endif
+    CHECK( "513" == Format( "{0:F0}", 512.51 ));
+
     // Float is ok
     CHECK( "0.00"   == Format( "{0:F}", 0.0f ));
     CHECK( "3.1416" == Format( "{0:F4}", 3.1415926f ));
-    CHECK( "512"    == Format( "{0:F0}", 512.49f ));
-    CHECK( "513"    == Format( "{0:F0}", 512.50f ));
+    CHECK( "511"    == Format( "{0:F0}", 511.49f ));
+    CHECK( "512"    == Format( "{0:F0}", 511.50f ));
 }
 
 
