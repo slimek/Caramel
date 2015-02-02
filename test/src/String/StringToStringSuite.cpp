@@ -107,6 +107,42 @@ TEST( StringToStringTrivialTest )
 }
 
 
+TEST( StringToStringWithFormatTest )
+{
+    /// Integers ///
+
+    CHECK( "0.00"      == ToString( 0, "F" ));
+    CHECK( "123,456.0" == ToString( 123456, "N1" ));
+    CHECK( "7b36a5"    == ToString( 8074917, "x" ));
+    CHECK( "-258.000"  == ToString( -258, "F3" ));
+
+    const Int16  i16max = INT16_MAX;
+    const Uint16 u16max = UINT16_MAX;
+    const Int32  i32max = INT32_MAX;
+    const Uint32 u32max = UINT32_MAX;
+    const Long   lz     = 0;
+    const Ulong  ulu    = 1;
+    const Int64  i64max = INT64_MAX;
+    const Uint64 u64v   = 538314;
+
+    CHECK( "32767.0" == ToString( i16max, "f1" ));
+    CHECK( "FFFF"    == ToString( u16max, "X" ));    
+    CHECK( "2,147,483,647"  == ToString( i32max, "N0" ));
+    CHECK( "4294967295.000" == ToString( u32max, "F3" ));
+    CHECK( "00000000" == ToString( lz, "x8" ));
+    CHECK( "1.00000"  == ToString( ulu, "n5" ));
+    CHECK( "7fffffffffffffff" == ToString( i64max, "x" ));
+    CHECK( "538,314.000" == ToString( u64v, "N3" ));
+
+
+    /// Floatings ///
+
+    CHECK( "0.00" == ToString( 0.0f, "F" ));
+    CHECK( "234,765,098.45123" == ToString( 234765098.45123, "N5" ));
+    CHECK( "-371" == ToString( -371.28f, "f0" ));
+}
+
+
 TEST( StringToStringTTest )
 {
     CHECK( "Bool"   == ToStringT< Bool >() );

@@ -66,6 +66,38 @@ inline std::string ToString( const Char* sz ) { return std::string( sz ); }
 
 ///////////////////////////////////////////////////////////////////////////////
 //
+// To String Functions, with Format
+// - See <Caramel/String/Format.h> for the formats of integers and floatings.
+//
+
+// Primary template
+// - This primary template is not defined, therefore all unsppurted types would
+//   cause a linking error.
+template< typename T >
+inline std::string ToString( const T& x, const std::string& format );
+
+
+//
+// Fundamental Overloadings
+//
+
+// Integers
+std::string ToString( Int16  x, const std::string& format );
+std::string ToString( Uint16 x, const std::string& format );
+std::string ToString( Int32  x, const std::string& format );
+std::string ToString( Uint32 x, const std::string& format );
+std::string ToString( Long   x, const std::string& format );
+std::string ToString( Ulong  x, const std::string& format );
+std::string ToString( Int64  x, const std::string& format );
+std::string ToString( Uint64 x, const std::string& format );
+
+// Floatings
+std::string ToString( Float  x, const std::string& format );
+std::string ToString( Double x, const std::string& format );
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
 // To String Function Templates
 // - Try to retrieve the name of types.
 //

@@ -786,6 +786,24 @@ std::string ToString( Double x ) { return FloatingConverter< Double >( x ).ToStr
 
 ///////////////////////////////////////////////////////////////////////////////
 //
+// ToString with Format
+//
+
+std::string ToString( Int16 x,  const std::string& format ) { return IntegerConverter< Int16 > ( x )( format ); }
+std::string ToString( Uint16 x, const std::string& format ) { return IntegerConverter< Uint16 >( x )( format ); }
+std::string ToString( Int32 x,  const std::string& format ) { return IntegerConverter< Int32 > ( x )( format ); }
+std::string ToString( Uint32 x, const std::string& format ) { return IntegerConverter< Uint32 >( x )( format ); }
+std::string ToString( Long x,   const std::string& format ) { return IntegerConverter< Long >  ( x )( format ); }
+std::string ToString( Ulong x,  const std::string& format ) { return IntegerConverter< Ulong > ( x )( format ); }
+std::string ToString( Int64 x,  const std::string& format ) { return IntegerConverter< Int64 > ( x )( format ); }
+std::string ToString( Uint64 x, const std::string& format ) { return IntegerConverter< Uint64 >( x )( format ); }
+
+std::string ToString( Float  x, const std::string& format ) { return FloatingConverter< Float > ( x )( format ); } 
+std::string ToString( Double x, const std::string& format ) { return FloatingConverter< Double >( x )( format ); }
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
 // To String <Type>
 //
 
