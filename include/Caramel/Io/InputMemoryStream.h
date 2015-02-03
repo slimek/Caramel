@@ -25,6 +25,12 @@ public:
     template< typename T, Uint n >
     explicit InputMemoryStream( const T(& buffer)[n] );
 
+    // Specialized for C-style string
+    // - Will discard all the trailing '\0'
+    template< Uint n >
+    explicit InputMemoryStream( const Char(& sz)[n] );
+
+
     Uint Length() const { return m_length; }
 
 
@@ -57,6 +63,30 @@ inline InputMemoryStream::InputMemoryStream( const T(& buffer)[n] )
     : m_buffer( reinterpret_cast< const Byte* >( &buffer[0] ))
     , m_length( n )
 {}
+
+
+//
+// Specialization for C-style string
+//
+// - When a user write the following code:
+//
+//     InputMemoryStream stream( "Alice" );
+//
+//   He/she may think the stream length is 5, but in fact the C-style string "Alice"
+//   has 6 bytes in memory, including the trailing '\0'
+//
+//   In this case, we decide to discard all the trailing '\0',
+//   since the stream length to be 5 is more intuitive.
+//
+template< Uint n >
+inline InputMemoryStream::InputMemoryStream( const Char(& sz)[n] )
+    : m_buffer( reinterpret_cast< const Byte* >( &sz[0] ))
+    , m_length( n )
+{
+    // Discard all trailing '\0'
+    // - A C-style string always has one '\0'.
+    while ( sz[ m_length - 1 ] == '\0' ) { -- m_length; }
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -15,7 +15,7 @@ SUITE( InputMemoryStreamSuite )
 
 TEST( InputMemoryStreamSeekTellTest )
 {
-    Char buffer[128] = { 0 };
+    Byte buffer[128] = { 0 };
     InputMemoryStream stream( buffer );
 
     CHECK( 128 == stream.Length() );
@@ -47,7 +47,7 @@ TEST( InputMemoryStreamTextReaderTest )
 {
     Char alice[] = "Alice\nis a\nDollmaster";
     InputMemoryStream stream( alice );
-    TextStreamReader reader( stream );
+    TextStreamReader reader( stream, TEXT_ENCODING_UTF8 );
 
     std::string line;
 
@@ -61,6 +61,32 @@ TEST( InputMemoryStreamTextReaderTest )
     CHECK( "Dollmaster" == line );
 
     CHECK( false == reader.ReadLine( line ));
+
+
+    #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+
+    // The default encoding on Windows is ACP
+    // i.e. If you write:
+    //
+    //   TextStreamReader reader( stream );
+    //
+    // The reader would assume to use TEXT_ENCODING_DEFAULT, which is ACP on Windows.
+
+    stream.Rewind();
+    TextStreamReader acpReader( stream, TEXT_ENCODING_WINDOWS_ACP );
+
+    CHECK( true == acpReader.ReadLine( line ));
+    CHECK( "Alice" == line );
+
+    CHECK( true == acpReader.ReadLine( line ));
+    CHECK( "is a" == line );
+
+    CHECK( true == acpReader.ReadLine( line ));
+    CHECK( "Dollmaster" == line );
+
+    CHECK( false == acpReader.ReadLine( line ));
+
+    #endif
 }
 
 
