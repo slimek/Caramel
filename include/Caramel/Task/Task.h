@@ -34,8 +34,8 @@ public:
 
     Task() {}  // Create a "not-a-task". Submit it results in exception.
 
-    Task( const std::string& name, TaskFunction f );
-    Task( const std::string& name, std::unique_ptr< Detail::TaskHolder >&& holder );
+    Task( std::string name, TaskFunction f );
+    Task( std::string name, std::unique_ptr< Detail::TaskHolder >&& holder );
 
 
     /// Scheduling ///
@@ -78,8 +78,8 @@ public:
 
     Task() {}  // Create a "not-a-task". Submit it results in exception.
 
-    Task( const std::string& name, TaskFunction f );
-    Task( const std::string& name, std::unique_ptr< Detail::TaskHolder >&& holder );
+    Task( std::string name, TaskFunction f );
+    Task( std::string name, std::unique_ptr< Detail::TaskHolder >&& holder );
 
 
     /// Scheduling ///
@@ -136,15 +136,15 @@ inline auto MakeTask( const std::string& name, Function f ) -> Task< decltype( f
 //
 
 template< typename Result >
-inline Task< Result >::Task( const std::string& name, TaskFunction f )
-    : TaskCore( name, MakeUnique< Detail::RegularTask< Result >>( std::move( f )))
+inline Task< Result >::Task( std::string name, TaskFunction f )
+    : TaskCore( std::move( name ), MakeUnique< Detail::RegularTask< Result >>( std::move( f )))
 {
 }
 
 
 template< typename Result >
-inline Task< Result >::Task( const std::string& name, std::unique_ptr< Detail::TaskHolder >&& holder )
-    : TaskCore( name, std::move( holder ))
+inline Task< Result >::Task( std::string name, std::unique_ptr< Detail::TaskHolder >&& holder )
+    : TaskCore( std::move( name ), std::move( holder ))
 {
 }
 
@@ -197,14 +197,14 @@ Task< AnteResult >::Then( ThenFunction f )
 // Task< void >
 //
 
-inline Task< void >::Task( const std::string& name, TaskFunction f )
-    : TaskCore( name, MakeUnique< Detail::RegularTask< void >>( std::move( f )))
+inline Task< void >::Task( std::string name, TaskFunction f )
+    : TaskCore( std::move( name ), MakeUnique< Detail::RegularTask< void >>( std::move( f )))
 {
 }
 
 
-inline Task< void >::Task( const std::string& name, std::unique_ptr< Detail::TaskHolder >&& holder )
-    : TaskCore( name, std::move( holder ))
+inline Task< void >::Task( std::string name, std::unique_ptr< Detail::TaskHolder >&& holder )
+    : TaskCore( std::move( name ), std::move( holder ))
 {
 }
 

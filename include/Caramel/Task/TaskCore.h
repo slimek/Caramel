@@ -78,7 +78,7 @@ public:
 
 protected:
 
-    TaskCore( const std::string& name, std::unique_ptr< Detail::TaskHolder >&& holder );
+    TaskCore( std::string&& name, std::unique_ptr< Detail::TaskHolder >&& holder );
     TaskCore( const std::shared_ptr< TaskImpl >& impl );
 
     void AddContinuation( TaskCore& continuation );

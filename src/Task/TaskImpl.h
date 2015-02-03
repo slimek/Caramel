@@ -32,7 +32,7 @@ public:
 
     TaskImpl();  // Not-a-task
 
-    TaskImpl( const std::string& name, std::unique_ptr< TaskHolder >&& holder );
+    TaskImpl( std::string&& name, std::unique_ptr< TaskHolder >&& holder );
 
     ~TaskImpl();
 

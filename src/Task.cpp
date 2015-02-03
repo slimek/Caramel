@@ -44,8 +44,8 @@ TaskCore::TaskCore()
 }
 
 
-TaskCore::TaskCore( const std::string& name, std::unique_ptr< TaskHolder >&& holder )
-    : m_impl( new TaskImpl( name, std::move( holder )))
+TaskCore::TaskCore( std::string&& name, std::unique_ptr< TaskHolder >&& holder )
+    : m_impl( new TaskImpl( std::move( name ), std::move( holder )))
 {
 }
 
@@ -171,8 +171,8 @@ TaskImpl::TaskImpl()
 }
 
 
-TaskImpl::TaskImpl( const std::string& name, std::unique_ptr< TaskHolder >&& holder )
-    : m_name( name )
+TaskImpl::TaskImpl( std::string&& name, std::unique_ptr< TaskHolder >&& holder )
+    : m_name( std::move( name ))
     , m_holder( std::move( holder ))
     , m_state( TASK_STATE_INITIAL )
     , m_hasDelay( false )
