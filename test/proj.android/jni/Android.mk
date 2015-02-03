@@ -85,10 +85,21 @@ LOCAL_SRC_FILES := \
 	$(CRMTEST_SRC)/Error/AnyFailureSuite.cpp \
 	$(CRMTEST_SRC)/Error/CatchExceptionSuite.cpp \
 	$(CRMTEST_SRC)/Error/ExceptionPtrSuite.cpp \
+	$(CRMTEST_SRC)/FileSystem/PathSuite.cpp \
+	$(CRMTEST_SRC)/Functional/BindSuite.cpp \
+	$(CRMTEST_SRC)/Io/InputMemoryStreamSuite.cpp \
+	$(CRMTEST_SRC)/Io/TextStreamWriterSuite.cpp \
 	$(CRMTEST_SRC)/Lexical/LexicalBooleanSuite.cpp \
 	$(CRMTEST_SRC)/Lexical/LexicalFloatingSuite.cpp \
 	$(CRMTEST_SRC)/Lexical/LexicalIntegerSuite.cpp \
 	$(CRMTEST_SRC)/Lexical/LexicalVersionSuite.cpp \
+	$(CRMTEST_SRC)/Memory/SharedPtrUtilsSuite.cpp \
+	$(CRMTEST_SRC)/Meta/IsGeneralStringSuite.cpp \
+	$(CRMTEST_SRC)/Meta/MetaRangeSuite.cpp \
+	$(CRMTEST_SRC)/Numeric/NumberConverterSuite.cpp \
+	$(CRMTEST_SRC)/Numeric/NumberRelationSuite.cpp \
+	$(CRMTEST_SRC)/Numeric/NumberTraitsSuite.cpp \
+	$(CRMTEST_SRC)/Numeric/UnionBitsSuite.cpp \
 	$(CRMTEST_SRC)/String/FormatSuite.cpp \
 	$(CRMTEST_SRC)/String/SplitSuite.cpp \
 	$(CRMTEST_SRC)/String/SprintfSuite.cpp \
