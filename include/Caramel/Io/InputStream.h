@@ -14,6 +14,7 @@ namespace Caramel
 //
 // Input Stream
 // - Interface
+//   The stream size should not exceed 2 G.
 //
 
 struct InputStream
@@ -44,6 +45,13 @@ struct InputStream
     //
     virtual Uint Peek( Void* buffer, Uint size );
 
+
+    //
+    // Rewind
+    // - Move the read position to the beginning of this stream.
+    //   Clear all buffers.
+    //
+    virtual void Rewind();
 };
 
 
@@ -57,6 +65,12 @@ inline Uint InputStream::Peek( Void* buffer, Uint size )
     const Uint count = this->Read( buffer, size );
     this->Seek( - static_cast< Int >( count ));
     return count;
+}
+
+
+inline void InputStream::Rewind()
+{
+    this->Seek( - static_cast< Int >( this->Tell() ));
 }
 
 

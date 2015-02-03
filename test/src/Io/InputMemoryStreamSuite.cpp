@@ -35,6 +35,11 @@ TEST( InputMemoryStreamSeekTellTest )
     stream.Seek( 192 );
     CHECK( 128 == stream.Tell() );
     CHECK( true == stream.IsEof() );
+
+    // Back to the beginning
+    stream.Rewind();
+    CHECK( 0 == stream.Tell() );
+    CHECK( false == stream.IsEof() );
 }
 
 
