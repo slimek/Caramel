@@ -97,7 +97,15 @@ inline std::string Format( const std::string& format, Args&&... args )
 //
 //   Format String for Integral Item
 //
-//     "X" or "x" : Hexadecimal. The precision is the least digits.
+//     "D" or "d" : Decimal. The precision is the least digits, may pad with '0'.
+//
+//         1234  "D"  -> 1234
+//         1234  "D6" -> 001234
+//         1234  "D3" -> 1234
+//        -1234  "D5" -> -01234
+
+//
+//     "X" or "x" : Hexadecimal. The precision is the least digits, may pad with '0'.
 //
 //         1234  "X"  -> 4D2
 //         1234  "X5" -> 004D2

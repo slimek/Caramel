@@ -28,6 +28,7 @@ public:
     {}
 
     std::string ToString() const;
+    std::string ToStringWithPadding( Uint digits ) const;
     std::string ToStringWithFixedPoint( Uint digits ) const;
     std::string ToStringWithGroup( Uint digits ) const;
     std::string ToStringHexadecimal( Uint digits, Bool useUppercase ) const;

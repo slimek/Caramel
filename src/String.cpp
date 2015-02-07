@@ -564,6 +564,34 @@ std::string IntegerConverter< Uint8 >::ToString() const
 
 
 template< typename T >
+std::string IntegerConverter< T >::ToStringWithPadding( Uint digits ) const
+{
+    const auto svalue = this->ToString();
+    
+    if ( StartsWith( svalue, '-' ))
+    {
+        // Negative
+        if ( digits >= svalue.length() - 1 )
+        {
+            return std::string( "-" )
+                 + std::string( digits - svalue.length() + 1, '0' )
+                 + svalue.substr( 1 );
+        }
+    }
+    else
+    {
+        // Positive
+        if ( digits >= svalue.length() )
+        {
+            return std::string( digits - svalue.length(), '0' ) + svalue; 
+        }
+    }
+
+    return svalue;
+}
+
+
+template< typename T >
 std::string IntegerConverter< T >::ToStringWithFixedPoint( Uint digits ) const
 {
     if ( digits == 0 ) { return this->ToString(); }
@@ -655,6 +683,9 @@ std::string IntegerConverter< T >::operator() ( const std::string& format ) cons
 
     switch ( numFmt.Specifier() )
     {
+    case 'D': case 'd':
+        return this->ToStringWithPadding( numFmt.Precision( 1 ));
+
     case 'F': case 'f':
         return this->ToStringWithFixedPoint( numFmt.Precision( 2 ));
 

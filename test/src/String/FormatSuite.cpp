@@ -111,6 +111,62 @@ TEST( FormatNumberConvertibleTest )
 }
 
 
+TEST( FormatDecimalTest )
+{
+    // Padding '0' to the number's left to fill the precision.
+
+    CHECK( "0"    == Format( "{0:D}", 0 ));  // default is D1
+    CHECK( "0000" == Format( "{0:D4}", 0 ));
+
+    CHECK( "007"    == Format( "{0:D3}", 7 ));
+    CHECK( "21384"  == Format( "{0:D2}", 21384 ));
+    CHECK( "-0051"  == Format( "{0:D4}", -51 ));
+    CHECK( "-48153" == Format( "{0:D2}", -48153 ));
+    
+    CHECK( "00000000000000000216" == Format( "{0:D20}", 216 ));
+
+    // lowercase
+    CHECK( "-1"   == Format( "{0:d}", -1 ));
+    CHECK( "0042" == Format( "{0:d4}", 42 ));
+
+    // Int8
+    CHECK( "00127" == Format( "{0:D5}", INT8_MAX ));
+    CHECK( "-0128" == Format( "{0:D4}", INT8_MIN ));
+
+    // Uint8
+    CHECK( "0255" == Format( "{0:D4}", UINT8_MAX ));
+
+    // Int16
+    const Int16 i16n = -1;
+    CHECK( "-001"    == Format( "{0:D3}", i16n ));
+    CHECK( "0032767" == Format( "{0:D7}", INT16_MAX ));
+    CHECK( "-032768" == Format( "{0:D6}", INT16_MIN ));
+
+    // Uint16
+    CHECK( "00065535" == Format( "{0:D8}", UINT16_MAX ));
+
+    // Long
+    const Long lv1 = 275;
+    const Long lv2 = -4125;
+    CHECK( "00275"   == Format( "{0:D5}", lv1 ));
+    CHECK( "-004125" == Format( "{0:D6}", lv2 ));
+
+    // Ulong
+    const Ulong ulv = 12876;
+    CHECK( "0012876" == Format( "{0:D7}", ulv ));
+
+    // Int64
+    const Int64 i64n = -1;
+    CHECK( "-01" == Format( "{0:D2}", i64n ));
+    CHECK( "009223372036854775807" == Format( "{0:D21}", INT64_MAX ));
+             
+    // Uint64
+    const Uint64 u64v = 45728;
+    CHECK( "000045728" == Format( "{0:D9}", u64v ));
+    CHECK( "018446744073709551615" == Format( "{0:D21}", UINT64_MAX ));
+}
+
+
 TEST( FormatFixedPointForFloatingTest )
 {
     CHECK( "0.00"   == Format( "{0:F}", 0.0 ));  // default is F2
