@@ -172,6 +172,7 @@
     <ClCompile Include="..\src\Trace\TraceChannelSuite.cpp" />
     <ClCompile Include="..\src\Trace\TraceSuite.cpp" />
     <ClCompile Include="..\src\Value\AnySuite.cpp" />
+    <ClCompile Include="..\src\Value\EnumFlagsSuite.cpp" />
     <ClCompile Include="..\src\Value\NamedValuesSuite.cpp" />
     <ClCompile Include="..\src\Value\ScalarSuite.cpp" />
     <ClCompile Include="..\src\Value\SharedArraySuite.cpp" />

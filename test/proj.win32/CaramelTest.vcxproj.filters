@@ -340,6 +340,9 @@
     <ClCompile Include="..\src\Error\TryCatchResultSuite.cpp">
       <Filter>2. Tests\Error</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Value\EnumFlagsSuite.cpp">
+      <Filter>2. Tests\Value</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">
