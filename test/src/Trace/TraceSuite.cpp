@@ -96,6 +96,51 @@ TEST( TraceTest )
 }
 
 
+TEST( TraceFunctionStyleTest )
+{
+    LocalListener lis;
+    lis.BindBuiltinChannels( Trace::LEVEL_DEBUG );
+    auto guard = ScopeExit( [&] { lis.UnbindAllChannels(); } );
+
+    /// Message with no argument ///
+
+    TraceDebug( "Debug" );
+    CHECK( "Debug" == lis.Msg() );
+    CHECK( Trace::LEVEL_DEBUG == lis.Lv() );
+
+    TraceInfo( "Info" );
+    CHECK( "Info" == lis.Msg() );
+    CHECK( Trace::LEVEL_INFO == lis.Lv() );
+
+    TraceWarn( "Warn" );
+    CHECK( "Warn" == lis.Msg() );
+    CHECK( Trace::LEVEL_WARN == lis.Lv() );
+
+    TraceError( "Error" );
+    CHECK( "Error" == lis.Msg() );
+    CHECK( Trace::LEVEL_ERROR == lis.Lv() );
+
+
+    /// Message with arguments ///
+
+    TraceDebug( "Debug:%d", 1 );
+    CHECK( "Debug:1" == lis.Msg() );
+    CHECK( Trace::LEVEL_DEBUG == lis.Lv() );
+
+    TraceInfo( "Info:%.1f %.2f", 1.0f, 0.75f );
+    CHECK( "Info:1.0 0.75" == lis.Msg() );
+    CHECK( Trace::LEVEL_INFO == lis.Lv() );
+
+    TraceWarn( "Warn:%x", 15 );
+    CHECK( "Warn:f" == lis.Msg() );
+    CHECK( Trace::LEVEL_WARN == lis.Lv() );
+
+    TraceError( "Error:%s %s", "Alice", "Marisa" );
+    CHECK( "Error:Alice Marisa" == lis.Msg() );
+    CHECK( Trace::LEVEL_ERROR == lis.Lv() );
+}
+
+
 TEST( TraceMessageQueueTest )
 {
     using namespace Trace;

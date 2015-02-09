@@ -12,13 +12,31 @@
 namespace Caramel
 {
 
-namespace Trace
-{
+///////////////////////////////////////////////////////////////////////////////
+//
+// General Trace Functions
+//
+
+template< typename... Args >
+void TraceDebug( const std::string& format, Args&&... args );
+
+template< typename... Args >
+void TraceInfo( const std::string& format, Args&&... args );
+
+template< typename... Args >
+void TraceWarn( const std::string& format, Args&&... args );
+
+template< typename... Args >
+void TraceError( const std::string& format, Args&&... args );
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Write to Built-in Channels
 //
+
+namespace Trace
+{
 
 //
 // Level of bulit-in channels are DEBUG, INFO, WARN and ERROR.
@@ -36,6 +54,7 @@ void WriteToBuiltinFailed( const std::string& message );
 } // namespace Trace
 
 } // namespace Caramel
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -84,8 +103,76 @@ void WriteToBuiltinFailed( const std::string& message );
 
 
 ///////////////////////////////////////////////////////////////////////////////
+//
+// Implementation
+//
+
+namespace Caramel
+{
+
+template< typename... Args >
+inline void TraceDebug( const std::string& format, Args&&... args )
+{
+    try
+    {
+        Trace::WriteToBuiltin(
+            Trace::LEVEL_DEBUG, Sprintf( format, std::forward< Args >( args )... ));
+    }
+    catch ( ... )
+    {
+        Trace::WriteToBuiltinFailed( format );
+    }
+}
 
 
+template< typename... Args >
+inline void TraceInfo( const std::string& format, Args&&... args )
+{
+    try
+    {
+        Trace::WriteToBuiltin(
+            Trace::LEVEL_INFO, Sprintf( format, std::forward< Args >( args )... ));
+    }
+    catch ( ... )
+    {
+        Trace::WriteToBuiltinFailed( format );
+    }
+}
+
+
+template< typename... Args >
+inline void TraceWarn( const std::string& format, Args&&... args )
+{
+    try
+    {
+        Trace::WriteToBuiltin(
+            Trace::LEVEL_WARN, Sprintf( format, std::forward< Args >( args )... ));
+    }
+    catch ( ... )
+    {
+        Trace::WriteToBuiltinFailed( format );
+    }
+}
+
+
+template< typename... Args >
+inline void TraceError( const std::string& format, Args&&... args )
+{
+    try
+    {
+        Trace::WriteToBuiltin(
+            Trace::LEVEL_ERROR, Sprintf( format, std::forward< Args >( args )... ));
+    }
+    catch ( ... )
+    {
+        Trace::WriteToBuiltinFailed( format );
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+
+} // namespace Caramel
 
 #endif // __CARAMEL_TRACE_TRACE_H
 
