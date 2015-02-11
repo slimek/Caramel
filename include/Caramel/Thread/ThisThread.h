@@ -34,6 +34,8 @@ public:
     static void Yield();
 
     // Set the handler when the thread exits.
+    // - If this thread is not a Caramel thread, this function do nothing.
+    //   You can only set 1 exit routines for each thread.
     static void AtThreadExit( std::function< void() > atExit );
 };
 

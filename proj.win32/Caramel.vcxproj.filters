@@ -195,6 +195,9 @@
     <Filter Include="1. Public Packages\Numeric\Detail">
       <UniqueIdentifier>{3aaa2fa9-aeda-4a36-ba02-ea3972c3c580}</UniqueIdentifier>
     </Filter>
+    <Filter Include="4. Non-Win32 Platform\Android\Detail">
+      <UniqueIdentifier>{99b66ca3-b505-45b9-a8cd-6c237d4a66ad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Setup\Compiler.h">
@@ -865,6 +868,21 @@
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Io\InputMemoryStream.h">
       <Filter>1. Public Packages\Io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Android\JniClass.h">
+      <Filter>4. Non-Win32 Platform\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Android\Detail\JniSignature.h">
+      <Filter>4. Non-Win32 Platform\Android\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Android\Detail\JniStaticMethod.h">
+      <Filter>4. Non-Win32 Platform\Android\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Android\Detail\JniTypeTraits.h">
+      <Filter>4. Non-Win32 Platform\Android\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Android\JniCenter.h">
+      <Filter>4. Non-Win32 Platform\Android\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\src\String\Converters.h">
       <Filter>2. Sources\String</Filter>
