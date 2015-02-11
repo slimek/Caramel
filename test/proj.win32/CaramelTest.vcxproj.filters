@@ -360,6 +360,9 @@
     <ClInclude Include="..\src\Utils\AssetReader.h">
       <Filter>4. Utils for Testing</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Utils\WritablePath.h">
+      <Filter>4. Utils for Testing</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\assets\items.ini">

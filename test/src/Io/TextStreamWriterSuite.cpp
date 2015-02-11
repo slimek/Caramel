@@ -2,6 +2,7 @@
 
 #include "CaramelTestPch.h"
 
+#include "Utils/WritablePath.h"
 #include <Caramel/Io/InputFileStream.h>
 #include <Caramel/Io/OutputFileStream.h>
 #include <Caramel/Io/TextStreamReader.h>
@@ -17,16 +18,17 @@ SUITE( TextStreamWriterSuite )
 
 TEST( TextStreamWriterAsciiTest )
 {
-    const std::string text = "Alice is a dollmaster";
+    const Path tempPath = WritablePath() / "temp.txt";
 
-    OutputFileStream ofile( "temp.txt" );
+    OutputFileStream ofile( tempPath );
     TextStreamWriter writer( ofile );
 
+    const std::string text = "Alice is a dollmaster";
     writer.Write( text );
 
     ofile.Close();
 
-    InputFileStream ifile( "temp.txt" );
+    InputFileStream ifile( tempPath );
     TextStreamReader reader( ifile );
 
     std::string line;
@@ -44,14 +46,16 @@ TEST( TextStreamWriterChineseTest )
     const std::string text = "愛莉絲是人形使";
     #endif
 
-    OutputFileStream ofile( "temp.txt" );
+    const Path tempPath = WritablePath() / "temp.txt";
+
+    OutputFileStream ofile( tempPath );
     TextStreamWriter writer( ofile );
 
     writer.Write( text );
 
     ofile.Close();
 
-    InputFileStream ifile( "temp.txt" );
+    InputFileStream ifile( tempPath );
     TextStreamReader reader( ifile );
 
     std::string line;

@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 public class CaramelTestActivity extends Activity
 {
+	static private CaramelTestActivity m_instance = null;
+	
 	static
 	{
 		System.loadLibrary( "CaramelTest" );
@@ -25,6 +27,8 @@ public class CaramelTestActivity extends Activity
 	public void onCreate( Bundle savedInstanceState )
 	{
 		super.onCreate( savedInstanceState );
+		
+		m_instance = this;
 		
 		LinearLayout layout = new LinearLayout( this );
 		layout.setOrientation( LinearLayout.VERTICAL );
@@ -48,5 +52,15 @@ public class CaramelTestActivity extends Activity
 		layout.addView( text );
 		layout.addView( startButton );
 		this.setContentView( layout );
+	}
+	
+	
+	//
+	// Called by C++
+	//
+	
+	static public String GetWritablePath()
+	{
+		return m_instance.getFilesDir().getAbsolutePath();
 	}
 }

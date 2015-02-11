@@ -3,9 +3,12 @@
 #include "CaramelTestPch.h"
 
 #include "Utils/AssetReader.h"
+#include "Utils/WritablePath.h"
+#include <Caramel/Android/JniClass.h>
 #include <Caramel/Android/LogTraceAdapter.h>
 #include <Caramel/Android/Streambuf.h>
 #include <Caramel/Functional/ScopeExit.h>
+#include <Caramel/Thread/Thread.h>
 #include <UnitTest++/TestReporterCout.h>
 #include <jni.h>
 #include <android/asset_manager.h>
@@ -45,7 +48,13 @@ RunTest::RunTest()
 
 void RunTest::Start()
 {
-	std::thread( [=] { this->Main(); } ).detach();
+	std::thread( [=]
+    {
+		Thread t;
+		t.Start( "RunStart", [=] { this->Main(); } );
+		t.Join();
+
+    }).detach();
 }
 
 
@@ -91,12 +100,16 @@ void RunTest::Main()
 // JNI Functions
 //
 
+static const std::string s_activityClassPath( "com/slimek/carameltest/CaramelTestActivity" );
+
 extern "C"
 {
 
 jint JNI_OnLoad( JavaVM* vm, void* reserved )
 {
-    return JNI_VERSION_1_4;
+	Caramel::Android::JniInitialize( vm, s_activityClassPath );
+
+	return JNI_VERSION_1_4;
 }
 
 
@@ -141,6 +154,21 @@ AssetReader::AssetReader( const std::string& fileName )
 Bool AssetReader::ReadLine( std::string& line )
 {
 	return m_reader->ReadLine( line );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Writable Path
+//
+
+static Android::JniClass s_activity( s_activityClassPath );
+
+Path WritablePath()
+{
+	const std::string cacheDir = s_activity.Method< std::string >( "GetWritablePath" ).Call();
+
+	return Path( cacheDir );
 }
 
 
