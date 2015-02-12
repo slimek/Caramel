@@ -5,7 +5,6 @@
 #include <Caramel/Functional/ScopeExit.h>
 #include <Caramel/Trace/Listeners.h>
 #include <Caramel/Trace/Trace.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

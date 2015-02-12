@@ -4,7 +4,6 @@
 
 #include <Caramel/String/Sprintf.h>
 #include <Caramel/Thread/Thread.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

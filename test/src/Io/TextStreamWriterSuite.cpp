@@ -7,7 +7,6 @@
 #include <Caramel/Io/OutputFileStream.h>
 #include <Caramel/Io/TextStreamReader.h>
 #include <Caramel/Io/TextStreamWriter.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

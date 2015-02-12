@@ -4,7 +4,6 @@
 
 #include <Caramel/Numeric/NumberConverter.h>
 #include <Caramel/Numeric/NumberTraits.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

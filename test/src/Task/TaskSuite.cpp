@@ -8,7 +8,6 @@
 #include <Caramel/Task/Task.h>
 #include <Caramel/Task/WorkerThread.h>
 #include <Caramel/Thread/ThisThread.h>
-#include <UnitTest++/UnitTest++.h>
 #include <atomic>
 #include <functional>
 #include <vector>

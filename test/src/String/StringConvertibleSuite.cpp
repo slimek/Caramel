@@ -4,7 +4,6 @@
 
 #include <Caramel/String/StringConvertible.h>
 #include <Caramel/Value/Scalar.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

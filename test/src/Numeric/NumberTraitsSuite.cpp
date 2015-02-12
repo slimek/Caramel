@@ -3,7 +3,6 @@
 #include "CaramelTestPch.h"
 
 #include <Caramel/Numeric/NumberTraits.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

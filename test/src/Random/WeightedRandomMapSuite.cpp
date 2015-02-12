@@ -3,7 +3,6 @@
 #include "CaramelTestPch.h"
 
 #include <Caramel/Random/WeightedRandomMap.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

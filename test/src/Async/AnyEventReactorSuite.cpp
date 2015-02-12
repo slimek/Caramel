@@ -7,7 +7,6 @@
 #include <Caramel/Async/AnyEventReactor.h>
 #include <Caramel/Task/StdAsync.h>
 #include <Caramel/Thread/ThisThread.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

@@ -6,7 +6,6 @@
 #include <Caramel/Chrono/SecondClock.h>
 #include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Thread/ThisThread.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

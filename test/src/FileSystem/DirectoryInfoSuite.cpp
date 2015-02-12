@@ -6,7 +6,6 @@
 #include <Caramel/FileSystem/FileInfo.h>
 #include <Caramel/Io/OutputFileStream.h>
 #include <Caramel/Io/TextStreamWriter.h>
-#include <UnitTest++/UnitTest++.h>
 #include <boost/filesystem/operations.hpp>
 
 

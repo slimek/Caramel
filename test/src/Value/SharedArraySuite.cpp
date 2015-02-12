@@ -4,7 +4,6 @@
 
 #include "Utils/SharedArrayUtils.h"
 #include <Caramel/Value/SharedArray.h>
-#include <UnitTest++/UnitTest++.h>
 #include <boost/range/algorithm.hpp>
 #include <set>
 #include <vector>

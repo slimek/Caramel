@@ -4,7 +4,6 @@
 
 #include <Caramel/Error/Alert.h>
 #include <Caramel/Error/Assert.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

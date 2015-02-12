@@ -3,7 +3,6 @@
 #include "CaramelTestPch.h"
 
 #include <Caramel/Lexical/Integer.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

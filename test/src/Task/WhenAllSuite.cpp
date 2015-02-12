@@ -5,7 +5,6 @@
 #include <Caramel/Task/StdAsync.h>
 #include <Caramel/Task/WhenAll.h>
 #include <Caramel/Thread/WaitableBool.h>
-#include <UnitTest++/UnitTest++.h>
 #include <atomic>
 #include <vector>
 

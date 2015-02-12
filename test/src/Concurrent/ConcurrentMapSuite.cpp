@@ -6,7 +6,6 @@
 #include <Caramel/Concurrent/FlatMap.h>
 #include <Caramel/Concurrent/HashMap.h>
 #include <Caramel/Concurrent/Map.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

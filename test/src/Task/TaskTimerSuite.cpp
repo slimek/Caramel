@@ -6,7 +6,6 @@
 #include <Caramel/Task/TaskPoller.h>
 #include <Caramel/Task/WorkerThread.h>
 #include <Caramel/Thread/ThisThread.h>
-#include <UnitTest++/UnitTest++.h>
 #include <atomic>
 
 

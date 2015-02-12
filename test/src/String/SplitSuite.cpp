@@ -3,7 +3,6 @@
 #include "CaramelTestPch.h"
 
 #include <Caramel/String/Split.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

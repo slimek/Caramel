@@ -3,7 +3,6 @@
 #include "CaramelTestPch.h"
 
 #include <Caramel/DateTime/DateTime.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

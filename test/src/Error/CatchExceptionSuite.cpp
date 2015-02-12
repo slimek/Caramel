@@ -3,7 +3,6 @@
 #include "CaramelTestPch.h"
 
 #include <Caramel/Error/CatchException.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

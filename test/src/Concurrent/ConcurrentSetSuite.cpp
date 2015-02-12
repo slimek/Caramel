@@ -9,7 +9,6 @@
 #include <Caramel/Random/UniformRandom.h>
 #include <Caramel/Thread/ThisThread.h>
 #include <Caramel/Thread/Thread.h>
-#include <UnitTest++/UnitTest++.h>
 #include <atomic>
 
 

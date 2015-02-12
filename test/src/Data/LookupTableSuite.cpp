@@ -3,7 +3,6 @@
 #include "CaramelTestPch.h"
 
 #include <Caramel/Data/LookupTable.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

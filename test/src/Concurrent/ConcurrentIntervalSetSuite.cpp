@@ -3,7 +3,6 @@
 #include "CaramelTestPch.h"
 
 #include <Caramel/Concurrent/IntervalSet.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

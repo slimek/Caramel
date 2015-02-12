@@ -3,7 +3,6 @@
 #include "CaramelTestPch.h"
 
 #include <Caramel/Concurrent/PriorityQueue.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

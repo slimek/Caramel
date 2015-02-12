@@ -4,7 +4,6 @@
 
 #include <Caramel/Trace/Channel.h>
 #include <Caramel/Trace/Listeners.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

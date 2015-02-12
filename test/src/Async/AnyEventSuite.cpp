@@ -4,7 +4,6 @@
 
 #include <Caramel/Async/AnyEvent.h>
 #include <Caramel/Concurrent/Queue.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

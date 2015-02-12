@@ -3,7 +3,6 @@
 #include "CaramelTestPch.h"
 
 #include <Caramel/Functional/Bind.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

@@ -8,7 +8,6 @@
 #include <Caramel/Task/WorkerThread.h>
 #include <Caramel/Thread/ThisThread.h>
 #include <Caramel/Thread/WaitableBool.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

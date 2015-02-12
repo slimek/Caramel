@@ -4,7 +4,6 @@
 
 #include <Caramel/Value/Scalar.h>
 #include <Caramel/FileSystem/Path.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

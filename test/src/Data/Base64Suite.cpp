@@ -4,7 +4,6 @@
 
 #include "Utils/StdVectorUtils.h"
 #include <Caramel/Data/Base64.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

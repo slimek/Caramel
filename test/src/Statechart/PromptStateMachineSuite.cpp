@@ -3,7 +3,6 @@
 #include "CaramelTestPch.h"
 
 #include <Caramel/Statechart/PromptStateMachine.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

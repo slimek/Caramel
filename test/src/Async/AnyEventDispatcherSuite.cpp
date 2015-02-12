@@ -7,7 +7,6 @@
 #include <Caramel/Async/AnyEventQueue.h>
 #include <Caramel/Async/AnyEventSlot.h>
 #include <Caramel/Task/StdAsync.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

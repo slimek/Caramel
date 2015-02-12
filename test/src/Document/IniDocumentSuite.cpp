@@ -5,7 +5,6 @@
 #include "Utils/AssetReader.h"
 #include "Utils/StdVectorUtils.h"
 #include <Caramel/Document/IniDocument.h>
-#include <UnitTest++/UnitTest++.h>
 #include <algorithm>
 #include <functional>
 

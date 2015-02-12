@@ -7,7 +7,6 @@
 #include <Caramel/FileSystem/Path.h>
 #include <Caramel/Program/ConsoleApplication.h>
 #include <Caramel/Program/ProgramOptions.h>
-#include <UnitTest++/UnitTest++.h>
 #include <UnitTest++/TestReporterStdout.h>
 #include <iostream>
 

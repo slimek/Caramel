@@ -4,7 +4,6 @@
 
 #include <Caramel/Error/AnyFailure.h>
 #include <Caramel/Error/ExceptionPtr.h>
-#include <UnitTest++/UnitTest++.h>
 #include <cstring>
 
 

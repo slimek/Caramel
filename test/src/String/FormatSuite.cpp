@@ -6,7 +6,6 @@
 #include <Caramel/Chrono/TickClock.h>
 #include <Caramel/String/Format.h>
 #include <Caramel/Value/Scalar.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

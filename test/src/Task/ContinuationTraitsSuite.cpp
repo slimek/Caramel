@@ -3,7 +3,6 @@
 #include "CaramelTestPch.h"
 
 #include <Caramel/Task/Task.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

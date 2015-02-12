@@ -3,7 +3,6 @@
 #include "CaramelTestPch.h"
 
 #include <Caramel/Lexical/Floating.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

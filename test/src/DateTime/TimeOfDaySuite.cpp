@@ -4,7 +4,6 @@
 
 #include <Caramel/DateTime/DateTime.h>
 #include <Caramel/DateTime/TimeOfDay.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

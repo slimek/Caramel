@@ -4,7 +4,6 @@
 
 #include <Caramel/String/ToString.h>
 #include <Caramel/String/Utf8String.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

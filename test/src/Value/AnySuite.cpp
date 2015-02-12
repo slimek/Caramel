@@ -5,7 +5,6 @@
 #include <Caramel/Numeric/NumberTraits.h>
 #include <Caramel/Value/Any.h>
 #include <Caramel/Value/AnyConvertible.h>
-#include <UnitTest++/UnitTest++.h>
 #include <cfloat>
 #include <vector>
 

@@ -6,7 +6,6 @@
 #include <Caramel/Thread/ThisThread.h>
 #include <Caramel/Thread/Thread.h>
 #include <Caramel/Thread/WaitableBool.h>
-#include <UnitTest++/UnitTest++.h>
 
 #if defined( CARAMEL_SYSTEM_IS_WINDOWS )
 #include <Windows.h>

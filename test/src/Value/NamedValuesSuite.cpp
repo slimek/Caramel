@@ -3,7 +3,6 @@
 #include "CaramelTestPch.h"
 
 #include <Caramel/Value/NamedValues.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

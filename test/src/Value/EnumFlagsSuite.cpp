@@ -3,7 +3,6 @@
 #include "CaramelTestPch.h"
 
 #include <Caramel/Value/EnumFlags.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

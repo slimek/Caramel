@@ -4,7 +4,6 @@
 
 #include <Caramel/Io/InputMemoryStream.h>
 #include <Caramel/Io/TextStreamReader.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

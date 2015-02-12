@@ -4,7 +4,6 @@
 
 #include <Caramel/Async/AnyEventDispatcher.h>
 #include <Caramel/Async/AnyEventSlot.h>
-#include <UnitTest++/UnitTest++.h>
 #include <functional>
 
 

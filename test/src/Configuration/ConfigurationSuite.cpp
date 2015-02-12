@@ -7,7 +7,6 @@
 #include <Caramel/Configuration/ConfigRoot.h>
 #include <Caramel/Configuration/ConfigValues.h>
 #include <Caramel/Document/IniDocument.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

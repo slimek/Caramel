@@ -3,7 +3,6 @@
 #include "CaramelTestPch.h"
 
 #include <Caramel/Arithmetic/Flags.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel

@@ -2,9 +2,8 @@
 
 #include "CaramelTestPch.h"
 
-#include <Caramel/String/Algorithm.h>
-#include <UnitTest++/UnitTest++.h>
 #include "Utils/StdVectorUtils.h"
+#include <Caramel/String/Algorithm.h>
 
 
 namespace Caramel

@@ -5,7 +5,6 @@
 #include <Caramel/DateTime/Date.h>
 #include <Caramel/DateTime/Days.h>
 #include <Caramel/DateTime/TimeSpan.h>
-#include <UnitTest++/UnitTest++.h>
 
 
 namespace Caramel
