@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6DA51D66193EB82B00050A24 /* Async.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DA51D65193EB82B00050A24 /* Async.cpp */; };
-		6DAC96D3191B5D760007BF91 /* Android.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAC9682191B5D760007BF91 /* Android.cpp */; };
 		6DAC96D4191B5D760007BF91 /* Apple.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DAC9683191B5D760007BF91 /* Apple.mm */; };
 		6DAC96D7191B5D760007BF91 /* CaramelPch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAC968A191B5D760007BF91 /* CaramelPch.cpp */; };
 		6DAC96D8191B5D760007BF91 /* Configuration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAC968C191B5D760007BF91 /* Configuration.cpp */; };
@@ -30,7 +29,6 @@
 		6DAC96E8191B5D760007BF91 /* Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAC96C8191B5D760007BF91 /* Thread.cpp */; };
 		6DAC96E9191B5D760007BF91 /* Trace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAC96CD191B5D760007BF91 /* Trace.cpp */; };
 		6DAC96EA191B5D760007BF91 /* Value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAC96D1191B5D760007BF91 /* Value.cpp */; };
-		6DAC96EB191B5D760007BF91 /* Windows.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DAC96D2191B5D760007BF91 /* Windows.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -1070,7 +1068,6 @@
 			files = (
 				6DAC96E3191B5D760007BF91 /* Program.cpp in Sources */,
 				6DAC96D4191B5D760007BF91 /* Apple.mm in Sources */,
-				6DAC96D3191B5D760007BF91 /* Android.cpp in Sources */,
 				6DAC96E8191B5D760007BF91 /* Thread.cpp in Sources */,
 				6DAC96DB191B5D760007BF91 /* Debug.cpp in Sources */,
 				6DAC96DF191B5D760007BF91 /* Io.cpp in Sources */,
@@ -1087,7 +1084,6 @@
 				6DAC96E4191B5D760007BF91 /* Random.cpp in Sources */,
 				6DAC96DA191B5D760007BF91 /* DateTime.cpp in Sources */,
 				6DAC96E0191B5D760007BF91 /* Lexical.cpp in Sources */,
-				6DAC96EB191B5D760007BF91 /* Windows.cpp in Sources */,
 				6DAC96E5191B5D760007BF91 /* Statechart.cpp in Sources */,
 				6DAC96E9191B5D760007BF91 /* Trace.cpp in Sources */,
 				6DAC96E6191B5D760007BF91 /* String.cpp in Sources */,

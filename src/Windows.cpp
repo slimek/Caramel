@@ -3,8 +3,6 @@
 #include "CaramelPch.h"
 
 
-#if defined( CARAMEL_SYSTEM_IS_WINDOWS )
-
 #include "Windows/RegistryImpl.h"
 #include <Caramel/Windows/CrtDebug.h>
 #include <Caramel/Windows/DebuggerTraceAdapter.h>
@@ -430,5 +428,3 @@ std::string WideString::ToNarrow( TextEncoding encoding ) const
 } // namespace Windows
 
 } // namespace Caramel
-
-#endif // CARAMEL_SYSTEM_IS_WINDOWS
