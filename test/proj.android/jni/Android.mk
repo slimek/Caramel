@@ -85,6 +85,7 @@ LOCAL_SRC_FILES := \
 	$(CRMTEST_SRC)/Error/AnyFailureSuite.cpp \
 	$(CRMTEST_SRC)/Error/CatchExceptionSuite.cpp \
 	$(CRMTEST_SRC)/Error/ExceptionPtrSuite.cpp \
+	$(CRMTEST_SRC)/Error/TryCatchResultSuite.cpp \
 	$(CRMTEST_SRC)/FileSystem/PathSuite.cpp \
 	$(CRMTEST_SRC)/Functional/BindSuite.cpp \
 	$(CRMTEST_SRC)/Io/InputMemoryStreamSuite.cpp \
@@ -100,15 +101,36 @@ LOCAL_SRC_FILES := \
 	$(CRMTEST_SRC)/Numeric/NumberRelationSuite.cpp \
 	$(CRMTEST_SRC)/Numeric/NumberTraitsSuite.cpp \
 	$(CRMTEST_SRC)/Numeric/UnionBitsSuite.cpp \
+	$(CRMTEST_SRC)/Random/UniformRandomSuite.cpp \
+	$(CRMTEST_SRC)/Random/WeightedRandomMapSuite.cpp \
+	$(CRMTEST_SRC)/Statechart/PromptStateMachineSuite.cpp \
+	$(CRMTEST_SRC)/Statechart/StateMachineSuite.cpp \
 	$(CRMTEST_SRC)/String/FormatSuite.cpp \
 	$(CRMTEST_SRC)/String/SplitSuite.cpp \
-	$(CRMTEST_SRC)/String/SprintfSuite.cpp \
 	$(CRMTEST_SRC)/String/StringAlgorithmSuite.cpp \
 	$(CRMTEST_SRC)/String/StringConvertibleSuite.cpp \
 	$(CRMTEST_SRC)/String/StringToStringSuite.cpp \
 	$(CRMTEST_SRC)/String/Utf8StringSuite.cpp \
+	$(CRMTEST_SRC)/Task/ContinuationTraitsSuite.cpp \
+	$(CRMTEST_SRC)/Task/StdAsyncSuite.cpp \
+	$(CRMTEST_SRC)/Task/TaskPollerSuite.cpp \
+	$(CRMTEST_SRC)/Task/TaskSuite.cpp \
+	$(CRMTEST_SRC)/Task/TaskTimerSuite.cpp \
+	$(CRMTEST_SRC)/Task/ThreadPoolSuite.cpp \
+	$(CRMTEST_SRC)/Task/WhenAllSuite.cpp \
+	$(CRMTEST_SRC)/Task/WorkerThreadSuite.cpp \
+	$(CRMTEST_SRC)/Thread/LockGuardSuite.cpp \
+	$(CRMTEST_SRC)/Thread/LoopThreadGroupSuite.cpp \
+	$(CRMTEST_SRC)/Thread/SpinMutexSuite.cpp \
+	$(CRMTEST_SRC)/Thread/ThreadSuite.cpp \
+	$(CRMTEST_SRC)/Thread/WaitableBoolSuite.cpp \
 	$(CRMTEST_SRC)/Trace/TraceChannelSuite.cpp \
 	$(CRMTEST_SRC)/Trace/TraceSuite.cpp \
+	$(CRMTEST_SRC)/Value/AnySuite.cpp \
+	$(CRMTEST_SRC)/Value/EnumFlagsSuite.cpp \
+	$(CRMTEST_SRC)/Value/NamedValuesSuite.cpp \
+	$(CRMTEST_SRC)/Value/ScalarSuite.cpp \
+	$(CRMTEST_SRC)/Value/SharedArraySuite.cpp \
 
 
 LOCAL_C_INCLUDES := \
