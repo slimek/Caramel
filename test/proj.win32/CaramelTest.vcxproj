@@ -167,6 +167,7 @@
     <ClCompile Include="..\src\Thread\LoopThreadGroupSuite.cpp" />
     <ClCompile Include="..\src\Thread\SpinMutexSuite.cpp" />
     <ClCompile Include="..\src\Thread\ThreadSuite.cpp" />
+    <ClCompile Include="..\src\Thread\LockGuardSuite.cpp" />
     <ClCompile Include="..\src\Thread\WaitableBoolSuite.cpp" />
     <ClCompile Include="..\src\Trace\TraceChannelSuite.cpp" />
     <ClCompile Include="..\src\Trace\TraceSuite.cpp" />
