@@ -12,13 +12,13 @@ namespace Caramel
 SUITE( SpinMutexSuite )
 {
 
-SpinMutex s_mutex;
-Int s_value = 0;
-Int s_count = 0;
+static SpinMutex s_mutex;
+static Int s_value = 0;
+static Int s_count = 0;
 
-const Uint LOOP = 100000;
+static const Uint LOOP = 100000;
 
-void Execute()
+static void Execute()
 {
     for ( Uint i = 0; i < LOOP; ++ i )
     {

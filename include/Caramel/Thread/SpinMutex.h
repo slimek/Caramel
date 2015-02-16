@@ -6,7 +6,7 @@
 
 #include <Caramel/Setup/CaramelDefs.h>
 #include <boost/noncopyable.hpp>
-#include <boost/smart_ptr/detail/spinlock_pool.hpp>
+#include <boost/smart_ptr/detail/spinlock.hpp>
 
 
 namespace Caramel
@@ -21,34 +21,36 @@ namespace Caramel
 class SpinMutex : public boost::noncopyable
 {
 public:
+    SpinMutex();
 
-    class ScopedLock : public boost::noncopyable
+    class ScopedLock;
+    friend class ScopedLock;
+
+    class ScopedLock : public boost::detail::spinlock::scoped_lock
     {
+        typedef boost::detail::spinlock::scoped_lock Inherited;
     public:
-        ScopedLock( SpinMutex& mutex );
-        ~ScopedLock();
-
-    private:
-        boost::detail::spinlock& m_lock;
+        explicit ScopedLock( SpinMutex& mutex );
     };
+
+private:
+    boost::detail::spinlock m_mutex;
 };
 
 
+///////////////////////////////////////////////////////////////////////////////
 //
 // Implementation
 //
 
+inline SpinMutex::SpinMutex()
+    : m_mutex( BOOST_DETAIL_SPINLOCK_INIT )
+{}
+
+
 inline SpinMutex::ScopedLock::ScopedLock( SpinMutex& mutex )
-    : m_lock( boost::detail::spinlock_pool< 0 >::spinlock_for( &mutex ))
-{
-    m_lock.lock();
-}
-
-
-inline SpinMutex::ScopedLock::~ScopedLock()
-{
-    m_lock.unlock();
-}
+    : Inherited( mutex.m_mutex )
+{}
 
 
 ///////////////////////////////////////////////////////////////////////////////
