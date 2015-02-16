@@ -81,7 +81,7 @@ void TraceManager::BindListenerToNamedChannel( const std::string& channelName, L
         auto iter = m_namedChannels.left.find( channelName );
         if ( iter == m_namedChannels.left.end() )
         {
-            CARAMEL_THROW( "Named channel %s not found", channelName );
+            CARAMEL_THROW( "Named channel \"{0}\" not found", channelName );
         }
 
         channel = iter->second;
@@ -133,7 +133,7 @@ void TraceManager::AddNamedChannel( ChannelPtr channel )
     const auto result = m_namedChannels.insert( NamedChannelEntry( name, channel ));
     if ( ! result.second )
     {
-        CARAMEL_THROW( "Named channel is duplicate, name: %s", name );
+        CARAMEL_THROW( "Named channel is duplicate, name: \"{0}\"", name );
     }
 }
 
@@ -145,7 +145,7 @@ void TraceManager::RemoveNamedChannel( ChannelPtr channel )
     const auto count = m_namedChannels.right.erase( channel );
     if ( count == 0 )
     {
-        CARAMEL_TRACE_WARN( "Named channel not found, name: %s", channel->GetName() );
+        CARAMEL_TRACE_WARN( "Named channel not found, name: \"{0}\"", channel->GetName() );
     }
 }
 
@@ -334,7 +334,7 @@ void Listener::BindBuiltinChannels( Level minLevel )
 {
     if ( ! ( ExistsBuiltinChannel( minLevel )))
     {
-        CARAMEL_THROW( "Not level of built-in channel, minLevel: %d", minLevel );
+        CARAMEL_THROW( "Not level of built-in channel, minLevel: {0}", minLevel );
     }
 
     TraceManager::Instance()->BindListenerToBuiltinChannels( minLevel, this );

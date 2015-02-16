@@ -182,7 +182,7 @@ jclass JniCenter::GetClassId( const std::string& classPath )
 
 	if ( ! klass )
 	{
-		CARAMEL_ALERT( "GetClassId() failed, classPath: %s", classPath );
+		CARAMEL_ALERT( "GetClassId() failed, classPath: \"{0}\"", classPath );
 	}
 
 	return klass;
@@ -245,7 +245,7 @@ void JniStaticMethodCore::BuildMethod( const std::string& signature )
 	if ( ! m_method )
 	{
 		CARAMEL_THROW(
-			"GetStaticMethodID() failed, classPath: %s, methodName: %s, signature: %s",
+			"GetStaticMethodID() failed, classPath: \"{0}\", methodName: \"{1}\", signature: \"{2}\"",
 			m_classPath, m_methodName, signature );
 	}
 }

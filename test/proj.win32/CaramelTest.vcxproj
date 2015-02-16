@@ -152,7 +152,6 @@
     <ClCompile Include="..\src\Statechart\StateMachineSuite.cpp" />
     <ClCompile Include="..\src\String\FormatSuite.cpp" />
     <ClCompile Include="..\src\String\SplitSuite.cpp" />
-    <ClCompile Include="..\src\String\SprintfSuite.cpp" />
     <ClCompile Include="..\src\String\StringAlgorithmSuite.cpp" />
     <ClCompile Include="..\src\String\StringConvertibleSuite.cpp" />
     <ClCompile Include="..\src\String\StringToStringSuite.cpp" />

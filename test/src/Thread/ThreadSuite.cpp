@@ -51,7 +51,7 @@ TEST( ThreadIdTest )
         const Uint32 curId = ::GetCurrentThreadId();
 
         CHECK( threadId.GetNativeId() == curId );
-        CHECK( threadId.ToString() == Sprintf( "%u", curId ));
+        CHECK( threadId.ToString() == ToString( curId ));
     }
     #endif
 

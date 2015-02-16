@@ -141,11 +141,8 @@
     <ClInclude Include="..\include\Caramel\String\Detail\FormatParameter.h" />
     <ClInclude Include="..\include\Caramel\String\Detail\FormatRecursive.h" />
     <ClInclude Include="..\include\Caramel\String\Detail\Formatter.h" />
-    <ClInclude Include="..\include\Caramel\String\Detail\SprintfParameter.h" />
     <ClInclude Include="..\include\Caramel\String\Format.h" />
-    <ClInclude Include="..\include\Caramel\String\Inline\Sprintf_Sprintf.h" />
     <ClInclude Include="..\include\Caramel\String\Split.h" />
-    <ClInclude Include="..\include\Caramel\String\Sprintf.h" />
     <ClInclude Include="..\include\Caramel\String\StringConvertible.h" />
     <ClInclude Include="..\include\Caramel\String\TextEncoding.h" />
     <ClInclude Include="..\include\Caramel\String\ToString.h" />
@@ -227,7 +224,6 @@
     <ClInclude Include="..\src\String\Converters.h" />
     <ClInclude Include="..\src\String\FormatterImpl.h" />
     <ClInclude Include="..\src\String\NumberFormat.h" />
-    <ClInclude Include="..\src\String\SprintfManager.h" />
     <ClInclude Include="..\src\Task\PooledThread.h" />
     <ClInclude Include="..\src\Task\TaskImpl.h" />
     <ClInclude Include="..\src\Task\TaskPollerImpl.h" />

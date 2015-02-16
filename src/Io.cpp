@@ -102,7 +102,7 @@ void FileStream::Open( const Utf8String& fileName )
 {
     if ( ! this->TryOpen( fileName ))
     {
-        CARAMEL_THROW( "Open file failed: %s", fileName );
+        CARAMEL_THROW( "Open file \"{0}\" failed", fileName );
     }
 }
 
@@ -197,7 +197,7 @@ void InputFileStream::Seek( Int offset )
 
     if ( 0 != result )
     {
-        CARAMEL_THROW( "fseek failed, error: %s", strerror( errno ));
+        CARAMEL_THROW( "fseek failed, error: {0}", strerror( errno ));
     }
 }
 
@@ -210,7 +210,7 @@ Uint InputFileStream::Tell() const
 
     if ( 0 > result )
     {
-        CARAMEL_THROW( "ftell failed, error: %s", strerror( errno ));
+        CARAMEL_THROW( "ftell failed, error: {0}", strerror( errno ));
     }
 
     return static_cast< Uint >( result );
@@ -268,7 +268,7 @@ void OutputFileStream::Write( const Void* buffer, Uint size )
 
     if ( written != size )
     {
-        CARAMEL_THROW( "Write file %s failed, errno: %u", m_fileName, errno );
+        CARAMEL_THROW( "Write file \"{0}\" failed, errno: {1}", m_fileName, errno );
     }
 }
 
@@ -459,7 +459,7 @@ Bool MbcsStreamReader::ReadLine( std::string& line )
     const Bool encoded = u8Line.TryParse( chars, m_encoding );
     if ( ! encoded )
     {
-        CARAMEL_THROW( "Convert from encoding %u failed", m_encoding );
+        CARAMEL_THROW( "Convert from encoding {0} failed", m_encoding );
     }
 
     line = u8Line.MoveString();

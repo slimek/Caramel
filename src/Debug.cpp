@@ -42,7 +42,7 @@ void DebugManager::ReportTimingToTrace()
 
         const Uint32 total = static_cast< Uint32 >( m_timings[i].total );
 
-        CARAMEL_TRACE_DEBUG( "[%u] : %u ms / %u", i, total, count );
+        CARAMEL_TRACE_DEBUG( "[{0}] : {1} ms / {2}", i, total, count );
     }
 }
 

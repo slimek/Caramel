@@ -193,9 +193,6 @@
     <ClCompile Include="..\src\String\SplitSuite.cpp">
       <Filter>2. Tests\String</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\String\SprintfSuite.cpp">
-      <Filter>2. Tests\String</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\String\StringAlgorithmSuite.cpp">
       <Filter>2. Tests\String</Filter>
     </ClCompile>

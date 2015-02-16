@@ -178,7 +178,7 @@ State StateMachineImpl::AddState( Int stateId )
     StatePtr newState = std::make_shared< StateImpl >( stateId, m_name );
     if ( ! m_states.Insert( stateId, newState ))
     {
-        CARAMEL_THROW( "State duplicate, machine: %s, stateId: %d", m_name, stateId );
+        CARAMEL_THROW( "State duplicate, machine: \"{0}\", stateId: {1}", m_name, stateId );
     }
     return State( newState );
 }
@@ -199,7 +199,7 @@ void StateMachineImpl::VerifyStatesAndTransitions()
         {
             if ( ! m_states.Contains( transition->targetStateId ))
             {
-                CARAMEL_THROW( "Transition target state not found, machine: %s, stateId: %d",
+                CARAMEL_THROW( "Transition target state not found, machine: \"{0}\", stateId: {1}",
                                m_name, transition->targetStateId );
             }
         }
@@ -214,7 +214,7 @@ void StateMachineImpl::Initiate( Int stateId )
     StatePtr initialState;
     if ( ! m_states.Find( stateId, initialState ))
     {
-        CARAMEL_THROW( "Initial state not found, machine: %s, stateId: %d",
+        CARAMEL_THROW( "Initial state not found, machine: \"{0}\", stateId: {1}",
                        m_name, stateId );
     }
 
@@ -259,7 +259,7 @@ void StateMachineImpl::PostEvent( const AnyEvent& evt )
     CARAMEL_CHECK( m_initiated );
 
     auto task = MakeTask(
-        Sprintf( "Machine[%s].ProcessEvent[%d]", m_name, evt.Id() ),
+        Format( "Machine[{0}].ProcessEvent[{1}]", m_name, evt.Id() ),
         [=] { this->ProcessEvent( evt ); }
     );
 
@@ -307,8 +307,8 @@ void StateMachineImpl::ProcessEvent( const AnyEvent& evt )
             if ( ! m_states.Find( stateId, targetState ))
             {
                 CARAMEL_THROW(
-                    "%s reaction plan to transit, but target state not found, "
-                    "eventId: %d, target stateId: %d",
+                    "\"{0}\" reaction plan to transit, but target state not found, "
+                    "eventId: {1}, target stateId: {2}",
                     m_currentState->GetName(), evt.Id(), stateId
                 );
             }
@@ -320,7 +320,7 @@ void StateMachineImpl::ProcessEvent( const AnyEvent& evt )
     }
 
     // Otherwise, discard this event
-    CARAMEL_TRACE_DEBUG( "%s discards event %d", m_currentState->GetName(), evt.Id() );
+    CARAMEL_TRACE_DEBUG( "State \"{0}\" discards event {1}", m_currentState->GetName(), evt.Id() );
 }
 
 
@@ -336,7 +336,7 @@ void StateMachineImpl::DoTransit( StatePtr targetState, const Action& transition
         if ( xc )
         {
             CARAMEL_TRACE_WARN(
-                "%s transition action throws, target stateId: %d\n%s",
+                "State \"{0}\" transition action throws, target stateId: {1}\n{2}",
                 m_currentState->GetName(), targetState->GetId(), xc.TracingMessage()
             );
         }
@@ -371,7 +371,7 @@ void StateMachineImpl::EnterState()
         auto xc = CatchException( [=] { m_currentState->m_enterAction(); } );
         if ( xc )
         {
-            CARAMEL_TRACE_WARN( "%s enter action throws:\n%s",
+            CARAMEL_TRACE_WARN( "State \"{0}\" enter action throws:\n{1}",
                                 m_currentState->GetName(), xc.TracingMessage() );
         }
     }
@@ -391,7 +391,7 @@ void StateMachineImpl::ExitState()
         auto xc = CatchException( [=] { m_currentState->m_exitAction(); } );
         if ( xc )
         {
-            CARAMEL_TRACE_WARN( "%s exit action throws:\n%s",
+            CARAMEL_TRACE_WARN( "State \"{0}\" exit action throws:\n{1}",
                                 m_currentState->GetName(), xc.TracingMessage() );
         }
     }
@@ -408,7 +408,7 @@ void StateMachineImpl::DoInStateReact( Int eventId, const Action& action )
     auto xc = CatchException( [=] { action(); } );
     if ( xc )
     {
-        CARAMEL_TRACE_WARN( "%s reaction to event %d throws:\n%s",
+        CARAMEL_TRACE_WARN( "State \"{0}\" reaction to event {1} throws:\n{2}",
                             m_currentState->GetName(), eventId, xc.TracingMessage() );
     }
 }
@@ -443,7 +443,7 @@ void StateMachineImpl::StartTimer( const Ticks& ticks, Int eventId )
     }
 
     m_timerTask = MakeTask(
-        Sprintf( "%s.TimerEvent[%d]", m_currentState->GetName(), eventId ),
+        Format( "{0}.TimerEvent[{1}]", m_currentState->GetName(), eventId ),
         [=] { this->ProcessEvent( AnyEvent( eventId )); }
     );
     m_timerTask.DelayFor( ticks );
@@ -591,7 +591,7 @@ State& State::Transition( Int eventId, Int targetStateId, Action action )
     if ( m_impl->m_reactions.Contains( eventId ))
     {
         CARAMEL_THROW(
-            "%s transition conflicts with reactions, eventId: %d, targetStateId: %d",
+            "State \"{0}\" transition conflicts with reactions, eventId: {1}, targetStateId: {2}",
             m_impl->GetName(), eventId, targetStateId 
         );
     }
@@ -600,7 +600,7 @@ State& State::Transition( Int eventId, Int targetStateId, Action action )
     auto transition = std::make_shared< Statechart::Transition >( targetStateId, std::move( action ));
     if ( ! m_impl->m_transitions.Insert( eventId, transition ))
     {
-        CARAMEL_THROW( "%s transition duplicate, eventId: %d, targetStateId: %d",
+        CARAMEL_THROW( "State \"{0}\" transition duplicate, eventId: {1}, targetStateId: {2}",
                        m_impl->GetName(), eventId, targetStateId );
     }
 
@@ -613,14 +613,14 @@ State& State::Reaction( Int eventId, Action action )
     // Check the Event ID
     if ( m_impl->m_transitions.Contains( eventId ))
     {
-        CARAMEL_THROW( "%s reaction conflicts with transitions, eventId: %d",
+        CARAMEL_THROW( "State \"{0}\" reaction conflicts with transitions, eventId: {1}",
                        m_impl->GetName(), eventId );
     }
 
     // Insert Reaction
     if ( ! m_impl->m_reactions.Insert( eventId, std::move( action )))
     {
-        CARAMEL_THROW( "%s reaction duplicate, eventId: %d",
+        CARAMEL_THROW( "State \"{0}\" reaction duplicate, eventId: {1}",
                        m_impl->GetName(), eventId );
     }
 
@@ -634,7 +634,7 @@ State& State::Reaction( Int eventId, Action action )
 
 StateImpl::StateImpl( Int stateId, const std::string& machineName )
     : m_id( stateId )
-    , m_name( Sprintf( "Machine[%s].State[%d]", machineName, stateId ))
+    , m_name( Format( "Machine[{0}].State[{1}]", machineName, stateId ))
 {
 }
 

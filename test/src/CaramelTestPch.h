@@ -26,7 +26,6 @@
 
 // Caramel Headers
 #include <Caramel/Setup/PchHeaders.h>
-#include <Caramel/String/Format.h>
 
 // UnitTest++ Headers
 #include <UnitTest++/UnitTest++.h>

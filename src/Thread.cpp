@@ -122,7 +122,7 @@ void ThreadImpl::RunWork()
     auto workXc = CatchException( m_workFunction );
     if ( workXc )
     {
-        CARAMEL_TRACE_WARN( "Thread[%s] caugut exception:\n%s",
+        CARAMEL_TRACE_WARN( "Thread[{0}] caugut exception:\n{1}",
                             m_name, workXc.TracingMessage() );
     }
 
@@ -131,7 +131,7 @@ void ThreadImpl::RunWork()
         auto exitXc = CatchException( m_atExit );
         if ( exitXc )
         {
-            CARAMEL_TRACE_WARN( "Thread[%s].atExit() throws:\n%s",
+            CARAMEL_TRACE_WARN( "Thread[{0}].atExit() throws:\n{1}",
                                 m_name, exitXc.TracingMessage() );
         }
     }
@@ -319,7 +319,7 @@ void LoopThread::RepeatWork()
 
         if ( xc )
         {
-            CARAMEL_ALERT( "Thread[%s] throws exception: %s", m_thread->m_name, xc.TracingMessage() );
+            CARAMEL_ALERT( "Thread[{0}] throws exception: {1}", m_thread->m_name, xc.TracingMessage() );
         }
 
     }

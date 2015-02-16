@@ -275,7 +275,7 @@ void AnyEventSlotImpl::Send( const AnyEvent& event, Uint age )
         }
 
         // Not returns ? The event has already existed, discard the new event.
-        CARAMEL_TRACE_DEBUG( "AnyEventSlot discard an event, id: %d", event.Id() );
+        CARAMEL_TRACE_DEBUG( "AnyEventSlot discard an event, id: {0}", event.Id() );
     }
 }
 
@@ -643,7 +643,7 @@ void AnyEventReactorImpl::PollOne()
         {
             if ( e.event.IsValid() )
             {
-                CARAMEL_ALERT( "Handler is invalid, event id: %d", e.event.Id() );
+                CARAMEL_ALERT( "Handler is invalid, event id: {0}", e.event.Id() );
             }
             else
             {

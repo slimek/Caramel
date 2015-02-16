@@ -209,7 +209,7 @@ TEST( ConcurrentSetSnapshotStressTest )
     t2.Join();
     t3.Join();
 
-    CARAMEL_TRACE_INFO( "Inserts: %u Erases: %u, Snapshots: %u",
+    CARAMEL_TRACE_INFO( "Inserts: {0} Erases: {1}, Snapshots: {2}",
                         inserts.load(), erases.load(), snapshots.load() );
 }
 

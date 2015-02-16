@@ -5,7 +5,7 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
-#include <Caramel/String/Sprintf.h>
+#include <Caramel/String/Format.h>
 #include <Caramel/Trace/TraceTypes.h>
 
 
@@ -53,7 +53,7 @@ private:
 template< typename... Args >
 inline void Channel::Write( const std::string& format, Args&&... args )
 {
-    this->Write( Sprintf( format, std::forward< Args >( args )... ));
+    this->Write( Format( format, std::forward< Args >( args )... ));
 }
 
 

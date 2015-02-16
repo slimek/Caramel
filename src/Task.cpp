@@ -188,7 +188,7 @@ TaskImpl::~TaskImpl()
 
     if ( m_exception && ! m_exceptionHandled )
     {
-        CARAMEL_TRACE_WARN( "Task %s throws:\n%s", m_name, m_exception.TracingMessage() );
+        CARAMEL_TRACE_WARN( "Task \"{0}\" throws:\n{1}", m_name, m_exception.TracingMessage() );
     }
 }
 
@@ -407,7 +407,7 @@ void TaskTimer::Start(
 {
     if ( m_impl )
     {
-        CARAMEL_THROW( "TaskTimer[%s] is working, make new timer[%s] failed", m_impl->Name(), name );
+        CARAMEL_THROW( "TaskTimer[{0}] is working, make new timer[{1}] failed", m_impl->Name(), name );
     }
 
     m_impl.reset( new TaskTimerImpl( name, executor, period ));
@@ -449,7 +449,7 @@ void TaskTimerImpl::MakeAndSubmitTask( WorkFunction f )
         auto xc = CatchException( f );
         if ( xc )
         {
-            CARAMEL_TRACE_WARN( "TaskTimer[%s] throws:\n%s",
+            CARAMEL_TRACE_WARN( "TaskTimer[{0}] throws:\n{1}",
                                 thiz->m_name, xc.TracingMessage() );
         }
 
@@ -578,7 +578,7 @@ WorkerThread::~WorkerThread()
 {
     if ( !m_impl->m_stopped )
     {
-        CARAMEL_ALERT( "WorkerThread[%s] not stopped before destroyed", m_impl->m_name );
+        CARAMEL_ALERT( "WorkerThread[{0}] not stopped before destroyed", m_impl->m_name );
         
         m_impl->m_stopped = true;
         m_impl->m_readyTasks.Complete();
@@ -684,7 +684,7 @@ void WorkerThreadImpl::Execute()
 
     if ( ! m_delayTasks.IsEmpty() && ! m_readyTasks.IsEmpty() )
     {
-        CARAMEL_TRACE_WARN( "WorkerThread[%s] discards some tasks" );
+        CARAMEL_TRACE_WARN( "WorkerThread[{0}] discards some tasks", m_name );
     }
 }
 
@@ -777,7 +777,7 @@ void ThreadPool::Submit( TaskCore& task )
 {
     if ( task.HasDelay() )
     {
-        CARAMEL_THROW( "ThreadPool doesn't support delay yet, task: %s", task.Name() );
+        CARAMEL_THROW( "ThreadPool doesn't support delay yet, task: \"{0}\"", task.Name() );
     }
     else
     {
@@ -827,7 +827,7 @@ ThreadPoolImpl::~ThreadPoolImpl()
 {
     if ( ! m_shutdown )
     {
-        CARAMEL_TRACE_WARN_HERE( "Destroy the thread pool %s before shutdown it", m_name );
+        CARAMEL_ALERT( "Destroy the thread pool {0} before shutdown it", m_name );
 
         // REMARKS: Do not rely on the destructor to shutdown a thread pool.
         //          Here is only a remedy.
@@ -864,7 +864,7 @@ void ThreadPoolImpl::AddReadyTask( TaskCore& task )
 
     if ( m_shutdown )
     {
-        CARAMEL_TRACE_WARN( "ThreadPool[%s] discard Task[%s]", m_name, task.Name() );
+        CARAMEL_TRACE_WARN( "ThreadPool[{0}] discard Task[{1}]", m_name, task.Name() );
         return;
     }
 
@@ -935,7 +935,7 @@ void StdAsync::Submit( TaskCore& task )
 {
     if ( task.HasDelay() )
     {
-        CARAMEL_THROW( "StdAsync doesn't support delay, task: %s", task.Name() );
+        CARAMEL_THROW( "StdAsync doesn't support delay, task: \"{0}\"", task.Name() );
     }
     else
     {

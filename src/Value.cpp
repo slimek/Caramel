@@ -90,7 +90,7 @@ void AnyInteger_Get( T& value, U intValue )
 {
     if ( ! NumberConverter< T, U >::CanExactConvert( intValue ))
     {
-        CARAMEL_THROW( "Can't exactly convert %s to %s, value: %s",
+        CARAMEL_THROW( "Can't exactly convert {0} to {1}, value: {2}",
                        ToStringT< U >(), ToStringT< T >(), ToString( intValue ));
     }
     
@@ -139,7 +139,7 @@ void AnyFloating::Get( Float& value ) const
 {
     if ( ! NumberConverter< Float, Double >::CanExactConvert( m_value ))
     {
-        CARAMEL_THROW( "Can't exactly convert Double to Float, value: %e", m_value );
+        CARAMEL_THROW( "Can't exactly convert Double to Float, value: {0}", m_value );
     }
 
     value = static_cast< Float >( m_value );
@@ -297,7 +297,7 @@ Detail::ConstNamedValueRef NamedValues::operator[]( const std::string& name ) co
     auto ivalue = m_impl->m_values.find( name );
     if ( m_impl->m_values.end() == ivalue )
     {
-        CARAMEL_THROW( "Value not found, name: %s", name );
+        CARAMEL_THROW( "Value not found, name: \"{0}\"", name );
     }
 
     return Detail::ConstNamedValueRef( name, &( ivalue->second ));
@@ -355,7 +355,7 @@ Bool ConstNamedValueRef::AsBool() const
     const auto value = m_value->AsBool();
     if ( ! value )
     {
-        CARAMEL_THROW( "Can't convert \"%s\" value to Bool", m_name );
+        CARAMEL_THROW( "Can't convert \"{0}\" value to Bool", m_name );
     }
     return *value;
 }
@@ -366,7 +366,7 @@ Int ConstNamedValueRef::AsInt() const
     const auto value = m_value->AsInt();
     if ( ! value )
     {
-        CARAMEL_THROW( "Can't convert \"%s\" value to Int", m_name );
+        CARAMEL_THROW( "Can't convert \"{0}\" value to Int", m_name );
     }
     return *value;
 }
@@ -377,7 +377,7 @@ Uint ConstNamedValueRef::AsUint() const
     const auto value = m_value->AsUint();
     if ( ! value )
     {
-        CARAMEL_THROW( "Can't convert \"%s\" value to Uint", m_name );
+        CARAMEL_THROW( "Can't convert \"{0}\" value to Uint", m_name );
     }
     return *value;
 }
@@ -388,7 +388,7 @@ Int64 ConstNamedValueRef::AsInt64() const
     const auto value = m_value->AsInt64();
     if ( ! value )
     {
-        CARAMEL_THROW( "Can't convert \"%s\" value to Int64", m_name );
+        CARAMEL_THROW( "Can't convert \"{0}\" value to Int64", m_name );
     }
     return *value;
 }
@@ -399,7 +399,7 @@ Uint64 ConstNamedValueRef::AsUint64() const
     const auto value = m_value->AsUint64();
     if ( ! value )
     {
-        CARAMEL_THROW( "Can't convert \"%s\" value to Uint64", m_name );
+        CARAMEL_THROW( "Can't convert \"{0}\" value to Uint64", m_name );
     }
     return *value;
 }
@@ -410,7 +410,7 @@ Float ConstNamedValueRef::AsFloat() const
     const auto value = m_value->AsFloat();
     if ( ! value )
     {
-        CARAMEL_THROW( "Can't convert \"%s\" value to Float", m_name );
+        CARAMEL_THROW( "Can't convert \"{0}\" value to Float", m_name );
     }
     return *value;
 }
@@ -421,7 +421,7 @@ Double ConstNamedValueRef::AsDouble() const
     const auto value = m_value->AsDouble();
     if ( ! value )
     {
-        CARAMEL_THROW( "Can't convert \"%s\" value to Double", m_name );
+        CARAMEL_THROW( "Can't convert \"{0}\" value to Double", m_name );
     }
     return *value;
 }

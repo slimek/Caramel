@@ -97,7 +97,7 @@ IniSection IniDocument::GetSection( const std::string& sectionName )
     IniSectionPtr section = m_impl->FindSection( sectionName );
     if ( ! section )
     {
-        CARAMEL_THROW( "Section %s not found", sectionName );
+        CARAMEL_THROW( "Section \"{0}\" not found", sectionName );
     }
 
     return IniSection( section );
@@ -159,13 +159,14 @@ void IniDocumentImpl::LoadFromText( TextReader& reader )
         case IniLine::TYPE_VALUE:
             if ( ! m_currSection )
             {
-                CARAMEL_THROW( "No section given before the first value: %s", iniLine.Name() );
+                CARAMEL_THROW( "No section given before the first value: \"{0}\"", iniLine.Name() );
             }
             m_currSection->AddValue( iniLine.Name(), iniLine.Value(), rawLine );
             break;
 
         case IniLine::TYPE_INVALID:
-            CARAMEL_THROW( "Line: %u : Syntax error in %s section", lineNo, m_currSection->GetName() );
+            CARAMEL_THROW( "Line: {0} : Syntax error in section \"{1}\"",
+                           lineNo, m_currSection->GetName() );
 
         default:
             CARAMEL_NOT_REACHED();
@@ -195,7 +196,7 @@ void IniDocumentImpl::AddSection( const std::string& sectionName, const std::str
     SectionMap::iterator is = m_sectionMap.find( sectionName );
     if ( m_sectionMap.end() != is )
     {
-        CARAMEL_THROW( "Section duplicate, section name: %s", sectionName );
+        CARAMEL_THROW( "Section duplicate, name: \"{0}\"", sectionName );
     }
 
     m_currSection.reset( new IniSectionImpl( sectionName, rawLine ));
@@ -250,7 +251,7 @@ Bool IniSection::GetBool( const std::string& valueName ) const
     const auto bvalue = value.AsBool();
     if ( ! bvalue )
     {
-        CARAMEL_THROW( "Can't convert value %s \"%s\" to Bool, in section %s",
+        CARAMEL_THROW( "Can't convert value {0} \"{1}\" to Bool, in section \"{2}\"",
                        valueName, value, m_impl->GetName() );
     }
     return *bvalue;
@@ -263,7 +264,7 @@ Int IniSection::GetInt( const std::string& valueName ) const
     const auto ivalue = value.AsInt();
     if ( ! ivalue )
     {
-        CARAMEL_THROW( "Can't convert value %s \"%s\" to Int, in section %s",
+        CARAMEL_THROW( "Can't convert value {0} \"{1}\" to Int, in section \"{2}\"",
                        valueName, value, m_impl->GetName() );
     }
     return *ivalue;
@@ -276,7 +277,7 @@ Uint IniSection::GetUint( const std::string& valueName ) const
     const auto uvalue = value.AsUint();
     if ( ! uvalue )
     {
-        CARAMEL_THROW( "Can't convert value %s \"%s\" to Uint, in section %s",
+        CARAMEL_THROW( "Can't convert value {0} \"{1}\" to Uint, in section \"{2}\"",
                        valueName, value, m_impl->GetName() );
     }
     return *uvalue;
@@ -289,7 +290,7 @@ Float IniSection::GetFloat( const std::string& valueName ) const
     const auto fvalue = value.AsFloat();
     if ( ! fvalue )
     {
-        CARAMEL_THROW( "Can't convert value %s \"%s\" to Float, in section %s",
+        CARAMEL_THROW( "Can't convert value {0} \"{1}\" to Float, in section \"{2}\"",
                        valueName, value, m_impl->GetName() );
     }
     return *fvalue;
@@ -348,7 +349,7 @@ Scalar IniSectionImpl::GetValue( const std::string& valueName ) const
         return ivalue->second.value;
     }
 
-    CARAMEL_THROW( "Value \"%s\" not found in section: \"%s\"", valueName, m_name );
+    CARAMEL_THROW( "Value \"{0}\" not found in section \"{1}\"", valueName, m_name );
 }
 
 
@@ -361,7 +362,7 @@ void IniSectionImpl::AddValue(
 {
     if ( this->HasValue( valueName ))
     {
-        CARAMEL_THROW( "Duplicate value %s in section %s", valueName, m_name );
+        CARAMEL_THROW( "Duplicate value \"{0}\" in section \"{1}\"", valueName, m_name );
     }
 
     ValueEntry value;

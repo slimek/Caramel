@@ -99,9 +99,6 @@ TEST( DateTryParseTest )
 TEST( DateMacroTest )
 {
     const auto dm = Date::FromMacro( __DATE__ );
-
-    CARAMEL_TRACE_DEBUG( "Build date: %s", dm.ToString() );
-
     CHECK( Date::Today() >= dm );
 }
 

@@ -5,7 +5,7 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
-#include <Caramel/String/Sprintf.h>
+#include <Caramel/String/Format.h>
 
 
 namespace Caramel
@@ -94,7 +94,7 @@ AlertResult ThrowAlertHandler(
 //
 
 #define CARAMEL_ALERT( ... ) \
-    Caramel::Alert( __LINE__, __FILE__, __FUNCTION__, Sprintf( __VA_ARGS__ ))
+    Caramel::Alert( __LINE__, __FILE__, __FUNCTION__, Format( __VA_ARGS__ ))
 
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -127,7 +127,7 @@ void DirectoryInfo::Create()
     const Bool ok = boost::filesystem::create_directory( *m_path );
     if ( ! ok )
     {
-        CARAMEL_THROW( "Create directory \"%s\" failed", m_path->ToString() );
+        CARAMEL_THROW( "Create directory \"{0}\" failed", m_path->ToString() );
     }
 }
 
@@ -164,7 +164,7 @@ void DirectoryInfo::CopyTo( const Path& goalPath ) const
     boost::filesystem::copy( *m_path, *goalPath.m_impl, errorCode );
     if ( errorCode != 0 )
     {
-		CARAMEL_THROW( "CopyTo directory from \"%s\" to \"%s\" failed. code:%d",
+		CARAMEL_THROW( "Copy directory from \"{0}\" to \"{1}\" failed, error code: {2}",
                        m_path->ToString(), goalPath.ToString(), errorCode.value() );
     }
 }
@@ -176,7 +176,7 @@ void DirectoryInfo::Rename( const Path& goalPath )
     boost::filesystem::rename( *m_path, *goalPath.m_impl, errorCode );
     if ( errorCode != 0 )
     {
-		CARAMEL_THROW( "Rename directory from \"%s\" to \"%s\" failed. code:%d",
+		CARAMEL_THROW( "Rename directory from \"{0}\" to \"{1}\" failed, error code: {2}",
                        m_path->ToString(), goalPath.ToString(), errorCode.value() );
     }
 }
@@ -187,7 +187,7 @@ void DirectoryInfo::Delete()
     const Bool ok = boost::filesystem::remove( *m_path );
     if ( ! ok )
     {
-        CARAMEL_THROW( "Delete directory \"%s\" but not found", m_path->ToString() );
+        CARAMEL_THROW( "Delete directory \"{0}\" failed", m_path->ToString() );
     }
 }
 
@@ -197,7 +197,7 @@ void DirectoryInfo::DeleteAll()
     const auto removes = boost::filesystem::remove_all( *m_path );
     if ( removes == 0 )
     {
-        CARAMEL_THROW( "Delete directory \"%s\" but not found", m_path->ToString() );
+        CARAMEL_THROW( "Delete directory \"{0}\" failed", m_path->ToString() );
     }
 }
 
@@ -248,7 +248,7 @@ void FileInfo::CopyTo( const Path& goalPath ) const
     boost::filesystem::copy_file( *m_path, *goalPath.m_impl, errorCode );
     if ( errorCode != 0 )
     {
-		CARAMEL_THROW( "CopyTo File from \"%s\" to \"%s\" failed. code:%d",
+		CARAMEL_THROW( "Copy file from \"{0}\" to \"{1}\" failed, error code: {2}",
                        m_path->ToString(), goalPath.ToString(), errorCode.value() );
     }
 }
@@ -259,7 +259,7 @@ void FileInfo::Delete()
 	const Bool ok = boost::filesystem::remove( *m_path );
     if ( ! ok )
     {
-        CARAMEL_THROW( "Delete file \"%s\" failed", m_path->ToString() );
+        CARAMEL_THROW( "Delete file \"{0}\" failed", m_path->ToString() );
     }
 }
 

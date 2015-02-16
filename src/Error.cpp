@@ -438,7 +438,7 @@ void Alert(
         return;
 
     default:
-        CARAMEL_TRACE_WARN( "Invalid result: %d", result );
+        CARAMEL_TRACE_WARN( "Invalid result: {0}", result );
         // Pass through
 
     case ALERT_RESULT_ABORT:
@@ -510,7 +510,7 @@ AlertResult TraceAlertHandler(
     const std::string& message )
 {
     CARAMEL_TRACE_WARN(
-        "ALERT WARNING: \"%s\" line %d, function: \"%s\"\n%s",
+        "ALERT WARNING: \"{0}\" line {1}, function: \"{2}\"\n{3}",
         file, line, function, message
     );
 

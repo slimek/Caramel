@@ -87,7 +87,7 @@ void ConfigRootImpl::AddSection( ConfigSectionPtr section )
 {
     if ( ! m_sections.Insert( section->GetName(), section ))
     {
-        CARAMEL_THROW( "Section %s duplicate", section->GetName() );
+        CARAMEL_THROW( "Section \"{0}\" duplicate", section->GetName() );
     }
 }
 
@@ -103,7 +103,7 @@ void ConfigRootImpl::Load( const std::map< std::string, NamedValues >& sectionMa
         const auto iter = sectionMap.find( sectName );
         if ( iter == sectionMap.end() )
         {
-            CARAMEL_THROW( "Section %s not found", sectName );
+            CARAMEL_THROW( "Section \"{0}\" not found", sectName );
         }
 
         section->Load( iter->second );
@@ -152,7 +152,7 @@ void ConfigSectionImpl::AddValue( ConfigValue* value )
 {
     if ( ! m_values.Insert( value->GetName(), value ))
     {
-        CARAMEL_THROW( "Value %s/%s duplicate", m_name, value->GetName() );
+        CARAMEL_THROW( "Value \"{0}/{1}\" duplicate", m_name, value->GetName() );
     }
 }
 
@@ -169,7 +169,7 @@ void ConfigSectionImpl::Load( const NamedValues& valueData )
         {
             if ( value->HasDefault() ) { continue; }
 
-            CARAMEL_THROW( "Value %s/%s not found", m_name, valueName );
+            CARAMEL_THROW( "Value \"{0}/{1}\" not found", m_name, valueName );
         }
 
         value->Load( valueData );

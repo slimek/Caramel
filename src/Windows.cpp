@@ -160,7 +160,7 @@ Bool Registry::GetStringValue(
         }
         else
         {
-            CARAMEL_THROW( "Open registry key %s failed, error: %d", keyFullPath, keyResult );
+            CARAMEL_THROW( "Open registry key \"{0}\" failed, error: {1}", keyFullPath, keyResult );
         }
     }
 
@@ -223,7 +223,7 @@ Bool RegistryImpl::GetStringValue( const Utf8String& valueName, Utf8String& valu
 
     if ( result != ERROR_SUCCESS )
     {
-        CARAMEL_THROW( "Query registry %s value %s", m_name, valueName );
+        CARAMEL_THROW( "RegQueryValueExW() failed, value: \"{0}/{1}\"", m_name, valueName );
     }
 
     value = Utf8String( std::wstring( &buffer[0] ));
@@ -274,7 +274,7 @@ WideString::WideString( const std::string& input, TextEncoding encoding )
 {
     if ( ! this->TryParse( input, encoding ))
     {
-        CARAMEL_THROW( "Convert to UTF-16 failed, input: %s, encoding: %u", input, encoding );
+        CARAMEL_THROW( "Convert to UTF-16 failed, input: \"{0}\", encoding: {1}", input, encoding );
     }
 }
 

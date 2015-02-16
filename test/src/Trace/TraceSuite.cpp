@@ -58,39 +58,20 @@ TEST( TraceTest )
 
     /// Message with one argument ///
 
-    CARAMEL_TRACE_DEBUG( "Debug:%d", 1 );
+    CARAMEL_TRACE_DEBUG( "Debug:{0}", 1 );
     CHECK( "Debug:1" == lis.Msg() );
     CHECK( Trace::LEVEL_DEBUG == lis.Lv() );
 
-    CARAMEL_TRACE_INFO( "Info:%.1f", 1.0f );
+    CARAMEL_TRACE_INFO( "Info:{0:F1}", 1.0f );
     CHECK( "Info:1.0" == lis.Msg() );
     CHECK( Trace::LEVEL_INFO == lis.Lv() );
 
-    CARAMEL_TRACE_WARN( "Warn:%x", 15 );
+    CARAMEL_TRACE_WARN( "Warn:{0:x}", 15 );
     CHECK( "Warn:f" == lis.Msg() );
     CHECK( Trace::LEVEL_WARN == lis.Lv() );
 
-    CARAMEL_TRACE_ERROR( "Error:%s", "wow" );
+    CARAMEL_TRACE_ERROR( "Error:{0}", "wow" );
     CHECK( "Error:wow" == lis.Msg() );
-    CHECK( Trace::LEVEL_ERROR == lis.Lv() );
-
-
-    /// Message with hosting function name ///
-
-    CARAMEL_TRACE_DEBUG_HERE( "Debug" );
-    CHECK( Sprintf( "%s - Debug", __FUNCTION__ ) == lis.Msg() );
-    CHECK( Trace::LEVEL_DEBUG == lis.Lv() );
-
-    CARAMEL_TRACE_INFO_HERE( "Info" );
-    CHECK( Sprintf( "%s - Info", __FUNCTION__ ) == lis.Msg() );
-    CHECK( Trace::LEVEL_INFO == lis.Lv() );
-
-    CARAMEL_TRACE_WARN_HERE( "Warn" );
-    CHECK( Sprintf( "%s - Warn", __FUNCTION__ ) == lis.Msg() );
-    CHECK( Trace::LEVEL_WARN == lis.Lv() );
-
-    CARAMEL_TRACE_ERROR_HERE( "Error" );
-    CHECK( Sprintf( "%s - Error", __FUNCTION__ ) == lis.Msg() );
     CHECK( Trace::LEVEL_ERROR == lis.Lv() );
 }
 
@@ -122,19 +103,19 @@ TEST( TraceFunctionStyleTest )
 
     /// Message with arguments ///
 
-    TraceDebug( "Debug:%d", 1 );
+    TraceDebug( "Debug:{0}", 1 );
     CHECK( "Debug:1" == lis.Msg() );
     CHECK( Trace::LEVEL_DEBUG == lis.Lv() );
 
-    TraceInfo( "Info:%.1f %.2f", 1.0f, 0.75f );
+    TraceInfo( "Info:{0:F1} {1:F2}", 1.0f, 0.75f );
     CHECK( "Info:1.0 0.75" == lis.Msg() );
     CHECK( Trace::LEVEL_INFO == lis.Lv() );
 
-    TraceWarn( "Warn:%x", 15 );
+    TraceWarn( "Warn:{0:x}", 15 );
     CHECK( "Warn:f" == lis.Msg() );
     CHECK( Trace::LEVEL_WARN == lis.Lv() );
 
-    TraceError( "Error:%s %s", "Alice", "Marisa" );
+    TraceError( "Error:{0} {1}", "Alice", "Marisa" );
     CHECK( "Error:Alice Marisa" == lis.Msg() );
     CHECK( Trace::LEVEL_ERROR == lis.Lv() );
 }

@@ -33,12 +33,12 @@ TEST( ChannelTest )
     
     /// Write with Sprintf ///
 
-    channel.Write( "Youmu has %d katanas", 2 );
+    channel.Write( "Youmu has {0} katanas", 2 );
 
     CHECK( true == queue.TryPop( level, msg ));
     CHECK( "Youmu has 2 katanas" == msg );
 
-    channel.Write( "%s and %s are both Witches", "Alice", "Marisa" );
+    channel.Write( "{0} and {1} are both Witches", "Alice", "Marisa" );
 
     CHECK( true == queue.TryPop( level, msg ));
     CHECK( "Alice and Marisa are both Witches" );

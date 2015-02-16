@@ -229,7 +229,7 @@ Version::Version( const std::string& versionString )
 {
     if ( ! this->TryParse( versionString ))
     {
-        CARAMEL_THROW( "\"%s\" is not a version string", versionString );
+        CARAMEL_THROW( "\"{0}\" is not a version string", versionString );
     }
 }
 
@@ -304,7 +304,7 @@ std::string Version::ToString( Uint numComponents ) const
     case 4: return this->ToString();
 
     default:
-        CARAMEL_THROW( "Invalid number of components: %u", numComponents );
+        CARAMEL_THROW( "Invalid number of components: {0}", numComponents );
     }
 }
 
@@ -327,13 +327,13 @@ Bool Version::TryParse( const std::string& rawInput )
 
     if ( tokens.empty() )
     {
-        CARAMEL_TRACE_DEBUG( "No components found: \"%s\"", input );
+        CARAMEL_TRACE_DEBUG( "No components found: \"{0}\"", input );
         return false;
     }
 
     if ( tokens.size() > 4 )
     {
-        CARAMEL_TRACE_DEBUG( "Too many components found: \"%s\"", input );
+        CARAMEL_TRACE_DEBUG( "Too many components found: \"{0}\"", input );
         return false;
     }
 
@@ -344,7 +344,7 @@ Bool Version::TryParse( const std::string& rawInput )
         Integer< Uint32 > value;
         if ( ! value.TryParse( tokens[i] ))
         {
-            CARAMEL_TRACE_DEBUG( "Invalid version string: \"%s\"", input );
+            CARAMEL_TRACE_DEBUG( "Invalid version string: \"{0}\"", input );
             return false;
         }
 

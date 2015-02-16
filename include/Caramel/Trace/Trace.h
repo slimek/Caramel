@@ -5,7 +5,7 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
-#include <Caramel/String/Sprintf.h>
+#include <Caramel/String/Format.h>
 #include <Caramel/Trace/TraceTypes.h>
 
 
@@ -53,62 +53,11 @@ void WriteToBuiltinFailed( const std::string& message );
 
 } // namespace Trace
 
-} // namespace Caramel
-
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Trace Macros
-//
-
-#define CARAMEL_TRACE_WRITE_TO_BUILTIN( level, format_message, ... ) \
-    { \
-        try { \
-            Caramel::Trace::WriteToBuiltin( level, Caramel::Sprintf( format_message, ##__VA_ARGS__ )); \
-        } catch ( ... ) { \
-            Caramel::Trace::WriteToBuiltinFailed( format_message ); \
-        } \
-    }
-
-
-#define CARAMEL_TRACE_DEBUG( format_message, ... ) \
-    CARAMEL_TRACE_WRITE_TO_BUILTIN( Caramel::Trace::LEVEL_DEBUG, format_message, ##__VA_ARGS__ )
-
-#define CARAMEL_TRACE_INFO( format_message, ... ) \
-    CARAMEL_TRACE_WRITE_TO_BUILTIN( Caramel::Trace::LEVEL_INFO, format_message, ##__VA_ARGS__ )
-
-#define CARAMEL_TRACE_WARN( format_message, ... ) \
-    CARAMEL_TRACE_WRITE_TO_BUILTIN( Caramel::Trace::LEVEL_WARN, format_message, ##__VA_ARGS__ )
-
-#define CARAMEL_TRACE_ERROR( format_message, ... ) \
-    CARAMEL_TRACE_WRITE_TO_BUILTIN( Caramel::Trace::LEVEL_ERROR, format_message, ##__VA_ARGS__ )
-
-
-//
-// Write Trace with Location
-// - The format_message must be string literal.
-//
-
-#define CARAMEL_TRACE_DEBUG_HERE( format_message, ... ) \
-    CARAMEL_TRACE_WRITE_TO_BUILTIN( Caramel::Trace::LEVEL_DEBUG, "%s - " format_message, __FUNCTION__, ##__VA_ARGS__ )
-
-#define CARAMEL_TRACE_INFO_HERE( format_message, ... ) \
-    CARAMEL_TRACE_WRITE_TO_BUILTIN( Caramel::Trace::LEVEL_INFO, "%s - " format_message, __FUNCTION__, ##__VA_ARGS__ )
-
-#define CARAMEL_TRACE_WARN_HERE( format_message, ... ) \
-    CARAMEL_TRACE_WRITE_TO_BUILTIN( Caramel::Trace::LEVEL_WARN, "%s - " format_message, __FUNCTION__, ##__VA_ARGS__ )
-
-#define CARAMEL_TRACE_ERROR_HERE( format_message, ... ) \
-    CARAMEL_TRACE_WRITE_TO_BUILTIN( Caramel::Trace::LEVEL_ERROR, "%s - " format_message, __FUNCTION__, ##__VA_ARGS__ )
-
 
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Implementation
 //
-
-namespace Caramel
-{
 
 template< typename... Args >
 inline void TraceDebug( const std::string& format, Args&&... args )
@@ -116,7 +65,7 @@ inline void TraceDebug( const std::string& format, Args&&... args )
     try
     {
         Trace::WriteToBuiltin(
-            Trace::LEVEL_DEBUG, Sprintf( format, std::forward< Args >( args )... ));
+            Trace::LEVEL_DEBUG, Format( format, std::forward< Args >( args )... ));
     }
     catch ( ... )
     {
@@ -131,7 +80,7 @@ inline void TraceInfo( const std::string& format, Args&&... args )
     try
     {
         Trace::WriteToBuiltin(
-            Trace::LEVEL_INFO, Sprintf( format, std::forward< Args >( args )... ));
+            Trace::LEVEL_INFO, Format( format, std::forward< Args >( args )... ));
     }
     catch ( ... )
     {
@@ -146,7 +95,7 @@ inline void TraceWarn( const std::string& format, Args&&... args )
     try
     {
         Trace::WriteToBuiltin(
-            Trace::LEVEL_WARN, Sprintf( format, std::forward< Args >( args )... ));
+            Trace::LEVEL_WARN, Format( format, std::forward< Args >( args )... ));
     }
     catch ( ... )
     {
@@ -161,7 +110,7 @@ inline void TraceError( const std::string& format, Args&&... args )
     try
     {
         Trace::WriteToBuiltin(
-            Trace::LEVEL_ERROR, Sprintf( format, std::forward< Args >( args )... ));
+            Trace::LEVEL_ERROR, Format( format, std::forward< Args >( args )... ));
     }
     catch ( ... )
     {
@@ -170,9 +119,27 @@ inline void TraceError( const std::string& format, Args&&... args )
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-
 } // namespace Caramel
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Trace Macros
+//
+
+#define CARAMEL_TRACE_DEBUG( format_message, ... ) \
+    Caramel::TraceDebug( format_message, ##__VA_ARGS__ )
+
+#define CARAMEL_TRACE_INFO( format_message, ... ) \
+    Caramel::TraceInfo( format_message, ##__VA_ARGS__ )
+
+#define CARAMEL_TRACE_WARN( format_message, ... ) \
+    Caramel::TraceWarn( format_message, ##__VA_ARGS__ )
+
+#define CARAMEL_TRACE_ERROR( format_message, ... ) \
+    Caramel::TraceError( format_message, ##__VA_ARGS__ )
+
+
+///////////////////////////////////////////////////////////////////////////////
 
 #endif // __CARAMEL_TRACE_TRACE_H
 

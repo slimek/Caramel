@@ -85,14 +85,14 @@ Date Date::FromMacro( const Char* inputDate )
 
     if ( ! regex_match( sdate, matches, spec ))
     {
-        CARAMEL_THROW( "Not match ANSI C __DATE__ format: %s", sdate );
+        CARAMEL_THROW( "Not match ANSI C __DATE__ format: \"{0}\"", sdate );
     }
 
     const std::string smonth = matches[1].str();
     const std::string sday   = matches[2].str();
     const std::string syear  = matches[3].str();
 
-    return FromString( Sprintf( "%s-%s-%s", syear, smonth, sday ));
+    return FromString( Caramel::Format( "{0}-{1}-{2}", syear, smonth, sday ));
 }
 
 
@@ -260,7 +260,7 @@ Days::operator TimeSpan() const
 
     if ( MAX_DAYS_TO_TIME_SPAN < days )
     {
-        CARAMEL_THROW( "Out of convertible range, days: %d", days );
+        CARAMEL_THROW( "Out of convertible range, days: {0}", days );
     }
 
     return Hours( days * 24 );
@@ -726,7 +726,7 @@ TimeOfDay::TimeOfDay( Int hour, Int minute, Int second )
 
     if ( tdur->is_negative() || 24 <= tdur->hours() )
     {
-        CARAMEL_THROW( "Out of range, %d:%d:%d", hour, minute, second );
+        CARAMEL_THROW( "Out of range, {0}:{1}:{2}", hour, minute, second );
     }
 
     m_impl = tdur;
@@ -757,7 +757,7 @@ TimeOfDay TimeOfDay::FromString( const std::string& s )
 
     if ( tdur->is_negative() || 24 <= tdur->hours() )
     {
-        CARAMEL_THROW( "Out of range, input: %s", s );
+        CARAMEL_THROW( "Out of range, input: \"{0}\"", s );
     }
 
     return TimeOfDay( tdur );

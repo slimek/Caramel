@@ -5,7 +5,7 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
-#include <Caramel/String/Sprintf.h>
+#include <Caramel/String/Format.h>
 #include <exception>
 
 
@@ -62,7 +62,7 @@ private:
     throw CARAMEL_MAKE_EXCEPTION( __VA_ARGS__ )
 
 #define CARAMEL_MAKE_EXCEPTION( ... ) \
-    Caramel::Exception( __LINE__, __FILE__, CARAMEL_CURRENT_FUNCTION, Caramel::Sprintf( __VA_ARGS__ ))
+    Caramel::Exception( __LINE__, __FILE__, CARAMEL_CURRENT_FUNCTION, Caramel::Format( __VA_ARGS__ ))
 
 
 //

@@ -245,7 +245,7 @@ std::string ProgramOptionsManager::GetStringOption( const std::string& longName 
 {
     if ( ! this->Contains( longName ))
     {
-        CARAMEL_THROW( "Option not found, longName: %s", longName );
+        CARAMEL_THROW( "Option not found, longName: {0}", longName );
     }
 
     return m_variablesMap[ longName ].as< std::string >();

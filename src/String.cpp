@@ -5,13 +5,11 @@
 #include "String/Converters.h"
 #include "String/FormatterImpl.h"
 #include "String/NumberFormat.h"
-#include "String/SprintfManager.h"
 #include <Caramel/Functional/ScopeExit.h>
 #include <Caramel/Lexical/Integer.h>
 #include <Caramel/String/Algorithm.h>
 #include <Caramel/String/Format.h>
 #include <Caramel/String/Split.h>
-#include <Caramel/String/Sprintf.h>
 #include <Caramel/String/ToString.h>
 #include <Caramel/String/Utf8String.h>
 #include <boost/algorithm/string/join.hpp>
@@ -35,9 +33,6 @@ namespace Caramel
 //
 // Contents
 //
-//   Sprintf
-//   SprintfBuffer
-//   SprintfManager
 //   Utf8String
 //   Algorithm
 //   NumberFormat
@@ -47,136 +42,6 @@ namespace Caramel
 //   ToStringT
 //   Formatter
 //
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Sprintf
-//
-// - CAUTION: Sprintf utility is the foundation of Exception and Trace macros.
-//            Don't use these macros in Sprintf code.
-//
-
-namespace Detail
-{
-
-std::string SprintfImpl( const Char* format, ... )
-{
-    SprintfBuffer* buffer = SprintfManager::Instance()->AllocateBuffer();
-    auto guard = ScopeExit( [ buffer ] { SprintfManager::Instance()->FreeBuffer( buffer ); } );
-
-    Char* p = buffer->GetPointer();
-
-    va_list args;
-    va_start( args, format );
-
-    const Int count = vsnprintf( p, SprintfBuffer::SIZE, format, args );
-
-    va_end( args );
-
-    if ( 0 > count )
-    {
-        // TODO: use Trace function for error reporting.
-    }
-    
-    return std::string( p );
-}
-
-} // namespace Detail
-
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Sprintf Buffer
-//
-// - CAUTION: Sprintf utility is the foundation of Exception and Trace macros.
-//            Don't use these macros in Sprintf code.
-//
-
-SprintfBuffer::SprintfBuffer()
-{
-    // Keep a local copy here.
-    // Using PAD_CHAR in std::fill() would cause a linking error in Clang compiler.
-    const Uint8 padding = PAD_CHAR;
-
-    // Align buffer acoording to the cache lines
-    Void* p = &m_chunk[0];
-
-    #if defined( CARAMEL_SYSTEM_IS_ANDROID )
-    {
-        // As at Nov.2013, Andoird NDK GNU C++ 4.8 doesn't support std::align
-        m_buffer = reinterpret_cast< Char* >( p );
-    }
-    #else
-    {
-        std::size_t space = CHUNK_SIZE;
-        m_buffer = reinterpret_cast< Char* >( std::align( BUFFER_ALIGN, SIZE, p, space ));
-    }
-    #endif
-
-    CARAMEL_ASSERT( m_buffer + SIZE + sizeof( Uint32 ) <= &m_chunk[ CHUNK_SIZE ] );
-
-    // Padding before head
-    std::fill( &m_chunk[0], m_buffer, padding );
-
-    // Clear the buffer
-    std::fill( m_buffer, m_buffer + SIZE, 0 );
-
-    // Put the tail guard
-    Uint32* tailGuard = reinterpret_cast< Uint32* >( m_buffer + SIZE );
-    *tailGuard = TAIL_GUARD;
-
-    // Padding after tail
-    std::fill( m_buffer + SIZE + sizeof( Uint32 ), &m_chunk[ CHUNK_SIZE ], padding );
-}
-
-
-Bool SprintfBuffer::CheckGuard() const
-{
-    return *reinterpret_cast< Uint32* >( m_buffer + SIZE ) == TAIL_GUARD;
-}
-
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Sprintf Manager
-//
-// - CAUTION: Sprintf utility is the foundation of Exception and Trace macros.
-//            Don't use these macros in Sprintf code.
-//
-
-SprintfManager::SprintfManager()
-{
-}
-
-
-SprintfManager::~SprintfManager()
-{
-    SprintfBuffer* buffer = nullptr;
-    while ( m_buffers.TryPop( buffer ))
-    {
-        delete buffer;
-    }
-}
-
-
-SprintfBuffer* SprintfManager::AllocateBuffer()
-{
-    SprintfBuffer* buffer = nullptr;
-    if ( ! m_buffers.TryPop( buffer ))
-    {
-        buffer = new SprintfBuffer;
-    }
-
-    CARAMEL_ASSERT( buffer->CheckGuard() );
-    return buffer;
-}
-
-
-void SprintfManager::FreeBuffer( SprintfBuffer* buffer )
-{
-    m_buffers.Push( buffer );
-}
-
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -701,7 +566,7 @@ std::string IntegerConverter< T >::operator() ( const std::string& format ) cons
         break;
 
     default:
-        CARAMEL_ALERT( "Invalid integer format: %s", format );
+        CARAMEL_ALERT( "Invalid integer format: \"{0}\"", format );
         return this->ToString();
     }
 }
@@ -776,7 +641,7 @@ std::string FloatingConverter< T >::operator() ( const std::string& format ) con
         return this->ToStringWithGroup( numFmt.Precision( 2 ));
 
     default:
-        CARAMEL_ALERT( "Invalid floating format: %s", format );
+        CARAMEL_ALERT( "Invalid floating format: \"{0}\"", format );
         return this->ToString();
     }
 }
