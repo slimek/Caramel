@@ -322,16 +322,37 @@ TEST( TimeSpanFormatTest )
     const TimeSpan t1( 12, 34, 56 );
     const TimeSpan t2 = Days( 2 ) + Minutes( 42 );
     const TimeSpan t3 = Seconds( 35.125 );
+    const TimeSpan t4( 1, 23, 54 );
+    const TimeSpan t5 = Days( 50 );  // 1200 hours
 
     CHECK( "00:00:00"  == t0.Format( "%H:%M:%S" ));
     CHECK( "12:34:56"  == t1.Format( "%H:%M:%S" ));
     CHECK( "48h42m"    == t2.Format( "%Hh%Mm" ));
     CHECK( "35.125000" == t3.Format( "%S.%f" ));
+    CHECK( "01:23"     == t4.Format( "%H:%M" ));
+
+    // The different of %O and %H :
+    // - %H can only print 2 digits. %O doesn't have limitation.
+
+    //CHECK( "1200" == t5.Format( "%H" ));  <- cause assertion!
+    CHECK( "1200" == t5.Format( "%O" ));
+
+    // Otherwise they are pretty the same...
+    CHECK( t2.Format( "%O" ) == t2.Format( "%H" ));
+    CHECK( t4.Format( "%O" ) == t4.Format( "%H" ));
+
 
     // TODO: There are no easy way to format the days part?
     CHECK( 0 == t2.Hours() );
     CHECK( 2 == t2.Days() );
     // CHECK( "02d00h42m" == t2.FormatEx( ??? ));
+
+
+    // The ToString() behavior equals to Format( "%H:%M:%S" ), unless the seconds have fraction
+    CHECK( t0.ToString() == t0.Format( "%H:%M:%S" ));
+    CHECK( t1.ToString() == t1.Format( "%H:%M:%S" ));
+    CHECK( t2.ToString() == t2.Format( "%H:%M:%S" ));
+    CHECK( t3.ToString() != t3.Format( "%H:%M:%S" ));  // NOT EQUAL: seconds have fraction.
 }
 
 
