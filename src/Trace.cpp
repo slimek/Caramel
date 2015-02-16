@@ -133,7 +133,7 @@ void TraceManager::AddNamedChannel( ChannelPtr channel )
     const auto result = m_namedChannels.insert( NamedChannelEntry( name, channel ));
     if ( ! result.second )
     {
-        CARAMEL_THROW( "Named channel is duplicate, name: \"{0}\"", name );
+        CARAMEL_ALERT( "Named channel \"{0}\" is duplicate", name );
     }
 }
 
@@ -145,7 +145,7 @@ void TraceManager::RemoveNamedChannel( ChannelPtr channel )
     const auto count = m_namedChannels.right.erase( channel );
     if ( count == 0 )
     {
-        CARAMEL_TRACE_WARN( "Named channel not found, name: \"{0}\"", channel->GetName() );
+        CARAMEL_ALERT( "Named channel \"{0}\" not found", channel->GetName() );
     }
 }
 

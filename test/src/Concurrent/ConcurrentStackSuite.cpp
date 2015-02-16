@@ -94,7 +94,7 @@ TEST( ConcurrentStackWarmupTest )
     t1.Join();
     t2.Join();
 
-    CARAMEL_TRACE_DEBUG( "Pushes: {0}, Pops: {1}", pushes.load(), pops.load() );
+    TraceDebug( "Pushes: {0}, Pops: {1}", pushes.load(), pops.load() );
 }
 
 

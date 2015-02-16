@@ -150,7 +150,7 @@ JNIEnv* JniCenter::GetEnvOfCurrentThread()
 
 		// This thread is already attached to Java VM at somewhere.
 
-		CARAMEL_TRACE_DEBUG( "JniCenter: This thread already has its own Env" );
+		TraceDebug( "JniCenter: This thread already has its own Env" );
 		return tls_threadJniEnv;
 	}
 

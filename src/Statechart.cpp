@@ -320,7 +320,7 @@ void StateMachineImpl::ProcessEvent( const AnyEvent& evt )
     }
 
     // Otherwise, discard this event
-    CARAMEL_TRACE_DEBUG( "State \"{0}\" discards event {1}", m_currentState->GetName(), evt.Id() );
+    TraceDebug( "State[{0}] discards event {1}", m_currentState->GetName(), evt.Id() );
 }
 
 
@@ -335,10 +335,8 @@ void StateMachineImpl::DoTransit( StatePtr targetState, const Action& transition
         auto xc = CatchException( [&] { transitionAction(); } );
         if ( xc )
         {
-            CARAMEL_TRACE_WARN(
-                "State \"{0}\" transition action throws, target stateId: {1}\n{2}",
-                m_currentState->GetName(), targetState->GetId(), xc.TracingMessage()
-            );
+            CARAMEL_ALERT( "State[{0}] transition action throws, target stateId: {1}\n{2}",
+                           m_currentState->GetName(), targetState->GetId(), xc.TracingMessage() );
         }
     }
 
@@ -371,8 +369,8 @@ void StateMachineImpl::EnterState()
         auto xc = CatchException( [=] { m_currentState->m_enterAction(); } );
         if ( xc )
         {
-            CARAMEL_TRACE_WARN( "State \"{0}\" enter action throws:\n{1}",
-                                m_currentState->GetName(), xc.TracingMessage() );
+            CARAMEL_ALERT( "State[{0}] enter action throws:\n{1}",
+                           m_currentState->GetName(), xc.TracingMessage() );
         }
     }
 }
@@ -391,8 +389,8 @@ void StateMachineImpl::ExitState()
         auto xc = CatchException( [=] { m_currentState->m_exitAction(); } );
         if ( xc )
         {
-            CARAMEL_TRACE_WARN( "State \"{0}\" exit action throws:\n{1}",
-                                m_currentState->GetName(), xc.TracingMessage() );
+            CARAMEL_ALERT( "State[{0}] exit action throws:\n{1}",
+                           m_currentState->GetName(), xc.TracingMessage() );
         }
     }
 }
@@ -408,8 +406,8 @@ void StateMachineImpl::DoInStateReact( Int eventId, const Action& action )
     auto xc = CatchException( [=] { action(); } );
     if ( xc )
     {
-        CARAMEL_TRACE_WARN( "State \"{0}\" reaction to event {1} throws:\n{2}",
-                            m_currentState->GetName(), eventId, xc.TracingMessage() );
+        CARAMEL_ALERT( "State[{0}] reaction to event {1} throws:\n{2}",
+                       m_currentState->GetName(), eventId, xc.TracingMessage() );
     }
 }
 

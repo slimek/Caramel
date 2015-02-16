@@ -124,6 +124,7 @@ inline void TraceError( const std::string& format, Args&&... args )
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Trace Macros
+// - Deprecated. Please use function-style instead.
 //
 
 #define CARAMEL_TRACE_DEBUG( format_message, ... ) \

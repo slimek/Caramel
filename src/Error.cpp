@@ -165,7 +165,7 @@ void ExceptionCatcherCore::OnCatchUnknown()
 {
     m_exception = ExceptionPtr::Unknown();
 
-    CARAMEL_TRACE_ERROR( "Unknown exception caught" );
+    TraceError( "Unknown exception caught" );
 }
 
 
@@ -438,11 +438,11 @@ void Alert(
         return;
 
     default:
-        CARAMEL_TRACE_WARN( "Invalid result: {0}", result );
+        TraceWarn( "Invalid result: {0}", result );
         // Pass through
 
     case ALERT_RESULT_ABORT:
-        CARAMEL_TRACE_INFO( "Program aborts by alert result" );
+        TraceInfo( "Program aborts by alert result" );
         ::abort();
         return;
     }
@@ -509,10 +509,8 @@ AlertResult TraceAlertHandler(
     Int line, const std::string& file, const std::string& function,
     const std::string& message )
 {
-    CARAMEL_TRACE_WARN(
-        "ALERT WARNING: \"{0}\" line {1}, function: \"{2}\"\n{3}",
-        file, line, function, message
-    );
+    TraceWarn( "ALERT WARNING: \"{0}\" line {1}, function: \"{2}\"\n{3}",
+               file, line, function, message );
 
     return ALERT_RESULT_CONTINUE;
 }

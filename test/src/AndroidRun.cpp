@@ -69,7 +69,7 @@ void RunTest::Main()
 
 	std::cout << "Android::Streambuf created" << std::endl;
 
-	CARAMEL_TRACE_INFO( "Caramel Test Starts" );
+	TraceInfo( "Caramel Test Starts" );
 
 
 	using namespace UnitTest;

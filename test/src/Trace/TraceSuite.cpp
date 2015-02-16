@@ -31,7 +31,7 @@ private:
 };
 
 
-TEST( TraceTest )
+TEST( TraceMacroStyleTest )
 {
     LocalListener lis;
     lis.BindBuiltinChannels( Trace::LEVEL_DEBUG );

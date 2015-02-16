@@ -37,7 +37,7 @@ TEST( UniformRandomTest )
             if ( metMin && metMax ) { break; }
         }
 
-        CARAMEL_TRACE_DEBUG( "Test GenRandomInt() count: {0}, elapsed: {1}", count, watch.Elapsed() );
+        TraceDebug( "Test GenRandomInt() count: {0}, elapsed: {1}", count, watch.Elapsed() );
     }
 
     /// Uint ///
@@ -62,7 +62,7 @@ TEST( UniformRandomTest )
             if ( metMin && metMax ) { break; }
         }
 
-        CARAMEL_TRACE_DEBUG( "Test GenRandomUint() count: {0}, elapsed: {1}", count, watch.Elapsed() );
+        TraceDebug( "Test GenRandomUint() count: {0}, elapsed: {1}", count, watch.Elapsed() );
     }
 
     /// Float ///
@@ -92,7 +92,7 @@ TEST( UniformRandomTest )
             if ( metLower && metUpper ) { break; }
         }
 
-        CARAMEL_TRACE_DEBUG( "Test GenRandomFloat() count: {0}, elapsed: {1}", count, watch.Elapsed() );
+        TraceDebug( "Test GenRandomFloat() count: {0}, elapsed: {1}", count, watch.Elapsed() );
     }
 
     /// Double ///
@@ -122,7 +122,7 @@ TEST( UniformRandomTest )
             if ( metLower && metUpper ) { break; }
         }
 
-        CARAMEL_TRACE_DEBUG( "Test GenRandomDouble() count: {0}, elapsed: {1}", count, watch.Elapsed() );
+        TraceDebug( "Test GenRandomDouble() count: {0}, elapsed: {1}", count, watch.Elapsed() );
     }
 }
 
@@ -146,8 +146,8 @@ TEST( GenRandomBoolTest )
 
     CHECK_CLOSE( 0.25, ratio, 0.05 );
 
-    CARAMEL_TRACE_DEBUG( "Test GenRandomBool() count: {0}, elapsed: {1}, ratio: {2}", 
-                         total, watch.Elapsed(), ratio );
+    TraceDebug( "Test GenRandomBool() count: {0}, elapsed: {1}, ratio: {2}", 
+                total, watch.Elapsed(), ratio );
 }
 
 

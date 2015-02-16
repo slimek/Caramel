@@ -275,7 +275,7 @@ void AnyEventSlotImpl::Send( const AnyEvent& event, Uint age )
         }
 
         // Not returns ? The event has already existed, discard the new event.
-        CARAMEL_TRACE_DEBUG( "AnyEventSlot discard an event, id: {0}", event.Id() );
+        TraceDebug( "AnyEventSlot discard an event, id: {0}", event.Id() );
     }
 }
 

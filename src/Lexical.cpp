@@ -327,13 +327,13 @@ Bool Version::TryParse( const std::string& rawInput )
 
     if ( tokens.empty() )
     {
-        CARAMEL_TRACE_DEBUG( "No components found: \"{0}\"", input );
+        TraceDebug( "No components found: \"{0}\"", input );
         return false;
     }
 
     if ( tokens.size() > 4 )
     {
-        CARAMEL_TRACE_DEBUG( "Too many components found: \"{0}\"", input );
+        TraceDebug( "Too many components found: \"{0}\"", input );
         return false;
     }
 
@@ -344,7 +344,7 @@ Bool Version::TryParse( const std::string& rawInput )
         Integer< Uint32 > value;
         if ( ! value.TryParse( tokens[i] ))
         {
-            CARAMEL_TRACE_DEBUG( "Invalid version string: \"{0}\"", input );
+            TraceDebug( "Invalid version string: \"{0}\"", input );
             return false;
         }
 

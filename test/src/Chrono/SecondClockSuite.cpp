@@ -33,7 +33,7 @@ TEST( SecondClockTest )
     CHECK_CLOSE( Seconds( 1 ), slice,   Seconds( 0.05 ));
     CHECK_CLOSE( Seconds( 0 ), reseted, Seconds( 0.05 ));
     
-    CARAMEL_TRACE_DEBUG( "Duration: {0}", delta );
+    TraceDebug( "Duration: {0}", delta );
 }
 
 

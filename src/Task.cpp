@@ -184,11 +184,11 @@ TaskImpl::TaskImpl( std::string&& name, std::unique_ptr< TaskHolder >&& holder )
 
 TaskImpl::~TaskImpl()
 {
-    // Trace the exception if it isn't rethrown.
+    // Alert the exception if it isn't rethrown.
 
     if ( m_exception && ! m_exceptionHandled )
     {
-        CARAMEL_TRACE_WARN( "Task \"{0}\" throws:\n{1}", m_name, m_exception.TracingMessage() );
+        CARAMEL_ALERT( "Task[{0}] throws:\n{1}", m_name, m_exception.TracingMessage() );
     }
 }
 
@@ -449,8 +449,7 @@ void TaskTimerImpl::MakeAndSubmitTask( WorkFunction f )
         auto xc = CatchException( f );
         if ( xc )
         {
-            CARAMEL_TRACE_WARN( "TaskTimer[{0}] throws:\n{1}",
-                                thiz->m_name, xc.TracingMessage() );
+            CARAMEL_ALERT( "TaskTimer[{0}] throws:\n{1}", thiz->m_name, xc.TracingMessage() );
         }
 
         thiz->MakeAndSubmitTask( f );
@@ -684,7 +683,7 @@ void WorkerThreadImpl::Execute()
 
     if ( ! m_delayTasks.IsEmpty() && ! m_readyTasks.IsEmpty() )
     {
-        CARAMEL_TRACE_WARN( "WorkerThread[{0}] discards some tasks", m_name );
+        TraceWarn( "WorkerThread[{0}] discards some tasks", m_name );
     }
 }
 
@@ -864,7 +863,7 @@ void ThreadPoolImpl::AddReadyTask( TaskCore& task )
 
     if ( m_shutdown )
     {
-        CARAMEL_TRACE_WARN( "ThreadPool[{0}] discard Task[{1}]", m_name, task.Name() );
+        TraceWarn( "ThreadPool[{0}] discard Task[{1}]", m_name, task.Name() );
         return;
     }
 

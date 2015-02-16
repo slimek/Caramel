@@ -32,7 +32,7 @@ void DebugManager::UpdateTiming( Uint id, const Ticks& elapsed )
 
 void DebugManager::ReportTimingToTrace()
 {
-    CARAMEL_TRACE_DEBUG( "<Timing Report>" );
+    TraceDebug( "<Timing Report>" );
 
     for ( Uint i = 0; i < NUM_TIMINGS; ++ i )
     {
@@ -42,7 +42,7 @@ void DebugManager::ReportTimingToTrace()
 
         const Uint32 total = static_cast< Uint32 >( m_timings[i].total );
 
-        CARAMEL_TRACE_DEBUG( "[{0}] : {1} ms / {2}", i, total, count );
+        TraceDebug( "[{0}] : {1} ms / {2}", i, total, count );
     }
 }
 
