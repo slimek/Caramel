@@ -8,9 +8,6 @@
 #include <Caramel/String/Utf8String.h>
 
 
-#if defined( CARAMEL_SYSTEM_IS_WINDOWS )
-
-
 namespace Caramel
 {
 
@@ -61,8 +58,5 @@ private:
 } // namespace Windows
 
 } // namespace Caramel
-
-
-#endif // CARAMEL_SYSTEM_IS_WINDOWS
 
 #endif // __CARAMEL_WINDOWS_REGISTRY_H

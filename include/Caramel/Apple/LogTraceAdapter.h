@@ -5,10 +5,6 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
-
-
-#if defined( CARAMEL_SYSTEM_OF_APPLE )
-
 #include <Caramel/Trace/Listeners.h>
 
 
@@ -38,7 +34,5 @@ public:
 } // namespace Apple
 
 } // namespace Caramel
-
-#endif // CARAMEL_SYSTEM_OF_APPLE
 
 #endif // __CARAMEL_APPLE_LOG_TRACE_ADAPTER_H

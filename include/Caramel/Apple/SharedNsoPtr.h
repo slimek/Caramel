@@ -7,9 +7,6 @@
 #include <Caramel/Setup/CaramelDefs.h>
 
 
-#if defined( CARAMEL_SYSTEM_OF_APPLE )
-
-
 namespace Caramel
 {
 
@@ -107,7 +104,5 @@ inline SharedNsoPtr< T >::~SharedNsoPtr< T >()
 } // namespace Apple
 
 } // namespace Caramel
-
-#endif // CARAMEL_SYSTEM_OF_APPLE
 
 #endif // __CARAMEL_APPLE_SHARED_NSO_PTR_H

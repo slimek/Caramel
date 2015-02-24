@@ -5,10 +5,6 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
-
-
-#if defined( CARAMEL_SYSTEM_IS_WINDOWS )
-
 #include <Caramel/String/TextEncoding.h>
 
 
@@ -56,7 +52,5 @@ private:
 } // namespace Windows
 
 } // namespace Caramel
-
-#endif // CARAMEL_SYSTEM_IS_WINDOWS
 
 #endif // __CARAMEL_WINDOWS_WIDE_STRING_H

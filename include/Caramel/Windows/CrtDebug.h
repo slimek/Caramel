@@ -7,9 +7,6 @@
 #include <Caramel/Setup/CaramelDefs.h>
 
 
-#if defined( CARAMEL_SYSTEM_IS_WINDOWS )
-
-
 namespace Caramel
 {
 
@@ -29,7 +26,5 @@ void EnableMemoryLeakCheckAtExit();
 } // namespace Windows
 
 } // namespace Caramel
-
-#endif // CARAMEL_SYSTEM_IS_WINDOWS
 
 #endif // __CARAMEL_WINDOWS_CRT_DEBUG_H

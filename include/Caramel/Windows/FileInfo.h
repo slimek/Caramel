@@ -5,10 +5,6 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
-
-
-#if defined( CARAMEL_SYSTEM_IS_WINDOWS )
-
 #include <Caramel/FileSystem/FileInfo.h>
 
 
@@ -48,7 +44,5 @@ public:
 } // namespace Windows
 
 } // namespace Caramel
-
-#endif // CARAMEL_SYSTEM_IS_WINDOWS
 
 #endif // __CARAMEL_WINDOWS_FILE_INFO_H
