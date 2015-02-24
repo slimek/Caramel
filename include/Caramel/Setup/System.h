@@ -18,6 +18,8 @@
 #define CARAMEL_SYSTEM_IS_WINDOWS
 #define CARAMEL_SYSTEM_NAME "Windows"
 
+#define CARAEML_SYSTEM_OF_DESKTOP
+
 #if defined( _WIN64 )
 #define CARAMEL_SYSTEM_IS_64_BIT
 #endif
@@ -63,6 +65,8 @@
 
 #define CARAMEL_SYSTEM_IS_OSX
 #define CARAMEL_SYSTEM_NAME "OS X"
+
+#define CARAMEL_SYSTEM_OF_DESKTOP
 
 #endif
 
