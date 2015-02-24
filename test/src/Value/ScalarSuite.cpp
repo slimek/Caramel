@@ -97,8 +97,8 @@ TEST( ScalarIntTest )
     CHECK( "-1"   == *sin1.AsString() );
 
     // not convertible
-    CHECK( false == sin1.AsUint() );
-    CHECK( false == sin1.AsUint64() );
+    CHECK( ! sin1.AsUint() );
+    CHECK( ! sin1.AsUint64() );
 }
 
 
@@ -132,8 +132,8 @@ TEST( ScalarUintTest )
     CHECK( "4294967295"  == *sux.AsString() );
 
     // not convertible
-    CHECK( false == sux.AsInt() );
-    CHECK( false == sux.AsFloat() );
+    CHECK( ! sux.AsInt() );
+    CHECK( ! sux.AsFloat() );
 }
 
 
@@ -159,9 +159,9 @@ TEST( ScalarInt64Test )
     CHECK( "10000000000"  == *sib.AsString() );
 
     // not convertible
-    CHECK( false == sib.AsInt() );
-    CHECK( false == sib.AsUint() );
-    CHECK( false == sib.AsFloat() );
+    CHECK( ! sib.AsInt() );
+    CHECK( ! sib.AsUint() );
+    CHECK( ! sib.AsFloat() );
 }
 
 
@@ -186,10 +186,10 @@ TEST( ScalarUint64Test )
     CHECK( "100200300400500600"  == *sub.AsString() );
 
     // not convertible
-    CHECK( false == sub.AsInt() );
-    CHECK( false == sub.AsUint() );
-    CHECK( false == sub.AsFloat() );
-    CHECK( false == sub.AsDouble() );
+    CHECK( ! sub.AsInt() );
+    CHECK( ! sub.AsUint() );
+    CHECK( ! sub.AsFloat() );
+    CHECK( ! sub.AsDouble() );
 }
 
 
@@ -222,10 +222,10 @@ TEST( ScalarFloatTest )
     CHECK( "0"    == *sf0.AsString() );
 
     // Convert from floating to interger is not allowed
-    CHECK( false == sf0.AsInt() );
-    CHECK( false == sf0.AsUint() );
-    CHECK( false == sf0.AsInt64() );
-    CHECK( false == sf0.AsUint64() );
+    CHECK( ! sf0.AsInt() );
+    CHECK( ! sf0.AsUint() );
+    CHECK( ! sf0.AsInt64() );
+    CHECK( ! sf0.AsUint64() );
 }
 
 
@@ -239,10 +239,10 @@ TEST( ScalarDoubleTest )
     CHECK( "0"    == *sd0.AsString() );
 
     // Convert from floating to interger is not allowed
-    CHECK( false == sd0.AsInt() );
-    CHECK( false == sd0.AsUint() );
-    CHECK( false == sd0.AsInt64() );
-    CHECK( false == sd0.AsUint64() );
+    CHECK( ! sd0.AsInt() );
+    CHECK( ! sd0.AsUint() );
+    CHECK( ! sd0.AsInt64() );
+    CHECK( ! sd0.AsUint64() );
 }
 
 
@@ -282,13 +282,13 @@ TEST( ScalarStrintConvertTest )
 
     const Scalar sbad( "bad" );
 
-    CHECK( false == static_cast< Bool >( sbad.AsBool() ));
-    CHECK( false == sbad.AsInt() );
-    CHECK( false == sbad.AsUint() );
-    CHECK( false == sbad.AsInt64() );
-    CHECK( false == sbad.AsUint64() );
-    CHECK( false == sbad.AsFloat() );
-    CHECK( false == sbad.AsDouble() );
+    CHECK( ! static_cast< Bool >( sbad.AsBool() ));
+    CHECK( ! sbad.AsInt() );
+    CHECK( ! sbad.AsUint() );
+    CHECK( ! sbad.AsInt64() );
+    CHECK( ! sbad.AsUint64() );
+    CHECK( ! sbad.AsFloat() );
+    CHECK( ! sbad.AsDouble() );
 
 
     /// Boolean ///
@@ -335,9 +335,14 @@ TEST( ScalarStrintConvertTest )
     CHECK( 16777215   == *swhite.AsUint64() );
     CHECK( "0xFFFFFF" == *swhite.AsString() );  // keep the original string
 
-    // Not convertible - Lexical.Floating doesn't accept hexidecimal format.
-    CHECK( false == swhite.AsFloat() );
-    CHECK( false == swhite.AsDouble() );
+    #if defined( CARAMEL_COMPILER_IS_MSVC )
+    // Not convertible - VC 2013 strtof/strtod() don't support hexidecimal format.
+    CHECK( ! swhite.AsFloat() );
+    CHECK( ! swhite.AsDouble() );
+    #else
+    CHECK( 16777215.0f == *swhite.AsFloat() );
+    CHECK( 16777215.0  == *swhite.AsDouble() );
+    #endif
 
 
     /// Floating ///
@@ -350,11 +355,11 @@ TEST( ScalarStrintConvertTest )
 
     // Not convertible
     // - Lexical.Boolean and Integer don't accept floating format.
-    CHECK( false == static_cast< Bool >( spai.AsBool() ));
-    CHECK( false == spai.AsInt() );
-    CHECK( false == spai.AsUint() );
-    CHECK( false == spai.AsInt64() );
-    CHECK( false == spai.AsUint64() );
+    CHECK( ! static_cast< Bool >( spai.AsBool() ));
+    CHECK( ! spai.AsInt() );
+    CHECK( ! spai.AsUint() );
+    CHECK( ! spai.AsInt64() );
+    CHECK( ! spai.AsUint64() );
 }
 
 
