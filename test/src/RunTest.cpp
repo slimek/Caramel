@@ -87,7 +87,7 @@ namespace Caramel
 {
 
 AssetReader::AssetReader( const std::string& fileName )
-    : m_file( Path( "..\\assets" ) / fileName )
+    : m_file( Path( "../assets" ) / fileName )
     , m_reader( m_file )
 {}
 

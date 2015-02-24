@@ -19,7 +19,7 @@ namespace Caramel
 // - A text reader which read data from files in assets directory.
 //
 
-#if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+#if defined( CARAMEL_SYSTEM_OF_DESKTOP )
 
 class AssetReader : public TextReader
 {

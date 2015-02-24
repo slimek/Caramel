@@ -16,9 +16,9 @@ namespace Caramel
 // Writable Path
 //
 
-#if defined( CARAMEL_SYSTEM_IS_WINDOWS )
+#if defined( CARAMEL_SYSTEM_OF_DESKTOP )
 
-// Windows: working directory
+// Desktop: working directory
 inline Path WritablePath()
 {
     return DirectoryInfo::Current().GetPath();
