@@ -199,8 +199,6 @@
 		6A23F6F61849A1B800FD4293 /* NamedValueEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A23F6C71849A1B800FD4293 /* NamedValueEntry.h */; };
 		6A23F6F71849A1B800FD4293 /* NamedValuesImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A23F6C81849A1B800FD4293 /* NamedValuesImpl.h */; };
 		6A23F6F81849A1B800FD4293 /* Value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A23F6C91849A1B800FD4293 /* Value.cpp */; };
-		6A23F6F91849A1B800FD4293 /* Windows.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A23F6CA1849A1B800FD4293 /* Windows.cpp */; };
-		6AC73137188D661C00188F23 /* Android.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AC73136188D661C00188F23 /* Android.cpp */; };
 		6AC73139188D668700188F23 /* Apple.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6AC73138188D668700188F23 /* Apple.mm */; };
 /* End PBXBuildFile section */
 
@@ -1307,12 +1305,10 @@
 				6A23F6F81849A1B800FD4293 /* Value.cpp in Sources */,
 				6A23F6D61849A1B800FD4293 /* Document.cpp in Sources */,
 				6A23F6D91849A1B800FD4293 /* FileSystem.cpp in Sources */,
-				6AC73137188D661C00188F23 /* Android.cpp in Sources */,
 				6A23F6F21849A1B800FD4293 /* Thread.cpp in Sources */,
 				6A23F6ED1849A1B800FD4293 /* String.cpp in Sources */,
 				6A23F6DE1849A1B800FD4293 /* Lexical.cpp in Sources */,
 				6AC73139188D668700188F23 /* Apple.mm in Sources */,
-				6A23F6F91849A1B800FD4293 /* Windows.cpp in Sources */,
 				6A23F6D21849A1B800FD4293 /* Debug.cpp in Sources */,
 				6A23F6D01849A1B800FD4293 /* DateTime.cpp in Sources */,
 				6A23F6CB1849A1B800FD4293 /* CaramelPch.cpp in Sources */,
