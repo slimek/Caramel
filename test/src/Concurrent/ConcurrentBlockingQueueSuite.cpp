@@ -48,10 +48,7 @@ TEST( BlockingQueueBasicTest )
             iqueue.PulseAll();
         }));
 
-        iqueue.PopOrWaitFor( value, Ticks( 500 ));
-
-        cout << watch.Elapsed() << endl;
-
+        CHECK( false == iqueue.PopOrWaitFor( value, Ticks( 500 )));
         CHECK( Ticks( 200 ) > watch.Slice() );
 
 
