@@ -264,7 +264,7 @@ void OutputFileStream::Write( const Void* buffer, std::size_t size )
 {
     CARAMEL_ASSERT( m_file );
 
-    Usize written = fwrite( buffer, 1, size, m_file );
+    const auto written = fwrite( buffer, 1, size, m_file );
 
     if ( written != size )
     {

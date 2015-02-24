@@ -130,7 +130,7 @@ inline Uint BasicSet< SetT, ReplicateP >::Erase( const Key& k )
 {
     LockGuard lock( m_setMutex );
 
-    const Usize erased = m_set.erase( k );
+    const auto erased = m_set.erase( k );
 
     if ( 0 < erased )
     {

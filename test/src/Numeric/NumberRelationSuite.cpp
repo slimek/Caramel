@@ -11,11 +11,6 @@ namespace Caramel
 SUITE( NumberRelationSuite )
 {
 
-TEST( NumberRelationTest )
-{
-}
-
-
 // Default underline type : Int
 enum SpanishColor
 {

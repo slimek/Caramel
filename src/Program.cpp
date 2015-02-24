@@ -169,9 +169,9 @@ void ProgramOptionsManager::AddPositionalOptions( const std::vector< ProgramOpti
         CARAMEL_THROW( "Positional options can only be added once" );
     }
 
-    for ( Usize i = 0; i < options.size(); ++ i )
+    for ( const auto& option : options )
     {
-        m_positionalDesc.add( options[i].GetLongName().c_str(), 1 );
+        m_positionalDesc.add( option.GetLongName().c_str(), 1 );
     }
 
     m_positionalAdded = true;

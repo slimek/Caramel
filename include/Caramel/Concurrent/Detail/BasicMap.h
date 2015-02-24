@@ -152,7 +152,7 @@ inline Uint BasicMap< MapT, ReplicateP >::Erase( const Key& k )
 {
     LockGuard lock( m_mapMutex );
 
-    const Usize erased = m_map.erase( k );
+    const auto erased = m_map.erase( k );
 
     if ( 0 < erased )
     {

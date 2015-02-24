@@ -75,6 +75,26 @@ struct NumberRelation_Arithmetic< Uint32, Int32 >
 
 
 template<>
+struct NumberRelation_Arithmetic< Uint32, Long >
+{
+    static Bool CanExactConvert( Long value )
+    {
+        return 0 <= value && value <= UINT32_MAX;
+    }
+};
+
+
+template<>
+struct NumberRelation_Arithmetic< Uint32, Ulong >
+{
+    static Bool CanExactConvert( Ulong value )
+    {
+        return value <= UINT32_MAX;
+    }
+};
+
+
+template<>
 struct NumberRelation_Arithmetic< Uint32, Int64 >
 {
     static Bool CanExactConvert( Int64 value )

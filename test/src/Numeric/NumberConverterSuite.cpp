@@ -46,10 +46,22 @@ TEST( NumberConverterTest )
     CHECK( false == NCU3I6::TryExactConvert( u32, -1 ));
 
 
-    typedef NumberConverter< Uint32, Uint64 >NCU3U6;
+    typedef NumberConverter< Uint32, Uint64 > NCU3U6;
 
     CHECK( true == NCU3U6::TryExactConvert( u32, UINT32_MAX ));
     CHECK( UINT32_MAX == u32 );
+
+
+    typedef NumberConverter< Uint32, Long >  NCU3L;
+    typedef NumberConverter< Uint32, Ulong > NCU3UL;
+
+    #if defined( CARAMEL_LONG_IS_64_BIT )
+    CHECK( false == NCU3L::TryExactConvert( u32, LONG_MAX ));
+    CHECK( false == NCU3UL::TryExactConvert( u32, ULONG_MAX ));
+    #else
+    CHECK( true == NCU3L::TryExactConvert( u32, LONG_MAX ));
+    CHECK( true == NCU3UL::TryExactConvert( u32, ULONG_MAX ));
+    #endif
 }
 
 } // SUITE NumberConverterSuite

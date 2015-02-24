@@ -176,6 +176,7 @@
     <ClCompile Include="..\src\Value\NamedValuesSuite.cpp" />
     <ClCompile Include="..\src\Value\ScalarSuite.cpp" />
     <ClCompile Include="..\src\Value\SharedArraySuite.cpp" />
+    <ClCompile Include="..\src\Value\UsizeSuite.cpp" />
     <ClCompile Include="..\src\Windows\WindowsRegistrySuite.cpp" />
   </ItemGroup>
   <ItemGroup>
