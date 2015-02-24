@@ -28,6 +28,14 @@ TEST( StdAsyncTest )
     t2.Wait();
 
     CHECK( 42 == t2.GetResult() );
+
+
+    // Make sure that an async thread is not the current thread.
+
+    auto t3 = executor.Submit( "GetThreadId", [&] { return ThisThread::GetId(); });
+
+    CHECK( ThisThread::GetId() != t3.GetResult() );
+
 }
 
 
