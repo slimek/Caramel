@@ -54,12 +54,12 @@
 
 #include <TargetConditionals.h>
 
-#if defined( TARGET_OS_IPHONE ) || defined( TARGET_IPHONE_SIMULATOR )
+#if ( TARGET_OS_IPHONE == 1 ) || ( TARGET_IPHONE_SIMULATOR == 1 )
 
 #define CARAMEL_SYSTEM_IS_IOS
 #define CARAMEL_SYSTEM_NAME "iOS"
 
-#elif defined( TARGET_OS_MAC )
+#elif ( TARGET_OS_MAC == 1 )
 
 #define CARAMEL_SYSTEM_IS_OSX
 #define CARAMEL_SYSTEM_NAME "OS X"
