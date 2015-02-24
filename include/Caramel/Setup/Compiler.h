@@ -187,10 +187,20 @@
 #define CARAMEL_ARCH_IS_X86
 #define CARAMEL_ARCH_NAME "x86"
 
+#elif defined( __x86_64__ )
+
+#define CARAMEL_ARCH_IS_X86_64
+#define CARAMEL_ARCH_NAME "x86_64"
+
 #elif defined( __arm__ )
 
 #define CARAMEL_ARCH_IS_ARM
 #define CARAMEL_ARCH_NAME "arm"
+
+#elif defined( __arm64__ )
+
+#define CARAMEL_ARCH_IS_ARM64
+#define CARAMEL_ARCH_NAME "arm64"
 
 #endif
 
