@@ -4,7 +4,7 @@
 
 #include <Caramel/Chrono/TickClock.h>
 #include <Caramel/Concurrent/BlockingQueue.h>
-#include <Caramel/Task/StdAsync.h>
+#include <Caramel/Task/WorkerThread.h>
 #include <Caramel/Thread/ThisThread.h>
 
 
@@ -16,7 +16,7 @@ SUITE( ConcurrentBlockingQueueSuite )
 
 TEST( BlockingQueueBasicTest )
 {
-    StdAsync async;
+    WorkerThread worker( "BlockingQueue" );
 
     /// Int Queue ///
 
@@ -42,7 +42,7 @@ TEST( BlockingQueueBasicTest )
         
         // Pulse All
 
-        async.Submit( MakeTask( "PulseAll", [&]
+        worker.Submit( MakeTask( "PulseAll", [&]
         {
             ThisThread::SleepFor( Ticks( 100 ));
             iqueue.PulseAll();
@@ -50,12 +50,14 @@ TEST( BlockingQueueBasicTest )
 
         iqueue.PopOrWaitFor( value, Ticks( 500 ));
 
+        cout << watch.Elapsed() << endl;
+
         CHECK( Ticks( 200 ) > watch.Slice() );
 
 
         // Wait and Available
 
-        async.Submit( MakeTask( "WaitAndAvailable",
+        worker.Submit( MakeTask( "WaitAndAvailable",
         [&]
         {
             ThisThread::SleepFor( Ticks( 100 ));
@@ -71,7 +73,7 @@ TEST( BlockingQueueBasicTest )
 
         // Complete
 
-        async.Submit( MakeTask( "Complete",
+        worker.Submit( MakeTask( "Complete",
         [&]
         {
             ThisThread::SleepFor( Ticks( 100 ));
@@ -105,6 +107,11 @@ TEST( BlockingQueueBasicTest )
         CHECK( "Alice" == value );
         CHECK( false   == squeue.PopOrWaitFor( value, Ticks( 10 )));
     }
+    
+    
+    /// Finalization ///
+    
+    worker.Stop();
 }
 
 
