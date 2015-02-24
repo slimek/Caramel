@@ -57,7 +57,6 @@
 		0150AA0E1990E5B20037F11B /* StateMachineSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9BE1990E5B20037F11B /* StateMachineSuite.cpp */; };
 		0150AA0F1990E5B20037F11B /* FormatSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9C01990E5B20037F11B /* FormatSuite.cpp */; };
 		0150AA101990E5B20037F11B /* SplitSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9C11990E5B20037F11B /* SplitSuite.cpp */; };
-		0150AA111990E5B20037F11B /* SprintfSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9C21990E5B20037F11B /* SprintfSuite.cpp */; };
 		0150AA121990E5B20037F11B /* StringAlgorithmSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9C31990E5B20037F11B /* StringAlgorithmSuite.cpp */; };
 		0150AA131990E5B20037F11B /* StringToStringSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9C41990E5B20037F11B /* StringToStringSuite.cpp */; };
 		0150AA141990E5B20037F11B /* Utf8StringSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9C51990E5B20037F11B /* Utf8StringSuite.cpp */; };
@@ -78,6 +77,17 @@
 		0150AA231990E5B20037F11B /* NamedValuesSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9DB1990E5B20037F11B /* NamedValuesSuite.cpp */; };
 		0150AA241990E5B20037F11B /* SharedArraySuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9DC1990E5B20037F11B /* SharedArraySuite.cpp */; };
 		0155AB69199C92B100B78527 /* PromptStateMachineSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0155AB68199C92B100B78527 /* PromptStateMachineSuite.cpp */; };
+		01B6B8361A9C267300404118 /* TryCatchResultSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01B6B8351A9C267300404118 /* TryCatchResultSuite.cpp */; };
+		01B6B8381A9C268900404118 /* InputMemoryStreamSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01B6B8371A9C268900404118 /* InputMemoryStreamSuite.cpp */; };
+		01B6B83A1A9C269A00404118 /* LexicalVersionSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01B6B8391A9C269A00404118 /* LexicalVersionSuite.cpp */; };
+		01B6B83C1A9C26A900404118 /* MetaRangeSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01B6B83B1A9C26A900404118 /* MetaRangeSuite.cpp */; };
+		01B6B83F1A9C26BA00404118 /* NumberConverterSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01B6B83D1A9C26BA00404118 /* NumberConverterSuite.cpp */; };
+		01B6B8401A9C26BA00404118 /* NumberRelationSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01B6B83E1A9C26BA00404118 /* NumberRelationSuite.cpp */; };
+		01B6B8421A9C26CE00404118 /* StringConvertibleSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01B6B8411A9C26CE00404118 /* StringConvertibleSuite.cpp */; };
+		01B6B8441A9C26E400404118 /* TaskTimerSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01B6B8431A9C26E400404118 /* TaskTimerSuite.cpp */; };
+		01B6B8461A9C270D00404118 /* LockGuardSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01B6B8451A9C270D00404118 /* LockGuardSuite.cpp */; };
+		01B6B84C1A9C273B00404118 /* EnumFlagsSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01B6B84A1A9C273B00404118 /* EnumFlagsSuite.cpp */; };
+		01B6B84D1A9C273B00404118 /* ScalarSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01B6B84B1A9C273B00404118 /* ScalarSuite.cpp */; };
 		6AAF38F11849D3B00010FAF1 /* libCaramel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AAF38F01849D3940010FAF1 /* libCaramel.a */; };
 /* End PBXBuildFile section */
 
@@ -134,8 +144,6 @@
 		0150A99C1990E5B20037F11B /* TimeOfDaySuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimeOfDaySuite.cpp; sourceTree = "<group>"; };
 		0150A99D1990E5B20037F11B /* TimeSpanSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimeSpanSuite.cpp; sourceTree = "<group>"; };
 		0150A99F1990E5B20037F11B /* IniDocumentSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IniDocumentSuite.cpp; sourceTree = "<group>"; };
-		0150A9A01990E5B20037F11B /* test1.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test1.ini; sourceTree = "<group>"; };
-		0150A9A11990E5B20037F11B /* test2.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test2.ini; sourceTree = "<group>"; };
 		0150A9A31990E5B20037F11B /* AlertSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AlertSuite.cpp; sourceTree = "<group>"; };
 		0150A9A41990E5B20037F11B /* AnyFailureSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnyFailureSuite.cpp; sourceTree = "<group>"; };
 		0150A9A51990E5B20037F11B /* CatchExceptionSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CatchExceptionSuite.cpp; sourceTree = "<group>"; };
@@ -157,7 +165,6 @@
 		0150A9BE1990E5B20037F11B /* StateMachineSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StateMachineSuite.cpp; sourceTree = "<group>"; };
 		0150A9C01990E5B20037F11B /* FormatSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FormatSuite.cpp; sourceTree = "<group>"; };
 		0150A9C11990E5B20037F11B /* SplitSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SplitSuite.cpp; sourceTree = "<group>"; };
-		0150A9C21990E5B20037F11B /* SprintfSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SprintfSuite.cpp; sourceTree = "<group>"; };
 		0150A9C31990E5B20037F11B /* StringAlgorithmSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StringAlgorithmSuite.cpp; sourceTree = "<group>"; };
 		0150A9C41990E5B20037F11B /* StringToStringSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StringToStringSuite.cpp; sourceTree = "<group>"; };
 		0150A9C51990E5B20037F11B /* Utf8StringSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utf8StringSuite.cpp; sourceTree = "<group>"; };
@@ -181,6 +188,24 @@
 		0150A9DC1990E5B20037F11B /* SharedArraySuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SharedArraySuite.cpp; sourceTree = "<group>"; };
 		0155AB68199C92B100B78527 /* PromptStateMachineSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PromptStateMachineSuite.cpp; sourceTree = "<group>"; };
 		0155AB6A199C92CF00B78527 /* CaramelTest-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CaramelTest-Prefix.pch"; sourceTree = "<group>"; };
+		01B6B8311A9C242000404118 /* items.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = items.ini; sourceTree = "<group>"; };
+		01B6B8321A9C242000404118 /* test1.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test1.ini; sourceTree = "<group>"; };
+		01B6B8331A9C242000404118 /* test2.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test2.ini; sourceTree = "<group>"; };
+		01B6B8341A9C242000404118 /* values.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = values.ini; sourceTree = "<group>"; };
+		01B6B8351A9C267300404118 /* TryCatchResultSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TryCatchResultSuite.cpp; sourceTree = "<group>"; };
+		01B6B8371A9C268900404118 /* InputMemoryStreamSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputMemoryStreamSuite.cpp; sourceTree = "<group>"; };
+		01B6B8391A9C269A00404118 /* LexicalVersionSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LexicalVersionSuite.cpp; sourceTree = "<group>"; };
+		01B6B83B1A9C26A900404118 /* MetaRangeSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MetaRangeSuite.cpp; sourceTree = "<group>"; };
+		01B6B83D1A9C26BA00404118 /* NumberConverterSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NumberConverterSuite.cpp; sourceTree = "<group>"; };
+		01B6B83E1A9C26BA00404118 /* NumberRelationSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NumberRelationSuite.cpp; sourceTree = "<group>"; };
+		01B6B8411A9C26CE00404118 /* StringConvertibleSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StringConvertibleSuite.cpp; sourceTree = "<group>"; };
+		01B6B8431A9C26E400404118 /* TaskTimerSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TaskTimerSuite.cpp; sourceTree = "<group>"; };
+		01B6B8451A9C270D00404118 /* LockGuardSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LockGuardSuite.cpp; sourceTree = "<group>"; };
+		01B6B8471A9C272700404118 /* AssetReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetReader.h; sourceTree = "<group>"; };
+		01B6B8481A9C272700404118 /* Matcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matcher.h; sourceTree = "<group>"; };
+		01B6B8491A9C272700404118 /* WritablePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WritablePath.h; sourceTree = "<group>"; };
+		01B6B84A1A9C273B00404118 /* EnumFlagsSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EnumFlagsSuite.cpp; sourceTree = "<group>"; };
+		01B6B84B1A9C273B00404118 /* ScalarSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScalarSuite.cpp; sourceTree = "<group>"; };
 		6A706EBB184985D3004C9602 /* CaramelTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CaramelTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AAF38EB1849D3930010FAF1 /* Caramel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Caramel.xcodeproj; path = ../../proj.mac/Caramel.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -304,8 +329,6 @@
 			isa = PBXGroup;
 			children = (
 				0150A99F1990E5B20037F11B /* IniDocumentSuite.cpp */,
-				0150A9A01990E5B20037F11B /* test1.ini */,
-				0150A9A11990E5B20037F11B /* test2.ini */,
 			);
 			path = Document;
 			sourceTree = "<group>";
@@ -313,6 +336,7 @@
 		0150A9A21990E5B20037F11B /* Error */ = {
 			isa = PBXGroup;
 			children = (
+				01B6B8351A9C267300404118 /* TryCatchResultSuite.cpp */,
 				0150A9A31990E5B20037F11B /* AlertSuite.cpp */,
 				0150A9A41990E5B20037F11B /* AnyFailureSuite.cpp */,
 				0150A9A51990E5B20037F11B /* CatchExceptionSuite.cpp */,
@@ -341,6 +365,7 @@
 		0150A9AC1990E5B20037F11B /* Io */ = {
 			isa = PBXGroup;
 			children = (
+				01B6B8371A9C268900404118 /* InputMemoryStreamSuite.cpp */,
 				0150A9AD1990E5B20037F11B /* TextStreamWriterSuite.cpp */,
 			);
 			path = Io;
@@ -349,6 +374,7 @@
 		0150A9AE1990E5B20037F11B /* Lexical */ = {
 			isa = PBXGroup;
 			children = (
+				01B6B8391A9C269A00404118 /* LexicalVersionSuite.cpp */,
 				0150A9AF1990E5B20037F11B /* LexicalBooleanSuite.cpp */,
 				0150A9B01990E5B20037F11B /* LexicalFloatingSuite.cpp */,
 				0150A9B11990E5B20037F11B /* LexicalIntegerSuite.cpp */,
@@ -367,6 +393,7 @@
 		0150A9B41990E5B20037F11B /* Meta */ = {
 			isa = PBXGroup;
 			children = (
+				01B6B83B1A9C26A900404118 /* MetaRangeSuite.cpp */,
 				0150A9B51990E5B20037F11B /* IsGeneralStringSuite.cpp */,
 			);
 			path = Meta;
@@ -375,6 +402,8 @@
 		0150A9B61990E5B20037F11B /* Numeric */ = {
 			isa = PBXGroup;
 			children = (
+				01B6B83D1A9C26BA00404118 /* NumberConverterSuite.cpp */,
+				01B6B83E1A9C26BA00404118 /* NumberRelationSuite.cpp */,
 				0150A9B71990E5B20037F11B /* NumberTraitsSuite.cpp */,
 				0150A9B81990E5B20037F11B /* UnionBitsSuite.cpp */,
 			);
@@ -402,9 +431,9 @@
 		0150A9BF1990E5B20037F11B /* String */ = {
 			isa = PBXGroup;
 			children = (
+				01B6B8411A9C26CE00404118 /* StringConvertibleSuite.cpp */,
 				0150A9C01990E5B20037F11B /* FormatSuite.cpp */,
 				0150A9C11990E5B20037F11B /* SplitSuite.cpp */,
-				0150A9C21990E5B20037F11B /* SprintfSuite.cpp */,
 				0150A9C31990E5B20037F11B /* StringAlgorithmSuite.cpp */,
 				0150A9C41990E5B20037F11B /* StringToStringSuite.cpp */,
 				0150A9C51990E5B20037F11B /* Utf8StringSuite.cpp */,
@@ -415,6 +444,7 @@
 		0150A9C61990E5B20037F11B /* Task */ = {
 			isa = PBXGroup;
 			children = (
+				01B6B8431A9C26E400404118 /* TaskTimerSuite.cpp */,
 				0150A9C71990E5B20037F11B /* ContinuationTraitsSuite.cpp */,
 				0150A9C81990E5B20037F11B /* StdAsyncSuite.cpp */,
 				0150A9C91990E5B20037F11B /* TaskPollerSuite.cpp */,
@@ -429,6 +459,7 @@
 		0150A9CE1990E5B20037F11B /* Thread */ = {
 			isa = PBXGroup;
 			children = (
+				01B6B8451A9C270D00404118 /* LockGuardSuite.cpp */,
 				0150A9CF1990E5B20037F11B /* LoopThreadGroupSuite.cpp */,
 				0150A9D01990E5B20037F11B /* SpinMutexSuite.cpp */,
 				0150A9D11990E5B20037F11B /* ThreadSuite.cpp */,
@@ -449,6 +480,9 @@
 		0150A9D61990E5B20037F11B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				01B6B8471A9C272700404118 /* AssetReader.h */,
+				01B6B8481A9C272700404118 /* Matcher.h */,
+				01B6B8491A9C272700404118 /* WritablePath.h */,
 				0150A9D71990E5B20037F11B /* SharedArrayUtils.h */,
 				0150A9D81990E5B20037F11B /* StdVectorUtils.h */,
 			);
@@ -458,6 +492,8 @@
 		0150A9D91990E5B20037F11B /* Value */ = {
 			isa = PBXGroup;
 			children = (
+				01B6B84A1A9C273B00404118 /* EnumFlagsSuite.cpp */,
+				01B6B84B1A9C273B00404118 /* ScalarSuite.cpp */,
 				0150A9DA1990E5B20037F11B /* AnySuite.cpp */,
 				0150A9DB1990E5B20037F11B /* NamedValuesSuite.cpp */,
 				0150A9DC1990E5B20037F11B /* SharedArraySuite.cpp */,
@@ -473,9 +509,22 @@
 			name = proj.mac;
 			sourceTree = "<group>";
 		};
+		01B6B8301A9C242000404118 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				01B6B8311A9C242000404118 /* items.ini */,
+				01B6B8321A9C242000404118 /* test1.ini */,
+				01B6B8331A9C242000404118 /* test2.ini */,
+				01B6B8341A9C242000404118 /* values.ini */,
+			);
+			name = assets;
+			path = ../assets;
+			sourceTree = "<group>";
+		};
 		6A706E681849853D004C9602 = {
 			isa = PBXGroup;
 			children = (
+				01B6B8301A9C242000404118 /* assets */,
 				0150A97A1990E5B20037F11B /* src */,
 				0155AB66199C915F00B78527 /* proj.mac */,
 				6AAF38EB1849D3930010FAF1 /* Caramel.xcodeproj */,
@@ -560,19 +609,24 @@
 			files = (
 				0150AA1C1990E5B20037F11B /* LoopThreadGroupSuite.cpp in Sources */,
 				0150A9FB1990E5B20037F11B /* IniDocumentSuite.cpp in Sources */,
+				01B6B8381A9C268900404118 /* InputMemoryStreamSuite.cpp in Sources */,
 				0150AA051990E5B20037F11B /* LexicalFloatingSuite.cpp in Sources */,
 				0155AB69199C92B100B78527 /* PromptStateMachineSuite.cpp in Sources */,
 				0150AA061990E5B20037F11B /* LexicalIntegerSuite.cpp in Sources */,
 				0150A9E41990E5B20037F11B /* AnyEventSlotSuite.cpp in Sources */,
 				0150A9FA1990E5B20037F11B /* TimeSpanSuite.cpp in Sources */,
 				0150AA121990E5B20037F11B /* StringAlgorithmSuite.cpp in Sources */,
+				01B6B83A1A9C269A00404118 /* LexicalVersionSuite.cpp in Sources */,
 				0150AA0C1990E5B20037F11B /* WeightedRandomMapSuite.cpp in Sources */,
 				0150A9E31990E5B20037F11B /* AnyEventQueueSuite.cpp in Sources */,
 				0150AA081990E5B20037F11B /* IsGeneralStringSuite.cpp in Sources */,
 				0150A9FE1990E5B20037F11B /* CatchExceptionSuite.cpp in Sources */,
 				0150A9E01990E5B20037F11B /* PowerOfTwoSuite.cpp in Sources */,
+				01B6B84C1A9C273B00404118 /* EnumFlagsSuite.cpp in Sources */,
 				0150A9EA1990E5B20037F11B /* SecondClockSuite.cpp in Sources */,
 				0150A9E91990E5B20037F11B /* ClockProxySuite.cpp in Sources */,
+				01B6B8401A9C26BA00404118 /* NumberRelationSuite.cpp in Sources */,
+				01B6B83C1A9C26A900404118 /* MetaRangeSuite.cpp in Sources */,
 				0150A9F41990E5B20037F11B /* Base64Suite.cpp in Sources */,
 				0150A9FF1990E5B20037F11B /* ExceptionPtrSuite.cpp in Sources */,
 				0150AA231990E5B20037F11B /* NamedValuesSuite.cpp in Sources */,
@@ -581,6 +635,7 @@
 				0150AA101990E5B20037F11B /* SplitSuite.cpp in Sources */,
 				0150A9F61990E5B20037F11B /* DateSuite.cpp in Sources */,
 				0150A9E81990E5B20037F11B /* CaramelTestPch.cpp in Sources */,
+				01B6B8441A9C26E400404118 /* TaskTimerSuite.cpp in Sources */,
 				0150AA071990E5B20037F11B /* SharedPtrUtilsSuite.cpp in Sources */,
 				0150AA141990E5B20037F11B /* Utf8StringSuite.cpp in Sources */,
 				0150AA1A1990E5B20037F11B /* WhenAllSuite.cpp in Sources */,
@@ -591,11 +646,12 @@
 				0150AA041990E5B20037F11B /* LexicalBooleanSuite.cpp in Sources */,
 				0150A9EF1990E5B20037F11B /* ConcurrentMapSuite.cpp in Sources */,
 				0150A9F71990E5B20037F11B /* DateTimeBoolSuite.cpp in Sources */,
-				0150AA111990E5B20037F11B /* SprintfSuite.cpp in Sources */,
 				0150AA0F1990E5B20037F11B /* FormatSuite.cpp in Sources */,
 				0150A9DF1990E5B20037F11B /* FlagsSuite.cpp in Sources */,
 				0150A9E11990E5B20037F11B /* AnyEventDispatcherSuite.cpp in Sources */,
 				0150AA1E1990E5B20037F11B /* ThreadSuite.cpp in Sources */,
+				01B6B8461A9C270D00404118 /* LockGuardSuite.cpp in Sources */,
+				01B6B8361A9C267300404118 /* TryCatchResultSuite.cpp in Sources */,
 				0150A9ED1990E5B20037F11B /* ConcurrentBlockingQueueSuite.cpp in Sources */,
 				0150A9F51990E5B20037F11B /* LookupTableSuite.cpp in Sources */,
 				0150AA241990E5B20037F11B /* SharedArraySuite.cpp in Sources */,
@@ -607,14 +663,17 @@
 				0150A9F91990E5B20037F11B /* TimeOfDaySuite.cpp in Sources */,
 				0150AA191990E5B20037F11B /* ThreadPoolSuite.cpp in Sources */,
 				0150AA131990E5B20037F11B /* StringToStringSuite.cpp in Sources */,
+				01B6B8421A9C26CE00404118 /* StringConvertibleSuite.cpp in Sources */,
 				0150A9FD1990E5B20037F11B /* AnyFailureSuite.cpp in Sources */,
 				0150AA0B1990E5B20037F11B /* UniformRandomSuite.cpp in Sources */,
 				0150AA021990E5B20037F11B /* BindSuite.cpp in Sources */,
 				0150A9E71990E5B20037F11B /* ValueChangeSuite.cpp in Sources */,
 				0150AA091990E5B20037F11B /* NumberTraitsSuite.cpp in Sources */,
+				01B6B84D1A9C273B00404118 /* ScalarSuite.cpp in Sources */,
 				0150A9E21990E5B20037F11B /* AnyEventHandlerSuite.cpp in Sources */,
 				0150AA171990E5B20037F11B /* TaskPollerSuite.cpp in Sources */,
 				0150A9EC1990E5B20037F11B /* TimedBoolSuite.cpp in Sources */,
+				01B6B83F1A9C26BA00404118 /* NumberConverterSuite.cpp in Sources */,
 				0150AA0E1990E5B20037F11B /* StateMachineSuite.cpp in Sources */,
 				0150A9EB1990E5B20037F11B /* TickClockSuite.cpp in Sources */,
 				0150AA0A1990E5B20037F11B /* UnionBitsSuite.cpp in Sources */,
