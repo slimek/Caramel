@@ -20,6 +20,7 @@ namespace Caramel
 //
 // String Convertible
 // - Provides an adapter from a custom type to std::string.
+//   The derived type must have a member function ToString() which returns a std::string.
 //
 
 template< typename Derived >
