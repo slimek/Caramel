@@ -113,9 +113,7 @@
 		0103561B1991C00600F61887 /* Formatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 0103557D1991C00600F61887 /* Formatter.h */; };
 		0103561C1991C00600F61887 /* SprintfParameter.h in Headers */ = {isa = PBXBuildFile; fileRef = 0103557E1991C00600F61887 /* SprintfParameter.h */; };
 		0103561D1991C00600F61887 /* Format.h in Headers */ = {isa = PBXBuildFile; fileRef = 0103557F1991C00600F61887 /* Format.h */; };
-		0103561E1991C00600F61887 /* Sprintf_Sprintf.h in Headers */ = {isa = PBXBuildFile; fileRef = 010355811991C00600F61887 /* Sprintf_Sprintf.h */; };
 		0103561F1991C00600F61887 /* Split.h in Headers */ = {isa = PBXBuildFile; fileRef = 010355821991C00600F61887 /* Split.h */; };
-		010356201991C00600F61887 /* Sprintf.h in Headers */ = {isa = PBXBuildFile; fileRef = 010355831991C00600F61887 /* Sprintf.h */; };
 		010356211991C00600F61887 /* StringConvertible.h in Headers */ = {isa = PBXBuildFile; fileRef = 010355841991C00600F61887 /* StringConvertible.h */; };
 		010356221991C00600F61887 /* TextEncoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 010355851991C00600F61887 /* TextEncoding.h */; };
 		010356231991C00600F61887 /* ToString.h in Headers */ = {isa = PBXBuildFile; fileRef = 010355861991C00600F61887 /* ToString.h */; };
@@ -309,9 +307,7 @@
 		0103557D1991C00600F61887 /* Formatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formatter.h; sourceTree = "<group>"; };
 		0103557E1991C00600F61887 /* SprintfParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SprintfParameter.h; sourceTree = "<group>"; };
 		0103557F1991C00600F61887 /* Format.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Format.h; sourceTree = "<group>"; };
-		010355811991C00600F61887 /* Sprintf_Sprintf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sprintf_Sprintf.h; sourceTree = "<group>"; };
 		010355821991C00600F61887 /* Split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Split.h; sourceTree = "<group>"; };
-		010355831991C00600F61887 /* Sprintf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sprintf.h; sourceTree = "<group>"; };
 		010355841991C00600F61887 /* StringConvertible.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringConvertible.h; sourceTree = "<group>"; };
 		010355851991C00600F61887 /* TextEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextEncoding.h; sourceTree = "<group>"; };
 		010355861991C00600F61887 /* ToString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToString.h; sourceTree = "<group>"; };
@@ -765,9 +761,7 @@
 				0103557B1991C00600F61887 /* CainLess.h */,
 				0103557C1991C00600F61887 /* Detail */,
 				0103557F1991C00600F61887 /* Format.h */,
-				010355801991C00600F61887 /* Inline */,
 				010355821991C00600F61887 /* Split.h */,
-				010355831991C00600F61887 /* Sprintf.h */,
 				010355841991C00600F61887 /* StringConvertible.h */,
 				010355851991C00600F61887 /* TextEncoding.h */,
 				010355861991C00600F61887 /* ToString.h */,
@@ -783,14 +777,6 @@
 				0103557E1991C00600F61887 /* SprintfParameter.h */,
 			);
 			path = Detail;
-			sourceTree = "<group>";
-		};
-		010355801991C00600F61887 /* Inline */ = {
-			isa = PBXGroup;
-			children = (
-				010355811991C00600F61887 /* Sprintf_Sprintf.h */,
-			);
-			path = Inline;
 			sourceTree = "<group>";
 		};
 		010355881991C00600F61887 /* Task */ = {
@@ -1158,7 +1144,6 @@
 				0103563C1991C00600F61887 /* Any.h in Headers */,
 				010356241991C00600F61887 /* Utf8String.h in Headers */,
 				010356231991C00600F61887 /* ToString.h in Headers */,
-				0103561E1991C00600F61887 /* Sprintf_Sprintf.h in Headers */,
 				010355DF1991C00600F61887 /* TimeOfDay.h in Headers */,
 				010355F51991C00600F61887 /* OutputStream.h in Headers */,
 				010355C21991C00600F61887 /* Stopwatch.h in Headers */,
@@ -1198,7 +1183,6 @@
 				010356181991C00600F61887 /* StateMachine.h in Headers */,
 				6A23F6EE1849A1B800FD4293 /* TaskImpl.h in Headers */,
 				0103562A1991C00600F61887 /* TaskExecutor.h in Headers */,
-				010356201991C00600F61887 /* Sprintf.h in Headers */,
 				010356421991C00600F61887 /* SharedArray.h in Headers */,
 				010355B51991C00600F61887 /* PowerOfTwo.h in Headers */,
 				010355C71991C00600F61887 /* BasicSet.h in Headers */,
