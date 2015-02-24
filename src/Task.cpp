@@ -960,7 +960,7 @@ void StdAsync::AddReadyTask( TaskCore& task )
 
 #else
 
-// NOTES: Until Android NDK r9b, std::future and std::async are not supported.
+// NOTES: Until Android NDK r10c, std::future and std::async are not supported.
 
 void StdAsync::AddReadyTask( TaskCore& task )
 {
