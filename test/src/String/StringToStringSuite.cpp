@@ -59,9 +59,16 @@ TEST( StringToStringTest )
 
         CHECK( "0" == ToString( lz ));
         CHECK( "0" == ToString( ulz ));
+        
+        #if defined( CARAMEL_LONG_IS_64_BIT )
+        CHECK( "-9223372036854775808" == ToString( lmin ));
+        CHECK(  "9223372036854775807" == ToString( lmax ));
+        CHECK( "18446744073709551615" == ToString( ulmax ));
+        #else
         CHECK( "-2147483648" == ToString( lmin ));
         CHECK( "2147483647"  == ToString( lmax ));
         CHECK( "4294967295"  == ToString( ulmax ));
+        #endif
     }
 
     /// Floatings ///
