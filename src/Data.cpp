@@ -28,7 +28,7 @@ namespace Caramel
 // Encoding
 //
 
-std::string Base64Encode( const Byte* data, Uint size )
+std::string Base64Encode( const Byte* data, std::size_t size )
 {
     CARAMEL_ASSERT( nullptr != data );
 
@@ -58,7 +58,7 @@ std::string Base64Encode( const Byte* data, Uint size )
 }
 
 
-std::string Base64Encode( const Void* data, Uint size )
+std::string Base64Encode( const Void* data, std::size_t size )
 {
     return Base64Encode( static_cast< const Byte* >( data ), size );
 }
@@ -110,8 +110,7 @@ Bool Base64Decode( const std::string& base64, SharedArray< Byte >& data )
 
     if ( ! result ) { return false; }
     
-    data = SharedArray< Byte >( buffer.length() );
-    std::copy( buffer.begin(), buffer.end(), data.begin() );
+    data = SharedArray< Byte >::CopyFrom( buffer );
 
     return true;
 }

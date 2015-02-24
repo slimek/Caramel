@@ -185,7 +185,7 @@ Uint InputFileStream::Read( Void* buffer, Uint size )
 {
     CARAMEL_ASSERT( m_file );
     
-    return fread( buffer, 1, size, m_file );
+    return static_cast< Uint >( fread( buffer, 1, size, m_file ));
 }
 
 
@@ -206,7 +206,7 @@ Uint InputFileStream::Tell() const
 {
     CARAMEL_ASSERT( m_file );
 
-    const Int result = ftell( m_file );
+    const auto result = ftell( m_file );
 
     if ( 0 > result )
     {
@@ -260,7 +260,7 @@ void OutputFileStream::Flush()
 }
 
 
-void OutputFileStream::Write( const Void* buffer, Uint size )
+void OutputFileStream::Write( const Void* buffer, std::size_t size )
 {
     CARAMEL_ASSERT( m_file );
 

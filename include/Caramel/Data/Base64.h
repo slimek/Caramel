@@ -16,9 +16,9 @@ namespace Caramel
 // Base64 Encode
 //
 
-std::string Base64Encode( const Byte* data, Uint size );
+std::string Base64Encode( const Byte* data, std::size_t size );
 
-std::string Base64Encode( const Void* data, Uint size );
+std::string Base64Encode( const Void* data, std::size_t size );
 std::string Base64Encode( const std::string& data );
 
 

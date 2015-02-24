@@ -69,8 +69,8 @@ private:
 
     struct ValueEntry
     {
-        Scalar value;
-        Uint   rawLineIndex { 0 };
+        Scalar      value;
+        std::size_t rawLineIndex { 0 };
     };
 
     typedef std::map< std::string, ValueEntry, CainLess > ValueMap;

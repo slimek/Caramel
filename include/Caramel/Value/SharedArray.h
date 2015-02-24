@@ -37,12 +37,12 @@ public:
 
     template< typename InputIterator,
               typename = typename boost::disable_if< std::is_integral< InputIterator >>::type >
-    ConstSharedArray( InputIterator first, Uint count );
+    ConstSharedArray( InputIterator first, std::size_t count );
 
     // Transform the range to make an array.
     template< typename InputIterator, typename Function,
               typename = typename boost::disable_if< std::is_integral< InputIterator >>::type >
-    ConstSharedArray( InputIterator first, Uint count, Function func );
+    ConstSharedArray( InputIterator first, std::size_t count, Function func );
 
     
     /// Properties ///
@@ -108,7 +108,12 @@ public:
 
     template< typename InputIterator,
               typename = typename boost::disable_if< std::is_integral< InputIterator >>::type >
-    SharedArray( InputIterator first, Uint count );
+    SharedArray( InputIterator first, std::size_t count );
+
+    // Create an array as a copy of the container
+    // - The container may be std::vector, std::string, etc.
+    template< typename Container >
+    static SharedArray CopyFrom( const Container& c );
 
 
     /// Accessors (constant) ///
@@ -191,7 +196,7 @@ inline ConstSharedArray< T >::ConstSharedArray( Uint size, const T& value )
 
 template< typename T >
 inline ConstSharedArray< T >::ConstSharedArray( std::initializer_list< T > inits )
-    : m_size( inits.size() )
+    : m_size( static_cast< Uint >( inits.size() ))
 {
     this->InitArray();
     std::copy( inits.begin(), inits.end(), &m_array[0] );    
@@ -200,8 +205,8 @@ inline ConstSharedArray< T >::ConstSharedArray( std::initializer_list< T > inits
 
 template< typename T >
 template< typename InputIterator, typename Sfinae >
-inline ConstSharedArray< T >::ConstSharedArray( InputIterator first, Uint count )
-    : m_size( count )
+inline ConstSharedArray< T >::ConstSharedArray( InputIterator first, std::size_t count )
+    : m_size( static_cast< Uint >( count ))
 {
     this->InitArray();
     std::copy_n( first, count, &m_array[0] );
@@ -210,8 +215,8 @@ inline ConstSharedArray< T >::ConstSharedArray( InputIterator first, Uint count 
 
 template< typename T >
 template< typename InputIterator, typename Function, typename Sfinae >
-inline ConstSharedArray< T >::ConstSharedArray( InputIterator first, Uint count, Function func )
-    : m_size( count )
+inline ConstSharedArray< T >::ConstSharedArray( InputIterator first, std::size_t count, Function func )
+    : m_size( static_cast< Uint >( count ))
 {
     this->InitArray();
     std::transform( first, first + count, &m_array[0], func );
@@ -259,9 +264,19 @@ inline SharedArray< T >::SharedArray( std::initializer_list< T > inits )
 
 template< typename T >
 template< typename InputIterator, typename Sfinae >
-inline SharedArray< T >::SharedArray( InputIterator first, Uint count )
+inline SharedArray< T >::SharedArray( InputIterator first, std::size_t count )
     : ConstSharedArray< T >( first, count )
 {
+}
+
+
+template< typename T >
+template< typename Container >
+inline SharedArray< T > SharedArray< T >::CopyFrom( const Container& c )
+{
+    auto array = SharedArray< T >( static_cast< Uint >( c.size() ));
+    std::copy( c.cbegin(), c.cend(), array.Begin() );
+    return array;
 }
 
 
