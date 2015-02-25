@@ -124,7 +124,7 @@ TEST( AnyEventInQueueTest )
         {
             const auto pair = evt.Value< std::pair< Int, const Char* >>();
             CHECK( 21 == pair.first );
-            CHECK( "Reimu" == pair.second );
+            CHECK( std::string( "Reimu" ) == pair.second );
             break;
         }
 
