@@ -13,7 +13,7 @@
 //
 
 #define CARAMEL_META_INTEGRAL_TYPES_ALL( m ) \
-    m( Bool ) m( Int8 ) m( Uint8 ) m( Int16 ) m( Int32 ) m( Uint32 ) m( Int64 ) m( Uint64 )
+    m( Bool ) m( Int8 ) m( Uint8 ) m( Int16 ) m( Int32 ) m( Uint32 ) m( Long ) m( Ulong ) m( Int64 ) m( Uint64 )
 
 
 ///////////////////////////////////////////////////////////////////////////////
