@@ -12,7 +12,6 @@
 #include <Caramel/String/ToString.h>
 #include <Caramel/Value/Any.h>
 #include <Caramel/Value/Scalar.h>
-#include <Caramel/Value/Usize.h>
 #include <limits>
 
 
@@ -32,7 +31,6 @@ namespace Caramel
 //   NamedValueEntry
 //   NamedValueFeed
 //   Scalar
-//   Usize
 //
 
 namespace Detail
@@ -1076,27 +1074,6 @@ std::string ScalarImpl::GetString() const
     CARAMEL_ASSERT( m_type == SCALAR_STRING );
     return boost::get< std::string >( m_value );
 }
-
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Unsigned Size
-//
-
-template< typename T >
-inline void Usize::Init( T value )
-{
-    if ( ! NumberConverter< Uint, T >::TryExactConvert( m_value, value ))
-    {
-        CARAMEL_THROW( "Can't convert {0} ({1}) to Uint", value, ToStringT< T >() );
-    }
-}
-
-Usize::Usize( Ulong  value ) { this->Init( value ); }
-Usize::Usize( Uint64 value ) { this->Init( value ); }
-Usize::Usize( Int    value ) { this->Init( value ); }
-Usize::Usize( Long   value ) { this->Init( value ); }
-Usize::Usize( Int64  value ) { this->Init( value ); }
 
 
 ///////////////////////////////////////////////////////////////////////////////

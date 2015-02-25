@@ -343,9 +343,6 @@
     <ClCompile Include="..\src\Thread\LockGuardSuite.cpp">
       <Filter>2. Tests\Thread</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Value\UsizeSuite.cpp">
-      <Filter>2. Tests\Value</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">

@@ -181,7 +181,6 @@
     <ClInclude Include="..\include\Caramel\Value\NamedValues.h" />
     <ClInclude Include="..\include\Caramel\Value\Scalar.h" />
     <ClInclude Include="..\include\Caramel\Value\SharedArray.h" />
-    <ClInclude Include="..\include\Caramel\Value\Usize.h" />
     <ClInclude Include="..\include\Caramel\Windows\CrtDebug.h" />
     <ClInclude Include="..\include\Caramel\Windows\DebuggerTraceAdapter.h" />
     <ClInclude Include="..\include\Caramel\Windows\FileInfo.h" />
