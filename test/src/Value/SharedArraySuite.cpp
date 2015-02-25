@@ -142,6 +142,25 @@ TEST( SharedArrayBoostRangeTest )
 }
 
 
+TEST( SharedArrayCopyFromTest )
+{
+    std::vector< Int > idata = { 3, 2, 7, 6, 8 };
+    const auto icopy = SharedArray< Int >::CopyFrom( idata );
+
+    CHECK(( icopy == SharedArray< Int >{ 3, 2, 7, 6, 8 } ));
+
+    std::string sdata = "Alice";
+    const auto bcopy = SharedArray< Byte >::CopyFrom( sdata );
+
+    CHECK(( bcopy == SharedArray< Byte >{ 65, 108, 105, 99, 101 } ));  // 'A', 'l', 'i', 'c', 'e'
+
+    std::vector< std::string > empty;
+    const auto none = SharedArray< std::string >::CopyFrom( empty );
+
+    CHECK( none.IsEmpty() );
+}
+
+
 } // SUITE( SharedArraySuite )
 
 } // namespace Caramel

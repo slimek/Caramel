@@ -274,7 +274,7 @@ template< typename T >
 template< typename Container >
 inline SharedArray< T > SharedArray< T >::CopyFrom( const Container& c )
 {
-    auto array = SharedArray< T >( static_cast< Uint >( c.size() ));
+    auto array = SharedArray< T >( c.size() );
     std::copy( c.cbegin(), c.cend(), array.Begin() );
     return array;
 }
