@@ -107,9 +107,9 @@ TEST( SharedArrayRangeTest )
     CHECK(( array3 == SharedArray< Int >{ 1, 4, 9 } ));
 
     // Transform into string length
-    ConstSharedArray< Uint > array4(
+    ConstSharedArray< Usize > array4(
         array2.Begin(), array2.Size(), [] ( const std::string& s ) { return s.length(); } );
-    CHECK(( array4 == SharedArray< Uint >{ 5, 6, 5 } ));
+    CHECK(( array4 == SharedArray< Usize >{ 5, 6, 5 } ));
 }
 
 

@@ -50,7 +50,7 @@ public:
 
 private:
 
-    Int m_boundCount;
+    Usize m_boundCount;  // How many channels bound to this listener
 };
 
 

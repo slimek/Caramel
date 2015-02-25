@@ -45,7 +45,7 @@ public:
     //   For example, a [1,3]-[5,7] set would returns 6.
     //   But our snapshot are based on interals, not elements.
     //
-    Uint Size() const { return static_cast< Uint >( m_constSet.iterative_size() ); }
+    Usize Size() const { return m_constSet.iterative_size(); }
 
 
     /// Accessors ///

@@ -33,8 +33,8 @@ public:
 
     /// Properties ///
 
-    Bool IsEmpty() const { return m_constSet.empty(); }
-    Uint Size()    const { return static_cast< Uint >( m_constSet.size() ); }
+    Bool  IsEmpty() const { return m_constSet.empty(); }
+    Usize Size()    const { return m_constSet.size(); }
 
 
     /// Accessors ///

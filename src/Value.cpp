@@ -263,9 +263,9 @@ Bool NamedValues::IsEmpty() const
 }
 
 
-Uint NamedValues::Size() const
+Usize NamedValues::Size() const
 {
-    return static_cast< Uint >( m_impl->m_values.size() );
+    return m_impl->m_values.size();
 }
 
 

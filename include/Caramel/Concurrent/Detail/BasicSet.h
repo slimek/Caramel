@@ -48,8 +48,8 @@ public:
 
     /// Properties ///
 
-    Bool IsEmpty() const { return m_set.empty(); }
-    Uint Size()    const { return static_cast< Uint >( m_set.size() ); }
+    Bool  IsEmpty() const { return m_set.empty(); }
+    Usize Size()    const { return m_set.size(); }
 
 
     /// Accessors ///
@@ -59,8 +59,8 @@ public:
 
     /// Modifiers ///
 
-    Bool Insert( const Key& k );
-    Uint Erase( const Key& k );
+    Bool  Insert( const Key& k );
+    Usize Erase( const Key& k );
 
     // true  : All keys are inserted.
     // false : One or more keys aren't inserted.
@@ -126,7 +126,7 @@ inline Bool BasicSet< SetT, ReplicateP >::Insert( const Key& k )
 
 
 template< typename SetT, typename ReplicateP >
-inline Uint BasicSet< SetT, ReplicateP >::Erase( const Key& k )
+inline Usize BasicSet< SetT, ReplicateP >::Erase( const Key& k )
 {
     LockGuard lock( m_setMutex );
 
@@ -137,7 +137,7 @@ inline Uint BasicSet< SetT, ReplicateP >::Erase( const Key& k )
         this->Replicator::ReplicaRemove( k );
     }
 
-    return static_cast< Uint >( erased );
+    return erased;
 }
 
 

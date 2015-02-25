@@ -20,7 +20,7 @@ class InputMemoryStream : public InputStream
 {
 public:
     
-    explicit InputMemoryStream( const Void* buffer, Uint length );
+    explicit InputMemoryStream( const Void* buffer, Usize length );
 
     template< typename T, Uint n >
     explicit InputMemoryStream( const T(& buffer)[n] );
@@ -31,16 +31,16 @@ public:
     explicit InputMemoryStream( const Char(& sz)[n] );
 
 
-    Uint Length() const { return m_length; }
+    Usize Length() const { return m_length; }
 
 
     /// Implements InputStream ///
 
-    Uint Read( Void* buffer, Uint size ) override;
+    Usize Read( Void* buffer, Usize size ) override;
 
     void Seek( Int offset ) override;
 
-    Uint Tell() const override { return m_position; }
+    Uint Tell() const override { return static_cast< Uint >( m_position ); }
 
     Bool IsEof() const override { return m_position == m_length; }
 
@@ -48,8 +48,8 @@ public:
 private:
 
     const Byte* m_buffer { nullptr };
-    Uint m_length { 0 };
-    Uint m_position { 0 };
+    Usize m_length { 0 };
+    Usize m_position { 0 };
 };
 
 

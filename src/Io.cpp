@@ -181,11 +181,11 @@ InputFileStream::InputFileStream( const Utf8String& fileName )
 }
 
 
-Uint InputFileStream::Read( Void* buffer, Uint size )
+Usize InputFileStream::Read( Void* buffer, Usize size )
 {
     CARAMEL_ASSERT( m_file );
     
-    return static_cast< Uint >( fread( buffer, 1, size, m_file ));
+    return fread( buffer, 1, size, m_file );
 }
 
 
@@ -260,7 +260,7 @@ void OutputFileStream::Flush()
 }
 
 
-void OutputFileStream::Write( const Void* buffer, std::size_t size )
+void OutputFileStream::Write( const Void* buffer, Usize size )
 {
     CARAMEL_ASSERT( m_file );
 
@@ -278,15 +278,15 @@ void OutputFileStream::Write( const Void* buffer, std::size_t size )
 // Input Memory Stream
 //
 
-InputMemoryStream::InputMemoryStream( const Void* buffer, Uint length )
+InputMemoryStream::InputMemoryStream( const Void* buffer, Usize length )
     : m_buffer( static_cast< const Byte* >( buffer ))
     , m_length( length )
 {}
 
 
-Uint InputMemoryStream::Read( Void* buffer, Uint length )
+Usize InputMemoryStream::Read( Void* buffer, Usize length )
 {
-    const Uint avails = m_length - m_position;
+    const Usize avails = m_length - m_position;
     Byte* dest = static_cast< Byte* >( buffer );
 
     if ( avails > length )
@@ -308,9 +308,9 @@ void InputMemoryStream::Seek( Int offset )
 {
     if ( offset > 0 )
     {
-        const Uint uoffset = static_cast< Uint >( offset );
+        const Usize uoffset = static_cast< Usize >( offset );
 
-        const Uint avails = m_length - m_position;
+        const Usize avails = m_length - m_position;
         if ( uoffset < avails )
         {
             m_position += uoffset;
@@ -362,7 +362,7 @@ TextEncoding TextStreamReader::DetectEncoding()
 
     {
         Char bom[3] = { 0 };
-        const Uint count = m_stream.Peek( bom, 2 );
+        const auto count = m_stream.Peek( bom, 2 );
 
         if ( 2 == count && ByteOrderMark::UTF16_LE() == bom )
         {
@@ -374,7 +374,7 @@ TextEncoding TextStreamReader::DetectEncoding()
 
     {
         Char bom[4] = { 0 };
-        const Uint count = m_stream.Peek( bom, 3 );
+        const auto count = m_stream.Peek( bom, 3 );
 
         if ( 3 == count && ByteOrderMark::UTF8() == bom )
         {
@@ -474,7 +474,7 @@ std::string MbcsStreamReader::ReadCharLine()
     while ( true )
     {
         Char c = 0;
-        const Uint count = m_stream.Read( &c, 1 );
+        const auto count = m_stream.Read( &c, 1 );
         if ( 1 != count )
         {
             if ( m_stream.IsEof() )
@@ -527,7 +527,7 @@ Bool Utf8StreamReader::ReadLine( std::string& line )
 void Utf8StreamReader::TrySkipBom()
 {
     Char bom[4] = { 0 };
-    const Uint count = m_stream.Read( bom, 3 );
+    const auto count = m_stream.Read( bom, 3 );
     if ( 3 == count && ByteOrderMark::UTF8() == bom )
     {
         return;  // the BOM is skipped
@@ -565,7 +565,7 @@ Bool Utf16LeStreamReader::ReadLine( std::string& line )
     while ( true )
     {
         Char c16[3] = { 0 };
-        const Uint count = m_stream.Read( &c16, 2 );
+        const auto count = m_stream.Read( &c16, 2 );
         if ( 2 != count )
         {
             if ( m_stream.IsEof() )
@@ -598,7 +598,7 @@ Bool Utf16LeStreamReader::ReadLine( std::string& line )
 void Utf16LeStreamReader::TrySkipBom()
 {
     Char bom[3] = { 0 };
-    const Uint count = m_stream.Read( bom, 2 );
+    const auto count = m_stream.Read( bom, 2 );
     if ( 2 == count && ByteOrderMark::UTF16_LE() == bom )
     {
         return;  // the BOM is skipped.

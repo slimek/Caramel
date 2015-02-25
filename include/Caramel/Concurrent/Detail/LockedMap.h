@@ -38,8 +38,8 @@ public:
 
     /// Properties ///
 
-    Bool IsEmpty() const { return m_constMap.empty(); }
-    Uint Size()    const { return static_cast< Uint >( m_constMap.size() ); }
+    Bool  IsEmpty() const { return m_constMap.empty(); }
+    Usize Size()    const { return m_constMap.size(); }
 
 
     /// Accessors ///

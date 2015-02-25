@@ -34,7 +34,7 @@ public:
     void LinkTarget( AnyEventTarget& target );
     void UnlinkTarget( AnyEventTarget& target );
 
-    Uint GetNumTargets() const;
+    Usize GetNumTargets() const;
 
 
     /// Dispatch Events to Targets ///

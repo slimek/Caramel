@@ -51,8 +51,8 @@ public:
 
     /// Properties ///
 
-    Bool IsEmpty() const { return m_map.empty(); }
-    Uint Size()    const { return static_cast< Uint >( m_map.size() ); }
+    Bool  IsEmpty() const { return m_map.empty(); }
+    Usize Size()    const { return m_map.size(); }
 
 
     /// Accessors ///
@@ -63,8 +63,8 @@ public:
 
     /// Modifiers ///
     
-    Bool Insert( const Key& k, const Value& v );
-    Uint Erase( const Key& k );
+    Bool  Insert( const Key& k, const Value& v );
+    Usize Erase( const Key& k );
 
     void Clear();
 
@@ -148,7 +148,7 @@ inline Bool BasicMap< MapT, ReplicateP >::Insert( const Key& k, const Value& v )
 
 
 template< typename MapT, typename ReplicateP >
-inline Uint BasicMap< MapT, ReplicateP >::Erase( const Key& k )
+inline Usize BasicMap< MapT, ReplicateP >::Erase( const Key& k )
 {
     LockGuard lock( m_mapMutex );
 
@@ -159,7 +159,7 @@ inline Uint BasicMap< MapT, ReplicateP >::Erase( const Key& k )
         this->Replicator::ReplicaRemove( k );
     }
 
-    return static_cast< Uint >( erased );
+    return erased;
 }
 
 

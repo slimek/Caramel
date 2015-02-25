@@ -43,8 +43,8 @@ public:
 
     /// Properties ///
 
-    Bool IsEmpty() const { return m_queue.empty(); }
-    Uint Size()    const { return static_cast< Uint >( m_queue.size() ); }
+    Bool  IsEmpty() const { return m_queue.empty(); }
+    Usize Size()    const { return m_queue.size(); }
 
 
     /// Operations ///

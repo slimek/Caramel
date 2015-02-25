@@ -28,7 +28,7 @@ namespace Caramel
 // Encoding
 //
 
-std::string Base64Encode( const Byte* data, std::size_t size )
+std::string Base64Encode( const Byte* data, Usize size )
 {
     CARAMEL_ASSERT( nullptr != data );
 
@@ -58,7 +58,7 @@ std::string Base64Encode( const Byte* data, std::size_t size )
 }
 
 
-std::string Base64Encode( const Void* data, std::size_t size )
+std::string Base64Encode( const Void* data, Usize size )
 {
     return Base64Encode( static_cast< const Byte* >( data ), size );
 }

@@ -33,7 +33,7 @@ public:
     // Implements InputStream
     //
 
-    Uint Read( Void* buffer, Uint size ) override;
+    Usize Read( Void* buffer, Usize size ) override;
 
     void Seek( Int offset ) override;
 

@@ -326,7 +326,7 @@ void AnyEventDispatcher::UnlinkTarget( AnyEventTarget& target )
 }
 
 
-Uint AnyEventDispatcher::GetNumTargets() const
+Usize AnyEventDispatcher::GetNumTargets() const
 {
     return m_impl->GetNumTargets();
 }

@@ -79,8 +79,8 @@ public:
 
     /// Properties ///
 
-    Bool IsEmpty() const;
-    Uint Size()    const;
+    Bool  IsEmpty() const;
+    Usize Size()    const;
 
 
     /// Access a Value ///

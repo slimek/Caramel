@@ -87,7 +87,8 @@ Path FileInfo::GetExactPath() const
 
     std::vector< Wchar > shortBuffer( shortSize + 1, 0 );
 
-    const DWORD shortConverted = ::GetShortPathNameW( wpath.c_str(), &shortBuffer[0], shortBuffer.size() );
+    const DWORD shortConverted = ::GetShortPathNameW(
+        wpath.c_str(), &shortBuffer[0], static_cast< DWORD >( shortBuffer.size() ));
     if ( ! shortConverted )
     {
         CARAMEL_THROW( "GetShortPathName() convert failed" );
@@ -106,7 +107,8 @@ Path FileInfo::GetExactPath() const
 
     std::vector< Wchar > longBuffer( longSize + 1, 0 );
 
-    const DWORD longConverted = ::GetLongPathNameW( shortPath.c_str(), &longBuffer[0], longBuffer.size() );
+    const DWORD longConverted = ::GetLongPathNameW(
+        shortPath.c_str(), &longBuffer[0], static_cast< DWORD >( longBuffer.size() ));
     if ( ! longConverted )
     {
         CARAMEL_THROW( "GetLongPathName() convert failed" );
@@ -310,7 +312,7 @@ Bool WideString::TryParse( const std::string& input, TextEncoding encoding )
             encoding,
             0,
             input.c_str(),
-            input.length(),
+            static_cast< Int >( input.length() ),
             NULL, 0
         );
 
@@ -327,7 +329,7 @@ Bool WideString::TryParse( const std::string& input, TextEncoding encoding )
             encoding,
             0,
             input.c_str(),
-            input.length(),
+            static_cast< Int >( input.length() ),
             &buffer[0],
             requiredSize
         );
@@ -353,7 +355,7 @@ static DWORD WideString_Encode(
             encoding,            // code page
             0,
             input.c_str(),
-            input.length() + 1,  // including the terminating '\0'
+            static_cast< Int >( input.length() + 1 ),  // including the terminating '\0'
             &buffer[0],
             requiredSize,
             NULL, NULL
@@ -394,7 +396,7 @@ std::string WideString::ToNarrow( TextEncoding encoding ) const
             encoding,            // code page
             0,
             m_s.c_str(),
-            m_s.length() + 1,  // including the terminating '\0'
+            static_cast< Int >( m_s.length() + 1 ),  // including the terminating '\0'
             NULL, 0, NULL, NULL
         );
 

@@ -45,7 +45,7 @@ public:
 
     /// Properties ///
 
-    Uint Length() const { return static_cast< Uint >( m_s.length() ); }
+    Usize Length() const { return m_s.length(); }
 
 
     /// Operators ///

@@ -27,7 +27,7 @@ public:
     void LinkTarget( AnyEventTargetPtr&& target );
     void UnlinkTarget( const AnyEventTargetPtr& target );
 
-    Uint GetNumTargets() const { return m_targets.Size(); }
+    Usize GetNumTargets() const { return m_targets.Size(); }
 
 
     /// Operations ///

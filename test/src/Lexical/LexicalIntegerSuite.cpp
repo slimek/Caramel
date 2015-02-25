@@ -81,6 +81,9 @@ TEST( LexicalIntegerTest )
         CHECK( true == lexInt64.TryParse( "9223372036854775807" ));
         CHECK( INT64_MAX == lexInt64 );
 
+        CHECK( true == lexInt64.TryParse( "0x8000000000000000" ));
+        CHECK( INT64_MIN == lexInt64 );
+
         CHECK( true == lexInt64.TryParse( "0xFFFFFFFFFFFFFFFF" ));
         CHECK( -1 == lexInt64 );
     }
@@ -97,6 +100,9 @@ TEST( LexicalIntegerTest )
 
         CHECK( true == lexUint64.TryParse( "9223372036854775807" ));
         CHECK( INT64_MAX == lexUint64 );
+
+        CHECK( true == lexUint64.TryParse( "18446744073709551615" ));
+        CHECK( UINT64_MAX == lexUint64 );
 
         CHECK( true == lexUint64.TryParse( "0xFFFFFFFFFFFFFFFF" ));
         CHECK( UINT64_MAX == lexUint64 );

@@ -40,7 +40,7 @@ void DebugManager::ReportTimingToTrace()
 
         if ( 0 == count ) { continue; }
 
-        const Uint32 total = static_cast< Uint32 >( m_timings[i].total );
+        const Uint64 total = m_timings[i].total;
 
         TraceDebug( "[{0}] : {1} ms / {2}", i, total, count );
     }

@@ -31,8 +31,8 @@ public:
     
     /// Properties ///
 
-    Bool IsEmpty() const { return m_stack.empty(); }
-    Uint Size()    const { return static_cast< Uint >( m_stack.size() ); }
+    Bool  IsEmpty() const { return m_stack.empty(); }
+    Usize Size()    const { return m_stack.size(); }
 
 
     /// Operations ///

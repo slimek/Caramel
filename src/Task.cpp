@@ -797,7 +797,7 @@ void ThreadPool::Shutdown()
 }
 
 
-Uint ThreadPool::GetNumReadyTasks() const
+Usize ThreadPool::GetNumReadyTasks() const
 {
     return m_impl->m_readyTasks.Size();
 }

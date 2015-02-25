@@ -13,7 +13,7 @@ namespace Caramel
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Input Stream
-// - Interface
+// - Interface ( with some helper functions )
 //   The stream size should not exceed 2 G.
 //
 
@@ -22,7 +22,7 @@ struct InputStream
     virtual ~InputStream() {}
 
     // Returns how many bytes read.
-    virtual Uint Read( Void* buffer, Uint size ) = 0;
+    virtual Usize Read( Void* buffer, Usize size ) = 0;
 
     // Move read position from current, forwards or backwards.
     virtual void Seek( Int offset ) = 0;
@@ -43,7 +43,7 @@ struct InputStream
     // - See a few data at the stream, but don't move the read position.
     //   Returns how many bytes actually peeked.
     //
-    virtual Uint Peek( Void* buffer, Uint size );
+    virtual Usize Peek( Void* buffer, Usize size );
 
 
     //
@@ -60,9 +60,9 @@ struct InputStream
 // Implementation
 //
 
-inline Uint InputStream::Peek( Void* buffer, Uint size )
+inline Usize InputStream::Peek( Void* buffer, Usize size )
 {
-    const Uint count = this->Read( buffer, size );
+    const Usize count = this->Read( buffer, size );
     this->Seek( - static_cast< Int >( count ));
     return count;
 }

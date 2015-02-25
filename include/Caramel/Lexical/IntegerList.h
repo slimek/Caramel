@@ -29,7 +29,7 @@ public:
 
     /// Properties ///
 
-    Uint Size() const { return m_values.size(); }
+    Usize Size() const { return m_values.size(); }
 
     ValueType operator[]( Uint index ) const { return m_values[index]; }
 

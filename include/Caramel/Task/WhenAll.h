@@ -46,7 +46,7 @@ class WhenAllWrapper : public std::enable_shared_from_this< WhenAllWrapper< Func
 {
 public:
     
-    WhenAllWrapper( const std::string& name, Function&& f, Uint numTasks );
+    WhenAllWrapper( const std::string& name, Function&& f, Usize numTasks );
 
     void CompleteOne( const Task< void >& task );
 
@@ -55,7 +55,7 @@ private:
     std::string m_name;
     Function m_function;
 
-    Uint m_numTasks;
+    Usize m_numTasks;
     std::atomic< Uint > m_completeCount;
 };
 
@@ -68,7 +68,7 @@ private:
 template< typename TaskSequence, typename Function >
 inline void WhenAll( const std::string& name, const TaskSequence& tasks, Function f )
 {
-    const Uint numTasks = static_cast< Uint >( tasks.size() );
+    const auto numTasks = tasks.size();
 
     if ( numTasks == 0 )
     {
@@ -91,7 +91,7 @@ inline void WhenAll( const std::string& name, const TaskSequence& tasks, Functio
 
 template< typename Function >
 inline WhenAllWrapper< Function >::WhenAllWrapper(
-    const std::string& name, Function&& f, Uint numTasks
+    const std::string& name, Function&& f, Usize numTasks
 )
     : m_name( name )
     , m_function( std::move( f ))

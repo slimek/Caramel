@@ -29,33 +29,33 @@ class ConstSharedArray
 public:
 
     ConstSharedArray();
-    explicit ConstSharedArray( Uint size );
+    explicit ConstSharedArray( Usize size );
     explicit ConstSharedArray( std::initializer_list< T > inits );
 
     // Fill this array with 'value'    
-    explicit ConstSharedArray( Uint size, const T& value );
+    explicit ConstSharedArray( Usize size, const T& value );
 
     template< typename InputIterator,
               typename = typename boost::disable_if< std::is_integral< InputIterator >>::type >
-    ConstSharedArray( InputIterator first, std::size_t count );
+    ConstSharedArray( InputIterator first, Usize count );
 
     // Transform the range to make an array.
     template< typename InputIterator, typename Function,
               typename = typename boost::disable_if< std::is_integral< InputIterator >>::type >
-    ConstSharedArray( InputIterator first, std::size_t count, Function func );
+    ConstSharedArray( InputIterator first, Usize count, Function func );
 
     
     /// Properties ///
 
-    Bool IsEmpty() const { return 0 == m_size; }
-    Uint Size()    const { return m_size; }
+    Bool  IsEmpty() const { return 0 == m_size; }
+    Usize Size()    const { return m_size; }
 
 
     /// Accessors ///
 
     typedef T ValueType;
 
-    const ValueType& operator[]( Uint i ) const;
+    const ValueType& operator[]( Usize i ) const;
     
     // Linear search
     Bool Contains( const T& value ) const;
@@ -66,7 +66,7 @@ public:
     typedef const ValueType* ConstIterator;
 
     ConstIterator Begin() const { return &m_array[0]; }
-    ConstIterator End()   const { return &m_array[static_cast< std::ptrdiff_t >( m_size )]; }
+    ConstIterator End()   const { return &m_array[m_size]; }
 
 
     /// STL Compatible ///
@@ -90,7 +90,7 @@ protected:
     typedef boost::shared_ptr< T[] > ArrayType;
     ArrayType m_array;
 
-    Uint m_size;
+    Usize m_size;
 };
 
 
@@ -100,15 +100,15 @@ class SharedArray : public ConstSharedArray< T >
 public:
 
     SharedArray();
-    explicit SharedArray( Uint size );
+    explicit SharedArray( Usize size );
     explicit SharedArray( std::initializer_list< T > inits );
 
     // Fill this array with 'value'    
-    explicit SharedArray( Uint size, const T& value );
+    explicit SharedArray( Usize size, const T& value );
 
     template< typename InputIterator,
               typename = typename boost::disable_if< std::is_integral< InputIterator >>::type >
-    SharedArray( InputIterator first, std::size_t count );
+    SharedArray( InputIterator first, Usize count );
 
     // Create an array as a copy of the container
     // - The container may be std::vector, std::string, etc.
@@ -129,13 +129,13 @@ public:
 
     typedef T ValueType;
 
-    ValueType& operator[]( Uint i );
+    ValueType& operator[]( Usize i );
 
 
     typedef ValueType* Iterator;
 
     Iterator Begin() { return &m_array[0]; }
-    Iterator End()   { return &m_array[static_cast< std::ptrdiff_t >( m_size )]; }
+    Iterator End()   { return &m_array[m_size]; }
 
 
     /// STL Compatible ///
@@ -148,7 +148,7 @@ public:
 
     /// Modifiers ///
 
-    void Reset( Uint size );
+    void Reset( Usize size );
 
 
 protected:
@@ -178,7 +178,7 @@ inline ConstSharedArray< T >::ConstSharedArray()
 
 
 template< typename T >
-inline ConstSharedArray< T >::ConstSharedArray( Uint size )
+inline ConstSharedArray< T >::ConstSharedArray( Usize size )
     : m_size( size )
 {
     this->InitArray();
@@ -186,7 +186,7 @@ inline ConstSharedArray< T >::ConstSharedArray( Uint size )
 
 
 template< typename T >
-inline ConstSharedArray< T >::ConstSharedArray( Uint size, const T& value )
+inline ConstSharedArray< T >::ConstSharedArray( Usize size, const T& value )
     : m_size( size )
 {
     this->InitArray();
@@ -196,7 +196,7 @@ inline ConstSharedArray< T >::ConstSharedArray( Uint size, const T& value )
 
 template< typename T >
 inline ConstSharedArray< T >::ConstSharedArray( std::initializer_list< T > inits )
-    : m_size( static_cast< Uint >( inits.size() ))
+    : m_size( inits.size() )
 {
     this->InitArray();
     std::copy( inits.begin(), inits.end(), &m_array[0] );    
@@ -205,8 +205,8 @@ inline ConstSharedArray< T >::ConstSharedArray( std::initializer_list< T > inits
 
 template< typename T >
 template< typename InputIterator, typename Sfinae >
-inline ConstSharedArray< T >::ConstSharedArray( InputIterator first, std::size_t count )
-    : m_size( static_cast< Uint >( count ))
+inline ConstSharedArray< T >::ConstSharedArray( InputIterator first, Usize count )
+    : m_size( count )
 {
     this->InitArray();
     std::copy_n( first, count, &m_array[0] );
@@ -215,8 +215,8 @@ inline ConstSharedArray< T >::ConstSharedArray( InputIterator first, std::size_t
 
 template< typename T >
 template< typename InputIterator, typename Function, typename Sfinae >
-inline ConstSharedArray< T >::ConstSharedArray( InputIterator first, std::size_t count, Function func )
-    : m_size( static_cast< Uint >( count ))
+inline ConstSharedArray< T >::ConstSharedArray( InputIterator first, Usize count, Function func )
+    : m_size( count )
 {
     this->InitArray();
     std::transform( first, first + count, &m_array[0], func );
@@ -228,7 +228,7 @@ template< typename T >
 inline void ConstSharedArray< T >::InitArray()
 {
     // If size is 0, keep a dummy content in m_array.
-    const Uint implSize = ( 0 < m_size ) ? m_size : 1;
+    const Usize implSize = ( 0 < m_size ) ? m_size : 1;
 
     m_array.reset( new T[implSize] );
 }
@@ -242,14 +242,14 @@ inline SharedArray< T >::SharedArray()
 
 
 template< typename T >
-inline SharedArray< T >::SharedArray( Uint size )
+inline SharedArray< T >::SharedArray( Usize size )
     : ConstSharedArray< T >( size )
 {
 }
 
 
 template< typename T >
-inline SharedArray< T >::SharedArray( Uint size, const T& value )
+inline SharedArray< T >::SharedArray( Usize size, const T& value )
     : ConstSharedArray< T >( size, value )
 {
 }
@@ -264,7 +264,7 @@ inline SharedArray< T >::SharedArray( std::initializer_list< T > inits )
 
 template< typename T >
 template< typename InputIterator, typename Sfinae >
-inline SharedArray< T >::SharedArray( InputIterator first, std::size_t count )
+inline SharedArray< T >::SharedArray( InputIterator first, Usize count )
     : ConstSharedArray< T >( first, count )
 {
 }
@@ -292,7 +292,7 @@ inline Bool ConstSharedArray< T >::Contains( const T& value ) const
 
 
 template< typename T >
-inline const T& ConstSharedArray< T >::operator[]( Uint i ) const
+inline const T& ConstSharedArray< T >::operator[]( Usize i ) const
 {
     CARAMEL_ASSERT( m_size > i );
     return m_array[i];
@@ -300,7 +300,7 @@ inline const T& ConstSharedArray< T >::operator[]( Uint i ) const
 
 
 template< typename T >
-inline T& SharedArray< T >::operator[]( Uint i )
+inline T& SharedArray< T >::operator[]( Usize i )
 {
     CARAMEL_ASSERT( m_size > i );
     return m_array[i];
@@ -312,7 +312,7 @@ inline T& SharedArray< T >::operator[]( Uint i )
 //
 
 template< typename T >
-inline void SharedArray< T >::Reset( Uint size )
+inline void SharedArray< T >::Reset( Usize size )
 {
     m_array.reset( new T[size] );
     m_size = size;

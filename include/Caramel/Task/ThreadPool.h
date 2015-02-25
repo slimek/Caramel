@@ -36,7 +36,7 @@ public:
 
     /// Properties ///
 
-    Uint GetNumReadyTasks() const;
+    Usize GetNumReadyTasks() const;
 
 
 private:

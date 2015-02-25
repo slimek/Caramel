@@ -54,7 +54,7 @@ private:
 
     std::string m_name;
     std::string m_value;
-    Long        m_valueBegin;  // Long is the returned type of std::ftell().
+    Usize       m_valueBegin;
     Bool        m_quoted;
 };
 
