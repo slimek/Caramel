@@ -27,7 +27,11 @@ public:
 	JniObject();
 	JniObject( jobject obj, JNIEnv* env );
 
-	Bool GetBool( const std::string& fieldName ) const;
+	Bool  GetBool( const std::string& fieldName ) const;
+	Int   GetInt ( const std::string& fieldName ) const;
+	Int64 GetLong( const std::string& fieldName ) const;
+	
+	std::string GetString( const std::string& fieldName ) const;
 
 
 	/// Make methods ///
@@ -41,7 +45,8 @@ private:
 	template< typename T >
 	jfieldID GetFieldId( const std::string& fieldName ) const;
 
-	jobject m_object { nullptr };
+	std::shared_ptr< Detail::JniObjectLocal > m_object;
+	std::shared_ptr< Detail::JniClassLocal >  m_class;
 	JNIEnv* m_env { nullptr };
 };
 

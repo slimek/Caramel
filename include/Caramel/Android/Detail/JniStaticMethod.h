@@ -106,31 +106,13 @@ inline Result JniStaticMethod< Result >::Call( const Args&... args )
 }
 
 
-template<>
+template< typename Result >
 template< typename... JniArgs >
-inline void JniStaticMethod< void >::CallMethod( const JniArgs&... jniArgs )
+inline Result JniStaticMethod< Result >::CallMethod( const JniArgs&... jniArgs )
 {
-	m_env->CallStaticVoidMethod( m_class, m_method, jniArgs... );
+	return JniTypeTraits< Result >::CallStaticMethod( m_env, m_class, m_method, jniArgs... );
 }
 
-
-template<>
-template< typename... JniArgs >
-inline std::string JniStaticMethod< std::string >::CallMethod( const JniArgs&... jniArgs )
-{
-	jstring jstr = (jstring)m_env->CallStaticObjectMethod( m_class, m_method, jniArgs... );
-	JniStringLocal local( jstr, m_env );
-	return local.ToString();
-}
-
-
-template<>
-template< typename... JniArgs >
-inline JniObject JniStaticMethod< JniObject >::CallMethod( const JniArgs&... jniArgs )
-{
-	jobject jobj = m_env->CallStaticObjectMethod( m_class, m_method, jniArgs... );
-	return JniObject( jobj, m_env );
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 

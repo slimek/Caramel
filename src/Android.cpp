@@ -28,7 +28,11 @@ namespace Android
 //   Detail::JniStaticMethodCore
 //   Detail::JniMethodCore
 //   Detail::JniTypeTraits
-//   Detail::JniLocals
+//   Detail::JniStringLocal
+//   Detail::JniStringArrayLocal
+//   Detail::JniObjectLocal
+//   Detail::JniObjectArrayLocal
+//   Detail::JniClass
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -212,12 +216,55 @@ JniClass::JniClass( std::string classPath )
 ///////////////////////////////////////////////////////////////////////////////
 //
 // JNI Object
+// - Keep reference counting of JniObjectLocal and JniClassLocal
 //
 
 JniObject::JniObject( jobject obj, JNIEnv* env )
-	: m_object( obj )
+	: m_object( std::make_shared< Detail::JniObjectLocal >( obj, env ))
+	, m_class( std::make_shared< Detail::JniClassLocal >( obj, env ))
 	, m_env( env )
 {}
+
+
+template< typename T >
+jfieldID JniObject::GetFieldId( const std::string& fieldName ) const
+{
+	return m_env->GetFieldID(
+		m_class->Jni(), fieldName.c_str(), Detail::JniTypeTraits< T >::Signature().c_str() );
+}
+
+
+Bool JniObject::GetBool( const std::string& fieldName ) const
+{
+	jfieldID fid = this->GetFieldId< Bool >( fieldName );
+
+	return m_env->GetBooleanField( m_object->Jni(), fid );
+}
+
+
+Int JniObject::GetInt( const std::string& fieldName ) const
+{
+	jfieldID fid = this->GetFieldId< Int >( fieldName );
+
+	return m_env->GetIntField( m_object->Jni(), fid );
+}
+
+
+Int64 JniObject::GetLong( const std::string& fieldName ) const
+{
+	jfieldID fid = this->GetFieldId< Int64 >( fieldName );
+
+	return m_env->GetLongField( m_object->Jni(), fid );
+}
+
+
+std::string JniObject::GetString( const std::string& fieldName ) const
+{
+	jfieldID fid = this->GetFieldId< std::string >( fieldName );
+
+    return Detail::JniStringLocal(
+		(jstring)m_env->GetObjectField( m_object->Jni(), fid ), m_env ).ToString();
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -272,12 +319,10 @@ std::string JniTypeTraits< Int >::Signature()							{ return "I"; }
 std::string JniTypeTraits< Int64 >::Signature()                         { return "J"; }
 std::string JniTypeTraits< Float >::Signature()							{ return "D"; }
 std::string JniTypeTraits< std::string >::Signature() 					{ return "Ljava/lang/String;"; }
-std::string JniTypeTraits< JniObject >::Signature() 					{ return "Ljava/lang/Object;"; }
-
-/*
 std::string JniTypeTraits< std::vector< std::string > >::Signature() 	{ return "[Ljava/lang/String;"; }
+std::string JniTypeTraits< JniObject >::Signature() 					{ return "Ljava/lang/Object;"; }
 std::string JniTypeTraits< std::vector< JniObject > >::Signature()		{ return "[Ljava/lang/Object;"; }
-*/
+
 
 } // namespace Detail
 
@@ -291,7 +336,7 @@ namespace Detail
 {
 
 //
-// JNI for String
+// JNI Local for String
 //
 
 JniStringLocal::JniStringLocal( const std::string& cs, JNIEnv* env )
@@ -327,6 +372,105 @@ std::string JniStringLocal::ToString() const
 	return str;
 }
 
+
+//
+// JNI Local for String Array
+//
+
+JniStringArrayLocal::JniStringArrayLocal( const std::vector< std::string >& csa, JNIEnv* env )
+	: m_env( env )
+{
+	jclass stringClass = env->FindClass( "java/lang/String" );
+	m_jobjectArray = env->NewObjectArray( csa.size(), stringClass, nullptr );
+
+	for ( uint i = 0; i < csa.size(); ++ i )
+	{
+		jstring s = env->NewStringUTF( csa[i].c_str() );
+		env->SetObjectArrayElement( m_jobjectArray, i, s );
+		env->DeleteLocalRef( s );
+	}
+
+	env->DeleteLocalRef( stringClass );
+}
+
+
+JniStringArrayLocal::~JniStringArrayLocal()
+{
+	m_env->DeleteLocalRef( m_jobjectArray );
+}
+
+
+//
+// JNI Local for Object
+//
+
+JniObjectLocal::JniObjectLocal( jobject obj, JNIEnv* env )
+	: m_jobject( obj )
+	, m_env( env )
+{}
+
+
+JniObjectLocal::~JniObjectLocal()
+{
+	m_env->DeleteLocalRef( m_jobject );
+}
+
+
+JniObjectLocal::operator JniObject() const
+{
+	return JniObject( m_env->NewLocalRef( m_jobject ), m_env );
+}
+
+
+//
+// JNI Local for Object Array
+//
+
+JniObjectArrayLocal::JniObjectArrayLocal( jobjectArray objs, JNIEnv* env )
+	: m_jobjectArray( objs )
+	, m_env( env )
+{
+}
+
+
+JniObjectArrayLocal::~JniObjectArrayLocal()
+{
+	m_env->DeleteLocalRef( m_jobjectArray );
+}
+
+
+JniObjectArrayLocal::operator std::vector< JniObject >() const
+{
+	const int length = m_env->GetArrayLength( m_jobjectArray );
+
+	std::vector< JniObject > objects;
+	objects.reserve( length );
+
+	for ( int i = 0; i < length; ++ i )
+	{
+		jobject elem = m_env->GetObjectArrayElement( m_jobjectArray, i );
+		objects.push_back( JniObject( elem, m_env ));
+	}
+
+	return objects;
+}
+
+
+//
+// JNI Local for Class
+//
+
+JniClassLocal::JniClassLocal( jobject obj, JNIEnv* env )
+	: m_jclass( env->GetObjectClass( obj ))
+	, m_env( env )
+{
+}
+
+
+JniClassLocal::~JniClassLocal()
+{
+	m_env->DeleteLocalRef( m_jclass );
+}
 
 
 } // namespace Detail

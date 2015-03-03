@@ -27,11 +27,13 @@ public:
 
 	explicit JniClass( std::string classPath );
 
+	std::string Path() const { return m_classPath; }
+	
 
 	/// Make static methods ///
 
 	template< typename Result >
-	Detail::JniStaticMethod< Result > Method( std::string methodName );
+	Detail::JniStaticMethod< Result > Method( std::string methodName ) const;
 
 
 private:
@@ -47,7 +49,7 @@ private:
 //
 
 template< typename Result >
-inline Detail::JniStaticMethod< Result > JniClass::Method( std::string methodName )
+inline Detail::JniStaticMethod< Result > JniClass::Method( std::string methodName ) const
 {
 	return Detail::JniStaticMethod< Result >( m_classPath, std::move( methodName ));
 }

@@ -16,6 +16,12 @@ namespace Caramel
 namespace Android
 {
 
+// Forwards declaration
+class JniClass;
+class JniObject;
+class JniString;
+
+
 namespace Detail
 {
 
@@ -60,6 +66,77 @@ public:
 
 private:
 	jstring m_jstring { nullptr };
+	JNIEnv* m_env { nullptr };
+};
+
+
+//
+// String Array
+//
+class JniStringArrayLocal : public boost::noncopyable
+{
+public:
+	JniStringArrayLocal( const std::vector< std::string >& csa, JNIEnv* env );
+	~JniStringArrayLocal();
+
+	jobjectArray Jni() const { return m_jobjectArray; }
+
+private:
+	jobjectArray m_jobjectArray { nullptr };
+	JNIEnv* m_env { nullptr };
+};
+
+
+//
+// Object
+//
+class JniObjectLocal : public boost::noncopyable
+{
+public:
+	JniObjectLocal( jobject obj, JNIEnv* evn );
+	~JniObjectLocal();
+
+	operator JniObject() const;
+	jobject Jni() const { return m_jobject; }
+	
+
+
+private:
+	jobject m_jobject { nullptr };
+	JNIEnv* m_env { nullptr };
+};
+
+
+//
+// Object Array
+//
+class JniObjectArrayLocal : public boost::noncopyable
+{
+public:
+	JniObjectArrayLocal( jobjectArray objs, JNIEnv* env );
+	~JniObjectArrayLocal();
+
+	operator std::vector< JniObject >() const;
+
+private:
+	jobjectArray m_jobjectArray { nullptr };
+	JNIEnv* m_env { nullptr };
+};
+
+
+//
+// Class
+//
+class JniClassLocal : public boost::noncopyable
+{
+public:
+	JniClassLocal( jobject obj, JNIEnv* env );
+	~JniClassLocal();
+
+	jclass Jni() const { return m_jclass; }
+
+private:
+	jclass m_jclass { nullptr };
 	JNIEnv* m_env { nullptr };
 };
 
