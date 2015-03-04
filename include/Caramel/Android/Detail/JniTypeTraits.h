@@ -6,7 +6,6 @@
 
 #include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Android/Detail/JniLocals.h>
-#include <Caramel/Android/JniObject.h>
 
 
 namespace Caramel
@@ -166,12 +165,8 @@ struct JniTypeTraits< JniObject >
 	static std::string Signature();  // "Ljava/lang/Object;"
 	
 	template< typename... Args >
-	static JniObject CallStaticMethod( JNIEnv* env, jclass cid, jmethodID mid, Args&&... args )
-	{
-		jobject jret = env->CallStaticObjectMethod( cid, mid, std::forward< Args >( args )... );
-		JniObjectLocal local( jret, env );
-		return local;
-	}
+	static JniObject
+		CallStaticMethod( JNIEnv* env, jclass cid, jmethodID mid, Args&&... args );
 };
 
 
@@ -184,13 +179,7 @@ struct JniTypeTraits< std::vector< JniObject >>
 	
 	template< typename... Args >
 	static std::vector< JniObject >
-		CallStaticMethod( JNIEnv* env, jclass cid, jmethodID mid, Args&&... args )
-	{
-		jobjectArray jret =
-			(jobjectArray)env->CallStaticObjectMethod( cid, mid, std::forward< Args >( args )... );
-		JniObjectArrayLocal local( jret, env );
-		return local;
-	}
+		CallStaticMethod( JNIEnv* env, jclass cid, jmethodID mid, Args&&... args );
 };
 
 

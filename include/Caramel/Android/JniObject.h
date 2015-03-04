@@ -24,7 +24,7 @@ class JniObject
 {
 public:
 
-	JniObject();
+	JniObject() {}
 	JniObject( jobject obj, JNIEnv* env );
 
 	Bool  GetBool( const std::string& fieldName ) const;
@@ -50,6 +50,37 @@ private:
 	JNIEnv* m_env { nullptr };
 };
 
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// JNI Type Tratis with JniObject
+//
+
+namespace Detail
+{
+
+template< typename... Args >
+inline JniObject JniTypeTraits< JniObject >::
+    CallStaticMethod( JNIEnv* env, jclass cid, jmethodID mid, Args&&... args )
+{
+	jobject jret = env->CallStaticObjectMethod( cid, mid, std::forward< Args >( args )... );
+	JniObjectLocal local( jret, env );
+	return local;
+}
+
+
+template< typename... Args >
+inline std::vector< JniObject > JniTypeTraits< std::vector< JniObject >>::
+	CallStaticMethod( JNIEnv* env, jclass cid, jmethodID mid, Args&&... args )
+{
+	jobjectArray jret =
+		(jobjectArray)env->CallStaticObjectMethod( cid, mid, std::forward< Args >( args )... );
+	JniObjectArrayLocal local( jret, env );
+	return local;
+}
+
+
+} // namespace Detail
 
 ///////////////////////////////////////////////////////////////////////////////
 

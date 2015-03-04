@@ -5,7 +5,6 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
-#include <Caramel/Android/Detail/JniLocals.h>
 #include <Caramel/Android/Detail/JniSignature.h>
 #include <Caramel/Android/Detail/JniTypeTraits.h>
 #include <Caramel/Android/JniObject.h>
@@ -31,7 +30,7 @@ class JniStaticMethodCore
 protected:
 
 	JniStaticMethodCore( std::string&& classPath, std::string&& methodName );
-
+	
 
 protected:
 
@@ -58,7 +57,7 @@ public:
 
 	JniStaticMethod( std::string classPath, std::string methodName );
 
-
+	
 	// Call with no parameter.
 	Result Call();
 
