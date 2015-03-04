@@ -2,6 +2,8 @@
 #include <Caramel/Android/JniClass.h>
 #include <Caramel/Android/LogTraceAdapter.h>
 #include <Caramel/Error/Alert.h>
+#include <Caramel/Object/Singleton.h>
+#include <Caramel/Task/WorkerThread.h>
 #include <Caramel/Trace/Trace.h>
 #include <jni.h>
 
@@ -12,14 +14,20 @@ using namespace Caramel::Android;
 static JniClass s_activityClass( "com/slimek/caramel/samples/jnihelpers/JniHelpersActivity" );
 static JniClass s_textView( "android/widget/TextView" );
 
+static WorkerThread s_worker( "GlobalWorker" );
 
 void Run()
 {
-	CARAMEL_TRACE_INFO( "Native Run" );
+	TraceInfo( "Native Run" );
 
-	s_activityClass.Method< void >( "Salute" ).Call( std::string( "Hello world" ));
+	s_worker.Submit( "Run",
+	[]
+	{
+		s_activityClass.Method< void >( "Salute" ).Call( std::string( "Hello world" ));
 
-	JniObject activity = s_activityClass.Method< JniObject >( "Instance" ).Call();
+		JniObject activity = s_activityClass.Method< JniObject >( "Instance" ).Call();
+
+	});
 }
 
 
