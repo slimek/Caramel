@@ -23,7 +23,7 @@ void Run()
 	s_worker.Submit( "Run",
 	[]
 	{
-		s_activityClass.Method< void >( "Salute" ).Call( std::string( "Hello world" ));
+		s_activityClass.Method< void >( "Salute" ).Call( "Hello world" );
 
 		JniObject activity = s_activityClass.Method< JniObject >( "Instance" ).Call();
 

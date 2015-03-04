@@ -136,6 +136,12 @@ struct JniTypeTraits< std::string >
 };
 
 
+// Convert string literal to std::string.
+template< Uint n >
+struct JniTypeTraits< Char[n] > : public JniTypeTraits< std::string >
+{};
+
+
 template<>
 struct JniTypeTraits< std::vector< std::string >>
 {
