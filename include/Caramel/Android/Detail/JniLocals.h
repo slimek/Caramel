@@ -8,6 +8,7 @@
 #include <jni.h>
 #include <boost/noncopyable.hpp>
 #include <type_traits>
+#include <vector>
 
 
 namespace Caramel
