@@ -42,7 +42,7 @@ protected:
 
 	JNIEnv*   m_env { nullptr };
 	jclass    m_class { nullptr };
-	jmethodID m_method { nullptr };
+	jmethodID m_methodId { nullptr };
 };
 
 
@@ -110,7 +110,7 @@ template< typename Result >
 template< typename... JniArgs >
 inline Result JniStaticMethod< Result >::CallMethod( const JniArgs&... jniArgs )
 {
-	return JniTypeTraits< Result >::CallStaticMethod( m_env, m_class, m_method, jniArgs... );
+	return JniTypeTraits< Result >::CallStaticMethod( m_env, m_class, m_methodId, jniArgs... );
 }
 
 

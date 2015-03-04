@@ -32,7 +32,7 @@ public:
 	// Get the JNIEnv object of the current thread.
 	JNIEnv* GetEnvOfCurrentThread();
 
-	jclass GetClassId( const std::string& classPath );
+	jclass GetClass( const std::string& classPath );
 
 
 private:

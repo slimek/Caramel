@@ -175,7 +175,7 @@ JNIEnv* JniCenter::GetEnvOfCurrentThread()
 }
 
 
-jclass JniCenter::GetClassId( const std::string& classPath )
+jclass JniCenter::GetClass( const std::string& classPath )
 {
 	auto env = this->GetEnvOfCurrentThread();
 
@@ -286,10 +286,10 @@ void JniStaticMethodCore::BuildMethod( const std::string& signature )
 	auto center = JniCenter::Instance();
 
 	m_env = center->GetEnvOfCurrentThread();
-	m_class = center->GetClassId( m_classPath );
-	m_method = m_env->GetStaticMethodID( m_class, m_methodName.c_str(), signature.c_str() );
+	m_class = center->GetClass( m_classPath );
+	m_methodId = m_env->GetStaticMethodID( m_class, m_methodName.c_str(), signature.c_str() );
 
-	if ( ! m_method )
+	if ( ! m_methodId )
 	{
 		CARAMEL_THROW(
 			"GetStaticMethodID() failed, classPath: \"{0}\", methodName: \"{1}\", signature: \"{2}\"",
