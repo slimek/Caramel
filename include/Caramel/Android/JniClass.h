@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
+#include <Caramel/Android/Detail/JniConstructor.h>
 #include <Caramel/Android/Detail/JniStaticMethod.h>
 #include <Caramel/Android/JniBase.h>
 #include <Caramel/Android/JniObject.h>
@@ -30,12 +31,16 @@ public:
 	std::string Path() const { return m_classPath; }
 	
 
-	/// Make static methods ///
-
+	// Make a static method to be called.
 	template< typename Result >
 	Detail::JniStaticMethod< Result > Method( std::string methodName ) const;
 
 
+	// Create a new instance of this class
+	template< typename... Args >
+	JniObject NewObject( const Args&... args ) const;
+	
+	
 private:
 
 	std::string m_classPath;
@@ -52,6 +57,13 @@ template< typename Result >
 inline Detail::JniStaticMethod< Result > JniClass::Method( std::string methodName ) const
 {
 	return Detail::JniStaticMethod< Result >( m_classPath, std::move( methodName ));
+}
+
+
+template< typename... Args >
+inline JniObject JniClass::NewObject( const Args&... args ) const
+{
+	return Detail::JniConstructor( m_classPath ).Call( args... );
 }
 
 

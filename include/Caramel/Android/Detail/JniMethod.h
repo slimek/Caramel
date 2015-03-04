@@ -5,6 +5,9 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
+#include <Caramel/Android/Detail/JniSignature.h>
+#include <Caramel/Android/Detail/JniTypeTraits.h>
+#include <jni.h>
 
 
 namespace Caramel
@@ -25,6 +28,18 @@ class JniMethodCore
 {
 protected:
 
+    JniMethodCore( std::string&& classPath, std::string&& methodName );
+	
+protected:
+
+    void BuildMethod( const std::string& signature );
+
+    std::string m_classPath;
+	std::string m_methodName;
+	
+	JNIEnv*   m_env { nullptr };
+	jclass    m_class { nullptr };
+	jmethodID m_methodId { nullptr };
 };
 
 
@@ -47,8 +62,18 @@ public:
 	template< typename... Args >
 	Result Call( const Args&... args );
 
+
+private:
+    
+	template< typename... JniArgs >
+	Result CallMethod( const JniArgs... jniArgs );
 };
 
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Implementation
+//
 
 ///////////////////////////////////////////////////////////////////////////////
 

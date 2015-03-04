@@ -27,6 +27,7 @@ namespace Android
 //   JniObject
 //   Detail::JniStaticMethodCore
 //   Detail::JniMethodCore
+//   Detail::JniConstructor
 //   Detail::JniTypeTraits
 //   Detail::JniStringLocal
 //   Detail::JniStringArrayLocal
@@ -298,8 +299,35 @@ void JniStaticMethodCore::BuildMethod( const std::string& signature )
 }
 
 
-} // namespace Detail
+///////////////////////////////////////////////////////////////////////////////
+//
+// JNI Static Method Core
+//
 
+JniMethodCore::JniMethodCore( std::string&& classPath, std::string&& methodName )
+	: m_classPath( std::move( classPath ))
+	, m_methodName( std::move( methodName ))
+{}
+
+
+void JniMethodCore::BuildMethod( const std::string& signature )
+{
+	auto center = JniCenter::Instance();
+	
+	m_env = center->GetEnvOfCurrentThread();
+	m_class = center->GetClass( m_classPath );
+	m_methodId = m_env->GetMethodID( m_class, m_methodName.c_str(), signature.c_str() );
+
+	if ( ! m_methodId )
+	{
+		CARAMEL_THROW(
+			"GetMethodID() failed, classPath: \"{0}\", methodName: \"{1}\", signature: \"{2}\"",
+			m_classPath, m_methodName, signature );
+	}
+}
+
+
+} // namespace Detail
 
 ///////////////////////////////////////////////////////////////////////////////
 //
