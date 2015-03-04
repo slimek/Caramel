@@ -30,9 +30,12 @@ public:
 	void Initialize( JavaVM* vm, const std::string& userClassPath );
 
 	// Get the JNIEnv object of the current thread.
-	JNIEnv* GetEnvOfCurrentThread();
+	JNIEnv* GetEnv();
 
-	jclass GetClass( const std::string& classPath );
+	// Caller should call DeleteLocalRef() to delete this local reference.
+	jclass FindClass( const std::string& classPath );
+
+	void DeleteLocalRef( jclass klass );
 
 
 private:

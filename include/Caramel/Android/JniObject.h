@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
+#include <Caramel/Android/Detail/JniGlobals.h>
 #include <Caramel/Android/Detail/JniMethod.h>
 #include <Caramel/Android/JniBase.h>
 
@@ -25,7 +26,7 @@ class JniObject
 public:
 
 	JniObject() {}
-	JniObject( jobject obj, JNIEnv* env );
+	explicit JniObject( jobject obj );
 
 	Bool  GetBool( const std::string& fieldName ) const;
 	Int   GetInt ( const std::string& fieldName ) const;
@@ -45,9 +46,7 @@ private:
 	template< typename T >
 	jfieldID GetFieldId( const std::string& fieldName ) const;
 
-	std::shared_ptr< Detail::JniObjectLocal > m_object;
-	std::shared_ptr< Detail::JniClassLocal >  m_class;
-	JNIEnv* m_env { nullptr };
+	std::shared_ptr< Detail::JniObjectGlobal > m_object;
 };
 
 

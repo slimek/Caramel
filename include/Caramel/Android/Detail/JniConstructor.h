@@ -28,7 +28,7 @@ class JniConstructor
 {
 public:
 	
-	explicit JniConstructor( std::string classPath );
+	JniConstructor( jclass klass, std::string classPath );
 	
 	// Call with no parameter
 	JniObject Call();

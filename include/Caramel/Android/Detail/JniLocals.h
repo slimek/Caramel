@@ -7,7 +7,6 @@
 #include <Caramel/Setup/CaramelDefs.h>
 #include <jni.h>
 #include <boost/noncopyable.hpp>
-#include <type_traits>
 #include <vector>
 
 
@@ -29,7 +28,7 @@ namespace Detail
 ///////////////////////////////////////////////////////////////////////////////
 //
 // JNI Local Wrappers
-// - RAII wrappers for JNI objects.
+// - RAII wrappers for JNI object local references.
 //
 
 //
@@ -144,13 +143,11 @@ private:
 
 ///////////////////////////////////////////////////////////////////////////////
 
-
 }  // namespace Detali
 
 }  // namespace Android
 
 }  // namespace Caramel
-
 
 #endif // __CARAMEL_ANDROID_DETAIL_JNI_LOCALS_H
 

@@ -29,8 +29,8 @@ class JniStaticMethodCore
 {
 protected:
 
-	JniStaticMethodCore( std::string&& classPath, std::string&& methodName );
-	
+	JniStaticMethodCore( jclass klass, std::string&& classPath, std::string&& methodName );
+
 
 protected:
 
@@ -55,7 +55,7 @@ class JniStaticMethod : public JniStaticMethodCore
 {
 public:
 
-	JniStaticMethod( std::string classPath, std::string methodName );
+	JniStaticMethod( jclass klass, std::string classPath, std::string methodName );
 
 	
 	// Call with no parameter.
@@ -78,8 +78,9 @@ private:
 //
 
 template< typename Result >
-inline JniStaticMethod< Result >::JniStaticMethod( std::string classPath, std::string methodName )
-	: JniStaticMethodCore( std::move( classPath ), std::move( methodName ))
+inline JniStaticMethod< Result >::JniStaticMethod(
+	jclass klass, std::string classPath, std::string methodName )
+	: JniStaticMethodCore( klass, std::move( classPath ), std::move( methodName ))
 {}
 
 

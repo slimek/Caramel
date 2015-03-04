@@ -6,6 +6,7 @@
 
 #include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Android/Detail/JniConstructor.h>
+#include <Caramel/Android/Detail/JniGlobals.h>
 #include <Caramel/Android/Detail/JniStaticMethod.h>
 #include <Caramel/Android/JniBase.h>
 #include <Caramel/Android/JniObject.h>
@@ -30,6 +31,9 @@ public:
 
 	std::string Path() const { return m_classPath; }
 	
+	// Lazy initializing
+	jclass Jni() const;
+
 
 	// Make a static method to be called.
 	template< typename Result >
@@ -45,6 +49,8 @@ private:
 
 	std::string m_classPath;
 
+	// Lazy initialized
+	mutable std::shared_ptr< Detail::JniClassGlobal > m_class;
 };
 
 
@@ -56,14 +62,14 @@ private:
 template< typename Result >
 inline Detail::JniStaticMethod< Result > JniClass::Method( std::string methodName ) const
 {
-	return Detail::JniStaticMethod< Result >( m_classPath, std::move( methodName ));
+	return Detail::JniStaticMethod< Result >( this->Jni(), m_classPath, std::move( methodName ));
 }
 
 
 template< typename... Args >
 inline JniObject JniClass::NewObject( const Args&... args ) const
 {
-	return Detail::JniConstructor( m_classPath ).Call( args... );
+	return Detail::JniConstructor( this->Jni(), m_classPath ).Call( args... );
 }
 
 

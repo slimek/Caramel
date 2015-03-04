@@ -33,7 +33,8 @@ namespace Android
 //   Detail::JniStringArrayLocal
 //   Detail::JniObjectLocal
 //   Detail::JniObjectArrayLocal
-//   Detail::JniClass
+//   Detail::JniClassLocal
+//   Detail::JniClassGlobal
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -107,7 +108,7 @@ JniCenter::~JniCenter()
 {
 	if ( m_classLoader )
 	{
-		this->GetEnvOfCurrentThread()->DeleteGlobalRef( m_classLoader );
+		this->GetEnv()->DeleteGlobalRef( m_classLoader );
 	}
 }
 
@@ -119,7 +120,7 @@ void JniCenter::Initialize( JavaVM* jvm, const std::string& userClassPath )
 
 	m_jvm = jvm;
 
-	JNIEnv* env = this->GetEnvOfCurrentThread();
+	JNIEnv* env = this->GetEnv();
 
 	// Get a user-defined class.
 	auto userClass = env->FindClass( userClassPath.c_str() );
@@ -136,13 +137,17 @@ void JniCenter::Initialize( JavaVM* jvm, const std::string& userClassPath )
 		classLoaderClass, "findClass", "(Ljava/lang/String;)Ljava/lang/Class;" );
 
 	CARAMEL_ASSERT( m_findClassMethod );
+
+	env->DeleteLocalRef( userClass );
+	env->DeleteLocalRef( classClass );
+	env->DeleteLocalRef( classLoaderClass );
 }
 
 
 // The JNIEnv of each thread.
 static thread_local JNIEnv* tls_threadJniEnv = nullptr;
 
-JNIEnv* JniCenter::GetEnvOfCurrentThread()
+JNIEnv* JniCenter::GetEnv()
 {
 	if ( nullptr != tls_threadJniEnv ) { return tls_threadJniEnv; }
 
@@ -176,9 +181,9 @@ JNIEnv* JniCenter::GetEnvOfCurrentThread()
 }
 
 
-jclass JniCenter::GetClass( const std::string& classPath )
+jclass JniCenter::FindClass( const std::string& classPath )
 {
-	auto env = this->GetEnvOfCurrentThread();
+	auto env = this->GetEnv();
 
 	Detail::JniStringLocal jname( classPath, env );
 
@@ -191,6 +196,13 @@ jclass JniCenter::GetClass( const std::string& classPath )
 	}
 
 	return klass;
+}
+
+
+void JniCenter::DeleteLocalRef( jclass klass )
+{
+	auto env = this->GetEnv();
+	env->DeleteLocalRef( klass );
 }
 
 
@@ -214,57 +226,71 @@ JniClass::JniClass( std::string classPath )
 {}
 
 
+jclass JniClass::Jni() const
+{
+	if ( ! m_class )
+	{
+		auto center = JniCenter::Instance();
+
+		auto klass = center->FindClass( m_classPath );
+		m_class.reset( new Detail::JniClassGlobal( klass ));
+		center->DeleteLocalRef( klass );
+	}
+
+	return m_class->Jni();
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // JNI Object
 // - Keep reference counting of JniObjectLocal and JniClassLocal
 //
 
-JniObject::JniObject( jobject obj, JNIEnv* env )
-	: m_object( std::make_shared< Detail::JniObjectLocal >( obj, env ))
-	, m_class( std::make_shared< Detail::JniClassLocal >( obj, env ))
-	, m_env( env )
+JniObject::JniObject( jobject obj )
+	: m_object( std::make_shared< Detail::JniObjectGlobal >( obj ))
 {}
 
 
 template< typename T >
 jfieldID JniObject::GetFieldId( const std::string& fieldName ) const
 {
-	return m_env->GetFieldID(
-		m_class->Jni(), fieldName.c_str(), Detail::JniTypeTraits< T >::Signature().c_str() );
+	auto env = JniCenter::Instance()->GetEnv();
+	auto klass = env->GetObjectClass( m_object->Jni() );
+
+	return env->GetFieldID(
+		klass, fieldName.c_str(), Detail::JniTypeTraits< T >::Signature().c_str() );
 }
 
 
 Bool JniObject::GetBool( const std::string& fieldName ) const
 {
 	jfieldID fid = this->GetFieldId< Bool >( fieldName );
-
-	return m_env->GetBooleanField( m_object->Jni(), fid );
+	return JniCenter::Instance()->GetEnv()->GetBooleanField( m_object->Jni(), fid );
 }
 
 
 Int JniObject::GetInt( const std::string& fieldName ) const
 {
 	jfieldID fid = this->GetFieldId< Int >( fieldName );
-
-	return m_env->GetIntField( m_object->Jni(), fid );
+	return JniCenter::Instance()->GetEnv()->GetIntField( m_object->Jni(), fid );
 }
 
 
 Int64 JniObject::GetLong( const std::string& fieldName ) const
 {
 	jfieldID fid = this->GetFieldId< Int64 >( fieldName );
-
-	return m_env->GetLongField( m_object->Jni(), fid );
+	return JniCenter::Instance()->GetEnv()->GetLongField( m_object->Jni(), fid );
 }
 
 
 std::string JniObject::GetString( const std::string& fieldName ) const
 {
-	jfieldID fid = this->GetFieldId< std::string >( fieldName );
+	auto env = JniCenter::Instance()->GetEnv();
 
+	jfieldID fid = this->GetFieldId< std::string >( fieldName );
     return Detail::JniStringLocal(
-		(jstring)m_env->GetObjectField( m_object->Jni(), fid ), m_env ).ToString();
+		(jstring)env->GetObjectField( m_object->Jni(), fid ), env ).ToString();
 }
 
 
@@ -276,18 +302,16 @@ std::string JniObject::GetString( const std::string& fieldName ) const
 namespace Detail
 {
 
-JniStaticMethodCore::JniStaticMethodCore( std::string&& classPath, std::string&& methodName )
+JniStaticMethodCore::JniStaticMethodCore( jclass klass, std::string&& classPath, std::string&& methodName )
 	: m_classPath( std::move( classPath ))
 	, m_methodName( std::move( methodName ))
+	, m_class( klass )
 {}
 
 
 void JniStaticMethodCore::BuildMethod( const std::string& signature )
 {
-	auto center = JniCenter::Instance();
-
-	m_env = center->GetEnvOfCurrentThread();
-	m_class = center->GetClass( m_classPath );
+	m_env = JniCenter::Instance()->GetEnv();
 	m_methodId = m_env->GetStaticMethodID( m_class, m_methodName.c_str(), signature.c_str() );
 
 	if ( ! m_methodId )
@@ -332,17 +356,15 @@ void JniMethodCore::BuildMethod( const std::string& signature )
 // JNI Constructor
 //
 
-JniConstructor::JniConstructor( std::string classPath )
+JniConstructor::JniConstructor( jclass klass, std::string classPath )
 	: m_classPath( std::move( classPath ))
+	, m_class( klass )
 {}
 
 
 void JniConstructor::BuildMethod( const std::string& signature )
 {
-	auto center = JniCenter::Instance();
-
-	m_env = center->GetEnvOfCurrentThread();
-	m_class = center->GetClass( m_classPath );
+	m_env = JniCenter::Instance()->GetEnv();
 	m_methodId = m_env->GetMethodID( m_class, "<init>", signature.c_str() );
 
 	if ( ! m_methodId )
@@ -473,7 +495,7 @@ JniObjectLocal::~JniObjectLocal()
 
 JniObjectLocal::operator JniObject() const
 {
-	return JniObject( m_env->NewLocalRef( m_jobject ), m_env );
+	return JniObject( m_jobject );
 }
 
 
@@ -504,7 +526,8 @@ JniObjectArrayLocal::operator std::vector< JniObject >() const
 	for ( int i = 0; i < length; ++ i )
 	{
 		jobject elem = m_env->GetObjectArrayElement( m_jobjectArray, i );
-		objects.push_back( JniObject( elem, m_env ));
+		objects.push_back( JniObject( elem ));
+		m_env->DeleteLocalRef( elem );
 	}
 
 	return objects;
@@ -525,6 +548,47 @@ JniClassLocal::JniClassLocal( jobject obj, JNIEnv* env )
 JniClassLocal::~JniClassLocal()
 {
 	m_env->DeleteLocalRef( m_jclass );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// JNI Global Wrappers
+//
+
+//
+// JNI Global for Object
+//
+
+JniObjectGlobal::JniObjectGlobal( jobject object )
+{
+	auto env = JniCenter::Instance()->GetEnv();
+	m_object = reinterpret_cast< jobject >( env->NewGlobalRef( object ));
+}
+
+
+JniObjectGlobal::~JniObjectGlobal()
+{
+	auto env = JniCenter::Instance()->GetEnv();
+	env->DeleteGlobalRef( m_object );
+}
+
+
+//
+// JNI Global for Class
+//
+
+JniClassGlobal::JniClassGlobal( jclass klass )
+{
+	auto env = JniCenter::Instance()->GetEnv();
+	m_class = reinterpret_cast< jclass >( env->NewGlobalRef( klass ));
+}
+
+
+JniClassGlobal::~JniClassGlobal()
+{
+	auto env = JniCenter::Instance()->GetEnv();
+	env->DeleteGlobalRef( m_class );
 }
 
 

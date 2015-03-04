@@ -12,6 +12,7 @@ using namespace Caramel;
 using namespace Caramel::Android;
 
 static JniClass s_activityClass( "com/slimek/caramel/samples/jnihelpers/JniHelpersActivity" );
+static JniClass s_testerClass( "com/slimek/caramel/samples/jnihelpers/Tester" );
 static JniClass s_textView( "android/widget/TextView" );
 
 static WorkerThread s_worker( "GlobalWorker" );
@@ -27,6 +28,10 @@ void Run()
 
 		JniObject activity = s_activityClass.Method< JniObject >( "Instance" ).Call();
 
+		JniObject tester = s_testerClass.NewObject();
+
+		TraceInfo( "Tester.number: {0}", tester.GetInt( "number" ));
+		TraceInfo( "Tester.name: {0}", tester.GetString( "name" ));
 	});
 }
 
