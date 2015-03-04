@@ -28,7 +28,7 @@ class JniMethodCore
 {
 protected:
 
-    JniMethodCore( JNIEnv* env, jobject object, jclass klass, std::string&& methodName );
+    JniMethodCore( jobject object, std::string&& methodName );
 	
 protected:
 
@@ -38,7 +38,6 @@ protected:
 	
 	JNIEnv*   m_env { nullptr };
 	jobject   m_object { nullptr };
-	jclass    m_class { nullptr };
 	jmethodID m_methodId { nullptr };
 };
 
@@ -53,7 +52,7 @@ class JniMethod : public JniMethodCore
 {
 public:
 
-	JniMethod( JNIEnv* env, jobject object, jclass klass, std::string methodName );
+	JniMethod( jobject object, std::string&& methodName );
 
 
 	// Call with no parameter
@@ -76,9 +75,8 @@ private:
 //
 
 template< typename Result >
-inline JniMethod< Result >::JniMethod(
-	JNIEnv* env, jobject object, jclass klass, std::string methodName )
-	: JniMethodCore( env, object, klass, std::move( methodName ))
+inline JniMethod< Result >::JniMethod( jobject object, std::string&& methodName )
+	: JniMethodCore( object, std::move( methodName ))
 {}
 
 

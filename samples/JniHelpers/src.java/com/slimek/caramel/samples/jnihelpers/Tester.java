@@ -16,4 +16,9 @@ public class Tester
 	{
 		number = newNumber;
 	}
+	
+	public String GetText()
+	{
+		return "Test me!";
+	}
 }

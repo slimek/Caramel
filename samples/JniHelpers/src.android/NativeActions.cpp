@@ -32,6 +32,12 @@ void Run()
 
 		TraceInfo( "Tester.number: {0}", tester.GetInt( "number" ));
 		TraceInfo( "Tester.name: {0}", tester.GetString( "name" ));
+
+		tester.Method< void >( "ChangeNumber" ).Call( 456 );
+
+		TraceInfo( "Tester.number: {0}", tester.GetInt( "number" ));
+
+		TraceInfo( tester.Method< std::string >( "GetText" ).Call() );
 	});
 }
 

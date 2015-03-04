@@ -294,6 +294,12 @@ std::string JniObject::GetString( const std::string& fieldName ) const
 }
 
 
+jobject JniObject::Jni() const
+{
+	return m_object->Jni();
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // JNI Static Method Core
@@ -328,19 +334,18 @@ void JniStaticMethodCore::BuildMethod( const std::string& signature )
 // JNI Method Core
 //
 
-JniMethodCore::JniMethodCore( JNIEnv* env, jobject object, jclass klass, std::string&& methodName )
-	: m_env( env )
+JniMethodCore::JniMethodCore( jobject object, std::string&& methodName )
+	: m_methodName( std::move( methodName ))
 	, m_object( object )
-	, m_class( klass )
-	, m_methodName( std::move( methodName ))
 {}
 
 
 void JniMethodCore::BuildMethod( const std::string& signature )
 {
-	auto center = JniCenter::Instance();
+	m_env = JniCenter::Instance()->GetEnv();
 	
-	m_methodId = m_env->GetMethodID( m_class, m_methodName.c_str(), signature.c_str() );
+	auto klass = m_env->GetObjectClass( m_object );
+	m_methodId = m_env->GetMethodID( klass, m_methodName.c_str(), signature.c_str() );
 
 	if ( ! m_methodId )
 	{
@@ -348,6 +353,8 @@ void JniMethodCore::BuildMethod( const std::string& signature )
 			"GetMethodID() failed, methodName: \"{1}\", signature: \"{2}\"",
 			m_methodName, signature );
 	}
+
+	m_env->DeleteLocalRef( klass );
 }
 
 

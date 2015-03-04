@@ -34,6 +34,8 @@ public:
 	
 	std::string GetString( const std::string& fieldName ) const;
 
+	jobject Jni() const;
+
 
 	/// Make methods ///
 
@@ -48,6 +50,18 @@ private:
 
 	std::shared_ptr< Detail::JniObjectGlobal > m_object;
 };
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Implementation
+//
+
+template< typename Result >
+inline Detail::JniMethod< Result > JniObject::Method( std::string methodName )
+{
+	return Detail::JniMethod< Result >( this->Jni(), std::move( methodName ));
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////
