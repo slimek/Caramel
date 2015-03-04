@@ -83,11 +83,32 @@ inline JniObject JniTypeTraits< JniObject >::
 
 
 template< typename... Args >
+inline JniObject JniTypeTraits< JniObject >::
+    CallMethod( JNIEnv* env, jobject obj, jmethodID mid, Args&&... args )
+{
+	jobject jret = env->CallObjectMethod( obj, mid, std::forward< Args >( args )... );
+	JniObjectLocal local( jret, env );
+	return local;
+}
+
+
+template< typename... Args >
 inline std::vector< JniObject > JniTypeTraits< std::vector< JniObject >>::
 	CallStaticMethod( JNIEnv* env, jclass cid, jmethodID mid, Args&&... args )
 {
 	jobjectArray jret =
 		(jobjectArray)env->CallStaticObjectMethod( cid, mid, std::forward< Args >( args )... );
+	JniObjectArrayLocal local( jret, env );
+	return local;
+}
+
+
+template< typename... Args >
+inline std::vector< JniObject > JniTypeTraits< std::vector< JniObject >>::
+	CallMethod( JNIEnv* env, jobject obj, jmethodID mid, Args&&... args )
+{
+	jobjectArray jret =
+		(jobjectArray)env->CallObjectMethod( obj, mid, std::forward< Args >( args )... );
 	JniObjectArrayLocal local( jret, env );
 	return local;
 }
