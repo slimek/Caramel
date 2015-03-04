@@ -301,11 +301,13 @@ void JniStaticMethodCore::BuildMethod( const std::string& signature )
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// JNI Static Method Core
+// JNI Method Core
 //
 
-JniMethodCore::JniMethodCore( std::string&& classPath, std::string&& methodName )
-	: m_classPath( std::move( classPath ))
+JniMethodCore::JniMethodCore( JNIEnv* env, jobject object, jclass klass, std::string&& methodName )
+	: m_env( env )
+	, m_object( object )
+	, m_class( klass )
 	, m_methodName( std::move( methodName ))
 {}
 
@@ -314,15 +316,40 @@ void JniMethodCore::BuildMethod( const std::string& signature )
 {
 	auto center = JniCenter::Instance();
 	
-	m_env = center->GetEnvOfCurrentThread();
-	m_class = center->GetClass( m_classPath );
 	m_methodId = m_env->GetMethodID( m_class, m_methodName.c_str(), signature.c_str() );
 
 	if ( ! m_methodId )
 	{
 		CARAMEL_THROW(
-			"GetMethodID() failed, classPath: \"{0}\", methodName: \"{1}\", signature: \"{2}\"",
-			m_classPath, m_methodName, signature );
+			"GetMethodID() failed, methodName: \"{1}\", signature: \"{2}\"",
+			m_methodName, signature );
+	}
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// JNI Constructor
+//
+
+JniConstructor::JniConstructor( std::string classPath )
+	: m_classPath( std::move( classPath ))
+{}
+
+
+void JniConstructor::BuildMethod( const std::string& signature )
+{
+	auto center = JniCenter::Instance();
+
+	m_env = center->GetEnvOfCurrentThread();
+	m_class = center->GetClass( m_classPath );
+	m_methodId = m_env->GetMethodID( m_class, "<init>", signature.c_str() );
+
+	if ( ! m_methodId )
+	{
+		CARAMEL_THROW(
+			"GetMethodID() failed, classPath: \"{0}\", methodName: \"<init>\", signature: \"{1}\"",
+			m_classPath, signature );
 	}
 }
 

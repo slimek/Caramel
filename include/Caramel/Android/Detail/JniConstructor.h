@@ -24,7 +24,7 @@ namespace Detail
 // - Used for creating new JAVA object.
 //
 
-class JniConstructor : public JniMethodCore
+class JniConstructor
 {
 public:
 	
@@ -38,23 +38,22 @@ public:
 	
 private:
 
+	void BuildMethod( const std::string& signature );
+
 	template< typename... JniArgs >
 	JniObject CallMethod( const JniArgs&... jniArgs );
+	
+	std::string m_classPath;
+	
+	JNIEnv* m_env { nullptr };
+	jclass m_class { nullptr };
+	jmethodID m_methodId { nullptr };
 };
 
 
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Implementation
-//
-
-inline JniConstructor::JniConstructor( std::string classPath )
-	: JniMethodCore( std::move( classPath ), "<init>" )
-{}
-
-
-//
-// Call Methods
 //
 
 inline JniObject JniConstructor::Call()

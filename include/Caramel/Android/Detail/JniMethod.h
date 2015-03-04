@@ -28,16 +28,16 @@ class JniMethodCore
 {
 protected:
 
-    JniMethodCore( std::string&& classPath, std::string&& methodName );
+    JniMethodCore( JNIEnv* env, jobject object, jclass klass, std::string&& methodName );
 	
 protected:
 
     void BuildMethod( const std::string& signature );
 
-    std::string m_classPath;
 	std::string m_methodName;
 	
 	JNIEnv*   m_env { nullptr };
+	jobject   m_object { nullptr };
 	jclass    m_class { nullptr };
 	jmethodID m_methodId { nullptr };
 };
@@ -53,7 +53,7 @@ class JniMethod : public JniMethodCore
 {
 public:
 
-	JniMethod( std::string classPath, std::string methodName );
+	JniMethod( JNIEnv* env, jobject object, jclass klass, std::string methodName );
 
 
 	// Call with no parameter
@@ -66,7 +66,7 @@ public:
 private:
     
 	template< typename... JniArgs >
-	Result CallMethod( const JniArgs... jniArgs );
+	Result CallMethod( const JniArgs&... jniArgs );
 };
 
 
@@ -74,6 +74,45 @@ private:
 //
 // Implementation
 //
+
+template< typename Result >
+inline JniMethod< Result >::JniMethod(
+	JNIEnv* env, jobject object, jclass klass, std::string methodName )
+	: JniMethodCore( env, object, klass, std::move( methodName ))
+{}
+
+
+//
+// Call Methods
+//
+
+template< typename Result >
+inline Result JniMethod< Result >::Call()
+{
+	this->BuildMethod( MakeJniSignature< Result >() );
+	return this->CallMethod();
+}
+
+
+template< typename Result >
+template< typename... Args >
+inline Result JniMethod< Result >::Call( const Args&... args )
+{
+	this->BuildMethod( MakeJniSignature< Result >( args... ));
+	return this->CallMethod(
+		( typename JniTypeTraits< Args >::Local( args, m_env )).Jni()... );
+}
+
+
+template< typename Result >
+template< typename... JniArgs >
+inline Result JniMethod< Result >::CallMethod( const JniArgs&... jniArgs )
+{
+	return JniTypeTraits< Result >::CallMethod( m_env, m_object, m_methodId, jniArgs... );
+}
+
+
+
 
 ///////////////////////////////////////////////////////////////////////////////
 
