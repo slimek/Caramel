@@ -199,6 +199,20 @@ jclass JniCenter::FindClass( const std::string& classPath )
 }
 
 
+std::string JniCenter::GetObjectClassPath( jobject object )
+{
+	auto env = this->GetEnv();
+
+	auto klass = env->GetObjectClass( object );
+
+	auto classClass = this->FindClass( "java/lang/Class" );
+	auto getNameMethod = env->GetMethodID( classClass, "getName", "()Ljava/lang/String;" );
+
+	Detail::JniStringLocal name( (jstring)env->CallObjectMethod( klass, getNameMethod ), env );
+	return name.ToString();
+}
+
+
 void JniCenter::DeleteLocalRef( jclass klass )
 {
 	auto env = this->GetEnv();

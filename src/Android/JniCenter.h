@@ -35,6 +35,8 @@ public:
 	// Caller should call DeleteLocalRef() to delete this local reference.
 	jclass FindClass( const std::string& classPath );
 
+	std::string GetObjectClassPath( jobject object );
+
 	void DeleteLocalRef( jclass klass );
 
 
