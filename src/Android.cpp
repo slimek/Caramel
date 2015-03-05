@@ -401,7 +401,7 @@ std::string JniTypeTraits< void >::Signature()							{ return "V"; }
 std::string JniTypeTraits< Bool >::Signature() 							{ return "Z"; }
 std::string JniTypeTraits< Int >::Signature()							{ return "I"; }
 std::string JniTypeTraits< Int64 >::Signature()                         { return "J"; }
-std::string JniTypeTraits< Float >::Signature()							{ return "D"; }
+std::string JniTypeTraits< Float >::Signature()							{ return "F"; }
 std::string JniTypeTraits< std::string >::Signature() 					{ return "Ljava/lang/String;"; }
 std::string JniTypeTraits< std::vector< std::string > >::Signature() 	{ return "[Ljava/lang/String;"; }
 std::string JniTypeTraits< JniObject >::Signature() 					{ return "Ljava/lang/Object;"; }
