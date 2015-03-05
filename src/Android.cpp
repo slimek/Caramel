@@ -364,7 +364,7 @@ void JniMethodCore::BuildMethod( const std::string& signature )
 	if ( ! m_methodId )
 	{
 		CARAMEL_THROW(
-			"GetMethodID() failed, methodName: \"{1}\", signature: \"{2}\"",
+			"GetMethodID() failed, methodName: \"{0}\", signature: \"{1}\"",
 			m_methodName, signature );
 	}
 
