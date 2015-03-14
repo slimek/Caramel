@@ -94,7 +94,7 @@
 //
 
 #define CARAMEL_CURRENT_FUNCTION __PRETTY_FUNCTION__
-#define CARAMEL_DEPRECATED
+#define CARAMEL_DEPRECATED __attribute__((deprecated))
 
 
 //
@@ -156,7 +156,7 @@
 //
 
 #define CARAMEL_CURRENT_FUNCTION __PRETTY_FUNCTION__
-#define CARAMEL_DEPRECATED
+#define CARAMEL_DEPRECATED __attribute__((deprecated))
 
 
 //
