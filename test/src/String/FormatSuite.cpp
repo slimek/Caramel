@@ -114,6 +114,26 @@ TEST( FormatStringTest )
 }
 
 
+struct Juice
+{
+    std::string fruit;
+    Float percent;
+};
+
+std::string ToString( const Juice& j )
+{
+    return Format( "({0},{1})", j.fruit, j.percent );
+}
+
+
+TEST( FormatGlobalScopeToStringTest )
+{
+    Juice juice{ "Banana", 0.9f };
+
+    CHECK( "(Banana,0.9)" == Format( "{0}", juice ));
+}
+
+
 TEST( FormatFailureTest )
 {
     CHECK( "Score 0" == Format( "Score 0", 42 ));

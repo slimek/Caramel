@@ -83,6 +83,19 @@ struct FormatParameter_NumberConvertible
 };
 
 
+//
+// Default - With global scope ToString() functions
+//
+template< typename T >
+struct FormatParameter_Default
+{
+    std::string operator() ( const T& x ) const
+    {
+        return ToString( x );
+    }
+};
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Format Parameter Select
@@ -98,7 +111,7 @@ struct FormatParameterSelect
         IsGeneralStringT< T >::VALUE,       FormatParameter_GeneralString< T >,
         IsStringConvertibleT< T >::VALUE,   FormatParameter_StringConvertible< T >,
         IsNumberConvertibleT< T >::VALUE,   FormatParameter_NumberConvertible< T >,
-                                            EmptyType
+                                            FormatParameter_Default< T >
     >::Type ParameterType;
 };
 
