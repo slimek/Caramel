@@ -27,10 +27,10 @@ namespace Caramel
 //
 
 template< typename... Args >
-inline std::string Format( const std::string& format, Args&&... args )
+inline std::string Format( const std::string& format, const Args&... args )
 {
     Detail::Formatter formatter( format );
-    return Detail::FormatRecursive( formatter, std::forward< Args >( args )... );
+    return Detail::FormatRecursive( formatter, args... );
 }
 
 

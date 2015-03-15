@@ -33,11 +33,11 @@ inline std::string FormatRecursive( Formatter& formatter )
 // One argument (terminal condition)
 //
 template< typename T >
-inline std::string FormatRecursive( Formatter& formatter, T&& x )
+inline std::string FormatRecursive( Formatter& formatter, const T& x )
 {
     typedef typename std::remove_cv< typename std::remove_reference< T >::type >::type ParamType;
 
-    formatter.Feed( Detail::FormatParameter< ParamType >()( std::forward< T >( x )));
+    formatter.Feed( Detail::FormatParameter< ParamType >()( x ));
     return formatter.GetString();
 }
 
@@ -46,12 +46,12 @@ inline std::string FormatRecursive( Formatter& formatter, T&& x )
 // Variadic arguments
 //
 template< typename T, typename... Args >
-inline std::string FormatRecursive( Formatter& formatter, T&& x, Args&&... args )
+inline std::string FormatRecursive( Formatter& formatter, const T& x, const Args&... args )
 {
     typedef typename std::remove_cv< typename std::remove_reference< T >::type >::type ParamType;
 
-    formatter.Feed( Detail::FormatParameter< ParamType >()( std::forward< T >( x )));
-    return FormatRecursive( formatter, std::forward< Args >( args )... );
+    formatter.Feed( Detail::FormatParameter< ParamType >()( x ));
+    return FormatRecursive( formatter, args... );
 }
 
 
