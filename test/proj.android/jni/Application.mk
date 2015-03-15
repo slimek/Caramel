@@ -3,11 +3,9 @@ NDK_TOOLCHAIN_VERSION := 4.8
 APP_PLATFORM := android-15
 APP_STL := gnustl_static
 
-APP_CFLAGS := -fexceptions
-APP_CPPFLAGS := -std=c++11 -frtti -fsigned-char
+APP_CFLAGS := -fexceptions -fsigned-char 
+APP_CPPFLAGS := -std=c++11 -frtti
 APP_LDFLAGS := -latomic
-
-APP_ABI := x86 armeabi
 
 
 ifeq ($(NDK_DEBUG),1)
@@ -16,13 +14,15 @@ ifeq ($(NDK_DEBUG),1)
 APP_OPTIM := debug
 CARAMEL_CONFIG := gcc48.Debug
 
-APP_CFLAGS += -g
+APP_ABI := armeabi
 
 else
 
 # Release
 APP_OPTIM := release
 CARAMEL_CONFIG := gcc48.Release
+
+APP_ABI := x86 armeabi
 
 endif
 
