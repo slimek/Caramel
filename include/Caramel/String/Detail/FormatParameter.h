@@ -24,13 +24,25 @@ namespace Detail
 //
 
 //
-// Identity Copy, for Fundamental and Enum types.
+// Fundamental, just copy the value.
 //
 template< typename T >
-struct FormatParameter_IdentityCopy
+struct FormatParameter_Fundamental
 {
     T operator() ( T x ) const { return x; }
-};  
+};
+
+
+//
+// Enum, retrieve its underlying type to pass the value.
+//
+template< typename T >
+struct FormatParameter_Enum
+{
+    typedef typename std::underlying_type< T >::type ValueType;
+
+    ValueType operator() ( T x ) const { return static_cast< ValueType >( x ); }
+};
 
 
 //
@@ -81,8 +93,8 @@ struct FormatParameterSelect
 {
     typedef typename IfThenElse5T
     <
-        std::is_fundamental< T >::value,    FormatParameter_IdentityCopy< T >,
-        std::is_enum< T >::value,           FormatParameter_IdentityCopy< T >,
+        std::is_fundamental< T >::value,    FormatParameter_Fundamental< T >,
+        std::is_enum< T >::value,           FormatParameter_Enum< T >,
         IsGeneralStringT< T >::VALUE,       FormatParameter_GeneralString< T >,
         IsStringConvertibleT< T >::VALUE,   FormatParameter_StringConvertible< T >,
         IsNumberConvertibleT< T >::VALUE,   FormatParameter_NumberConvertible< T >,

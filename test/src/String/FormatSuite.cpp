@@ -66,6 +66,41 @@ TEST( FormatFloatingTest )
 }
 
 
+enum AppleName : Int16
+{
+    APPLE   = 0,    // en
+    APFEL   = 63,   // de
+    MANZANA = -1,   // es
+};
+
+enum OrangeName : Int32
+{
+    NARANJA = -1,   // es
+};
+
+enum class Lemon
+{
+    LEMON   = 1,    // en
+    ZITRONE = 42,   // de
+};
+
+
+TEST( FormatEnumTest )
+{
+    CHECK( "0"   == Format( "{0}",    APPLE ));
+    CHECK( "063" == Format( "{0:D3}", APFEL ));
+
+    // Format will retreive the underlying type of enums
+
+    CHECK( "ffff"     == Format( "{0:x}", MANZANA ));  // 16-bit
+    CHECK( "ffffffff" == Format( "{0:x}", NARANJA ));  // 32-bit
+
+    // Scoped enumerations
+    CHECK( "1"    == Format( "{0}",    Lemon::LEMON ));
+    CHECK( "42.0" == Format( "{0:N1}", Lemon::ZITRONE ));
+}
+
+
 TEST( FormatStringTest )
 {
     CHECK( "Miko: Reimu" == Format( "Miko: {0}", "Reimu" ));
