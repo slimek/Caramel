@@ -202,8 +202,6 @@
 		6DAC9680191B5D680007BF91 /* WideString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WideString.h; sourceTree = "<group>"; };
 		6DAC9682191B5D760007BF91 /* Android.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Android.cpp; sourceTree = "<group>"; };
 		6DAC9683191B5D760007BF91 /* Apple.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Apple.mm; sourceTree = "<group>"; };
-		6DAC9687191B5D760007BF91 /* libCaramel.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCaramel.a; sourceTree = "<group>"; };
-		6DAC9689191B5D760007BF91 /* libCaramel.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCaramel.a; sourceTree = "<group>"; };
 		6DAC968A191B5D760007BF91 /* CaramelPch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CaramelPch.cpp; sourceTree = "<group>"; };
 		6DAC968B191B5D760007BF91 /* CaramelPch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaramelPch.h; sourceTree = "<group>"; };
 		6DAC968C191B5D760007BF91 /* Configuration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Configuration.cpp; sourceTree = "<group>"; };
@@ -244,7 +242,6 @@
 		6DAC96B9191B5D760007BF91 /* Transition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transition.h; sourceTree = "<group>"; };
 		6DAC96BA191B5D760007BF91 /* Statechart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Statechart.cpp; sourceTree = "<group>"; };
 		6DAC96BC191B5D760007BF91 /* FormatterImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormatterImpl.h; sourceTree = "<group>"; };
-		6DAC96BD191B5D760007BF91 /* SprintfManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SprintfManager.h; sourceTree = "<group>"; };
 		6DAC96BE191B5D760007BF91 /* String.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = String.cpp; sourceTree = "<group>"; };
 		6DAC96C0191B5D760007BF91 /* TaskImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskImpl.h; sourceTree = "<group>"; };
 		6DAC96C1191B5D760007BF91 /* TaskPollerImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskPollerImpl.h; sourceTree = "<group>"; };
@@ -258,11 +255,20 @@
 		6DAC96CB191B5D760007BF91 /* ListenersImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListenersImpl.h; sourceTree = "<group>"; };
 		6DAC96CC191B5D760007BF91 /* TraceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TraceManager.h; sourceTree = "<group>"; };
 		6DAC96CD191B5D760007BF91 /* Trace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Trace.cpp; sourceTree = "<group>"; };
-		6DAC96CF191B5D760007BF91 /* NamedValueEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NamedValueEntry.h; sourceTree = "<group>"; };
 		6DAC96D0191B5D760007BF91 /* NamedValuesImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NamedValuesImpl.h; sourceTree = "<group>"; };
 		6DAC96D1191B5D760007BF91 /* Value.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Value.cpp; sourceTree = "<group>"; };
 		6DAC96D2191B5D760007BF91 /* Windows.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Windows.cpp; sourceTree = "<group>"; };
 		6DAFE0ED1815118B00859097 /* libCaramel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCaramel.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DB0CCB01AB7D0A500ABAD42 /* AnyEventReactorImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyEventReactorImpl.h; sourceTree = "<group>"; };
+		6DB0CCB11AB7D0A500ABAD42 /* AnyEventReactorSourceImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyEventReactorSourceImpl.h; sourceTree = "<group>"; };
+		6DB0CCB21AB7D0A500ABAD42 /* AnyEventTargetProxyImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyEventTargetProxyImpl.h; sourceTree = "<group>"; };
+		6DB0CCB41AB7D0D800ABAD42 /* ConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigManager.h; sourceTree = "<group>"; };
+		6DB0CCB51AB7D0D800ABAD42 /* ConfigRootImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigRootImpl.h; sourceTree = "<group>"; };
+		6DB0CCB61AB7D0D800ABAD42 /* ConfigSectionImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigSectionImpl.h; sourceTree = "<group>"; };
+		6DB0CCB71AB7D0E900ABAD42 /* Converters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Converters.h; sourceTree = "<group>"; };
+		6DB0CCB81AB7D0E900ABAD42 /* NumberFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberFormat.h; sourceTree = "<group>"; };
+		6DB0CCB91AB7D0F500ABAD42 /* TaskTimerImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskTimerImpl.h; sourceTree = "<group>"; };
+		6DB0CCBA1AB7D10900ABAD42 /* ScalarImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScalarImpl.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -289,8 +295,11 @@
 			children = (
 				6DA51D61193EB82B00050A24 /* AnyEventDispatcherImpl.h */,
 				6DA51D62193EB82B00050A24 /* AnyEventQueueImpl.h */,
+				6DB0CCB01AB7D0A500ABAD42 /* AnyEventReactorImpl.h */,
+				6DB0CCB11AB7D0A500ABAD42 /* AnyEventReactorSourceImpl.h */,
 				6DA51D63193EB82B00050A24 /* AnyEventSlotImpl.h */,
 				6DA51D64193EB82B00050A24 /* AnyEventTargetImpl.h */,
+				6DB0CCB21AB7D0A500ABAD42 /* AnyEventTargetProxyImpl.h */,
 			);
 			path = Async;
 			sourceTree = "<group>";
@@ -778,9 +787,9 @@
 				6DAC9683191B5D760007BF91 /* Apple.mm */,
 				6DA51D60193EB82B00050A24 /* Async */,
 				6DA51D65193EB82B00050A24 /* Async.cpp */,
-				6DAC9684191B5D760007BF91 /* Caramel */,
 				6DAC968A191B5D760007BF91 /* CaramelPch.cpp */,
 				6DAC968B191B5D760007BF91 /* CaramelPch.h */,
+				6DB0CCB31AB7D0D800ABAD42 /* Configuration */,
 				6DAC968C191B5D760007BF91 /* Configuration.cpp */,
 				6DAC968D191B5D760007BF91 /* Data.cpp */,
 				6DAC968E191B5D760007BF91 /* DateTime */,
@@ -819,39 +828,6 @@
 			);
 			name = src;
 			path = ../src;
-			sourceTree = "<group>";
-		};
-		6DAC9684191B5D760007BF91 /* Caramel */ = {
-			isa = PBXGroup;
-			children = (
-				6DAC9685191B5D760007BF91 /* lib */,
-			);
-			path = Caramel;
-			sourceTree = "<group>";
-		};
-		6DAC9685191B5D760007BF91 /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				6DAC9686191B5D760007BF91 /* ios-iphoneos */,
-				6DAC9688191B5D760007BF91 /* ios-iphonesimulator */,
-			);
-			path = lib;
-			sourceTree = "<group>";
-		};
-		6DAC9686191B5D760007BF91 /* ios-iphoneos */ = {
-			isa = PBXGroup;
-			children = (
-				6DAC9687191B5D760007BF91 /* libCaramel.a */,
-			);
-			path = "ios-iphoneos";
-			sourceTree = "<group>";
-		};
-		6DAC9688191B5D760007BF91 /* ios-iphonesimulator */ = {
-			isa = PBXGroup;
-			children = (
-				6DAC9689191B5D760007BF91 /* libCaramel.a */,
-			);
-			path = "ios-iphonesimulator";
 			sourceTree = "<group>";
 		};
 		6DAC968E191B5D760007BF91 /* DateTime */ = {
@@ -950,8 +926,9 @@
 		6DAC96BB191B5D760007BF91 /* String */ = {
 			isa = PBXGroup;
 			children = (
+				6DB0CCB71AB7D0E900ABAD42 /* Converters.h */,
 				6DAC96BC191B5D760007BF91 /* FormatterImpl.h */,
-				6DAC96BD191B5D760007BF91 /* SprintfManager.h */,
+				6DB0CCB81AB7D0E900ABAD42 /* NumberFormat.h */,
 			);
 			path = String;
 			sourceTree = "<group>";
@@ -962,6 +939,7 @@
 				6DAC5E2319664E7500F78D76 /* PooledThread.h */,
 				6DAC96C0191B5D760007BF91 /* TaskImpl.h */,
 				6DAC96C1191B5D760007BF91 /* TaskPollerImpl.h */,
+				6DB0CCB91AB7D0F500ABAD42 /* TaskTimerImpl.h */,
 				6DAC5E2419664E7500F78D76 /* ThreadPoolImpl.h */,
 				6DAC96C2191B5D760007BF91 /* WorkerThreadImpl.h */,
 			);
@@ -991,8 +969,8 @@
 		6DAC96CE191B5D760007BF91 /* Value */ = {
 			isa = PBXGroup;
 			children = (
-				6DAC96CF191B5D760007BF91 /* NamedValueEntry.h */,
 				6DAC96D0191B5D760007BF91 /* NamedValuesImpl.h */,
+				6DB0CCBA1AB7D10900ABAD42 /* ScalarImpl.h */,
 			);
 			path = Value;
 			sourceTree = "<group>";
@@ -1013,6 +991,16 @@
 				6DAFE0ED1815118B00859097 /* libCaramel.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		6DB0CCB31AB7D0D800ABAD42 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				6DB0CCB41AB7D0D800ABAD42 /* ConfigManager.h */,
+				6DB0CCB51AB7D0D800ABAD42 /* ConfigRootImpl.h */,
+				6DB0CCB61AB7D0D800ABAD42 /* ConfigSectionImpl.h */,
+			);
+			path = Configuration;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
