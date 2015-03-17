@@ -164,7 +164,6 @@
 		6DAC9652191B5D680007BF91 /* Format.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Format.h; sourceTree = "<group>"; };
 		6DAC9654191B5D680007BF91 /* Sprintf_Sprintf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sprintf_Sprintf.h; sourceTree = "<group>"; };
 		6DAC9655191B5D680007BF91 /* Split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Split.h; sourceTree = "<group>"; };
-		6DAC9656191B5D680007BF91 /* Sprintf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sprintf.h; sourceTree = "<group>"; };
 		6DAC9657191B5D680007BF91 /* StringConvertible.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringConvertible.h; sourceTree = "<group>"; };
 		6DAC9658191B5D680007BF91 /* TextEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextEncoding.h; sourceTree = "<group>"; };
 		6DAC9659191B5D680007BF91 /* ToString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToString.h; sourceTree = "<group>"; };
@@ -670,7 +669,6 @@
 				6DAC9652191B5D680007BF91 /* Format.h */,
 				6DAC9653191B5D680007BF91 /* Inline */,
 				6DAC9655191B5D680007BF91 /* Split.h */,
-				6DAC9656191B5D680007BF91 /* Sprintf.h */,
 				6DAC9657191B5D680007BF91 /* StringConvertible.h */,
 				6DAC9658191B5D680007BF91 /* TextEncoding.h */,
 				6DAC9659191B5D680007BF91 /* ToString.h */,
