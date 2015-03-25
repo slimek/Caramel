@@ -460,9 +460,15 @@ JniStringLocal::~JniStringLocal()
 
 std::string JniStringLocal::ToString() const
 {
+    if ( m_jstring == nullptr ) { return "(null)"; }
+	
 	const Char* chars = m_env->GetStringUTFChars( m_jstring, nullptr );
 
-	if ( ! chars ) { return std::string(); }
+	if ( ! chars )
+    {
+		CARAMEL_ALERT( "GetStringUTFChars() returns null" );
+        return std::string( "(null)" );
+    }
 
 	const std::string str( chars );
 	m_env->ReleaseStringUTFChars( m_jstring, chars );
