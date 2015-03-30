@@ -65,6 +65,47 @@ TEST( UniformRandomTest )
         TraceDebug( "Test GenRandomUint() count: {0}, elapsed: {1}", count, watch.Elapsed() );
     }
 
+    /// Uint64 - Simplified Test ///
+    {
+        Bool metSmall = false;
+        Bool metBig = false;
+
+        for ( ;; )
+        {
+            const Uint64 value = GenRandomUint64( 0, UINT64_MAX );
+
+            if ( value < 0x1000000000000000ull ) { metSmall = true; }
+            if ( value > 0xF000000000000000ull ) { metBig = true; }
+
+            if ( metSmall && metBig ) { break; }
+        }
+    }
+
+    /// Usize - Simplified Test ///
+    {
+        Bool metSmall = false;
+        Bool metBig = false;
+
+        for ( ;; )
+        {
+            const Usize value = GenRandomUsize( 0, SIZE_MAX );
+
+            #if defined( CARAMEL_SYSTEM_IS_64_BIT )
+            {
+                if ( value < 0x1000000000000000ull ) { metSmall = true; }
+                if ( value > 0xF000000000000000ull ) { metBig = true; }
+            }
+            #else
+            {
+                if ( value < 0x10000000 ) { metSmall = true; }
+                if ( value > 0xF0000000 ) { metBig = true; }
+            }
+            #endif
+
+            if ( metSmall && metBig ) { break; }
+        }
+    }
+
     /// Float ///
     {
         const Float vLower = 0;

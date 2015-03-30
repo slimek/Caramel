@@ -18,7 +18,7 @@ namespace Caramel
 //
 // Generate Random Integers
 // - Generate values between 'minValue' and 'maxValue' (inclusive).
-//   This function is thread-safe.
+//   These functions are thread-safe.
 //
 //   EXAMPLE:
 //
@@ -27,14 +27,17 @@ namespace Caramel
 //       GenRandomUint( 1, 6 );
 //
 
-Int  GenRandomInt ( Int  minValue, Int  maxValue );
-Uint GenRandomUint( Uint minValue, Uint maxValue );
+Int    GenRandomInt   ( Int    minValue, Int    maxValue );
+Uint   GenRandomUint  ( Uint   minValue, Uint   maxValue );
+Uint64 GenRandomUint64( Uint64 minValue, Uint64 maxValue );
+
+Usize GenRandomUsize( Usize minValue, Usize maxValue );  // for std::size_t
 
 
 //
 // Generate Random Floatings
 // - Generate values between 'lowerBound' and 'upperBound' (exclusive? see below).
-//   This function is thread-safe.
+//   These functions are thread-safe.
 //
 //   EXAMPLE:
 //
@@ -43,7 +46,7 @@ Uint GenRandomUint( Uint minValue, Uint maxValue );
 //       GenRandomFloat( 0, 1 );
 //
 //   You will get a value from 0 to very close to 1, but ...
-//   It may or may not returns 1, it depends on the precision and compiler implementations.
+//   It may or may not returns 1, which depends on the precision and compiler implementations.
 //
 
 Float  GenRandomFloat ( Float  lowerBound, Float  upperBound );
