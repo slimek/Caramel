@@ -25,18 +25,34 @@ namespace Detail
 //
 
 //
+// String
+//
+class JniStringGlobal : public boost::noncopyable
+{
+public:
+    JniStringGlobal( jstring str );
+    ~JniStringGlobal();
+    
+    jstring Jni() const { return m_string; }
+    
+private:
+    jstring m_string { nullptr };
+};
+
+
+//
 // Object
 //
 class JniObjectGlobal : public boost::noncopyable
 {
 public:
-	JniObjectGlobal( jobject object );
-	~JniObjectGlobal();
+    JniObjectGlobal( jobject object );
+    ~JniObjectGlobal();
 
-	jobject Jni() const { return m_object; }
+    jobject Jni() const { return m_object; }
 
 private:
-	jobject m_object { nullptr };
+    jobject m_object { nullptr };
 };
 
 
@@ -46,13 +62,13 @@ private:
 class JniClassGlobal : public boost::noncopyable
 {
 public:
-	JniClassGlobal( jclass klass );
-	~JniClassGlobal();
+    JniClassGlobal( jclass klass );
+    ~JniClassGlobal();
 
-	jclass Jni() const { return m_class; }
+    jclass Jni() const { return m_class; }
 
 private:
-	jclass m_class { nullptr };
+    jclass m_class { nullptr };
 };
 
 

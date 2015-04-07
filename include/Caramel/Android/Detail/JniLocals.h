@@ -17,10 +17,7 @@ namespace Android
 {
 
 // Forwards declaration
-class JniClass;
 class JniObject;
-class JniString;
-
 
 namespace Detail
 {
