@@ -15,7 +15,7 @@ namespace Caramel
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Any Event Target
-// - A target may be linked to an AnyEventDispatcher.
+// - A target may be linked to an AnyEventDispatcher or AnyEventTask
 //
 //   The implementation should provide an AnyEventTargetPtr, which is
 //   a std::shared_ptr. 
@@ -40,6 +40,7 @@ struct AnyEventTarget
 private:
 
     friend class AnyEventDispatcher;
+    friend class AnyEventTask;
 
     // This is called by AnyEventDispatcher.
     virtual AnyEventTargetPtr GetTargetImpl() const = 0;

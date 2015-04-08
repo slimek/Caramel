@@ -60,6 +60,7 @@ LOCAL_SRC_FILES := \
 	$(CRMTEST_SRC)/Async/AnyEventQueueSuite.cpp \
 	$(CRMTEST_SRC)/Async/AnyEventSlotSuite.cpp \
 	$(CRMTEST_SRC)/Async/AnyEventSuite.cpp \
+	$(CRMTEST_SRC)/Async/AnyEventTaskSuite.cpp \
 	$(CRMTEST_SRC)/Async/FlowStateSuite.cpp \
 	$(CRMTEST_SRC)/Async/ValueChangeSuite.cpp \
 	$(CRMTEST_SRC)/Chrono/ClockProxySuite.cpp \

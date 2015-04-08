@@ -10,6 +10,7 @@
 #include "Async/AnyEventTargetImpl.h"
 #include "Async/AnyEventTargetProxyImpl.h"
 #include <Caramel/Async/AnyEventHandler.h>
+#include <Caramel/Async/AnyEventTask.h>
 
 
 namespace Caramel
@@ -28,6 +29,7 @@ namespace Caramel
 //   AnyEventReactor
 //   Detail::AnyEventReactorSource
 //   AnyEventHandler
+//   AnyEventTask
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -791,6 +793,42 @@ void AnyEventHandler::InitFromTarget( AnyEventTarget& target )
 void AnyEventHandler::operator()( const AnyEvent& event ) const
 {
     m_handler( event );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Any Event Task
+//
+
+AnyEventTask::AnyEventTask()
+    : Task< AnyEvent >()
+{
+}
+
+
+AnyEventTask::AnyEventTask( Task< AnyEvent > task )
+    : Task< AnyEvent >( std::move( task ))
+{
+}
+
+
+void AnyEventTask::Link( AnyEventTarget& target )
+{
+    auto targetImpl = target.GetTargetImpl();
+    const auto age = targetImpl->GetAge();
+
+    this->Then(
+    [=] ( const Task< AnyEvent >& task )
+    {
+        targetImpl->Send( task.GetResult(), age );
+    });
+}
+
+
+Int AnyEventTask::Id() const
+{
+    return this->GetResult().Id();
 }
 
 

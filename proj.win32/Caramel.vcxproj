@@ -35,6 +35,7 @@
     <ClInclude Include="..\include\Caramel\Async\AnyEventReactor.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEventSlot.h" />
     <ClInclude Include="..\include\Caramel\Async\AnyEventTarget.h" />
+    <ClInclude Include="..\include\Caramel\Async\AnyEventTask.h" />
     <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventDispatcherProxy.h" />
     <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventReactorSource.h" />
     <ClInclude Include="..\include\Caramel\Async\Detail\AnyEventQueueProxy.h" />

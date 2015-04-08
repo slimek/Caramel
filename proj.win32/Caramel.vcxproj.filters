@@ -881,6 +881,9 @@
     <ClInclude Include="..\include\Caramel\Value\EnumFlags.h">
       <Filter>1. Public Packages\Value</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Async\AnyEventTask.h">
+      <Filter>1. Public Packages\Async</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">
