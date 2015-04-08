@@ -34,6 +34,8 @@ public:
 
     Task() {}  // Create a "not-a-task". Submit it results in exception.
 
+    explicit Task( TaskFunction f );
+
     Task( std::string name, TaskFunction f );
     Task( std::string name, std::unique_ptr< Detail::TaskHolder >&& holder );
 
@@ -52,9 +54,10 @@ public:
 
     template< typename ThenFunction >
     typename Detail::ContinuationTraits< ThenFunction, Result >::TaskType
-    Then( const std::string& name, ThenFunction f );
+    Then( std::string name, ThenFunction f );
 
-    // Then task name = "TaskName" + "-Then"
+    // If this task's name is empty, the then task's name would also be empty.
+    // Otherwise it's name is "name-Then".
     template< typename ThenFunction >
     typename Detail::ContinuationTraits< ThenFunction, Result >::TaskType
     Then( ThenFunction f );
@@ -78,6 +81,8 @@ public:
 
     Task() {}  // Create a "not-a-task". Submit it results in exception.
 
+    explicit Task( TaskFunction f );
+
     Task( std::string name, TaskFunction f );
     Task( std::string name, std::unique_ptr< Detail::TaskHolder >&& holder );
 
@@ -91,9 +96,10 @@ public:
 
     template< typename ThenFunction >
     typename Detail::ContinuationTraits< ThenFunction, void >::TaskType
-    Then( const std::string& name, ThenFunction f );
+    Then( std::string name, ThenFunction f );
 
-    // Then task name = "TaskName" + "-Then"
+    // If this task's name is empty, the then task's name would also be empty.
+    // Otherwise it's name is "name-Then".
     template< typename ThenFunction >
     typename Detail::ContinuationTraits< ThenFunction, void >::TaskType
     Then( ThenFunction f );
@@ -106,9 +112,16 @@ public:
 //
 
 template< typename Function >
-inline auto MakeTask( const std::string& name, Function f ) -> Task< decltype( f() ) >
+inline auto MakeTask( Function f ) -> Task< decltype( f() ) >
 {
-    return Task< decltype( f() ) >( name, std::move( f ));
+    return Task< decltype( f() ) >( std::move( f ));
+}
+
+
+template< typename Function >
+inline auto MakeTask( std::string name, Function f ) -> Task< decltype( f() ) >
+{
+    return Task< decltype( f() ) >( std::move( name ), std::move( f ));
 }
 
 
@@ -134,6 +147,13 @@ inline auto MakeTask( const std::string& name, Function f ) -> Task< decltype( f
 //
 // Task< Result >
 //
+
+template< typename Result >
+inline Task< Result >::Task( TaskFunction f )
+    : TaskCore( std::string(), MakeUnique< Detail::RegularTask< Result >>( std::move( f )))
+{
+}
+
 
 template< typename Result >
 inline Task< Result >::Task( std::string name, TaskFunction f )
@@ -169,7 +189,7 @@ inline Result Task< Result >::GetResult() const
 template< typename AnteResult >
 template< typename ThenFunction >
 inline typename Detail::ContinuationTraits< ThenFunction, AnteResult >::TaskType
-Task< AnteResult >::Then( const std::string& name, ThenFunction f )
+Task< AnteResult >::Then( std::string name, ThenFunction f )
 {
     typedef typename Detail::ContinuationTraits< ThenFunction, AnteResult >::HolderType HolderType;
     typedef typename Detail::ContinuationTraits< ThenFunction, AnteResult >::TaskType TaskType;
@@ -178,7 +198,7 @@ Task< AnteResult >::Then( const std::string& name, ThenFunction f )
     std::unique_ptr< Detail::TaskHolder > thenHolder =
         MakeUnique< HolderType >( std::move( f ), *this );
 
-    auto thenTask = TaskType( name, std::move( thenHolder ));
+    auto thenTask = TaskType( std::move( name ), std::move( thenHolder ));
     this->AddContinuation( thenTask );
     return thenTask;
 }
@@ -189,13 +209,19 @@ template< typename ThenFunction >
 inline typename Detail::ContinuationTraits< ThenFunction, AnteResult >::TaskType
 Task< AnteResult >::Then( ThenFunction f )
 {
-    return this->Then( this->Name() + "-Then", std::move( f ));
+    return this->Then( this->MakeDefaultThenTaskName(), std::move( f ));
 }
 
 
 //
 // Task< void >
 //
+
+inline Task< void >::Task( TaskFunction f )
+    : TaskCore( std::string(), MakeUnique< Detail::RegularTask< void >>( std::move( f )))
+{
+}
+
 
 inline Task< void >::Task( std::string name, TaskFunction f )
     : TaskCore( std::move( name ), MakeUnique< Detail::RegularTask< void >>( std::move( f )))
@@ -218,7 +244,7 @@ inline Task< void >& Task< void >::DelayFor( const Ticks& duration )
 
 template< typename ThenFunction >
 inline typename Detail::ContinuationTraits< ThenFunction, void >::TaskType
-Task< void >::Then( const std::string& name, ThenFunction f )
+Task< void >::Then( std::string name, ThenFunction f )
 {
     typedef typename Detail::ContinuationTraits< ThenFunction, void >::HolderType HolderType;
     typedef typename Detail::ContinuationTraits< ThenFunction, void >::TaskType TaskType;
@@ -227,7 +253,7 @@ Task< void >::Then( const std::string& name, ThenFunction f )
     std::unique_ptr< Detail::TaskHolder > thenHolder =
         MakeUnique< HolderType >( std::move( f ), *this );
 
-    auto thenTask = TaskType( name, std::move( thenHolder ));
+    auto thenTask = TaskType( std::move( name ), std::move( thenHolder ));
     this->AddContinuation( thenTask );
     return thenTask;
 }
@@ -237,7 +263,7 @@ template< typename ThenFunction >
 inline typename Detail::ContinuationTraits< ThenFunction, void >::TaskType
 Task< void >::Then( ThenFunction f )
 {
-    return this->Then( this->Name() + "-Then", std::move( f ));
+    return this->Then( this->MakeDefaultThenTaskName(), std::move( f ));
 }
 
 

@@ -20,8 +20,10 @@ SUITE( TaskSuite )
 {
 
 static Bool s_calledFoo = false;
+static Bool s_calledQuz = false;
 
 void Foo() { s_calledFoo = true; }
+Int  Quz() { s_calledQuz = true; return 1; }
 
 
 TEST( TaskNotTaskTest )
@@ -353,6 +355,86 @@ TEST( TaskContinueImmediatelyTest )
     CHECK( IsSorted( seq ));
 
     worker.Stop();
+}
+
+
+TEST( TaskWithoutNameTest )
+{
+    /// Standalone Functions ///
+
+    auto t1 = MakeTask( &Foo );
+
+    CHECK( true == t1.IsValid() );
+    CHECK( ""   == t1.Name() );
+
+    auto t2 = MakeTask( &Quz );
+
+    CHECK( true == t2.IsValid() );
+    CHECK( ""   == t2.Name() );
+
+    t2.Run();
+
+    CHECK( 1 == t2.GetResult() );
+
+
+    /// Member Functions ///
+
+    Widget w;
+
+    auto t3 = MakeTask( std::bind( &Widget::Bar, &w ));
+
+    CHECK( true == t3.IsValid() );
+    CHECK( ""   == t3.Name() );
+
+
+    /// Lambads ///
+
+    auto t4 = MakeTask( [] { return std::string( "Reimu" ); } );
+
+    CHECK( true == t4.IsValid() );
+    CHECK( ""   == t4.Name() );
+
+    t4.Run();
+
+    CHECK( "Reimu" == t4.GetResult() );
+
+
+    /// Catch Exception ///
+
+    auto t5 = MakeTask( [] { throw AnyFailure( 42 ); } );
+
+    t5.Run();
+    auto r5 = t5.Catch();
+
+    CHECK( r5.exception );   // true
+    CHECK( r5.anyFailure );  // true
+    CHECK( "" == r5.name );
+
+
+    /// Continuation ///
+
+    StdAsync async;
+    Int count = 0;
+
+    auto t6 = MakeTask( [&] { ++ count; } );
+    auto t6c = t6.Then( [] { return 42; } );
+
+    CHECK( "" == t6c.Name() );
+
+    async.Submit( t6 );
+    t6c.Wait();
+
+    CHECK( 42 == t6c.GetResult() );
+
+    auto t7 = MakeTask( [&] { ++ count; } );
+    auto t7c = t7.Then( "Marisa", [] { return std::string( "Spark" ); } );
+
+    CHECK( "Marisa" == t7c.Name() );
+
+    async.Submit( t7 );
+    t7c.Wait();
+
+    CHECK( "Spark" == t7c.GetResult() );
 }
 
 

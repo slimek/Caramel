@@ -32,6 +32,7 @@ public:
 
     TaskImpl();  // Not-a-task
 
+    // NOTES: the name may be an empty string if not given at the higher functions.
     TaskImpl( std::string&& name, std::unique_ptr< TaskHolder >&& holder );
 
     ~TaskImpl();

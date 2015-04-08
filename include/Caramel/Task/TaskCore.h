@@ -73,12 +73,15 @@ public:
     Bool StartWait  ( TaskExecutor& executor );
     Bool BecomeReady( TaskExecutor& executor );
     
+    // NOTES: Should only called by a TaskExecutor.
     void Run();
 
 
 protected:
 
+    // NOTES: the name may be an empty string if not given at the higher functions.
     TaskCore( std::string&& name, std::unique_ptr< Detail::TaskHolder >&& holder );
+
     TaskCore( const std::shared_ptr< TaskImpl >& impl );
 
     void AddContinuation( TaskCore& continuation );
@@ -86,6 +89,8 @@ protected:
     void DoDelayFor( const Ticks& duration );
 
     const Detail::TaskHolder* GetHolder() const;
+
+    std::string MakeDefaultThenTaskName() const;
 
 
     std::shared_ptr< TaskImpl > m_impl;

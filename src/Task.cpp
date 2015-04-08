@@ -74,6 +74,23 @@ void TaskCore::DoDelayFor( const Ticks& duration )
 }
 
 
+std::string TaskCore::MakeDefaultThenTaskName() const
+{
+    // NOTES: If the current task's name is empty,
+    //        its meaningless to give the then task a name of "-Then".
+
+    CARAMEL_CHECK( m_impl->IsValid() );
+    if ( m_impl->m_name.empty() )
+    {
+        return std::string();
+    }
+    else
+    {
+        return m_impl->m_name + "-Then";
+    }
+}
+
+
 //
 // Wait for Task to Complete
 //
