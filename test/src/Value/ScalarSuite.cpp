@@ -335,11 +335,10 @@ TEST( ScalarStrintConvertTest )
     CHECK( 16777215   == *swhite.AsUint64() );
     CHECK( "0xFFFFFF" == *swhite.AsString() );  // keep the original string
 
-    #if defined( CARAMEL_COMPILER_IS_MSVC ) || defined( CARAMEL_COMPILER_IS_GCC )
+    #if defined( CARAMEL_COMPILER_IS_MSVC )
     // Not convertible - In some compilers, strtof/strtod() don't support hexidecimal format.
     // Known compiler versions:
     // - Visual C++ 2013
-    //   Android NDK GCC 4.8 + static GNU STL (gnustl_static)
     CHECK( ! swhite.AsFloat() );
     CHECK( ! swhite.AsDouble() );
     #else
