@@ -4,6 +4,7 @@
 
 #include <Caramel/Async/AnyEventQueue.h>
 #include <Caramel/Async/AnyEventTask.h>
+#include <Caramel/Task/StdAsync.h>
 
 
 namespace Caramel
@@ -11,6 +12,15 @@ namespace Caramel
 
 SUITE( AnyEventTaskSuite )
 {
+
+static AnyEventTask TaskYukari()
+{
+    auto task = MakeTask( [] { return AnyEvent( 2, "Yukari" ); });
+    StdAsync async;
+    async.Submit( task );
+    return task;
+}
+
 
 TEST( AnyEventTaskTest )
 {
@@ -27,7 +37,7 @@ TEST( AnyEventTaskTest )
     CHECK( "Alice" == t1.Value< std::string >() );
 
 
-    /// Get the result in a handler ///
+    /// Get the result in a handler - Access events by task ///
 
     Int id2 = 0;
     std::string value2;
@@ -46,19 +56,37 @@ TEST( AnyEventTaskTest )
     CHECK( "Reimu" == value2 );
 
 
+    /// Get the result in a handler - Access events by lambda parameter ///
+
+    Int id3 = 0;
+    std::string value3;
+
+    auto t3 = TaskYukari().Then(
+    [&] ( const AnyEvent& event )
+    {
+        id3 = event.Id();
+        value3 = event.Value< std::string >();
+    });
+
+    t3.Wait();
+
+    CHECK( 2        == id3 );
+    CHECK( "Yukari" == value3 );
+
+
     /// Send the result into a Target ///
 
     AnyEventQueue queue;
 
-    AnyEventTask t3 = MakeTask( [] { return AnyEvent( 8, "Marisa" ); } );
-    t3.Link( queue );
+    AnyEventTask t4 = MakeTask( [] { return AnyEvent( 8, "Marisa" ); } );
+    t4.Link( queue );
 
-    t3.Run();
+    t4.Run();
 
-    AnyEvent e3;
-    CHECK( queue.TryPop( e3 ));
-    CHECK( 8 == e3.Id() );
-    CHECK( "Marisa" == e3.Value< std::string >() );
+    AnyEvent e4;
+    CHECK( queue.TryPop( e4 ));
+    CHECK( 8 == e4.Id() );
+    CHECK( "Marisa" == e4.Value< std::string >() );
 }
 
 } // SUITE AnyEventTaskSuite
