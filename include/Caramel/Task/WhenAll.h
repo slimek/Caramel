@@ -33,7 +33,7 @@ namespace Caramel
 //
 
 template< typename TaskSequence, typename Function >
-inline void WhenAll( const std::string& name, const TaskSequence& tasks, Function f );
+inline void WhenAll( std::string name, const TaskSequence& tasks, Function f );
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -46,7 +46,7 @@ class WhenAllWrapper : public std::enable_shared_from_this< WhenAllWrapper< Func
 {
 public:
     
-    WhenAllWrapper( const std::string& name, Function&& f, Usize numTasks );
+    WhenAllWrapper( std::string name, Function&& f, Usize numTasks );
 
     void CompleteOne( const Task< void >& task );
 
@@ -66,7 +66,7 @@ private:
 //
 
 template< typename TaskSequence, typename Function >
-inline void WhenAll( const std::string& name, const TaskSequence& tasks, Function f )
+inline void WhenAll( std::string name, const TaskSequence& tasks, Function f )
 {
     const auto numTasks = tasks.size();
 
@@ -76,7 +76,7 @@ inline void WhenAll( const std::string& name, const TaskSequence& tasks, Functio
     }
 
     auto whenAllWrapper =
-        std::make_shared< WhenAllWrapper< Function > >( name, std::move( f ), numTasks );
+        std::make_shared< WhenAllWrapper< Function > >( std::move( name ), std::move( f ), numTasks );
 
     for ( auto task : tasks )
     {
@@ -91,9 +91,9 @@ inline void WhenAll( const std::string& name, const TaskSequence& tasks, Functio
 
 template< typename Function >
 inline WhenAllWrapper< Function >::WhenAllWrapper(
-    const std::string& name, Function&& f, Usize numTasks
+    std::string name, Function&& f, Usize numTasks
 )
-    : m_name( name )
+    : m_name( std::move( name ))
     , m_function( std::move( f ))
     , m_numTasks( numTasks )
     , m_completeCount( 0 )
