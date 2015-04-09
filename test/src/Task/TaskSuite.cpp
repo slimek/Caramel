@@ -322,6 +322,29 @@ TEST( TaskThenSuite )
     CHECK( ! result5.exception );
 
     CHECK( "Task5-Then" == then5.Name() );
+
+
+    /// Continuation with Value ///
+
+    auto task6 = MakeTask( "Task6", [] { return std::string( "Youmu" ); });
+
+    // by task
+    auto then6t = task6.Then( [] ( const Task< std::string >& task ) { return task.GetResult(); } );
+
+    // by const reference
+    auto then6r = task6.Then( [] ( const std::string& name ) -> std::string { return name + "-ref"; } );
+
+    // by copy
+    auto then6c = task6.Then( [] ( std::string name ) { return name + "-copy"; } );
+
+    async.Submit( task6 );
+    then6t.Wait();
+    then6r.Wait();
+    then6c.Wait();
+
+    CHECK( "Youmu"      == then6t.GetResult() );
+    CHECK( "Youmu-ref"  == then6r.GetResult() );
+    CHECK( "Youmu-copy" == then6c.GetResult() );
 }
 
 

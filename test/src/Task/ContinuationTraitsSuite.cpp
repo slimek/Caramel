@@ -80,6 +80,10 @@ TEST( ContinuationFromIntTraitsTest )
         auto t2v = wi.HolderOf( [] ( Task< Int > ) {} );
 
         CHECK(( true == std::is_same< TypeT< Detail::ThenWithTaskTask< void, Int >>, decltype( t2v ) >::value ));
+
+        auto i2v = wi.HolderOf( [] ( Int ) {} );
+
+        CHECK(( true == std::is_same< TypeT< Detail::ThenWithValueTask< void, Int >>, decltype( i2v ) >::value ));
     }
 
     /// Task Type ///
@@ -95,6 +99,12 @@ TEST( ContinuationFromIntTraitsTest )
 
         CHECK(( true == std::is_same< TypeT< Task< void >>, decltype( t2v ) >::value ));
         CHECK(( true == std::is_same< TypeT< Task< Int >>,  decltype( t2i ) >::value ));
+
+        auto i2v = wi.TaskOf( [] ( Int ) {} );
+        auto i2i = wi.TaskOf( [] ( Int ) -> Int { return 42; } );
+
+        CHECK(( true == std::is_same< TypeT< Task< void >>, decltype( i2v ) >::value ));
+        CHECK(( true == std::is_same< TypeT< Task< Int >>,  decltype( i2i ) >::value ));
     }
 } 
 

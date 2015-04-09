@@ -154,6 +154,53 @@ private:
 
 
 //
+// "Then with Value" Task
+//
+
+template< typename Result, typename AnteResult >
+class ThenWithValueTask : public BasicTask< Result >
+{
+public:
+
+    using typename BasicTask< Result >::ResultType;
+    using BasicTask< Result >::m_result;
+
+    typedef std::function< Result( AnteResult ) > ThenFunction;
+
+    ThenWithValueTask( ThenFunction&& f, Task< AnteResult > antecedent );
+
+    void Invoke() override;
+
+private:
+
+    ThenFunction m_thenFunction;
+    Task< AnteResult > m_antecedent;
+};
+
+
+//
+// "Then with Value" Task - No Result
+//
+
+template< typename AnteResult >
+class ThenWithValueTask< void, AnteResult > : public BasicTask< void >
+{
+public:
+
+    typedef std::function< void( AnteResult ) > ThenFunction;
+
+    ThenWithValueTask( ThenFunction&& f, Task< AnteResult > antecedent );
+
+    void Invoke() override;
+
+private:
+
+    ThenFunction m_thenFunction;
+    Task< AnteResult > m_antecedent;
+};
+
+
+//
 // "Then with Void" Task 
 //
 
@@ -218,7 +265,6 @@ template< typename Result >
 inline void RegularTask< Result >::Invoke()
 {
     m_result = m_function();
-
 }
 
 
@@ -273,6 +319,44 @@ template< typename AnteResult >
 inline void ThenWithTaskTask< void, AnteResult >::Invoke()
 {
     m_thenFunction( m_antecedent );
+}
+
+
+//
+// ThenWithValueTask< Result >
+//
+
+template< typename Result, typename AnteResult >
+inline ThenWithValueTask< Result, AnteResult >::ThenWithValueTask( ThenFunction&& f, Task< AnteResult > antecedent )
+    : m_thenFunction( std::move( f ))
+    , m_antecedent( antecedent )
+{
+}
+
+
+template< typename Result, typename AnteResult >
+inline void ThenWithValueTask< Result, AnteResult >::Invoke()
+{
+    m_result = m_thenFunction( m_antecedent.GetResult() );
+}
+
+
+//
+// ThenWithValueTask< void >
+//
+
+template< typename AnteResult >
+inline ThenWithValueTask< void, AnteResult >::ThenWithValueTask( ThenFunction&& f, Task< AnteResult > antecedent )
+    : m_thenFunction( std::move( f ))
+    , m_antecedent( antecedent )
+{
+}
+
+
+template< typename AnteResult >
+inline void ThenWithValueTask< void, AnteResult >::Invoke()
+{
+    m_thenFunction( m_antecedent.GetResult() );
 }
 
 

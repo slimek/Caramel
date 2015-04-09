@@ -58,6 +58,13 @@ template< typename Function, typename Type >
 std::false_type TakesTaskHelper( Type t, Function func, int, ... );
 
 
+template< typename Function, typename Type >
+auto TakesValueHelper( Type t, Function func, int, int ) -> decltype( func( t ), std::true_type() );
+
+template< typename Function, typename Type >
+std::false_type TakesValueHelper( Type t, Function func, int, ... );
+
+
 template< typename Function >
 auto VoidReturnTypeHelper( Function func, int, int ) -> decltype( func( ToTaskVoid( func )));
 
@@ -81,6 +88,7 @@ struct ThenFunctionTraits
 {
     typedef decltype( ReturnTypeHelper( Declval< AnteResult >(), Declval< ThenFunction >(), 0, 0 )) ResultType;
     typedef decltype( TakesTaskHelper ( Declval< AnteResult >(), Declval< ThenFunction >(), 0, 0 )) TakesTask;
+    typedef decltype( TakesValueHelper( Declval< AnteResult >(), Declval< ThenFunction >(), 0, 0 )) TakesValue;
 };
 
 
@@ -105,7 +113,12 @@ struct ContinuationTraits
     <
         ThenFunctionTraits< ThenFunction, AnteResult >::TakesTask::value,
         ThenWithTaskTask< ResultType, AnteResult >,
-        ThenWithVoidTask< ResultType >
+        typename std::conditional
+        <
+            ThenFunctionTraits< ThenFunction, AnteResult >::TakesValue::value,
+            ThenWithValueTask< ResultType, AnteResult >,
+            ThenWithVoidTask< ResultType >
+        >::type
 
     >::type HolderType;
 
