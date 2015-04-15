@@ -13,10 +13,9 @@ namespace Caramel
 SUITE( AnyEventTaskSuite )
 {
 
-static AnyEventTask TaskYukari()
+static AnyEventTask TaskYukari( StdAsync& async )
 {
     auto task = MakeTask( [] { return AnyEvent( 2, "Yukari" ); });
-    StdAsync async;
     async.Submit( task );
     return task;
 }
@@ -60,8 +59,9 @@ TEST( AnyEventTaskTest )
 
     Int id3 = 0;
     std::string value3;
+    StdAsync async;
 
-    auto t3 = TaskYukari().Then(
+    auto t3 = TaskYukari( async ).Then(
     [&] ( const AnyEvent& event )
     {
         id3 = event.Id();
