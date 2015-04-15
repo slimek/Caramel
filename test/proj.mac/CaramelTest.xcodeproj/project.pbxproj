@@ -7,87 +7,90 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0150A9DF1990E5B20037F11B /* FlagsSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A97C1990E5B20037F11B /* FlagsSuite.cpp */; };
-		0150A9E01990E5B20037F11B /* PowerOfTwoSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A97D1990E5B20037F11B /* PowerOfTwoSuite.cpp */; };
-		0150A9E11990E5B20037F11B /* AnyEventDispatcherSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A97F1990E5B20037F11B /* AnyEventDispatcherSuite.cpp */; };
-		0150A9E21990E5B20037F11B /* AnyEventHandlerSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9801990E5B20037F11B /* AnyEventHandlerSuite.cpp */; };
-		0150A9E31990E5B20037F11B /* AnyEventQueueSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9811990E5B20037F11B /* AnyEventQueueSuite.cpp */; };
-		0150A9E41990E5B20037F11B /* AnyEventSlotSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9821990E5B20037F11B /* AnyEventSlotSuite.cpp */; };
-		0150A9E51990E5B20037F11B /* AnyEventSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9831990E5B20037F11B /* AnyEventSuite.cpp */; };
-		0150A9E61990E5B20037F11B /* FlowStateSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9841990E5B20037F11B /* FlowStateSuite.cpp */; };
-		0150A9E71990E5B20037F11B /* ValueChangeSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9851990E5B20037F11B /* ValueChangeSuite.cpp */; };
-		0150A9E81990E5B20037F11B /* CaramelTestPch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9861990E5B20037F11B /* CaramelTestPch.cpp */; };
-		0150A9E91990E5B20037F11B /* ClockProxySuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9891990E5B20037F11B /* ClockProxySuite.cpp */; };
-		0150A9EA1990E5B20037F11B /* SecondClockSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A98A1990E5B20037F11B /* SecondClockSuite.cpp */; };
-		0150A9EB1990E5B20037F11B /* TickClockSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A98B1990E5B20037F11B /* TickClockSuite.cpp */; };
-		0150A9EC1990E5B20037F11B /* TimedBoolSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A98C1990E5B20037F11B /* TimedBoolSuite.cpp */; };
-		0150A9ED1990E5B20037F11B /* ConcurrentBlockingQueueSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A98E1990E5B20037F11B /* ConcurrentBlockingQueueSuite.cpp */; };
-		0150A9EE1990E5B20037F11B /* ConcurrentIntervalSetSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A98F1990E5B20037F11B /* ConcurrentIntervalSetSuite.cpp */; };
-		0150A9EF1990E5B20037F11B /* ConcurrentMapSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9901990E5B20037F11B /* ConcurrentMapSuite.cpp */; };
-		0150A9F01990E5B20037F11B /* ConcurrentPriorityQueueSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9911990E5B20037F11B /* ConcurrentPriorityQueueSuite.cpp */; };
-		0150A9F11990E5B20037F11B /* ConcurrentQueueSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9921990E5B20037F11B /* ConcurrentQueueSuite.cpp */; };
-		0150A9F21990E5B20037F11B /* ConcurrentSetSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9931990E5B20037F11B /* ConcurrentSetSuite.cpp */; };
-		0150A9F31990E5B20037F11B /* ConcurrentStackSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9941990E5B20037F11B /* ConcurrentStackSuite.cpp */; };
-		0150A9F41990E5B20037F11B /* Base64Suite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9961990E5B20037F11B /* Base64Suite.cpp */; };
-		0150A9F51990E5B20037F11B /* LookupTableSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9971990E5B20037F11B /* LookupTableSuite.cpp */; };
-		0150A9F61990E5B20037F11B /* DateSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9991990E5B20037F11B /* DateSuite.cpp */; };
-		0150A9F71990E5B20037F11B /* DateTimeBoolSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A99A1990E5B20037F11B /* DateTimeBoolSuite.cpp */; };
-		0150A9F81990E5B20037F11B /* DateTimeSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A99B1990E5B20037F11B /* DateTimeSuite.cpp */; };
-		0150A9F91990E5B20037F11B /* TimeOfDaySuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A99C1990E5B20037F11B /* TimeOfDaySuite.cpp */; };
-		0150A9FA1990E5B20037F11B /* TimeSpanSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A99D1990E5B20037F11B /* TimeSpanSuite.cpp */; };
-		0150A9FB1990E5B20037F11B /* IniDocumentSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A99F1990E5B20037F11B /* IniDocumentSuite.cpp */; };
-		0150A9FC1990E5B20037F11B /* AlertSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9A31990E5B20037F11B /* AlertSuite.cpp */; };
-		0150A9FD1990E5B20037F11B /* AnyFailureSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9A41990E5B20037F11B /* AnyFailureSuite.cpp */; };
-		0150A9FE1990E5B20037F11B /* CatchExceptionSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9A51990E5B20037F11B /* CatchExceptionSuite.cpp */; };
-		0150A9FF1990E5B20037F11B /* ExceptionPtrSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9A61990E5B20037F11B /* ExceptionPtrSuite.cpp */; };
-		0150AA001990E5B20037F11B /* DirectoryInfoSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9A81990E5B20037F11B /* DirectoryInfoSuite.cpp */; };
-		0150AA011990E5B20037F11B /* PathSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9A91990E5B20037F11B /* PathSuite.cpp */; };
-		0150AA021990E5B20037F11B /* BindSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9AB1990E5B20037F11B /* BindSuite.cpp */; };
-		0150AA031990E5B20037F11B /* TextStreamWriterSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9AD1990E5B20037F11B /* TextStreamWriterSuite.cpp */; };
-		0150AA041990E5B20037F11B /* LexicalBooleanSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9AF1990E5B20037F11B /* LexicalBooleanSuite.cpp */; };
-		0150AA051990E5B20037F11B /* LexicalFloatingSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9B01990E5B20037F11B /* LexicalFloatingSuite.cpp */; };
-		0150AA061990E5B20037F11B /* LexicalIntegerSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9B11990E5B20037F11B /* LexicalIntegerSuite.cpp */; };
-		0150AA071990E5B20037F11B /* SharedPtrUtilsSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9B31990E5B20037F11B /* SharedPtrUtilsSuite.cpp */; };
-		0150AA081990E5B20037F11B /* IsGeneralStringSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9B51990E5B20037F11B /* IsGeneralStringSuite.cpp */; };
-		0150AA091990E5B20037F11B /* NumberTraitsSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9B71990E5B20037F11B /* NumberTraitsSuite.cpp */; };
-		0150AA0A1990E5B20037F11B /* UnionBitsSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9B81990E5B20037F11B /* UnionBitsSuite.cpp */; };
-		0150AA0B1990E5B20037F11B /* UniformRandomSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9BA1990E5B20037F11B /* UniformRandomSuite.cpp */; };
-		0150AA0C1990E5B20037F11B /* WeightedRandomMapSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9BB1990E5B20037F11B /* WeightedRandomMapSuite.cpp */; };
-		0150AA0D1990E5B20037F11B /* RunTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9BC1990E5B20037F11B /* RunTest.cpp */; };
-		0150AA0E1990E5B20037F11B /* StateMachineSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9BE1990E5B20037F11B /* StateMachineSuite.cpp */; };
-		0150AA0F1990E5B20037F11B /* FormatSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9C01990E5B20037F11B /* FormatSuite.cpp */; };
-		0150AA101990E5B20037F11B /* SplitSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9C11990E5B20037F11B /* SplitSuite.cpp */; };
-		0150AA121990E5B20037F11B /* StringAlgorithmSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9C31990E5B20037F11B /* StringAlgorithmSuite.cpp */; };
-		0150AA131990E5B20037F11B /* StringToStringSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9C41990E5B20037F11B /* StringToStringSuite.cpp */; };
-		0150AA141990E5B20037F11B /* Utf8StringSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9C51990E5B20037F11B /* Utf8StringSuite.cpp */; };
-		0150AA151990E5B20037F11B /* ContinuationTraitsSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9C71990E5B20037F11B /* ContinuationTraitsSuite.cpp */; };
-		0150AA161990E5B20037F11B /* StdAsyncSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9C81990E5B20037F11B /* StdAsyncSuite.cpp */; };
-		0150AA171990E5B20037F11B /* TaskPollerSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9C91990E5B20037F11B /* TaskPollerSuite.cpp */; };
-		0150AA181990E5B20037F11B /* TaskSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9CA1990E5B20037F11B /* TaskSuite.cpp */; };
-		0150AA191990E5B20037F11B /* ThreadPoolSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9CB1990E5B20037F11B /* ThreadPoolSuite.cpp */; };
-		0150AA1A1990E5B20037F11B /* WhenAllSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9CC1990E5B20037F11B /* WhenAllSuite.cpp */; };
-		0150AA1B1990E5B20037F11B /* WorkerThreadSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9CD1990E5B20037F11B /* WorkerThreadSuite.cpp */; };
-		0150AA1C1990E5B20037F11B /* LoopThreadGroupSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9CF1990E5B20037F11B /* LoopThreadGroupSuite.cpp */; };
-		0150AA1D1990E5B20037F11B /* SpinMutexSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9D01990E5B20037F11B /* SpinMutexSuite.cpp */; };
-		0150AA1E1990E5B20037F11B /* ThreadSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9D11990E5B20037F11B /* ThreadSuite.cpp */; };
-		0150AA1F1990E5B20037F11B /* WaitableBoolSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9D21990E5B20037F11B /* WaitableBoolSuite.cpp */; };
-		0150AA201990E5B20037F11B /* TraceChannelSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9D41990E5B20037F11B /* TraceChannelSuite.cpp */; };
-		0150AA211990E5B20037F11B /* TraceSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9D51990E5B20037F11B /* TraceSuite.cpp */; };
-		0150AA221990E5B20037F11B /* AnySuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9DA1990E5B20037F11B /* AnySuite.cpp */; };
-		0150AA231990E5B20037F11B /* NamedValuesSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9DB1990E5B20037F11B /* NamedValuesSuite.cpp */; };
-		0150AA241990E5B20037F11B /* SharedArraySuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0150A9DC1990E5B20037F11B /* SharedArraySuite.cpp */; };
-		0155AB69199C92B100B78527 /* PromptStateMachineSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0155AB68199C92B100B78527 /* PromptStateMachineSuite.cpp */; };
-		01B6B8361A9C267300404118 /* TryCatchResultSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01B6B8351A9C267300404118 /* TryCatchResultSuite.cpp */; };
-		01B6B8381A9C268900404118 /* InputMemoryStreamSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01B6B8371A9C268900404118 /* InputMemoryStreamSuite.cpp */; };
-		01B6B83A1A9C269A00404118 /* LexicalVersionSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01B6B8391A9C269A00404118 /* LexicalVersionSuite.cpp */; };
-		01B6B83C1A9C26A900404118 /* MetaRangeSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01B6B83B1A9C26A900404118 /* MetaRangeSuite.cpp */; };
-		01B6B83F1A9C26BA00404118 /* NumberConverterSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01B6B83D1A9C26BA00404118 /* NumberConverterSuite.cpp */; };
-		01B6B8401A9C26BA00404118 /* NumberRelationSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01B6B83E1A9C26BA00404118 /* NumberRelationSuite.cpp */; };
-		01B6B8421A9C26CE00404118 /* StringConvertibleSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01B6B8411A9C26CE00404118 /* StringConvertibleSuite.cpp */; };
-		01B6B8441A9C26E400404118 /* TaskTimerSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01B6B8431A9C26E400404118 /* TaskTimerSuite.cpp */; };
-		01B6B8461A9C270D00404118 /* LockGuardSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01B6B8451A9C270D00404118 /* LockGuardSuite.cpp */; };
-		01B6B84C1A9C273B00404118 /* EnumFlagsSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01B6B84A1A9C273B00404118 /* EnumFlagsSuite.cpp */; };
-		01B6B84D1A9C273B00404118 /* ScalarSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01B6B84B1A9C273B00404118 /* ScalarSuite.cpp */; };
+		01498D931ADE543200B58EDC /* FlagsSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D1F1ADE543200B58EDC /* FlagsSuite.cpp */; };
+		01498D941ADE543200B58EDC /* PowerOfTwoSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D201ADE543200B58EDC /* PowerOfTwoSuite.cpp */; };
+		01498D951ADE543200B58EDC /* AnyEventDispatcherSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D221ADE543200B58EDC /* AnyEventDispatcherSuite.cpp */; };
+		01498D961ADE543200B58EDC /* AnyEventHandlerSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D231ADE543200B58EDC /* AnyEventHandlerSuite.cpp */; };
+		01498D971ADE543200B58EDC /* AnyEventQueueSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D241ADE543200B58EDC /* AnyEventQueueSuite.cpp */; };
+		01498D981ADE543200B58EDC /* AnyEventReactorSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D251ADE543200B58EDC /* AnyEventReactorSuite.cpp */; };
+		01498D991ADE543200B58EDC /* AnyEventSlotSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D261ADE543200B58EDC /* AnyEventSlotSuite.cpp */; };
+		01498D9A1ADE543200B58EDC /* AnyEventSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D271ADE543200B58EDC /* AnyEventSuite.cpp */; };
+		01498D9B1ADE543200B58EDC /* AnyEventTaskSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D281ADE543200B58EDC /* AnyEventTaskSuite.cpp */; };
+		01498D9C1ADE543200B58EDC /* FlowStateSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D291ADE543200B58EDC /* FlowStateSuite.cpp */; };
+		01498D9D1ADE543200B58EDC /* ValueChangeSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D2A1ADE543200B58EDC /* ValueChangeSuite.cpp */; };
+		01498D9E1ADE543200B58EDC /* CaramelTestPch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D2B1ADE543200B58EDC /* CaramelTestPch.cpp */; };
+		01498D9F1ADE543200B58EDC /* ClockProxySuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D2E1ADE543200B58EDC /* ClockProxySuite.cpp */; };
+		01498DA01ADE543200B58EDC /* SecondClockSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D2F1ADE543200B58EDC /* SecondClockSuite.cpp */; };
+		01498DA11ADE543200B58EDC /* TickClockSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D301ADE543200B58EDC /* TickClockSuite.cpp */; };
+		01498DA21ADE543200B58EDC /* TimedBoolSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D311ADE543200B58EDC /* TimedBoolSuite.cpp */; };
+		01498DA31ADE543200B58EDC /* ConcurrentBlockingQueueSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D331ADE543200B58EDC /* ConcurrentBlockingQueueSuite.cpp */; };
+		01498DA41ADE543200B58EDC /* ConcurrentIntervalSetSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D341ADE543200B58EDC /* ConcurrentIntervalSetSuite.cpp */; };
+		01498DA51ADE543200B58EDC /* ConcurrentMapSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D351ADE543200B58EDC /* ConcurrentMapSuite.cpp */; };
+		01498DA61ADE543200B58EDC /* ConcurrentPriorityQueueSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D361ADE543200B58EDC /* ConcurrentPriorityQueueSuite.cpp */; };
+		01498DA71ADE543200B58EDC /* ConcurrentQueueSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D371ADE543200B58EDC /* ConcurrentQueueSuite.cpp */; };
+		01498DA81ADE543200B58EDC /* ConcurrentSetSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D381ADE543200B58EDC /* ConcurrentSetSuite.cpp */; };
+		01498DA91ADE543200B58EDC /* ConcurrentStackSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D391ADE543200B58EDC /* ConcurrentStackSuite.cpp */; };
+		01498DAA1ADE543200B58EDC /* ConfigurationSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D3B1ADE543200B58EDC /* ConfigurationSuite.cpp */; };
+		01498DAB1ADE543200B58EDC /* Base64Suite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D3D1ADE543200B58EDC /* Base64Suite.cpp */; };
+		01498DAC1ADE543200B58EDC /* LookupTableSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D3E1ADE543200B58EDC /* LookupTableSuite.cpp */; };
+		01498DAD1ADE543200B58EDC /* DateSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D401ADE543200B58EDC /* DateSuite.cpp */; };
+		01498DAE1ADE543200B58EDC /* DateTimeBoolSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D411ADE543200B58EDC /* DateTimeBoolSuite.cpp */; };
+		01498DAF1ADE543200B58EDC /* DateTimeSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D421ADE543200B58EDC /* DateTimeSuite.cpp */; };
+		01498DB01ADE543200B58EDC /* TimeOfDaySuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D431ADE543200B58EDC /* TimeOfDaySuite.cpp */; };
+		01498DB11ADE543200B58EDC /* TimeSpanSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D441ADE543200B58EDC /* TimeSpanSuite.cpp */; };
+		01498DB21ADE543200B58EDC /* IniDocumentSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D461ADE543200B58EDC /* IniDocumentSuite.cpp */; };
+		01498DB31ADE543200B58EDC /* AlertSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D481ADE543200B58EDC /* AlertSuite.cpp */; };
+		01498DB41ADE543200B58EDC /* AnyFailureSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D491ADE543200B58EDC /* AnyFailureSuite.cpp */; };
+		01498DB51ADE543200B58EDC /* CatchExceptionSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D4A1ADE543200B58EDC /* CatchExceptionSuite.cpp */; };
+		01498DB61ADE543200B58EDC /* ExceptionPtrSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D4B1ADE543200B58EDC /* ExceptionPtrSuite.cpp */; };
+		01498DB71ADE543200B58EDC /* TryCatchResultSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D4C1ADE543200B58EDC /* TryCatchResultSuite.cpp */; };
+		01498DB81ADE543200B58EDC /* DirectoryInfoSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D4E1ADE543200B58EDC /* DirectoryInfoSuite.cpp */; };
+		01498DB91ADE543200B58EDC /* PathSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D4F1ADE543200B58EDC /* PathSuite.cpp */; };
+		01498DBA1ADE543200B58EDC /* BindSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D511ADE543200B58EDC /* BindSuite.cpp */; };
+		01498DBB1ADE543200B58EDC /* InputMemoryStreamSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D531ADE543200B58EDC /* InputMemoryStreamSuite.cpp */; };
+		01498DBC1ADE543200B58EDC /* TextStreamWriterSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D541ADE543200B58EDC /* TextStreamWriterSuite.cpp */; };
+		01498DBD1ADE543200B58EDC /* LexicalBooleanSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D561ADE543200B58EDC /* LexicalBooleanSuite.cpp */; };
+		01498DBE1ADE543200B58EDC /* LexicalFloatingSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D571ADE543200B58EDC /* LexicalFloatingSuite.cpp */; };
+		01498DBF1ADE543200B58EDC /* LexicalIntegerSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D581ADE543200B58EDC /* LexicalIntegerSuite.cpp */; };
+		01498DC01ADE543200B58EDC /* LexicalVersionSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D591ADE543200B58EDC /* LexicalVersionSuite.cpp */; };
+		01498DC11ADE543200B58EDC /* SharedPtrUtilsSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D5B1ADE543200B58EDC /* SharedPtrUtilsSuite.cpp */; };
+		01498DC21ADE543200B58EDC /* IsGeneralStringSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D5D1ADE543200B58EDC /* IsGeneralStringSuite.cpp */; };
+		01498DC31ADE543200B58EDC /* MetaRangeSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D5E1ADE543200B58EDC /* MetaRangeSuite.cpp */; };
+		01498DC41ADE543200B58EDC /* NumberConverterSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D601ADE543200B58EDC /* NumberConverterSuite.cpp */; };
+		01498DC51ADE543200B58EDC /* NumberRelationSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D611ADE543200B58EDC /* NumberRelationSuite.cpp */; };
+		01498DC61ADE543200B58EDC /* NumberTraitsSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D621ADE543200B58EDC /* NumberTraitsSuite.cpp */; };
+		01498DC71ADE543200B58EDC /* UnionBitsSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D631ADE543200B58EDC /* UnionBitsSuite.cpp */; };
+		01498DC81ADE543200B58EDC /* UniformRandomSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D651ADE543200B58EDC /* UniformRandomSuite.cpp */; };
+		01498DC91ADE543200B58EDC /* WeightedRandomMapSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D661ADE543200B58EDC /* WeightedRandomMapSuite.cpp */; };
+		01498DCA1ADE543200B58EDC /* RunTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D671ADE543200B58EDC /* RunTest.cpp */; };
+		01498DCB1ADE543200B58EDC /* PromptStateMachineSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D691ADE543200B58EDC /* PromptStateMachineSuite.cpp */; };
+		01498DCC1ADE543200B58EDC /* StateMachineSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D6A1ADE543200B58EDC /* StateMachineSuite.cpp */; };
+		01498DCD1ADE543200B58EDC /* FormatSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D6C1ADE543200B58EDC /* FormatSuite.cpp */; };
+		01498DCE1ADE543200B58EDC /* SplitSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D6D1ADE543200B58EDC /* SplitSuite.cpp */; };
+		01498DCF1ADE543200B58EDC /* StringAlgorithmSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D6E1ADE543200B58EDC /* StringAlgorithmSuite.cpp */; };
+		01498DD01ADE543200B58EDC /* StringConvertibleSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D6F1ADE543200B58EDC /* StringConvertibleSuite.cpp */; };
+		01498DD11ADE543200B58EDC /* StringToStringSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D701ADE543200B58EDC /* StringToStringSuite.cpp */; };
+		01498DD21ADE543200B58EDC /* Utf8StringSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D711ADE543200B58EDC /* Utf8StringSuite.cpp */; };
+		01498DD31ADE543200B58EDC /* ContinuationTraitsSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D731ADE543200B58EDC /* ContinuationTraitsSuite.cpp */; };
+		01498DD41ADE543200B58EDC /* StdAsyncSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D741ADE543200B58EDC /* StdAsyncSuite.cpp */; };
+		01498DD51ADE543200B58EDC /* TaskPollerSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D751ADE543200B58EDC /* TaskPollerSuite.cpp */; };
+		01498DD61ADE543200B58EDC /* TaskSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D761ADE543200B58EDC /* TaskSuite.cpp */; };
+		01498DD71ADE543200B58EDC /* TaskTimerSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D771ADE543200B58EDC /* TaskTimerSuite.cpp */; };
+		01498DD81ADE543200B58EDC /* ThreadPoolSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D781ADE543200B58EDC /* ThreadPoolSuite.cpp */; };
+		01498DD91ADE543200B58EDC /* WhenAllSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D791ADE543200B58EDC /* WhenAllSuite.cpp */; };
+		01498DDA1ADE543200B58EDC /* WorkerThreadSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D7A1ADE543200B58EDC /* WorkerThreadSuite.cpp */; };
+		01498DDB1ADE543200B58EDC /* LockGuardSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D7C1ADE543200B58EDC /* LockGuardSuite.cpp */; };
+		01498DDC1ADE543200B58EDC /* LoopThreadGroupSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D7D1ADE543200B58EDC /* LoopThreadGroupSuite.cpp */; };
+		01498DDD1ADE543200B58EDC /* SpinMutexSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D7E1ADE543200B58EDC /* SpinMutexSuite.cpp */; };
+		01498DDE1ADE543200B58EDC /* ThreadSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D7F1ADE543200B58EDC /* ThreadSuite.cpp */; };
+		01498DDF1ADE543200B58EDC /* WaitableBoolSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D801ADE543200B58EDC /* WaitableBoolSuite.cpp */; };
+		01498DE01ADE543200B58EDC /* TraceChannelSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D821ADE543200B58EDC /* TraceChannelSuite.cpp */; };
+		01498DE11ADE543200B58EDC /* TraceSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D831ADE543200B58EDC /* TraceSuite.cpp */; };
+		01498DE21ADE543200B58EDC /* AnySuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D8B1ADE543200B58EDC /* AnySuite.cpp */; };
+		01498DE31ADE543200B58EDC /* EnumFlagsSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D8C1ADE543200B58EDC /* EnumFlagsSuite.cpp */; };
+		01498DE41ADE543200B58EDC /* NamedValuesSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D8D1ADE543200B58EDC /* NamedValuesSuite.cpp */; };
+		01498DE51ADE543200B58EDC /* ScalarSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D8E1ADE543200B58EDC /* ScalarSuite.cpp */; };
+		01498DE61ADE543200B58EDC /* SharedArraySuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D8F1ADE543200B58EDC /* SharedArraySuite.cpp */; };
 		6AAF38F11849D3B00010FAF1 /* libCaramel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AAF38F01849D3940010FAF1 /* libCaramel.a */; };
 /* End PBXBuildFile section */
 
@@ -114,98 +117,101 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0150A97C1990E5B20037F11B /* FlagsSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FlagsSuite.cpp; sourceTree = "<group>"; };
-		0150A97D1990E5B20037F11B /* PowerOfTwoSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PowerOfTwoSuite.cpp; sourceTree = "<group>"; };
-		0150A97F1990E5B20037F11B /* AnyEventDispatcherSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnyEventDispatcherSuite.cpp; sourceTree = "<group>"; };
-		0150A9801990E5B20037F11B /* AnyEventHandlerSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnyEventHandlerSuite.cpp; sourceTree = "<group>"; };
-		0150A9811990E5B20037F11B /* AnyEventQueueSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnyEventQueueSuite.cpp; sourceTree = "<group>"; };
-		0150A9821990E5B20037F11B /* AnyEventSlotSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnyEventSlotSuite.cpp; sourceTree = "<group>"; };
-		0150A9831990E5B20037F11B /* AnyEventSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnyEventSuite.cpp; sourceTree = "<group>"; };
-		0150A9841990E5B20037F11B /* FlowStateSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FlowStateSuite.cpp; sourceTree = "<group>"; };
-		0150A9851990E5B20037F11B /* ValueChangeSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ValueChangeSuite.cpp; sourceTree = "<group>"; };
-		0150A9861990E5B20037F11B /* CaramelTestPch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CaramelTestPch.cpp; sourceTree = "<group>"; };
-		0150A9871990E5B20037F11B /* CaramelTestPch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaramelTestPch.h; sourceTree = "<group>"; };
-		0150A9891990E5B20037F11B /* ClockProxySuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClockProxySuite.cpp; sourceTree = "<group>"; };
-		0150A98A1990E5B20037F11B /* SecondClockSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SecondClockSuite.cpp; sourceTree = "<group>"; };
-		0150A98B1990E5B20037F11B /* TickClockSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TickClockSuite.cpp; sourceTree = "<group>"; };
-		0150A98C1990E5B20037F11B /* TimedBoolSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimedBoolSuite.cpp; sourceTree = "<group>"; };
-		0150A98E1990E5B20037F11B /* ConcurrentBlockingQueueSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConcurrentBlockingQueueSuite.cpp; sourceTree = "<group>"; };
-		0150A98F1990E5B20037F11B /* ConcurrentIntervalSetSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConcurrentIntervalSetSuite.cpp; sourceTree = "<group>"; };
-		0150A9901990E5B20037F11B /* ConcurrentMapSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConcurrentMapSuite.cpp; sourceTree = "<group>"; };
-		0150A9911990E5B20037F11B /* ConcurrentPriorityQueueSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConcurrentPriorityQueueSuite.cpp; sourceTree = "<group>"; };
-		0150A9921990E5B20037F11B /* ConcurrentQueueSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConcurrentQueueSuite.cpp; sourceTree = "<group>"; };
-		0150A9931990E5B20037F11B /* ConcurrentSetSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConcurrentSetSuite.cpp; sourceTree = "<group>"; };
-		0150A9941990E5B20037F11B /* ConcurrentStackSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConcurrentStackSuite.cpp; sourceTree = "<group>"; };
-		0150A9961990E5B20037F11B /* Base64Suite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Base64Suite.cpp; sourceTree = "<group>"; };
-		0150A9971990E5B20037F11B /* LookupTableSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LookupTableSuite.cpp; sourceTree = "<group>"; };
-		0150A9991990E5B20037F11B /* DateSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DateSuite.cpp; sourceTree = "<group>"; };
-		0150A99A1990E5B20037F11B /* DateTimeBoolSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DateTimeBoolSuite.cpp; sourceTree = "<group>"; };
-		0150A99B1990E5B20037F11B /* DateTimeSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DateTimeSuite.cpp; sourceTree = "<group>"; };
-		0150A99C1990E5B20037F11B /* TimeOfDaySuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimeOfDaySuite.cpp; sourceTree = "<group>"; };
-		0150A99D1990E5B20037F11B /* TimeSpanSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimeSpanSuite.cpp; sourceTree = "<group>"; };
-		0150A99F1990E5B20037F11B /* IniDocumentSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IniDocumentSuite.cpp; sourceTree = "<group>"; };
-		0150A9A31990E5B20037F11B /* AlertSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AlertSuite.cpp; sourceTree = "<group>"; };
-		0150A9A41990E5B20037F11B /* AnyFailureSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnyFailureSuite.cpp; sourceTree = "<group>"; };
-		0150A9A51990E5B20037F11B /* CatchExceptionSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CatchExceptionSuite.cpp; sourceTree = "<group>"; };
-		0150A9A61990E5B20037F11B /* ExceptionPtrSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExceptionPtrSuite.cpp; sourceTree = "<group>"; };
-		0150A9A81990E5B20037F11B /* DirectoryInfoSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DirectoryInfoSuite.cpp; sourceTree = "<group>"; };
-		0150A9A91990E5B20037F11B /* PathSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PathSuite.cpp; sourceTree = "<group>"; };
-		0150A9AB1990E5B20037F11B /* BindSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BindSuite.cpp; sourceTree = "<group>"; };
-		0150A9AD1990E5B20037F11B /* TextStreamWriterSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextStreamWriterSuite.cpp; sourceTree = "<group>"; };
-		0150A9AF1990E5B20037F11B /* LexicalBooleanSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LexicalBooleanSuite.cpp; sourceTree = "<group>"; };
-		0150A9B01990E5B20037F11B /* LexicalFloatingSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LexicalFloatingSuite.cpp; sourceTree = "<group>"; };
-		0150A9B11990E5B20037F11B /* LexicalIntegerSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LexicalIntegerSuite.cpp; sourceTree = "<group>"; };
-		0150A9B31990E5B20037F11B /* SharedPtrUtilsSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SharedPtrUtilsSuite.cpp; sourceTree = "<group>"; };
-		0150A9B51990E5B20037F11B /* IsGeneralStringSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IsGeneralStringSuite.cpp; sourceTree = "<group>"; };
-		0150A9B71990E5B20037F11B /* NumberTraitsSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NumberTraitsSuite.cpp; sourceTree = "<group>"; };
-		0150A9B81990E5B20037F11B /* UnionBitsSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnionBitsSuite.cpp; sourceTree = "<group>"; };
-		0150A9BA1990E5B20037F11B /* UniformRandomSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UniformRandomSuite.cpp; sourceTree = "<group>"; };
-		0150A9BB1990E5B20037F11B /* WeightedRandomMapSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WeightedRandomMapSuite.cpp; sourceTree = "<group>"; };
-		0150A9BC1990E5B20037F11B /* RunTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RunTest.cpp; sourceTree = "<group>"; };
-		0150A9BE1990E5B20037F11B /* StateMachineSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StateMachineSuite.cpp; sourceTree = "<group>"; };
-		0150A9C01990E5B20037F11B /* FormatSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FormatSuite.cpp; sourceTree = "<group>"; };
-		0150A9C11990E5B20037F11B /* SplitSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SplitSuite.cpp; sourceTree = "<group>"; };
-		0150A9C31990E5B20037F11B /* StringAlgorithmSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StringAlgorithmSuite.cpp; sourceTree = "<group>"; };
-		0150A9C41990E5B20037F11B /* StringToStringSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StringToStringSuite.cpp; sourceTree = "<group>"; };
-		0150A9C51990E5B20037F11B /* Utf8StringSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utf8StringSuite.cpp; sourceTree = "<group>"; };
-		0150A9C71990E5B20037F11B /* ContinuationTraitsSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ContinuationTraitsSuite.cpp; sourceTree = "<group>"; };
-		0150A9C81990E5B20037F11B /* StdAsyncSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StdAsyncSuite.cpp; sourceTree = "<group>"; };
-		0150A9C91990E5B20037F11B /* TaskPollerSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TaskPollerSuite.cpp; sourceTree = "<group>"; };
-		0150A9CA1990E5B20037F11B /* TaskSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TaskSuite.cpp; sourceTree = "<group>"; };
-		0150A9CB1990E5B20037F11B /* ThreadPoolSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ThreadPoolSuite.cpp; sourceTree = "<group>"; };
-		0150A9CC1990E5B20037F11B /* WhenAllSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WhenAllSuite.cpp; sourceTree = "<group>"; };
-		0150A9CD1990E5B20037F11B /* WorkerThreadSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WorkerThreadSuite.cpp; sourceTree = "<group>"; };
-		0150A9CF1990E5B20037F11B /* LoopThreadGroupSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoopThreadGroupSuite.cpp; sourceTree = "<group>"; };
-		0150A9D01990E5B20037F11B /* SpinMutexSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpinMutexSuite.cpp; sourceTree = "<group>"; };
-		0150A9D11990E5B20037F11B /* ThreadSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ThreadSuite.cpp; sourceTree = "<group>"; };
-		0150A9D21990E5B20037F11B /* WaitableBoolSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WaitableBoolSuite.cpp; sourceTree = "<group>"; };
-		0150A9D41990E5B20037F11B /* TraceChannelSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TraceChannelSuite.cpp; sourceTree = "<group>"; };
-		0150A9D51990E5B20037F11B /* TraceSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TraceSuite.cpp; sourceTree = "<group>"; };
-		0150A9D71990E5B20037F11B /* SharedArrayUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedArrayUtils.h; sourceTree = "<group>"; };
-		0150A9D81990E5B20037F11B /* StdVectorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StdVectorUtils.h; sourceTree = "<group>"; };
-		0150A9DA1990E5B20037F11B /* AnySuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnySuite.cpp; sourceTree = "<group>"; };
-		0150A9DB1990E5B20037F11B /* NamedValuesSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NamedValuesSuite.cpp; sourceTree = "<group>"; };
-		0150A9DC1990E5B20037F11B /* SharedArraySuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SharedArraySuite.cpp; sourceTree = "<group>"; };
-		0155AB68199C92B100B78527 /* PromptStateMachineSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PromptStateMachineSuite.cpp; sourceTree = "<group>"; };
+		01498D1F1ADE543200B58EDC /* FlagsSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FlagsSuite.cpp; sourceTree = "<group>"; };
+		01498D201ADE543200B58EDC /* PowerOfTwoSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PowerOfTwoSuite.cpp; sourceTree = "<group>"; };
+		01498D221ADE543200B58EDC /* AnyEventDispatcherSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnyEventDispatcherSuite.cpp; sourceTree = "<group>"; };
+		01498D231ADE543200B58EDC /* AnyEventHandlerSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnyEventHandlerSuite.cpp; sourceTree = "<group>"; };
+		01498D241ADE543200B58EDC /* AnyEventQueueSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnyEventQueueSuite.cpp; sourceTree = "<group>"; };
+		01498D251ADE543200B58EDC /* AnyEventReactorSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnyEventReactorSuite.cpp; sourceTree = "<group>"; };
+		01498D261ADE543200B58EDC /* AnyEventSlotSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnyEventSlotSuite.cpp; sourceTree = "<group>"; };
+		01498D271ADE543200B58EDC /* AnyEventSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnyEventSuite.cpp; sourceTree = "<group>"; };
+		01498D281ADE543200B58EDC /* AnyEventTaskSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnyEventTaskSuite.cpp; sourceTree = "<group>"; };
+		01498D291ADE543200B58EDC /* FlowStateSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FlowStateSuite.cpp; sourceTree = "<group>"; };
+		01498D2A1ADE543200B58EDC /* ValueChangeSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ValueChangeSuite.cpp; sourceTree = "<group>"; };
+		01498D2B1ADE543200B58EDC /* CaramelTestPch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CaramelTestPch.cpp; sourceTree = "<group>"; };
+		01498D2C1ADE543200B58EDC /* CaramelTestPch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaramelTestPch.h; sourceTree = "<group>"; };
+		01498D2E1ADE543200B58EDC /* ClockProxySuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClockProxySuite.cpp; sourceTree = "<group>"; };
+		01498D2F1ADE543200B58EDC /* SecondClockSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SecondClockSuite.cpp; sourceTree = "<group>"; };
+		01498D301ADE543200B58EDC /* TickClockSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TickClockSuite.cpp; sourceTree = "<group>"; };
+		01498D311ADE543200B58EDC /* TimedBoolSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimedBoolSuite.cpp; sourceTree = "<group>"; };
+		01498D331ADE543200B58EDC /* ConcurrentBlockingQueueSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConcurrentBlockingQueueSuite.cpp; sourceTree = "<group>"; };
+		01498D341ADE543200B58EDC /* ConcurrentIntervalSetSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConcurrentIntervalSetSuite.cpp; sourceTree = "<group>"; };
+		01498D351ADE543200B58EDC /* ConcurrentMapSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConcurrentMapSuite.cpp; sourceTree = "<group>"; };
+		01498D361ADE543200B58EDC /* ConcurrentPriorityQueueSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConcurrentPriorityQueueSuite.cpp; sourceTree = "<group>"; };
+		01498D371ADE543200B58EDC /* ConcurrentQueueSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConcurrentQueueSuite.cpp; sourceTree = "<group>"; };
+		01498D381ADE543200B58EDC /* ConcurrentSetSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConcurrentSetSuite.cpp; sourceTree = "<group>"; };
+		01498D391ADE543200B58EDC /* ConcurrentStackSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConcurrentStackSuite.cpp; sourceTree = "<group>"; };
+		01498D3B1ADE543200B58EDC /* ConfigurationSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConfigurationSuite.cpp; sourceTree = "<group>"; };
+		01498D3D1ADE543200B58EDC /* Base64Suite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Base64Suite.cpp; sourceTree = "<group>"; };
+		01498D3E1ADE543200B58EDC /* LookupTableSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LookupTableSuite.cpp; sourceTree = "<group>"; };
+		01498D401ADE543200B58EDC /* DateSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DateSuite.cpp; sourceTree = "<group>"; };
+		01498D411ADE543200B58EDC /* DateTimeBoolSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DateTimeBoolSuite.cpp; sourceTree = "<group>"; };
+		01498D421ADE543200B58EDC /* DateTimeSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DateTimeSuite.cpp; sourceTree = "<group>"; };
+		01498D431ADE543200B58EDC /* TimeOfDaySuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimeOfDaySuite.cpp; sourceTree = "<group>"; };
+		01498D441ADE543200B58EDC /* TimeSpanSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimeSpanSuite.cpp; sourceTree = "<group>"; };
+		01498D461ADE543200B58EDC /* IniDocumentSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IniDocumentSuite.cpp; sourceTree = "<group>"; };
+		01498D481ADE543200B58EDC /* AlertSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AlertSuite.cpp; sourceTree = "<group>"; };
+		01498D491ADE543200B58EDC /* AnyFailureSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnyFailureSuite.cpp; sourceTree = "<group>"; };
+		01498D4A1ADE543200B58EDC /* CatchExceptionSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CatchExceptionSuite.cpp; sourceTree = "<group>"; };
+		01498D4B1ADE543200B58EDC /* ExceptionPtrSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExceptionPtrSuite.cpp; sourceTree = "<group>"; };
+		01498D4C1ADE543200B58EDC /* TryCatchResultSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TryCatchResultSuite.cpp; sourceTree = "<group>"; };
+		01498D4E1ADE543200B58EDC /* DirectoryInfoSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DirectoryInfoSuite.cpp; sourceTree = "<group>"; };
+		01498D4F1ADE543200B58EDC /* PathSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PathSuite.cpp; sourceTree = "<group>"; };
+		01498D511ADE543200B58EDC /* BindSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BindSuite.cpp; sourceTree = "<group>"; };
+		01498D531ADE543200B58EDC /* InputMemoryStreamSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputMemoryStreamSuite.cpp; sourceTree = "<group>"; };
+		01498D541ADE543200B58EDC /* TextStreamWriterSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextStreamWriterSuite.cpp; sourceTree = "<group>"; };
+		01498D561ADE543200B58EDC /* LexicalBooleanSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LexicalBooleanSuite.cpp; sourceTree = "<group>"; };
+		01498D571ADE543200B58EDC /* LexicalFloatingSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LexicalFloatingSuite.cpp; sourceTree = "<group>"; };
+		01498D581ADE543200B58EDC /* LexicalIntegerSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LexicalIntegerSuite.cpp; sourceTree = "<group>"; };
+		01498D591ADE543200B58EDC /* LexicalVersionSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LexicalVersionSuite.cpp; sourceTree = "<group>"; };
+		01498D5B1ADE543200B58EDC /* SharedPtrUtilsSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SharedPtrUtilsSuite.cpp; sourceTree = "<group>"; };
+		01498D5D1ADE543200B58EDC /* IsGeneralStringSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IsGeneralStringSuite.cpp; sourceTree = "<group>"; };
+		01498D5E1ADE543200B58EDC /* MetaRangeSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MetaRangeSuite.cpp; sourceTree = "<group>"; };
+		01498D601ADE543200B58EDC /* NumberConverterSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NumberConverterSuite.cpp; sourceTree = "<group>"; };
+		01498D611ADE543200B58EDC /* NumberRelationSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NumberRelationSuite.cpp; sourceTree = "<group>"; };
+		01498D621ADE543200B58EDC /* NumberTraitsSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NumberTraitsSuite.cpp; sourceTree = "<group>"; };
+		01498D631ADE543200B58EDC /* UnionBitsSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnionBitsSuite.cpp; sourceTree = "<group>"; };
+		01498D651ADE543200B58EDC /* UniformRandomSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UniformRandomSuite.cpp; sourceTree = "<group>"; };
+		01498D661ADE543200B58EDC /* WeightedRandomMapSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WeightedRandomMapSuite.cpp; sourceTree = "<group>"; };
+		01498D671ADE543200B58EDC /* RunTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RunTest.cpp; sourceTree = "<group>"; };
+		01498D691ADE543200B58EDC /* PromptStateMachineSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PromptStateMachineSuite.cpp; sourceTree = "<group>"; };
+		01498D6A1ADE543200B58EDC /* StateMachineSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StateMachineSuite.cpp; sourceTree = "<group>"; };
+		01498D6C1ADE543200B58EDC /* FormatSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FormatSuite.cpp; sourceTree = "<group>"; };
+		01498D6D1ADE543200B58EDC /* SplitSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SplitSuite.cpp; sourceTree = "<group>"; };
+		01498D6E1ADE543200B58EDC /* StringAlgorithmSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StringAlgorithmSuite.cpp; sourceTree = "<group>"; };
+		01498D6F1ADE543200B58EDC /* StringConvertibleSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StringConvertibleSuite.cpp; sourceTree = "<group>"; };
+		01498D701ADE543200B58EDC /* StringToStringSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StringToStringSuite.cpp; sourceTree = "<group>"; };
+		01498D711ADE543200B58EDC /* Utf8StringSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utf8StringSuite.cpp; sourceTree = "<group>"; };
+		01498D731ADE543200B58EDC /* ContinuationTraitsSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ContinuationTraitsSuite.cpp; sourceTree = "<group>"; };
+		01498D741ADE543200B58EDC /* StdAsyncSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StdAsyncSuite.cpp; sourceTree = "<group>"; };
+		01498D751ADE543200B58EDC /* TaskPollerSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TaskPollerSuite.cpp; sourceTree = "<group>"; };
+		01498D761ADE543200B58EDC /* TaskSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TaskSuite.cpp; sourceTree = "<group>"; };
+		01498D771ADE543200B58EDC /* TaskTimerSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TaskTimerSuite.cpp; sourceTree = "<group>"; };
+		01498D781ADE543200B58EDC /* ThreadPoolSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ThreadPoolSuite.cpp; sourceTree = "<group>"; };
+		01498D791ADE543200B58EDC /* WhenAllSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WhenAllSuite.cpp; sourceTree = "<group>"; };
+		01498D7A1ADE543200B58EDC /* WorkerThreadSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WorkerThreadSuite.cpp; sourceTree = "<group>"; };
+		01498D7C1ADE543200B58EDC /* LockGuardSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LockGuardSuite.cpp; sourceTree = "<group>"; };
+		01498D7D1ADE543200B58EDC /* LoopThreadGroupSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoopThreadGroupSuite.cpp; sourceTree = "<group>"; };
+		01498D7E1ADE543200B58EDC /* SpinMutexSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpinMutexSuite.cpp; sourceTree = "<group>"; };
+		01498D7F1ADE543200B58EDC /* ThreadSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ThreadSuite.cpp; sourceTree = "<group>"; };
+		01498D801ADE543200B58EDC /* WaitableBoolSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WaitableBoolSuite.cpp; sourceTree = "<group>"; };
+		01498D821ADE543200B58EDC /* TraceChannelSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TraceChannelSuite.cpp; sourceTree = "<group>"; };
+		01498D831ADE543200B58EDC /* TraceSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TraceSuite.cpp; sourceTree = "<group>"; };
+		01498D851ADE543200B58EDC /* AssetReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetReader.h; sourceTree = "<group>"; };
+		01498D861ADE543200B58EDC /* Matcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matcher.h; sourceTree = "<group>"; };
+		01498D871ADE543200B58EDC /* SharedArrayUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedArrayUtils.h; sourceTree = "<group>"; };
+		01498D881ADE543200B58EDC /* StdVectorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StdVectorUtils.h; sourceTree = "<group>"; };
+		01498D891ADE543200B58EDC /* WritablePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WritablePath.h; sourceTree = "<group>"; };
+		01498D8B1ADE543200B58EDC /* AnySuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnySuite.cpp; sourceTree = "<group>"; };
+		01498D8C1ADE543200B58EDC /* EnumFlagsSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EnumFlagsSuite.cpp; sourceTree = "<group>"; };
+		01498D8D1ADE543200B58EDC /* NamedValuesSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NamedValuesSuite.cpp; sourceTree = "<group>"; };
+		01498D8E1ADE543200B58EDC /* ScalarSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScalarSuite.cpp; sourceTree = "<group>"; };
+		01498D8F1ADE543200B58EDC /* SharedArraySuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SharedArraySuite.cpp; sourceTree = "<group>"; };
 		0155AB6A199C92CF00B78527 /* CaramelTest-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CaramelTest-Prefix.pch"; sourceTree = "<group>"; };
 		01B6B8311A9C242000404118 /* items.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = items.ini; sourceTree = "<group>"; };
 		01B6B8321A9C242000404118 /* test1.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test1.ini; sourceTree = "<group>"; };
 		01B6B8331A9C242000404118 /* test2.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test2.ini; sourceTree = "<group>"; };
 		01B6B8341A9C242000404118 /* values.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = values.ini; sourceTree = "<group>"; };
-		01B6B8351A9C267300404118 /* TryCatchResultSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TryCatchResultSuite.cpp; sourceTree = "<group>"; };
-		01B6B8371A9C268900404118 /* InputMemoryStreamSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputMemoryStreamSuite.cpp; sourceTree = "<group>"; };
-		01B6B8391A9C269A00404118 /* LexicalVersionSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LexicalVersionSuite.cpp; sourceTree = "<group>"; };
-		01B6B83B1A9C26A900404118 /* MetaRangeSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MetaRangeSuite.cpp; sourceTree = "<group>"; };
-		01B6B83D1A9C26BA00404118 /* NumberConverterSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NumberConverterSuite.cpp; sourceTree = "<group>"; };
-		01B6B83E1A9C26BA00404118 /* NumberRelationSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NumberRelationSuite.cpp; sourceTree = "<group>"; };
-		01B6B8411A9C26CE00404118 /* StringConvertibleSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StringConvertibleSuite.cpp; sourceTree = "<group>"; };
-		01B6B8431A9C26E400404118 /* TaskTimerSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TaskTimerSuite.cpp; sourceTree = "<group>"; };
-		01B6B8451A9C270D00404118 /* LockGuardSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LockGuardSuite.cpp; sourceTree = "<group>"; };
-		01B6B8471A9C272700404118 /* AssetReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetReader.h; sourceTree = "<group>"; };
-		01B6B8481A9C272700404118 /* Matcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matcher.h; sourceTree = "<group>"; };
-		01B6B8491A9C272700404118 /* WritablePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WritablePath.h; sourceTree = "<group>"; };
-		01B6B84A1A9C273B00404118 /* EnumFlagsSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EnumFlagsSuite.cpp; sourceTree = "<group>"; };
-		01B6B84B1A9C273B00404118 /* ScalarSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScalarSuite.cpp; sourceTree = "<group>"; };
 		6A706EBB184985D3004C9602 /* CaramelTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CaramelTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AAF38EB1849D3930010FAF1 /* Caramel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Caramel.xcodeproj; path = ../../proj.mac/Caramel.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -222,281 +228,292 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0150A97A1990E5B20037F11B /* src */ = {
+		01498D1C1ADE543200B58EDC /* src */ = {
 			isa = PBXGroup;
 			children = (
-				0150A97B1990E5B20037F11B /* Arithmetic */,
-				0150A97E1990E5B20037F11B /* Async */,
-				0150A9861990E5B20037F11B /* CaramelTestPch.cpp */,
-				0150A9871990E5B20037F11B /* CaramelTestPch.h */,
-				0150A9881990E5B20037F11B /* Chrono */,
-				0150A98D1990E5B20037F11B /* Concurrent */,
-				0150A9951990E5B20037F11B /* Data */,
-				0150A9981990E5B20037F11B /* DateTime */,
-				0150A99E1990E5B20037F11B /* Document */,
-				0150A9A21990E5B20037F11B /* Error */,
-				0150A9A71990E5B20037F11B /* FileSystem */,
-				0150A9AA1990E5B20037F11B /* Functional */,
-				0150A9AC1990E5B20037F11B /* Io */,
-				0150A9AE1990E5B20037F11B /* Lexical */,
-				0150A9B21990E5B20037F11B /* Memory */,
-				0150A9B41990E5B20037F11B /* Meta */,
-				0150A9B61990E5B20037F11B /* Numeric */,
-				0150A9B91990E5B20037F11B /* Random */,
-				0150A9BC1990E5B20037F11B /* RunTest.cpp */,
-				0150A9BD1990E5B20037F11B /* Statechart */,
-				0150A9BF1990E5B20037F11B /* String */,
-				0150A9C61990E5B20037F11B /* Task */,
-				0150A9CE1990E5B20037F11B /* Thread */,
-				0150A9D31990E5B20037F11B /* Trace */,
-				0150A9D61990E5B20037F11B /* Utils */,
-				0150A9D91990E5B20037F11B /* Value */,
+				01498D1E1ADE543200B58EDC /* Arithmetic */,
+				01498D211ADE543200B58EDC /* Async */,
+				01498D2B1ADE543200B58EDC /* CaramelTestPch.cpp */,
+				01498D2C1ADE543200B58EDC /* CaramelTestPch.h */,
+				01498D2D1ADE543200B58EDC /* Chrono */,
+				01498D321ADE543200B58EDC /* Concurrent */,
+				01498D3A1ADE543200B58EDC /* Configuration */,
+				01498D3C1ADE543200B58EDC /* Data */,
+				01498D3F1ADE543200B58EDC /* DateTime */,
+				01498D451ADE543200B58EDC /* Document */,
+				01498D471ADE543200B58EDC /* Error */,
+				01498D4D1ADE543200B58EDC /* FileSystem */,
+				01498D501ADE543200B58EDC /* Functional */,
+				01498D521ADE543200B58EDC /* Io */,
+				01498D551ADE543200B58EDC /* Lexical */,
+				01498D5A1ADE543200B58EDC /* Memory */,
+				01498D5C1ADE543200B58EDC /* Meta */,
+				01498D5F1ADE543200B58EDC /* Numeric */,
+				01498D641ADE543200B58EDC /* Random */,
+				01498D671ADE543200B58EDC /* RunTest.cpp */,
+				01498D681ADE543200B58EDC /* Statechart */,
+				01498D6B1ADE543200B58EDC /* String */,
+				01498D721ADE543200B58EDC /* Task */,
+				01498D7B1ADE543200B58EDC /* Thread */,
+				01498D811ADE543200B58EDC /* Trace */,
+				01498D841ADE543200B58EDC /* Utils */,
+				01498D8A1ADE543200B58EDC /* Value */,
 			);
 			name = src;
 			path = ../src;
 			sourceTree = "<group>";
 		};
-		0150A97B1990E5B20037F11B /* Arithmetic */ = {
+		01498D1E1ADE543200B58EDC /* Arithmetic */ = {
 			isa = PBXGroup;
 			children = (
-				0150A97C1990E5B20037F11B /* FlagsSuite.cpp */,
-				0150A97D1990E5B20037F11B /* PowerOfTwoSuite.cpp */,
+				01498D1F1ADE543200B58EDC /* FlagsSuite.cpp */,
+				01498D201ADE543200B58EDC /* PowerOfTwoSuite.cpp */,
 			);
 			path = Arithmetic;
 			sourceTree = "<group>";
 		};
-		0150A97E1990E5B20037F11B /* Async */ = {
+		01498D211ADE543200B58EDC /* Async */ = {
 			isa = PBXGroup;
 			children = (
-				0150A97F1990E5B20037F11B /* AnyEventDispatcherSuite.cpp */,
-				0150A9801990E5B20037F11B /* AnyEventHandlerSuite.cpp */,
-				0150A9811990E5B20037F11B /* AnyEventQueueSuite.cpp */,
-				0150A9821990E5B20037F11B /* AnyEventSlotSuite.cpp */,
-				0150A9831990E5B20037F11B /* AnyEventSuite.cpp */,
-				0150A9841990E5B20037F11B /* FlowStateSuite.cpp */,
-				0150A9851990E5B20037F11B /* ValueChangeSuite.cpp */,
+				01498D221ADE543200B58EDC /* AnyEventDispatcherSuite.cpp */,
+				01498D231ADE543200B58EDC /* AnyEventHandlerSuite.cpp */,
+				01498D241ADE543200B58EDC /* AnyEventQueueSuite.cpp */,
+				01498D251ADE543200B58EDC /* AnyEventReactorSuite.cpp */,
+				01498D261ADE543200B58EDC /* AnyEventSlotSuite.cpp */,
+				01498D271ADE543200B58EDC /* AnyEventSuite.cpp */,
+				01498D281ADE543200B58EDC /* AnyEventTaskSuite.cpp */,
+				01498D291ADE543200B58EDC /* FlowStateSuite.cpp */,
+				01498D2A1ADE543200B58EDC /* ValueChangeSuite.cpp */,
 			);
 			path = Async;
 			sourceTree = "<group>";
 		};
-		0150A9881990E5B20037F11B /* Chrono */ = {
+		01498D2D1ADE543200B58EDC /* Chrono */ = {
 			isa = PBXGroup;
 			children = (
-				0150A9891990E5B20037F11B /* ClockProxySuite.cpp */,
-				0150A98A1990E5B20037F11B /* SecondClockSuite.cpp */,
-				0150A98B1990E5B20037F11B /* TickClockSuite.cpp */,
-				0150A98C1990E5B20037F11B /* TimedBoolSuite.cpp */,
+				01498D2E1ADE543200B58EDC /* ClockProxySuite.cpp */,
+				01498D2F1ADE543200B58EDC /* SecondClockSuite.cpp */,
+				01498D301ADE543200B58EDC /* TickClockSuite.cpp */,
+				01498D311ADE543200B58EDC /* TimedBoolSuite.cpp */,
 			);
 			path = Chrono;
 			sourceTree = "<group>";
 		};
-		0150A98D1990E5B20037F11B /* Concurrent */ = {
+		01498D321ADE543200B58EDC /* Concurrent */ = {
 			isa = PBXGroup;
 			children = (
-				0150A98E1990E5B20037F11B /* ConcurrentBlockingQueueSuite.cpp */,
-				0150A98F1990E5B20037F11B /* ConcurrentIntervalSetSuite.cpp */,
-				0150A9901990E5B20037F11B /* ConcurrentMapSuite.cpp */,
-				0150A9911990E5B20037F11B /* ConcurrentPriorityQueueSuite.cpp */,
-				0150A9921990E5B20037F11B /* ConcurrentQueueSuite.cpp */,
-				0150A9931990E5B20037F11B /* ConcurrentSetSuite.cpp */,
-				0150A9941990E5B20037F11B /* ConcurrentStackSuite.cpp */,
+				01498D331ADE543200B58EDC /* ConcurrentBlockingQueueSuite.cpp */,
+				01498D341ADE543200B58EDC /* ConcurrentIntervalSetSuite.cpp */,
+				01498D351ADE543200B58EDC /* ConcurrentMapSuite.cpp */,
+				01498D361ADE543200B58EDC /* ConcurrentPriorityQueueSuite.cpp */,
+				01498D371ADE543200B58EDC /* ConcurrentQueueSuite.cpp */,
+				01498D381ADE543200B58EDC /* ConcurrentSetSuite.cpp */,
+				01498D391ADE543200B58EDC /* ConcurrentStackSuite.cpp */,
 			);
 			path = Concurrent;
 			sourceTree = "<group>";
 		};
-		0150A9951990E5B20037F11B /* Data */ = {
+		01498D3A1ADE543200B58EDC /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
-				0150A9961990E5B20037F11B /* Base64Suite.cpp */,
-				0150A9971990E5B20037F11B /* LookupTableSuite.cpp */,
+				01498D3B1ADE543200B58EDC /* ConfigurationSuite.cpp */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		01498D3C1ADE543200B58EDC /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				01498D3D1ADE543200B58EDC /* Base64Suite.cpp */,
+				01498D3E1ADE543200B58EDC /* LookupTableSuite.cpp */,
 			);
 			path = Data;
 			sourceTree = "<group>";
 		};
-		0150A9981990E5B20037F11B /* DateTime */ = {
+		01498D3F1ADE543200B58EDC /* DateTime */ = {
 			isa = PBXGroup;
 			children = (
-				0150A9991990E5B20037F11B /* DateSuite.cpp */,
-				0150A99A1990E5B20037F11B /* DateTimeBoolSuite.cpp */,
-				0150A99B1990E5B20037F11B /* DateTimeSuite.cpp */,
-				0150A99C1990E5B20037F11B /* TimeOfDaySuite.cpp */,
-				0150A99D1990E5B20037F11B /* TimeSpanSuite.cpp */,
+				01498D401ADE543200B58EDC /* DateSuite.cpp */,
+				01498D411ADE543200B58EDC /* DateTimeBoolSuite.cpp */,
+				01498D421ADE543200B58EDC /* DateTimeSuite.cpp */,
+				01498D431ADE543200B58EDC /* TimeOfDaySuite.cpp */,
+				01498D441ADE543200B58EDC /* TimeSpanSuite.cpp */,
 			);
 			path = DateTime;
 			sourceTree = "<group>";
 		};
-		0150A99E1990E5B20037F11B /* Document */ = {
+		01498D451ADE543200B58EDC /* Document */ = {
 			isa = PBXGroup;
 			children = (
-				0150A99F1990E5B20037F11B /* IniDocumentSuite.cpp */,
+				01498D461ADE543200B58EDC /* IniDocumentSuite.cpp */,
 			);
 			path = Document;
 			sourceTree = "<group>";
 		};
-		0150A9A21990E5B20037F11B /* Error */ = {
+		01498D471ADE543200B58EDC /* Error */ = {
 			isa = PBXGroup;
 			children = (
-				01B6B8351A9C267300404118 /* TryCatchResultSuite.cpp */,
-				0150A9A31990E5B20037F11B /* AlertSuite.cpp */,
-				0150A9A41990E5B20037F11B /* AnyFailureSuite.cpp */,
-				0150A9A51990E5B20037F11B /* CatchExceptionSuite.cpp */,
-				0150A9A61990E5B20037F11B /* ExceptionPtrSuite.cpp */,
+				01498D481ADE543200B58EDC /* AlertSuite.cpp */,
+				01498D491ADE543200B58EDC /* AnyFailureSuite.cpp */,
+				01498D4A1ADE543200B58EDC /* CatchExceptionSuite.cpp */,
+				01498D4B1ADE543200B58EDC /* ExceptionPtrSuite.cpp */,
+				01498D4C1ADE543200B58EDC /* TryCatchResultSuite.cpp */,
 			);
 			path = Error;
 			sourceTree = "<group>";
 		};
-		0150A9A71990E5B20037F11B /* FileSystem */ = {
+		01498D4D1ADE543200B58EDC /* FileSystem */ = {
 			isa = PBXGroup;
 			children = (
-				0150A9A81990E5B20037F11B /* DirectoryInfoSuite.cpp */,
-				0150A9A91990E5B20037F11B /* PathSuite.cpp */,
+				01498D4E1ADE543200B58EDC /* DirectoryInfoSuite.cpp */,
+				01498D4F1ADE543200B58EDC /* PathSuite.cpp */,
 			);
 			path = FileSystem;
 			sourceTree = "<group>";
 		};
-		0150A9AA1990E5B20037F11B /* Functional */ = {
+		01498D501ADE543200B58EDC /* Functional */ = {
 			isa = PBXGroup;
 			children = (
-				0150A9AB1990E5B20037F11B /* BindSuite.cpp */,
+				01498D511ADE543200B58EDC /* BindSuite.cpp */,
 			);
 			path = Functional;
 			sourceTree = "<group>";
 		};
-		0150A9AC1990E5B20037F11B /* Io */ = {
+		01498D521ADE543200B58EDC /* Io */ = {
 			isa = PBXGroup;
 			children = (
-				01B6B8371A9C268900404118 /* InputMemoryStreamSuite.cpp */,
-				0150A9AD1990E5B20037F11B /* TextStreamWriterSuite.cpp */,
+				01498D531ADE543200B58EDC /* InputMemoryStreamSuite.cpp */,
+				01498D541ADE543200B58EDC /* TextStreamWriterSuite.cpp */,
 			);
 			path = Io;
 			sourceTree = "<group>";
 		};
-		0150A9AE1990E5B20037F11B /* Lexical */ = {
+		01498D551ADE543200B58EDC /* Lexical */ = {
 			isa = PBXGroup;
 			children = (
-				01B6B8391A9C269A00404118 /* LexicalVersionSuite.cpp */,
-				0150A9AF1990E5B20037F11B /* LexicalBooleanSuite.cpp */,
-				0150A9B01990E5B20037F11B /* LexicalFloatingSuite.cpp */,
-				0150A9B11990E5B20037F11B /* LexicalIntegerSuite.cpp */,
+				01498D561ADE543200B58EDC /* LexicalBooleanSuite.cpp */,
+				01498D571ADE543200B58EDC /* LexicalFloatingSuite.cpp */,
+				01498D581ADE543200B58EDC /* LexicalIntegerSuite.cpp */,
+				01498D591ADE543200B58EDC /* LexicalVersionSuite.cpp */,
 			);
 			path = Lexical;
 			sourceTree = "<group>";
 		};
-		0150A9B21990E5B20037F11B /* Memory */ = {
+		01498D5A1ADE543200B58EDC /* Memory */ = {
 			isa = PBXGroup;
 			children = (
-				0150A9B31990E5B20037F11B /* SharedPtrUtilsSuite.cpp */,
+				01498D5B1ADE543200B58EDC /* SharedPtrUtilsSuite.cpp */,
 			);
 			path = Memory;
 			sourceTree = "<group>";
 		};
-		0150A9B41990E5B20037F11B /* Meta */ = {
+		01498D5C1ADE543200B58EDC /* Meta */ = {
 			isa = PBXGroup;
 			children = (
-				01B6B83B1A9C26A900404118 /* MetaRangeSuite.cpp */,
-				0150A9B51990E5B20037F11B /* IsGeneralStringSuite.cpp */,
+				01498D5D1ADE543200B58EDC /* IsGeneralStringSuite.cpp */,
+				01498D5E1ADE543200B58EDC /* MetaRangeSuite.cpp */,
 			);
 			path = Meta;
 			sourceTree = "<group>";
 		};
-		0150A9B61990E5B20037F11B /* Numeric */ = {
+		01498D5F1ADE543200B58EDC /* Numeric */ = {
 			isa = PBXGroup;
 			children = (
-				01B6B83D1A9C26BA00404118 /* NumberConverterSuite.cpp */,
-				01B6B83E1A9C26BA00404118 /* NumberRelationSuite.cpp */,
-				0150A9B71990E5B20037F11B /* NumberTraitsSuite.cpp */,
-				0150A9B81990E5B20037F11B /* UnionBitsSuite.cpp */,
+				01498D601ADE543200B58EDC /* NumberConverterSuite.cpp */,
+				01498D611ADE543200B58EDC /* NumberRelationSuite.cpp */,
+				01498D621ADE543200B58EDC /* NumberTraitsSuite.cpp */,
+				01498D631ADE543200B58EDC /* UnionBitsSuite.cpp */,
 			);
 			path = Numeric;
 			sourceTree = "<group>";
 		};
-		0150A9B91990E5B20037F11B /* Random */ = {
+		01498D641ADE543200B58EDC /* Random */ = {
 			isa = PBXGroup;
 			children = (
-				0150A9BA1990E5B20037F11B /* UniformRandomSuite.cpp */,
-				0150A9BB1990E5B20037F11B /* WeightedRandomMapSuite.cpp */,
+				01498D651ADE543200B58EDC /* UniformRandomSuite.cpp */,
+				01498D661ADE543200B58EDC /* WeightedRandomMapSuite.cpp */,
 			);
 			path = Random;
 			sourceTree = "<group>";
 		};
-		0150A9BD1990E5B20037F11B /* Statechart */ = {
+		01498D681ADE543200B58EDC /* Statechart */ = {
 			isa = PBXGroup;
 			children = (
-				0155AB68199C92B100B78527 /* PromptStateMachineSuite.cpp */,
-				0150A9BE1990E5B20037F11B /* StateMachineSuite.cpp */,
+				01498D691ADE543200B58EDC /* PromptStateMachineSuite.cpp */,
+				01498D6A1ADE543200B58EDC /* StateMachineSuite.cpp */,
 			);
 			path = Statechart;
 			sourceTree = "<group>";
 		};
-		0150A9BF1990E5B20037F11B /* String */ = {
+		01498D6B1ADE543200B58EDC /* String */ = {
 			isa = PBXGroup;
 			children = (
-				01B6B8411A9C26CE00404118 /* StringConvertibleSuite.cpp */,
-				0150A9C01990E5B20037F11B /* FormatSuite.cpp */,
-				0150A9C11990E5B20037F11B /* SplitSuite.cpp */,
-				0150A9C31990E5B20037F11B /* StringAlgorithmSuite.cpp */,
-				0150A9C41990E5B20037F11B /* StringToStringSuite.cpp */,
-				0150A9C51990E5B20037F11B /* Utf8StringSuite.cpp */,
+				01498D6C1ADE543200B58EDC /* FormatSuite.cpp */,
+				01498D6D1ADE543200B58EDC /* SplitSuite.cpp */,
+				01498D6E1ADE543200B58EDC /* StringAlgorithmSuite.cpp */,
+				01498D6F1ADE543200B58EDC /* StringConvertibleSuite.cpp */,
+				01498D701ADE543200B58EDC /* StringToStringSuite.cpp */,
+				01498D711ADE543200B58EDC /* Utf8StringSuite.cpp */,
 			);
 			path = String;
 			sourceTree = "<group>";
 		};
-		0150A9C61990E5B20037F11B /* Task */ = {
+		01498D721ADE543200B58EDC /* Task */ = {
 			isa = PBXGroup;
 			children = (
-				01B6B8431A9C26E400404118 /* TaskTimerSuite.cpp */,
-				0150A9C71990E5B20037F11B /* ContinuationTraitsSuite.cpp */,
-				0150A9C81990E5B20037F11B /* StdAsyncSuite.cpp */,
-				0150A9C91990E5B20037F11B /* TaskPollerSuite.cpp */,
-				0150A9CA1990E5B20037F11B /* TaskSuite.cpp */,
-				0150A9CB1990E5B20037F11B /* ThreadPoolSuite.cpp */,
-				0150A9CC1990E5B20037F11B /* WhenAllSuite.cpp */,
-				0150A9CD1990E5B20037F11B /* WorkerThreadSuite.cpp */,
+				01498D731ADE543200B58EDC /* ContinuationTraitsSuite.cpp */,
+				01498D741ADE543200B58EDC /* StdAsyncSuite.cpp */,
+				01498D751ADE543200B58EDC /* TaskPollerSuite.cpp */,
+				01498D761ADE543200B58EDC /* TaskSuite.cpp */,
+				01498D771ADE543200B58EDC /* TaskTimerSuite.cpp */,
+				01498D781ADE543200B58EDC /* ThreadPoolSuite.cpp */,
+				01498D791ADE543200B58EDC /* WhenAllSuite.cpp */,
+				01498D7A1ADE543200B58EDC /* WorkerThreadSuite.cpp */,
 			);
 			path = Task;
 			sourceTree = "<group>";
 		};
-		0150A9CE1990E5B20037F11B /* Thread */ = {
+		01498D7B1ADE543200B58EDC /* Thread */ = {
 			isa = PBXGroup;
 			children = (
-				01B6B8451A9C270D00404118 /* LockGuardSuite.cpp */,
-				0150A9CF1990E5B20037F11B /* LoopThreadGroupSuite.cpp */,
-				0150A9D01990E5B20037F11B /* SpinMutexSuite.cpp */,
-				0150A9D11990E5B20037F11B /* ThreadSuite.cpp */,
-				0150A9D21990E5B20037F11B /* WaitableBoolSuite.cpp */,
+				01498D7C1ADE543200B58EDC /* LockGuardSuite.cpp */,
+				01498D7D1ADE543200B58EDC /* LoopThreadGroupSuite.cpp */,
+				01498D7E1ADE543200B58EDC /* SpinMutexSuite.cpp */,
+				01498D7F1ADE543200B58EDC /* ThreadSuite.cpp */,
+				01498D801ADE543200B58EDC /* WaitableBoolSuite.cpp */,
 			);
 			path = Thread;
 			sourceTree = "<group>";
 		};
-		0150A9D31990E5B20037F11B /* Trace */ = {
+		01498D811ADE543200B58EDC /* Trace */ = {
 			isa = PBXGroup;
 			children = (
-				0150A9D41990E5B20037F11B /* TraceChannelSuite.cpp */,
-				0150A9D51990E5B20037F11B /* TraceSuite.cpp */,
+				01498D821ADE543200B58EDC /* TraceChannelSuite.cpp */,
+				01498D831ADE543200B58EDC /* TraceSuite.cpp */,
 			);
 			path = Trace;
 			sourceTree = "<group>";
 		};
-		0150A9D61990E5B20037F11B /* Utils */ = {
+		01498D841ADE543200B58EDC /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				01B6B8471A9C272700404118 /* AssetReader.h */,
-				01B6B8481A9C272700404118 /* Matcher.h */,
-				01B6B8491A9C272700404118 /* WritablePath.h */,
-				0150A9D71990E5B20037F11B /* SharedArrayUtils.h */,
-				0150A9D81990E5B20037F11B /* StdVectorUtils.h */,
+				01498D851ADE543200B58EDC /* AssetReader.h */,
+				01498D861ADE543200B58EDC /* Matcher.h */,
+				01498D871ADE543200B58EDC /* SharedArrayUtils.h */,
+				01498D881ADE543200B58EDC /* StdVectorUtils.h */,
+				01498D891ADE543200B58EDC /* WritablePath.h */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		0150A9D91990E5B20037F11B /* Value */ = {
+		01498D8A1ADE543200B58EDC /* Value */ = {
 			isa = PBXGroup;
 			children = (
-				01B6B84A1A9C273B00404118 /* EnumFlagsSuite.cpp */,
-				01B6B84B1A9C273B00404118 /* ScalarSuite.cpp */,
-				0150A9DA1990E5B20037F11B /* AnySuite.cpp */,
-				0150A9DB1990E5B20037F11B /* NamedValuesSuite.cpp */,
-				0150A9DC1990E5B20037F11B /* SharedArraySuite.cpp */,
+				01498D8B1ADE543200B58EDC /* AnySuite.cpp */,
+				01498D8C1ADE543200B58EDC /* EnumFlagsSuite.cpp */,
+				01498D8D1ADE543200B58EDC /* NamedValuesSuite.cpp */,
+				01498D8E1ADE543200B58EDC /* ScalarSuite.cpp */,
+				01498D8F1ADE543200B58EDC /* SharedArraySuite.cpp */,
 			);
 			path = Value;
 			sourceTree = "<group>";
@@ -524,8 +541,8 @@
 		6A706E681849853D004C9602 = {
 			isa = PBXGroup;
 			children = (
+				01498D1C1ADE543200B58EDC /* src */,
 				01B6B8301A9C242000404118 /* assets */,
-				0150A97A1990E5B20037F11B /* src */,
 				0155AB66199C915F00B78527 /* proj.mac */,
 				6AAF38EB1849D3930010FAF1 /* Caramel.xcodeproj */,
 				6A706EBB184985D3004C9602 /* CaramelTest */,
@@ -607,87 +624,90 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0150AA1C1990E5B20037F11B /* LoopThreadGroupSuite.cpp in Sources */,
-				0150A9FB1990E5B20037F11B /* IniDocumentSuite.cpp in Sources */,
-				01B6B8381A9C268900404118 /* InputMemoryStreamSuite.cpp in Sources */,
-				0150AA051990E5B20037F11B /* LexicalFloatingSuite.cpp in Sources */,
-				0155AB69199C92B100B78527 /* PromptStateMachineSuite.cpp in Sources */,
-				0150AA061990E5B20037F11B /* LexicalIntegerSuite.cpp in Sources */,
-				0150A9E41990E5B20037F11B /* AnyEventSlotSuite.cpp in Sources */,
-				0150A9FA1990E5B20037F11B /* TimeSpanSuite.cpp in Sources */,
-				0150AA121990E5B20037F11B /* StringAlgorithmSuite.cpp in Sources */,
-				01B6B83A1A9C269A00404118 /* LexicalVersionSuite.cpp in Sources */,
-				0150AA0C1990E5B20037F11B /* WeightedRandomMapSuite.cpp in Sources */,
-				0150A9E31990E5B20037F11B /* AnyEventQueueSuite.cpp in Sources */,
-				0150AA081990E5B20037F11B /* IsGeneralStringSuite.cpp in Sources */,
-				0150A9FE1990E5B20037F11B /* CatchExceptionSuite.cpp in Sources */,
-				0150A9E01990E5B20037F11B /* PowerOfTwoSuite.cpp in Sources */,
-				01B6B84C1A9C273B00404118 /* EnumFlagsSuite.cpp in Sources */,
-				0150A9EA1990E5B20037F11B /* SecondClockSuite.cpp in Sources */,
-				0150A9E91990E5B20037F11B /* ClockProxySuite.cpp in Sources */,
-				01B6B8401A9C26BA00404118 /* NumberRelationSuite.cpp in Sources */,
-				01B6B83C1A9C26A900404118 /* MetaRangeSuite.cpp in Sources */,
-				0150A9F41990E5B20037F11B /* Base64Suite.cpp in Sources */,
-				0150A9FF1990E5B20037F11B /* ExceptionPtrSuite.cpp in Sources */,
-				0150AA231990E5B20037F11B /* NamedValuesSuite.cpp in Sources */,
-				0150AA181990E5B20037F11B /* TaskSuite.cpp in Sources */,
-				0150AA001990E5B20037F11B /* DirectoryInfoSuite.cpp in Sources */,
-				0150AA101990E5B20037F11B /* SplitSuite.cpp in Sources */,
-				0150A9F61990E5B20037F11B /* DateSuite.cpp in Sources */,
-				0150A9E81990E5B20037F11B /* CaramelTestPch.cpp in Sources */,
-				01B6B8441A9C26E400404118 /* TaskTimerSuite.cpp in Sources */,
-				0150AA071990E5B20037F11B /* SharedPtrUtilsSuite.cpp in Sources */,
-				0150AA141990E5B20037F11B /* Utf8StringSuite.cpp in Sources */,
-				0150AA1A1990E5B20037F11B /* WhenAllSuite.cpp in Sources */,
-				0150A9F31990E5B20037F11B /* ConcurrentStackSuite.cpp in Sources */,
-				0150AA151990E5B20037F11B /* ContinuationTraitsSuite.cpp in Sources */,
-				0150AA201990E5B20037F11B /* TraceChannelSuite.cpp in Sources */,
-				0150AA1B1990E5B20037F11B /* WorkerThreadSuite.cpp in Sources */,
-				0150AA041990E5B20037F11B /* LexicalBooleanSuite.cpp in Sources */,
-				0150A9EF1990E5B20037F11B /* ConcurrentMapSuite.cpp in Sources */,
-				0150A9F71990E5B20037F11B /* DateTimeBoolSuite.cpp in Sources */,
-				0150AA0F1990E5B20037F11B /* FormatSuite.cpp in Sources */,
-				0150A9DF1990E5B20037F11B /* FlagsSuite.cpp in Sources */,
-				0150A9E11990E5B20037F11B /* AnyEventDispatcherSuite.cpp in Sources */,
-				0150AA1E1990E5B20037F11B /* ThreadSuite.cpp in Sources */,
-				01B6B8461A9C270D00404118 /* LockGuardSuite.cpp in Sources */,
-				01B6B8361A9C267300404118 /* TryCatchResultSuite.cpp in Sources */,
-				0150A9ED1990E5B20037F11B /* ConcurrentBlockingQueueSuite.cpp in Sources */,
-				0150A9F51990E5B20037F11B /* LookupTableSuite.cpp in Sources */,
-				0150AA241990E5B20037F11B /* SharedArraySuite.cpp in Sources */,
-				0150A9FC1990E5B20037F11B /* AlertSuite.cpp in Sources */,
-				0150A9F81990E5B20037F11B /* DateTimeSuite.cpp in Sources */,
-				0150AA211990E5B20037F11B /* TraceSuite.cpp in Sources */,
-				0150AA0D1990E5B20037F11B /* RunTest.cpp in Sources */,
-				0150A9F01990E5B20037F11B /* ConcurrentPriorityQueueSuite.cpp in Sources */,
-				0150A9F91990E5B20037F11B /* TimeOfDaySuite.cpp in Sources */,
-				0150AA191990E5B20037F11B /* ThreadPoolSuite.cpp in Sources */,
-				0150AA131990E5B20037F11B /* StringToStringSuite.cpp in Sources */,
-				01B6B8421A9C26CE00404118 /* StringConvertibleSuite.cpp in Sources */,
-				0150A9FD1990E5B20037F11B /* AnyFailureSuite.cpp in Sources */,
-				0150AA0B1990E5B20037F11B /* UniformRandomSuite.cpp in Sources */,
-				0150AA021990E5B20037F11B /* BindSuite.cpp in Sources */,
-				0150A9E71990E5B20037F11B /* ValueChangeSuite.cpp in Sources */,
-				0150AA091990E5B20037F11B /* NumberTraitsSuite.cpp in Sources */,
-				01B6B84D1A9C273B00404118 /* ScalarSuite.cpp in Sources */,
-				0150A9E21990E5B20037F11B /* AnyEventHandlerSuite.cpp in Sources */,
-				0150AA171990E5B20037F11B /* TaskPollerSuite.cpp in Sources */,
-				0150A9EC1990E5B20037F11B /* TimedBoolSuite.cpp in Sources */,
-				01B6B83F1A9C26BA00404118 /* NumberConverterSuite.cpp in Sources */,
-				0150AA0E1990E5B20037F11B /* StateMachineSuite.cpp in Sources */,
-				0150A9EB1990E5B20037F11B /* TickClockSuite.cpp in Sources */,
-				0150AA0A1990E5B20037F11B /* UnionBitsSuite.cpp in Sources */,
-				0150A9EE1990E5B20037F11B /* ConcurrentIntervalSetSuite.cpp in Sources */,
-				0150AA1D1990E5B20037F11B /* SpinMutexSuite.cpp in Sources */,
-				0150AA221990E5B20037F11B /* AnySuite.cpp in Sources */,
-				0150AA1F1990E5B20037F11B /* WaitableBoolSuite.cpp in Sources */,
-				0150A9F21990E5B20037F11B /* ConcurrentSetSuite.cpp in Sources */,
-				0150A9F11990E5B20037F11B /* ConcurrentQueueSuite.cpp in Sources */,
-				0150AA031990E5B20037F11B /* TextStreamWriterSuite.cpp in Sources */,
-				0150AA011990E5B20037F11B /* PathSuite.cpp in Sources */,
-				0150AA161990E5B20037F11B /* StdAsyncSuite.cpp in Sources */,
-				0150A9E61990E5B20037F11B /* FlowStateSuite.cpp in Sources */,
-				0150A9E51990E5B20037F11B /* AnyEventSuite.cpp in Sources */,
+				01498DD31ADE543200B58EDC /* ContinuationTraitsSuite.cpp in Sources */,
+				01498D9E1ADE543200B58EDC /* CaramelTestPch.cpp in Sources */,
+				01498DA71ADE543200B58EDC /* ConcurrentQueueSuite.cpp in Sources */,
+				01498D931ADE543200B58EDC /* FlagsSuite.cpp in Sources */,
+				01498DD11ADE543200B58EDC /* StringToStringSuite.cpp in Sources */,
+				01498DDF1ADE543200B58EDC /* WaitableBoolSuite.cpp in Sources */,
+				01498DA81ADE543200B58EDC /* ConcurrentSetSuite.cpp in Sources */,
+				01498DBD1ADE543200B58EDC /* LexicalBooleanSuite.cpp in Sources */,
+				01498DA31ADE543200B58EDC /* ConcurrentBlockingQueueSuite.cpp in Sources */,
+				01498DB31ADE543200B58EDC /* AlertSuite.cpp in Sources */,
+				01498DA61ADE543200B58EDC /* ConcurrentPriorityQueueSuite.cpp in Sources */,
+				01498DBB1ADE543200B58EDC /* InputMemoryStreamSuite.cpp in Sources */,
+				01498DC81ADE543200B58EDC /* UniformRandomSuite.cpp in Sources */,
+				01498D9D1ADE543200B58EDC /* ValueChangeSuite.cpp in Sources */,
+				01498DC01ADE543200B58EDC /* LexicalVersionSuite.cpp in Sources */,
+				01498DAE1ADE543200B58EDC /* DateTimeBoolSuite.cpp in Sources */,
+				01498DB81ADE543200B58EDC /* DirectoryInfoSuite.cpp in Sources */,
+				01498DBC1ADE543200B58EDC /* TextStreamWriterSuite.cpp in Sources */,
+				01498DA11ADE543200B58EDC /* TickClockSuite.cpp in Sources */,
+				01498D961ADE543200B58EDC /* AnyEventHandlerSuite.cpp in Sources */,
+				01498DCC1ADE543200B58EDC /* StateMachineSuite.cpp in Sources */,
+				01498DCA1ADE543200B58EDC /* RunTest.cpp in Sources */,
+				01498DA21ADE543200B58EDC /* TimedBoolSuite.cpp in Sources */,
+				01498DE11ADE543200B58EDC /* TraceSuite.cpp in Sources */,
+				01498DB61ADE543200B58EDC /* ExceptionPtrSuite.cpp in Sources */,
+				01498D941ADE543200B58EDC /* PowerOfTwoSuite.cpp in Sources */,
+				01498DB11ADE543200B58EDC /* TimeSpanSuite.cpp in Sources */,
+				01498DA91ADE543200B58EDC /* ConcurrentStackSuite.cpp in Sources */,
+				01498D991ADE543200B58EDC /* AnyEventSlotSuite.cpp in Sources */,
+				01498DB01ADE543200B58EDC /* TimeOfDaySuite.cpp in Sources */,
+				01498DD71ADE543200B58EDC /* TaskTimerSuite.cpp in Sources */,
+				01498DDD1ADE543200B58EDC /* SpinMutexSuite.cpp in Sources */,
+				01498DCB1ADE543200B58EDC /* PromptStateMachineSuite.cpp in Sources */,
+				01498DA51ADE543200B58EDC /* ConcurrentMapSuite.cpp in Sources */,
+				01498DC51ADE543200B58EDC /* NumberRelationSuite.cpp in Sources */,
+				01498DB41ADE543200B58EDC /* AnyFailureSuite.cpp in Sources */,
+				01498DCF1ADE543200B58EDC /* StringAlgorithmSuite.cpp in Sources */,
+				01498DDA1ADE543200B58EDC /* WorkerThreadSuite.cpp in Sources */,
+				01498DD61ADE543200B58EDC /* TaskSuite.cpp in Sources */,
+				01498D9B1ADE543200B58EDC /* AnyEventTaskSuite.cpp in Sources */,
+				01498D981ADE543200B58EDC /* AnyEventReactorSuite.cpp in Sources */,
+				01498D971ADE543200B58EDC /* AnyEventQueueSuite.cpp in Sources */,
+				01498DAD1ADE543200B58EDC /* DateSuite.cpp in Sources */,
+				01498DDB1ADE543200B58EDC /* LockGuardSuite.cpp in Sources */,
+				01498DD41ADE543200B58EDC /* StdAsyncSuite.cpp in Sources */,
+				01498DBA1ADE543200B58EDC /* BindSuite.cpp in Sources */,
+				01498DE21ADE543200B58EDC /* AnySuite.cpp in Sources */,
+				01498DAA1ADE543200B58EDC /* ConfigurationSuite.cpp in Sources */,
+				01498DD81ADE543200B58EDC /* ThreadPoolSuite.cpp in Sources */,
+				01498DC11ADE543200B58EDC /* SharedPtrUtilsSuite.cpp in Sources */,
+				01498D951ADE543200B58EDC /* AnyEventDispatcherSuite.cpp in Sources */,
+				01498DCD1ADE543200B58EDC /* FormatSuite.cpp in Sources */,
+				01498DC21ADE543200B58EDC /* IsGeneralStringSuite.cpp in Sources */,
+				01498DE61ADE543200B58EDC /* SharedArraySuite.cpp in Sources */,
+				01498DE41ADE543200B58EDC /* NamedValuesSuite.cpp in Sources */,
+				01498DA41ADE543200B58EDC /* ConcurrentIntervalSetSuite.cpp in Sources */,
+				01498D9C1ADE543200B58EDC /* FlowStateSuite.cpp in Sources */,
+				01498DE01ADE543200B58EDC /* TraceChannelSuite.cpp in Sources */,
+				01498DDE1ADE543200B58EDC /* ThreadSuite.cpp in Sources */,
+				01498DD51ADE543200B58EDC /* TaskPollerSuite.cpp in Sources */,
+				01498DC71ADE543200B58EDC /* UnionBitsSuite.cpp in Sources */,
+				01498DBE1ADE543200B58EDC /* LexicalFloatingSuite.cpp in Sources */,
+				01498DC61ADE543200B58EDC /* NumberTraitsSuite.cpp in Sources */,
+				01498DA01ADE543200B58EDC /* SecondClockSuite.cpp in Sources */,
+				01498DC41ADE543200B58EDC /* NumberConverterSuite.cpp in Sources */,
+				01498DAB1ADE543200B58EDC /* Base64Suite.cpp in Sources */,
+				01498DC91ADE543200B58EDC /* WeightedRandomMapSuite.cpp in Sources */,
+				01498DB21ADE543200B58EDC /* IniDocumentSuite.cpp in Sources */,
+				01498DAC1ADE543200B58EDC /* LookupTableSuite.cpp in Sources */,
+				01498DD01ADE543200B58EDC /* StringConvertibleSuite.cpp in Sources */,
+				01498DB51ADE543200B58EDC /* CatchExceptionSuite.cpp in Sources */,
+				01498DBF1ADE543200B58EDC /* LexicalIntegerSuite.cpp in Sources */,
+				01498DCE1ADE543200B58EDC /* SplitSuite.cpp in Sources */,
+				01498DAF1ADE543200B58EDC /* DateTimeSuite.cpp in Sources */,
+				01498DC31ADE543200B58EDC /* MetaRangeSuite.cpp in Sources */,
+				01498D9F1ADE543200B58EDC /* ClockProxySuite.cpp in Sources */,
+				01498DE31ADE543200B58EDC /* EnumFlagsSuite.cpp in Sources */,
+				01498DDC1ADE543200B58EDC /* LoopThreadGroupSuite.cpp in Sources */,
+				01498DB91ADE543200B58EDC /* PathSuite.cpp in Sources */,
+				01498DD21ADE543200B58EDC /* Utf8StringSuite.cpp in Sources */,
+				01498DE51ADE543200B58EDC /* ScalarSuite.cpp in Sources */,
+				01498D9A1ADE543200B58EDC /* AnyEventSuite.cpp in Sources */,
+				01498DD91ADE543200B58EDC /* WhenAllSuite.cpp in Sources */,
+				01498DB71ADE543200B58EDC /* TryCatchResultSuite.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
