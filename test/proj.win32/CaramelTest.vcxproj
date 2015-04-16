@@ -188,6 +188,7 @@
     <ClCompile Include="..\src\Chrono\TickClockSuite.cpp" />
     <ClCompile Include="..\src\Chrono\TimedBoolSuite.cpp" />
     <ClCompile Include="..\src\Concurrent\ConcurrentBlockingQueueSuite.cpp" />
+    <ClCompile Include="..\src\Concurrent\ConcurrentDelayQueueSuite.cpp" />
     <ClCompile Include="..\src\Concurrent\ConcurrentIntervalSetSuite.cpp" />
     <ClCompile Include="..\src\Concurrent\ConcurrentMapSuite.cpp" />
     <ClCompile Include="..\src\Concurrent\ConcurrentPriorityQueueSuite.cpp" />

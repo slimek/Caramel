@@ -49,6 +49,7 @@
     <ClInclude Include="..\include\Caramel\Chrono\Stopwatch.h" />
     <ClInclude Include="..\include\Caramel\Chrono\TickClock.h" />
     <ClInclude Include="..\include\Caramel\Chrono\TimedBool.h" />
+    <ClInclude Include="..\include\Caramel\Concurrent\DelayQueue.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\Detail\BasicMap.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\Detail\BasicSet.h" />
     <ClInclude Include="..\include\Caramel\Concurrent\Detail\CollectionSnapshot.h" />
