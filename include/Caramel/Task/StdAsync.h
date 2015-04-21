@@ -77,16 +77,17 @@ private:
 template< typename Function >
 inline auto StdAsync::Submit( Function taskFunction ) -> Task< decltype( taskFunction() ) >
 {
-    auto task = MakeTask( taskFunction );
+    auto task = MakeTask( std::move( taskFunction ));
     StdAsync::Submit( task );
     return task;
 }
 
 
 template< typename Function >
-inline auto StdAsync::Submit( std::string taskName, Function taskFunction ) -> Task< decltype( taskFunction() ) >
+inline auto StdAsync::Submit(
+    std::string taskName, Function taskFunction ) -> Task< decltype( taskFunction() ) >
 {
-    auto task = MakeTask( taskName, taskFunction );
+    auto task = MakeTask( std::move( taskName ), std::move( taskFunction ));
     StdAsync::Submit( task );
     return task;
 }

@@ -39,7 +39,7 @@ public:
 
     // Directly submit a function into a task.
     template< typename Function >
-    auto Submit( const std::string& taskName, Function taskFunction )
+    auto Submit( std::string taskName, Function taskFunction )
         -> Task< decltype( taskFunction() ) >;
 
 
@@ -58,10 +58,9 @@ private:
 
 template< typename Function >
 inline auto TaskExecutor::Submit(
-    const std::string& taskName, Function taskFunction )
-        -> Task< decltype( taskFunction() ) >
+    std::string taskName, Function taskFunction ) -> Task< decltype( taskFunction() ) >
 {
-    auto task = MakeTask( taskName, std::move( taskFunction ));
+    auto task = MakeTask( std::move( taskName ), std::move( taskFunction ));
     this->Submit( task );
     return task;
 }
