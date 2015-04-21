@@ -14,6 +14,7 @@ namespace Caramel
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Task Completion Source
+// - The class name comes from .NET Task Parallel Library.
 //
 
 template< typename Result >
@@ -27,6 +28,7 @@ public:
 
     Task< Result > GetTask() const { return m_task; }
 
+    // This function would execute the task and all its first continuations.
     void SetResult( Result value );
 
 private:
@@ -49,6 +51,7 @@ public:
 
     Task< void > GetTask() const { return m_task; }
 
+    // This function would execute the task and all its first continuations.
     void Set();
 
 private:

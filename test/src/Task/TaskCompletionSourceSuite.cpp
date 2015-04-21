@@ -27,9 +27,11 @@ TEST( TaskCompletionSourceTest )
         source1.SetResult( 42 );
     });
 
-    task1.Wait();
+    Int value1 = 0;
+    auto then1 = task1.Then( [&] ( Int result ) { value1 = result; });
+    then1.Wait();
 
-    CHECK( 42 == task1.GetResult() );
+    CHECK( 42 == value1 );
 
 
     TaskCompletionSource< std::string > source2;
@@ -42,9 +44,11 @@ TEST( TaskCompletionSourceTest )
         source2.SetResult( "Alice" );
     });
 
-    task2.Wait();
+    std::string value2;
+    auto then2 = task2.Then( [&] ( std::string result ) { value2 = result; });
+    then2.Wait();
 
-    CHECK( "Alice" == task2.GetResult() );
+    CHECK( "Alice" == value2 );
 
 
     TaskCompletionSource< void > source3;
@@ -57,7 +61,11 @@ TEST( TaskCompletionSourceTest )
         source3.Set();
     });
 
-    task3.Wait();
+    Bool done3 = false;
+    auto then3 = task3.Then( [&] { done3 = true; });
+    then3.Wait();
+    
+    CHECK( true == done3 );
 }
 
 
