@@ -238,6 +238,7 @@
     <ClCompile Include="..\src\String\Utf8StringSuite.cpp" />
     <ClCompile Include="..\src\Task\ContinuationTraitsSuite.cpp" />
     <ClCompile Include="..\src\Task\StdAsyncSuite.cpp" />
+    <ClCompile Include="..\src\Task\TaskCompletionSourceSuite.cpp" />
     <ClCompile Include="..\src\Task\TaskPollerSuite.cpp" />
     <ClCompile Include="..\src\Task\TaskSuite.cpp" />
     <ClCompile Include="..\src\Task\TaskTimerSuite.cpp" />

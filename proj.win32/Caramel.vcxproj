@@ -161,6 +161,7 @@
     <ClInclude Include="..\include\Caramel\Task\Detail\TaskTraits.h" />
     <ClInclude Include="..\include\Caramel\Task\StdAsync.h" />
     <ClInclude Include="..\include\Caramel\Task\Task.h" />
+    <ClInclude Include="..\include\Caramel\Task\TaskCompletionSource.h" />
     <ClInclude Include="..\include\Caramel\Task\TaskCore.h" />
     <ClInclude Include="..\include\Caramel\Task\TaskExecutor.h" />
     <ClInclude Include="..\include\Caramel\Task\TaskFwd.h" />

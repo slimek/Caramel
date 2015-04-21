@@ -68,6 +68,7 @@ LOCAL_SRC_FILES := \
 	$(CRMTEST_SRC)/Chrono/TickClockSuite.cpp \
 	$(CRMTEST_SRC)/Chrono/TimedBoolSuite.cpp \
 	$(CRMTEST_SRC)/Concurrent/ConcurrentBlockingQueueSuite.cpp \
+	$(CRMTEST_SRC)/Concurrent/ConcurrentDelayQueueSuite.cpp \
 	$(CRMTEST_SRC)/Concurrent/ConcurrentIntervalSetSuite.cpp \
 	$(CRMTEST_SRC)/Concurrent/ConcurrentMapSuite.cpp \
 	$(CRMTEST_SRC)/Concurrent/ConcurrentPriorityQueueSuite.cpp \
@@ -114,6 +115,7 @@ LOCAL_SRC_FILES := \
 	$(CRMTEST_SRC)/String/Utf8StringSuite.cpp \
 	$(CRMTEST_SRC)/Task/ContinuationTraitsSuite.cpp \
 	$(CRMTEST_SRC)/Task/StdAsyncSuite.cpp \
+	$(CRMTEST_SRC)/Task/TaskCompletionSourceSuite.cpp \
 	$(CRMTEST_SRC)/Task/TaskPollerSuite.cpp \
 	$(CRMTEST_SRC)/Task/TaskSuite.cpp \
 	$(CRMTEST_SRC)/Task/TaskTimerSuite.cpp \
