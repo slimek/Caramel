@@ -141,7 +141,7 @@ TEST( AnyEventQueueProxyTest )
         proxy2.PushEvent( 8, "Marisa" );
     });
 
-    StdAsync().Submit( task );
+    StdAsync::Submit( task );
     task.Wait();
 
     CHECK( true == queue.TryPop( event ));

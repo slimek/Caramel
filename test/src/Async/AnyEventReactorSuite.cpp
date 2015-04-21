@@ -74,8 +74,7 @@ TEST( AnyEventReactorTest )
         source.AsHandler()( AnyEvent( 42, "Yukari" ));
     });
 
-    StdAsync async;
-    async.Submit( task );
+    StdAsync::Submit( task );
 
     task.Wait();
 

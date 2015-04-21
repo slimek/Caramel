@@ -3,6 +3,7 @@
 #include "CaramelPch.h"
 
 #include "Task/PooledThread.h"
+#include "Task/StdAsyncImpl.h"
 #include "Task/TaskImpl.h"
 #include "Task/TaskPollerImpl.h"
 #include "Task/TaskTimerImpl.h"
@@ -30,6 +31,7 @@ namespace Caramel
 //   WorkerThread
 //   PooledThread
 //   ThreadPool
+//   StdAsyncProxy
 //   StdAsync
 //
 
@@ -944,10 +946,10 @@ void ThreadPoolImpl::TryDispatchOneTask()
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Std Async
+// Std Async Proxy
 //
 
-void StdAsync::Submit( TaskCore& task )
+void StdAsyncProxy::Submit( TaskCore& task )
 {
     if ( task.HasDelay() )
     {
@@ -962,7 +964,7 @@ void StdAsync::Submit( TaskCore& task )
 
 #if !defined( CARAMEL_SYSTEM_IS_ANDROID )
 
-void StdAsync::AddReadyTask( TaskCore& task )
+void StdAsyncProxy::AddReadyTask( TaskCore& task )
 {
     task.BecomeReady( *this );
 
@@ -979,7 +981,7 @@ void StdAsync::AddReadyTask( TaskCore& task )
 
 // NOTES: Until Android NDK r10c, std::future and std::async are not supported.
 
-void StdAsync::AddReadyTask( TaskCore& task )
+void StdAsyncProxy::AddReadyTask( TaskCore& task )
 {
     task.BecomeReady( *this );
 
@@ -995,6 +997,23 @@ void StdAsync::AddReadyTask( TaskCore& task )
 }
 
 #endif // !CARAMEL_SYSTEM_IS_ANDROID
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Std Async
+//
+
+void StdAsync::Submit( TaskCore& task )
+{
+    StdAsyncCenter::Instance()->Submit( task );
+}
+
+
+void StdAsyncCenter::Submit( TaskCore& task )
+{
+    m_executor.Submit( task );
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////

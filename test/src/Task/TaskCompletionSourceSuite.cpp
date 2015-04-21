@@ -15,7 +15,7 @@ SUITE( TaskCompletionSourceSuite )
 
 TEST( TaskCompletionSourceTest )
 {
-    StdAsync async;
+    StdAsyncProxy async;
 
     TaskCompletionSource< Int > source1;
 

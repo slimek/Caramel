@@ -890,6 +890,9 @@
     <ClInclude Include="..\include\Caramel\Task\TaskCompletionSource.h">
       <Filter>1. Public Packages\Task</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Task\StdAsyncImpl.h">
+      <Filter>2. Sources\Task</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

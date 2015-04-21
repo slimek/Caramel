@@ -176,7 +176,7 @@ TEST( AnyEventDispatcherProxyTest )
         proxy2.DispatchEvent( 7, "Alice" );
     });
 
-    StdAsync().Submit( task );
+    StdAsync::Submit( task );
     task.Wait();
 
     CHECK( slot );

@@ -16,13 +16,44 @@ SUITE( StdAsyncSuite )
 
 TEST( StdAsyncTest )
 {
-    StdAsync executor;
+    Task< Int > t1( [] { return 42; });
+
+    StdAsync::Submit( t1 );
+    CHECK( 42 == t1.GetResult() );
+
+    Task< std::string > t2( [] { return "Alice"; });
+    
+    // Pass a rvalue
+    StdAsync::Submit( Task< std::string >( t2 ));
+    CHECK( "Alice" == t2.GetResult() );
+
+    auto t3 = StdAsync::Submit( [] { return 3.1416f; } );
+    CHECK( 3.1416f == t3.GetResult() );
+
+    Bool done4 = false;
+    auto t4 = StdAsync::Submit( "StdAsync4", [&] { done4 = true; });
+
+    t4.Wait();
+    CHECK( true == done4 );
+
+
+    // Make sure that an async thread is not the current thread
+
+    auto t5 = StdAsync::Submit( [] { return ThisThread::GetId(); });
+
+    CHECK( ThisThread::GetId() != t5.GetResult() );
+}
+
+
+TEST( StdAsyncProxyTest )
+{
+    StdAsyncProxy async;
 
     Task< void > t1( "Test1", [] {} );
     Task< Int >  t2( "Test2", [] { return 42; } );
 
-    executor.Submit( t1 );
-    executor.Submit( t2 );
+    async.Submit( t1 );
+    async.Submit( t2 );
 
     t1.Wait();
     t2.Wait();
@@ -32,7 +63,7 @@ TEST( StdAsyncTest )
 
     // Make sure that an async thread is not the current thread.
 
-    auto t3 = executor.Submit( "GetThreadId", [&] { return ThisThread::GetId(); });
+    auto t3 = async.Submit( "GetThreadId", [&] { return ThisThread::GetId(); });
 
     CHECK( ThisThread::GetId() != t3.GetResult() );
 

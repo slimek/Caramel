@@ -28,8 +28,8 @@ public:
     virtual void Submit( TaskCore& task ) = 0;
 
 
-    // Compiler Workaround :
-    // - Some compiler doesn't allow to convert a rvalue to non-const lvalue implicity.
+    // Compiler workaround :
+    // - Some compilers do not allow to convert a rvalue to non-const lvalue implicitly.
     //   This function may change a rvalue to a lvalue.
     void Submit( TaskCore&& task )
     {

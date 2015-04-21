@@ -17,7 +17,7 @@ SUITE( WhenAllSuite )
 
 TEST( WhenAllTest )
 {
-    StdAsync async;
+    StdAsyncProxy async;
 
     /// 16 Tasks - 100 Repeats ///
 

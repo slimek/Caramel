@@ -144,7 +144,7 @@ TEST( TaskWithResultTest )
 
 TEST( TaskWithExceptionTest )
 {
-    StdAsync async;
+    StdAsyncProxy async;
     std::string what;
 
 
@@ -185,7 +185,7 @@ TEST( TaskWithExceptionTest )
 
 TEST( TaskWaitOrCatchTest )
 {
-    StdAsync async;
+    StdAsyncProxy async;
     std::string what;
 
     auto task1 = MakeTask( "Task1", [] {} );
@@ -236,7 +236,7 @@ TEST( TaskWaitOrCatchTest )
 
 TEST( TaskThenSuite )
 {
-    StdAsync async;
+    StdAsyncProxy async;
     Int count1 = 0;
 
     auto task1 = MakeTask( "Task1", [&] { ++ count1; } );
@@ -436,7 +436,6 @@ TEST( TaskWithoutNameTest )
 
     /// Continuation ///
 
-    StdAsync async;
     Int count = 0;
 
     auto t6 = MakeTask( [&] { ++ count; } );
@@ -444,7 +443,7 @@ TEST( TaskWithoutNameTest )
 
     CHECK( "" == t6c.Name() );
 
-    async.Submit( t6 );
+    StdAsync::Submit( t6 );
     t6c.Wait();
 
     CHECK( 42 == t6c.GetResult() );
@@ -454,7 +453,7 @@ TEST( TaskWithoutNameTest )
 
     CHECK( "Marisa" == t7c.Name() );
 
-    async.Submit( t7 );
+    StdAsync::Submit( t7 );
     t7c.Wait();
 
     CHECK( "Spark" == t7c.GetResult() );

@@ -236,6 +236,7 @@
     <ClInclude Include="..\src\String\FormatterImpl.h" />
     <ClInclude Include="..\src\String\NumberFormat.h" />
     <ClInclude Include="..\src\Task\PooledThread.h" />
+    <ClInclude Include="..\src\Task\StdAsyncImpl.h" />
     <ClInclude Include="..\src\Task\TaskImpl.h" />
     <ClInclude Include="..\src\Task\TaskPollerImpl.h" />
     <ClInclude Include="..\src\Task\TaskTimerImpl.h" />
