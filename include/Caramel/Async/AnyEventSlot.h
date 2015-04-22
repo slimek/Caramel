@@ -38,6 +38,19 @@ public:
     Bool IsValid() const;
 
 
+    /// Operations ///
+
+    void Set( const AnyEvent& event );
+    void Set( AnyEvent&& event );
+
+    void SetEvent( Int eventId );
+    void SetEvent( Int eventId, const Any& value );
+    void SetEvent( Int eventId, Any&& value );
+
+    // Wait the slot until it becomes valid.
+    void Wait();
+
+
     //
     // Accessors
     // - These functions throw if this slot is empty.

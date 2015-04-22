@@ -7,6 +7,7 @@
 #include <Caramel/Setup/CaramelDefs.h>
 #include "Async/AnyEventTargetImpl.h"
 #include <Caramel/Async/AnyEventSlot.h>
+#include <condition_variable>
 #include <mutex>
 
 
@@ -22,6 +23,12 @@ class AnyEventSlotImpl : public AnyEventTargetImpl
 {
 public:
 
+    void SetEvent( const AnyEvent& event );
+    void SetEvent( AnyEvent&& event );
+
+    // Wait the slot until it becomes valid.
+    void Wait();
+
     AnyEvent GetEvent() const;
     Bool TryTake( AnyEvent& event );
 
@@ -35,6 +42,7 @@ private:
 
     AnyEvent m_event;
     mutable std::mutex m_eventMutex;
+    std::condition_variable m_becomesValid;
 };
 
 

@@ -211,6 +211,50 @@ Bool AnyEventSlot::IsValid() const
 }
 
 
+//
+// Operations
+//
+
+void AnyEventSlot::Set( const AnyEvent& event )
+{
+    m_impl->SetEvent( event );
+}
+
+
+void AnyEventSlot::Set( AnyEvent&& event )
+{
+    m_impl->SetEvent( std::move( event ));
+}
+
+
+void AnyEventSlot::SetEvent( Int eventId )
+{
+    m_impl->SetEvent( AnyEvent( eventId ));
+}
+
+
+void AnyEventSlot::SetEvent( Int eventId, const Any& value )
+{
+    m_impl->SetEvent( AnyEvent( eventId, value ));
+}
+
+
+void AnyEventSlot::SetEvent( Int eventId, Any&& value )
+{
+    m_impl->SetEvent( AnyEvent( eventId, std::move( value )));
+}
+
+
+void AnyEventSlot::Wait()
+{
+    m_impl->Wait();
+}
+
+
+//
+// Accessors
+//
+
 AnyEvent AnyEventSlot::Take()
 {
     AnyEvent event;
@@ -244,6 +288,47 @@ void AnyEventSlot::Reset()
 // Implementation
 //
 
+void AnyEventSlotImpl::SetEvent( const AnyEvent& event )
+{
+    LockGuard eventLock( m_eventMutex );
+    if ( ! m_event.HasValue() )
+    {
+        m_event = event;
+        m_becomesValid.notify_all();
+        return;
+    }
+
+    // Not returned ? The slot already has an event, discard the new event.
+    TraceDebug( "AnyEventSlot discard an event, id: {0}", event.Id() );
+}
+
+
+void AnyEventSlotImpl::SetEvent( AnyEvent&& event )
+{
+    LockGuard lock( m_eventMutex );
+    if ( ! m_event.HasValue() )
+    {
+        m_event = std::move( event );
+        m_becomesValid.notify_all();
+        return;
+    }
+
+    // Not returned ? The slot already has an event, discard the new event.
+    TraceDebug( "AnyEventSlot discard an event, id: {0}", event.Id() );
+}
+
+
+void AnyEventSlotImpl::Wait()
+{
+    UniqueLock ulock( m_eventMutex );
+
+    while ( ! m_event.IsValid() )
+    {
+        m_becomesValid.wait( ulock );
+    }
+}
+
+
 AnyEvent AnyEventSlotImpl::GetEvent() const
 {
     LockGuard lock( m_eventMutex );
@@ -267,17 +352,7 @@ void AnyEventSlotImpl::Send( const AnyEvent& event, Uint age )
     UniqueLock ulock = this->CompareAge( age );
     if ( ulock )
     {
-        {
-            LockGuard eventLock( m_eventMutex );
-            if ( ! m_event.HasValue() )
-            {
-                m_event = event;
-                return;
-            }
-        }
-
-        // Not returns ? The event has already existed, discard the new event.
-        TraceDebug( "AnyEventSlot discard an event, id: {0}", event.Id() );
+        this->SetEvent( event );
     }
 }
 

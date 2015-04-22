@@ -4,6 +4,7 @@
 
 #include <Caramel/Async/AnyEventDispatcher.h>
 #include <Caramel/Async/AnyEventSlot.h>
+#include <Caramel/Task/StdAsync.h>
 #include <functional>
 
 
@@ -87,6 +88,24 @@ TEST( AnyEventSlotTest )
 
     CHECK( ! slot );
     CHECK( 42 == event2.Id() );
+}
+
+
+TEST( AnyEventSlotWaitTest )
+{
+    AnyEventSlot slot;
+
+    StdAsync::Submit(
+    [&]
+    {
+        slot.SetEvent( 2, "Reimu" );
+    });
+
+    slot.Wait();
+
+    CHECK( slot );
+    CHECK( 2 == slot.Id() );
+    CHECK( "Reimu" == slot.Value< std::string >() );
 }
 
 
