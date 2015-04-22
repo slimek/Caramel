@@ -17,8 +17,6 @@ SUITE( WhenAllSuite )
 
 TEST( WhenAllTest )
 {
-    StdAsyncProxy async;
-
     /// 16 Tasks - 100 Repeats ///
 
     std::vector< Task< void > > tasks;
@@ -38,7 +36,7 @@ TEST( WhenAllTest )
         {
             auto task = MakeTask( "Task", [&] { ++ count; } );
             tasks.push_back( task );
-            async.Submit( task );
+            StdAsync::Submit( task );
         }
 
         WhenAll( "When-16-Tasks", tasks,
@@ -75,7 +73,7 @@ TEST( WhenAllTest )
         done = true;
     });
 
-    async.Submit( task1 );
+    StdAsync::Submit( task1 );
 
     done.Wait();
 
@@ -98,7 +96,7 @@ TEST( WhenAllTest )
         }
 
         tasks.push_back( task );
-        async.Submit( task );
+        StdAsync::Submit( task );
     }
 
     done = false;

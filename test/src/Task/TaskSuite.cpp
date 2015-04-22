@@ -144,14 +144,13 @@ TEST( TaskWithResultTest )
 
 TEST( TaskWithExceptionTest )
 {
-    StdAsyncProxy async;
     std::string what;
 
 
     /// Exception in Wait() ///
 
     auto task1 = MakeTask( "BadTask1", [] { throw std::runtime_error( "bad1" ); } );
-    async.Submit( task1 );
+    StdAsync::Submit( task1 );
 
     try
     {
@@ -168,7 +167,7 @@ TEST( TaskWithExceptionTest )
     /// Exception in GetResult() ///
 
     Task< Int > task2 = MakeTask( "BadTask2", [] { throw std::runtime_error( "bad2" ); return 42; } );
-    async.Submit( task2 );
+    StdAsync::Submit( task2 );
 
     try
     {
@@ -185,11 +184,10 @@ TEST( TaskWithExceptionTest )
 
 TEST( TaskWaitOrCatchTest )
 {
-    StdAsyncProxy async;
     std::string what;
 
     auto task1 = MakeTask( "Task1", [] {} );
-    async.Submit( task1 );
+    StdAsync::Submit( task1 );
 
 
     /// Ran to Completing ///
@@ -205,7 +203,7 @@ TEST( TaskWaitOrCatchTest )
     /// Fault with std::exception ///
 
     auto task2 = MakeTask( "Task2", [] { throw std::runtime_error( "bad" ); } );
-    async.Submit( task2 );
+    StdAsync::Submit( task2 );
 
     const auto result2 = task2.Catch();
 
@@ -220,7 +218,7 @@ TEST( TaskWaitOrCatchTest )
     /// Fault with AnyFailure ///
 
     auto task3 = MakeTask( "Task3", [] { throw AnyFailure( 42, "Cirno" ); } );
-    async.Submit( task3 );
+    StdAsync::Submit( task3 );
 
     const auto result3 = task3.Catch();
 
@@ -236,7 +234,6 @@ TEST( TaskWaitOrCatchTest )
 
 TEST( TaskThenSuite )
 {
-    StdAsyncProxy async;
     Int count1 = 0;
 
     auto task1 = MakeTask( "Task1", [&] { ++ count1; } );
@@ -244,7 +241,7 @@ TEST( TaskThenSuite )
 
     CHECK( "Task1+Continue" == task1c.Name() );
 
-    async.Submit( task1 );
+    StdAsync::Submit( task1 );
     task1c.Wait();
 
     CHECK( 2 == count1 );
@@ -259,7 +256,7 @@ TEST( TaskThenSuite )
 
     CHECK( "Task2-Then" == task2c.Name() );
 
-    async.Submit( task2 );
+    StdAsync::Submit( task2 );
     task2c.Wait();
 
     CHECK( 2 == count2 );
@@ -273,7 +270,7 @@ TEST( TaskThenSuite )
 
     CHECK( "Task3-Then-Then" == task3d.Name() );
 
-    async.Submit( task3 );
+    StdAsync::Submit( task3 );
     task3d.Wait();
 
     CHECK( 42 == task3c.GetResult() );
@@ -283,7 +280,7 @@ TEST( TaskThenSuite )
     /// Continue a task after it is faulted
 
     auto task4 = MakeTask( "Task4", [] { CARAMEL_THROW( "Bad task" ); } );
-    async.Submit( task4 );
+    StdAsync::Submit( task4 );
 
     task4.Catch();
 
@@ -313,7 +310,7 @@ TEST( TaskThenSuite )
         result5 = task.Catch(); 
     });
 
-    async.Submit( task5 );
+    StdAsync::Submit( task5 );
     then5.Wait();
 
     CHECK( TASK_STATE_RAN_TO_COMP == result5.doneState );
@@ -337,7 +334,7 @@ TEST( TaskThenSuite )
     // by copy
     auto then6c = task6.Then( [] ( std::string name ) { return name + "-copy"; } );
 
-    async.Submit( task6 );
+    StdAsync::Submit( task6 );
     then6t.Wait();
     then6r.Wait();
     then6c.Wait();
