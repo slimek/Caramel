@@ -2,6 +2,9 @@
 
 #include "CaramelTestPch.h"
 
+#include <Caramel/Async/AnyEventSlot.h>
+#include <Caramel/Async/AnyEventTask.h>
+#include <Caramel/Concurrent/Queue.h>
 #include <Caramel/Task/StdAsync.h>
 #include <Caramel/Task/TaskCompletionSource.h>
 #include <Caramel/Task/WorkerThread.h>
@@ -108,6 +111,53 @@ TEST( TaskCompletionSourceWithExecutorTest )
     CHECK( true == done2 );
 
     worker.Stop();
+}
+
+
+TEST( TaskCompletionSourceWithAnyEventTest )
+{
+    TaskCompletionSource< AnyEvent > source;
+
+    AnyEventTask task = source.GetTask();
+    StdAsync::Submit(
+    [&]
+    {
+        source.RunTask( AnyEvent( 2, "Reimu" )); 
+    });
+
+    AnyEventSlot slot;
+    task.Link( slot );
+    
+    // NOTES: AnyEventTask send event to target in a Then task.
+    //        task.Wait() may execute before the Then task and doesn't fit here.
+    slot.Wait();
+
+    CHECK( 2 == slot.Id() );
+    CHECK( "Reimu" == slot.Value< std::string >() );
+}
+
+
+TEST( TaskCompletionSourceInOutContainerTest )
+{
+    Concurrent::Queue< TaskCompletionSource< Int >> sources;
+    Task< Int > task;
+
+    // Part 1
+    {
+        TaskCompletionSource< Int > source;
+        task = source.GetTask();
+        sources.Push( source );
+    }
+
+    // Part 2
+    {
+        TaskCompletionSource< Int > source;
+        CHECK( true == sources.TryPop( source ));
+        source.RunTask( 51 );
+    }
+
+    task.Wait();
+    CHECK( 51 == task.GetResult() );
 }
 
 

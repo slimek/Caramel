@@ -75,16 +75,25 @@ private:
 template< typename Result >
 inline TaskCompletionSource< Result >::TaskCompletionSource()
     : m_result( std::make_shared< Result >() )
-    , m_task( [=] { return *m_result; } )
 {
+    auto result = m_result;
+    m_task = MakeTask( [=] { return *result; });
+
+    // NOTES: DO NOT use this code :
+    //
+    //     m_task = MakeTask( [=] { return *m_result; } );
+    //
+    //   In this case, the variable captured by lambda is 'this', not 'm_result'.
+    //   And 'this' would be invalid after the local TaskCompletionSource is destroyed.
 }
 
 
 template< typename Result >
 inline TaskCompletionSource< Result >::TaskCompletionSource( std::string taskName )
     : m_result( std::make_shared< Result >() )
-    , m_task( std::move( taskName ), [=] { return *m_result; } )
 {
+    auto result = m_result;
+    m_task = MakeTask( std::move( taskName ), [=] { return *result; });
 }
 
 
@@ -99,7 +108,14 @@ inline void TaskCompletionSource< Result >::RunTask( Result result, TaskExecutor
 template< typename Result >
 inline void TaskCompletionSource< Result >::RunTask( Result result )
 {
-    this->RunTask( result, StdAsyncProxy() );
+    StdAsyncProxy async;
+    this->RunTask( result, async );
+
+    // NOTES: You can't use the code:
+    //
+    //     this->RunTask( result, StdAsyncProxy() );
+    //
+    //   GCC doesn't not allow to pass a non-const reference of a temporary variable.
 }
 
 
@@ -127,7 +143,14 @@ inline void TaskCompletionSource< void >::RunTask( TaskExecutor& executor )
 
 inline void TaskCompletionSource< void >::RunTask()
 {
-    this->RunTask( StdAsyncProxy() );
+    StdAsyncProxy async;
+    this->RunTask( async );
+
+    // NOTES: You can't use the code:
+    //
+    //     this->RunTask( StdAsyncProxy() );
+    //
+    //   GCC doesn't not allow to pass a non-const reference of a temporary variable.
 }
 
 
