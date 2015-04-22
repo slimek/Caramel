@@ -89,8 +89,7 @@ inline void TaskCompletionSource< Result >::RunTask( Result result, TaskExecutor
 template< typename Result >
 inline void TaskCompletionSource< Result >::RunTask( Result result )
 {
-    *m_result = result;
-    StdAsync::Submit( m_task );
+    this->RunTask( result, StdAsyncProxy() );
 }
 
 
@@ -112,7 +111,7 @@ inline void TaskCompletionSource< void >::RunTask( TaskExecutor& executor )
 
 inline void TaskCompletionSource< void >::RunTask()
 {
-    StdAsync::Submit( m_task );
+    this->RunTask( StdAsyncProxy() );
 }
 
 

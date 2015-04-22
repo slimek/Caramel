@@ -51,8 +51,9 @@ private:
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Std Async Proxy
-// - A task executor based on std::async()
-//   This Executor doesn't support Delay of tasks.
+// - It would submit the task to StdAsync.
+//   Use this type when you need to pass a TaskExecutor parameter, and want to
+//   execute the tasks in StdAsync.
 // 
 
 class StdAsyncProxy : public TaskExecutor
