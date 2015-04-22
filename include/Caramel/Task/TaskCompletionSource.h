@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
+#include <Caramel/Task/StdAsync.h>
 #include <Caramel/Task/Task.h>
 
 
@@ -28,8 +29,10 @@ public:
 
     Task< Result > GetTask() const { return m_task; }
 
-    // This function would execute the task and all its first continuations.
-    void SetResult( Result value );
+    void RunTask( Result result, TaskExecutor& executor );
+
+    // Run the task and all its continuations with StdAsync.
+    void RunTask( Result result );
 
 private:
 
@@ -51,8 +54,10 @@ public:
 
     Task< void > GetTask() const { return m_task; }
 
-    // This function would execute the task and all its first continuations.
-    void Set();
+    void RunTask( TaskExecutor& executor );
+
+    // Run the task and all its continuations with StdAsync.
+    void RunTask();
 
 private:
 
@@ -74,16 +79,18 @@ inline TaskCompletionSource< Result >::TaskCompletionSource()
 
 
 template< typename Result >
-inline void TaskCompletionSource< Result >::SetResult( Result result )
+inline void TaskCompletionSource< Result >::RunTask( Result result, TaskExecutor& executor )
 {
-    // NOTES: Here is a little hack that Task.Run() should only be called
-    //        by a TaskExecutor :p
-
-    // TODO: Maybe the m_task will need BecomeReady() before Run().
-    //       In this case we can make a dummy TaskExecutor here.
-
     *m_result = result;
-    m_task.Run();
+    executor.Submit( m_task );
+}
+
+
+template< typename Result >
+inline void TaskCompletionSource< Result >::RunTask( Result result )
+{
+    *m_result = result;
+    StdAsync::Submit( m_task );
 }
 
 
@@ -97,15 +104,15 @@ inline TaskCompletionSource< void >::TaskCompletionSource()
 }
 
 
-inline void TaskCompletionSource< void >::Set()
+inline void TaskCompletionSource< void >::RunTask( TaskExecutor& executor )
 {
-    // NOTES: Here is a little hack that Task.Run() should only be called
-    //        by a TaskExecutor :p
+    executor.Submit( m_task );
+}
 
-    // TODO: Maybe the m_task will need BecomeReady() before Run().
-    //       In this case we can make a dummy TaskExecutor here.
 
-    m_task.Run();
+inline void TaskCompletionSource< void >::RunTask()
+{
+    StdAsync::Submit( m_task );
 }
 
 
