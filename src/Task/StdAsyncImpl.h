@@ -18,15 +18,15 @@ namespace Caramel
 // Std Async Center
 //
 
-class StdAsyncCenter : public Singleton< StdAsyncCenter, FACILITY_LONGEVITY_STD_ASYNC >
+class StdAsyncCenter : public TaskExecutor
+                     , public Singleton< StdAsyncCenter, FACILITY_LONGEVITY_STD_ASYNC >
 {
 public:
 
-    void Submit( TaskCore& task );
+    void Submit( TaskCore& task ) override;
 
-private:
+    void AddReadyTask( TaskCore& task ) override;
 
-    StdAsyncProxy m_executor;
 };
 
 

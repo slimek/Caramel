@@ -14,12 +14,13 @@ namespace Caramel
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Std Async
-// - Execute the tasks and all its first continuations with std::async().
+// - Execute the tasks and all their continuations with std::async().
 //
 
 class StdAsync
 {
 public:
+
     static void Submit( TaskCore& task );
 
     // Compiler workaround :
@@ -53,7 +54,6 @@ private:
 // - A task executor based on std::async()
 //   This Executor doesn't support Delay of tasks.
 // 
-
 
 class StdAsyncProxy : public TaskExecutor
 {

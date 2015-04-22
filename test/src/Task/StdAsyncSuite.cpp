@@ -47,26 +47,41 @@ TEST( StdAsyncTest )
 
 TEST( StdAsyncProxyTest )
 {
-    StdAsyncProxy async;
-
     Task< void > t1( "Test1", [] {} );
     Task< Int >  t2( "Test2", [] { return 42; } );
 
-    async.Submit( t1 );
-    async.Submit( t2 );
+    {
+        StdAsyncProxy async;
 
-    t1.Wait();
-    t2.Wait();
+        async.Submit( t1 );
+        async.Submit( t2 );
 
-    CHECK( 42 == t2.GetResult() );
+        t1.Wait();
+        t2.Wait();
+
+        CHECK( 42 == t2.GetResult() );
 
 
-    // Make sure that an async thread is not the current thread.
+        // Make sure that an async thread is not the current thread.
 
-    auto t3 = async.Submit( "GetThreadId", [&] { return ThisThread::GetId(); });
+        auto t3 = async.Submit( "GetThreadId", [&] { return ThisThread::GetId(); });
 
-    CHECK( ThisThread::GetId() != t3.GetResult() );
+        CHECK( ThisThread::GetId() != t3.GetResult() );
+    }
 
+    // Even the StdAsyncProxy object has been destroyed, you may still continuate these tasks.
+
+    Bool done1 = false;
+    auto then1 = t1.Then( [&] { done1 = true; });
+
+    Int value2 = 0;
+    auto then2 = t2.Then( [&] ( Int result ) { value2 = result * 2; });
+
+    then1.Wait();
+    then2.Wait();
+
+    CHECK( true == done1 );
+    CHECK( 84 == value2 );
 }
 
 

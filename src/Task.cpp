@@ -31,8 +31,8 @@ namespace Caramel
 //   WorkerThread
 //   PooledThread
 //   ThreadPool
-//   StdAsyncProxy
 //   StdAsync
+//   StdAsyncCenter
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -946,25 +946,46 @@ void ThreadPoolImpl::TryDispatchOneTask()
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Std Async Proxy
+// Std Async
 //
 
+void StdAsync::Submit( TaskCore& task )
+{
+    StdAsyncCenter::Instance()->Submit( task );
+}
+
+
 void StdAsyncProxy::Submit( TaskCore& task )
+{
+    StdAsyncCenter::Instance()->Submit( task );
+}
+
+
+void StdAsyncProxy::AddReadyTask( TaskCore& task )
+{
+    StdAsyncCenter::Instance()->AddReadyTask( task );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Std Async Center
+//
+
+void StdAsyncCenter::Submit( TaskCore& task )
 {
     if ( task.HasDelay() )
     {
         CARAMEL_THROW( "StdAsync doesn't support delay, task: \"{0}\"", task.Name() );
     }
-    else
-    {
-        this->AddReadyTask( task );
-    }
+
+    this->AddReadyTask( task );
 }
 
 
 #if !defined( CARAMEL_SYSTEM_IS_ANDROID )
 
-void StdAsyncProxy::AddReadyTask( TaskCore& task )
+void StdAsyncCenter::AddReadyTask( TaskCore& task )
 {
     task.BecomeReady( *this );
 
@@ -981,7 +1002,7 @@ void StdAsyncProxy::AddReadyTask( TaskCore& task )
 
 // NOTES: Until Android NDK r10c, std::future and std::async are not supported.
 
-void StdAsyncProxy::AddReadyTask( TaskCore& task )
+void StdAsyncCenter::AddReadyTask( TaskCore& task )
 {
     task.BecomeReady( *this );
 
@@ -997,23 +1018,6 @@ void StdAsyncProxy::AddReadyTask( TaskCore& task )
 }
 
 #endif // !CARAMEL_SYSTEM_IS_ANDROID
-
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Std Async
-//
-
-void StdAsync::Submit( TaskCore& task )
-{
-    StdAsyncCenter::Instance()->Submit( task );
-}
-
-
-void StdAsyncCenter::Submit( TaskCore& task )
-{
-    m_executor.Submit( task );
-}
 
 
 ///////////////////////////////////////////////////////////////////////////////
