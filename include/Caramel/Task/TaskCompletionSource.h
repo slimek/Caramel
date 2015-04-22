@@ -26,6 +26,7 @@ public:
     typedef Result ResultType;
 
     TaskCompletionSource();
+    explicit TaskCompletionSource( std::string taskName );
 
     Task< Result > GetTask() const { return m_task; }
 
@@ -51,6 +52,7 @@ class TaskCompletionSource< void >
 public:
     
     TaskCompletionSource();
+    explicit TaskCompletionSource( std::string taskName );
 
     Task< void > GetTask() const { return m_task; }
 
@@ -79,6 +81,14 @@ inline TaskCompletionSource< Result >::TaskCompletionSource()
 
 
 template< typename Result >
+inline TaskCompletionSource< Result >::TaskCompletionSource( std::string taskName )
+    : m_result( std::make_shared< Result >() )
+    , m_task( std::move( taskName ), [=] { return *m_result; } )
+{
+}
+
+
+template< typename Result >
 inline void TaskCompletionSource< Result >::RunTask( Result result, TaskExecutor& executor )
 {
     *m_result = result;
@@ -99,6 +109,12 @@ inline void TaskCompletionSource< Result >::RunTask( Result result )
 
 inline TaskCompletionSource< void >::TaskCompletionSource()
     : m_task( [] {} )
+{
+}
+
+
+inline TaskCompletionSource< void >::TaskCompletionSource( std::string taskName )
+    : m_task( std::move( taskName ), [] {} )
 {
 }
 

@@ -16,7 +16,7 @@ SUITE( TaskCompletionSourceSuite )
 
 TEST( TaskCompletionSourceTest )
 {
-    TaskCompletionSource< Int > source1;
+    TaskCompletionSource< Int > source1( "Big answer" );
 
     auto task1 = source1.GetTask();
     StdAsync::Submit( "Source1 Task",
@@ -30,6 +30,8 @@ TEST( TaskCompletionSourceTest )
     auto then1 = task1.Then( [&] ( Int result ) { value1 = result; });
     then1.Wait();
 
+    CHECK( "Big answer" == task1.Name() );
+    CHECK( "Big answer-Then" == then1.Name() );
     CHECK( 42 == value1 );
 
 
