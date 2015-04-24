@@ -61,11 +61,15 @@ public:
 
     /// Properties ///
 
-    Bool IsValid() const { return static_cast< Bool >( m_holder ); }  // *1
-    Bool IsDone()  const { return TASK_STATE_RUNNING < m_state; }
+    Bool IsValid()    const { return static_cast< Bool >( m_holder ); }  // *1
+    Bool IsCanceled() const { return TASK_STATE_CANCELED == m_state; }
+    Bool IsDone()     const { return TASK_STATE_RUNNING < m_state; }
 
     // NOTES:
     // 1 - In Android NDK r9b, std::shared_prt can't convert to Bool implicitly.
+
+    // Only task-based continuation can be run when the antecedant is faulted
+    Bool CanContinueWhenFaulted() const { return m_holder->Type() == TaskHolder::THEN_WITH_TASK; }
 
 
 private:

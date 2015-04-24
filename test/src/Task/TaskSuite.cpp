@@ -378,6 +378,59 @@ TEST( TaskContinueImmediatelyTest )
 }
 
 
+TEST( TaskCancelTest )
+{
+    // If a task is canceled, all its continuations should also be canceled. 
+
+    auto task = MakeTask( [] { return 42; });
+    auto thenV = task.Then( [] {} );
+    auto thenR = task.Then( [] ( Int result ) {} );
+    auto thenT = task.Then( [] ( const Task< Int >& task ) {} );
+
+    task.Cancel();
+    StdAsync::Submit( task );
+
+    thenV.Wait();
+    thenR.Wait();
+    thenT.Wait();
+
+    CHECK( task.IsCanceled() );
+    CHECK( thenV.IsCanceled() );
+    CHECK( thenR.IsCanceled() );
+    CHECK( thenT.IsCanceled() );
+
+    // Tasks added after canceling should also be canceled.
+    auto thenC = task.Then( [] {} );
+    thenC.Wait();
+    CHECK( thenC.IsCanceled() );
+}
+
+
+TEST( TaskFaultTest )
+{
+    // If a task is faulted :
+    // - Value-base continuation is canceled
+    //   Task-based continuation is run, and GetResult() will throw the exception.
+
+    auto task = MakeTask( [] () -> std::string { throw AnyFailure( 51 ); });
+    auto thenV = task.Then( [] {} );
+    auto thenR = task.Then( [] ( const std::string& result ) {} );
+    auto thenT = task.Then( [] ( const Task< std::string >& task ) {} );
+
+    StdAsync::Submit( task );
+    task.Catch();
+
+    thenV.Wait();
+    thenR.Wait();
+    thenT.Wait();
+
+    CHECK( task.IsFaulted() );
+    CHECK( thenV.IsCanceled() );
+    CHECK( thenR.IsCanceled() );
+    CHECK( thenT.IsDone() && ! thenT.IsCanceled() && ! thenT.IsFaulted() );
+}
+
+
 TEST( TaskWithoutNameTest )
 {
     /// Standalone Functions ///

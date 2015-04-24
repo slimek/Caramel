@@ -225,12 +225,17 @@ void TaskImpl::SetExecutor( TaskExecutor& executor )
 
 void TaskImpl::AddContinuation( TaskPtr continuation )
 {
+    Bool canceled = false;
     Bool canSubmit = false;
 
     {
         LockGuard lock( m_stateMutex );
 
-        if ( this->IsDone() )
+        if ( this->IsCanceled() )
+        {
+            canceled = true;
+        }
+        else if ( this->IsDone() )
         {
             canSubmit = true;
         }
@@ -240,7 +245,11 @@ void TaskImpl::AddContinuation( TaskPtr continuation )
         }
     }
 
-    if ( canSubmit )
+    if ( canceled )
+    {
+        continuation->Cancel();
+    }
+    else if ( canSubmit )
     {
         m_executor->Submit( TaskCore( continuation ));
     }
@@ -298,6 +307,12 @@ void TaskImpl::Run()
 
         for ( TaskPtr task : continuations )
         {
+            if ( m_state == TASK_STATE_FAULTED && ! task->CanContinueWhenFaulted() )
+            {
+                task->Cancel();
+                continue;
+            }
+
             if ( ! firstContinue.IsValid() )
             {
                 firstContinue = TaskCore( task );
@@ -361,15 +376,30 @@ void TaskImpl::DoWait() const
 
 Bool TaskImpl::Cancel()
 {
-    LockGuard lock( m_stateMutex );
+    Bool canceled = false;
+    TaskQueue::SnapshotType continuations;
 
-    if ( m_state < TASK_STATE_RUNNING )
     {
-        m_state = TASK_STATE_CANCELED;
-        return true;
+        LockGuard lock( m_stateMutex );
+
+        if ( m_state < TASK_STATE_RUNNING )
+        {
+            m_state = TASK_STATE_CANCELED;
+            canceled = true;
+            continuations = m_continuations.GetSnapshot();
+            m_becomesDone.notify_all();
+        }
     }
 
-    return false;
+    if ( canceled )
+    {
+        for ( auto cond : continuations )
+        {
+            cond->Cancel();
+        }
+    }
+
+    return canceled;
 }
 
 

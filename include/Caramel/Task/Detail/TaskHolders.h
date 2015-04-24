@@ -27,6 +27,10 @@ public:
     virtual ~TaskHolder() {}
 
     virtual void Invoke() = 0;
+
+    enum TypeValue { REGULAR, THEN_WITH_TASK, THEN_WITH_VALUE, THEN_WITH_VOID };
+
+    virtual TypeValue Type() const = 0;
 };
 
 
@@ -79,6 +83,8 @@ public:
 
     void Invoke() override;
 
+    TypeValue Type() const override { return REGULAR; }
+
 private:
     TaskFunction m_function;
 };
@@ -99,6 +105,8 @@ public:
     explicit RegularTask( TaskFunction&& f );
 
     void Invoke() override;
+
+    TypeValue Type() const override { return REGULAR; }
 
 private:
     TaskFunction m_function;
@@ -123,6 +131,8 @@ public:
 
     void Invoke() override;
 
+    TypeValue Type() const override { return THEN_WITH_TASK; }
+
 private:
 
     ThenFunction m_thenFunction;
@@ -145,6 +155,7 @@ public:
 
     void Invoke() override;
 
+    TypeValue Type() const override { return THEN_WITH_TASK; }
 
 private:
 
@@ -171,6 +182,8 @@ public:
 
     void Invoke() override;
 
+    TypeValue Type() const override { return THEN_WITH_VALUE; }
+
 private:
 
     ThenFunction m_thenFunction;
@@ -192,6 +205,8 @@ public:
     ThenWithValueTask( ThenFunction&& f, Task< AnteResult > antecedent );
 
     void Invoke() override;
+
+    TypeValue Type() const override { return THEN_WITH_VALUE; }
 
 private:
 
@@ -218,6 +233,8 @@ public:
 
     void Invoke() override;
 
+    TypeValue Type() const override { return THEN_WITH_VOID; }
+
 private:
 
     ThenFunction m_thenFunction;
@@ -238,6 +255,8 @@ public:
     ThenWithVoidTask( ThenFunction&& f, const TaskCore& );
 
     void Invoke() override;
+
+    TypeValue Type() const override { return THEN_WITH_VOID; }
 
 private:
 
