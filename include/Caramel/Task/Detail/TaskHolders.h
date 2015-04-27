@@ -83,7 +83,7 @@ public:
 
     void Invoke() override;
 
-    TypeValue Type() const override { return REGULAR; }
+    TaskHolder::TypeValue Type() const override { return TaskHolder::REGULAR; }
 
 private:
     TaskFunction m_function;
@@ -106,7 +106,7 @@ public:
 
     void Invoke() override;
 
-    TypeValue Type() const override { return REGULAR; }
+    TaskHolder::TypeValue Type() const override { return TaskHolder::REGULAR; }
 
 private:
     TaskFunction m_function;
@@ -131,7 +131,7 @@ public:
 
     void Invoke() override;
 
-    TypeValue Type() const override { return THEN_WITH_TASK; }
+    TaskHolder::TypeValue Type() const override { return TaskHolder::THEN_WITH_TASK; }
 
 private:
 
@@ -155,7 +155,7 @@ public:
 
     void Invoke() override;
 
-    TypeValue Type() const override { return THEN_WITH_TASK; }
+    TaskHolder::TypeValue Type() const override { return TaskHolder::THEN_WITH_TASK; }
 
 private:
 
@@ -182,7 +182,7 @@ public:
 
     void Invoke() override;
 
-    TypeValue Type() const override { return THEN_WITH_VALUE; }
+    TaskHolder::TypeValue Type() const override { return TaskHolder::THEN_WITH_VALUE; }
 
 private:
 
@@ -206,7 +206,7 @@ public:
 
     void Invoke() override;
 
-    TypeValue Type() const override { return THEN_WITH_VALUE; }
+    TaskHolder::TypeValue Type() const override { return TaskHolder::THEN_WITH_VALUE; }
 
 private:
 
@@ -233,7 +233,7 @@ public:
 
     void Invoke() override;
 
-    TypeValue Type() const override { return THEN_WITH_VOID; }
+    TaskHolder::TypeValue Type() const override { return TaskHolder::THEN_WITH_VOID; }
 
 private:
 
@@ -256,7 +256,7 @@ public:
 
     void Invoke() override;
 
-    TypeValue Type() const override { return THEN_WITH_VOID; }
+    TaskHolder::TypeValue Type() const override { return TaskHolder::THEN_WITH_VOID; }
 
 private:
 
