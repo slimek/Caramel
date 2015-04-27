@@ -42,7 +42,7 @@ private:
     friend class AnyEventDispatcher;
     friend class AnyEventTask;
 
-    // This is called by AnyEventDispatcher.
+    // This is called by AnyEventDispatcher or AnyEventTask.
     virtual AnyEventTargetPtr GetTargetImpl() const = 0;
 };
 
