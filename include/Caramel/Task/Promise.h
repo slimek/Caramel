@@ -17,9 +17,9 @@ namespace Caramel
 // Promise
 // - The Task/Promise pair work like the std::future/promise.
 //
-//   Reference:
-//     In Visual C++ PPL, it is called task_completion_event.
-//     In .NET Framework, it is called Promise.
+//   References:
+//     task_completion_event class in Visual C++ PPL.
+//     TaskCompletionSource class in .NET Framework.
 //
 
 template< typename Result >
