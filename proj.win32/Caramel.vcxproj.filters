@@ -887,11 +887,11 @@
     <ClInclude Include="..\include\Caramel\Concurrent\DelayQueue.h">
       <Filter>1. Public Packages\Concurrent</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\Task\TaskCompletionSource.h">
-      <Filter>1. Public Packages\Task</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\Task\StdAsyncImpl.h">
       <Filter>2. Sources\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Task\Promise.h">
+      <Filter>1. Public Packages\Task</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

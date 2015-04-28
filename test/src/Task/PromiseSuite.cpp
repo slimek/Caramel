@@ -1,12 +1,12 @@
-// Caramel C++ Library Test - Task - Task Completion Source Suite
+// Caramel C++ Library Test - Task - Promise Suite
 
 #include "CaramelTestPch.h"
 
 #include <Caramel/Async/AnyEventSlot.h>
 #include <Caramel/Async/AnyEventTask.h>
 #include <Caramel/Concurrent/Queue.h>
+#include <Caramel/Task/Promise.h>
 #include <Caramel/Task/StdAsync.h>
-#include <Caramel/Task/TaskCompletionSource.h>
 #include <Caramel/Task/WorkerThread.h>
 #include <Caramel/Thread/ThisThread.h>
 
@@ -14,19 +14,19 @@
 namespace Caramel
 {
 
-SUITE( TaskCompletionSourceSuite )
+SUITE( PromiseSuite )
 {
 
-TEST( TaskCompletionSourceTest )
+TEST( PromiseTest )
 {
-    TaskCompletionSource< Int > source1( "Big answer" );
+    Promise< Int > promise1( "Big answer" );  // Give the task name.
 
-    auto task1 = source1.GetTask();
-    StdAsync::Submit( "Source1 Task",
+    auto task1 = promise1.GetTask();
+    StdAsync::Submit( "Promise1 Task",
     [&]
     {
         ThisThread::SleepFor( Ticks( 100 ));
-        source1.RunTask( 42 );
+        promise1.RunTask( 42 );
     });
 
     Int value1 = 0;
@@ -38,14 +38,14 @@ TEST( TaskCompletionSourceTest )
     CHECK( 42 == value1 );
 
 
-    TaskCompletionSource< std::string > source2;
+    Promise< std::string > promise2;
 
-    auto task2 = source2.GetTask();
-    StdAsync::Submit( "Source2 Task",
+    auto task2 = promise2.GetTask();
+    StdAsync::Submit( "Promise2 Task",
     [&]
     {
         ThisThread::SleepFor( Ticks( 100 ));
-        source2.RunTask( "Alice" );
+        promise2.RunTask( "Alice" );
     });
 
     std::string value2;
@@ -55,14 +55,14 @@ TEST( TaskCompletionSourceTest )
     CHECK( "Alice" == value2 );
 
 
-    TaskCompletionSource< void > source3;
+    Promise< void > promise3;
 
-    auto task3 = source3.GetTask();
-    StdAsync::Submit( "Source3 Task",
+    auto task3 = promise3.GetTask();
+    StdAsync::Submit( "Promise3 Task",
     [&]
     {
         ThisThread::SleepFor( Ticks( 100 ));
-        source3.RunTask();
+        promise3.RunTask();
     });
 
     Bool done3 = false;
@@ -73,18 +73,18 @@ TEST( TaskCompletionSourceTest )
 }
 
 
-TEST( TaskCompletionSourceWithExecutorTest )
+TEST( PromiseWithExecutorTest )
 {
-    WorkerThread worker( "TaskCompletionSource worker" );
+    WorkerThread worker( "Promise worker" );
 
-    TaskCompletionSource< std::string > source1;
+    Promise< std::string > promise1;
 
-    auto task1 = source1.GetTask();
+    auto task1 = promise1.GetTask();
     StdAsync::Submit(
     [&]
     {
         ThisThread::SleepFor( Ticks( 50 ));
-        source1.RunTask( "Marisa", worker );
+        promise1.RunTask( "Marisa", worker );
     });
 
     std::string value1;
@@ -94,14 +94,14 @@ TEST( TaskCompletionSourceWithExecutorTest )
     CHECK( "Marisa" == value1 );
 
 
-    TaskCompletionSource< void > source2;
+    Promise< void > promise2;
 
-    auto task2 = source2.GetTask();
+    auto task2 = promise2.GetTask();
     StdAsync::Submit(
     [&]
     {
         ThisThread::SleepFor( Ticks( 50 ));
-        source2.RunTask( worker );
+        promise2.RunTask( worker );
     });
 
     Bool done2 = false;
@@ -114,15 +114,15 @@ TEST( TaskCompletionSourceWithExecutorTest )
 }
 
 
-TEST( TaskCompletionSourceWithAnyEventTest )
+TEST( PromiseWithAnyEventTest )
 {
-    TaskCompletionSource< AnyEvent > source;
+    Promise< AnyEvent > promise;
 
-    AnyEventTask task = source.GetTask();
+    AnyEventTask task = promise.GetTask();
     StdAsync::Submit(
     [&]
     {
-        source.RunTask( AnyEvent( 2, "Reimu" )); 
+        promise.RunTask( AnyEvent( 2, "Reimu" )); 
     });
 
     AnyEventSlot slot;
@@ -137,23 +137,23 @@ TEST( TaskCompletionSourceWithAnyEventTest )
 }
 
 
-TEST( TaskCompletionSourceInOutContainerTest )
+TEST( PromiseInOutContainerTest )
 {
-    Concurrent::Queue< TaskCompletionSource< Int >> sources;
+    Concurrent::Queue< Promise< Int >> promises;
     Task< Int > task;
 
     // Part 1
     {
-        TaskCompletionSource< Int > source;
-        task = source.GetTask();
-        sources.Push( source );
+        Promise< Int > promise;
+        task = promise.GetTask();
+        promises.Push( promise );
     }
 
     // Part 2
     {
-        TaskCompletionSource< Int > source;
-        CHECK( true == sources.TryPop( source ));
-        source.RunTask( 51 );
+        Promise< Int > promise;
+        CHECK( true == promises.TryPop( promise ));
+        promise.RunTask( 51 );
     }
 
     task.Wait();
@@ -161,6 +161,6 @@ TEST( TaskCompletionSourceInOutContainerTest )
 }
 
 
-} // SUITE TaskCompletionSourceSuite
+} // SUITE PromiseSuite
 
 } // namespace Caramel

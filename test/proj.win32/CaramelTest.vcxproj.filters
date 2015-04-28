@@ -349,7 +349,7 @@
     <ClCompile Include="..\src\Concurrent\ConcurrentDelayQueueSuite.cpp">
       <Filter>2. Tests\Concurrent</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Task\TaskCompletionSourceSuite.cpp">
+    <ClCompile Include="..\src\Task\PromiseSuite.cpp">
       <Filter>2. Tests\Task</Filter>
     </ClCompile>
   </ItemGroup>

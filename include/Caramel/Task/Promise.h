@@ -1,7 +1,7 @@
-// Caramel C++ Library - Task Facility - Task Completion Source Header
+// Caramel C++ Library - Task Facility - Promise Header
 
-#ifndef __CARAMEL_TASK_TASK_COMPLETION_SOURCE_H
-#define __CARAMEL_TASK_TASK_COMPLETION_SOURCE_H
+#ifndef __CARAMEL_TASK_PROMISE_H
+#define __CARAMEL_TASK_PROMISE_H
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
@@ -14,19 +14,23 @@ namespace Caramel
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Task Completion Source
-// - The class name comes from .NET Task Parallel Library.
+// Promise
+// - The Task/Promise pair work like the std::future/promise.
+//
+//   Reference:
+//     In Visual C++ PPL, it is called task_completion_event.
+//     In .NET Framework, it is called Promise.
 //
 
 template< typename Result >
-class TaskCompletionSource
+class Promise
 {
 public:
 
     typedef Result ResultType;
 
-    TaskCompletionSource();
-    explicit TaskCompletionSource( std::string taskName );
+    Promise();
+    explicit Promise( std::string taskName );
 
     Task< Result > GetTask() const { return m_task; }
 
@@ -47,12 +51,12 @@ private:
 //
 
 template<>
-class TaskCompletionSource< void >
+class Promise< void >
 {
 public:
     
-    TaskCompletionSource();
-    explicit TaskCompletionSource( std::string taskName );
+    Promise();
+    explicit Promise( std::string taskName );
 
     Task< void > GetTask() const { return m_task; }
 
@@ -73,7 +77,7 @@ private:
 //
 
 template< typename Result >
-inline TaskCompletionSource< Result >::TaskCompletionSource()
+inline Promise< Result >::Promise()
     : m_result( std::make_shared< Result >() )
 {
     auto result = m_result;
@@ -84,12 +88,12 @@ inline TaskCompletionSource< Result >::TaskCompletionSource()
     //     m_task = MakeTask( [=] { return *m_result; } );
     //
     //   In this case, the variable captured by lambda is 'this', not 'm_result'.
-    //   And 'this' would be invalid after the local TaskCompletionSource is destroyed.
+    //   And 'this' would be invalid after the local Promise is destroyed.
 }
 
 
 template< typename Result >
-inline TaskCompletionSource< Result >::TaskCompletionSource( std::string taskName )
+inline Promise< Result >::Promise( std::string taskName )
     : m_result( std::make_shared< Result >() )
 {
     auto result = m_result;
@@ -98,7 +102,7 @@ inline TaskCompletionSource< Result >::TaskCompletionSource( std::string taskNam
 
 
 template< typename Result >
-inline void TaskCompletionSource< Result >::RunTask( Result result, TaskExecutor& executor )
+inline void Promise< Result >::RunTask( Result result, TaskExecutor& executor )
 {
     *m_result = result;
     executor.Submit( m_task );
@@ -106,7 +110,7 @@ inline void TaskCompletionSource< Result >::RunTask( Result result, TaskExecutor
 
 
 template< typename Result >
-inline void TaskCompletionSource< Result >::RunTask( Result result )
+inline void Promise< Result >::RunTask( Result result )
 {
     StdAsyncProxy async;
     this->RunTask( result, async );
@@ -123,25 +127,25 @@ inline void TaskCompletionSource< Result >::RunTask( Result result )
 // Tasks return no values
 //
 
-inline TaskCompletionSource< void >::TaskCompletionSource()
+inline Promise< void >::Promise()
     : m_task( [] {} )
 {
 }
 
 
-inline TaskCompletionSource< void >::TaskCompletionSource( std::string taskName )
+inline Promise< void >::Promise( std::string taskName )
     : m_task( std::move( taskName ), [] {} )
 {
 }
 
 
-inline void TaskCompletionSource< void >::RunTask( TaskExecutor& executor )
+inline void Promise< void >::RunTask( TaskExecutor& executor )
 {
     executor.Submit( m_task );
 }
 
 
-inline void TaskCompletionSource< void >::RunTask()
+inline void Promise< void >::RunTask()
 {
     StdAsyncProxy async;
     this->RunTask( async );
@@ -158,4 +162,4 @@ inline void TaskCompletionSource< void >::RunTask()
 
 } // namespace Caramel
 
-#endif // __CARAMEL_TASK_TASK_COMPLETION_SOURCE_H
+#endif // __CARAMEL_TASK_PROMISE_H
