@@ -91,6 +91,8 @@
 		01498DE41ADE543200B58EDC /* NamedValuesSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D8D1ADE543200B58EDC /* NamedValuesSuite.cpp */; };
 		01498DE51ADE543200B58EDC /* ScalarSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D8E1ADE543200B58EDC /* ScalarSuite.cpp */; };
 		01498DE61ADE543200B58EDC /* SharedArraySuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D8F1ADE543200B58EDC /* SharedArraySuite.cpp */; };
+		01CB3AA71AEF972600EF8238 /* PromiseSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01CB3AA61AEF972600EF8238 /* PromiseSuite.cpp */; };
+		01CB3AAA1AEF973F00EF8238 /* ConcurrentDelayQueueSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01CB3AA91AEF973F00EF8238 /* ConcurrentDelayQueueSuite.cpp */; };
 		6AAF38F11849D3B00010FAF1 /* libCaramel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AAF38F01849D3940010FAF1 /* libCaramel.a */; };
 /* End PBXBuildFile section */
 
@@ -212,6 +214,8 @@
 		01B6B8321A9C242000404118 /* test1.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test1.ini; sourceTree = "<group>"; };
 		01B6B8331A9C242000404118 /* test2.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test2.ini; sourceTree = "<group>"; };
 		01B6B8341A9C242000404118 /* values.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = values.ini; sourceTree = "<group>"; };
+		01CB3AA61AEF972600EF8238 /* PromiseSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PromiseSuite.cpp; sourceTree = "<group>"; };
+		01CB3AA91AEF973F00EF8238 /* ConcurrentDelayQueueSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConcurrentDelayQueueSuite.cpp; sourceTree = "<group>"; };
 		6A706EBB184985D3004C9602 /* CaramelTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CaramelTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AAF38EB1849D3930010FAF1 /* Caramel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Caramel.xcodeproj; path = ../../proj.mac/Caramel.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -302,6 +306,7 @@
 		01498D321ADE543200B58EDC /* Concurrent */ = {
 			isa = PBXGroup;
 			children = (
+				01CB3AA91AEF973F00EF8238 /* ConcurrentDelayQueueSuite.cpp */,
 				01498D331ADE543200B58EDC /* ConcurrentBlockingQueueSuite.cpp */,
 				01498D341ADE543200B58EDC /* ConcurrentIntervalSetSuite.cpp */,
 				01498D351ADE543200B58EDC /* ConcurrentMapSuite.cpp */,
@@ -461,6 +466,7 @@
 		01498D721ADE543200B58EDC /* Task */ = {
 			isa = PBXGroup;
 			children = (
+				01CB3AA61AEF972600EF8238 /* PromiseSuite.cpp */,
 				01498D731ADE543200B58EDC /* ContinuationTraitsSuite.cpp */,
 				01498D741ADE543200B58EDC /* StdAsyncSuite.cpp */,
 				01498D751ADE543200B58EDC /* TaskPollerSuite.cpp */,
@@ -642,12 +648,14 @@
 				01498DAE1ADE543200B58EDC /* DateTimeBoolSuite.cpp in Sources */,
 				01498DB81ADE543200B58EDC /* DirectoryInfoSuite.cpp in Sources */,
 				01498DBC1ADE543200B58EDC /* TextStreamWriterSuite.cpp in Sources */,
+				01CB3AA71AEF972600EF8238 /* PromiseSuite.cpp in Sources */,
 				01498DA11ADE543200B58EDC /* TickClockSuite.cpp in Sources */,
 				01498D961ADE543200B58EDC /* AnyEventHandlerSuite.cpp in Sources */,
 				01498DCC1ADE543200B58EDC /* StateMachineSuite.cpp in Sources */,
 				01498DCA1ADE543200B58EDC /* RunTest.cpp in Sources */,
 				01498DA21ADE543200B58EDC /* TimedBoolSuite.cpp in Sources */,
 				01498DE11ADE543200B58EDC /* TraceSuite.cpp in Sources */,
+				01CB3AAA1AEF973F00EF8238 /* ConcurrentDelayQueueSuite.cpp in Sources */,
 				01498DB61ADE543200B58EDC /* ExceptionPtrSuite.cpp in Sources */,
 				01498D941ADE543200B58EDC /* PowerOfTwoSuite.cpp in Sources */,
 				01498DB11ADE543200B58EDC /* TimeSpanSuite.cpp in Sources */,
