@@ -89,6 +89,9 @@
     <Filter Include="3. Testing Assets">
       <UniqueIdentifier>{2bf94cfb-8d6a-424c-83c1-5269782f85e9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\Object">
+      <UniqueIdentifier>{4ec8615c-c53d-4619-b908-032da1d678ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\RunTest.cpp">
@@ -351,6 +354,9 @@
     </ClCompile>
     <ClCompile Include="..\src\Task\PromiseSuite.cpp">
       <Filter>2. Tests\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Object\InstanceCountedSuite.cpp">
+      <Filter>2. Tests\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

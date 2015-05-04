@@ -893,6 +893,9 @@
     <ClInclude Include="..\include\Caramel\Task\Promise.h">
       <Filter>1. Public Packages\Task</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Object\InstanceCounted.h">
+      <Filter>1. Public Packages\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

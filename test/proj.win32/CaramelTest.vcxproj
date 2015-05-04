@@ -225,6 +225,7 @@
     <ClCompile Include="..\src\Numeric\NumberRelationSuite.cpp" />
     <ClCompile Include="..\src\Numeric\NumberTraitsSuite.cpp" />
     <ClCompile Include="..\src\Numeric\UnionBitsSuite.cpp" />
+    <ClCompile Include="..\src\Object\InstanceCountedSuite.cpp" />
     <ClCompile Include="..\src\Random\UniformRandomSuite.cpp" />
     <ClCompile Include="..\src\Random\WeightedRandomMapSuite.cpp" />
     <ClCompile Include="..\src\RunTest.cpp" />
