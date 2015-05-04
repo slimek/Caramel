@@ -103,6 +103,7 @@ LOCAL_SRC_FILES := \
 	$(CRMTEST_SRC)/Numeric/NumberRelationSuite.cpp \
 	$(CRMTEST_SRC)/Numeric/NumberTraitsSuite.cpp \
 	$(CRMTEST_SRC)/Numeric/UnionBitsSuite.cpp \
+	$(CRMTEST_SRC)/Object/InstanceCountedSuite.cpp \
 	$(CRMTEST_SRC)/Random/UniformRandomSuite.cpp \
 	$(CRMTEST_SRC)/Random/WeightedRandomMapSuite.cpp \
 	$(CRMTEST_SRC)/Statechart/PromptStateMachineSuite.cpp \
@@ -114,8 +115,8 @@ LOCAL_SRC_FILES := \
 	$(CRMTEST_SRC)/String/StringToStringSuite.cpp \
 	$(CRMTEST_SRC)/String/Utf8StringSuite.cpp \
 	$(CRMTEST_SRC)/Task/ContinuationTraitsSuite.cpp \
+	$(CRMTEST_SRC)/Task/PromiseSuite.cpp \
 	$(CRMTEST_SRC)/Task/StdAsyncSuite.cpp \
-	$(CRMTEST_SRC)/Task/TaskCompletionSourceSuite.cpp \
 	$(CRMTEST_SRC)/Task/TaskPollerSuite.cpp \
 	$(CRMTEST_SRC)/Task/TaskSuite.cpp \
 	$(CRMTEST_SRC)/Task/TaskTimerSuite.cpp \

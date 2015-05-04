@@ -18,9 +18,19 @@ public:
         : m_value( std::move( value ))
     {}
 
+    explicit Widget( const Widget& w )
+        : m_value( w.m_value )
+    {}
+
     explicit Widget( Widget&& w )
         : m_value( std::move( w.m_value ))
     {}
+
+    Widget& operator=( const Widget& w )
+    {
+        m_value = w.m_value;
+        return *this;
+    }
 
     Widget& operator=( Widget&& w )
     {
@@ -52,9 +62,6 @@ TEST( InstanceCountedTest )
 
         CHECK( 3 == Widget::GetInstanceCount() );
     
-        CHECK( "" == w1.Value() );
-        CHECK( "Alice" == w3.Value() );
-
         Widget w4( "Reimu" );
         w1 = w4;
 
@@ -63,9 +70,6 @@ TEST( InstanceCountedTest )
         w2 = std::move( w4 );
 
         CHECK( 4 == Widget::GetInstanceCount() );
-
-        CHECK( "" == w4.Value() );
-        CHECK( "Reimu" == w2.Value() );
     }
 
     CHECK( 1 == Widget::GetInstanceCount() );
