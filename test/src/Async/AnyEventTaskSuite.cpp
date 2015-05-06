@@ -3,6 +3,7 @@
 #include "CaramelTestPch.h"
 
 #include <Caramel/Async/AnyEventQueue.h>
+#include <Caramel/Async/AnyEventReactor.h>
 #include <Caramel/Async/AnyEventTask.h>
 #include <Caramel/Task/StdAsync.h>
 
@@ -15,7 +16,7 @@ SUITE( AnyEventTaskSuite )
 
 static AnyEventTask TaskYukari()
 {
-    auto task = MakeTask( [] { return AnyEvent( 2, "Yukari" ); });
+    auto task = MakeTask( [] { return AnyEvent( 22, "Yukari" ); });
     StdAsync::Submit( task );
     return task;
 }
@@ -69,7 +70,7 @@ TEST( AnyEventTaskTest )
 
     t3.Wait();
 
-    CHECK( 2        == id3 );
+    CHECK( 22       == id3 );
     CHECK( "Yukari" == value3 );
 
 
@@ -86,6 +87,27 @@ TEST( AnyEventTaskTest )
     CHECK( queue.TryPop( e4 ));
     CHECK( 8 == e4.Id() );
     CHECK( "Marisa" == e4.Value< std::string >() );
+
+
+    /// Send the result into a Reactor ///
+
+    AnyEventReactor reactor;
+
+    AnyEventTask t5 = MakeTask( [] { return AnyEvent( 51, "Nitori" ); });
+
+    AnyEvent e5;    
+    
+    t5.Link( reactor.Receive(
+    [&] ( const AnyEvent& event )
+    {
+        e5 = event;
+    }));
+
+    t5.Run();
+    reactor.PollOne();
+
+    CHECK( 51 == e5.Id() );
+    CHECK( "Nitori" == e5.Value< std::string >() );
 }
 
 } // SUITE AnyEventTaskSuite

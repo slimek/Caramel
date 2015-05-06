@@ -33,6 +33,14 @@ public:
     // When the task is completed, send an event to the target.
     void Link( AnyEventTarget& target );
 
+    // Compiler workaround :
+    // - Some compilers do not allow to convert a rvalue to non-const lvalue implicitly.
+    //   This function may change a rvalue to a lvalue.
+    void Link( AnyEventTarget&& target )
+    {
+        this->Link( target );
+    }
+
 
     //
     // Access the Event
