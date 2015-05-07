@@ -358,6 +358,9 @@
     <ClCompile Include="..\src\Object\InstanceCountedSuite.cpp">
       <Filter>2. Tests\Object</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Lexical\LexicalFloatingListSuite.cpp">
+      <Filter>2. Tests\Lexical</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">

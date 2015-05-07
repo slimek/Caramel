@@ -93,6 +93,7 @@ LOCAL_SRC_FILES := \
 	$(CRMTEST_SRC)/Io/InputMemoryStreamSuite.cpp \
 	$(CRMTEST_SRC)/Io/TextStreamWriterSuite.cpp \
 	$(CRMTEST_SRC)/Lexical/LexicalBooleanSuite.cpp \
+	$(CRMTEST_SRC)/Lexical/LexicalFloatingListSuite.cpp \
 	$(CRMTEST_SRC)/Lexical/LexicalFloatingSuite.cpp \
 	$(CRMTEST_SRC)/Lexical/LexicalIntegerSuite.cpp \
 	$(CRMTEST_SRC)/Lexical/LexicalVersionSuite.cpp \

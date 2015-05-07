@@ -896,6 +896,9 @@
     <ClInclude Include="..\include\Caramel\Object\InstanceCounted.h">
       <Filter>1. Public Packages\Object</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Lexical\FloatingList.h">
+      <Filter>1. Public Packages\Lexical</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">
