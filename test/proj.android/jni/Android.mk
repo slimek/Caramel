@@ -95,6 +95,7 @@ LOCAL_SRC_FILES := \
 	$(CRMTEST_SRC)/Lexical/LexicalBooleanSuite.cpp \
 	$(CRMTEST_SRC)/Lexical/LexicalFloatingListSuite.cpp \
 	$(CRMTEST_SRC)/Lexical/LexicalFloatingSuite.cpp \
+	$(CRMTEST_SRC)/Lexical/LexicalIntegerListSuite.cpp \
 	$(CRMTEST_SRC)/Lexical/LexicalIntegerSuite.cpp \
 	$(CRMTEST_SRC)/Lexical/LexicalVersionSuite.cpp \
 	$(CRMTEST_SRC)/Memory/SharedPtrUtilsSuite.cpp \

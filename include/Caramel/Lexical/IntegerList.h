@@ -9,6 +9,7 @@
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <deque>
+#include <type_traits>
 
 
 namespace Caramel
@@ -20,29 +21,35 @@ namespace Lexical
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Integer List
+// - Convert a string into a list of integer values.
 //
 
-template< typename ValueType >
+template< typename Value >
 class IntegerList
 {
+    static_assert( std::is_integral< Value >::value, "Value must be integral" );
+
 public:
 
+    typedef Value ValueType;
+
+    
     /// Properties ///
 
     Usize Size() const { return m_values.size(); }
 
-    ValueType operator[]( Uint index ) const { return m_values[index]; }
+    ValueType operator[]( Usize index ) const { return m_values[index]; }
 
 
-    //
-    // Try Parse
-    // - Returns false if the input string is bad format.
-    //
+    /// Conversions ///
+
+    // Returns false if the input string is bad format.
     Bool TryParse( const std::string& input, const std::string& separators );
 
 
 private:
-    typedef std::deque< ValueType > ValueList;
+
+    typedef std::deque< Value > ValueList;
     ValueList m_values;    
 };
 
@@ -52,16 +59,19 @@ private:
 // Implementations
 //
 
-template< typename ValueType >
-inline Bool IntegerList< ValueType >::TryParse( const std::string& input, const std::string& separators )
+template< typename Value >
+inline Bool IntegerList< Value >::TryParse(
+    const std::string& input, const std::string& separators )
 {
-    std::deque< std::string > tokens;
-    boost::split( tokens, input, boost::is_any_of( separators ));
+    m_values.clear();
 
-    for ( Usize i = 0; i < tokens.size(); ++ i )
+    std::deque< std::string > tokens;
+    boost::split( tokens, input, boost::is_any_of( separators ), boost::token_compress_on );
+
+    for ( const auto& token : tokens )
     {
-        Integer< ValueType > ivalue;
-        if ( !ivalue.TryParse( tokens[i] ))
+        Integer< Value > ivalue;
+        if ( !ivalue.TryParse( token ))
         {
             return false;
         }
@@ -73,7 +83,6 @@ inline Bool IntegerList< ValueType >::TryParse( const std::string& input, const 
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
 
 } // namespace Lexical
 

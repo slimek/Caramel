@@ -217,6 +217,7 @@
     <ClCompile Include="..\src\Lexical\LexicalBooleanSuite.cpp" />
     <ClCompile Include="..\src\Lexical\LexicalFloatingListSuite.cpp" />
     <ClCompile Include="..\src\Lexical\LexicalFloatingSuite.cpp" />
+    <ClCompile Include="..\src\Lexical\LexicalIntegerListSuite.cpp" />
     <ClCompile Include="..\src\Lexical\LexicalIntegerSuite.cpp" />
     <ClCompile Include="..\src\Lexical\LexicalVersionSuite.cpp" />
     <ClCompile Include="..\src\Memory\SharedPtrUtilsSuite.cpp" />
