@@ -199,9 +199,6 @@
     <ClCompile Include="..\src\String\StringAlgorithmSuite.cpp">
       <Filter>2. Tests\String</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\String\StringToStringSuite.cpp">
-      <Filter>2. Tests\String</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\String\Utf8StringSuite.cpp">
       <Filter>2. Tests\String</Filter>
     </ClCompile>
@@ -363,6 +360,9 @@
     </ClCompile>
     <ClCompile Include="..\src\Lexical\LexicalIntegerListSuite.cpp">
       <Filter>2. Tests\Lexical</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\String\ToStringSuite.cpp">
+      <Filter>2. Tests\String</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

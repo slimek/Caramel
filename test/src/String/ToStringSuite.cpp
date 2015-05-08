@@ -9,10 +9,10 @@
 namespace Caramel
 {
 
-SUITE( StringToString )
+SUITE( ToString )
 {
 
-TEST( StringToString )
+TEST( ToString )
 {
     CHECK( "false" == ToString( false ));
     CHECK( "true"  == ToString( true ));
@@ -95,7 +95,7 @@ TEST( StringToString )
 static Bool IsRvalue( const std::string& s ) { return false; }
 static Bool IsRvalue( std::string&& s )      { return true; }
 
-TEST( StringToStringTrivial )
+TEST( ToStringTrivial )
 {
     const std::string alice( "Alice" );
     const Char* reimu = "Reimu";
@@ -113,7 +113,7 @@ TEST( StringToStringTrivial )
 }
 
 
-TEST( StringToStringWithFormat )
+TEST( ToStringWithFormat )
 {
     /// Integers ///
 
@@ -150,7 +150,7 @@ TEST( StringToStringWithFormat )
 }
 
 
-TEST( StringToStringT )
+TEST( ToStringT )
 {
     CHECK( "Bool"   == ToStringT< Bool >() );
     CHECK( "Char"   == ToStringT< Char >() );
@@ -169,6 +169,6 @@ TEST( StringToStringT )
 }
 
 
-} // SUITE StringToString
+} // SUITE ToString
 
 } // namespace Caramel

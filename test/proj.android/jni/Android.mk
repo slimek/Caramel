@@ -114,7 +114,7 @@ LOCAL_SRC_FILES := \
 	$(CRMTEST_SRC)/String/SplitSuite.cpp \
 	$(CRMTEST_SRC)/String/StringAlgorithmSuite.cpp \
 	$(CRMTEST_SRC)/String/StringConvertibleSuite.cpp \
-	$(CRMTEST_SRC)/String/StringToStringSuite.cpp \
+	$(CRMTEST_SRC)/String/ToStringSuite.cpp \
 	$(CRMTEST_SRC)/String/Utf8StringSuite.cpp \
 	$(CRMTEST_SRC)/Task/ContinuationTraitsSuite.cpp \
 	$(CRMTEST_SRC)/Task/PromiseSuite.cpp \
