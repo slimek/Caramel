@@ -80,6 +80,7 @@ LOCAL_SRC_FILES := \
 	$(CRMTEST_SRC)/DateTime/DateSuite.cpp \
 	$(CRMTEST_SRC)/DateTime/DateTimeBoolSuite.cpp \
 	$(CRMTEST_SRC)/DateTime/DateTimeSuite.cpp \
+	$(CRMTEST_SRC)/DateTime/DaysSuite.cpp \
 	$(CRMTEST_SRC)/DateTime/TimeOfDaySuite.cpp \
 	$(CRMTEST_SRC)/DateTime/TimeSpanSuite.cpp \
 	$(CRMTEST_SRC)/Document/IniDocumentSuite.cpp \
