@@ -8,7 +8,7 @@
 namespace Caramel
 {
 
-SUITE( InstanceCountedSuite )
+SUITE( InstanceCounted )
 {
 
 class Widget : public InstanceCounted< Widget >
@@ -45,7 +45,7 @@ private:
 };
 
 
-TEST( InstanceCountedTest )
+TEST( InstanceCounted )
 {
     CHECK( 0 == Widget::GetInstanceCount() );
 
@@ -75,6 +75,6 @@ TEST( InstanceCountedTest )
     CHECK( 1 == Widget::GetInstanceCount() );
 }
 
-} // SUITE InstanceCounted Suite
+} // SUITE InstanceCounted
 
 } // namespace Caramel

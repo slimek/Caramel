@@ -8,10 +8,10 @@
 namespace Caramel
 {
 
-SUITE( UnionBitsSuite )
+SUITE( UnionBits )
 {
 
-TEST( UnionBits16Test )
+TEST( UnionBits16 )
 {
     UnionBits16 b16;
     b16.i = 0x1234;
@@ -24,7 +24,7 @@ TEST( UnionBits16Test )
 }
 
 
-TEST( UnionBits32Test )
+TEST( UnionBits32 )
 {
     UnionBits32 b32;
     b32.i = 0x12345678;
@@ -61,6 +61,6 @@ TEST( UnionBits32Test )
 }
 
 
-} // SUITE UnionBitsSuite
+} // SUITE UnionBits
 
 } // namespace Caramel

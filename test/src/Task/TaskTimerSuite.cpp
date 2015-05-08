@@ -12,16 +12,16 @@
 namespace Caramel
 {
 
-SUITE( TaskTimerSuite )
+SUITE( TaskTimer )
 {
 
-TEST( TaskTimerTrivialTest )
+TEST( TaskTimerTrivial )
 {
     TaskTimer timer;  // not-a-timer
 }
 
 
-TEST( TaskTimerPollerTest )
+TEST( TaskTimerPoller )
 {
     TaskPoller poller;
     std::atomic< Int > counter{ 0 };
@@ -56,7 +56,7 @@ TEST( TaskTimerPollerTest )
 }
 
 
-TEST( TaskTimerWorkerTest )
+TEST( TaskTimerWorker )
 {
     WorkerThread worker( "TaskTimerWorker" );
     std::atomic< Int > counter{ 0 };
@@ -84,7 +84,7 @@ TEST( TaskTimerWorkerTest )
 //
 // It should be safe the cancel the timer in its work.
 //
-TEST( TaskTimerCancelTest )
+TEST( TaskTimerCancel )
 {
     WorkerThread worker( "TaskTimerWorker-Cancel" );
     std::atomic< Int > counter{ 0 };
@@ -108,6 +108,6 @@ TEST( TaskTimerCancelTest )
 }
 
 
-} // SUITE TaskTimerSuite
+} // SUITE TaskTimer
 
 } // namespace Caramel

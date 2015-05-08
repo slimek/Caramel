@@ -10,10 +10,10 @@ namespace Caramel
 
 using Lexical::Version;
 
-SUITE( LexicalVersionSuite )
+SUITE( LexicalVersion )
 {
 
-TEST( LexicalVersionTrivialTest )
+TEST( LexicalVersionTrivial )
 {
     Version v0;
 
@@ -78,7 +78,7 @@ TEST( LexicalVersionTrivialTest )
 }
 
 
-TEST( LexicalVersionParseTest )
+TEST( LexicalVersionParse )
 {
     Version ver;
 
@@ -119,7 +119,7 @@ TEST( LexicalVersionParseTest )
 }
 
 
-TEST( LexicalVersionCompareTest )
+TEST( LexicalVersionCompare )
 {
     Version va ( "1.2.3.4" );
     Version va2( "1.2.3.4" );
@@ -161,6 +161,6 @@ TEST( LexicalVersionCompareTest )
 }
 
 
-} // SUITE LexicalVersionSuite
+} // SUITE LexicalVersion
 
 } // namespace Caramel

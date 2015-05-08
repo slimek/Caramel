@@ -8,10 +8,10 @@
 namespace Caramel
 {
 
-SUITE( LexicalIntegerSuite )
+SUITE( LexicalInteger )
 {
 
-TEST( LexicalIntegerTest )
+TEST( LexicalInteger )
 {
     /// Int32 ///
     {
@@ -116,7 +116,7 @@ TEST( LexicalIntegerTest )
 }
 
 
-TEST( LexicalIntegerHexTest )
+TEST( LexicalIntegerHex )
 {
     /// Uint32 ///
     {
@@ -142,6 +142,6 @@ TEST( LexicalIntegerHexTest )
 }
 
 
-} // SUITE LexicalIntegerSuite
+} // SUITE LexicalInteger
 
 } // namespace Caramel

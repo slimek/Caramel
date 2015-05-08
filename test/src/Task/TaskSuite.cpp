@@ -16,7 +16,7 @@
 namespace Caramel
 {
 
-SUITE( TaskSuite )
+SUITE( Task )
 {
 
 static Bool s_calledFoo = false;
@@ -26,7 +26,7 @@ void Foo() { s_calledFoo = true; }
 Int  Quz() { s_calledQuz = true; return 1; }
 
 
-TEST( TaskNotTaskTest )
+TEST( TaskNotTask )
 {
     Task< void > t0;
 
@@ -51,7 +51,7 @@ TEST( TaskNotTaskTest )
 }
 
 
-TEST( TaskTrivialTest )
+TEST( TaskTrivial )
 {
     auto t1 = MakeTask( "Foo", &Foo );
 
@@ -81,7 +81,7 @@ private:
 };
 
 
-TEST( TaskMemberFunctionTest )
+TEST( TaskMemberFunction )
 {
     Widget w;
 
@@ -99,7 +99,7 @@ TEST( TaskMemberFunctionTest )
 }
 
 
-TEST( TaskOfBindMacroTest )
+TEST( TaskOfBindMacro )
 {
     /// Member Functions ///
 
@@ -128,7 +128,7 @@ TEST( TaskOfBindMacroTest )
 }
 
 
-TEST( TaskWithResultTest )
+TEST( TaskWithResult )
 {
     auto itask = MakeTask( "IntTask", [] { return 42; } );
 
@@ -142,7 +142,7 @@ TEST( TaskWithResultTest )
 }
 
 
-TEST( TaskWithExceptionTest )
+TEST( TaskWithException )
 {
     std::string what;
 
@@ -182,7 +182,7 @@ TEST( TaskWithExceptionTest )
 }
 
 
-TEST( TaskWaitOrCatchTest )
+TEST( TaskWaitOrCatch )
 {
     std::string what;
 
@@ -232,7 +232,7 @@ TEST( TaskWaitOrCatchTest )
 }
 
 
-TEST( TaskThenSuite )
+TEST( TaskThen )
 {
     Int count1 = 0;
 
@@ -345,7 +345,7 @@ TEST( TaskThenSuite )
 }
 
 
-TEST( TaskContinueImmediatelyTest )
+TEST( TaskContinueImmediately )
 {
     /// The First Continuation should be executed immediately ///
 
@@ -378,7 +378,7 @@ TEST( TaskContinueImmediatelyTest )
 }
 
 
-TEST( TaskCancelTest )
+TEST( TaskCancel )
 {
     // If a task is canceled, all its continuations should also be canceled. 
 
@@ -406,7 +406,7 @@ TEST( TaskCancelTest )
 }
 
 
-TEST( TaskFaultTest )
+TEST( TaskFault )
 {
     // If a task is faulted :
     // - Value-base continuation is canceled
@@ -431,7 +431,7 @@ TEST( TaskFaultTest )
 }
 
 
-TEST( TaskWithoutNameTest )
+TEST( TaskWithoutName )
 {
     /// Standalone Functions ///
 
@@ -510,6 +510,6 @@ TEST( TaskWithoutNameTest )
 }
 
 
-} // SUITE TaskSuite
+} // SUITE Task
 
 } // namespace Caramel

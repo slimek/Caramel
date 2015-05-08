@@ -9,10 +9,10 @@
 namespace Caramel
 {
 
-SUITE( TickClockSuite )
+SUITE( TickClock )
 {
 
-TEST( TickClockTest )
+TEST( TickClock )
 {
     const TickPoint now1 = TickClock::Now();
     TickWatch watch;
@@ -46,6 +46,6 @@ TEST( TickClockTest )
 }
 
 
-} // SUITE TickClockSuite
+} // SUITE TickClock
 
 } // namespace Caramel

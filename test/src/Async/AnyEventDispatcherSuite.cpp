@@ -12,10 +12,10 @@
 namespace Caramel
 {
 
-SUITE( AnyEventDispatcherSuite )
+SUITE( AnyEventDispatcher )
 {
 
-TEST( AnyEventDispatcherTrivialTest )
+TEST( AnyEventDispatcherTrivial )
 {
     AnyEventDispatcher disp;
 
@@ -27,7 +27,7 @@ TEST( AnyEventDispatcherTrivialTest )
 }
 
 
-TEST( AnyEventDispatcherToQueueTest )
+TEST( AnyEventDispatcherToQueue )
 {
     AnyEventDispatcher disp;
 
@@ -90,7 +90,7 @@ TEST( AnyEventDispatcherToQueueTest )
 }
 
 
-TEST( AnyEventDispatcherToDispatcherTest )
+TEST( AnyEventDispatcherToDispatcher )
 {
     AnyEventDispatcher disp1;
     AnyEventDispatcher disp2;
@@ -147,7 +147,7 @@ TEST( AnyEventDispatcherToDispatcherTest )
 }
 
 
-TEST( AnyEventDispatcherProxyTest )
+TEST( AnyEventDispatcherProxy )
 {
     AnyEventDispatcher disp;
     AnyEventSlot slot;
@@ -199,6 +199,6 @@ TEST( AnyEventDispatcherProxyTest )
 }
 
 
-} // SUITE AnyEventDispatcherSuite
+} // SUITE AnyEventDispatcher
 
 } // namespace Caramel

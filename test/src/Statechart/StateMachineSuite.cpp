@@ -13,7 +13,7 @@
 namespace Caramel
 {
 
-SUITE( StateMachineSuite )
+SUITE( StateMachine )
 {
 
 enum StateId
@@ -32,7 +32,7 @@ enum EventId
 };
 
 
-TEST( StateMachineTest )
+TEST( StateMachine )
 {
     Statechart::StateMachine machine( "Basic" );
 
@@ -68,7 +68,7 @@ TEST( StateMachineTest )
 }
 
 
-TEST( StateMachineStateVariableTest )
+TEST( StateMachineStateVariable )
 {
     Statechart::StateMachine machine( "StateVariable" );
 
@@ -96,7 +96,7 @@ TEST( StateMachineStateVariableTest )
 }
 
 
-TEST( StateMachineEventTest )
+TEST( StateMachineEvent )
 {
     Statechart::StateMachine machine( "Event" );
 
@@ -128,7 +128,7 @@ TEST( StateMachineEventTest )
 }
 
 
-TEST( StateMachineBuildFailedTest )
+TEST( StateMachineBuildFailed )
 {
     Statechart::StateMachine machine( "BuildFailed" );
 
@@ -165,7 +165,7 @@ TEST( StateMachineBuildFailedTest )
 }
 
 
-TEST( StateMachineRunFailedTest )
+TEST( StateMachineRunFailed )
 {
     Statechart::StateMachine machine( "RunFailed" );;
 
@@ -192,7 +192,7 @@ TEST( StateMachineRunFailedTest )
 }
 
 
-TEST( StateMachineAsAnyEventTargetTest )
+TEST( StateMachineAsAnyEventTarget )
 {
     AnyEventDispatcher disp;
     Statechart::StateMachine machine( "AnyEventTarget" );
@@ -214,7 +214,7 @@ TEST( StateMachineAsAnyEventTargetTest )
 }
 
 
-TEST( StateMachineReactionTest )
+TEST( StateMachineReaction )
 {
     Statechart::StateMachine machine( "Reaction" );
 
@@ -258,7 +258,7 @@ TEST( StateMachineReactionTest )
 }
 
 
-TEST( StateMachineReactionFailedTest )
+TEST( StateMachineReactionFailed )
 {
     Statechart::StateMachine machine( "ReactionFailed" );
     
@@ -297,7 +297,7 @@ TEST( StateMachineReactionFailedTest )
 }
 
 
-TEST( StateMachineExternalTaskPollerTest )
+TEST( StateMachineExternalTaskPoller )
 {
     TaskPoller poller;
     Statechart::StateMachine machine( "ExternalTaskPoller", poller );
@@ -321,7 +321,7 @@ TEST( StateMachineExternalTaskPollerTest )
 }
 
 
-TEST( StateMachineExternalWorkerThreadTest )
+TEST( StateMachineExternalWorkerThread )
 {
     WorkerThread worker( "StateMachine" );
     Statechart::StateMachine machine( "ExternalWorkerThread", worker );
@@ -348,7 +348,7 @@ TEST( StateMachineExternalWorkerThreadTest )
 }
 
 
-TEST( StateMachinePollerTimerTest )
+TEST( StateMachinePollerTimer )
 {
     TaskPoller poller;
     Statechart::StateMachine machine( "Timer", poller ); 
@@ -397,6 +397,6 @@ TEST( StateMachinePollerTimerTest )
 }
 
 
-} // SUITE StateMachineSuite
+} // SUITE StateMachine
 
 } // namespace Caramel

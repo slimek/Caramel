@@ -11,7 +11,7 @@
 namespace Caramel
 {
 
-SUITE( AnyEventTaskSuite )
+SUITE( AnyEventTask )
 {
 
 static AnyEventTask TaskYukari()
@@ -22,7 +22,7 @@ static AnyEventTask TaskYukari()
 }
 
 
-TEST( AnyEventTaskTest )
+TEST( AnyEventTask )
 {
     /// Get the result directly ///
 
@@ -110,6 +110,6 @@ TEST( AnyEventTaskTest )
     CHECK( "Nitori" == e5.Value< std::string >() );
 }
 
-} // SUITE AnyEventTaskSuite
+} // SUITE AnyEventTask
 
 } // namespace Caramel

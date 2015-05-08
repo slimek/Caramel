@@ -11,10 +11,10 @@
 namespace Caramel
 {
 
-SUITE( ClockProxySuite )
+SUITE( ClockProxy )
 {
 
-TEST( ClockProxyTest )
+TEST( ClockProxy )
 {
     /// Proxy of TickClock ///
     {
@@ -60,7 +60,7 @@ private:
 SecondPoint CustomClock::m_now;
 
 
-TEST( ClockProxyOfCustomClockTest )
+TEST( ClockProxyOfCustomClock )
 {
     CustomClock::Reset();
 
@@ -88,6 +88,6 @@ TEST( ClockProxyOfCustomClockTest )
     CHECK_CLOSE( Ticks( 1000 ), pnow3 - pnow2, Ticks( 1 ));
 }
 
-} // SUITE ClockProxySuite
+} // SUITE ClockProxy
 
 } // namespace Caramel

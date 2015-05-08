@@ -14,10 +14,10 @@
 namespace Caramel
 {
 
-SUITE( PromiseSuite )
+SUITE( Promise )
 {
 
-TEST( PromiseTest )
+TEST( Promise )
 {
     Promise< Int > promise1( "Big answer" );  // Give the task name.
 
@@ -73,7 +73,7 @@ TEST( PromiseTest )
 }
 
 
-TEST( PromiseWithExecutorTest )
+TEST( PromiseWithExecutor )
 {
     WorkerThread worker( "Promise worker" );
 
@@ -114,7 +114,7 @@ TEST( PromiseWithExecutorTest )
 }
 
 
-TEST( PromiseWithAnyEventTest )
+TEST( PromiseWithAnyEvent )
 {
     Promise< AnyEvent > promise;
 
@@ -137,7 +137,7 @@ TEST( PromiseWithAnyEventTest )
 }
 
 
-TEST( PromiseInOutContainerTest )
+TEST( PromiseInOutContainer )
 {
     Concurrent::Queue< Promise< Int >> promises;
     Task< Int > task;
@@ -161,6 +161,6 @@ TEST( PromiseInOutContainerTest )
 }
 
 
-} // SUITE PromiseSuite
+} // SUITE Promise
 
 } // namespace Caramel

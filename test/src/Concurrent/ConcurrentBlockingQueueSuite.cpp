@@ -11,10 +11,10 @@
 namespace Caramel
 {
 
-SUITE( ConcurrentBlockingQueueSuite )
+SUITE( ConcurrentBlockingQueue )
 {
 
-TEST( BlockingQueueBasicTest )
+TEST( BlockingQueueBasic )
 {
     WorkerThread worker( "BlockingQueue" );
 
@@ -112,6 +112,6 @@ TEST( BlockingQueueBasicTest )
 }
 
 
-} // SUITE ConcurrentBlockingQueueSuite
+} // SUITE ConcurrentBlockingQueue
 
 } // namespace Caramel

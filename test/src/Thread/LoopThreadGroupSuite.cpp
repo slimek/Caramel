@@ -9,10 +9,10 @@
 namespace Caramel
 {
 
-SUITE( LoopThreadGroupSuite )
+SUITE( LoopThreadGroup )
 {
 
-TEST( LoopThreadGroupTest )
+TEST( LoopThreadGroup )
 {
     LoopThreadGroup threads;
 
@@ -34,6 +34,6 @@ TEST( LoopThreadGroupTest )
 }
 
 
-} // SUITE LoopThreadGroupSuite
+} // SUITE LoopThreadGroup
 
 } // namespace Caramel

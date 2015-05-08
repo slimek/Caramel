@@ -10,10 +10,10 @@
 namespace Caramel
 {
 
-SUITE( UniformRandomSuite )
+SUITE( UniformRandom )
 {
 
-TEST( UniformRandomTest )
+TEST( UniformRandom )
 {
     /// Int ///
     {
@@ -168,7 +168,7 @@ TEST( UniformRandomTest )
 }
 
 
-TEST( GenRandomBoolTest )
+TEST( GenRandomBool )
 {
     Int trues = 0;
     const Int total = 1000000;
@@ -192,6 +192,6 @@ TEST( GenRandomBoolTest )
 }
 
 
-} // SUITE UniformRandomSuite
+} // SUITE UniformRandom
 
 } // namespace Caramel

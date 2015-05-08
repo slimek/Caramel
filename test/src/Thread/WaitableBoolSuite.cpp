@@ -10,10 +10,10 @@
 namespace Caramel
 {
 
-SUITE( WaitableBoolSuite )
+SUITE( WaitableBool )
 {
 
-TEST( WaitableBoolTest )
+TEST( WaitableBool )
 {
     {
         // If the test failed, program would be blocked forever.
@@ -59,6 +59,6 @@ TEST( WaitableBoolTest )
 }
 
 
-} // SUITE WaitableBoolSuite
+} // SUITE WaitableBool
 
 } // namespace Caramel

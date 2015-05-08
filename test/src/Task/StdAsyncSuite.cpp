@@ -11,10 +11,10 @@
 namespace Caramel
 {
 
-SUITE( StdAsyncSuite )
+SUITE( StdAsync )
 {
 
-TEST( StdAsyncTest )
+TEST( StdAsync )
 {
     Task< Int > t1( [] { return 42; });
 
@@ -45,7 +45,7 @@ TEST( StdAsyncTest )
 }
 
 
-TEST( StdAsyncProxyTest )
+TEST( StdAsyncProxy )
 {
     Task< void > t1( "Test1", [] {} );
     Task< Int >  t2( "Test2", [] { return 42; } );
@@ -85,6 +85,6 @@ TEST( StdAsyncProxyTest )
 }
 
 
-} // SUITE StdAsyncSuite
+} // SUITE StdAsync
 
 } // namespace Caramel

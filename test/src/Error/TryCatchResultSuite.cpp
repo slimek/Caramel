@@ -10,7 +10,7 @@
 namespace Caramel
 {
 
-SUITE( TryCatchResultSuite )
+SUITE( TryCatchResult )
 {
 
 void TestException( const TryCatchResult& result )
@@ -29,7 +29,7 @@ void TestAnyFailure( const TryCatchResult& result, Int code )
 }
 
 
-TEST( TryCatchResultTest )
+TEST( TryCatchResult )
 {
     auto xc1 = CatchException( [] { CARAMEL_THROW( "I'll be back!" ); } );
     TestException( xc1 );
@@ -56,6 +56,6 @@ TEST( TryCatchResultTest )
     CHECK( res3.exception == nullptr );
 }
 
-} // SUITE TryCatchResultSuite
+} // SUITE TryCatchResult
 
 } // namespace Caramel

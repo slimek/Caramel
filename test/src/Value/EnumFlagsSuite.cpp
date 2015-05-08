@@ -8,7 +8,7 @@
 namespace Caramel
 {
 
-SUITE( EnumFlagsSuite )
+SUITE( EnumFlags )
 {
 
 enum ColorFlag
@@ -22,7 +22,7 @@ enum ColorFlag
 };
 
 
-TEST( EnumFlagsTest )
+TEST( EnumFlags )
 {
     EnumFlags< ColorFlag > none;
 
@@ -46,6 +46,6 @@ TEST( EnumFlagsTest )
     CHECK( false == yellow.Match( COLOR_BLUE ));
 }
 
-} // SUITE EnumFlagsSuite
+} // SUITE EnumFlags
 
 } // namespace Caramel

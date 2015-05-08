@@ -12,10 +12,10 @@
 namespace Caramel
 {
 
-SUITE( DirectoryInfoSuite )
+SUITE( DirectoryInfo )
 {
 
-TEST( DirectoryInfoTest )
+TEST( DirectoryInfo )
 {
     DirectoryInfo dir( "temp-dir" );
 
@@ -64,6 +64,6 @@ TEST( DirectoryInfoTest )
 }
 
 
-} // SUITE DirectoryInfoSuite
+} // SUITE DirectoryInfo
 
 } // namespace Caramel

@@ -16,17 +16,17 @@
 namespace Caramel
 {
 
-SUITE( WorkerThreadSuite )
+SUITE( WorkerThread )
 {
 
-TEST( WorkerThreadTrivialTest )
+TEST( WorkerThreadTrivial )
 {
     WorkerThread worker( "Trivial" );
     worker.Stop();
 }
 
 
-TEST( WorkerThreadNormalTest )
+TEST( WorkerThreadNormal )
 {
     WorkerThread worker( "Normal" );
 
@@ -74,7 +74,7 @@ TEST( WorkerThreadNormalTest )
 }
 
 
-TEST( WorkerThreadDelayTest )
+TEST( WorkerThreadDelay )
 {
     WorkerThread worker( "Delay" );
 
@@ -153,7 +153,7 @@ TEST( WorkerThreadDelayTest )
 }
 
 
-TEST( WorkerThreadThenTest )
+TEST( WorkerThreadThen )
 {
     WorkerThread worker( "Then" );
 
@@ -205,7 +205,7 @@ TEST( WorkerThreadThenTest )
 }
 
 
-TEST( WorkerThreadCancelTest )
+TEST( WorkerThreadCancel )
 {
     WorkerThread worker( "Cancel" );
     Bool done1 = false;
@@ -231,6 +231,6 @@ TEST( WorkerThreadCancelTest )
 }
 
 
-} // SUITE WorkerThreadSuite
+} // SUITE WorkerThread
 
 } // namespace Caramel

@@ -8,10 +8,10 @@
 namespace Caramel
 {
 
-SUITE( IntervalSetSuite )
+SUITE( ConcurrentIntervalSet )
 {
 
-TEST( IntervalSetTest )
+TEST( ConcurrentIntervalSet )
 {
     Concurrent::IntervalSet< Int > iset;
 
@@ -50,7 +50,7 @@ TEST( IntervalSetTest )
 }
 
 
-TEST( IntervalSetInsertTest )
+TEST( ConcurrentIntervalSetInsert )
 {
     Concurrent::IntervalSet< Int > iset;
 
@@ -66,7 +66,7 @@ TEST( IntervalSetInsertTest )
 }
 
 
-TEST( IntervalSetEraseTest )
+TEST( ConcurrentIntervalSetErase )
 {
     Concurrent::IntervalSet< Int > iset;
     iset.InsertClosed( 3, 10 );
@@ -86,7 +86,7 @@ TEST( IntervalSetEraseTest )
 }
 
 
-TEST( IntervalSetContainsTest )
+TEST( ConcurrentIntervalSetContains )
 {
     // The sub-interval must be totally within a valid interval.
 
@@ -111,7 +111,7 @@ TEST( IntervalSetContainsTest )
 }
 
 
-TEST( IntervalSetIntersectsTest )
+TEST( ConcurrentIntervalSetIntersects )
 {
     Concurrent::IntervalSet< Int > iset;
     iset.InsertClosed( 3, 6 );
@@ -134,7 +134,7 @@ TEST( IntervalSetIntersectsTest )
 }
 
 
-TEST( IntervalSetLockedSetTest )
+TEST( ConcurrentIntervalSetLockedSet )
 {
     /// Discrete Interval ///
 
@@ -171,7 +171,7 @@ TEST( IntervalSetLockedSetTest )
 }
 
 
-TEST( IntervalSetSnapshotTest )
+TEST( ConcurrentIntervalSetSnapshot )
 {
     Concurrent::IntervalSet< Int > iset;
 
@@ -235,6 +235,6 @@ TEST( IntervalSetSnapshotTest )
 }
 
 
-} // SUITE IntervalSetSuite
+} // SUITE ConcurrentIntervalSet
 
 } // namespace Caramel

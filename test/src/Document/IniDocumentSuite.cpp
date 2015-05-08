@@ -12,10 +12,10 @@
 namespace Caramel
 {
 
-SUITE( IniDocumentSuite )
+SUITE( IniDocument )
 {
 
-TEST( IniDocumentFundamentalTest )
+TEST( IniDocumentFundamental )
 {
     IniDocument iniDoc;
     iniDoc.LoadFromText( AssetReader( "test1.ini" ));
@@ -96,7 +96,7 @@ TEST( IniDocumentFundamentalTest )
 }
 
 
-TEST( IniDocumentNamedValuesTest )
+TEST( IniDocumentNamedValues )
 {
     IniDocument iniDoc;
     iniDoc.LoadFromText( AssetReader( "test1.ini" ));
@@ -118,7 +118,7 @@ TEST( IniDocumentNamedValuesTest )
 }
 
 
-TEST( IniDocumentSyntaxTest )
+TEST( IniDocumentSyntax )
 {
     // Test the below syntaxes:
     //   1. Trim the left spaces.
@@ -130,6 +130,6 @@ TEST( IniDocumentSyntaxTest )
 }
 
 
-} // SUITE IniDocumentSuite
+} // SUITE IniDocument
 
 } // namespace Caramel

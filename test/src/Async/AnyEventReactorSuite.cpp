@@ -12,10 +12,10 @@
 namespace Caramel
 {
 
-SUITE( AnyEventReactorSuite )
+SUITE( AnyEventReactor )
 {
 
-TEST( AnyEventReactorTest )
+TEST( AnyEventReactor )
 {
     AnyEventReactor reactor;
     AnyEvent buffer;
@@ -135,6 +135,6 @@ TEST( AnyEventReactorTest )
 }
 
 
-} // SUITE AnyEventReactorSuite
+} // SUITE AnyEventReactor
 
 } // namespace Caramel

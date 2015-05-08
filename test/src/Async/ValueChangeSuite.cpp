@@ -8,10 +8,10 @@
 namespace Caramel
 {
 
-SUITE( ValueChangeSuite )
+SUITE( ValueChange )
 {
 
-TEST( ValueChangeIntTest )
+TEST( ValueChangeInt )
 {
     ValueChange< Int > ichange( 0 );
 
@@ -40,7 +40,7 @@ TEST( ValueChangeIntTest )
 }
 
 
-TEST( ValueChangeBoolTest )
+TEST( ValueChangeBool )
 {
     ValueChange< Bool > b1;  // default initial to false.
 
@@ -94,6 +94,6 @@ TEST( ValueChangeBoolTest )
 }
 
 
-} // SUITE ValueChangeSuite
+} // SUITE ValueChange
 
 } // namespace Caramel

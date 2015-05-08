@@ -8,10 +8,10 @@
 namespace Caramel
 {
 
-SUITE( SharedPtrUtilsSuite )
+SUITE( SharedPtrUtils )
 {
 
-TEST( SharedPtrArithmeticTest )
+TEST( SharedPtrArithmetic )
 {
     /// Add/Substract with SharedPtr.
 
@@ -42,7 +42,7 @@ TEST( SharedPtrArithmeticTest )
 //
 // Substitute for Android NDK r9
 //
-TEST( SharedPtrAtomicTest )
+TEST( SharedPtrAtomic )
 {
     /// Load ///
 
@@ -70,6 +70,6 @@ TEST( SharedPtrAtomicTest )
 }
 
 
-} // SUITE SharedPtrUtilsSuite
+} // SUITE SharedPtrUtils
 
 } // namespace Caramel

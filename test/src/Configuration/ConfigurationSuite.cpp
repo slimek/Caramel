@@ -12,7 +12,7 @@
 namespace Caramel
 {
 
-SUITE( ConfigurationSuite )
+SUITE( Configuration )
 {
 
 static ConfigSection cs_vs( "Values" );
@@ -27,7 +27,7 @@ static ConfigString cv_name( cs_vs, "Name" );
 static ConfigString cv_role( cs_vs, "Role", "Mage" );
 
 
-TEST( ConfigValuesTest )
+TEST( ConfigValues )
 {
     /// Default values ///
 
@@ -70,7 +70,7 @@ static ConfigSection cs_p( "Items", "Potion" );
 static ConfigInt cv_id( cs_p, "Id" );
 static ConfigString cv_desc( cs_p, "Desc" );
 
-TEST( ConfigRootTest )
+TEST( ConfigRoot )
 {
     /// Load the INI into a named Root ///
 
@@ -85,6 +85,6 @@ TEST( ConfigRootTest )
 }
 
 
-} // SUITE ConfigurationSuite
+} // SUITE Configuration
 
 } // namespace Caramel

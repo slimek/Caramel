@@ -10,7 +10,7 @@
 namespace Caramel
 {
 
-SUITE( TraceSuite )
+SUITE( Trace )
 {
 
 class LocalListener : public Trace::Listener
@@ -31,7 +31,7 @@ private:
 };
 
 
-TEST( TraceMacroStyleTest )
+TEST( TraceMacroStyle )
 {
     LocalListener lis;
     lis.BindBuiltinChannels( Trace::LEVEL_DEBUG );
@@ -76,7 +76,7 @@ TEST( TraceMacroStyleTest )
 }
 
 
-TEST( TraceFunctionStyleTest )
+TEST( TraceFunctionStyle )
 {
     LocalListener lis;
     lis.BindBuiltinChannels( Trace::LEVEL_DEBUG );
@@ -121,7 +121,7 @@ TEST( TraceFunctionStyleTest )
 }
 
 
-TEST( TraceMessageQueueTest )
+TEST( TraceMessageQueue )
 {
     using namespace Trace;
 
@@ -151,6 +151,6 @@ TEST( TraceMessageQueueTest )
 }
 
 
-} // SUITE TraceSuite
+} // SUITE Trace
 
 } // namespace Caramel

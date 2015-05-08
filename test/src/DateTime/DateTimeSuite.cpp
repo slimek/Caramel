@@ -8,10 +8,10 @@
 namespace Caramel
 {
 
-SUITE( DateTimeSuite )
+SUITE( DateTime )
 {
 
-TEST( DateTimeBasicTest )
+TEST( DateTimeBasic )
 {
     const DateTime undef;
     const auto now = DateTime::Now();
@@ -47,7 +47,7 @@ TEST( DateTimeBasicTest )
 }
 
 
-TEST( DateTimeStringTest )
+TEST( DateTimeString )
 {
     const auto time1 = DateTime::FromString( "2013-04-05 18:09:30" );
 
@@ -109,7 +109,7 @@ TEST( DateTimeStringTest )
 }
 
 
-TEST( DateTimeFormatTest )
+TEST( DateTimeFormat )
 {
     const auto dt = DateTime::FromString( "2013-04-05 6:17:28" );
 
@@ -120,7 +120,7 @@ TEST( DateTimeFormatTest )
 }
 
 
-TEST( DateTimeComparisonsTest )
+TEST( DateTimeComparisons )
 {
     const auto dt1 = DateTime::FromString( "1987-06-23 4:56" );
     const auto dt2 = DateTime::FromString( "2013-04-05 6:17" );
@@ -143,7 +143,7 @@ TEST( DateTimeComparisonsTest )
 }
 
 
-TEST( DateTimeArithmeticTest )
+TEST( DateTimeArithmetic )
 {
     const auto dt1 = DateTime::FromString( "2013-04-05 18:09:30" );
     const auto dt2 = DateTime::FromString( "2013-04-05 00:00:00" );
@@ -168,7 +168,7 @@ TEST( DateTimeArithmeticTest )
 }
 
 
-TEST( DateAndTimeOfDayTest )
+TEST( DateAndTimeOfDay )
 {
     // Combine Date and TimeOfDay to DateTime
     {
@@ -190,7 +190,7 @@ TEST( DateAndTimeOfDayTest )
 }
 
 
-TEST( DateTimeOpDaysTest )
+TEST( DateTimeOpDays )
 {
     const auto dt = DateTime::FromString( "2013/04/05 6:17:28" );
 
@@ -199,7 +199,7 @@ TEST( DateTimeOpDaysTest )
 }
 
 
-TEST( DateTimeUtcTest )
+TEST( DateTimeUtc )
 {
     const auto now = DateTime::Now();
     const auto utcNow = DateTime::UtcNow();
@@ -210,6 +210,6 @@ TEST( DateTimeUtcTest )
 }
 
 
-} // SUITE DateTimeSuite
+} // SUITE DateTime
 
 } // namespace Caramel

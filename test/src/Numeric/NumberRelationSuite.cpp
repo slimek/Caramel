@@ -8,7 +8,7 @@
 namespace Caramel
 {
 
-SUITE( NumberRelationSuite )
+SUITE( NumberRelation )
 {
 
 // Default underline type : Int
@@ -29,7 +29,7 @@ Bool TestEnum( OutputT, InputT value )
 }
 
 
-TEST( NumberRelationEnumTest )
+TEST( NumberRelationEnum )
 {
     Int i = 0;
     Uint u = 0;
@@ -44,6 +44,6 @@ TEST( NumberRelationEnumTest )
     CHECK( false == TestEnum( u, COLOR_GRIS ));   // negative enum > Uint
 }
 
-} // SUITE NumberRelationSuite
+} // SUITE NumberRelation
 
 } // namespace Caramel

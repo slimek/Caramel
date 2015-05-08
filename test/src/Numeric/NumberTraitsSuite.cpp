@@ -8,7 +8,7 @@
 namespace Caramel
 {
 
-SUITE( NumberTraitsSuite )
+SUITE( NumberTraits )
 {
 
 template< typename Floating, typename Integer >
@@ -21,7 +21,7 @@ Bool TestLossless( Integer before )
 }
 
 
-TEST( FloatTraitsTest )
+TEST( FloatTraits )
 {
     /// Float can contain any 16-bit Integers ///
 
@@ -49,7 +49,7 @@ TEST( FloatTraitsTest )
 }
 
 
-TEST( DoubleTraitsTest )
+TEST( DoubleTraits )
 {
     /// Double can contain any 32-bit Integers ///
 
@@ -77,6 +77,6 @@ TEST( DoubleTraitsTest )
 }
 
 
-} // SUITE NumberTraitsSuite
+} // SUITE NumberTraits
 
 } // namespace Caramel

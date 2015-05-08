@@ -8,10 +8,10 @@
 namespace Caramel
 {
 
-SUITE( PathSuite )
+SUITE( Path )
 {
 
-TEST( PathDecompositionTest )
+TEST( PathDecomposition )
 {
     const Path nil( "" );
     const Path file( "file" );
@@ -90,7 +90,7 @@ TEST( PathDecompositionTest )
 }
 
 
-TEST( PathCombineTest )
+TEST( PathCombine )
 {
     const Path p1( "dir" );
     const Path p2( "file" );
@@ -115,7 +115,7 @@ TEST( PathCombineTest )
 }
 
 
-TEST( PathAppendExtensionTest )
+TEST( PathAppendExtension )
 {
     const Path p1( "file" );
     const Path p2( "file.ini" );
@@ -146,7 +146,7 @@ TEST( PathAppendExtensionTest )
 }
 
 
-TEST( PathInsertStemSuffixTest )
+TEST( PathInsertStemSuffix )
 {
     Path p1( "file" );
     p1.InsertStemSuffix( "_en" );
@@ -162,6 +162,6 @@ TEST( PathInsertStemSuffixTest )
 }
 
 
-} // SUITE PathSuite
+} // SUITE Path
 
 } // namespace Caramel

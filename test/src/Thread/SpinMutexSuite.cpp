@@ -9,7 +9,7 @@
 namespace Caramel
 {
 
-SUITE( SpinMutexSuite )
+SUITE( SpinMutex )
 {
 
 static SpinMutex s_mutex;
@@ -31,7 +31,7 @@ static void Execute()
 }
 
 
-TEST( SpinMutexTest )
+TEST( SpinMutex )
 {
     /// Recover Test ///
 
@@ -58,6 +58,6 @@ TEST( SpinMutexTest )
 }
 
 
-} // SUITE SpinMutexSuite
+} // SUITE SpinMutex
 
 } // namespace Caramel

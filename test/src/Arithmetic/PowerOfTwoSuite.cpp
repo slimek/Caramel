@@ -8,10 +8,10 @@
 namespace Caramel
 {
 
-SUITE( PowerOfTwoSuite )
+SUITE( PowerOfTwo )
 {
 
-TEST( IsPowerOfTwoTest )
+TEST( IsPowerOfTwo )
 {
     /// Compile-time Expression ///
 
@@ -44,6 +44,6 @@ TEST( IsPowerOfTwoTest )
 }
 
 
-} // SUITE PowerOfTwoSuite
+} // SUITE PowerOfTwo
 
 } // namespace Caramel

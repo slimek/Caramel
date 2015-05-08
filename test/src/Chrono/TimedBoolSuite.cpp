@@ -11,10 +11,10 @@
 namespace Caramel
 {
 
-SUITE( TimedBoolSuite )
+SUITE( TimedBool )
 {
 
-TEST( TickedBoolTrivialTest )
+TEST( TickedBoolTrivial )
 {
     typedef TimedBool< TickClock > TickedBool;
 
@@ -25,7 +25,7 @@ TEST( TickedBoolTrivialTest )
 }
 
 
-TEST( TickedBoolTest )
+TEST( TickedBool )
 {
     typedef TimedBool< TickClock > TickedBool;
 
@@ -128,7 +128,7 @@ TEST( TickedBoolTest )
 }
 
 
-TEST( SecondedBoolTest )
+TEST( SecondedBool )
 {
     typedef TimedBool< SecondClock > SecondedBool;
 
@@ -149,6 +149,6 @@ TEST( SecondedBoolTest )
 }
 
 
-} // SUITE TimedBoolSuite
+} // SUITE TimedBool
 
 } // namespace Caramel

@@ -9,10 +9,10 @@
 namespace Caramel
 {
 
-SUITE( NumberConverterSuite )
+SUITE( NumberConverter )
 {
 
-TEST( NumberConverterTest )
+TEST( NumberConverter )
 {
     typedef NumberConverter< Int32, Int64 > NCI3I6;
 
@@ -64,6 +64,6 @@ TEST( NumberConverterTest )
     #endif
 }
 
-} // SUITE NumberConverterSuite
+} // SUITE NumberConverter
 
 } // namespace Caramel

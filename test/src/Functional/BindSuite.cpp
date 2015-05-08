@@ -8,7 +8,7 @@
 namespace Caramel
 {
 
-SUITE( BindSuite )
+SUITE( Bind )
 {
 
 //
@@ -38,7 +38,7 @@ private:
 //   3. Lambda expression
 //
 
-TEST( Bind1stTest )
+TEST( Bind1st )
 {
     /// Regular Functions ///
 
@@ -67,6 +67,6 @@ TEST( Bind1stTest )
     CHECK( 35 == mul5( 7 ));
 }
 
-} // SUITE BindSuite
+} // SUITE Bind
 
 } // namespace Caramel

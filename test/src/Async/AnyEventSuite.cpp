@@ -9,10 +9,10 @@
 namespace Caramel
 {
 
-SUITE( AnyEventSuite )
+SUITE( AnyEvent )
 {
 
-TEST( AnyEventTest )
+TEST( AnyEvent )
 {
     /// Not an Event ///
 
@@ -76,7 +76,7 @@ struct Widget
     std::string name;
 };
 
-TEST( AnyEventInQueueTest )
+TEST( AnyEventInQueue )
 {
     Concurrent::Queue< AnyEvent > equeue;
 
@@ -139,7 +139,7 @@ TEST( AnyEventInQueueTest )
 // AnyEvent supports move semantics
 //
 
-TEST( AnyEventMoveTest )
+TEST( AnyEventMove )
 {
     AnyEvent e1( 7, "Alice" );
 
@@ -160,7 +160,7 @@ TEST( AnyEventMoveTest )
 // Nested AnyEvent
 //
 
-TEST( AnyEventOfAnyEventTest )
+TEST( AnyEventOfAnyEvent )
 {
     AnyEvent inner( 7, "Alice" );
     AnyEvent outer( 42, inner );
@@ -195,6 +195,6 @@ TEST( AnyEventOfAnyEventTest )
 }
 
 
-} // SUITE AnyEventSuite
+} // SUITE AnyEvent
 
 } // namespace Caramel

@@ -8,10 +8,10 @@
 namespace Caramel
 {
 
-SUITE( SplitSuite )
+SUITE( Split )
 {
 
-TEST( SplitterFirstTest )
+TEST( SplitterFirst )
 {
     SplitterFirst split1( "Alice.Margatroid", '.' );
 
@@ -42,6 +42,6 @@ TEST( SplitterFirstTest )
 }
 
 
-} // SUITE SplitSuite
+} // SUITE Split
 
 } // namespace Caramel

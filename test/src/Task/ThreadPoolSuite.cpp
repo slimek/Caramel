@@ -11,17 +11,17 @@
 namespace Caramel
 {
 
-SUITE( ThreadPoolSuite )
+SUITE( ThreadPool )
 {
 
-TEST( ThreadPoolTrivialTest )
+TEST( ThreadPoolTrivial )
 {
     ThreadPool pool( "Trivial", 2 );
     pool.Shutdown();
 }
 
 
-TEST( ThreadPoolNormalTest )
+TEST( ThreadPoolNormal )
 {
     ThreadPool pool( "Normal", 4 );
 
@@ -66,7 +66,7 @@ TEST( ThreadPoolNormalTest )
 //
 // EXPECTED: Discard all pending tasks and return as soon as possible.
 //
-TEST( ThreadPoolShutdownTest )
+TEST( ThreadPoolShutdown )
 {
     ThreadPool pool( "Shutdown", 4 );
 
@@ -85,6 +85,6 @@ TEST( ThreadPoolShutdownTest )
 }
 
 
-} // SUITE ThreadPoolSuite
+} // SUITE ThreadPool
 
 } // namespace Caramel

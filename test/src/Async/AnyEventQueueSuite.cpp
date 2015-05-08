@@ -11,10 +11,10 @@
 namespace Caramel
 {
 
-SUITE( AnyEventQueueSuite )
+SUITE( AnyEventQueue )
 {
 
-TEST( AnyEventQueueTest )
+TEST( AnyEventQueue )
 {
     AnyEventQueue equeue;
 
@@ -65,7 +65,7 @@ TEST( AnyEventQueueTest )
 }
 
 
-TEST( AnyEventQueueUnlinkTest )
+TEST( AnyEventQueueUnlink )
 {
     AnyEventDispatcher edisp;
     AnyEventQueue equeue;
@@ -113,7 +113,7 @@ TEST( AnyEventQueueUnlinkTest )
 }
 
 
-TEST( AnyEventQueueProxyTest )
+TEST( AnyEventQueueProxy )
 {
     AnyEventQueue queue;
     AnyEvent event;
@@ -160,6 +160,6 @@ TEST( AnyEventQueueProxyTest )
 }
 
 
-} // SUITE AnyEventQueueSuite
+} // SUITE AnyEventQueue
 
 } // namespace Caramel

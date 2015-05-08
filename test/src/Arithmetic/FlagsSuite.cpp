@@ -8,7 +8,7 @@
 namespace Caramel
 {
 
-SUITE( FlagsSuite )
+SUITE( Flags )
 {
 
 enum Flag
@@ -18,7 +18,7 @@ enum Flag
 };
 
 
-TEST( FlagsMatchTest )
+TEST( FlagsMatch )
 {
     /// Match one bit ///
 
@@ -51,6 +51,6 @@ TEST( FlagsMatchTest )
 }
 
 
-} // SUITE FlagsSuite
+} // SUITE Flags
 
 } // namespace Caramel

@@ -16,10 +16,10 @@
 namespace Caramel
 {
 
-SUITE( ThreadSuite )
+SUITE( Thread )
 {
 
-TEST( ThreadTest )
+TEST( Thread )
 {
     Thread t0;
 
@@ -40,7 +40,7 @@ TEST( ThreadTest )
 }
 
 
-TEST( ThreadIdTest )
+TEST( ThreadId )
 {
     /// Current Thread ///
 
@@ -92,7 +92,7 @@ TEST( ThreadIdTest )
 
 #if ! defined( CARAMEL_SYSTEM_OF_APPLE )
 
-TEST( ThisThreadAtExitTest )
+TEST( ThisThreadAtExit )
 {
     WaitableBool gate;
     Bool flag = false;
@@ -120,6 +120,6 @@ TEST( ThisThreadAtExitTest )
 #endif // CARAMEL_SYSTEM_OF_APPLE
 
 
-}  // SUITE ThreadSuite
+}  // SUITE Thread
 
 } // namespace Caramel

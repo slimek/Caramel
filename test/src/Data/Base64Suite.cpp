@@ -9,10 +9,10 @@
 namespace Caramel
 {
 
-SUITE( Base64Suite )
+SUITE( Base64 )
 {
 
-TEST( Base64TrivialTest )
+TEST( Base64Trivial )
 {
     const auto e64 = Base64Encode( "" );
     CHECK( "" == e64 );
@@ -23,7 +23,7 @@ TEST( Base64TrivialTest )
 }
 
 
-TEST( Base64StringTest )
+TEST( Base64String )
 {
     const auto alice   = Base64Encode( "Alice" );
     const auto marisa  = Base64Encode( "Marisa" );
@@ -46,7 +46,7 @@ TEST( Base64StringTest )
 }
 
 
-TEST( Base64BinaryTest )
+TEST( Base64Binary )
 {
     const std::vector< Int > data = MakeRandomVector( 64, 0, 0x7FFFFFFF );
 
@@ -64,6 +64,6 @@ TEST( Base64BinaryTest )
 }
 
 
-} // SUITE Base64Suite
+} // SUITE Base64
 
 } // namespace Caramel

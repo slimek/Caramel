@@ -8,10 +8,10 @@
 namespace Caramel
 {
 
-SUITE( NamedValuesSuite )
+SUITE( NamedValues )
 {
 
-TEST( NamedValuesTrivialTest )
+TEST( NamedValuesTrivial )
 {
     NamedValues nv;
 
@@ -27,7 +27,7 @@ TEST( NamedValuesTrivialTest )
 }
 
 
-TEST( NamedValuesTest )
+TEST( NamedValues )
 {
     NamedValues nv;
     const NamedValues& cnv = nv;
@@ -141,7 +141,7 @@ TEST( NamedValuesTest )
 }
 
 
-TEST( NameValuesValueMapTest )
+TEST( NameValuesValueMap )
 {
     NamedValues nv;
 
@@ -168,7 +168,7 @@ TEST( NameValuesValueMapTest )
 }
 
 
-TEST( NamedValuesChainTest )
+TEST( NamedValuesChain )
 {
     auto nv = NamedValues
         ( "Chirno", 123 )
@@ -185,7 +185,7 @@ TEST( NamedValuesChainTest )
 }
 
 
-TEST( NamedValuesFromMapTest )
+TEST( NamedValuesFromMap )
 {
     std::map< std::string, std::string > smap
     {
@@ -204,7 +204,7 @@ TEST( NamedValuesFromMapTest )
 
 void TestNamedValues( const NamedValues& nv ) {}
 
-TEST( NamedValuesInitializerListTest )
+TEST( NamedValuesInitializerList )
 {
     const NamedValues nv
     {
@@ -269,6 +269,6 @@ TEST( NamedValuesInitializerListTest )
 }
 
 
-} // SUITE NamedValuesSuite
+} // SUITE NamedValues
 
 } // namespace Caramel

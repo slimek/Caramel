@@ -8,7 +8,7 @@
 namespace Caramel
 {
 
-SUITE( MetaRangeSuite )
+SUITE( MetaRange )
 {
 
 enum RangeValue
@@ -19,7 +19,7 @@ enum RangeValue
 };
 
 
-TEST( MetaRangeTest )
+TEST( MetaRange )
 {
     typedef RangeN< Int, 0, 10 > D1;  // 1-digit number
 
@@ -65,6 +65,6 @@ TEST( MetaRangeTest )
 }
 
 
-} // SUITE MetaRangeSuite
+} // SUITE MetaRange
 
 } // namespace Caramel

@@ -9,10 +9,10 @@
 namespace Caramel
 {
 
-SUITE( ScalarSuite )
+SUITE( Scalar )
 {
 
-TEST( ScalarTrivialTest )
+TEST( ScalarTrivial )
 {
     const Scalar s;
 
@@ -28,7 +28,7 @@ TEST( ScalarTrivialTest )
 }
 
 
-TEST( ScalarBoolTest )
+TEST( ScalarBool )
 {
     const Scalar st( true );
 
@@ -63,7 +63,7 @@ TEST( ScalarBoolTest )
 }
 
 
-TEST( ScalarIntTest )
+TEST( ScalarInt )
 {
     const Scalar si0( 0 );
 
@@ -102,7 +102,7 @@ TEST( ScalarIntTest )
 }
 
 
-TEST( ScalarUintTest )
+TEST( ScalarUint )
 {
     const Scalar su0( 0u );
 
@@ -137,7 +137,7 @@ TEST( ScalarUintTest )
 }
 
 
-TEST( ScalarInt64Test )
+TEST( ScalarInt64 )
 {
     const Scalar si0( 0LL );
 
@@ -165,7 +165,7 @@ TEST( ScalarInt64Test )
 }
 
 
-TEST( ScalarUint64Test )
+TEST( ScalarUint64 )
 {
     const Scalar su0( 0uLL );
 
@@ -193,7 +193,7 @@ TEST( ScalarUint64Test )
 }
 
 
-TEST( ScalarLongTest )
+TEST( ScalarLong )
 {
     // In Visual C++, Long is accepted by Int.
 
@@ -212,7 +212,7 @@ TEST( ScalarLongTest )
 }
 
 
-TEST( ScalarFloatTest )
+TEST( ScalarFloat )
 {
     const Scalar sf0( 0.0f );
 
@@ -229,7 +229,7 @@ TEST( ScalarFloatTest )
 }
 
 
-TEST( ScalarDoubleTest )
+TEST( ScalarDouble )
 {
     const Scalar sd0( 0.0 );
 
@@ -246,7 +246,7 @@ TEST( ScalarDoubleTest )
 }
 
 
-TEST( ScalarStringTest )
+TEST( ScalarString )
 {
     const Scalar se( "" );
 
@@ -276,7 +276,7 @@ TEST( ScalarStringTest )
 }
 
 
-TEST( ScalarStrintConvertTest )
+TEST( ScalarStrintConvert )
 {
     /// Not convertible ///
 
@@ -365,6 +365,6 @@ TEST( ScalarStrintConvertTest )
 }
 
 
-} // SUITE ScalarSuite
+} // SUITE Scalar
 
 } // namespace Caramel

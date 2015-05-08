@@ -11,10 +11,10 @@
 namespace Caramel
 {
 
-SUITE( ConcurrentStackSuite )
+SUITE( ConcurrentStack )
 {
 
-TEST( ConcurrentStackTest )
+TEST( ConcurrentStack )
 {
     Concurrent::Stack< Int > istack;
     Int value = 0;
@@ -59,7 +59,7 @@ TEST( ConcurrentStackTest )
 }
 
 
-TEST( ConcurrentStackWarmupTest )
+TEST( ConcurrentStackWarmup )
 {
     Concurrent::Stack< std::string > stack;
 
@@ -98,6 +98,6 @@ TEST( ConcurrentStackWarmupTest )
 }
 
 
-} // SUITE ConcurrentStackSuite
+} // SUITE ConcurrentStack
 
 } // namespace Caramel

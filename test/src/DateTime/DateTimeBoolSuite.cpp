@@ -10,7 +10,7 @@
 namespace Caramel
 {
 
-SUITE( DateTimeBoolSuite )
+SUITE( DateTimeBool )
 {
 
 //
@@ -20,7 +20,7 @@ SUITE( DateTimeBoolSuite )
 //   Duration             : TimeSpan
 //
 
-TEST( DateTimeBoolTest )
+TEST( DateTimeBool )
 {
     TimedBool< DateTime > timer1( Seconds( 1 ));
     TimedBool< DateTime > timer2;
@@ -43,6 +43,6 @@ TEST( DateTimeBoolTest )
 }
 
 
-} // SUITE DateTimeBoolSuite
+} // SUITE DateTimeBool
 
 } // namespace Caramel

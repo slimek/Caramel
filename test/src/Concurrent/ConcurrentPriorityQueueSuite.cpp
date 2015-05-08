@@ -8,10 +8,10 @@
 namespace Caramel
 {
 
-SUITE( ConcurrentPriorityQueueSuite )
+SUITE( ConcurrentPriorityQueue )
 {
 
-TEST( PriorityQueueTest )
+TEST( ConcurrentPriorityQueue )
 {
     // Largest first
     {
@@ -95,6 +95,6 @@ TEST( PriorityQueueTest )
 }
 
 
-} // SUITE ConcurrentPriorityQueueSuite
+} // SUITE ConcurrentPriorityQueue
 
 } // namespace Caramel

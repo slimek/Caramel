@@ -12,10 +12,10 @@
 namespace Caramel
 {
 
-SUITE( WhenAllSuite )
+SUITE( WhenAll )
 {
 
-TEST( WhenAllTest )
+TEST( WhenAll )
 {
     /// 16 Tasks - 100 Repeats ///
 
@@ -118,6 +118,6 @@ TEST( WhenAllTest )
 }
 
 
-} // SUITE WhenAllSuite
+} // SUITE WhenAll
 
 } // namespace Caramel

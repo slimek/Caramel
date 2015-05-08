@@ -15,7 +15,7 @@
 namespace Caramel
 {
 
-SUITE( ConcurrentSetSuite )
+SUITE( ConcurrentSet )
 {
 
 template< typename SetType >
@@ -72,14 +72,14 @@ void TestBasicIntSet( SetType& set )
 // Concurrent Set Test
 //
 
-TEST( ConcurrentSetTest )
+TEST( ConcurrentSet )
 {
     Concurrent::Set< Int > iset;
     TestBasicIntSet( iset );
 }
 
 
-TEST( ConcurrentFlatSetTest )
+TEST( ConcurrentFlatSet )
 {
     Concurrent::FlatSet< Int > iset;
     TestBasicIntSet( iset );
@@ -130,14 +130,14 @@ void TestBasicSetWithSnapshot( SetType& set )
 // Concurrent Set with Snapshot Test
 //
 
-TEST( ConcurrentSetWithSnapshotTest )
+TEST( ConcurrentSetWithSnapshot )
 {
     Concurrent::SetWithSnapshot< Int > iset;
     TestBasicSetWithSnapshot( iset );
 }
 
 
-TEST( ConcurrentFlatSetWithSnapshotTest )
+TEST( ConcurrentFlatSetWithSnapshot )
 {
     Concurrent::FlatSetWithSnapshot< Int > iset;
     TestBasicSetWithSnapshot( iset );
@@ -149,7 +149,7 @@ TEST( ConcurrentFlatSetWithSnapshotTest )
 // Concurrent Set Snapshot Stress Test
 //
 
-TEST( ConcurrentSetSnapshotStressTest )
+TEST( ConcurrentSetSnapshotStress )
 {
     const Int minInt = -256;
     const Int maxInt = 255;
@@ -214,6 +214,6 @@ TEST( ConcurrentSetSnapshotStressTest )
 }
 
 
-} // SUITE ConcurrentSetSuite
+} // SUITE ConcurrentSet
 
 } // namespace Caramel

@@ -8,7 +8,7 @@
 namespace Caramel
 {
 
-SUITE( LookupTableSuite )
+SUITE( LookupTable )
 {
 
 enum ImageFormat
@@ -20,7 +20,7 @@ enum ImageFormat
 };
 
 
-TEST( EnumLookupTableTest )
+TEST( EnumLookupTable )
 {
     const auto table = LookupTable< ImageFormat >
         ( IMAGE_PNG, "png" )
@@ -124,7 +124,7 @@ void EnumLookupHost::Test()
 }
 
 
-TEST( EnumLookupTableInClassTest )
+TEST( EnumLookupTableInClass )
 {
     EnumLookupHost host;
     host.Test();
@@ -139,7 +139,7 @@ static const PlainPair< ImageFormat, const Char* > IMAGE_FORMAT_NAMES[] =
 };
 
 
-TEST( EnumLookupTableFromArrayTest )
+TEST( EnumLookupTableFromArray )
 {
     const auto table = LookupTable< ImageFormat >( IMAGE_FORMAT_NAMES );
 
@@ -162,7 +162,7 @@ TEST( EnumLookupTableFromArrayTest )
 // - the ValueType is Int
 //
 
-TEST( IntLookupTableTest )
+TEST( IntLookupTable )
 {
     const auto itable = LookupTable< Int >
         ( 1, "one" )
@@ -187,7 +187,7 @@ TEST( IntLookupTableTest )
 // Lookup Table Alias Test
 //
 
-TEST( LookupTableAliasTest )
+TEST( LookupTableAlias )
 {
     const auto table = LookupTable< ImageFormat >
         ( IMAGE_PNG, "png", "apng" )
@@ -250,6 +250,6 @@ TEST( LookupTableAliasTest )
 }
 
 
-} // SUITE LookupTableSuite
+} // SUITE LookupTable
 
 } // namespace Caramel

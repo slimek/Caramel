@@ -12,10 +12,10 @@
 namespace Caramel
 {
 
-SUITE( AnySuite )
+SUITE( Any )
 {
 
-TEST( AnyEmptyTest )
+TEST( AnyEmpty )
 {
     Any a0;
     CHECK( true == a0.IsEmpty() );
@@ -26,7 +26,7 @@ TEST( AnyEmptyTest )
 }
 
 
-TEST( AnyIntegerTest )
+TEST( AnyInteger )
 {
     Any ai( 42 );
     
@@ -78,7 +78,7 @@ TEST( AnyIntegerTest )
 }
 
 
-TEST( AnyBoolTest )
+TEST( AnyBool )
 {
     Any atrue( true );
     CHECK( true == atrue.As< Bool >() );
@@ -88,7 +88,7 @@ TEST( AnyBoolTest )
 }
 
 
-TEST( AnyStringTest )
+TEST( AnyString )
 {
     Any as( std::string( "Alice" ));
     Any asz1( "Cirno" );
@@ -117,7 +117,7 @@ enum FillMode
     FILL_SOLID = 255,
 };
 
-TEST( AnyEnumTest )
+TEST( AnyEnum )
 {
     Any ae( COLOR_BLUE );
 
@@ -130,7 +130,7 @@ TEST( AnyEnumTest )
 }
 
 
-TEST( AnyIntegerToFloatingTest )
+TEST( AnyIntegerToFloating )
 {
     Any az( 0 );
     Any ai32max( INT32_MAX );
@@ -165,7 +165,7 @@ TEST( AnyIntegerToFloatingTest )
 }
 
 
-TEST( AnyFloatingTest )
+TEST( AnyFloating )
 {
     Any az( 0.0 );
     Any as( 42.0 );
@@ -197,7 +197,7 @@ TEST( AnyFloatingTest )
 }
 
 
-TEST( AnyObjectTest )
+TEST( AnyObject )
 {
     /// Pair Struct ///
 
@@ -242,7 +242,7 @@ struct Square : public Shape
 };
 
 
-TEST( AnyPolymorphicTest )
+TEST( AnyPolymorphic )
 {
     std::vector< Any > anys;
 
@@ -263,7 +263,7 @@ TEST( AnyPolymorphicTest )
 }
 
 
-TEST( AnyAssignTest )
+TEST( AnyAssign )
 {
     Any a1;
 
@@ -299,7 +299,7 @@ struct AnyItem
 };
 
 
-TEST( AnyMoveTest )
+TEST( AnyMove )
 {
     AnyItem i1( 42 );
     
@@ -370,7 +370,7 @@ private:
 };
 
 
-TEST( AnyConvertibleTest )
+TEST( AnyConvertible )
 {
     StringProxyRigid rigid( "Rigid" );
     StringProxySmart smart( "Smart" );
@@ -396,6 +396,6 @@ TEST( AnyConvertibleTest )
 }
 
 
-} // SUITE AnySuite
+} // SUITE Any
 
 } // namespace Caramel

@@ -8,10 +8,10 @@
 namespace Caramel
 {
 
-SUITE( CatchExceptionSuite )
+SUITE( CatchException )
 {
 
-TEST( CatchExceptionTest )
+TEST( CatchException )
 {
     /// No Exception ///
     {
@@ -116,7 +116,7 @@ TEST( CatchExceptionTest )
 }
 
 
-TEST( CatchExceptionWithResultTest )
+TEST( CatchExceptionWithResult )
 {
     /// Exception ///
     {
@@ -192,6 +192,6 @@ TEST( CatchExceptionWithResultTest )
 }
 
 
-} // SUITE CatchExceptionSuite
+} // SUITE CatchException
 
 } // namespace Caramel

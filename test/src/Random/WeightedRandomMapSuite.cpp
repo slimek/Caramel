@@ -8,10 +8,10 @@
 namespace Caramel
 {
 
-SUITE( WeightedRandomMapSuite )
+SUITE( WeightedRandomMap )
 {
 
-TEST( WeightedRandomMapTrivialTest )
+TEST( WeightedRandomMapTrivial )
 {
     WeightedRandomMap< Int, std::string > map;
     CHECK( true == map.IsEmpty() );
@@ -21,7 +21,7 @@ TEST( WeightedRandomMapTrivialTest )
 }
 
 
-TEST( WeightedRandomMapTest )
+TEST( WeightedRandomMap )
 {
     // Weight is Int
     {
@@ -69,6 +69,6 @@ TEST( WeightedRandomMapTest )
 }
 
 
-} // SUITE WeightedRandomMapSuite
+} // SUITE WeightedRandomMap
 
 } // namespace Caramel

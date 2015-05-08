@@ -10,10 +10,10 @@
 namespace Caramel
 {
 
-SUITE( ExceptionPtrSuite )
+SUITE( ExceptionPtr )
 {
 
-TEST( ExceptionPtrNullTest )
+TEST( ExceptionPtrNull )
 {
     ExceptionPtr px0;
 
@@ -36,7 +36,7 @@ TEST( ExceptionPtrNullTest )
 }
 
 
-TEST( ExceptionPtrTest )
+TEST( ExceptionPtr )
 {
     /// std::exception ///
 
@@ -117,7 +117,7 @@ TEST( ExceptionPtrTest )
 }
 
 
-TEST( AnyFailurePtrNullTest )
+TEST( AnyFailurePtrNull )
 {
     AnyFailurePtr af0;
 
@@ -137,7 +137,7 @@ TEST( AnyFailurePtrNullTest )
 }
 
 
-TEST( AnyFailurePtrTest )
+TEST( AnyFailurePtr )
 {
     /// std::exception ///
 
@@ -199,6 +199,6 @@ TEST( AnyFailurePtrTest )
 }
 
 
-} // SUITE ExceptionPtrSuite
+} // SUITE ExceptionPtr
 
 } // namespace Caramel

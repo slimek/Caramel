@@ -8,10 +8,10 @@
 namespace Caramel
 {
 
-SUITE( WindowsRegistrySuite )
+SUITE( WindowsRegistry )
 {
 
-TEST( WindowsRegistryTest )
+TEST( WindowsRegistry )
 {
     // Try to read the Windows machine GUID, which should be set when the Windows installed.
 
@@ -35,6 +35,6 @@ TEST( WindowsRegistryTest )
     CHECK( false == registry.GetStringValue( "THIS\\DoesNot", "Exist", exist ));
 }
 
-} // SUITE WindowsRegistrySuite
+} // SUITE WindowsRegistry
 
 } // namespace Caramel

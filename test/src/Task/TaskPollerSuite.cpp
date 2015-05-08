@@ -11,10 +11,10 @@
 namespace Caramel
 {
 
-SUITE( TaskPollerSuite )
+SUITE( TaskPoller )
 {
 
-TEST( TaskPollerNormalTest )
+TEST( TaskPollerNormal )
 {
     TaskPoller poller;
 
@@ -47,7 +47,7 @@ TEST( TaskPollerNormalTest )
 }
 
 
-TEST( TaskPollerDelayTest )
+TEST( TaskPollerDelay )
 {
     TaskPoller poller;
 
@@ -98,7 +98,7 @@ private:
 TickPoint CustomClock::m_now;
 
 
-TEST( TaskPollerWithCustomClockTest )
+TEST( TaskPollerWithCustomClock )
 {
     TaskPoller poller( MakeClockProxy< CustomClock >() );
 
@@ -126,7 +126,7 @@ TEST( TaskPollerWithCustomClockTest )
 }
 
 
-TEST( TaskPollerThenTest )
+TEST( TaskPollerThen )
 {
     TaskPoller poller;
 
@@ -189,7 +189,7 @@ TEST( TaskPollerThenTest )
 }
 
 
-TEST( TaskPollerCancelTest )
+TEST( TaskPollerCancel )
 {
     TaskPoller poller;
     Bool done1 = false;
@@ -224,6 +224,6 @@ TEST( TaskPollerCancelTest )
 }
 
 
-} // SUITE TaskPollerSuite
+} // SUITE TaskPoller
 
 } // namespace Caramel

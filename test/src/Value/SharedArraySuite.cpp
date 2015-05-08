@@ -12,10 +12,10 @@
 namespace Caramel
 {
 
-SUITE( SharedArraySuite )
+SUITE( SharedArray )
 {
 
-TEST( ConstSharedArrayTest )
+TEST( ConstSharedArray )
 {
     ConstSharedArray< Int > ia0;
     
@@ -32,7 +32,7 @@ TEST( ConstSharedArrayTest )
 }
 
 
-TEST( SharedArrayTest )
+TEST( SharedArray )
 {
     SharedArray< std::string > sa0;
 
@@ -64,7 +64,7 @@ TEST( SharedArrayTest )
 }
 
 
-TEST( SharedArrayInitializerTest )
+TEST( SharedArrayInitializer )
 {
     SharedArray< std::string > sa0{};
 
@@ -88,7 +88,7 @@ TEST( SharedArrayInitializerTest )
 }
 
 
-TEST( SharedArrayRangeTest )
+TEST( SharedArrayRange )
 {
     std::vector< Int > data{ 1, 2, 3 };
     SharedArray< Int > array1( data.begin(), data.size() );
@@ -114,7 +114,7 @@ TEST( SharedArrayRangeTest )
 
 
 // Test of the fill constructors
-TEST( SharedArrayFillTest )
+TEST( SharedArrayFill )
 {
     SharedArray< Int > array1( 1, 7 );
     CHECK(( array1 == SharedArray< Int >{ 7 } ));
@@ -127,7 +127,7 @@ TEST( SharedArrayFillTest )
 }
 
 
-TEST( SharedArrayBoostRangeTest )
+TEST( SharedArrayBoostRange )
 {
     SharedArray< Int > ary( 3 );
     CHECK( ary.Begin() == boost::begin( ary ));
@@ -142,7 +142,7 @@ TEST( SharedArrayBoostRangeTest )
 }
 
 
-TEST( SharedArrayCopyFromTest )
+TEST( SharedArrayCopyFrom )
 {
     std::vector< Int > idata = { 3, 2, 7, 6, 8 };
     const auto icopy = SharedArray< Int >::CopyFrom( idata );
@@ -161,6 +161,6 @@ TEST( SharedArrayCopyFromTest )
 }
 
 
-} // SUITE( SharedArraySuite )
+} // SUITE SharedArray
 
 } // namespace Caramel

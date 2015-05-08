@@ -8,10 +8,10 @@
 namespace Caramel
 {
 
-SUITE( ConcurrentQueueSuite )
+SUITE( ConcurrentQueue )
 {
 
-TEST( ConcurrentQueueTrivialTest )
+TEST( ConcurrentQueueTrivial )
 {
     Concurrent::Queue< Int > ique;
     Int value = 0;
@@ -45,7 +45,7 @@ TEST( ConcurrentQueueTrivialTest )
 }
 
 
-TEST( ConcurrentQueueSnapshotTest )
+TEST( ConcurrentQueueSnapshot )
 {
     Concurrent::QueueWithSnapshot< Int > ique;
     Int value = 0;
@@ -91,6 +91,6 @@ TEST( ConcurrentQueueSnapshotTest )
 }
 
 
-} // SUITE( ConcurrentQueueSuite )
+} // SUITE ConcurrentQueue
 
 } // namespace Caramel

@@ -8,10 +8,10 @@
 namespace Caramel
 {
 
-SUITE( LexicalFloatingSuite )
+SUITE( LexicalFloating )
 {
 
-TEST( LexicalFloatinTest )
+TEST( LexicalFloatin )
 {
     /// Float ///
     {
@@ -57,6 +57,6 @@ TEST( LexicalFloatinTest )
 }
 
 
-} // SUITE LexicalFloatingSuite
+} // SUITE LexicalFloating
 
 } // namespace Caramel

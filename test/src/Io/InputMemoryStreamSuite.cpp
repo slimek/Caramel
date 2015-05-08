@@ -9,10 +9,10 @@
 namespace Caramel
 {
 
-SUITE( InputMemoryStreamSuite )
+SUITE( InputMemoryStream )
 {
 
-TEST( InputMemoryStreamSeekTellTest )
+TEST( InputMemoryStreamSeekTell )
 {
     Byte buffer[128] = { 0 };
     InputMemoryStream stream( buffer );
@@ -42,7 +42,7 @@ TEST( InputMemoryStreamSeekTellTest )
 }
 
 
-TEST( InputMemoryStreamTextReaderTest )
+TEST( InputMemoryStreamTextReader )
 {
     Char alice[] = "Alice\nis a\nDollmaster";
     InputMemoryStream stream( alice );
@@ -89,6 +89,6 @@ TEST( InputMemoryStreamTextReaderTest )
 }
 
 
-} // SUITE InputMemoryStreamSuite
+} // SUITE InputMemoryStream
 
 } // namespace Caramel

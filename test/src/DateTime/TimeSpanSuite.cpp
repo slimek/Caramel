@@ -10,10 +10,10 @@
 namespace Caramel
 {
 
-SUITE( TimeSpanSuite )
+SUITE( TimeSpan )
 {
 
-TEST( TimeSpanTest )
+TEST( TimeSpan )
 {
     /// Accessors ///
     {
@@ -210,7 +210,7 @@ TEST( TimeSpanTest )
 }
 
 
-TEST( TimeSpanLimitTest )
+TEST( TimeSpanLimit )
 {
     const auto max = TimeSpan::MaxValue();
     const auto min = TimeSpan::MinValue();
@@ -251,7 +251,7 @@ TEST( TimeSpanLimitTest )
 }
 
 
-TEST( LargeDateTimeDifferenceTest )
+TEST( LargeDateTimeDifference )
 {
     const auto min    = DateTime::MinValue();
     const auto modern = DateTime::FromString( "2100-01-01 00:00" );
@@ -284,7 +284,7 @@ TEST( LargeDateTimeDifferenceTest )
 }
 
 
-TEST( TimeSpanTryParseTest )
+TEST( TimeSpanTryParse )
 {
     TimeSpan span;
 
@@ -316,7 +316,7 @@ TEST( TimeSpanTryParseTest )
 }
 
 
-TEST( TimeSpanFormatTest )
+TEST( TimeSpanFormat )
 {
     const TimeSpan t0;
     const TimeSpan t1( 12, 34, 56 );
@@ -356,6 +356,6 @@ TEST( TimeSpanFormatTest )
 }
 
 
-} // SUITE TimeSpanSuite
+} // SUITE TimeSpan
 
 } // namespace Caramel

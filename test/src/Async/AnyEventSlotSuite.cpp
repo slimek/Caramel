@@ -11,10 +11,10 @@
 namespace Caramel
 {
 
-SUITE( AnyEventSlotSuite )
+SUITE( AnyEventSlot )
 {
 
-TEST( AnyEventSlotTrivialTest )
+TEST( AnyEventSlotTrivial )
 {
     AnyEventSlot slot;
 
@@ -27,7 +27,7 @@ TEST( AnyEventSlotTrivialTest )
 }
 
 
-TEST( AnyEventSlotTest )
+TEST( AnyEventSlot )
 {
     AnyEventDispatcher disp;
     AnyEventSlot slot;
@@ -91,7 +91,7 @@ TEST( AnyEventSlotTest )
 }
 
 
-TEST( AnyEventSlotWaitTest )
+TEST( AnyEventSlotWait )
 {
     AnyEventSlot slot;
 
@@ -109,6 +109,6 @@ TEST( AnyEventSlotWaitTest )
 }
 
 
-} // SUITE AnyEventSlotSuite
+} // SUITE AnyEventSlot
 
 } // namespace Caramel

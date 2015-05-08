@@ -14,10 +14,10 @@ namespace Caramel
 //   We use Scalar, which inherits StringConvertible, as the test case.
 //
 
-SUITE( StringConvertibleSuite )
+SUITE( StringConvertible )
 {
 
-TEST( StringConvertibleComparisonTest )
+TEST( StringConvertibleComparison )
 {
     Scalar alice( "Alice" );
 
@@ -32,7 +32,7 @@ TEST( StringConvertibleComparisonTest )
 }
 
 
-} // SUITE StringConvertibleSuite
+} // SUITE StringConvertible
 
 
 } // namespace Caramel

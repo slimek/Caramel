@@ -10,10 +10,10 @@
 namespace Caramel
 {
 
-SUITE( AnyEventHandlerSuite )
+SUITE( AnyEventHandler )
 {
 
-TEST( AnyEventHandlerTrivalTest )
+TEST( AnyEventHandlerTrival )
 {
     AnyEventSlot slot;
 
@@ -37,7 +37,7 @@ TEST( AnyEventHandlerTrivalTest )
 }
 
 
-TEST( AnyEventHandlerFromLambdaTest )
+TEST( AnyEventHandlerFromLambda )
 {
     AnyEvent event;
 
@@ -50,7 +50,7 @@ TEST( AnyEventHandlerFromLambdaTest )
 }
 
 
-TEST( AnyEventHandlerFromSlotTest )
+TEST( AnyEventHandlerFromSlot )
 {
     AnyEventSlot slot;
 
@@ -75,7 +75,7 @@ TEST( AnyEventHandlerFromSlotTest )
 }
 
 
-TEST( AnyEventHandlerFromQueueTest )
+TEST( AnyEventHandlerFromQueue )
 {
     AnyEvent event;
     AnyEventQueue equeue;
@@ -109,7 +109,7 @@ AnyEventHandler WrapHandler( AnyEventHandler handler )
 }
 
 
-TEST( AnyEventHandlerConversionTest )
+TEST( AnyEventHandlerConversion )
 {
     AnyEvent event;
 
@@ -136,7 +136,7 @@ TEST( AnyEventHandlerConversionTest )
 }
 
 
-TEST( AnyEventHandlerAssignmentTest )
+TEST( AnyEventHandlerAssignment )
 {
     AnyEventQueue queue;
     AnyEventSlot slot;
@@ -168,6 +168,6 @@ TEST( AnyEventHandlerAssignmentTest )
 }
 
 
-} // SUITE AnyEventHandlerSuite
+} // SUITE AnyEventHandler
 
 } // namespace Caramel

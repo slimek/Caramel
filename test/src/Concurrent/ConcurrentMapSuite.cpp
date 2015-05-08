@@ -11,7 +11,7 @@
 namespace Caramel
 {
 
-SUITE( ConcurrentMapSuite )
+SUITE( ConcurrentMap )
 {
 
 template< typename MapType >
@@ -91,7 +91,7 @@ void TestBasicMap( MapType& map )
 // Concurrent Map Test
 //
 
-TEST( ConcurrentMapTest )
+TEST( ConcurrentMap )
 {
     typedef Concurrent::Map< Int, std::string > MapType;
     MapType map;
@@ -105,7 +105,7 @@ TEST( ConcurrentMapTest )
 // Concurrent Hash Map Test
 //
 
-TEST( ConcurrentHashMapTest )
+TEST( ConcurrentHashMap )
 {
     typedef Concurrent::HashMap< Int, std::string > MapType;
     MapType map;
@@ -119,7 +119,7 @@ TEST( ConcurrentHashMapTest )
 // Concurrent Flat Map Test
 //
 
-TEST( ConcurrentFlatMapTest )
+TEST( ConcurrentFlatMap )
 {
     typedef Concurrent::FlatMap< Int, std::string > MapType;
     MapType map;
@@ -195,20 +195,20 @@ void TestBasicMapWithSnapshot( MapType& map, Bool ordered )
 }
 
 
-TEST( ConcurrentMapWithSnapshotTest )
+TEST( ConcurrentMapWithSnapshot )
 {
     Concurrent::MapWithSnapshot< Int, std::string > imap;
     TestBasicMapWithSnapshot( imap, true );
 }
 
 
-TEST( ConcurrentHashMapWithSnapshotTest )
+TEST( ConcurrentHashMapWithSnapshot )
 {
     Concurrent::HashMapWithSnapshot< Int, std::string > imap;
     TestBasicMapWithSnapshot( imap, false );
 }
 
 
-} // SUITE ConcurrentMapSuite
+} // SUITE ConcurrentMap
 
 } // namespace Caramel

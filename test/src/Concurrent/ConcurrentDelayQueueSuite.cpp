@@ -9,10 +9,10 @@
 namespace Caramel
 {
 
-SUITE( ConcurrentDelayQueueSuite )
+SUITE( ConcurrentDelayQueue )
 {
 
-TEST( ConcurrentDelayQueueTest )
+TEST( ConcurrentDelayQueue )
 {
     Concurrent::DelayQueue< Int > que( Seconds( 0.4 ));
 
@@ -41,6 +41,6 @@ TEST( ConcurrentDelayQueueTest )
     CHECK( que.IsEmpty() );
 }
 
-} // SUITE ConcurrentDelayQueueSuite
+} // SUITE ConcurrentDelayQueue
 
 } // namespace Caramel

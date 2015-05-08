@@ -9,7 +9,7 @@
 namespace Caramel
 {
 
-SUITE( AlertSuite )
+SUITE( Alert )
 {
 
 static std::string s_fileBuffer;
@@ -27,7 +27,7 @@ AlertResult LocalAlertHandler(
 }
 
 
-TEST( AlertTest )
+TEST( Alert )
 {
     auto oldHandler = SetAlertHandler( LocalAlertHandler );
 
@@ -59,6 +59,6 @@ TEST( AlertTest )
 }
 
 
-} // SUITE AlertSuite
+} // SUITE Alert
 
 } // namespace Caramel

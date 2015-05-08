@@ -12,10 +12,10 @@
 namespace Caramel
 {
 
-SUITE( AnyFailureSuite )
+SUITE( AnyFailure )
 {
 
-TEST( AnyFailureTest )
+TEST( AnyFailure )
 {
     try
     {
@@ -67,6 +67,6 @@ TEST( AnyFailureTest )
 }
 
 
-} // SUITE AnyFailureSuite
+} // SUITE AnyFailure
 
 } // namespace Caramel

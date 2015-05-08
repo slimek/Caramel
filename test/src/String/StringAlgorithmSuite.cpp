@@ -9,10 +9,10 @@
 namespace Caramel
 {
 
-SUITE( StringAlgorithmSuite )
+SUITE( StringAlgorithm )
 {
 
-TEST( StringPredicateTest )
+TEST( StringPredicate )
 {
     /// String : Char ///
 
@@ -94,7 +94,7 @@ TEST( StringPredicateTest )
 }
 
 
-TEST( StringExtractorTest )
+TEST( StringExtractor )
 {
     /// String : Char ///
 
@@ -112,14 +112,14 @@ TEST( StringExtractorTest )
 }
 
 
-TEST( StringJoinTest )
+TEST( StringJoin )
 {
     CHECK( "reimu,marisa,alice" == Join( std::vector< std::string >{ "reimu", "marisa", "alice" }, "," ));
     CHECK( "" == Join( std::vector< std::string >(), "," ));
 }
 
 
-TEST( StringTrimTest )
+TEST( StringTrim )
 {
     std::string marisa = "  Marisa  ";
 
@@ -140,6 +140,6 @@ TEST( StringTrimTest )
 }
 
 
-} // SUITE StringAlgorithmSuite
+} // SUITE StringAlgorithm
 
 } // namespace Caramel

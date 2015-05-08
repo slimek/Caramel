@@ -9,7 +9,7 @@
 namespace Caramel
 {
 
-SUITE( IsGeneralStringSuite )
+SUITE( IsGeneralString )
 {
 
 class IgsTester
@@ -29,7 +29,7 @@ private:
 };
 
 
-TEST( IsGeneralStringTest )
+TEST( IsGeneralString )
 {
     /// Fundamental Types ///
 
@@ -70,6 +70,6 @@ TEST( IsGeneralStringTest )
 }
 
 
-} // SUITE IsGeneralStringSuite
+} // SUITE IsGeneralString
 
 } // namespace Caramel

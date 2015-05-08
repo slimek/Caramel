@@ -12,10 +12,10 @@
 namespace Caramel
 {
 
-SUITE( TextStreamWriterSuite )
+SUITE( TextStreamWriter )
 {
 
-TEST( TextStreamWriterAsciiTest )
+TEST( TextStreamWriterAscii )
 {
     const Path tempPath = WritablePath() / "temp.txt";
 
@@ -37,7 +37,7 @@ TEST( TextStreamWriterAsciiTest )
 }
 
 
-TEST( TextStreamWriterChineseTest )
+TEST( TextStreamWriterChinese )
 {
     #if defined ( CARAMEL_SYSTEM_IS_WINDOWS )
     const std::string text = Utf8String( L"愛莉絲是人形使" ).ToString();
@@ -64,6 +64,6 @@ TEST( TextStreamWriterChineseTest )
 }
 
 
-} // SUITE TextStreamWriterSuite
+} // SUITE TextStreamWriter
 
 } // namespace Caramel

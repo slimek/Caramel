@@ -8,10 +8,10 @@
 namespace Caramel
 {
 
-SUITE( LexicalBooleanSuite )
+SUITE( LexicalBoolean )
 {
 
-TEST( LexicalBooleanTest )
+TEST( LexicalBoolean )
 {
     Lexical::Boolean lexBool;
 
@@ -64,12 +64,6 @@ TEST( LexicalBooleanTest )
 }
 
 
-TEST( LexicalVersionParseTest )
-{
-    
-}
-
-
-} // SUITE LexicalBooleanSuite
+} // SUITE LexicalBoolean
 
 } // namespace Caramel

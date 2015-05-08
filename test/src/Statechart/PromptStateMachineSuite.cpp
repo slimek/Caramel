@@ -8,7 +8,7 @@
 namespace Caramel
 {
 
-SUITE( PromptStateMachineSuite )
+SUITE( PromptStateMachine )
 {
 
 enum StateId
@@ -26,7 +26,7 @@ enum EventId
     E_FINISH,
 };
 
-TEST( PromptStateMachineTest )
+TEST( PromptStateMachine )
 {
     PromptStateMachine machine( "PSM-Test1" );
 
@@ -68,6 +68,6 @@ TEST( PromptStateMachineTest )
 }
 
 
-} // SUITE PromptStateMachineSuite
+} // SUITE PromptStateMachine
 
 } // namespace Caramel

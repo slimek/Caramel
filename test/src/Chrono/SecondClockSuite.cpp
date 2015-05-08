@@ -10,10 +10,10 @@
 namespace Caramel
 {
 
-SUITE( SecondClockSuite )
+SUITE( SecondClock )
 {
 
-TEST( SecondClockTest )
+TEST( SecondClock )
 {
     const SecondPoint now1 = SecondClock::Now();
     SecondWatch watch;
@@ -37,7 +37,7 @@ TEST( SecondClockTest )
 }
 
 
-TEST( SecondsDivideTest )
+TEST( SecondsDivide )
 {
     /// Operators ///
     {
@@ -98,7 +98,7 @@ TEST( SecondsDivideTest )
 // Duration Conversion
 //
 
-TEST( DurationConvertTest )
+TEST( DurationConvert )
 {
     const Ticks   tz( 0 );
     const Seconds sz( 0 );
@@ -140,6 +140,6 @@ TEST( DurationConvertTest )
 }
 
 
-} // SUITE ClockSuite
+} // SUITE SecondClock
 
 } // namespace Caramel

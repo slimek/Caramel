@@ -11,10 +11,10 @@
 namespace Caramel
 {
 
-SUITE( FormatSuite )
+SUITE( Format )
 {
 
-TEST( FormatTrivialTest )
+TEST( FormatTrivial )
 {
     CHECK( "" == Format( "" ));
 
@@ -29,13 +29,13 @@ TEST( FormatTrivialTest )
 }
 
 
-TEST( FormatBooleanTest )
+TEST( FormatBoolean )
 {
     CHECK( "Kami is true not false" == Format( "Kami is {0} not {1}", true, false ));
 }
 
 
-TEST( FormatIntegerTest )
+TEST( FormatInteger )
 {
     CHECK( "Score 0" == Format( "Score {0}", 0 ));
     CHECK( "Answer -1:42" == Format( "Answer {0}:{1}", -1, 42 ));
@@ -56,7 +56,7 @@ TEST( FormatIntegerTest )
 }
 
 
-TEST( FormatFloatingTest )
+TEST( FormatFloating )
 {
     CHECK( "Score 0" == Format( "Score {0}", 0.0 ));
     CHECK( "Score 0" == Format( "Score {0}", 0.0f ));
@@ -85,7 +85,7 @@ enum class Lemon
 };
 
 
-TEST( FormatEnumTest )
+TEST( FormatEnum )
 {
     CHECK( "0"   == Format( "{0}",    APPLE ));
     CHECK( "063" == Format( "{0:D3}", APFEL ));
@@ -101,7 +101,7 @@ TEST( FormatEnumTest )
 }
 
 
-TEST( FormatStringTest )
+TEST( FormatString )
 {
     CHECK( "Miko: Reimu" == Format( "Miko: {0}", "Reimu" ));
     CHECK( "Ah Ha Ha Ha!" == Format( "{1} {0} {0} {0}!", "Ha", "Ah" ));
@@ -126,7 +126,7 @@ std::string ToString( const Juice& j )
 }
 
 
-TEST( FormatGlobalScopeToStringTest )
+TEST( FormatGlobalScopeToString )
 {
     Juice juice{ "Banana", 0.9f };
 
@@ -134,7 +134,7 @@ TEST( FormatGlobalScopeToStringTest )
 }
 
 
-TEST( FormatFailureTest )
+TEST( FormatFailure )
 {
     CHECK( "Score 0" == Format( "Score 0", 42 ));
     CHECK( "Score {0" == Format( "Score {0", 42 ));
@@ -143,7 +143,7 @@ TEST( FormatFailureTest )
 }
 
 
-TEST( FormatStringConvertibleTest )
+TEST( FormatStringConvertible )
 {
     // Scalar is StringConvertible
 
@@ -154,7 +154,7 @@ TEST( FormatStringConvertibleTest )
 }
 
 
-TEST( FormatNumberConvertibleTest )
+TEST( FormatNumberConvertible )
 {
     // Ticks and Seconds are NumberConvertible
 
@@ -165,7 +165,7 @@ TEST( FormatNumberConvertibleTest )
 }
 
 
-TEST( FormatDecimalTest )
+TEST( FormatDecimal )
 {
     // Padding '0' to the number's left to fill the precision.
 
@@ -221,7 +221,7 @@ TEST( FormatDecimalTest )
 }
 
 
-TEST( FormatFixedPointForFloatingTest )
+TEST( FormatFixedPointForFloating )
 {
     CHECK( "0.00"   == Format( "{0:F}", 0.0 ));  // default is F2
     CHECK( "3.1416" == Format( "{0:F4}", 3.1415926 ));
@@ -271,7 +271,7 @@ TEST( FormatFixedPointForFloatingTest )
 }
 
 
-TEST( FormatFixedPointForIntegerTest )
+TEST( FormatFixedPointForInteger )
 {
     // Int / Int32
     CHECK( "0.00"    == Format( "{0:F}", 0 ));
@@ -332,7 +332,7 @@ TEST( FormatFixedPointForIntegerTest )
 }
 
 
-TEST( FormatNumberTest )
+TEST( FormatNumber )
 {
     /// Floatings ///
 
@@ -368,7 +368,7 @@ TEST( FormatNumberTest )
 }
 
 
-TEST( FormatHexadecimalTest )
+TEST( FormatHexadecimal )
 {
     CHECK( "0" == Format( "{0:X}", 0 ));   // Default is X1
 
@@ -431,7 +431,7 @@ TEST( FormatHexadecimalTest )
 }
 
 
-TEST( FormatArgumentsTest )
+TEST( FormatArguments )
 {
     CHECK( "ABCDEFGH12345678" ==
         Format( "{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}{11}{12}{13}{14}{15}",
@@ -453,6 +453,6 @@ TEST( FormatArgumentsTest )
 }
 
 
-} // SUITE FormatSuite
+} // SUITE Format
 
 } // namespace Caramel

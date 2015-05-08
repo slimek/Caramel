@@ -9,10 +9,10 @@
 namespace Caramel
 {
 
-SUITE( TimeOfDaySuite )
+SUITE( TimeOfDay )
 {
 
-TEST( TimeOfDayTest )
+TEST( TimeOfDay )
 {
     const TimeOfDay td0;
 
@@ -92,6 +92,6 @@ TEST( TimeOfDayTest )
 }
 
 
-} // SUITE TimeOfDaySuite
+} // SUITE TimeOfDay
 
 } // namespace Caramel

@@ -9,7 +9,7 @@
 namespace Caramel
 {
 
-SUITE( LockGuardSuite )
+SUITE( LockGuard )
 {
 
 static std::mutex s_mutex;
@@ -31,7 +31,7 @@ static void Execute()
 }
 
 
-TEST( LockGuardTest )
+TEST( LockGuard )
 {
     s_count = 0;
 
@@ -61,6 +61,6 @@ TEST( LockGuardTest )
 }
 
 
-} // SUITE LockGuardSuite
+} // SUITE LockGuard
 
 } // namespace Caramel

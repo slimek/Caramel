@@ -8,10 +8,10 @@
 namespace Caramel
 {
 
-SUITE( Utf8StringSuite )
+SUITE( Utf8String )
 {
 
-TEST( Utf8ValidateTest )
+TEST( Utf8Validate )
 {
     CHECK( true == Utf8String::Validate( "" ));
     CHECK( true == Utf8String::Validate( "ABCabc" ));
@@ -30,7 +30,7 @@ TEST( Utf8ValidateTest )
 }
 
 
-TEST( Utf8StringMoveTest )
+TEST( Utf8StringMove )
 {
     Utf8String source( "Alice" );
     std::string target;
@@ -42,6 +42,6 @@ TEST( Utf8StringMoveTest )
 }
 
 
-} // SUITE Utf8StringSuite
+} // SUITE Utf8String
 
 } // namespace Caramel

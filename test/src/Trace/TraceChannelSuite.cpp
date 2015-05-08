@@ -9,10 +9,10 @@
 namespace Caramel
 {
 
-SUITE( TraceChannelSuite )
+SUITE( TraceChannel )
 {
 
-TEST( ChannelTest )
+TEST( TraceChannel )
 {
     Trace::Channel channel;
     channel.Open( "Test", Trace::LEVEL_DEBUG );
@@ -45,7 +45,7 @@ TEST( ChannelTest )
 }
 
 
-TEST( BindChannelByNameTest )
+TEST( TraceChannelBindByName )
 {
     Trace::Channel channel;
     channel.Open( "ByName", Trace::LEVEL_DEBUG );
@@ -67,6 +67,6 @@ TEST( BindChannelByNameTest )
 }
 
 
-} // SUITE TraceChannelSuite
+} // SUITE TraceChannel
 
 } // namespace Caramel

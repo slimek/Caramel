@@ -8,7 +8,7 @@
 namespace Caramel
 {
 
-SUITE( ContinuationTraitsSuite )
+SUITE( ContinuationTraits )
 {
 
 //
@@ -38,7 +38,7 @@ struct Work
 };
 
 
-TEST( ContinuationFromIntTraitsTest )
+TEST( ContinuationFromIntTraits )
 {
     typedef std::string Str;
 
@@ -136,7 +136,7 @@ struct Work< void >
 };
 
 
-TEST( ContinuationFromVoidTraitsTest )
+TEST( ContinuationFromVoidTraits )
 {
     typedef std::string Str;
 
@@ -189,6 +189,6 @@ TEST( ContinuationFromVoidTraitsTest )
 }
 
 
-} // SUITE ContinuationTraitsSuite
+} // SUITE ContinuationTraits
 
 } // namespace Caramel

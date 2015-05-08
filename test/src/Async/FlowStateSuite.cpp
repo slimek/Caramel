@@ -8,10 +8,10 @@
 namespace Caramel
 {
 
-SUITE( FlowStateSuite )
+SUITE( FlowState )
 {
 
-TEST( FlowStateTest )
+TEST( FlowState )
 {
     FlowState< Int > state( 0 );
 
@@ -31,6 +31,6 @@ TEST( FlowStateTest )
     CHECK( false == state.IsEntering() );
 }
 
-} // SUITE FlowStateSuite
+} // SUITE FlowState
 
 } // namespace Caramel

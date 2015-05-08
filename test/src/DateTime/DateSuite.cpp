@@ -10,10 +10,10 @@
 namespace Caramel
 {
 
-SUITE( DateSuite )
+SUITE( Date )
 {
 
-TEST( DateTest )
+TEST( Date )
 {
     const Date notDate;
     const Date today = Date::Today();
@@ -29,7 +29,7 @@ TEST( DateTest )
 }
 
 
-TEST( DateComparisonTest )
+TEST( DateComparison )
 {
     const auto d1 = Date::FromString( "1987-06-23" );
     const auto d2 = Date::FromString( "2013-04-05" );
@@ -52,7 +52,7 @@ TEST( DateComparisonTest )
 }
 
 
-TEST( DateStringTest )
+TEST( DateString )
 {
     const auto d1 = Date::FromString( "2013-04-05" );
 
@@ -72,7 +72,7 @@ TEST( DateStringTest )
 }
 
 
-TEST( DateFormatTest )
+TEST( DateFormat )
 {
     const auto d1 = Date::FromString( "2013-04-05" );
 
@@ -81,7 +81,7 @@ TEST( DateFormatTest )
 }
 
 
-TEST( DateTryParseTest )
+TEST( DateTryParse )
 {
     Date date;
 
@@ -96,14 +96,14 @@ TEST( DateTryParseTest )
 }
 
 
-TEST( DateMacroTest )
+TEST( DateMacro )
 {
     const auto dm = Date::FromMacro( __DATE__ );
     CHECK( Date::Today() >= dm );
 }
 
 
-TEST( DaysTest )
+TEST( Days )
 {
     const Days d0;
 
@@ -117,7 +117,7 @@ TEST( DaysTest )
 }
 
 
-TEST( DaysComparisonTest )
+TEST( DaysComparison )
 {
     const Days d1( 1 );
     const Days d2( 42 );
@@ -140,7 +140,7 @@ TEST( DaysComparisonTest )
 }
 
 
-TEST( DaysArithmeticTest )
+TEST( DaysArithmetic )
 {
     const Days d1( 42 );
     const Days d2( 3 );
@@ -169,7 +169,7 @@ TEST( DaysArithmeticTest )
 }
 
 
-TEST( DateDaysArithmeticTest )
+TEST( DateDaysArithmetic )
 {
     const Date d1( 1987, 6, 5 );
     
@@ -218,7 +218,7 @@ TEST( DateDaysArithmeticTest )
 }
 
 
-TEST( DaysTimeSpanTest )
+TEST( DaysTimeSpan )
 {
     const Days d0( 0 );
     const TimeSpan t0 = d0;
@@ -244,6 +244,6 @@ TEST( DaysTimeSpanTest )
 }
 
 
-} // SUITE DateSuite
+} // SUITE Date
 
 } // namespace Caramel
