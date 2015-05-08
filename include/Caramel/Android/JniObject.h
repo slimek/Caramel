@@ -7,7 +7,6 @@
 #include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Android/Detail/JniGlobals.h>
 #include <Caramel/Android/Detail/JniMethod.h>
-#include <Caramel/Android/JniBase.h>
 
 
 namespace Caramel

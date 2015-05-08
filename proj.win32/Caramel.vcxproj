@@ -19,10 +19,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\Caramel\Android\Detail\JniConstructor.h" />
+    <ClInclude Include="..\include\Caramel\Android\Detail\JniGlobals.h" />
+    <ClInclude Include="..\include\Caramel\Android\Detail\JniLocals.h" />
+    <ClInclude Include="..\include\Caramel\Android\Detail\JniMethod.h" />
     <ClInclude Include="..\include\Caramel\Android\Detail\JniSignature.h" />
     <ClInclude Include="..\include\Caramel\Android\Detail\JniStaticMethod.h" />
     <ClInclude Include="..\include\Caramel\Android\Detail\JniTypeTraits.h" />
     <ClInclude Include="..\include\Caramel\Android\JniClass.h" />
+    <ClInclude Include="..\include\Caramel\Android\JniInitialize.h" />
+    <ClInclude Include="..\include\Caramel\Android\JniObject.h" />
+    <ClInclude Include="..\include\Caramel\Android\JniString.h" />
     <ClInclude Include="..\include\Caramel\Android\LogTraceAdapter.h" />
     <ClInclude Include="..\include\Caramel\Android\Streambuf.h" />
     <ClInclude Include="..\include\Caramel\Apple\LogTraceAdapter.h" />

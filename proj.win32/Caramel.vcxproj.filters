@@ -899,6 +899,27 @@
     <ClInclude Include="..\include\Caramel\Lexical\FloatingList.h">
       <Filter>1. Public Packages\Lexical</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Android\JniInitialize.h">
+      <Filter>4. Non-Win32 Platform\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Android\JniObject.h">
+      <Filter>4. Non-Win32 Platform\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Android\JniString.h">
+      <Filter>4. Non-Win32 Platform\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Android\Detail\JniConstructor.h">
+      <Filter>4. Non-Win32 Platform\Android\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Android\Detail\JniGlobals.h">
+      <Filter>4. Non-Win32 Platform\Android\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Android\Detail\JniLocals.h">
+      <Filter>4. Non-Win32 Platform\Android\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Android\Detail\JniMethod.h">
+      <Filter>4. Non-Win32 Platform\Android\Detail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

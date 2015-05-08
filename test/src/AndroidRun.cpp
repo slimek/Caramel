@@ -5,6 +5,7 @@
 #include "Utils/AssetReader.h"
 #include "Utils/WritablePath.h"
 #include <Caramel/Android/JniClass.h>
+#include <Caramel/Android/JniInitialize.h>
 #include <Caramel/Android/LogTraceAdapter.h>
 #include <Caramel/Android/Streambuf.h>
 #include <Caramel/Functional/ScopeExit.h>
