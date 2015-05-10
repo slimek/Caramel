@@ -21,15 +21,14 @@ namespace Caramel
 //
 // Contents
 //
-//   AnyInteger
-//   AnyFloating
-//   AnyEnum
-//   AnyString
+//   Detail::AnyInteger
+//   Detail::AnyFloating
+//   Detail::AnyEnum
+//   Detail::AnyString
 //   NamedValues
-//   ConstNamedValueRef
-//   NamedValueRef
-//   NamedValueEntry
-//   NamedValueFeed
+//   Detail::ConstNamedValueRef
+//   Detail::NamedValueRef
+//   Detail::NamedValueFeed
 //   Scalar
 //
 

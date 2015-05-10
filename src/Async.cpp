@@ -23,7 +23,7 @@ namespace Caramel
 //   AnyEventQueue
 //   AnyEventSlot
 //   AnyEventDispatcher
-//   AnyEventTargetProxy
+//   AnyEventTargetProxyImpl
 //   Detail::AnyEventQueueProxy
 //   Detail::AnyEventDispatcherProxy
 //   AnyEventReactor

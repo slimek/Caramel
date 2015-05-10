@@ -3,7 +3,6 @@
 #include "CaramelPch.h"
 
 #include "Error/ErrorManager.h"
-#include <Caramel/Async/AnyEvent.h>
 #include <Caramel/Error/Detail/ExceptionCatcherCore.h>
 #include <Caramel/Error/AnyFailure.h>
 #include <Caramel/Error/CatchException.h>
