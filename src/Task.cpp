@@ -182,10 +182,6 @@ const TaskHolder* TaskCore::GetHolder() const { return m_impl->m_holder.get(); }
 
 TaskImpl::TaskImpl()
     : m_name( "Not-a-task" )
-    , m_state( TASK_STATE_INITIAL )
-    , m_hasDelay( false )
-    , m_executor( nullptr )
-    , m_exceptionHandled( false )
 {
 }
 
@@ -193,10 +189,6 @@ TaskImpl::TaskImpl()
 TaskImpl::TaskImpl( std::string&& name, std::unique_ptr< TaskHolder >&& holder )
     : m_name( std::move( name ))
     , m_holder( std::move( holder ))
-    , m_state( TASK_STATE_INITIAL )
-    , m_hasDelay( false )
-    , m_executor( nullptr )
-    , m_exceptionHandled( false )
 {
 }
 
@@ -251,7 +243,7 @@ void TaskImpl::AddContinuation( TaskPtr continuation )
     }
     else if ( canSubmit )
     {
-        m_executor->Submit( TaskCore( continuation ));
+        this->SubmitContinuation( continuation );
     }
 }
 
@@ -313,18 +305,32 @@ void TaskImpl::Run()
                 continue;
             }
 
-            if ( ! firstContinue.IsValid() )
+            if ( ! firstContinue.IsValid() && task->GetExecutor() == nullptr )
             {
                 firstContinue = TaskCore( task );
             }
             else
             {
-                m_executor->Submit( TaskCore( task ));
+                this->SubmitContinuation( task );
             }
         }
 
         // The first continuation should run immediately.
         firstContinue.Run();
+    }
+}
+
+
+void TaskImpl::SubmitContinuation( TaskPtr continuation )
+{
+    auto executor = continuation->GetExecutor();
+    if ( executor )
+    {
+        executor->Submit( TaskCore( continuation ));
+    }
+    else
+    {
+         m_executor->Submit( TaskCore( continuation ));
     }
 }
 

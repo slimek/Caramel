@@ -41,6 +41,7 @@ public:
     /// Operations ///
 
     void SetExecutor( TaskExecutor& executor );
+    TaskExecutor* GetExecutor() const { return m_executor; }
 
     void AddContinuation( TaskPtr continuation );
 
@@ -74,6 +75,8 @@ public:
 
 private:
 
+    void SubmitContinuation( TaskPtr continuation );
+
     void NotifyDone();
 
     void DoWait() const;
@@ -87,7 +90,7 @@ private:
 
     /// State ///
 
-    TaskState m_state;
+    TaskState m_state { TASK_STATE_INITIAL };
 
     mutable std::mutex m_stateMutex;
     mutable std::condition_variable m_becomesDone;
@@ -95,13 +98,13 @@ private:
     
     /// Delay ///
 
-    Bool  m_hasDelay;
+    Bool  m_hasDelay { false };
     Ticks m_delayDuration;
 
 
     /// Schedule and Run ///
 
-    TaskExecutor* m_executor;
+    TaskExecutor* m_executor { nullptr };
 
 
     /// Continuation ///
@@ -110,7 +113,7 @@ private:
     TaskQueue m_continuations;
 
     ExceptionPtr m_exception;
-    mutable Bool m_exceptionHandled;
+    mutable Bool m_exceptionHandled { false };
     
 };
 
