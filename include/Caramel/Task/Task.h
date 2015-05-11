@@ -61,6 +61,17 @@ public:
     template< typename ThenFunction >
     typename Detail::ContinuationTraits< ThenFunction, Result >::TaskType
     Then( ThenFunction f );
+
+
+    /// Continuation by another Executor ///
+
+    template< typename ThenFunction >
+    typename Detail::ContinuationTraits< ThenFunction, Result >::TaskType
+    Then( std::string name, TaskExecutor& executor, ThenFunction f );
+
+    template< typename ThenFunction >
+    typename Detail::ContinuationTraits< ThenFunction, Result >::TaskType
+    Then( TaskExecutor& executor, ThenFunction f );
 };
 
 
@@ -103,6 +114,17 @@ public:
     template< typename ThenFunction >
     typename Detail::ContinuationTraits< ThenFunction, void >::TaskType
     Then( ThenFunction f );
+
+
+    /// Continuation by another Executor ///
+
+    template< typename ThenFunction >
+    typename Detail::ContinuationTraits< ThenFunction, void >::TaskType
+    Then( std::string name, TaskExecutor& executor, ThenFunction f );
+
+    template< typename ThenFunction >
+    typename Detail::ContinuationTraits< ThenFunction, void >::TaskType
+    Then( TaskExecutor& executor, ThenFunction f );
 };
 
 
@@ -213,6 +235,33 @@ Task< AnteResult >::Then( ThenFunction f )
 }
 
 
+template< typename AnteResult >
+template< typename ThenFunction >
+inline typename Detail::ContinuationTraits< ThenFunction, AnteResult >::TaskType
+Task< AnteResult >::Then( std::string name, TaskExecutor& executor, ThenFunction f )
+{
+    typedef typename Detail::ContinuationTraits< ThenFunction, AnteResult >::HolderType HolderType;
+    typedef typename Detail::ContinuationTraits< ThenFunction, AnteResult >::TaskType TaskType;
+
+    // Convert to Detail::TaskHolder explicitly.
+    std::unique_ptr< Detail::TaskHolder > thenHolder =
+        MakeUnique< HolderType >( std::move( f ), *this );
+
+    auto thenTask = TaskType( std::move( name ), std::move( thenHolder ));
+    this->AddContinuation( executor, thenTask );
+    return thenTask;
+}
+
+
+template< typename AnteResult >
+template< typename ThenFunction >
+inline typename Detail::ContinuationTraits< ThenFunction, AnteResult >::TaskType
+Task< AnteResult >::Then( TaskExecutor& executor, ThenFunction f )
+{
+    return this->Then( this->MakeDefaultThenTaskName(), executor, std::move( f ));
+}
+
+
 //
 // Task< void >
 //
@@ -264,6 +313,31 @@ inline typename Detail::ContinuationTraits< ThenFunction, void >::TaskType
 Task< void >::Then( ThenFunction f )
 {
     return this->Then( this->MakeDefaultThenTaskName(), std::move( f ));
+}
+
+
+template< typename ThenFunction >
+inline typename Detail::ContinuationTraits< ThenFunction, void >::TaskType
+Task< void >::Then( std::string name, TaskExecutor& executor, ThenFunction f )
+{
+    typedef typename Detail::ContinuationTraits< ThenFunction, void >::HolderType HolderType;
+    typedef typename Detail::ContinuationTraits< ThenFunction, void >::TaskType TaskType;
+
+    // Convert to Detail::TaskHolder explicitly.
+    std::unique_ptr< Detail::TaskHolder > thenHolder =
+        MakeUnique< HolderType >( std::move( f ), *this );
+
+    auto thenTask = TaskType( std::move( name ), std::move( thenHolder ));
+    this->AddContinuation( executor, thenTask );
+    return thenTask;
+}
+
+
+template< typename ThenFunction >
+inline typename Detail::ContinuationTraits< ThenFunction, void >::TaskType
+Task< void >::Then( TaskExecutor& executor, ThenFunction f )
+{
+    return this->Then( this->MakeDefaultThenTaskName(), executor, std::move( f ));
 }
 
 

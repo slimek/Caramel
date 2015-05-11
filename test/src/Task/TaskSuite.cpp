@@ -6,6 +6,7 @@
 #include <Caramel/Error/CatchException.h>
 #include <Caramel/Task/StdAsync.h>
 #include <Caramel/Task/Task.h>
+#include <Caramel/Task/TaskPoller.h>
 #include <Caramel/Task/WorkerThread.h>
 #include <Caramel/Thread/ThisThread.h>
 #include <atomic>
@@ -507,6 +508,60 @@ TEST( TaskWithoutName )
     t7c.Wait();
 
     CHECK( "Spark" == t7c.GetResult() );
+}
+
+
+TEST( TaskContinuationWithAnotherExecutor )
+{
+    TaskPoller poller;
+
+    Int value1 = 0;
+
+    auto task1 = MakeTask( [] { return 42; });
+    auto then1 = task1.Then( poller,
+    [&] ( Int v )
+    {
+        value1 = v;
+    });
+    auto fence1 = task1.Then( [] {} );
+
+    poller.PollOne();
+
+    StdAsync::Submit( task1 );
+    fence1.Wait();
+
+    CHECK( false == then1.IsDone() );
+
+    poller.PollOne();
+
+    CHECK( true == then1.IsDone() );
+    CHECK( 42 == value1 );
+
+
+    /// Without result ///
+
+    Bool flag2 = false;
+
+    auto task2 = MakeTask( [] {} );
+    auto then2 = task2.Then( poller,
+    [&]
+    {
+        flag2 = true;
+    });
+    auto fence2 = task2.Then( [] {} );
+
+    poller.PollOne();
+
+    StdAsync::Submit( task2 );
+    fence2.Wait();
+
+    CHECK( false == then2.IsDone() );
+
+    poller.PollOne();
+
+    CHECK( true == then2.IsDone() );
+    CHECK( true == flag2 );
+
 }
 
 

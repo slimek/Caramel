@@ -69,6 +69,14 @@ void TaskCore::AddContinuation( TaskCore& continuation )
 }
 
 
+void TaskCore::AddContinuation( TaskExecutor& executor, TaskCore& continuation )
+{
+    CARAMEL_CHECK( m_impl->IsValid() );
+    continuation.m_impl->SetExecutor( executor );
+    m_impl->AddContinuation( continuation.m_impl );
+}
+
+
 void TaskCore::DoDelayFor( const Ticks& duration )
 {
     CARAMEL_CHECK( m_impl->IsValid() );

@@ -85,6 +85,7 @@ protected:
     TaskCore( const std::shared_ptr< TaskImpl >& impl );
 
     void AddContinuation( TaskCore& continuation );
+    void AddContinuation( TaskExecutor& executor, TaskCore& continuation );
 
     void DoDelayFor( const Ticks& duration );
 
