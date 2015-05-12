@@ -123,6 +123,7 @@
     <ClInclude Include="..\include\Caramel\Lexical\IntegerList.h" />
     <ClInclude Include="..\include\Caramel\Lexical\Version.h" />
     <ClInclude Include="..\include\Caramel\Math\Floating.h" />
+    <ClInclude Include="..\include\Caramel\Memory\CopyPtr.h" />
     <ClInclude Include="..\include\Caramel\Memory\SharedPtrUtils.h" />
     <ClInclude Include="..\include\Caramel\Memory\UniquePtrUtils.h" />
     <ClInclude Include="..\include\Caramel\Meta\IfThenElse.h" />

@@ -221,6 +221,7 @@
     <ClCompile Include="..\src\Lexical\LexicalIntegerListSuite.cpp" />
     <ClCompile Include="..\src\Lexical\LexicalIntegerSuite.cpp" />
     <ClCompile Include="..\src\Lexical\LexicalVersionSuite.cpp" />
+    <ClCompile Include="..\src\Memory\CopyPtrSuite.cpp" />
     <ClCompile Include="..\src\Memory\SharedPtrUtilsSuite.cpp" />
     <ClCompile Include="..\src\Meta\IsGeneralStringSuite.cpp" />
     <ClCompile Include="..\src\Meta\MetaRangeSuite.cpp" />
