@@ -35,6 +35,7 @@ public:
     typedef ConstSharedArray< Value > Snapshot, SnapshotType;
 
     CollectionSnapshot();
+    explicit CollectionSnapshot( Bool initiallyModified );
 
     /// Accessors ///
 
@@ -67,6 +68,13 @@ private:
 template< typename Derived, typename Value >
 inline CollectionSnapshot< Derived, Value >::CollectionSnapshot()
     : m_modified( false )
+{
+}
+
+
+template< typename Derived, typename Value >
+inline CollectionSnapshot< Derived, Value >::CollectionSnapshot( Bool initiallyModified )
+    : m_modified( initiallyModified )
 {
 }
 
