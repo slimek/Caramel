@@ -353,7 +353,7 @@ LoopThreadGroup::~LoopThreadGroup()
 
 
 void LoopThreadGroup::Start(
-    const std::string& name, WorkFunction&& work, const Ticks& interval )
+    const std::string& name, WorkFunction work, const Ticks& interval )
 {
     m_impl->Add( std::make_shared< LoopThread >( name, std::move( work ), interval ));
 }
