@@ -370,6 +370,9 @@
     <ClCompile Include="..\src\Memory\CopyPtrSuite.cpp">
       <Filter>2. Tests\Memory</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Concurrent\ConcurrentVectorSuite.cpp">
+      <Filter>2. Tests\Concurrent</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">

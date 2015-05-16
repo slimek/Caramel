@@ -923,6 +923,9 @@
     <ClInclude Include="..\include\Caramel\Memory\CopyPtr.h">
       <Filter>1. Public Packages\Memory</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Concurrent\Vector.h">
+      <Filter>1. Public Packages\Concurrent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">
