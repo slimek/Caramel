@@ -28,17 +28,21 @@ public:
     WideString( const std::wstring& s );
     WideString( const std::string& input, TextEncoding encoding );
 
+    static WideString FromUtf8( const std::string& input );
+
 
     /// Accessors ///
 
-    const Wchar* ToCstr() const { return m_s.c_str(); }
+    const std::wstring ToString() const { return m_s; }
+    const Wchar*       ToCstr()   const { return m_s.c_str(); }
 
 
-    /// Conversion ///
+    /// Conversions ///
 
     Bool TryParse( const std::string& input, TextEncoding encoding );
 
     std::string ToNarrow( TextEncoding encoding ) const;
+    std::string ToUtf8() const;
 
     
 private:

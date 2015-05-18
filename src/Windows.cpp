@@ -281,6 +281,12 @@ WideString::WideString( const std::string& input, TextEncoding encoding )
 }
 
 
+WideString WideString::FromUtf8( const std::string& input )
+{
+    return WideString( input, TEXT_ENCODING_UTF8 );
+}
+
+
 Bool WideString::TryParse( const std::string& input, TextEncoding encoding )
 {
     if ( input.empty() )
@@ -422,6 +428,12 @@ std::string WideString::ToNarrow( TextEncoding encoding ) const
     }
 
     return result;
+}
+
+
+std::string WideString::ToUtf8() const
+{
+    return this->ToNarrow( TEXT_ENCODING_UTF8 );
 }
 
 

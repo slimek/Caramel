@@ -373,6 +373,9 @@
     <ClCompile Include="..\src\Concurrent\ConcurrentVectorSuite.cpp">
       <Filter>2. Tests\Concurrent</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Windows\WindowsWideStringSuite.cpp">
+      <Filter>2. Tests\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">
