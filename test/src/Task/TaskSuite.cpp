@@ -343,6 +343,23 @@ TEST( TaskThen )
     CHECK( "Youmu"      == then6t.GetResult() );
     CHECK( "Youmu-ref"  == then6r.GetResult() );
     CHECK( "Youmu-copy" == then6c.GetResult() );
+
+
+    // If faulted, all by-value continuations should be canceled
+
+    auto task7 = MakeTask( "Task7", [] () -> Int { throw AnyFailure( 42 ); });
+    auto then7 = task7.Then( [] ( Int value ) { return value; });
+
+    StdAsync::Submit( task7 );
+
+    // ATTENTION: If a task throws, you must handle the exception by:
+    //            1. Call Wait() or Catch(). or
+    //            2. Give it a by-task continuation.
+    task7.Catch();
+
+    then7.Wait();
+
+    CHECK( true == then7.IsCanceled() );
 }
 
 

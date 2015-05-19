@@ -313,7 +313,8 @@ void TaskImpl::Run()
                 continue;
             }
 
-            if ( ! firstContinue.IsValid() && task->GetExecutor() == nullptr )
+            if ( ! firstContinue.IsValid()
+                && ( task->GetExecutor() == nullptr || task->GetExecutor() == m_executor ))
             {
                 firstContinue = TaskCore( task );
             }
@@ -323,8 +324,11 @@ void TaskImpl::Run()
             }
         }
 
-        // The first continuation should run immediately.
-        firstContinue.Run();
+        if ( firstContinue.IsValid() )
+        {
+            // The first continuation should run immediately.
+            firstContinue.Run();
+        }
     }
 }
 
