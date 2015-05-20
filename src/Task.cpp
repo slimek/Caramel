@@ -176,6 +176,8 @@ Bool TaskCore::IsDone()  const { return m_impl->IsDone(); }
 Bool TaskCore::IsFaulted()  const { return m_impl->m_state == TASK_STATE_FAULTED; }
 Bool TaskCore::IsCanceled() const { return m_impl->m_state == TASK_STATE_CANCELED; }
 
+Bool TaskCore::IsIdle() const { return ( ! m_impl->IsValid() ) || m_impl->IsDone(); }
+
 std::string TaskCore::Name() const { return m_impl->m_name; }
 
 Bool  TaskCore::HasDelay()         const { return m_impl->m_hasDelay; }

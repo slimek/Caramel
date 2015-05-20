@@ -41,6 +41,10 @@ public:
     Bool IsCanceled() const;
     Bool IsDone()     const;  // "Ran to Completion", Faulted or Canceled
 
+    // Returns true if the task is "Not a task", or it is done.
+    // In other words, the task does NOT have anything to do.
+    Bool IsIdle() const;
+
 
     /// Operations ///
 

@@ -27,11 +27,14 @@ void Foo() { s_calledFoo = true; }
 Int  Quz() { s_calledQuz = true; return 1; }
 
 
-TEST( TaskNotTask )
+TEST( TaskTrivial )
 {
+    /// Not a Task ///
+
     Task< void > t0;
 
     CHECK( false        == t0.IsValid() );
+    CHECK( true         == t0.IsIdle() );
     CHECK( "Not-a-task" == t0.Name() );
     CHECK( false        == t0.HasDelay() );
     CHECK( Ticks( 0 )   == t0.GetDelayDuration() );
@@ -43,28 +46,38 @@ TEST( TaskNotTask )
     Task< Int > t1;
 
     CHECK( false        == t1.IsValid() );
+    CHECK( true         == t1.IsIdle() );
     CHECK( "Not-a-task" == t1.Name() );
     CHECK( false        == t1.HasDelay() );
     CHECK( Ticks( 0 )   == t1.GetDelayDuration() );
 
     CHECK_THROW( t1.DelayFor( Ticks( 100 )), Caramel::Exception );
     CHECK_THROW( t1.Run(), Caramel::Exception );
-}
 
 
-TEST( TaskTrivial )
-{
-    auto t1 = MakeTask( "Foo", &Foo );
+    /// Assign a task to replace the "Not a Task" ///
 
-    CHECK( true       == t1.IsValid() );
-    CHECK( "Foo"      == t1.Name() );
-    CHECK( false      == t1.HasDelay() );
-    CHECK( Ticks( 0 ) == t1.GetDelayDuration() );
+    t0 = MakeTask( "Foo", &Foo );
 
-    t1.DelayFor( Ticks( 100 ));
+    CHECK( true       == t0.IsValid() );
+    CHECK( false      == t0.IsIdle() );
+    CHECK( "Foo"      == t0.Name() );
+    CHECK( false      == t0.HasDelay() );
+    CHECK( Ticks( 0 ) == t0.GetDelayDuration() );
 
-    CHECK( true         == t1.HasDelay() );
-    CHECK( Ticks( 100 ) == t1.GetDelayDuration() );
+    t0.DelayFor( Ticks( 100 ));
+
+    CHECK( true         == t0.HasDelay() );
+    CHECK( Ticks( 100 ) == t0.GetDelayDuration() );
+
+    WorkerThread worker( "TaskTrivial" );
+    worker.Submit( t0 );
+    t0.Wait();
+
+    CHECK( true == t0.IsIdle() );
+    CHECK( true == t0.IsDone() );
+
+    worker.Stop();
 }
 
 
@@ -240,6 +253,8 @@ TEST( TaskThen )
     auto task1 = MakeTask( "Task1", [&] { ++ count1; } );
     auto task1c = task1.Then( "Task1+Continue", [&] { ++ count1; } );
 
+    CHECK( true  == task1c.IsValid() );
+    CHECK( false == task1c.IsIdle() );
     CHECK( "Task1+Continue" == task1c.Name() );
 
     StdAsync::Submit( task1 );
@@ -417,6 +432,10 @@ TEST( TaskCancel )
     CHECK( thenR.IsCanceled() );
     CHECK( thenT.IsCanceled() );
 
+    // Other properties
+    CHECK( task.IsDone() );
+    CHECK( task.IsIdle() );
+
     // Tasks added after canceling should also be canceled.
     auto thenC = task.Then( [] {} );
     thenC.Wait();
@@ -446,6 +465,10 @@ TEST( TaskFault )
     CHECK( thenV.IsCanceled() );
     CHECK( thenR.IsCanceled() );
     CHECK( thenT.IsDone() && ! thenT.IsCanceled() && ! thenT.IsFaulted() );
+
+    // Other properties
+    CHECK( task.IsDone() );
+    CHECK( task.IsIdle() );
 }
 
 
