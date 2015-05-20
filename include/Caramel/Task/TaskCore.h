@@ -102,12 +102,18 @@ protected:
 //
 // Task State
 //
+// - NOTE: Keep the order of the values, especially INITIAL and RUNNING:
+//   1. Values after INITIAL are "submitted".
+//   2. Values after RUNNING are "done".
+//
 
 enum TaskState : Int
 {
     TASK_STATE_UNDEF        = 0,
 
     TASK_STATE_INITIAL      = 0x01,
+
+    // After sumitted states
     TASK_STATE_DELAYING     = 0x02,
     TASK_STATE_STRANDING    = 0x04,
     TASK_STATE_READY        = 0x08,
