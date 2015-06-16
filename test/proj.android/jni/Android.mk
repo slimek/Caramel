@@ -75,6 +75,7 @@ LOCAL_SRC_FILES := \
 	$(CRMTEST_SRC)/Concurrent/ConcurrentQueueSuite.cpp \
 	$(CRMTEST_SRC)/Concurrent/ConcurrentSetSuite.cpp \
 	$(CRMTEST_SRC)/Concurrent/ConcurrentStackSuite.cpp \
+	$(CRMTEST_SRC)/Concurrent/ConcurrentVectorSuite.cpp \
 	$(CRMTEST_SRC)/Data/Base64Suite.cpp \
 	$(CRMTEST_SRC)/Data/LookupTableSuite.cpp \
 	$(CRMTEST_SRC)/DateTime/DateSuite.cpp \
@@ -99,6 +100,7 @@ LOCAL_SRC_FILES := \
 	$(CRMTEST_SRC)/Lexical/LexicalIntegerListSuite.cpp \
 	$(CRMTEST_SRC)/Lexical/LexicalIntegerSuite.cpp \
 	$(CRMTEST_SRC)/Lexical/LexicalVersionSuite.cpp \
+	$(CRMTEST_SRC)/Memory/CopyPtrSuite.cpp \
 	$(CRMTEST_SRC)/Memory/SharedPtrUtilsSuite.cpp \
 	$(CRMTEST_SRC)/Meta/IsGeneralStringSuite.cpp \
 	$(CRMTEST_SRC)/Meta/MetaRangeSuite.cpp \
