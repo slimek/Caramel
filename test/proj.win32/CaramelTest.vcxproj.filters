@@ -277,9 +277,6 @@
     <ClCompile Include="..\src\Thread\LoopThreadGroupSuite.cpp">
       <Filter>2. Tests\Thread</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Thread\SpinMutexSuite.cpp">
-      <Filter>2. Tests\Thread</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Thread\ThreadSuite.cpp">
       <Filter>2. Tests\Thread</Filter>
     </ClCompile>
@@ -375,6 +372,9 @@
     </ClCompile>
     <ClCompile Include="..\src\Windows\WindowsWideStringSuite.cpp">
       <Filter>2. Tests\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Thread\MutexLocksSuite.cpp">
+      <Filter>2. Tests\Thread</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -128,7 +128,7 @@ LOCAL_SRC_FILES := \
 	$(CRMTEST_SRC)/Task/WorkerThreadSuite.cpp \
 	$(CRMTEST_SRC)/Thread/LockGuardSuite.cpp \
 	$(CRMTEST_SRC)/Thread/LoopThreadGroupSuite.cpp \
-	$(CRMTEST_SRC)/Thread/SpinMutexSuite.cpp \
+	$(CRMTEST_SRC)/Thread/MutexLocksSuite.cpp \
 	$(CRMTEST_SRC)/Thread/ThreadSuite.cpp \
 	$(CRMTEST_SRC)/Thread/WaitableBoolSuite.cpp \
 	$(CRMTEST_SRC)/Trace/TraceChannelSuite.cpp \

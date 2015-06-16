@@ -252,7 +252,7 @@
     <ClCompile Include="..\src\Task\WhenAllSuite.cpp" />
     <ClCompile Include="..\src\Task\WorkerThreadSuite.cpp" />
     <ClCompile Include="..\src\Thread\LoopThreadGroupSuite.cpp" />
-    <ClCompile Include="..\src\Thread\SpinMutexSuite.cpp" />
+    <ClCompile Include="..\src\Thread\MutexLocksSuite.cpp" />
     <ClCompile Include="..\src\Thread\ThreadSuite.cpp" />
     <ClCompile Include="..\src\Thread\LockGuardSuite.cpp" />
     <ClCompile Include="..\src\Thread\WaitableBoolSuite.cpp" />
