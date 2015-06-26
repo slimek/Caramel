@@ -183,7 +183,6 @@
     <ClInclude Include="..\include\Caramel\Task\WorkerThread.h" />
     <ClInclude Include="..\include\Caramel\Thread\LoopThreadGroup.h" />
     <ClInclude Include="..\include\Caramel\Thread\MutexLocks.h" />
-    <ClInclude Include="..\include\Caramel\Thread\SpinMutex.h" />
     <ClInclude Include="..\include\Caramel\Thread\ThisThread.h" />
     <ClInclude Include="..\include\Caramel\Thread\Thread.h" />
     <ClInclude Include="..\include\Caramel\Thread\ThreadId.h" />
