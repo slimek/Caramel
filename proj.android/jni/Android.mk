@@ -33,4 +33,38 @@ LOCAL_C_INCLUDES := \
 	$(GIT_ROOT)/CandyJar/include
 	
 include $(BUILD_STATIC_LIBRARY)
- 
+
+
+#
+# Prebuilding Caramel
+#
+
+ifdef CARAMEL_CONFIG
+
+#
+# Make output directories, then copy the library to there
+#
+
+CRM_LIB := ../lib
+CRM_ARCH_ABI := $(TARGET_ARCH_ABI)
+NDK_CRM_CONFIG := Android.Ndk.$(CARAMEL_CONFIG)
+
+all: $(CRM_ARCH_ABI)
+
+$(CRM_ARCH_ABI): $(LOCAL_BUILT_MODULE)
+	$(call host-mkdir,$(CRM_LIB)/$(NDK_CRM_CONFIG))
+	$(call host-mkdir,$(CRM_LIB)/$(NDK_CRM_CONFIG)/$@)
+	$(call host-cp,obj/$(CARAMEL_CONFIG)/local/$@/libCaramel.a,$(CRM_LIB)/$(NDK_CRM_CONFIG)/$@/libCaramel.a)
+
+
+#
+# Clean the output directories
+#
+
+clean: $(CRM_ARCH_ABI)-clean
+
+$(CRM_ARCH_ABI)-clean:
+	$(call host-rm,$(CRM_LIB)/$(NDK_CRM_CONFIG)/$(subst -clean,,$@)/libCaramel.a)
+
+
+endif
