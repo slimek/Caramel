@@ -24,7 +24,7 @@ class LoopThread
 {
 public:
 
-    LoopThread( const std::string& name, WorkFunction&& work, const Ticks& interval );
+    LoopThread( const std::string& name, const Ticks& interval, WorkFunction&& work );
 
     void Stop();
     void Join();

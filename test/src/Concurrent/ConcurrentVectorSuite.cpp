@@ -231,7 +231,7 @@ TEST( ConcurrentVectorStress )
     LoopThreadGroup threads;
     for ( Usize i = 0; i < 4; ++ i )
     {
-        threads.Start( "Stress", work, Ticks::Zero() );
+        threads.Start( "Stress", Ticks::Zero(), work );
     }
 
     ThisThread::SleepFor( Ticks( 100 ));

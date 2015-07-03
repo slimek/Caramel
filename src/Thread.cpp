@@ -285,7 +285,7 @@ void ThisThread::AtThreadExit( std::function< void() > atExit )
 // Loop Thread
 //
 
-LoopThread::LoopThread( const std::string& name, WorkFunction&& work, const Ticks& interval )
+LoopThread::LoopThread( const std::string& name, const Ticks& interval, WorkFunction&& work )
     : m_workFunction( std::move( work ))
     , m_interval( interval )
 {
@@ -353,9 +353,9 @@ LoopThreadGroup::~LoopThreadGroup()
 
 
 void LoopThreadGroup::Start(
-    const std::string& name, WorkFunction work, const Ticks& interval )
+    const std::string& name, const Ticks& interval, WorkFunction work )
 {
-    m_impl->Add( std::make_shared< LoopThread >( name, std::move( work ), interval ));
+    m_impl->Add( std::make_shared< LoopThread >( name, interval, std::move( work )));
 }
 
 

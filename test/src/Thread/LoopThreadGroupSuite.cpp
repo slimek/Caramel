@@ -20,9 +20,9 @@ TEST( LoopThreadGroup )
     Int count1 = 0;
     Int count2 = 0;
 
-    threads.Start( "Test0", [&] { ++ count0; }, Ticks( 0 ));
-    threads.Start( "Test1", [&] { ++ count1; }, Ticks( 10 ));
-    threads.Start( "Test2", [&] { ++ count2; }, Ticks( 10000 ));
+    threads.Start( "Test0", Ticks( 0 ), [&] { ++ count0; });
+    threads.Start( "Test1", Ticks( 10 ), [&] { ++ count1; });
+    threads.Start( "Test2", Ticks( 10000 ), [&] { ++ count2; });
 
     ThisThread::SleepFor( Ticks( 100 ));
 
