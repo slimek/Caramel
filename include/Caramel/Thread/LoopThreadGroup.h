@@ -27,7 +27,7 @@ public:
     ~LoopThreadGroup();
 
     // The first execute is delayed for an interval.
-    void Start( const std::string& name, const Ticks& interval, WorkFunction work );
+    void Start( std::string name, Ticks interval, WorkFunction work );
 
     void StopAll();
 

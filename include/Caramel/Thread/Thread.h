@@ -25,14 +25,14 @@ public:
 
     Thread();
 
-    Thread( const std::string& name, WorkFunction work );
+    Thread( std::string name, WorkFunction work );
 
     ~Thread();
 
 
     /// Thread Operations ///
 
-    void Start( const std::string& name, WorkFunction work );
+    void Start( std::string name, WorkFunction work );
 
     void Join();
 

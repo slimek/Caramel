@@ -57,9 +57,9 @@ Thread::Thread()
 }
 
 
-Thread::Thread( const std::string& name, WorkFunction work )
+Thread::Thread( std::string name, WorkFunction work )
 {
-    this->Start( name, work );
+    this->Start( std::move( name ), std::move( work ));
 }
 
 
@@ -68,9 +68,9 @@ Thread::~Thread()
 }
 
 
-void Thread::Start( const std::string& name, WorkFunction work )
+void Thread::Start( std::string name, WorkFunction work )
 {
-    m_impl.reset( new ThreadImpl( name, work ));
+    m_impl.reset( new ThreadImpl( std::move( name ), std::move( work )));
 }
 
 
@@ -95,9 +95,9 @@ ThreadId Thread::GetId() const
 // Implemenation
 //
 
-ThreadImpl::ThreadImpl( const std::string& name, WorkFunction work )
-    : m_name( name )
-    , m_workFunction( work )
+ThreadImpl::ThreadImpl( std::string&& name, WorkFunction&& work )
+    : m_name( std::move( name ))
+    , m_workFunction( std::move( work ))
 {
     m_thread.reset( new std::thread( [=] { this->RunWork(); } ));
     m_started.Wait();
@@ -285,11 +285,11 @@ void ThisThread::AtThreadExit( std::function< void() > atExit )
 // Loop Thread
 //
 
-LoopThread::LoopThread( const std::string& name, const Ticks& interval, WorkFunction&& work )
+LoopThread::LoopThread( std::string&& name, Ticks&& interval, WorkFunction&& work )
     : m_workFunction( std::move( work ))
-    , m_interval( interval )
+    , m_interval( std::move( interval ))
 {
-    m_thread.reset( new ThreadImpl( name, [this] { this->RepeatWork(); } ));
+    m_thread.reset( new ThreadImpl( std::move( name ), [this] { this->RepeatWork(); } ));
 }
 
 
@@ -352,10 +352,10 @@ LoopThreadGroup::~LoopThreadGroup()
 }
 
 
-void LoopThreadGroup::Start(
-    const std::string& name, const Ticks& interval, WorkFunction work )
+void LoopThreadGroup::Start( std::string name, Ticks interval, WorkFunction work )
 {
-    m_impl->Add( std::make_shared< LoopThread >( name, interval, std::move( work )));
+    m_impl->Add( std::make_shared< LoopThread >(
+        std::move( name ), std::move( interval ), std::move( work )));
 }
 
 

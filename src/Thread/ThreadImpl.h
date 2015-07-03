@@ -26,7 +26,7 @@ class ThreadImpl
 
 public:
 
-    ThreadImpl( const std::string& name, WorkFunction work );
+    ThreadImpl( std::string&& name, WorkFunction&& work );
 
 
     // Set the handler when the thread exits.
