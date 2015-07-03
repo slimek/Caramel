@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\Caramel\Algorithm\RegularBuffer.h" />
     <ClInclude Include="..\include\Caramel\Android\Detail\JniConstructor.h" />
     <ClInclude Include="..\include\Caramel\Android\Detail\JniGlobals.h" />
     <ClInclude Include="..\include\Caramel\Android\Detail\JniLocals.h" />

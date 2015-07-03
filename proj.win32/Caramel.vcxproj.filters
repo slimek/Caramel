@@ -195,6 +195,9 @@
     <Filter Include="4. Non-Win32 Platform\Android\Detail">
       <UniqueIdentifier>{99b66ca3-b505-45b9-a8cd-6c237d4a66ad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\Algorithm">
+      <UniqueIdentifier>{ff67ec7e-92b7-42fc-9480-b2ba48cae5d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Caramel\Setup\Compiler.h">
@@ -922,6 +925,9 @@
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Concurrent\Vector.h">
       <Filter>1. Public Packages\Concurrent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Algorithm\RegularBuffer.h">
+      <Filter>1. Public Packages\Algorithm</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

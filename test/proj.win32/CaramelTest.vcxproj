@@ -166,6 +166,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\Algorithm\RegularBufferSuite.cpp" />
     <ClCompile Include="..\src\Arithmetic\FlagsSuite.cpp" />
     <ClCompile Include="..\src\Arithmetic\PowerOfTwoSuite.cpp" />
     <ClCompile Include="..\src\Async\AnyEventDispatcherSuite.cpp" />

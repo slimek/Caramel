@@ -92,6 +92,9 @@
     <Filter Include="2. Tests\Object">
       <UniqueIdentifier>{4ec8615c-c53d-4619-b908-032da1d678ac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\Algorithm">
+      <UniqueIdentifier>{ec7c354e-49cb-4526-87ac-53c57d47c883}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\RunTest.cpp">
@@ -375,6 +378,9 @@
     </ClCompile>
     <ClCompile Include="..\src\Thread\MutexLocksSuite.cpp">
       <Filter>2. Tests\Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Algorithm\RegularBufferSuite.cpp">
+      <Filter>2. Tests\Algorithm</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
