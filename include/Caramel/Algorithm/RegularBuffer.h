@@ -87,7 +87,7 @@ inline void RegularBuffer< T >::Add( const InputPiece& input )
     Usize spare = m_chunkSize - m_written;  // the rest space can be written into the working chunk.
 
     // If the remain of input are larger then the spare of working chunk :
-    // - Write it as possible, then prepare a new working buffer.
+    // - Write until the chunk is full, then prepare a new working chunk.
 
     while ( remain > spare )
     {
@@ -102,11 +102,11 @@ inline void RegularBuffer< T >::Add( const InputPiece& input )
         spare = m_chunkSize;
     }
 
-    // Write all content in input into the working chunk.
+    // Write all remain content of input into the working chunk.
 
     auto srcIt = input.begin() + readIndex;
     auto destIt = m_workingChunk.begin() + m_written;
-    std::copy( srcIt, srcIt + remain, destIt );  // copy lenght : remain
+    std::copy( srcIt, srcIt + remain, destIt );  // copy length : remain
 
     m_written += remain;
     if ( m_written == m_chunkSize )
