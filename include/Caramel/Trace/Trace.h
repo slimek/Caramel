@@ -18,16 +18,16 @@ namespace Caramel
 //
 
 template< typename... Args >
-void TraceDebug( const std::string& format, Args&&... args );
+void TraceDebug( const std::string& format, const Args&... args );
 
 template< typename... Args >
-void TraceInfo( const std::string& format, Args&&... args );
+void TraceInfo( const std::string& format, const Args&... args );
 
 template< typename... Args >
-void TraceWarn( const std::string& format, Args&&... args );
+void TraceWarn( const std::string& format, const Args&... args );
 
 template< typename... Args >
-void TraceError( const std::string& format, Args&&... args );
+void TraceError( const std::string& format, const Args&... args );
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -60,12 +60,12 @@ void WriteToBuiltinFailed( const std::string& message );
 //
 
 template< typename... Args >
-inline void TraceDebug( const std::string& format, Args&&... args )
+inline void TraceDebug( const std::string& format, const Args&... args )
 {
     try
     {
         Trace::WriteToBuiltin(
-            Trace::LEVEL_DEBUG, Format( format, std::forward< Args >( args )... ));
+            Trace::LEVEL_DEBUG, Format( format, args... ));
     }
     catch ( ... )
     {
@@ -75,12 +75,12 @@ inline void TraceDebug( const std::string& format, Args&&... args )
 
 
 template< typename... Args >
-inline void TraceInfo( const std::string& format, Args&&... args )
+inline void TraceInfo( const std::string& format, const Args&... args )
 {
     try
     {
         Trace::WriteToBuiltin(
-            Trace::LEVEL_INFO, Format( format, std::forward< Args >( args )... ));
+            Trace::LEVEL_INFO, Format( format, args... ));
     }
     catch ( ... )
     {
@@ -90,12 +90,12 @@ inline void TraceInfo( const std::string& format, Args&&... args )
 
 
 template< typename... Args >
-inline void TraceWarn( const std::string& format, Args&&... args )
+inline void TraceWarn( const std::string& format, const Args&... args )
 {
     try
     {
         Trace::WriteToBuiltin(
-            Trace::LEVEL_WARN, Format( format, std::forward< Args >( args )... ));
+            Trace::LEVEL_WARN, Format( format, args... ));
     }
     catch ( ... )
     {
@@ -105,12 +105,12 @@ inline void TraceWarn( const std::string& format, Args&&... args )
 
 
 template< typename... Args >
-inline void TraceError( const std::string& format, Args&&... args )
+inline void TraceError( const std::string& format, const Args&... args )
 {
     try
     {
         Trace::WriteToBuiltin(
-            Trace::LEVEL_ERROR, Format( format, std::forward< Args >( args )... ));
+            Trace::LEVEL_ERROR, Format( format, args... ));
     }
     catch ( ... )
     {
