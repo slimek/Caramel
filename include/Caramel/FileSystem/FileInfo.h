@@ -31,8 +31,13 @@ public:
     
     /// Properties ///
 
-    Bool Exists()  const;
-    Path GetPath() const;
+    Bool  Exists()  const;
+    Path  GetPath() const;
+
+    // Throws if the file is greater than UINT32_MAX bytes.
+    Uint32 Size() const;
+
+    Uint64 Size64() const;
 
 
     /// Operations ///

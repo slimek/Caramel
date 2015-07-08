@@ -232,6 +232,26 @@ Bool FileInfo::Exists() const
 }
 
 
+Uint32 FileInfo::Size() const
+{
+    const Uint64 size = this->Size64();
+    if ( size > UINT32_MAX )
+    {
+        CARAMEL_THROW( "File \"{0}\" size \"{1}\" is out of 32-bit", *m_path, size );
+    }
+    return static_cast< Uint32 >( size );
+}
+
+
+Uint64 FileInfo::Size64() const
+{
+    static_assert( sizeof( boost::filesystem::file_size( *m_path )) == 8,
+                   "file_size() should return in 64-bit" );
+
+    return boost::filesystem::file_size( *m_path );
+}
+
+
 Path FileInfo::GetPath() const
 {
     return Path( m_path );

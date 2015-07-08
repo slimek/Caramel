@@ -382,6 +382,9 @@
     <ClCompile Include="..\src\Algorithm\RegularBufferSuite.cpp">
       <Filter>2. Tests\Algorithm</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\FileSystem\FileInfoSuite.cpp">
+      <Filter>2. Tests\FileSystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">

@@ -1,6 +1,7 @@
 // Caramel C++ Library - Precompiled Header Creator
 
 #include "CaramelPch.h"
+#include <boost/cstdint.hpp>
 #include <boost/version.hpp>
 #include <type_traits>
 
@@ -147,6 +148,11 @@ static_assert( 2 == sizeof( Wchar ), "sizeof( Wchar ) should be 2" );
 /// Boost Versions ///
 
 static_assert( 105600 == BOOST_VERSION, "Boost version not matched" );
+
+
+/// Boost Typedefs Validation ///
+
+static_assert( 8 == sizeof( boost::uintmax_t ), "sizeof( boost::uintmax_t ) should be 8" );
 
 
 ///////////////////////////////////////////////////////////////////////////////
