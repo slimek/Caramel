@@ -113,6 +113,7 @@
     <ClInclude Include="..\include\Caramel\Io\InputMemoryStream.h" />
     <ClInclude Include="..\include\Caramel\Io\InputStream.h" />
     <ClInclude Include="..\include\Caramel\Io\OutputFileStream.h" />
+    <ClInclude Include="..\include\Caramel\Io\OutputMemoryStream.h" />
     <ClInclude Include="..\include\Caramel\Io\OutputStream.h" />
     <ClInclude Include="..\include\Caramel\Io\TextReader.h" />
     <ClInclude Include="..\include\Caramel\Io\TextStreamReader.h" />

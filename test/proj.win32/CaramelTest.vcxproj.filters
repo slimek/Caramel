@@ -385,6 +385,9 @@
     <ClCompile Include="..\src\FileSystem\FileInfoSuite.cpp">
       <Filter>2. Tests\FileSystem</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Io\OutputMemoryStreamSuite.cpp">
+      <Filter>2. Tests\Io</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">

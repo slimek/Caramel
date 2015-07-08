@@ -10,6 +10,7 @@
 #include <Caramel/Io/InputFileStream.h>
 #include <Caramel/Io/InputMemoryStream.h>
 #include <Caramel/Io/OutputFileStream.h>
+#include <Caramel/Io/OutputMemoryStream.h>
 #include <Caramel/Io/TextStreamReader.h>
 #include <Caramel/Io/TextStreamWriter.h>
 #include <cerrno>
@@ -30,6 +31,7 @@ namespace Caramel
 //   InputFileStream
 //   OutputFileStream
 //   InputMemoryStream
+//   OutputMemoryStream
 //
 // < Readers >
 //   TextStreamReader
@@ -328,6 +330,34 @@ void InputMemoryStream::Seek( Int offset )
         {
             m_position = 0;
         }
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Output Memory Stream
+//
+
+OutputMemoryStream::OutputMemoryStream( Void* buffer, Usize length )
+    : m_buffer( static_cast< Byte* >( buffer ))
+    , m_length( length )
+{}
+
+
+void OutputMemoryStream::Write( const Void* data, Usize length )
+{
+    const Usize avails = m_length - m_position;
+    const Byte* src = static_cast< const Byte* >( data );
+
+    if ( avails > length )
+    {
+        std::copy( src, src + length, &m_buffer[ m_position ] );
+        m_position += length;
+    }
+    else
+    {
+        CARAMEL_THROW( "Out of range, available: {0}, length: {1}", avails, length );
     }
 }
 

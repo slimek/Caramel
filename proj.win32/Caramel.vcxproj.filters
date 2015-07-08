@@ -929,6 +929,9 @@
     <ClInclude Include="..\include\Caramel\Algorithm\RegularBuffer.h">
       <Filter>1. Public Packages\Algorithm</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Io\OutputMemoryStream.h">
+      <Filter>1. Public Packages\Io</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">
