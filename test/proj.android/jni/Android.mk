@@ -52,6 +52,8 @@ CRMTEST_SRC := ../../src
 LOCAL_SRC_FILES := \
 	$(CRMTEST_SRC)/CaramelTestPch.cpp \
 	$(CRMTEST_SRC)/AndroidRun.cpp \
+	$(CRMTEST_SRC)/Android/InputAssetStreamSuite.cpp \
+	$(CRMTEST_SRC)/Algorithm/RegularBufferSuite.cpp \
 	$(CRMTEST_SRC)/Arithmetic/FlagsSuite.cpp \
 	$(CRMTEST_SRC)/Arithmetic/PowerOfTwoSuite.cpp \
 	$(CRMTEST_SRC)/Async/AnyEventDispatcherSuite.cpp \
@@ -92,7 +94,9 @@ LOCAL_SRC_FILES := \
 	$(CRMTEST_SRC)/Error/TryCatchResultSuite.cpp \
 	$(CRMTEST_SRC)/FileSystem/PathSuite.cpp \
 	$(CRMTEST_SRC)/Functional/BindSuite.cpp \
+	$(CRMTEST_SRC)/Io/BufferStreamSuite.cpp \
 	$(CRMTEST_SRC)/Io/InputMemoryStreamSuite.cpp \
+	$(CRMTEST_SRC)/Io/OutputMemoryStreamSuite.cpp \
 	$(CRMTEST_SRC)/Io/TextStreamWriterSuite.cpp \
 	$(CRMTEST_SRC)/Lexical/LexicalBooleanSuite.cpp \
 	$(CRMTEST_SRC)/Lexical/LexicalFloatingListSuite.cpp \

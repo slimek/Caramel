@@ -3,6 +3,7 @@
 #include "CaramelPch.h"
 
 #include "Android/JniCenter.h"
+#include <Caramel/Android/InputAssetStream.h>
 #include <Caramel/Android/JniClass.h>
 #include <Caramel/Android/JniString.h>
 #include <Caramel/Android/LogTraceAdapter.h>
@@ -23,6 +24,9 @@ namespace Android
 //
 //   LogTraceAdapter
 //   Streambuf
+//   InputAssetStream
+//
+// < JNI - Java Native Interface >
 //   JniCenter
 //   JniClass
 //   JniString
@@ -100,6 +104,59 @@ Int Streambuf::sync()
     }
 
     return rc;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Input Asset Stream
+//
+
+InputAssetStream::InputAssetStream( AAssetManager* manager, const std::string& assetName )
+    : m_assetName( assetName )
+{
+    m_asset = AAssetManager_open( manager, assetName.c_str(), AASSET_MODE_STREAMING );
+    if ( ! m_asset )
+    {
+        CARAMEL_THROW( "Open asset \"{0}\" failed", assetName );
+    }
+
+    m_length = static_cast< Uint >( AAsset_getLength( m_asset ));
+}
+
+
+InputAssetStream::~InputAssetStream()
+{
+    AAsset_close( m_asset );
+}
+
+
+Usize InputAssetStream::Read( Void* buffer, Usize size )
+{
+    const Int read = AAsset_read( m_asset, buffer, size );
+    if ( read == 0 )
+    {
+        m_eof = true;
+    }
+    else if ( read < 0 )
+    {
+        CARAMEL_THROW( "Read asset \"{0}\" failed", m_assetName );
+    }
+
+    return static_cast< Usize >( read );
+}
+
+
+void InputAssetStream::Seek( Int offset )
+{
+    AAsset_seek( m_asset, offset, SEEK_CUR );
+}
+
+
+Uint InputAssetStream::Tell() const
+{
+    const auto remain = AAsset_getRemainingLength( m_asset );
+    return m_length - remain;
 }
 
 

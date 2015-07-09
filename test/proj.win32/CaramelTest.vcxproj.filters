@@ -95,6 +95,15 @@
     <Filter Include="2. Tests\Algorithm">
       <UniqueIdentifier>{ec7c354e-49cb-4526-87ac-53c57d47c883}</UniqueIdentifier>
     </Filter>
+    <Filter Include="6. Non-Win32 Tests">
+      <UniqueIdentifier>{6f02e12e-95b5-438c-a455-d0f184106c76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="6. Non-Win32 Tests\Android">
+      <UniqueIdentifier>{32de8b19-9eca-42dd-bff7-4604812e928e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="6. Non-Win32 Tests\Utils">
+      <UniqueIdentifier>{de1d25c7-1efc-409b-9255-ae045d2a8c00}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\RunTest.cpp">
@@ -391,6 +400,9 @@
     <ClCompile Include="..\src\Io\BufferStreamSuite.cpp">
       <Filter>2. Tests\Io</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Android\InputAssetStreamSuite.cpp">
+      <Filter>6. Non-Win32 Tests\Android</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">
@@ -410,6 +422,9 @@
     </ClInclude>
     <ClInclude Include="..\src\Utils\WritablePath.h">
       <Filter>4. Utils for Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Utils\AndroidUtils.h">
+      <Filter>6. Non-Win32 Tests\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

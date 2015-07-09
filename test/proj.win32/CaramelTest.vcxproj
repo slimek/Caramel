@@ -167,6 +167,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Algorithm\RegularBufferSuite.cpp" />
+    <ClCompile Include="..\src\Android\InputAssetStreamSuite.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\src\Arithmetic\FlagsSuite.cpp" />
     <ClCompile Include="..\src\Arithmetic\PowerOfTwoSuite.cpp" />
     <ClCompile Include="..\src\Async\AnyEventDispatcherSuite.cpp" />
@@ -272,6 +276,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h" />
+    <ClInclude Include="..\src\Utils\AndroidUtils.h" />
     <ClInclude Include="..\src\Utils\AssetReader.h" />
     <ClInclude Include="..\src\Utils\Matcher.h" />
     <ClInclude Include="..\src\Utils\SharedArrayUtils.h" />

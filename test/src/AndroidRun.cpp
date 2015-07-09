@@ -173,6 +173,17 @@ Path WritablePath()
 }
 
 
+///////////////////////////////////////////////////////////////////////////////
+//
+// Utilities Functions
+//
+
+AAssetManager* GetAssetManager()
+{
+	return s_assetManager;
+}
+
+
 } // namespace Caramel
 
 
