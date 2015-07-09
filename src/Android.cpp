@@ -133,6 +133,12 @@ InputAssetStream::~InputAssetStream()
 
 Usize InputAssetStream::Read( Void* buffer, Usize size )
 {
+    if ( size == 0 )
+    {
+        TraceWarn( "Read size 0 results in nothing" );
+        return 0;
+    }
+
     const Int read = AAsset_read( m_asset, buffer, size );
     if ( read == 0 )
     {
