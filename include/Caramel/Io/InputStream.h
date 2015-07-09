@@ -30,7 +30,7 @@ struct InputStream
     // Returns the current read position.
     virtual Uint Tell() const = 0;
 
-    // Returns true if this stream has read over the end.
+    // Returns true if this stream has read OVER the end.
     virtual Bool IsEof() const = 0;
 
 

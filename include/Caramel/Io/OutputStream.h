@@ -20,7 +20,7 @@ struct OutputStream
 {
     virtual ~OutputStream() {}
 
-    virtual void Write( const Void* buffer, Usize size ) = 0;
+    virtual void Write( const Void* data, Usize size ) = 0;
 };
 
 

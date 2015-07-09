@@ -40,7 +40,7 @@ public:
     // Implements OutputStream
     //
 
-    void Write( const Void* buffer, Usize size ) override;
+    void Write( const Void* data, Usize size ) override;
 
 };
 

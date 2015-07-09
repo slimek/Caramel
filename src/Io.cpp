@@ -261,11 +261,11 @@ void OutputFileStream::Flush()
 }
 
 
-void OutputFileStream::Write( const Void* buffer, Usize size )
+void OutputFileStream::Write( const Void* data, Usize size )
 {
     CARAMEL_ASSERT( m_file );
 
-    const auto written = fwrite( buffer, 1, size, m_file );
+    const auto written = fwrite( data, 1, size, m_file );
 
     if ( written != size )
     {
