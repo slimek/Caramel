@@ -6,6 +6,7 @@
 #include "Io/Utf16LeStreamReader.h"
 #include "Io/Utf8StreamReader.h"
 #include "Io/Utf8StreamWriter.h"
+#include <Caramel/Io/BufferStream.h>
 #include <Caramel/Io/FileStream.h>
 #include <Caramel/Io/InputFileStream.h>
 #include <Caramel/Io/InputMemoryStream.h>
@@ -32,8 +33,9 @@ namespace Caramel
 //   OutputFileStream
 //   InputMemoryStream
 //   OutputMemoryStream
+//   BufferStream
 //
-// < Readers >
+// < Reader/Writers >
 //   TextStreamReader
 //   MbcsStreamReader
 //   Utf8StreamReader
@@ -359,6 +361,53 @@ void OutputMemoryStream::Write( const Void* data, Usize length )
     {
         CARAMEL_THROW( "Out of range, available: {0}, length: {1}", avails, length );
     }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Buffer Stream
+//
+
+Usize BufferStream::Position() const
+{
+    return static_cast< Usize >( const_cast< std::stringstream& >( m_stream ).tellp() );
+}
+
+
+void BufferStream::Write( const Void* data, Usize size )
+{
+    m_stream.write( reinterpret_cast< const Char* >( data ), size );
+    m_eof = false;
+}
+
+
+Usize BufferStream::Read( Void* buffer, Usize size )
+{
+    m_stream.read( reinterpret_cast< Char* >( buffer ), size );
+    if ( m_stream )
+    {
+        return size;
+    }
+    else
+    {
+        const Usize count = static_cast< Usize >( m_stream.gcount() );
+        m_stream.clear();
+        m_eof = true;
+        return count;
+    }
+}
+
+
+Uint BufferStream::Tell() const
+{
+    return static_cast< Uint >( const_cast< std::stringstream& >( m_stream ).tellg() );
+}
+
+
+void BufferStream::Seek( Int offset )
+{
+    CARAMEL_NOT_IMPLEMENTED();
 }
 
 

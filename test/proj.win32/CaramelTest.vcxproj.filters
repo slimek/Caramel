@@ -388,6 +388,9 @@
     <ClCompile Include="..\src\Io\OutputMemoryStreamSuite.cpp">
       <Filter>2. Tests\Io</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Io\BufferStreamSuite.cpp">
+      <Filter>2. Tests\Io</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">
