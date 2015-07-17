@@ -403,6 +403,9 @@
     <ClCompile Include="..\src\Android\InputAssetStreamSuite.cpp">
       <Filter>6. Non-Win32 Tests\Android</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Concurrent\ConcurrentBoundedQueueSuite.cpp">
+      <Filter>2. Tests\Concurrent</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">

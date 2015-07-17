@@ -938,6 +938,9 @@
     <ClInclude Include="..\include\Caramel\Android\InputAssetStream.h">
       <Filter>4. Non-Win32 Platform\Android</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Concurrent\BoundedQueue.h">
+      <Filter>1. Public Packages\Concurrent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">
