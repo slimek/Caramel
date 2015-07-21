@@ -56,6 +56,11 @@ public:
     //   3. If this queue becomes empty, later PopOrWaitFor() would return false immediately.
     void Complete();
 
+    // Make this queue to return to the initial state:
+    //   1. Clear the queue.
+    //   2. Reset the completed flag.
+    void Reset();
+
 
 private:
 
@@ -158,6 +163,19 @@ inline void BlockingQueue< T >::Complete()
     {
         LockGuard lock( m_queueMutex );
         m_completed = true;
+    }
+
+    m_available.notify_all();
+}
+
+
+template< typename T >
+inline void BlockingQueue< T >::Reset()
+{
+    {
+        LockGuard lock( m_queueMutex );
+        m_queue.clear();
+        m_completed = false;
     }
 
     m_available.notify_all();

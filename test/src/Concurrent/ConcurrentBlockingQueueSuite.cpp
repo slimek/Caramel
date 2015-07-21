@@ -112,6 +112,27 @@ TEST( BlockingQueueBasic )
 }
 
 
+TEST( ConcurrentBlockingQueueReset )
+{
+    Concurrent::BlockingQueue< Int > iqueue;
+    Int value = 0;
+
+    iqueue.Push( 42 );
+    iqueue.Complete();
+
+    // After Complete(), the queue throws if try to push.
+    CHECK_THROW( iqueue.Push( 7 ), Caramel::Exception );
+
+    // But after Reset(), the queue is re-usable.
+
+    iqueue.Reset();
+    iqueue.Push( 51 );
+
+    CHECK( true == iqueue.PopOrWaitFor( value, Ticks( 1000 )));
+    CHECK( 51 == value );
+}
+
+
 } // SUITE ConcurrentBlockingQueue
 
 } // namespace Caramel
