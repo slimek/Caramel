@@ -51,6 +51,18 @@ TEST( LexicalIntegerList )
     CHECK( 0 == ilist.Size() );
 }
 
+
+TEST( LexicalIntegerListOutOfRange )
+{
+    // If any of the value is out of range, the whole list is failed.
+
+    Lexical::IntegerList< Int16 > ilist;
+
+    CHECK( false == ilist.TryParse( "42 6107 65000 -51", " " ));  // the 3rd value is out of range.
+    CHECK( 0 == ilist.Size() );
+}
+
+
 } // SUITE LexicalIntegerList
 
 } // namespace Caramel

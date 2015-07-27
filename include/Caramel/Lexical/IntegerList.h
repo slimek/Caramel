@@ -82,6 +82,7 @@ inline Bool IntegerList< Value >::TryParse(
         Integer< Value > ivalue;
         if ( !ivalue.TryParse( token ))
         {
+            m_values.clear();
             return false;
         }
         m_values.push_back( ivalue );
