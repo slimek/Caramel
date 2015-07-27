@@ -113,6 +113,43 @@ TEST( LexicalInteger )
         CHECK( true == lexUint64.TryParse( "-456" ));
         CHECK(( UINT64_MAX - 455 ) == lexUint64 );
     }
+
+    /// Int16 ///
+    {
+        Lexical::Integer< Int16 > lexInt16;
+
+        CHECK( true == lexInt16.TryParse( "123" ));
+        CHECK( 123 == lexInt16 );
+
+        CHECK( true == lexInt16.TryParse( "-456" ));
+        CHECK( -456 == lexInt16 );
+
+        CHECK( true == lexInt16.TryParse( "32767" ));
+        CHECK( 32767 == lexInt16 );
+
+        CHECK( false == lexInt16.TryParse( "32768" ));
+
+        CHECK( true == lexInt16.TryParse( "-32768" ));
+        CHECK( -32768 == lexInt16 );
+    }
+
+    /// Uint16 ///
+    {
+        Lexical::Integer< Uint16 > lexUint16;
+
+        CHECK( true == lexUint16.TryParse( "123" ));
+        CHECK( 123 == lexUint16 );
+
+        CHECK( false == lexUint16.TryParse( "-456" ));
+
+        CHECK( true == lexUint16.TryParse( "65535" ));
+        CHECK( 65535 == lexUint16 );
+
+        CHECK( false == lexUint16.TryParse( "65536" ));
+        
+        CHECK( true == lexUint16.TryParse( "0x0" ));
+        CHECK( 0 == lexUint16 );
+    }
 }
 
 

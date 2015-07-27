@@ -187,6 +187,36 @@ Bool Integer< Uint64 >::TryParse( const std::string& input )
 
 
 //
+// 16-bit Integers
+//
+
+template<>
+Bool Integer< Int16 >::TryParse( const std::string& input )
+{
+    Integer< Int32 > i32;
+    if ( ! i32.TryParse( input )) { return false; }
+
+    if ( INT16_MIN > i32 || i32 > INT16_MAX ) { return false; }
+
+    m_value = static_cast< Int16 >( i32 );
+    return true;
+}
+
+
+template<>
+Bool Integer< Uint16 >::TryParse( const std::string& input )
+{
+    Integer< Uint32 > u32;
+    if ( ! u32.TryParse( input )) { return false; }
+
+    if ( u32 > UINT16_MAX ) { return false; }
+
+    m_value = static_cast< Uint16 >( u32 );
+    return true;
+}
+
+
+//
 // Parse Hexidecimal Number
 //
 
