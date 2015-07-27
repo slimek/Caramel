@@ -39,8 +39,6 @@ public:
 
     operator ValueType() const { return m_value; }
 
-    Bool IsOutOfRange() const { return m_outOfRange; }
-
 
     //
     // Try Parse
@@ -61,7 +59,6 @@ public:
 
 private:
     ValueType m_value;
-    Bool      m_outOfRange;
 };
 
 
@@ -73,7 +70,6 @@ private:
 template< typename ValueT >
 inline Integer< ValueT >::Integer()
     : m_value( 0 )
-    , m_outOfRange( false )
 {
 }
 
@@ -81,7 +77,6 @@ inline Integer< ValueT >::Integer()
 template< typename ValueT >
 inline Integer< ValueT >::Integer( ValueT defaultValue )
     : m_value( defaultValue )
-    , m_outOfRange( false )
 {
 }
     
