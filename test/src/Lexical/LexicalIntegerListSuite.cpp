@@ -25,10 +25,25 @@ TEST( LexicalIntegerList )
     CHECK( 60  == ilist[2] );
     CHECK( 78  == ilist[3] );
 
+    // Range-based for loop
+
+    Int answers[] = { 51, 235, 60, 78 };
+    Int i = 0;
+    for ( Int v : ilist )
+    {
+        CHECK( v == answers[i++] );
+    }
+
+
+    // Only one element
+
     CHECK( true == ilist.TryParse( "42", ", " ));
 
     CHECK( 1  == ilist.Size() );
     CHECK( 42 == ilist[0] );
+
+
+    // Parse failed
 
     CHECK( false == ilist.TryParse( "Reimu Yukari", ", " ));
 

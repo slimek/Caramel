@@ -29,6 +29,8 @@ class IntegerList
 {
     static_assert( std::is_integral< Value >::value, "Value must be integral" );
 
+    typedef std::deque< Value > ValueList;
+
 public:
 
     typedef Value ValueType;
@@ -47,9 +49,16 @@ public:
     Bool TryParse( const std::string& input, const std::string& separators );
 
 
+    /// Supports range-based for loop ///
+
+    typedef typename ValueList::const_iterator const_iterator;
+
+    const_iterator begin() const { return m_values.begin(); }
+    const_iterator end()   const { return m_values.end(); }
+
+
 private:
 
-    typedef std::deque< Value > ValueList;
     ValueList m_values;    
 };
 
