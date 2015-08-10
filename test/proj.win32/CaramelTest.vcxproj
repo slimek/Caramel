@@ -166,6 +166,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\Algorithm\LinearSamplerSuite.cpp" />
     <ClCompile Include="..\src\Algorithm\RegularBufferSuite.cpp" />
     <ClCompile Include="..\src\Android\InputAssetStreamSuite.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>

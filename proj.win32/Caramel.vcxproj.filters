@@ -941,6 +941,9 @@
     <ClInclude Include="..\include\Caramel\Concurrent\BoundedQueue.h">
       <Filter>1. Public Packages\Concurrent</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Caramel\Algorithm\LinearResampler.h">
+      <Filter>1. Public Packages\Algorithm</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Configuration.cpp">

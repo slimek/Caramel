@@ -406,6 +406,9 @@
     <ClCompile Include="..\src\Concurrent\ConcurrentBoundedQueueSuite.cpp">
       <Filter>2. Tests\Concurrent</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Algorithm\LinearSamplerSuite.cpp">
+      <Filter>2. Tests\Algorithm</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CaramelTestPch.h">
