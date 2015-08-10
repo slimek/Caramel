@@ -71,6 +71,8 @@ public:
 
     /// STL Compatible ///
 
+    Usize size() const { return m_size; }
+
     typedef const ValueType* const_iterator;
 
     const_iterator begin() const { return this->Begin(); }
