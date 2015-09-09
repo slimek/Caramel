@@ -52,7 +52,6 @@ NDK_CRM_CONFIG := Android.Ndk.$(CARAMEL_CONFIG)
 all: $(CRM_ARCH_ABI)
 
 $(CRM_ARCH_ABI): $(LOCAL_BUILT_MODULE)
-	$(call host-mkdir,$(CRM_LIB)/$(NDK_CRM_CONFIG))
 	$(call host-mkdir,$(CRM_LIB)/$(NDK_CRM_CONFIG)/$@)
 	$(call host-cp,obj/$(CARAMEL_CONFIG)/local/$@/libCaramel.a,$(CRM_LIB)/$(NDK_CRM_CONFIG)/$@/libCaramel.a)
 
