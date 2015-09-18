@@ -32,8 +32,18 @@ TEST( SecondClock )
     CHECK_CLOSE( Seconds( 1 ), elapsed, Seconds( 0.05 ));
     CHECK_CLOSE( Seconds( 1 ), slice,   Seconds( 0.05 ));
     CHECK_CLOSE( Seconds( 0 ), reseted, Seconds( 0.05 ));
+
+
+    /// Default Values of Seconds ///
     
-    TraceDebug( "Duration: {0}", delta );
+    const Seconds dur0;
+    CHECK( 0 == dur0.ToDouble() );    
+
+
+    /// Numeric Convertible ///
+
+    const Seconds t098( 0.98 );
+    CHECK( "0.98" == Format( "{0}", t098 ));
 }
 
 

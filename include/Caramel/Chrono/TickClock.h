@@ -30,7 +30,7 @@ class Ticks : public boost::chrono::duration< Int64, boost::milli >
 
 public:
 
-    Ticks() {}
+    Ticks();  // default value = 0
     
     Ticks( const Inherited& duration );
     Ticks( Inherited&& duration );
@@ -127,6 +127,12 @@ public:
 //
 // Tick Duration
 //
+
+inline Ticks::Ticks()
+    : Inherited( 0 )
+{
+}
+
 
 inline Ticks::Ticks( const Inherited& duration )
     : Inherited( duration )

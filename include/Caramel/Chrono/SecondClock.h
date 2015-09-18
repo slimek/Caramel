@@ -31,7 +31,7 @@ class Seconds : public boost::chrono::duration< Double, boost::ratio< 1 > >
 
 public:
 
-    Seconds() {}
+    Seconds();  // default value = 0
     
     Seconds( const Inherited& duration );
     Seconds( Inherited&& duration );
@@ -146,6 +146,12 @@ public:
 //
 // Second Duration
 //
+
+inline Seconds::Seconds()
+    : Inherited( 0 )
+{
+}
+
 
 inline Seconds::Seconds( const Inherited& duration )
     : Inherited( duration )

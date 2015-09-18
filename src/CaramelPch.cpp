@@ -147,7 +147,7 @@ static_assert( 2 == sizeof( Wchar ), "sizeof( Wchar ) should be 2" );
 
 /// Boost Versions ///
 
-static_assert( 105600 == BOOST_VERSION, "Boost version not matched" );
+static_assert( 105900 == BOOST_VERSION, "Boost version not matched" );
 
 
 /// Boost Typedefs Validation ///
