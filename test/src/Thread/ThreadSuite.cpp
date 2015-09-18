@@ -31,12 +31,12 @@ TEST( Thread )
     Thread t2( "Execute2", [=] { ThisThread::SleepFor( Ticks( 100 )); } );
     t2.Join();
 
-    CHECK_CLOSE( watch.Slice(), Ticks( 110 ), Ticks( 10 ));
+    CHECK_CLOSE( Ticks( 100 ), watch.Slice(), Ticks( 10 ));
 
     Thread t3( "Execute3", [=] { ThisThread::SleepFor( Seconds( 0.1 )); } );
     t3.Join();
 
-    CHECK_CLOSE( watch.Slice(), Ticks( 110 ), Ticks( 10 ));
+    CHECK_CLOSE( Ticks( 100 ), watch.Slice(), Ticks( 10 ));
 }
 
 
