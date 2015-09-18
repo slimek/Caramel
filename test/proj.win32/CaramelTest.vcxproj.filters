@@ -148,9 +148,6 @@
     <ClCompile Include="..\src\Task\ContinuationTraitsSuite.cpp">
       <Filter>2. Tests\Task</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Task\StdAsyncSuite.cpp">
-      <Filter>2. Tests\Task</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Task\TaskPollerSuite.cpp">
       <Filter>2. Tests\Task</Filter>
     </ClCompile>
@@ -408,6 +405,9 @@
     </ClCompile>
     <ClCompile Include="..\src\Algorithm\LinearSamplerSuite.cpp">
       <Filter>2. Tests\Algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Task\AsyncSubmitSuite.cpp">
+      <Filter>2. Tests\Task</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

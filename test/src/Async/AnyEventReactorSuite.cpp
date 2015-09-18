@@ -5,7 +5,7 @@
 #include <Caramel/Async/AnyEventDispatcher.h>
 #include <Caramel/Async/AnyEventHandler.h>
 #include <Caramel/Async/AnyEventReactor.h>
-#include <Caramel/Task/StdAsync.h>
+#include <Caramel/Task/AsyncSubmit.h>
 #include <Caramel/Thread/ThisThread.h>
 
 
@@ -74,7 +74,7 @@ TEST( AnyEventReactor )
         source.AsHandler()( AnyEvent( 42, "Yukari" ));
     });
 
-    StdAsync::Submit( task );
+    AsyncSubmit( task );
 
     task.Wait();
 

@@ -4,7 +4,7 @@
 
 #include "Utils/StdVectorUtils.h"
 #include <Caramel/Error/CatchException.h>
-#include <Caramel/Task/StdAsync.h>
+#include <Caramel/Task/AsyncSubmit.h>
 #include <Caramel/Task/Task.h>
 #include <Caramel/Task/TaskPoller.h>
 #include <Caramel/Task/WorkerThread.h>
@@ -164,7 +164,7 @@ TEST( TaskWithException )
     /// Exception in Wait() ///
 
     auto task1 = MakeTask( "BadTask1", [] { throw std::runtime_error( "bad1" ); } );
-    StdAsync::Submit( task1 );
+    AsyncSubmit( task1 );
 
     try
     {
@@ -181,7 +181,7 @@ TEST( TaskWithException )
     /// Exception in GetResult() ///
 
     Task< Int > task2 = MakeTask( "BadTask2", [] { throw std::runtime_error( "bad2" ); return 42; } );
-    StdAsync::Submit( task2 );
+    AsyncSubmit( task2 );
 
     try
     {
@@ -201,7 +201,7 @@ TEST( TaskWaitOrCatch )
     std::string what;
 
     auto task1 = MakeTask( "Task1", [] {} );
-    StdAsync::Submit( task1 );
+    AsyncSubmit( task1 );
 
 
     /// Ran to Completing ///
@@ -217,7 +217,7 @@ TEST( TaskWaitOrCatch )
     /// Fault with std::exception ///
 
     auto task2 = MakeTask( "Task2", [] { throw std::runtime_error( "bad" ); } );
-    StdAsync::Submit( task2 );
+    AsyncSubmit( task2 );
 
     const auto result2 = task2.Catch();
 
@@ -232,7 +232,7 @@ TEST( TaskWaitOrCatch )
     /// Fault with AnyFailure ///
 
     auto task3 = MakeTask( "Task3", [] { throw AnyFailure( 42, "Cirno" ); } );
-    StdAsync::Submit( task3 );
+    AsyncSubmit( task3 );
 
     const auto result3 = task3.Catch();
 
@@ -257,7 +257,7 @@ TEST( TaskThen )
     CHECK( false == task1c.IsIdle() );
     CHECK( "Task1+Continue" == task1c.Name() );
 
-    StdAsync::Submit( task1 );
+    AsyncSubmit( task1 );
     task1c.Wait();
 
     CHECK( 2 == count1 );
@@ -272,7 +272,7 @@ TEST( TaskThen )
 
     CHECK( "Task2-Then" == task2c.Name() );
 
-    StdAsync::Submit( task2 );
+    AsyncSubmit( task2 );
     task2c.Wait();
 
     CHECK( 2 == count2 );
@@ -286,7 +286,7 @@ TEST( TaskThen )
 
     CHECK( "Task3-Then-Then" == task3d.Name() );
 
-    StdAsync::Submit( task3 );
+    AsyncSubmit( task3 );
     task3d.Wait();
 
     CHECK( 42 == task3c.GetResult() );
@@ -296,7 +296,7 @@ TEST( TaskThen )
     /// Continue a task after it is faulted
 
     auto task4 = MakeTask( "Task4", [] { CARAMEL_THROW( "Bad task" ); } );
-    StdAsync::Submit( task4 );
+    AsyncSubmit( task4 );
 
     task4.Catch();
 
@@ -326,7 +326,7 @@ TEST( TaskThen )
         result5 = task.Catch(); 
     });
 
-    StdAsync::Submit( task5 );
+    AsyncSubmit( task5 );
     then5.Wait();
 
     CHECK( TASK_STATE_RAN_TO_COMP == result5.doneState );
@@ -350,7 +350,7 @@ TEST( TaskThen )
     // by copy
     auto then6c = task6.Then( [] ( std::string name ) { return name + "-copy"; } );
 
-    StdAsync::Submit( task6 );
+    AsyncSubmit( task6 );
     then6t.Wait();
     then6r.Wait();
     then6c.Wait();
@@ -365,7 +365,7 @@ TEST( TaskThen )
     auto task7 = MakeTask( "Task7", [] () -> Int { throw AnyFailure( 42 ); });
     auto then7 = task7.Then( [] ( Int value ) { return value; });
 
-    StdAsync::Submit( task7 );
+    AsyncSubmit( task7 );
 
     // ATTENTION: If a task throws, you must handle the exception by:
     //            1. Call Wait() or Catch(). or
@@ -421,7 +421,7 @@ TEST( TaskCancel )
     auto thenT = task.Then( [] ( const Task< Int >& task ) {} );
 
     task.Cancel();
-    StdAsync::Submit( task );
+    AsyncSubmit( task );
 
     thenV.Wait();
     thenR.Wait();
@@ -454,7 +454,7 @@ TEST( TaskFault )
     auto thenR = task.Then( [] ( const std::string& result ) {} );
     auto thenT = task.Then( [] ( const Task< std::string >& task ) {} );
 
-    StdAsync::Submit( task );
+    AsyncSubmit( task );
     task.Catch();
 
     thenV.Wait();
@@ -534,7 +534,7 @@ TEST( TaskWithoutName )
 
     CHECK( "" == t6c.Name() );
 
-    StdAsync::Submit( t6 );
+    AsyncSubmit( t6 );
     t6c.Wait();
 
     CHECK( 42 == t6c.GetResult() );
@@ -544,7 +544,7 @@ TEST( TaskWithoutName )
 
     CHECK( "Marisa" == t7c.Name() );
 
-    StdAsync::Submit( t7 );
+    AsyncSubmit( t7 );
     t7c.Wait();
 
     CHECK( "Spark" == t7c.GetResult() );
@@ -567,7 +567,7 @@ TEST( TaskContinuationWithAnotherExecutor )
 
     poller.PollOne();
 
-    StdAsync::Submit( task1 );
+    AsyncSubmit( task1 );
     fence1.Wait();
 
     CHECK( false == then1.IsDone() );
@@ -592,7 +592,7 @@ TEST( TaskContinuationWithAnotherExecutor )
 
     poller.PollOne();
 
-    StdAsync::Submit( task2 );
+    AsyncSubmit( task2 );
     fence2.Wait();
 
     CHECK( false == then2.IsDone() );

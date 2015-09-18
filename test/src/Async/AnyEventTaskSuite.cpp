@@ -5,7 +5,7 @@
 #include <Caramel/Async/AnyEventQueue.h>
 #include <Caramel/Async/AnyEventReactor.h>
 #include <Caramel/Async/AnyEventTask.h>
-#include <Caramel/Task/StdAsync.h>
+#include <Caramel/Task/AsyncSubmit.h>
 
 
 namespace Caramel
@@ -17,7 +17,7 @@ SUITE( AnyEventTask )
 static AnyEventTask TaskYukari()
 {
     auto task = MakeTask( [] { return AnyEvent( 22, "Yukari" ); });
-    StdAsync::Submit( task );
+    AsyncSubmit( task );
     return task;
 }
 

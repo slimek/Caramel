@@ -635,9 +635,6 @@
     <ClInclude Include="..\include\Caramel\Concurrent\Detail\LockedIntervalSet.h">
       <Filter>1. Public Packages\Concurrent\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\Task\StdAsync.h">
-      <Filter>1. Public Packages\Task</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Caramel\Io\OutputFileStream.h">
       <Filter>1. Public Packages\Io</Filter>
     </ClInclude>
@@ -887,9 +884,6 @@
     <ClInclude Include="..\include\Caramel\Concurrent\DelayQueue.h">
       <Filter>1. Public Packages\Concurrent</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Task\StdAsyncImpl.h">
-      <Filter>2. Sources\Task</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Caramel\Task\Promise.h">
       <Filter>1. Public Packages\Task</Filter>
     </ClInclude>
@@ -943,6 +937,12 @@
     </ClInclude>
     <ClInclude Include="..\include\Caramel\Algorithm\LinearResampler.h">
       <Filter>1. Public Packages\Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caramel\Task\AsyncSubmit.h">
+      <Filter>1. Public Packages\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Task\AsyncSubmitImpl.h">
+      <Filter>2. Sources\Task</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

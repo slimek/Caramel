@@ -1,9 +1,9 @@
-// Caramel C++ Library Test - Task - Std Async Suite
+// Caramel C++ Library Test - Task - Async Submit Suite
 
 #include "CaramelTestPch.h"
 
 #include <Caramel/Chrono/TickClock.h>
-#include <Caramel/Task/StdAsync.h>
+#include <Caramel/Task/AsyncSubmit.h>
 #include <Caramel/Thread/ThisThread.h>
 #include <future>
 
@@ -11,27 +11,27 @@
 namespace Caramel
 {
 
-SUITE( StdAsync )
+SUITE( AsyncSubmit )
 {
 
-TEST( StdAsync )
+TEST( AsyncSubmit )
 {
     Task< Int > t1( [] { return 42; });
 
-    StdAsync::Submit( t1 );
+    AsyncSubmit( t1 );
     CHECK( 42 == t1.GetResult() );
 
     Task< std::string > t2( [] { return "Alice"; });
     
     // Pass a rvalue
-    StdAsync::Submit( Task< std::string >( t2 ));
+    AsyncSubmit( Task< std::string >( t2 ));
     CHECK( "Alice" == t2.GetResult() );
 
-    auto t3 = StdAsync::Submit( [] { return 3.1416f; } );
+    auto t3 = AsyncSubmit( [] { return 3.1416f; } );
     CHECK( 3.1416f == t3.GetResult() );
 
     Bool done4 = false;
-    auto t4 = StdAsync::Submit( "StdAsync4", [&] { done4 = true; });
+    auto t4 = AsyncSubmit( "AsyncSubmit4", [&] { done4 = true; });
 
     t4.Wait();
     CHECK( true == done4 );
@@ -39,19 +39,19 @@ TEST( StdAsync )
 
     // Make sure that an async thread is not the current thread
 
-    auto t5 = StdAsync::Submit( [] { return ThisThread::GetId(); });
+    auto t5 = AsyncSubmit( [] { return ThisThread::GetId(); });
 
     CHECK( ThisThread::GetId() != t5.GetResult() );
 }
 
 
-TEST( StdAsyncProxy )
+TEST( AsyncSubmitProxy )
 {
     Task< void > t1( "Test1", [] {} );
     Task< Int >  t2( "Test2", [] { return 42; } );
 
     {
-        StdAsyncProxy async;
+        AsyncSubmitProxy async;
 
         async.Submit( t1 );
         async.Submit( t2 );
@@ -69,7 +69,7 @@ TEST( StdAsyncProxy )
         CHECK( ThisThread::GetId() != t3.GetResult() );
     }
 
-    // Even the StdAsyncProxy object has been destroyed, you may still continuate these tasks.
+    // Even the AsyncSubmitProxy object has been destroyed, you may still continuate these tasks.
 
     Bool done1 = false;
     auto then1 = t1.Then( [&] { done1 = true; });
@@ -85,6 +85,6 @@ TEST( StdAsyncProxy )
 }
 
 
-} // SUITE StdAsync
+} // SUITE AsyncSubmit
 
 } // namespace Caramel

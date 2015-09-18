@@ -2,7 +2,7 @@
 
 #include "CaramelTestPch.h"
 
-#include <Caramel/Task/StdAsync.h>
+#include <Caramel/Task/AsyncSubmit.h>
 #include <Caramel/Thread/MutexLocks.h>
 #include <Caramel/Thread/Thread.h>
 #include <Caramel/Thread/ThisThread.h>
@@ -81,7 +81,7 @@ TEST( UniqueLock )
     std::condition_variable cond;
     auto pcond = &cond;
 
-    auto task = StdAsync::Submit( [=]
+    auto task = AsyncSubmit( [=]
     {
         UniqueLock lock( s_mutex );
         while ( s_value < 2 )

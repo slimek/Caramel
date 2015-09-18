@@ -6,7 +6,7 @@
 #include <Caramel/Async/AnyEventTask.h>
 #include <Caramel/Concurrent/Queue.h>
 #include <Caramel/Task/Promise.h>
-#include <Caramel/Task/StdAsync.h>
+#include <Caramel/Task/AsyncSubmit.h>
 #include <Caramel/Task/WorkerThread.h>
 #include <Caramel/Thread/ThisThread.h>
 
@@ -22,7 +22,7 @@ TEST( Promise )
     Promise< Int > promise1( "Big answer" );  // Give the task name.
 
     auto task1 = promise1.GetTask();
-    StdAsync::Submit( "Promise1 Task",
+    AsyncSubmit( "Promise1 Task",
     [&]
     {
         ThisThread::SleepFor( Ticks( 100 ));
@@ -41,7 +41,7 @@ TEST( Promise )
     Promise< std::string > promise2;
 
     auto task2 = promise2.GetTask();
-    StdAsync::Submit( "Promise2 Task",
+    AsyncSubmit( "Promise2 Task",
     [&]
     {
         ThisThread::SleepFor( Ticks( 100 ));
@@ -58,7 +58,7 @@ TEST( Promise )
     Promise< void > promise3;
 
     auto task3 = promise3.GetTask();
-    StdAsync::Submit( "Promise3 Task",
+    AsyncSubmit( "Promise3 Task",
     [&]
     {
         ThisThread::SleepFor( Ticks( 100 ));
@@ -80,7 +80,7 @@ TEST( PromiseWithExecutor )
     Promise< std::string > promise1;
 
     auto task1 = promise1.GetTask();
-    StdAsync::Submit(
+    AsyncSubmit(
     [&]
     {
         ThisThread::SleepFor( Ticks( 50 ));
@@ -97,7 +97,7 @@ TEST( PromiseWithExecutor )
     Promise< void > promise2;
 
     auto task2 = promise2.GetTask();
-    StdAsync::Submit(
+    AsyncSubmit(
     [&]
     {
         ThisThread::SleepFor( Ticks( 50 ));
@@ -119,7 +119,7 @@ TEST( PromiseWithAnyEvent )
     Promise< AnyEvent > promise;
 
     AnyEventTask task = promise.GetTask();
-    StdAsync::Submit(
+    AsyncSubmit(
     [&]
     {
         promise.RunTask( AnyEvent( 2, "Reimu" )); 

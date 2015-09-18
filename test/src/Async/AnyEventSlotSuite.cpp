@@ -4,7 +4,7 @@
 
 #include <Caramel/Async/AnyEventDispatcher.h>
 #include <Caramel/Async/AnyEventSlot.h>
-#include <Caramel/Task/StdAsync.h>
+#include <Caramel/Task/AsyncSubmit.h>
 #include <functional>
 
 
@@ -95,7 +95,7 @@ TEST( AnyEventSlotWait )
 {
     AnyEventSlot slot;
 
-    StdAsync::Submit(
+    AsyncSubmit(
     [&]
     {
         slot.SetEvent( 2, "Reimu" );

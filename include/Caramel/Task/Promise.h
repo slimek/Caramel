@@ -5,7 +5,7 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
-#include <Caramel/Task/StdAsync.h>
+#include <Caramel/Task/AsyncSubmit.h>
 #include <Caramel/Task/Task.h>
 
 
@@ -112,12 +112,12 @@ inline void Promise< Result >::RunTask( Result result, TaskExecutor& executor )
 template< typename Result >
 inline void Promise< Result >::RunTask( Result result )
 {
-    StdAsyncProxy async;
+    AsyncSubmitProxy async;
     this->RunTask( result, async );
 
     // NOTES: You can't use the code:
     //
-    //     this->RunTask( result, StdAsyncProxy() );
+    //     this->RunTask( result, AsyncSubmitProxy() );
     //
     //   GCC doesn't not allow to pass a non-const reference of a temporary variable.
 }
@@ -147,12 +147,12 @@ inline void Promise< void >::RunTask( TaskExecutor& executor )
 
 inline void Promise< void >::RunTask()
 {
-    StdAsyncProxy async;
+    AsyncSubmitProxy async;
     this->RunTask( async );
 
     // NOTES: You can't use the code:
     //
-    //     this->RunTask( StdAsyncProxy() );
+    //     this->RunTask( AsyncSubmitProxy() );
     //
     //   GCC doesn't not allow to pass a non-const reference of a temporary variable.
 }

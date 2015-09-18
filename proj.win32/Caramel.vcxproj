@@ -174,9 +174,9 @@
     <ClInclude Include="..\include\Caramel\String\TextEncoding.h" />
     <ClInclude Include="..\include\Caramel\String\ToString.h" />
     <ClInclude Include="..\include\Caramel\String\Utf8String.h" />
+    <ClInclude Include="..\include\Caramel\Task\AsyncSubmit.h" />
     <ClInclude Include="..\include\Caramel\Task\Detail\TaskHolders.h" />
     <ClInclude Include="..\include\Caramel\Task\Detail\TaskTraits.h" />
-    <ClInclude Include="..\include\Caramel\Task\StdAsync.h" />
     <ClInclude Include="..\include\Caramel\Task\Task.h" />
     <ClInclude Include="..\include\Caramel\Task\Promise.h" />
     <ClInclude Include="..\include\Caramel\Task\TaskCore.h" />
@@ -251,8 +251,8 @@
     <ClInclude Include="..\src\String\Converters.h" />
     <ClInclude Include="..\src\String\FormatterImpl.h" />
     <ClInclude Include="..\src\String\NumberFormat.h" />
+    <ClInclude Include="..\src\Task\AsyncSubmitImpl.h" />
     <ClInclude Include="..\src\Task\PooledThread.h" />
-    <ClInclude Include="..\src\Task\StdAsyncImpl.h" />
     <ClInclude Include="..\src\Task\TaskImpl.h" />
     <ClInclude Include="..\src\Task\TaskPollerImpl.h" />
     <ClInclude Include="..\src\Task\TaskTimerImpl.h" />

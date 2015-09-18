@@ -2,8 +2,8 @@
 
 #include "CaramelPch.h"
 
+#include "Task/AsyncSubmitImpl.h"
 #include "Task/PooledThread.h"
-#include "Task/StdAsyncImpl.h"
 #include "Task/TaskImpl.h"
 #include "Task/TaskPollerImpl.h"
 #include "Task/TaskTimerImpl.h"
@@ -13,7 +13,6 @@
 #include <Caramel/Chrono/TimedBool.h>
 #include <Caramel/Error/CatchException.h>
 #include <Caramel/String/Format.h>
-#include <Caramel/Task/StdAsync.h>
 #include <Caramel/Thread/ThisThread.h>
 #include <algorithm>
 #include <future>
@@ -31,8 +30,8 @@ namespace Caramel
 //   WorkerThread
 //   PooledThread
 //   ThreadPool
-//   StdAsync
-//   StdAsyncCenter
+//   AsyncSubmit
+//   AsyncSubmitCenter
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -996,63 +995,50 @@ void ThreadPoolImpl::TryDispatchOneTask()
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Std Async
+// Async Submit
 //
 
-void StdAsync::Submit( TaskCore& task )
+void AsyncSubmit( TaskCore& task )
 {
-    StdAsyncCenter::Instance()->Submit( task );
+    AsyncSubmitCenter::Instance()->Submit( task );
 }
 
 
-void StdAsyncProxy::Submit( TaskCore& task )
+void AsyncSubmit( TaskCore&& task )
 {
-    StdAsyncCenter::Instance()->Submit( task );
+    AsyncSubmitCenter::Instance()->Submit(task);
 }
 
 
-void StdAsyncProxy::AddReadyTask( TaskCore& task )
+void AsyncSubmitProxy::Submit( TaskCore& task )
 {
-    StdAsyncCenter::Instance()->AddReadyTask( task );
+    AsyncSubmitCenter::Instance()->Submit(task);
+}
+
+
+void AsyncSubmitProxy::AddReadyTask( TaskCore& task )
+{
+    AsyncSubmitCenter::Instance()->AddReadyTask( task );
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Std Async Center
+// Async Submit Center
 //
 
-void StdAsyncCenter::Submit( TaskCore& task )
+void AsyncSubmitCenter::Submit( TaskCore& task )
 {
     if ( task.HasDelay() )
     {
-        CARAMEL_THROW( "StdAsync doesn't support delay, task: \"{0}\"", task.Name() );
+        CARAMEL_THROW( "AsyncSubmit doesn't support delay, task: \"{0}\"", task.Name() );
     }
 
     this->AddReadyTask( task );
 }
 
 
-#if !defined( CARAMEL_SYSTEM_IS_ANDROID )
-
-void StdAsyncCenter::AddReadyTask( TaskCore& task )
-{
-    task.BecomeReady( *this );
-
-    std::async( std::launch::async,
-    [task]
-    {
-        // task is a const variable and can't call Run().
-        TaskCore copy = task;
-        copy.Run();
-    });
-}
-
-#else
-
-// NOTES: Until Android NDK r10c, std::future and std::async are not supported.
-
-void StdAsyncCenter::AddReadyTask( TaskCore& task )
+void AsyncSubmitCenter::AddReadyTask( TaskCore& task )
 {
     task.BecomeReady( *this );
 
@@ -1066,8 +1052,6 @@ void StdAsyncCenter::AddReadyTask( TaskCore& task )
 
     thread.detach();
 }
-
-#endif // !CARAMEL_SYSTEM_IS_ANDROID
 
 
 ///////////////////////////////////////////////////////////////////////////////

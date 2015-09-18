@@ -6,7 +6,7 @@
 #include <Caramel/Async/AnyEventHandler.h>
 #include <Caramel/Async/AnyEventQueue.h>
 #include <Caramel/Async/AnyEventSlot.h>
-#include <Caramel/Task/StdAsync.h>
+#include <Caramel/Task/AsyncSubmit.h>
 
 
 namespace Caramel
@@ -176,7 +176,7 @@ TEST( AnyEventDispatcherProxy )
         proxy2.DispatchEvent( 7, "Alice" );
     });
 
-    StdAsync::Submit( task );
+    AsyncSubmit( task );
     task.Wait();
 
     CHECK( slot );

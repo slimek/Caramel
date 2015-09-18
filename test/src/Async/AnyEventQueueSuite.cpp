@@ -5,7 +5,7 @@
 #include <Caramel/Async/AnyEventDispatcher.h>
 #include <Caramel/Async/AnyEventHandler.h>
 #include <Caramel/Async/AnyEventQueue.h>
-#include <Caramel/Task/StdAsync.h>
+#include <Caramel/Task/AsyncSubmit.h>
 
 
 namespace Caramel
@@ -141,7 +141,7 @@ TEST( AnyEventQueueProxy )
         proxy2.PushEvent( 8, "Marisa" );
     });
 
-    StdAsync::Submit( task );
+    AsyncSubmit( task );
     task.Wait();
 
     CHECK( true == queue.TryPop( event ));

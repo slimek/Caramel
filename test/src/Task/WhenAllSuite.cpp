@@ -2,7 +2,7 @@
 
 #include "CaramelTestPch.h"
 
-#include <Caramel/Task/StdAsync.h>
+#include <Caramel/Task/AsyncSubmit.h>
 #include <Caramel/Task/WhenAll.h>
 #include <Caramel/Thread/WaitableBool.h>
 #include <atomic>
@@ -36,7 +36,7 @@ TEST( WhenAll )
         {
             auto task = MakeTask( "Task", [&] { ++ count; } );
             tasks.push_back( task );
-            StdAsync::Submit( task );
+            AsyncSubmit( task );
         }
 
         WhenAll( "When-16-Tasks", tasks,
@@ -73,7 +73,7 @@ TEST( WhenAll )
         done = true;
     });
 
-    StdAsync::Submit( task1 );
+    AsyncSubmit( task1 );
 
     done.Wait();
 
@@ -96,7 +96,7 @@ TEST( WhenAll )
         }
 
         tasks.push_back( task );
-        StdAsync::Submit( task );
+        AsyncSubmit( task );
     }
 
     done = false;
