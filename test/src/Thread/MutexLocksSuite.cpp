@@ -90,12 +90,18 @@ TEST( UniqueLock )
         }
     });
 
-    s_value = 1;
+    {
+        UniqueLock lock( s_mutex );
+        s_value = 1;
+    }
     cond.notify_one();
 
     CHECK( ! task.IsDone() );
 
-    s_value = 2;
+    {
+        UniqueLock lock( s_mutex );
+        s_value = 2;
+    }
     cond.notify_one();
 
     task.Wait();
