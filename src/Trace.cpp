@@ -325,7 +325,7 @@ Listener::~Listener()
 {
     if ( 0 < m_boundCount )
     {
-        CARAMEL_THROW( "Listener doesn't unbind all channels before destroyed" );
+        TraceWarn( "Listener doesn't unbind all channels before destroyed" );
     }
 }
 
