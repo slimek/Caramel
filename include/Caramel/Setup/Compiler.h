@@ -11,8 +11,8 @@
 
 #if defined( _MSC_VER )
 
-#if ( 1800 > _MSC_VER )
-#error "Caramel doesn't support Visual C++ before 2013"
+#if ( _MSC_VER < 1900 )
+#error "Caramel doesn't support Visual C++ before 2015"
 #endif
 
 #define CARAMEL_COMPILER_IS_MSVC
@@ -26,27 +26,6 @@
 
 #define CARAMEL_CURRENT_FUNCTION __FUNCTION__
 #define CARAMEL_DEPRECATED __declspec( deprecated )
-
-
-//
-// C++11 Compatibility
-//
-
-#if ( _MSC_VER >= 1900 )
-
-#define CARAMEL_NOEXCEPT noexcept
-#define CARAMEL_THREAD_LOCAL thread_local
-
-#else
-
-// Visual C++ 2013 limitations:
-// - doesn't support noexcept
-//   doesn't support thread_local, but have a workaround.
-
-#define CARAMEL_NOEXCEPT 
-#define CARAMEL_THREAD_LOCAL __declspec( thread )
-
-#endif
 
 
 //
@@ -108,14 +87,6 @@
 
 
 //
-// C++11 Compatibility
-//
-
-#define CARAMEL_NOEXCEPT noexcept
-#define CARAMEL_THREAD_LOCAL thread_local
-
-
-//
 // Architecture
 //
 
@@ -168,14 +139,6 @@
 #if defined( __LP64__ )
 #define CARAMEL_LONG_IS_64_BIT
 #endif
-
-
-//
-// C++ 11 Compatibility
-//
-
-#define CARAMEL_NOEXCEPT noexcept
-#define CARAMEL_THREAD_LOCAL thread_local
 
 
 //

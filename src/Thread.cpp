@@ -41,7 +41,7 @@ namespace Caramel
 #define HAS_THREAD_LOCAL
 
 // This would be set before the thread's working function starts.
-CARAMEL_THREAD_LOCAL ThreadImpl* tls_thisThread = nullptr;
+thread_local ThreadImpl* tls_thisThread = nullptr;
 
 #endif
 

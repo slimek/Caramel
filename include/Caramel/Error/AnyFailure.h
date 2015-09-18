@@ -54,7 +54,7 @@ public:
     /// Overrides std::exception ///
 
     // Returns a generated message from id if m_what not given.
-    const Char* what() const CARAMEL_NOEXCEPT override { return m_what.c_str(); }
+    const Char* what() const noexcept override { return m_what.c_str(); }
 
 
 private:

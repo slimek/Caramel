@@ -40,7 +40,7 @@ public:
 
     /// Overrides std::exception ///
 
-    const Char* what() const CARAMEL_NOEXCEPT override { return m_what.c_str(); }
+    const Char* what() const noexcept override { return m_what.c_str(); }
 
 
 private:
