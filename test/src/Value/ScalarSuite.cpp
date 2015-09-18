@@ -276,7 +276,7 @@ TEST( ScalarString )
 }
 
 
-TEST( ScalarStrintConvert )
+TEST( ScalarStringConvert )
 {
     /// Not convertible ///
 
@@ -335,16 +335,9 @@ TEST( ScalarStrintConvert )
     CHECK( 16777215   == *swhite.AsUint64() );
     CHECK( "0xFFFFFF" == *swhite.AsString() );  // keep the original string
 
-    #if defined( CARAMEL_COMPILER_IS_MSVC )
-    // Not convertible - In some compilers, strtof/strtod() don't support hexidecimal format.
-    // Known compiler versions:
-    // - Visual C++ 2013
-    CHECK( ! swhite.AsFloat() );
-    CHECK( ! swhite.AsDouble() );
-    #else
+    // floatings
     CHECK( 16777215.0f == *swhite.AsFloat() );
     CHECK( 16777215.0  == *swhite.AsDouble() );
-    #endif
 
 
     /// Floating ///
