@@ -54,7 +54,7 @@ TEST( SecondsDivide )
         const Seconds n1( 8.5 );
         const Seconds d1( 2.0 );
 
-        CHECK( 4.25            == n1 / d1 );
+        CHECK( 4.25            == ( n1 / d1 ));
         CHECK( Seconds( 4.25 ) == n1 / 2 );
         CHECK( Seconds( 0.5 )  == n1 % d1 );
 
@@ -153,3 +153,4 @@ TEST( DurationConvert )
 } // SUITE SecondClock
 
 } // namespace Caramel
+

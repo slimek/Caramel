@@ -5,66 +5,72 @@
 #pragma once
 
 #include <Caramel/Setup/CaramelDefs.h>
-#include <Caramel/Chrono/SteadyClock.h>
 #include <Caramel/Chrono/Stopwatch.h>
 #include <Caramel/Math/Floating.h>
 #include <Caramel/Numeric/NumberConvertible.h>
-#include <cmath>
+#include <chrono>
 
 
 namespace Caramel
 {
 
+//
+// Second Clock classes
+// - This header provides five classes by second time unit:
+//     Seconds
+//     SecondPoint
+//     SecondClock
+//     SecondWatch
+//     SecondsBool
+//
+
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Second Clock Classes
+// Seconds (Second Duration)
 //
 
-//
-// Seconds - Second Duration
-//
-
-class Seconds : public boost::chrono::duration< Double, boost::ratio< 1 > >
+class Seconds : public std::chrono::duration< Double, std::ratio< 1 >>
               , public NumberConvertible< Seconds, Double >
 {
-    typedef boost::chrono::duration< Double, boost::ratio< 1 > > Inherited;
-
 public:
 
-    Seconds();  // default value = 0
-    
-    Seconds( const Inherited& duration );
-    Seconds( Inherited&& duration );
+    typedef std::chrono::duration< Double, std::ratio< 1 >> StdDuration;
+
+
+    /// Constructors ///
+
+    Seconds();  // default value = 0;
+
+    Seconds( const StdDuration& duration );
 
     template< typename Rep, typename Period >
-    Seconds( const boost::chrono::duration< Rep, Period >& duration );
+    Seconds( const std::chrono::duration< Rep, Period >& duration );
 
     explicit Seconds( Double seconds );
 
 
-    /// Properties ///
+    /// Constants ///
 
-    static Seconds Zero()     { return Seconds( Inherited::zero() ); }
-    static Seconds MaxValue() { return Seconds( Inherited::max() ); }
+    static Seconds Zero()     { return Seconds( StdDuration::zero() ); }
+    static Seconds MaxValue() { return Seconds( StdDuration::max() ); }
 
 
     /// Convertions ///
 
+    // Implements NumberConvertible
     Double ToNumber() const { return this->count(); }
 
-    Double ToDouble() const { return this->count(); }
+    Double ToDouble() const { return this->count(); } 
     Float  ToFloat()  const { return static_cast< Float >( this->count() ); }
 
 
     /// Operators ///
 
-    friend Double operator/( const Seconds& lhs, const Seconds& rhs );
+    // NOTES: In Visual C++ 2015, you must override these division operators,
+    //        or it doesn't compile.
 
-    // T souble be converible to Double
-    template< typename T >
-    friend Seconds operator/( const Seconds& dur, const T& scalar );
-
-    friend Seconds operator%( const Seconds& dur, const Seconds& period );
+    friend Double  operator/( const Seconds& duration, const Seconds& period );
+    friend Seconds operator%( const Seconds& duration, const Seconds& period );
 
 
     /// Operations ///
@@ -76,66 +82,67 @@ public:
     // Results in quotient and remainder.
     struct DivideResult;
     DivideResult DivideBy( const Seconds& divisor ) const;
+
+
+private:
+
+    friend class SecondPoint;
+    friend class SecondClock;
 };
 
 
+///////////////////////////////////////////////////////////////////////////////
 //
 // Second Point
 //
 
 class SecondPoint
-    : public boost::chrono::time_point<
-        boost::chrono::steady_clock, boost::chrono::duration< Double, boost::ratio< 1 > >
-      >
+    : public std::chrono::time_point< std::chrono::steady_clock, Seconds::StdDuration >
 {
-    typedef boost::chrono::time_point<
-        boost::chrono::steady_clock, boost::chrono::duration< Double, boost::ratio< 1 > >
+    typedef std::chrono::time_point<
+        std::chrono::steady_clock, std::chrono::duration< Double, std::ratio< 1 >>
     > Inherited;
 
 public:
-    
-    typedef boost::chrono::duration< Double, boost::ratio< 1 > > Duration;
+
+    typedef std::chrono::time_point<
+        std::chrono::steady_clock, Seconds::StdDuration > StdTimePoint;
+
+    /// Constructors ///
 
     SecondPoint() {}
 
-    SecondPoint( const Inherited& tpoint );
-    SecondPoint( Inherited&& tpoint );
+    SecondPoint( const StdTimePoint& tpoint );
 
 
-    /// Properties ///
+    /// Constants ///
 
-    static SecondPoint MaxValue() { return Inherited::max(); }
+    static SecondPoint MaxValue() { return SecondPoint( StdTimePoint::max() ); }
 };
 
 
+///////////////////////////////////////////////////////////////////////////////
 //
 // Second Clock
 //
 
-class SecondClock : public SteadyClock< Seconds, SecondPoint >
+class SecondClock
 {
 public:
 
-    /// Inherited Functions: ///
+    typedef Seconds Duration;
+    typedef SecondPoint TimePoint;
 
-    // static SecondPoint Now();
+    static SecondPoint Now();
 };
 
 
+///////////////////////////////////////////////////////////////////////////////
 //
 // Second Stopwatch
 //
 
-class SecondWatch : public Stopwatch< SecondClock >
-{
-public:
-
-    /// Inherited Functions: ///
-
-    // void Reset();
-    // Seconds Elasped() const;
-    // Seconds Slice();
-};
+typedef Stopwatch< SecondClock > SecondWatch;
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -144,62 +151,50 @@ public:
 //
 
 //
-// Second Duration
+// Seconds - Constructurs
 //
 
 inline Seconds::Seconds()
-    : Inherited( 0 )
-{
-}
+    : StdDuration( 0 )
+{}
 
 
-inline Seconds::Seconds( const Inherited& duration )
-    : Inherited( duration )
-{
-}
-
-
-inline Seconds::Seconds( Inherited&& duration )
-    : Inherited( std::move( duration ))
-{
-}
+inline Seconds::Seconds( const StdDuration& duration )
+    : StdDuration( duration )
+{}
 
 
 template< typename Rep, typename Period >
-inline Seconds::Seconds( const boost::chrono::duration< Rep, Period >& duration )
-    : Inherited( boost::chrono::duration_cast< Inherited >( duration ))
-{
-}
+inline Seconds::Seconds( const std::chrono::duration< Rep, Period >& duration )
+    : StdDuration( std::chrono::duration_cast< StdDuration >( duration ))
+{}
 
 
 inline Seconds::Seconds( Double seconds )
-    : Inherited( seconds )
-{
-}
+    : StdDuration( seconds )
+{}
 
 
 //
 // Seconds - Operators
 //
 
-inline Double operator/( const Seconds& lhs, const Seconds& rhs )
+inline Double operator/( const Seconds& duration, const Seconds& period )
 {
-    return static_cast< const Seconds::Inherited& >( lhs )
-         / static_cast< const Seconds::Inherited& >( rhs );
+    return static_cast< const Seconds::StdDuration& >( duration )
+         / static_cast< const Seconds::StdDuration& >( period );
 }
 
 
-template< typename T >
-inline Seconds operator/( const Seconds& dur, const T& scalar )
+inline Seconds operator%( const Seconds& duration, const Seconds& period )
 {
-    return static_cast< const Seconds::Inherited& >( dur )
-         / static_cast< Double >( scalar );
-}
+    return Seconds( std::fmod( duration.count(), period.count() ));
 
+    // NOTES: In Visual C++ 2015, the below code doesn't compile.
+    //        Maybe it doesn't support remainder of floating?
 
-inline Seconds operator%( const Seconds& dur, const Seconds& period )
-{
-    return Seconds( std::fmod( dur.count(), period.count() ));
+    //return Seconds( static_cast< const Seconds::StdDuration& >( duration )
+    //              % static_cast< const Seconds::StdDuration& >( period ));
 }
 
 
@@ -234,13 +229,10 @@ inline Seconds::DivideResult Seconds::DivideBy( const Seconds& divisor ) const
 
     result.quotient  = static_cast< Int64 >( Caramel::operator/( *this, divisor ));
     result.remainder = Caramel::operator%( *this, divisor );
-    
-    //
-    // TODO: In Visual C++ 2013, the below code doesn't compile. I don't know why...
-    //
-    // result.quotient  = static_cast< Int64 >( *this / divisor );
-    // result.remainder = *this % divisor;
-    //
+
+    // TODO: In Visual C++ 2015, the below code doesn't compile. I don't know why...
+    //   result.quotient  = *this / divisor;
+    //   result.remainder = *this % divisor;
 
     return result;
 }
@@ -250,15 +242,19 @@ inline Seconds::DivideResult Seconds::DivideBy( const Seconds& divisor ) const
 // Second Point
 //
 
-inline SecondPoint::SecondPoint( const Inherited& tpoint )
-    : Inherited( tpoint )
-{
-}
+inline SecondPoint::SecondPoint( const StdTimePoint& tpoint )
+    : StdTimePoint( tpoint )
+{}
 
 
-inline SecondPoint::SecondPoint( Inherited&& tpoint )
-    : Inherited( tpoint )
+//
+// Second Clock
+//
+
+inline SecondPoint SecondClock::Now()
 {
+    return SecondPoint(
+        std::chrono::time_point_cast< Seconds::StdDuration >( std::chrono::steady_clock::now() ));
 }
 
 
@@ -267,19 +263,20 @@ inline SecondPoint::SecondPoint( Inherited&& tpoint )
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Traits helper for Seconds' division.
+// Helper trait for division of Seconds.
+// - Without this trait, Visual C++ 2015 doesn't compile.
 //
 
-namespace boost { namespace chrono { namespace detail
+namespace std
 {
 
 template<>
-struct is_duration< ::Caramel::Seconds > : boost::true_type {};
+struct common_type< Caramel::Double, Caramel::Seconds >
+{
+    typedef Caramel::Double type;
+};
 
+} // namespace std
 
-} } } // namespace boost::chrono::detail
-
-
-///////////////////////////////////////////////////////////////////////////////
 
 #endif // __CARAMEL_CHRONO_SECOND_CLOCK_H

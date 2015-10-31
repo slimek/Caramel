@@ -111,7 +111,7 @@ inline Bool WaitableBool::WaitFor( const Ticks& timeout )
 
     if ( ! m_value )
     {
-        m_becomesTrue.wait_for( ulock, timeout.ToStdDuration() );
+        m_becomesTrue.wait_for( ulock, timeout );
     }
 
     return m_value;

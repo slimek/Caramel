@@ -135,7 +135,7 @@ inline Bool BlockingQueue< T >::PopOrWaitFor( T& value, const Ticks& relTime )
     {
         if ( m_completed ) { return false; }
 
-        m_available.wait_for( ulock, relTime.ToStdDuration() );
+        m_available.wait_for( ulock, relTime );
 
         if ( m_queue.empty() ) { return false; }
 
