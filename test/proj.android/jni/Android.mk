@@ -123,9 +123,9 @@ LOCAL_SRC_FILES := \
 	$(CRMTEST_SRC)/String/StringConvertibleSuite.cpp \
 	$(CRMTEST_SRC)/String/ToStringSuite.cpp \
 	$(CRMTEST_SRC)/String/Utf8StringSuite.cpp \
+	$(CRMTEST_SRC)/Task/AsyncSubmitSuite.cpp \
 	$(CRMTEST_SRC)/Task/ContinuationTraitsSuite.cpp \
 	$(CRMTEST_SRC)/Task/PromiseSuite.cpp \
-	$(CRMTEST_SRC)/Task/StdAsyncSuite.cpp \
 	$(CRMTEST_SRC)/Task/TaskPollerSuite.cpp \
 	$(CRMTEST_SRC)/Task/TaskSuite.cpp \
 	$(CRMTEST_SRC)/Task/TaskTimerSuite.cpp \
