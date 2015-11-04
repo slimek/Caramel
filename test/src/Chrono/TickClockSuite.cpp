@@ -46,6 +46,55 @@ TEST( TickClock )
 }
 
 
+TEST( TicksDivide )
+{
+    /// Operators ///
+    {
+        const Ticks n1( 853 );
+        const Ticks d1( 200 );
+
+        CHECK( 4 == ( n1 / d1 ));
+        // NOTES: The representation of Ticks is Int64,
+        //        therefore the quotient is also Int64.
+
+        CHECK( Ticks( 426 ) == n1 / 2 );
+        CHECK( Ticks( 53 )  == n1 % d1 );
+
+        CHECK( Ticks( 341 ) != n1 / 2.5 );
+        CHECK( Ticks( 341 ) == Ticks( n1 / 2.5 ));
+        // NOTES: ( n1 / 2.5 ) will return a std::chrono::duration< double >.
+        //        It has fraction and can't be equal to Ticks( 341 ).
+
+
+        const Ticks n2( 9313 );
+        const Ticks d2( 67 );
+
+        CHECK( 139           == n2 / d2 );
+        CHECK( Ticks::Zero() == n2 % d2 );
+    }
+
+    /// Divide By ///
+    {
+        const Ticks n1( 853 );
+        const Ticks d1( 200 );
+
+        const auto r1 = n1.DivideBy( d1 );
+
+        CHECK( 4 == r1.quotient );
+        CHECK( Ticks( 53 ) == r1.remainder );
+
+
+        const Ticks n2( 9313 );
+        const Ticks d2( 67 );
+
+        const auto r2 = n2.DivideBy( d2 );
+
+        CHECK( 139 == r2.quotient );
+        CHECK( Ticks::Zero() == r2.remainder );
+    }
+}
+
+
 } // SUITE TickClock
 
 } // namespace Caramel

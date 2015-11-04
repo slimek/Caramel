@@ -62,6 +62,14 @@ public:
     Int64 ToInt64() const { return this->count(); }
     Int32 ToInt32() const { return static_cast< Int32 >( this->count() ); }
 
+
+    /// Operations ///
+
+    // Results in quotient and remainder
+    struct DivideResult;
+    DivideResult DivideBy( const Ticks& divisor ) const;
+
+
 private:
 
     friend class TickPoint;
@@ -148,6 +156,37 @@ inline Ticks::Ticks( const std::chrono::duration< Rep, Period >& duration )
 inline Ticks::Ticks( Int64 ticks )
     : StdDuration( ticks )
 {}
+
+
+//
+// Ticks Operations
+//
+
+struct Ticks::DivideResult
+{
+    DivideResult() : quotient( 0 ) {}
+
+    Int64 quotient;
+    Ticks remainder;
+};
+
+
+inline Ticks::DivideResult Ticks::DivideBy( const Ticks& divisor ) const
+{
+    DivideResult result;
+
+    result.quotient = static_cast< const StdDuration& >( *this )
+                    / static_cast< const StdDuration& >( divisor );
+
+    result.remainder = static_cast< const StdDuration& >( *this )
+                     % static_cast< const StdDuration& >( divisor );
+
+    // TODO: In Visual C++ 2015, the below code doesn't compile. I don't know why...
+    //   result.quotient  = *this / divisor;
+    //   result.remainder = *this % divisor;
+
+    return result;
+}
 
 
 //
