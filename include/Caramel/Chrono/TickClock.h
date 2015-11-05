@@ -35,6 +35,7 @@ class Ticks : public std::chrono::duration< Int64, std::milli >
 public:
 
     typedef std::chrono::duration< Int64, std::milli > StdDuration;
+    typedef StdDuration::rep Rep;
 
     
     /// Constructors ///
@@ -43,8 +44,8 @@ public:
 
     Ticks( const StdDuration& duration );
 
-    template< typename Rep, typename Period >
-    Ticks( const std::chrono::duration< Rep, Period >& duration );
+    template< typename Rep2, typename Period2 >
+    Ticks( const std::chrono::duration< Rep2, Period2 >& duration );
 
     explicit Ticks( Int64 ticks );
 
@@ -149,8 +150,8 @@ inline Ticks::Ticks( const StdDuration& duration )
 {}
 
 
-template< typename Rep, typename Period >
-inline Ticks::Ticks( const std::chrono::duration< Rep, Period >& duration )
+template< typename Rep2, typename Period2 >
+inline Ticks::Ticks( const std::chrono::duration< Rep2, Period2 >& duration )
     : StdDuration( std::chrono::duration_cast< StdDuration >( duration ))
 {}
 

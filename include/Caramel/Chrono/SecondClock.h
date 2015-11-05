@@ -36,7 +36,7 @@ class Seconds : public std::chrono::duration< Double, std::ratio< 1 >>
 public:
 
     typedef std::chrono::duration< Double, std::ratio< 1 >> StdDuration;
-
+    typedef StdDuration::rep Rep;
 
     /// Constructors ///
 
@@ -44,8 +44,8 @@ public:
 
     Seconds( const StdDuration& duration );
 
-    template< typename Rep, typename Period >
-    Seconds( const std::chrono::duration< Rep, Period >& duration );
+    template< typename Rep2, typename Period2 >
+    Seconds( const std::chrono::duration< Rep2, Period2 >& duration );
 
     explicit Seconds( Double seconds );
 
@@ -166,8 +166,8 @@ inline Seconds::Seconds( const StdDuration& duration )
 {}
 
 
-template< typename Rep, typename Period >
-inline Seconds::Seconds( const std::chrono::duration< Rep, Period >& duration )
+template< typename Rep2, typename Period2 >
+inline Seconds::Seconds( const std::chrono::duration< Rep2, Period2 >& duration )
     : StdDuration( std::chrono::duration_cast< StdDuration >( duration ))
 {}
 

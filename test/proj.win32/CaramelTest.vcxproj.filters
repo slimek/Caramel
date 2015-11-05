@@ -223,9 +223,6 @@
     <ClCompile Include="..\src\DateTime\DateSuite.cpp">
       <Filter>2. Tests\DateTime</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\DateTime\DateTimeBoolSuite.cpp">
-      <Filter>2. Tests\DateTime</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\DateTime\DateTimeSuite.cpp">
       <Filter>2. Tests\DateTime</Filter>
     </ClCompile>

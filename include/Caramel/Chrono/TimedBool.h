@@ -31,23 +31,20 @@ class TimedBool : public boost::noncopyable
 public:
 
     typedef Clock ClockType;
-    typedef typename ClockType::TimePoint TimePoint;
-    typedef typename ClockType::Duration  Duration;
+    typedef typename Clock::TimePoint TimePoint;
+    typedef typename Clock::Duration  Duration;
 
 
-    TimedBool();
+    TimedBool();  // default: never expired i.e. is always false.
+
     explicit TimedBool( const Duration& duration );
-
-    template< typename AnyDuration >
-    explicit TimedBool( const AnyDuration& duration );
+    explicit TimedBool( typename Duration::Rep duration );
 
 
     /// Manipulators ///
 
     void Start( const Duration& duration );
-
-    template< typename AnyDuration >
-    void Start( const AnyDuration& duration );
+    void Start( typename Duration::Rep duration );
 
 
     // Start this timer with previous duration.
@@ -119,8 +116,7 @@ inline TimedBool< Clock >::TimedBool( const Duration& duration )
 
 
 template< typename Clock >
-template< typename AnyDuration >
-inline TimedBool< Clock >::TimedBool( const AnyDuration& duration )
+inline TimedBool< Clock >::TimedBool( typename Duration::Rep duration )
 {
     this->Start( duration );
 }
@@ -141,14 +137,13 @@ inline void TimedBool< Clock >::Start( const Duration& duration )
 
 
 template< typename Clock >
-template< typename AnyDuration >
-inline void TimedBool< Clock >::Start( const AnyDuration& anyDuration )
+inline void TimedBool< Clock >::Start( typename Duration::Rep duration )
 {
     const auto now = Clock::Now();
-    const Duration duration( anyDuration );
+    const Duration dur( duration );
 
     LockGuard lock( m_mutex );
-    this->Start_Locked( now, duration );
+    this->Start_Locked( now, dur );
 }
 
 

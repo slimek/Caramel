@@ -81,7 +81,6 @@ LOCAL_SRC_FILES := \
 	$(CRMTEST_SRC)/Data/Base64Suite.cpp \
 	$(CRMTEST_SRC)/Data/LookupTableSuite.cpp \
 	$(CRMTEST_SRC)/DateTime/DateSuite.cpp \
-	$(CRMTEST_SRC)/DateTime/DateTimeBoolSuite.cpp \
 	$(CRMTEST_SRC)/DateTime/DateTimeSuite.cpp \
 	$(CRMTEST_SRC)/DateTime/DaysSuite.cpp \
 	$(CRMTEST_SRC)/DateTime/TimeOfDaySuite.cpp \

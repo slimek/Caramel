@@ -34,7 +34,6 @@
 		01498DAB1ADE543200B58EDC /* Base64Suite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D3D1ADE543200B58EDC /* Base64Suite.cpp */; };
 		01498DAC1ADE543200B58EDC /* LookupTableSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D3E1ADE543200B58EDC /* LookupTableSuite.cpp */; };
 		01498DAD1ADE543200B58EDC /* DateSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D401ADE543200B58EDC /* DateSuite.cpp */; };
-		01498DAE1ADE543200B58EDC /* DateTimeBoolSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D411ADE543200B58EDC /* DateTimeBoolSuite.cpp */; };
 		01498DAF1ADE543200B58EDC /* DateTimeSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D421ADE543200B58EDC /* DateTimeSuite.cpp */; };
 		01498DB01ADE543200B58EDC /* TimeOfDaySuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D431ADE543200B58EDC /* TimeOfDaySuite.cpp */; };
 		01498DB11ADE543200B58EDC /* TimeSpanSuite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01498D441ADE543200B58EDC /* TimeSpanSuite.cpp */; };
@@ -147,7 +146,6 @@
 		01498D3D1ADE543200B58EDC /* Base64Suite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Base64Suite.cpp; sourceTree = "<group>"; };
 		01498D3E1ADE543200B58EDC /* LookupTableSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LookupTableSuite.cpp; sourceTree = "<group>"; };
 		01498D401ADE543200B58EDC /* DateSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DateSuite.cpp; sourceTree = "<group>"; };
-		01498D411ADE543200B58EDC /* DateTimeBoolSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DateTimeBoolSuite.cpp; sourceTree = "<group>"; };
 		01498D421ADE543200B58EDC /* DateTimeSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DateTimeSuite.cpp; sourceTree = "<group>"; };
 		01498D431ADE543200B58EDC /* TimeOfDaySuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimeOfDaySuite.cpp; sourceTree = "<group>"; };
 		01498D441ADE543200B58EDC /* TimeSpanSuite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimeSpanSuite.cpp; sourceTree = "<group>"; };
@@ -339,7 +337,6 @@
 			isa = PBXGroup;
 			children = (
 				01498D401ADE543200B58EDC /* DateSuite.cpp */,
-				01498D411ADE543200B58EDC /* DateTimeBoolSuite.cpp */,
 				01498D421ADE543200B58EDC /* DateTimeSuite.cpp */,
 				01498D431ADE543200B58EDC /* TimeOfDaySuite.cpp */,
 				01498D441ADE543200B58EDC /* TimeSpanSuite.cpp */,
@@ -645,7 +642,6 @@
 				01498DC81ADE543200B58EDC /* UniformRandomSuite.cpp in Sources */,
 				01498D9D1ADE543200B58EDC /* ValueChangeSuite.cpp in Sources */,
 				01498DC01ADE543200B58EDC /* LexicalVersionSuite.cpp in Sources */,
-				01498DAE1ADE543200B58EDC /* DateTimeBoolSuite.cpp in Sources */,
 				01498DB81ADE543200B58EDC /* DirectoryInfoSuite.cpp in Sources */,
 				01498DBC1ADE543200B58EDC /* TextStreamWriterSuite.cpp in Sources */,
 				01CB3AA71AEF972600EF8238 /* PromiseSuite.cpp in Sources */,

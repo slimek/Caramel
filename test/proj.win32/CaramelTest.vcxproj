@@ -207,7 +207,6 @@
     <ClCompile Include="..\src\Data\Base64Suite.cpp" />
     <ClCompile Include="..\src\Data\LookupTableSuite.cpp" />
     <ClCompile Include="..\src\DateTime\DateSuite.cpp" />
-    <ClCompile Include="..\src\DateTime\DateTimeBoolSuite.cpp" />
     <ClCompile Include="..\src\DateTime\DateTimeSuite.cpp" />
     <ClCompile Include="..\src\DateTime\DaysSuite.cpp" />
     <ClCompile Include="..\src\DateTime\TimeOfDaySuite.cpp" />

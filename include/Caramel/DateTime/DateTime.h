@@ -119,12 +119,6 @@ public:
     static DateTime UtcToLocal( const DateTime& utcTime );
 
 
-    /// Typedefs as a Clock type - Supports TimedBool ///
-
-    typedef TimeSpan Duration;
-    typedef DateTime TimePoint;
-
-
 private:
 
     explicit DateTime( std::shared_ptr< DateTimeImpl > impl );
