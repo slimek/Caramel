@@ -55,7 +55,6 @@
     <ClInclude Include="..\include\Caramel\Chrono\ClockProxy.h" />
     <ClInclude Include="..\include\Caramel\Chrono\Detail\ClockProxyHolder.h" />
     <ClInclude Include="..\include\Caramel\Chrono\SecondClock.h" />
-    <ClInclude Include="..\include\Caramel\Chrono\SteadyClock.h" />
     <ClInclude Include="..\include\Caramel\Chrono\Stopwatch.h" />
     <ClInclude Include="..\include\Caramel\Chrono\TickClock.h" />
     <ClInclude Include="..\include\Caramel\Chrono\TimedBool.h" />

@@ -14,17 +14,17 @@ namespace Caramel
 //
 // Stopwatch
 // 
-//   Concept of ClockT:
+//   Concept of Clock:
 //   - Has typedefs of Duration, TimePoint
 //     Has static function Now()
 //
 
-template< typename ClockT >
+template< typename Clock >
 class Stopwatch
 {
 public:
 
-    typedef ClockT ClockType;
+    typedef Clock ClockType;
 
     typedef typename ClockType::Duration  Duration;
     typedef typename ClockType::TimePoint TimePoint;
@@ -45,6 +45,7 @@ public:
 
 private:
 
+    // The last time when this watch starts or resets.
     TimePoint m_markTime;
 };
 
@@ -54,34 +55,34 @@ private:
 // Implementation
 //
 
-template< typename ClockT >
-inline Stopwatch< ClockT >::Stopwatch()
+template< typename Clock >
+inline Stopwatch< Clock >::Stopwatch()
 {
     this->Reset();
 }
 
 
-template< typename ClockT >
-inline void Stopwatch< ClockT >::Reset()
+template< typename Clock >
+inline void Stopwatch< Clock >::Reset()
 {
-    m_markTime = ClockT::Now();
+    m_markTime = Clock::Now();
 }
 
 
-template< typename ClockT >
-inline auto Stopwatch< ClockT >::Elapsed() const -> Duration
+template< typename Clock >
+inline auto Stopwatch< Clock >::Elapsed() const -> Duration
 {
-    return Duration( ClockT::Now() - m_markTime );
+    return Duration( Clock::Now() - m_markTime );
 }
 
 
-template< typename ClockT >
-inline auto Stopwatch< ClockT >::Slice() -> Duration
+template< typename Clock >
+inline auto Stopwatch< Clock >::Slice() -> Duration
 {
     // This function is ALMOST equivalent to Elapsed() then Reset(),
     // but here we can use the same now in both functions.
 
-    const TimePoint now = ClockT::Now();
+    const TimePoint now = Clock::Now();
     const Duration delta = now - m_markTime;
     m_markTime = now;
     return delta;

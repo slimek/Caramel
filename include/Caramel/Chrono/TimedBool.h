@@ -19,18 +19,18 @@ namespace Caramel
 //
 //   This class is thread-safe.
 //
-//   Concept of ClockT:
+//   Concept of Clock:
 //   - Has typedefs of Duration, TimePoint
 //     Has static function Now()
 //     Its Duration and TimePoint have static function MaxValue().
 //
 
-template< typename ClockT >
+template< typename Clock >
 class TimedBool : public boost::noncopyable
 {
 public:
 
-    typedef ClockT ClockType;
+    typedef Clock ClockType;
     typedef typename ClockType::TimePoint TimePoint;
     typedef typename ClockType::Duration  Duration;
 
@@ -103,24 +103,24 @@ private:
 // Implementation
 //
 
-template< typename ClockT >
-inline TimedBool< ClockT >::TimedBool()
+template< typename Clock >
+inline TimedBool< Clock >::TimedBool()
     : m_duration( Duration::MaxValue() )
     , m_deadline( TimePoint::MaxValue() )
 {
 }
 
 
-template< typename ClockT >
-inline TimedBool< ClockT >::TimedBool( const Duration& duration )
+template< typename Clock >
+inline TimedBool< Clock >::TimedBool( const Duration& duration )
 {
     this->Start( duration );
 }
 
 
-template< typename ClockT >
+template< typename Clock >
 template< typename AnyDuration >
-inline TimedBool< ClockT >::TimedBool( const AnyDuration& duration )
+inline TimedBool< Clock >::TimedBool( const AnyDuration& duration )
 {
     this->Start( duration );
 }
@@ -130,21 +130,21 @@ inline TimedBool< ClockT >::TimedBool( const AnyDuration& duration )
 // Manipulators
 //
 
-template< typename ClockT >
-inline void TimedBool< ClockT >::Start( const Duration& duration )
+template< typename Clock >
+inline void TimedBool< Clock >::Start( const Duration& duration )
 {
-    const auto now = ClockT::Now();
+    const auto now = Clock::Now();
 
     LockGuard lock( m_mutex );
     this->Start_Locked( now, duration );
 }
 
 
-template< typename ClockT >
+template< typename Clock >
 template< typename AnyDuration >
-inline void TimedBool< ClockT >::Start( const AnyDuration& anyDuration )
+inline void TimedBool< Clock >::Start( const AnyDuration& anyDuration )
 {
-    const auto now = ClockT::Now();
+    const auto now = Clock::Now();
     const Duration duration( anyDuration );
 
     LockGuard lock( m_mutex );
@@ -152,40 +152,40 @@ inline void TimedBool< ClockT >::Start( const AnyDuration& anyDuration )
 }
 
 
-template< typename ClockT >
-inline void TimedBool< ClockT >::Restart()
+template< typename Clock >
+inline void TimedBool< Clock >::Restart()
 {
-    const auto now = ClockT::Now();
+    const auto now = Clock::Now();
 
     LockGuard lock( m_mutex );
     this->Restart_Locked( now );
 }
 
 
-template< typename ClockT >
-inline void TimedBool< ClockT >::Continue()
+template< typename Clock >
+inline void TimedBool< Clock >::Continue()
 {
-    const auto now = ClockT::Now();
+    const auto now = Clock::Now();
 
     LockGuard lock( m_mutex );
     this->Continue_Locked( now );
 }
 
 
-template< typename ClockT >
-inline void TimedBool< ClockT >::ExpireNow()
+template< typename Clock >
+inline void TimedBool< Clock >::ExpireNow()
 {
-    const auto now = ClockT::Now();
+    const auto now = Clock::Now();
 
     LockGuard lock( m_mutex );
     m_deadline = now;
 }
 
 
-template< typename ClockT >
-inline Bool TimedBool< ClockT >::TakeAndRestart()
+template< typename Clock >
+inline Bool TimedBool< Clock >::TakeAndRestart()
 {
-    const auto now = ClockT::Now();
+    const auto now = Clock::Now();
 
     LockGuard lock( m_mutex );
 
@@ -196,10 +196,10 @@ inline Bool TimedBool< ClockT >::TakeAndRestart()
 }
 
 
-template< typename ClockT >
-inline Bool TimedBool< ClockT >::TakeAndContinue()
+template< typename Clock >
+inline Bool TimedBool< Clock >::TakeAndContinue()
 {
-    const auto now = ClockT::Now();
+    const auto now = Clock::Now();
 
     LockGuard lock( m_mutex );
 
@@ -215,24 +215,24 @@ inline Bool TimedBool< ClockT >::TakeAndContinue()
 // - These three conversions have the same result.
 
 
-template< typename ClockT >
-inline TimedBool< ClockT >::operator Bool() const
+template< typename Clock >
+inline TimedBool< Clock >::operator Bool() const
 {
     return this->IsExpired();
 }
 
 
-template< typename ClockT >
-inline Bool TimedBool< ClockT >::ToBool() const
+template< typename Clock >
+inline Bool TimedBool< Clock >::ToBool() const
 {
     return this->IsExpired();
 }
 
 
-template< typename ClockT >
-inline Bool TimedBool< ClockT >::IsExpired() const
+template< typename Clock >
+inline Bool TimedBool< Clock >::IsExpired() const
 {
-    const auto now = ClockT::Now();
+    const auto now = Clock::Now();
 
     LockGuard lock( m_mutex );
     return this->IsExpired_Locked( now );
@@ -243,16 +243,16 @@ inline Bool TimedBool< ClockT >::IsExpired() const
 // Properties
 //
 
-template< typename ClockT >
-inline auto TimedBool< ClockT >::GetDuration() const -> Duration
+template< typename Clock >
+inline auto TimedBool< Clock >::GetDuration() const -> Duration
 {
     LockGuard lock( m_mutex );
     return m_duration;
 }
 
 
-template< typename ClockT >
-inline auto TimedBool< ClockT >::GetDeadline() const -> TimePoint
+template< typename Clock >
+inline auto TimedBool< Clock >::GetDeadline() const -> TimePoint
 {
     LockGuard lock( m_mutex );
     return m_deadline;
@@ -263,16 +263,16 @@ inline auto TimedBool< ClockT >::GetDeadline() const -> TimePoint
 // Locked Internal Functions
 //
 
-template< typename ClockT >
-inline void TimedBool< ClockT >::Start_Locked( const TimePoint& now, const Duration& duration )
+template< typename Clock >
+inline void TimedBool< Clock >::Start_Locked( const TimePoint& now, const Duration& duration )
 {
     m_duration = duration;
     this->Restart_Locked( now );
 }
 
 
-template< typename ClockT >
-inline void TimedBool< ClockT >::Restart_Locked( const TimePoint& now )
+template< typename Clock >
+inline void TimedBool< Clock >::Restart_Locked( const TimePoint& now )
 {
     const auto maxTime = TimePoint::MaxValue();
 
@@ -287,8 +287,8 @@ inline void TimedBool< ClockT >::Restart_Locked( const TimePoint& now )
 }
 
 
-template< typename ClockT >
-inline void TimedBool< ClockT >::Continue_Locked( const TimePoint& now )
+template< typename Clock >
+inline void TimedBool< Clock >::Continue_Locked( const TimePoint& now )
 {
     const auto maxTime = TimePoint::MaxValue();
 
@@ -307,8 +307,8 @@ inline void TimedBool< ClockT >::Continue_Locked( const TimePoint& now )
 }
 
 
-template< typename ClockT >
-inline Bool TimedBool< ClockT >::IsExpired_Locked( const TimePoint& now ) const
+template< typename Clock >
+inline Bool TimedBool< Clock >::IsExpired_Locked( const TimePoint& now ) const
 {
     return now >= m_deadline;
 }

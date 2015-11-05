@@ -248,9 +248,6 @@
     <ClInclude Include="..\include\Caramel\Lexical\IntegerList.h">
       <Filter>1. Public Packages\Lexical</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Caramel\Chrono\SteadyClock.h">
-      <Filter>1. Public Packages\Chrono</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Caramel\FileSystem\FileInfo.h">
       <Filter>1. Public Packages\FileSystem</Filter>
     </ClInclude>
