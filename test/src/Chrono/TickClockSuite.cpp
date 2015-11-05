@@ -95,6 +95,59 @@ TEST( TicksDivide )
 }
 
 
+TEST( TicksBool )
+{
+    /// Default Value ///
+
+    TicksBool tbx;  // never expired
+
+    CHECK( false == tbx );
+    CHECK( Ticks::MaxValue() == tbx.GetDuration() );
+    CHECK( TickPoint::MaxValue()== tbx.GetDeadline() );
+
+
+    /// Restart and Continue ///
+
+    TicksBool tb1( 50 );
+    TicksBool tb2( Ticks( 50 ));
+
+    CHECK( false == tb1 );
+    CHECK( false == tb2 );
+
+    tb1.ExpireNow();  // immediately expire
+
+    CHECK( true == tb1 );
+
+    std::this_thread::sleep_for( std::chrono::milliseconds( 90 ));
+
+    CHECK( true == tb2 );
+
+    tb1.Restart();
+    tb2.Continue();
+
+    CHECK( false == tb1 );
+    CHECK( false == tb2 );
+
+    std::this_thread::sleep_for( std::chrono::milliseconds( 20 ));
+
+    CHECK( false == tb1 );
+    CHECK( true  == tb2 );
+
+    std::this_thread::sleep_for( std::chrono::milliseconds( 40 ));
+
+    CHECK( true == tb1 );
+    
+
+    // Boolean Conversion ///
+
+    CHECK( true == tb2.ToBool() );
+    CHECK( true == tb2.IsExpired() );
+
+    CHECK( false == tbx.ToBool() );
+    CHECK( false == tbx.IsExpired() );
+}
+
+
 } // SUITE TickClock
 
 } // namespace Caramel

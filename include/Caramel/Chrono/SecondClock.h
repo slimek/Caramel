@@ -6,6 +6,7 @@
 
 #include <Caramel/Setup/CaramelDefs.h>
 #include <Caramel/Chrono/Stopwatch.h>
+#include <Caramel/Chrono/TimedBool.h>
 #include <Caramel/Math/Floating.h>
 #include <Caramel/Numeric/NumberConvertible.h>
 #include <chrono>
@@ -139,10 +140,11 @@ public:
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Second Stopwatch
+// Second Clock derivative classes
 //
 
 typedef Stopwatch< SecondClock > SecondWatch;
+typedef TimedBool< SecondClock > SecondsBool;
 
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -10,7 +10,6 @@
 #include "Task/ThreadPoolImpl.h"
 #include "Task/WorkerThreadImpl.h"
 #include <Caramel/Chrono/TickClock.h>
-#include <Caramel/Chrono/TimedBool.h>
 #include <Caramel/Error/CatchException.h>
 #include <Caramel/String/Format.h>
 #include <Caramel/Thread/ThisThread.h>
@@ -617,7 +616,7 @@ void TaskPollerImpl::PollFor( const Ticks& sliceTicks )
         m_readyTasks.Push( task );
     }
 
-    TimedBool< TickClock > sliceTimeout( sliceTicks );
+    TicksBool sliceTimeout( sliceTicks );
 
     TaskCore task;
 

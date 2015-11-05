@@ -2,7 +2,6 @@
 
 #include "CaramelTestPch.h"
 
-#include <Caramel/Chrono/TimedBool.h>
 #include <Caramel/Concurrent/Stack.h>
 #include <Caramel/Thread/Thread.h>
 #include <atomic>
@@ -63,7 +62,7 @@ TEST( ConcurrentStackWarmup )
 {
     Concurrent::Stack< std::string > stack;
 
-    TimedBool< TickClock > timeup( 1000 );
+    TicksBool timeup( 1000 );
 
     std::atomic< Int > pushes( 0 );
     std::atomic< Int > pops( 0 );

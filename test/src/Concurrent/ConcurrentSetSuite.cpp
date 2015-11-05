@@ -3,7 +3,6 @@
 #include "CaramelTestPch.h"
 
 #include "Utils/SharedArrayUtils.h"
-#include <Caramel/Chrono/TimedBool.h>
 #include <Caramel/Concurrent/FlatSet.h>
 #include <Caramel/Concurrent/Set.h>
 #include <Caramel/Random/UniformRandom.h>
@@ -156,7 +155,7 @@ TEST( ConcurrentSetSnapshotStress )
 
     Concurrent::SetWithSnapshot< Int > iset;
 
-    TimedBool< TickClock > timeup( 3000 );
+    TicksBool timeup( 3000 );
 
     std::atomic< Int > inserts( 0 );
     std::atomic< Int > erases( 0 );

@@ -44,6 +44,26 @@ TEST( SecondClock )
 
     const Seconds t098( 0.98 );
     CHECK( "0.98" == Format( "{0}", t098 ));
+
+
+    /// Truncation ///
+    // - Remove the fraction part.
+
+    Seconds s1( 1.5 );
+
+    CHECK( Seconds( 1.0 ) == Seconds::TruncFrom( s1 ));
+    s1.Trunc();
+    CHECK( Seconds( 1.0 ) == s1 );
+
+    Seconds s2( -1.5 );
+
+    CHECK( Seconds( -1.0 ) == Seconds::TruncFrom( s2 ));
+    s2.Trunc();
+    CHECK( Seconds( -1.0 ) == s2 );
+
+    Seconds s3( 125 );
+
+    CHECK( Seconds( 125 ) == Seconds::TruncFrom( s3 ));
 }
 
 
@@ -104,8 +124,27 @@ TEST( SecondsDivide )
 }
 
 
+TEST( SecondsBool )
+{
+    SecondsBool sb1( 0.5 );
+    SecondsBool sb2( 10 );
+
+    CHECK( false == sb1 );
+    CHECK( false == sb2 );
+
+    std::this_thread::sleep_for( std::chrono::milliseconds( 600 ));
+
+    CHECK( true  == sb1 );
+    CHECK( false == sb2 );
+
+    sb2.ExpireNow();
+
+    CHECK( true == sb2 );
+}
+
+
 //
-// Duration Conversion
+// Duration Conversion between Ticks and Seconds
 //
 
 TEST( DurationConvert )
@@ -128,25 +167,6 @@ TEST( DurationConvert )
     const Seconds sdur = tu;
 
     CHECK( 1.0 == sdur.ToNumber() );
-
-
-    /// Truncation ///
-
-    Seconds s1( 1.5 );
-
-    CHECK( Seconds( 1.0 ) == Seconds::TruncFrom( s1 ));
-    s1.Trunc();
-    CHECK( Seconds( 1.0 ) == s1 );
-
-    Seconds s2( -1.5 );
-
-    CHECK( Seconds( -1.0 ) == Seconds::TruncFrom( s2 ));
-    s2.Trunc();
-    CHECK( Seconds( -1.0 ) == s2 );
-
-    Seconds s3( 125 );
-
-    CHECK( Seconds( 125 ) == Seconds::TruncFrom( s3 ));
 }
 
 
